@@ -208,6 +208,31 @@ function PortalPage() {
         </div>
       </div>
 
+      <A11yBar />
+
+      {/* Tabs */}
+      <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border">
+        {([
+          ["overview", "Overzicht"],
+          ["changes", "Jouw changes"],
+        ] as const).map(([key, label]) => (
+          <button
+            key={key}
+            role="tab"
+            aria-selected={tab === key}
+            onClick={() => setTab(key)}
+            className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px focus-visible:ring-2 focus-visible:ring-ring ${
+              tab === key ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "overview" && (
+        <div className="space-y-10">
+
       {/* Quick actions */}
       <div className="flex flex-wrap gap-2">
         {data.profile?.website_url && (
