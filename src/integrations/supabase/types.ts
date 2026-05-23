@@ -53,6 +53,36 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          details: Json
+          id: string
+          target_id: string | null
+          target_type: string
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+          target_type: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string | null
+          target_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       change_attachments: {
         Row: {
           created_at: string
@@ -132,6 +162,8 @@ export type Database = {
           cancellation_reason: string | null
           category: string
           created_at: string
+          deleted_at: string | null
+          deleted_by: string | null
           description: string
           due_date: string | null
           id: string
@@ -139,6 +171,8 @@ export type Database = {
           is_paid: boolean
           priority: string
           request_number: number | null
+          restored_at: string | null
+          restored_by: string | null
           rush: boolean
           status: Database["public"]["Enums"]["request_status"]
           ticket_type: string
@@ -151,6 +185,8 @@ export type Database = {
           cancellation_reason?: string | null
           category?: string
           created_at?: string
+          deleted_at?: string | null
+          deleted_by?: string | null
           description: string
           due_date?: string | null
           id?: string
@@ -158,6 +194,8 @@ export type Database = {
           is_paid?: boolean
           priority?: string
           request_number?: number | null
+          restored_at?: string | null
+          restored_by?: string | null
           rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
           ticket_type?: string
@@ -170,6 +208,8 @@ export type Database = {
           cancellation_reason?: string | null
           category?: string
           created_at?: string
+          deleted_at?: string | null
+          deleted_by?: string | null
           description?: string
           due_date?: string | null
           id?: string
@@ -177,6 +217,8 @@ export type Database = {
           is_paid?: boolean
           priority?: string
           request_number?: number | null
+          restored_at?: string | null
+          restored_by?: string | null
           rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
           ticket_type?: string
@@ -635,6 +677,13 @@ export type Database = {
     }
     Functions: {
       available_credits: { Args: { _user_id: string }; Returns: number }
+      has_any_role: {
+        Args: {
+          _roles: Database["public"]["Enums"]["app_role"][]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -642,9 +691,17 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
+      is_super_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "admin" | "customer"
+      app_role:
+        | "admin"
+        | "customer"
+        | "super_admin"
+        | "co_admin"
+        | "support_agent"
+        | "viewer"
       request_status:
         | "pending"
         | "in_review"
@@ -783,7 +840,14 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "customer"],
+      app_role: [
+        "admin",
+        "customer",
+        "super_admin",
+        "co_admin",
+        "support_agent",
+        "viewer",
+      ],
       request_status: [
         "pending",
         "in_review",

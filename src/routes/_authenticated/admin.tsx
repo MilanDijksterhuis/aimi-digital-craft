@@ -38,6 +38,10 @@ import {
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
 import { AdminChatPanel } from "@/components/AdminChatPanel";
+import { TeamTab } from "@/components/TeamTab";
+import { DeletedChangesTab } from "@/components/DeletedChangesTab";
+import { adminSoftDeleteChange } from "@/lib/admin.functions";
+import { usePermissions } from "@/hooks/use-permissions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
@@ -54,11 +58,12 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat">(
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat" | "team" | "deleted">(
     "dashboard",
   );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
+  const perms = usePermissions();
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
   if (error) {
@@ -90,6 +95,8 @@ function AdminPage() {
           ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
           ["afspraken", "📅 Afspraken"],
           ["chat", "💬 Chat"],
+          ["team", "👤 Team"],
+          ["deleted", "🗑 Verwijderd"],
         ].map(([k, l]) => (
           <button
             key={k}
@@ -126,6 +133,8 @@ function AdminPage() {
       {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
       {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
       {tab === "chat" && <AdminChatPanel />}
+      {tab === "team" && <TeamTab />}
+      {tab === "deleted" && <DeletedChangesTab />}
     </div>
   );
 }
