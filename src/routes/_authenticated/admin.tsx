@@ -40,6 +40,7 @@ import {
 import { AdminChatPanel } from "@/components/AdminChatPanel";
 import { TeamTab } from "@/components/TeamTab";
 import { DeletedChangesTab } from "@/components/DeletedChangesTab";
+import { BerichtenTab } from "@/components/BerichtenTab";
 import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
 
@@ -58,9 +59,9 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat" | "team" | "deleted">(
-    "dashboard",
-  );
+  const [tab, setTab] = useState<
+    "dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat" | "berichten" | "team" | "deleted"
+  >("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
   const perms = usePermissions();
@@ -80,6 +81,18 @@ function AdminPage() {
   }
   if (!data) return null;
 
+  const tabs: [typeof tab, string][] = [
+    ["dashboard", "📊 Groei"],
+    ["klanten", `👥 Klanten (${data.customers.length})`],
+    ["changes", `🔧 Changes (${data.requests.length})`],
+    ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
+    ["berichten", "✉️ Berichten"],
+    ["afspraken", "📅 Afspraken"],
+    ["chat", "💬 Chat"],
+    ["team", "👤 Team"],
+    ["deleted", "🗑 Verwijderd"],
+  ];
+
   return (
     <div className="space-y-6">
       <div>
@@ -87,54 +100,52 @@ function AdminPage() {
         <p className="text-muted-foreground">Beheer klanten, changes en groei.</p>
       </div>
 
-      <div className="flex gap-2 border-b border-border overflow-x-auto">
-        {[
-          ["dashboard", "📊 Groei"],
-          ["klanten", `👥 Klanten (${data.customers.length})`],
-          ["changes", `🔧 Changes (${data.requests.length})`],
-          ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
-          ["afspraken", "📅 Afspraken"],
-          ["chat", "💬 Chat"],
-          ["team", "👤 Team"],
-          ["deleted", "🗑 Verwijderd"],
-        ].map(([k, l]) => (
-          <button
-            key={k}
-            onClick={() => setTab(k as any)}
-            className={`px-4 py-2 text-sm whitespace-nowrap border-b-2 ${
-              tab === k ? "border-primary text-primary" : "border-transparent text-muted-foreground"
-            }`}
-          >
-            {l}
-          </button>
-        ))}
+      <div className="flex flex-col md:flex-row gap-6">
+        <nav
+          aria-label="Admin secties"
+          className="md:w-56 md:shrink-0 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-r border-border pb-2 md:pb-0 md:pr-4"
+        >
+          {tabs.map(([k, l]) => (
+            <button
+              key={k}
+              onClick={() => setTab(k)}
+              className={`text-left whitespace-nowrap rounded-lg px-3 py-2 text-sm transition ${
+                tab === k
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+              }`}
+            >
+              {l}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex-1 min-w-0">
+          {tab === "dashboard" && <Dashboard metrics={data.metrics} />}
+          {tab === "klanten" && (
+            <KlantenTab
+              data={data}
+              qc={qc}
+              openCustomer={openCustomer}
+              setOpenCustomer={setOpenCustomer}
+            />
+          )}
+          {tab === "changes" && (
+            <ChangesTab
+              data={data}
+              qc={qc}
+              openRequest={openRequest}
+              setOpenRequest={setOpenRequest}
+            />
+          )}
+          {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
+          {tab === "berichten" && <BerichtenTab />}
+          {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
+          {tab === "chat" && <AdminChatPanel />}
+          {tab === "team" && <TeamTab />}
+          {tab === "deleted" && <DeletedChangesTab />}
+        </div>
       </div>
-
-      {tab === "dashboard" && <Dashboard metrics={data.metrics} />}
-
-      {tab === "klanten" && (
-        <KlantenTab
-          data={data}
-          qc={qc}
-          openCustomer={openCustomer}
-          setOpenCustomer={setOpenCustomer}
-        />
-      )}
-
-      {tab === "changes" && (
-        <ChangesTab
-          data={data}
-          qc={qc}
-          openRequest={openRequest}
-          setOpenRequest={setOpenRequest}
-        />
-      )}
-
-      {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
-      {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
-      {tab === "chat" && <AdminChatPanel />}
-      {tab === "team" && <TeamTab />}
-      {tab === "deleted" && <DeletedChangesTab />}
     </div>
   );
 }
@@ -715,7 +726,7 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
                     {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
                   </span>
                   {r.rush && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">⚡ Spoed</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">Spoed</span>
                   )}
                 </div>
               </div>

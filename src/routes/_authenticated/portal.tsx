@@ -448,7 +448,7 @@ function PortalPage() {
                 checked={rush}
                 onChange={(e) => setRush(e.target.checked)}
               />
-              ⚡ Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
+              Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
             </label>
             <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent">
               📎 Bestanden ({files.length})
@@ -544,7 +544,7 @@ function PortalPage() {
                     </span>
                     {r.rush && (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">
-                        ⚡ Spoed
+                        Spoed
                       </span>
                     )}
                   </div>
