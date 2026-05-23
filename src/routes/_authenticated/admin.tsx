@@ -544,21 +544,97 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
 function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
   const [sortBy, setSortBy] = useState<"date" | "priority">("priority");
   const [statusFilter, setStatusFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
+  const [paidFilter, setPaidFilter] = useState<string>(""); // "", "free", "paid"
+  const [customerFilter, setCustomerFilter] = useState<string>("");
+
+  const togglePaid = useServerFn(adminToggleRequestPaid);
+  const togglePaidM = useMutation({
+    mutationFn: (i: any) => togglePaid({ data: i }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
+  });
 
   const sorted = useMemo(() => {
-    const arr = [...data.requests];
-    if (statusFilter) arr.filter((r: any) => r.status === statusFilter);
+    let arr = [...data.requests];
+    if (statusFilter) arr = arr.filter((r: any) => r.status === statusFilter);
+    if (categoryFilter) arr = arr.filter((r: any) => (r.category ?? "other") === categoryFilter);
+    if (paidFilter) arr = arr.filter((r: any) => (paidFilter === "paid" ? r.is_paid : !r.is_paid));
+    if (customerFilter) arr = arr.filter((r: any) => r.user_id === customerFilter);
     arr.sort((a: any, b: any) => {
       if (sortBy === "priority") {
         return (PRIORITY_WEIGHT[b.priority] ?? 0) - (PRIORITY_WEIGHT[a.priority] ?? 0);
       }
       return b.created_at.localeCompare(a.created_at);
     });
-    return statusFilter ? arr.filter((r: any) => r.status === statusFilter) : arr;
-  }, [data.requests, sortBy, statusFilter]);
+    return arr;
+  }, [data.requests, sortBy, statusFilter, categoryFilter, paidFilter, customerFilter]);
+
+  // Inzicht: top 5 klanten + gemiddelde doorlooptijd (created→done)
+  const insights = useMemo(() => {
+    const counts: Record<string, number> = {};
+    let totalHours = 0;
+    let doneCount = 0;
+    for (const r of data.requests as any[]) {
+      counts[r.user_id] = (counts[r.user_id] ?? 0) + 1;
+      if (r.status === "done" || r.status === "invoiced") {
+        const h = (new Date(r.updated_at).getTime() - new Date(r.created_at).getTime()) / 36e5;
+        if (h > 0) { totalHours += h; doneCount++; }
+      }
+    }
+    const top = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([uid, n]) => {
+        const c = data.customers.find((c: any) => c.id === uid);
+        return { name: c?.full_name || c?.email || uid, count: n };
+      });
+    return { top, avgHours: doneCount ? Math.round(totalHours / doneCount) : null };
+  }, [data.requests, data.customers]);
+
+  const exportCsv = () => {
+    const rows = (data.requests as any[]).filter((r) => r.is_paid && (r.status === "done" || r.status === "invoiced"));
+    const header = ["datum", "klant", "email", "titel", "categorie", "spoed", "bedrag_eur", "status"];
+    const lines = [header.join(";")];
+    for (const r of rows) {
+      const c = data.customers.find((c: any) => c.id === r.user_id) ?? {};
+      const bedrag = PAID_CHANGE_PRICE_EUR + (r.rush ? 15 : 0);
+      lines.push([
+        new Date(r.created_at).toISOString().slice(0, 10),
+        (c.full_name || "").replace(/;/g, ","),
+        c.email ?? "",
+        r.title.replace(/;/g, ","),
+        CATEGORY_LABEL[r.category ?? "other"] ?? r.category ?? "",
+        r.rush ? "ja" : "nee",
+        bedrag.toFixed(2),
+        STATUS_LABEL[r.status] ?? r.status,
+      ].join(";"));
+    }
+    const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `betaalde-changes-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="space-y-3">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 rounded-2xl border border-border bg-card p-4">
+        <div>
+          <p className="text-xs uppercase text-muted-foreground">Gem. doorlooptijd</p>
+          <p className="text-xl font-bold">{insights.avgHours !== null ? `${insights.avgHours} uur` : "—"}</p>
+        </div>
+        <div className="sm:col-span-2">
+          <p className="text-xs uppercase text-muted-foreground mb-1">Top 5 klanten (changes)</p>
+          <ol className="text-sm space-y-0.5">
+            {insights.top.map((t, i) => (
+              <li key={i}>{i + 1}. {t.name} — {t.count}</li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
       <div className="flex flex-wrap gap-2 items-center">
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
           <option value="priority">Sorteer: prioriteit</option>
@@ -568,6 +644,24 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
           <option value="">Alle statussen</option>
           {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
         </select>
+        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+          <option value="">Alle categorieën</option>
+          {CATEGORY_KEYS.map((k) => <option key={k} value={k}>{CATEGORY_LABEL[k]}</option>)}
+        </select>
+        <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+          <option value="">Gratis + betaald</option>
+          <option value="free">Alleen gratis</option>
+          <option value="paid">Alleen betaald</option>
+        </select>
+        <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+          <option value="">Alle klanten</option>
+          {data.customers.map((c: any) => (
+            <option key={c.id} value={c.id}>{c.full_name || c.email}</option>
+          ))}
+        </select>
+        <button onClick={exportCsv} className="ml-auto rounded-full border border-primary px-3 py-1 text-xs text-primary hover:bg-primary hover:text-primary-foreground">
+          ⬇ Export CSV (betaald + gereed)
+        </button>
       </div>
 
       {sorted.map((r: any) => {
@@ -583,8 +677,27 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
                 </p>
                 <h3 className="font-semibold mt-1">{r.title}</h3>
                 <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">{r.description}</p>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted">
+                    {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
+                  </span>
+                  {r.rush && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">⚡ Spoed</span>
+                  )}
+                </div>
               </div>
-              <span className="text-xs px-2 py-1 rounded-full bg-muted">{STATUS_LABEL[r.status]}</span>
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-xs px-2 py-1 rounded-full bg-muted">{STATUS_LABEL[r.status]}</span>
+                <button
+                  onClick={() => togglePaidM.mutate({ id: r.id, is_paid: !r.is_paid })}
+                  className={`text-[10px] px-2 py-0.5 rounded-full cursor-pointer ${
+                    r.is_paid ? "bg-amber-500/15 text-amber-600" : "bg-primary/15 text-primary"
+                  }`}
+                  title="Klik om te wisselen tussen gratis en betaald"
+                >
+                  {r.is_paid ? `€${PAID_CHANGE_PRICE_EUR} · klik voor gratis` : "Gratis · klik voor €20"}
+                </button>
+              </div>
             </div>
             <button
               onClick={() => setOpenRequest(openRequest === r.id ? null : r.id)}
