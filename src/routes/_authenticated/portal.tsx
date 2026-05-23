@@ -711,7 +711,7 @@ function A11yBar() {
     <div
       role="region"
       aria-label="Toegankelijkheid"
-      className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-2 text-xs"
+      className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/95 backdrop-blur p-2 text-xs shadow-lg"
     >
       <span className="text-muted-foreground px-2">Toegankelijkheid:</span>
       <button
