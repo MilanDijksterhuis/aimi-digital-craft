@@ -37,6 +37,7 @@ import {
   adminToggleRequestPaid,
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
+import { AdminChatPanel } from "@/components/AdminChatPanel";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
