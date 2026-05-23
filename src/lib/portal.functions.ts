@@ -107,12 +107,20 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
     if (((avail as number) ?? 0) <= 0) {
       throw new Error("Geen changes meer beschikbaar deze maand. Koop er bij.");
     }
+    const { data: prof } = await supabase
+      .from("profiles")
+      .select("website_url")
+      .eq("id", userId)
+      .maybeSingle();
+    const websitePrefix = prof?.website_url
+      ? `🌐 Website: ${prof.website_url}\n\n`
+      : "";
     const { data: row, error } = await supabase
       .from("change_requests")
       .insert({
         user_id: userId,
         title: data.title,
-        description: data.description,
+        description: websitePrefix + data.description,
         priority: data.priority,
       })
       .select()
