@@ -11,7 +11,9 @@ import {
   postCustomerComment,
   getAttachmentUrl,
   updateMyProfile,
+  cancelMyChange,
 } from "@/lib/portal.functions";
+
 import { supabase } from "@/integrations/supabase/client";
 import {
   STATUS_LABEL,
