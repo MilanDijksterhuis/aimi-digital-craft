@@ -212,12 +212,8 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
           <Field label="Naam" value={newC.full_name} onChange={(v: string) => setNewC({ ...newC, full_name: v })} required />
           <Field label="Email" type="email" value={newC.email} onChange={(v: string) => setNewC({ ...newC, email: v })} required />
           <Field label="Bedrijf" value={newC.company} onChange={(v: string) => setNewC({ ...newC, company: v })} />
-        </>}{false && <></>
-        >
-          <Field label="Naam" value={newC.full_name} onChange={(v) => setNewC({ ...newC, full_name: v })} required />
-          <Field label="Email" type="email" value={newC.email} onChange={(v) => setNewC({ ...newC, email: v })} required />
-          <Field label="Bedrijf" value={newC.company} onChange={(v) => setNewC({ ...newC, company: v })} />
           <button
+
             type="submit"
             disabled={createM.isPending}
             className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
@@ -405,10 +401,11 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
   const [onbLabel, setOnbLabel] = useState("");
   const [tagsInput, setTagsInput] = useState("");
 
-  if (isLoading || !data) {
+  if (isLoading || !data || !data.profile) {
     return <Modal onClose={onClose} title="Laden…"><p>Laden…</p></Modal>;
   }
   const p = data.profile;
+
   const f = form ?? {
     full_name: p.full_name ?? "", company: p.company ?? "", email: p.email,
     phone: p.phone ?? "", address: p.address ?? "", kvk: p.kvk ?? "", btw: p.btw ?? "",
@@ -428,7 +425,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
               ["phone", "Telefoon"], ["address", "Adres"], ["kvk", "KVK"], ["btw", "BTW"],
               ["package", "Pakket (bv. Starter/Pro)"],
             ].map(([k, label]) => (
-              <Field key={k} label={label} value={f[k] ?? ""} onChange={(v) => setForm({ ...f, [k]: v })} />
+              <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
             ))}
             <label className="block text-sm">
               <span className="text-muted-foreground">Maandprijs (€)</span>
