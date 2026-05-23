@@ -119,11 +119,10 @@ function Dashboard({ metrics }: { metrics: any }) {
   const max = Math.max(1, ...metrics.months.map((m: any) => m.count));
   return (
     <div className="space-y-6">
-      <div className="grid sm:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-3 gap-4">
         <Card label="Klanten" value={metrics.totalCustomers} />
         <Card label="Actief (30d)" value={metrics.activeCount} accent />
         <Card label="Inactief" value={metrics.inactiveCount} />
-        <Card label="MRR" value={eur(metrics.mrr_cents)} accent />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <Card
