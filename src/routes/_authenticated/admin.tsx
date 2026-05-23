@@ -383,6 +383,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
   };
 
   const updateM = useMutation({ mutationFn: (i: any) => update({ data: i }), onSuccess: inv });
+  const setQuotaM = useMutation({ mutationFn: (i: any) => setQuota({ data: i }), onSuccess: inv });
   const addCostM = useMutation({ mutationFn: (i: any) => addCost({ data: i }), onSuccess: inv });
   const delCostM = useMutation({ mutationFn: (id: string) => delCost({ data: { id } }), onSuccess: inv });
   const addOnbM = useMutation({ mutationFn: (i: any) => addOnb({ data: i }), onSuccess: inv });
