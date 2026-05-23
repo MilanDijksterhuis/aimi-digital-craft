@@ -108,12 +108,31 @@ function PortalPage() {
           });
         }
       }
-      await submitM.mutateAsync({ title, description, priority, attachments: uploaded });
-      setTitle(""); setDescription(""); setPriority("normal"); setFiles([]);
+      await submitM.mutateAsync({
+        title,
+        description,
+        priority,
+        category,
+        rush,
+        attachments: uploaded,
+      });
+      setTitle("");
+      setDescription("");
+      setPriority("normal");
+      setCategory("text");
+      setRush(false);
+      setFiles([]);
     } finally {
       setUploading(false);
     }
   };
+
+  const openChanges = data.requests.filter(
+    (r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced",
+  ).length;
+  const reachedOpenLimit = openChanges >= 10;
+  const formIsFree = isCategoryFree(category);
+  const formPrice = priceForChange(category, rush);
 
   const openAttachment = async (file_path: string) => {
     const { url } = await attUrl({ data: { file_path } });
