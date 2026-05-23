@@ -133,6 +133,8 @@ function AdminPage() {
       {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
       {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
       {tab === "chat" && <AdminChatPanel />}
+      {tab === "team" && <TeamTab />}
+      {tab === "deleted" && <DeletedChangesTab />}
     </div>
   );
 }
