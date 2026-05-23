@@ -132,7 +132,7 @@ function PortalPage() {
       <section className="rounded-2xl border border-border bg-card p-6">
         <h2 className="font-display text-2xl font-semibold mb-2">Extra changes bijkopen</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          €49 per extra change. Na aankoopverzoek voegt AIMI je credits toe en sturen we een factuur.
+          €20 per extra change. Na aankoopverzoek voegt AIMI je credits toe en sturen we een factuur.
         </p>
         <div className="flex items-center gap-3">
           <input
@@ -148,7 +148,7 @@ function PortalPage() {
             disabled={buyM.isPending}
             className="rounded-full border border-primary px-5 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition"
           >
-            {buyM.isPending ? "Bezig…" : `Aanvragen (€${purchaseQty * 49})`}
+            {buyM.isPending ? "Bezig…" : `Aanvragen (€${purchaseQty * 20})`}
           </button>
           {buyM.isSuccess && (
             <span className="text-sm text-primary">Verzoek verstuurd ✓</span>
