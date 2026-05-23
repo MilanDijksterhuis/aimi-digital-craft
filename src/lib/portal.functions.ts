@@ -99,6 +99,14 @@ export const updateMyProfile = createServerFn({ method: "POST" })
         contact_person: z.string().trim().max(200).optional(),
         kvk: z.string().trim().max(50).optional(),
         btw: z.string().trim().max(50).optional(),
+        contacts: z
+          .object({
+            financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+          })
+          .partial()
+          .optional(),
       })
       .parse(d),
   )
@@ -108,6 +116,52 @@ export const updateMyProfile = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const logLogin = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_agent: z.string().max(500).optional() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    // Best effort ip extraction
+    let ip: string | null = null;
+    try {
+      const { getRequestHeader } = await import("@tanstack/react-start/server");
+      ip = getRequestHeader("x-forwarded-for") ?? getRequestHeader("cf-connecting-ip") ?? null;
+      if (ip && ip.includes(",")) ip = ip.split(",")[0].trim();
+    } catch {}
+    await supabase.from("login_events").insert({
+      user_id: userId,
+      ip,
+      user_agent: data.user_agent ?? null,
+    });
+    return { ok: true };
+  });
+
+export const cancelMyChange = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), reason: z.string().trim().max(500).optional() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const { data: req } = await supabase
+      .from("change_requests")
+      .select("user_id, status")
+      .eq("id", data.id)
+      .single();
+    if (!req || req.user_id !== userId) throw new Error("Niet gevonden.");
+    if (["in_progress", "review", "done", "invoiced"].includes(req.status)) {
+      throw new Error("Deze change is al in uitvoering en kan niet meer geannuleerd worden.");
+    }
+    const { error } = await supabase
+      .from("change_requests")
+      .update({ status: "cancelled" as any, cancellation_reason: data.reason ?? null })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+
 
 const SIMPLE_CATEGORIES_SERVER = new Set(["text", "styling", "media", "accessibility"]);
 
