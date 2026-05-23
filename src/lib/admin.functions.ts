@@ -89,6 +89,9 @@ export const adminUpdateCustomer = createServerFn({ method: "POST" })
         monthly_price_cents: z.number().int().min(0).max(100000000).optional(),
         internal_notes: z.string().max(5000).optional(),
         tags: z.array(z.string().trim().min(1).max(50)).max(20).optional(),
+        website_url: z.string().trim().max(500).optional().nullable(),
+        contact_person: z.string().trim().max(200).optional().nullable(),
+        billing_address: z.string().trim().max(500).optional().nullable(),
       })
       .parse(d),
   )
