@@ -721,8 +721,6 @@ function A11yBar() {
     </div>
   );
 }
-  );
-}
 
 function Stat({ label, value, accent }: { label: string; value: any; accent?: boolean }) {
   return (
