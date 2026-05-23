@@ -19,6 +19,13 @@ import {
   STATUS_COLOR,
   PRIORITY_LABEL,
   PRIORITY_COLOR,
+  CATEGORY_LABEL,
+  CATEGORY_KEYS,
+  isCategoryFree,
+  priceForChange,
+  PAID_CHANGE_PRICE_EUR,
+  RUSH_SURCHARGE_EUR,
+  CHANGE_TEMPLATES,
 } from "@/lib/status";
 
 export const Route = createFileRoute("/_authenticated/portal")({
