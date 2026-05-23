@@ -11,14 +11,49 @@ import {
   adminGetCustomerDetail,
 } from "./admin.server";
 
+const ADMIN_LIKE_ROLES = ["super_admin", "co_admin", "admin"];
+const STAFF_ROLES_SRV = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
+
+async function getRoles(supabase: any, userId: string): Promise<string[]> {
+  const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
+  return (data ?? []).map((r: any) => r.role);
+}
+
+async function ensureRoles(supabase: any, userId: string, allowed: string[], label = "this action") {
+  const roles = await getRoles(supabase, userId);
+  if (!roles.some((r) => allowed.includes(r))) {
+    throw new Error(`Forbidden: ${label}`);
+  }
+  return roles;
+}
+
 async function ensureAdmin(supabase: any, userId: string) {
-  const { data } = await supabase
-    .from("user_roles")
-    .select("role")
-    .eq("user_id", userId)
-    .eq("role", "admin")
-    .maybeSingle();
-  if (!data) throw new Error("Forbidden: admin only");
+  await ensureRoles(supabase, userId, ADMIN_LIKE_ROLES, "admin only");
+}
+
+async function ensureSuperAdmin(supabase: any, userId: string) {
+  await ensureRoles(supabase, userId, ["super_admin", "admin"], "super admin only");
+}
+
+async function ensureStaff(supabase: any, userId: string) {
+  await ensureRoles(supabase, userId, STAFF_ROLES_SRV, "staff only");
+}
+
+async function logAudit(
+  supabase: any,
+  userId: string,
+  action: string,
+  target_type: string,
+  target_id: string | null,
+  details: Record<string, any> = {},
+) {
+  await supabase.from("audit_log").insert({
+    user_id: userId,
+    action,
+    target_type,
+    target_id,
+    details,
+  });
 }
 
 export const adminGetOverview = createServerFn({ method: "GET" })
