@@ -95,6 +95,8 @@ function AdminPage() {
           ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
           ["afspraken", "📅 Afspraken"],
           ["chat", "💬 Chat"],
+          ["team", "👤 Team"],
+          ["deleted", "🗑 Verwijderd"],
         ].map(([k, l]) => (
           <button
             key={k}
