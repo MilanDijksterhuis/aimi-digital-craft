@@ -38,6 +38,10 @@ import {
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
 import { AdminChatPanel } from "@/components/AdminChatPanel";
+import { TeamTab } from "@/components/TeamTab";
+import { DeletedChangesTab } from "@/components/DeletedChangesTab";
+import { adminSoftDeleteChange } from "@/lib/admin.functions";
+import { usePermissions } from "@/hooks/use-permissions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
