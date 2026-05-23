@@ -684,9 +684,6 @@ function PortalPage() {
         )}
         </section>
       )}
-      <div className="fixed bottom-3 left-3 z-40 max-w-[calc(100vw-1.5rem)]">
-        <A11yBar />
-      </div>
       <ChatWidget />
     </div>
   );
