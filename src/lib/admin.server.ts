@@ -121,8 +121,9 @@ export async function adminGetGrowthMetrics() {
         .order("created_at", { ascending: true }),
     ]);
 
+  const STAFF_R = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
   const adminIds = new Set(
-    (roles ?? []).filter((r: any) => r.role === "admin").map((r: any) => r.user_id),
+    (roles ?? []).filter((r: any) => STAFF_R.includes(r.role)).map((r: any) => r.user_id),
   );
   const customers = (profiles ?? []).filter((p: any) => !adminIds.has(p.id));
 
