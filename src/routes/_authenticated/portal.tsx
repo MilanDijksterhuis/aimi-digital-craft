@@ -576,13 +576,35 @@ function PortalPage() {
                 )}
 
                 {/* Thread */}
-                <div className="mt-3 border-t border-border pt-3">
+                <div className="mt-3 border-t border-border pt-3 flex flex-wrap items-center gap-3">
                   <button
                     onClick={() => setOpenThread(openThread === r.id ? null : r.id)}
                     className="text-xs text-primary hover:underline"
                   >
                     💬 Berichten ({r.change_comments?.length ?? 0})
                   </button>
+                  {r.request_number && (
+                    <span className="text-xs text-muted-foreground">
+                      #CHG-{String(r.request_number).padStart(4, "0")}
+                    </span>
+                  )}
+                  {!["in_progress", "review", "done", "invoiced", "cancelled", "rejected"].includes(r.status) && (
+                    <button
+                      onClick={() => {
+                        const reason = window.prompt("Reden voor annulering? (optioneel)") ?? undefined;
+                        if (window.confirm("Weet je zeker dat je deze change wilt annuleren?")) {
+                          cancelM.mutate({ id: r.id, reason });
+                        }
+                      }}
+                      className="text-xs text-destructive hover:underline ml-auto"
+                    >
+                      Annuleer
+                    </button>
+                  )}
+                </div>
+                {openThread === r.id && (
+                  <div className="mt-3 border-t border-border pt-3">
+
                   {openThread === r.id && (
                     <div className="mt-3 space-y-2">
                       {(r.change_comments ?? [])
