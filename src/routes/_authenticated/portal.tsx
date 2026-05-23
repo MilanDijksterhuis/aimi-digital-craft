@@ -496,29 +496,11 @@ function PortalPage() {
         </div>
       </section>
 
-      {/* Referral */}
-      {data.profile?.referral_code && (
-        <section className="rounded-2xl border border-primary/40 bg-primary/5 p-6">
-          <h2 className="font-display text-2xl font-semibold mb-2">Ken jij iemand?</h2>
-          <p className="text-sm text-muted-foreground mb-4">
-            Deel jouw referral-link. Wie via jou een site bestelt krijgt korting — jij ook.
-          </p>
-          <div className="flex items-center gap-2">
-            <code className="flex-1 rounded-md bg-background border border-border px-3 py-2 text-sm overflow-auto">
-              {referralLink}
-            </code>
-            <button
-              onClick={() => navigator.clipboard.writeText(referralLink)}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-            >
-              Kopieer
-            </button>
-          </div>
-        </section>
+        </div>
       )}
 
-      {/* Requests */}
-      <section>
+      {tab === "changes" && (
+        <section>
         <h2 className="font-display text-2xl font-semibold mb-4">Jouw changes</h2>
         {data.requests.length === 0 ? (
           <p className="text-muted-foreground text-sm">Nog geen changes ingediend.</p>
