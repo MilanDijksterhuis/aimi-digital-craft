@@ -24,7 +24,19 @@ import {
   adminCreateAppointment,
   adminDeleteAppointment,
 } from "@/lib/admin.functions";
-import { STATUS_LABEL, PRIORITY_LABEL, PRIORITY_WEIGHT, PRIORITY_COLOR } from "@/lib/status";
+import {
+  STATUS_LABEL,
+  PRIORITY_LABEL,
+  PRIORITY_WEIGHT,
+  PRIORITY_COLOR,
+  CATEGORY_LABEL,
+  CATEGORY_KEYS,
+  PAID_CHANGE_PRICE_EUR,
+} from "@/lib/status";
+import {
+  adminToggleRequestPaid,
+  adminSetFreeQuota,
+} from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
