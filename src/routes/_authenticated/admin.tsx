@@ -726,7 +726,7 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
                     {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
                   </span>
                   {r.rush && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">⚡ Spoed</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">Spoed</span>
                   )}
                 </div>
               </div>

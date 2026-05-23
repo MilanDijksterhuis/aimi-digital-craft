@@ -1,6 +1,6 @@
-import { createFileRoute, Outlet, redirect, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Link, useNavigate } from "@tanstack/react-router";
 import { useAuth, AuthProvider } from "@/hooks/use-auth";
-import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/_authenticated")({
   component: AuthLayout,
@@ -26,7 +26,6 @@ function Inner() {
     );
   }
   if (!user) {
-    // client redirect (SPA)
     nav({ to: "/login" });
     return null;
   }
@@ -41,22 +40,106 @@ function Inner() {
           <div className="flex items-center gap-4 text-sm">
             <Link to="/portal" className="hover:text-primary">Portaal</Link>
             <Link to="/admin" className="hover:text-primary">Admin</Link>
-            <span className="text-muted-foreground hidden sm:inline">{user.email}</span>
-            <button
-              onClick={async () => {
+            <AccountMenu
+              email={user.email ?? ""}
+              onSignOut={async () => {
                 await signOut();
                 nav({ to: "/login" });
               }}
-              className="rounded-full border border-border px-3 py-1.5 hover:bg-accent"
-            >
-              Uitloggen
-            </button>
+            />
           </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-6 py-10">
         <Outlet />
       </main>
+    </div>
+  );
+}
+
+function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => void | Promise<void> }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  const initials = (email || "?").slice(0, 1).toUpperCase();
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className="flex items-center gap-2 rounded-full border border-border bg-card pl-1 pr-3 py-1 hover:bg-accent"
+      >
+        <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-semibold">
+          {initials}
+        </span>
+        <span className="hidden sm:inline">Mijn account</span>
+        <span aria-hidden="true" className="text-muted-foreground">▾</span>
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 mt-2 w-64 rounded-xl border border-border bg-card shadow-lg z-50 overflow-hidden"
+        >
+          <div className="px-4 py-3 border-b border-border">
+            <p className="text-xs text-muted-foreground">Ingelogd als</p>
+            <p className="text-sm font-medium truncate">{email}</p>
+          </div>
+          <ul className="py-1 text-sm">
+            <li>
+              <Link
+                to="/portal"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-2 hover:bg-accent"
+                role="menuitem"
+              >
+                Mijn gegevens
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/portal"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-2 hover:bg-accent"
+                role="menuitem"
+              >
+                Mijn changes
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/reset-password"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-2 hover:bg-accent"
+                role="menuitem"
+              >
+                Wachtwoord wijzigen
+              </Link>
+            </li>
+            <li className="border-t border-border mt-1">
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  void onSignOut();
+                }}
+                className="w-full text-left px-4 py-2 hover:bg-accent text-destructive"
+                role="menuitem"
+              >
+                Uitloggen
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
