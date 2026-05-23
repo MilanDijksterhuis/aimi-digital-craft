@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as LoginRouteImport } from './routes/login'
@@ -19,6 +20,11 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 
+const TrackDotjsRoute = TrackDotjsRouteImport.update({
+  id: '/track.js',
+  path: '/track.js',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup-admin'
     | '/sitemap.xml'
+    | '/track.js'
     | '/admin'
     | '/portal'
     | '/api/public/site-error'
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup-admin'
     | '/sitemap.xml'
+    | '/track.js'
     | '/admin'
     | '/portal'
     | '/api/public/site-error'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup-admin'
     | '/sitemap.xml'
+    | '/track.js'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/api/public/site-error'
@@ -136,12 +148,20 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   SetupAdminRoute: typeof SetupAdminRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TrackDotjsRoute: typeof TrackDotjsRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/track.js': {
+      id: '/track.js'
+      path: '/track.js'
+      fullPath: '/track.js'
+      preLoaderRoute: typeof TrackDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -228,6 +248,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   SetupAdminRoute: SetupAdminRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TrackDotjsRoute: TrackDotjsRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
 }
