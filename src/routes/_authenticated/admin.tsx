@@ -425,7 +425,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
               ["phone", "Telefoon"], ["address", "Adres"], ["kvk", "KVK"], ["btw", "BTW"],
               ["package", "Pakket (bv. Starter/Pro)"],
             ].map(([k, label]) => (
-              <Field key={k} label={label} value={f[k] ?? ""} onChange={(v) => setForm({ ...f, [k]: v })} />
+              <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
             ))}
             <label className="block text-sm">
               <span className="text-muted-foreground">Maandprijs (€)</span>
