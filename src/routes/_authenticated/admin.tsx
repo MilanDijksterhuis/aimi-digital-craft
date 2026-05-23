@@ -209,6 +209,11 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
             });
           }}
         >
+          <Field label="Naam" value={newC.full_name} onChange={(v: string) => setNewC({ ...newC, full_name: v })} required />
+          <Field label="Email" type="email" value={newC.email} onChange={(v: string) => setNewC({ ...newC, email: v })} required />
+          <Field label="Bedrijf" value={newC.company} onChange={(v: string) => setNewC({ ...newC, company: v })} />
+        </>}{false && <></>
+        >
           <Field label="Naam" value={newC.full_name} onChange={(v) => setNewC({ ...newC, full_name: v })} required />
           <Field label="Email" type="email" value={newC.email} onChange={(v) => setNewC({ ...newC, email: v })} required />
           <Field label="Bedrijf" value={newC.company} onChange={(v) => setNewC({ ...newC, company: v })} />
