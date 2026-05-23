@@ -1,13 +1,18 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { adminCreateCustomer, adminListCustomers } from "./admin.server";
+import {
+  adminCreateCustomer,
+  adminListCustomers,
+  adminGenerateRecoveryLink,
+  adminSetUserPassword,
+  adminUpdateUserEmail,
+  adminGetGrowthMetrics,
+  adminGetCustomerDetail,
+} from "./admin.server";
 
 async function ensureAdmin(supabase: any, userId: string) {
-  const { data } = await supabase.rpc("has_role", {
-    _user_id: userId,
-    _role: "admin",
-  });
+  const { data } = await supabase.rpc("has_role", { _user_id: userId, _role: "admin" });
   if (!data) throw new Error("Forbidden: admin only");
 }
 
@@ -18,23 +23,36 @@ export const adminGetOverview = createServerFn({ method: "GET" })
     await ensureAdmin(supabase, userId);
 
     const customers = await adminListCustomers();
-    const [requestsRes, purchasesRes] = await Promise.all([
+    const [requestsRes, purchasesRes, snippetsRes, metrics] = await Promise.all([
       supabase
         .from("change_requests")
-        .select("*")
+        .select("*, change_attachments(*), change_comments(*)")
         .order("created_at", { ascending: false }),
       supabase
         .from("purchase_requests")
         .select("*")
         .eq("status", "pending")
         .order("created_at", { ascending: false }),
+      supabase.from("reply_snippets").select("*").order("created_at", { ascending: false }),
+      adminGetGrowthMetrics(),
     ]);
 
     return {
       customers,
       requests: requestsRes.data ?? [],
       pendingPurchases: purchasesRes.data ?? [],
+      snippets: snippetsRes.data ?? [],
+      metrics,
     };
+  });
+
+export const adminGetCustomer = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    return adminGetCustomerDetail(data.user_id);
   });
 
 export const adminCreateCustomerFn = createServerFn({ method: "POST" })
@@ -51,8 +69,42 @@ export const adminCreateCustomerFn = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const result = await adminCreateCustomer(data);
-    return result;
+    return adminCreateCustomer(data);
+  });
+
+export const adminUpdateCustomer = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        full_name: z.string().trim().max(200).optional(),
+        company: z.string().trim().max(200).optional(),
+        email: z.string().trim().email().max(255).optional(),
+        phone: z.string().trim().max(50).optional(),
+        address: z.string().trim().max(500).optional(),
+        kvk: z.string().trim().max(50).optional(),
+        btw: z.string().trim().max(50).optional(),
+        package: z.string().trim().max(100).optional(),
+        monthly_price_cents: z.number().int().min(0).max(100000000).optional(),
+        internal_notes: z.string().max(5000).optional(),
+        tags: z.array(z.string().trim().min(1).max(50)).max(20).optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { user_id, email, ...rest } = data;
+
+    if (email) await adminUpdateUserEmail(user_id, email);
+
+    const update: any = { ...rest };
+    if (email) update.email = email;
+
+    const { error } = await supabase.from("profiles").update(update).eq("id", user_id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
 
 export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
@@ -61,8 +113,7 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
     z
       .object({
         id: z.string().uuid(),
-        status: z.enum(["pending", "in_progress", "done", "rejected"]),
-        admin_notes: z.string().max(2000).optional(),
+        status: z.enum(["pending", "in_review", "in_progress", "review", "done", "rejected"]),
       })
       .parse(d),
   )
@@ -71,19 +122,66 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
     await ensureAdmin(supabase, userId);
     const { data: req, error } = await supabase
       .from("change_requests")
-      .update({ status: data.status, admin_notes: data.admin_notes ?? null })
+      .update({ status: data.status })
       .eq("id", data.id)
       .select("user_id, title")
       .single();
     if (error) throw new Error(error.message);
 
-    // Auto-notify customer
     await supabase.from("notifications").insert({
       user_id: req.user_id,
       title: `Status update: ${req.title}`,
       message: `Je verzoek is nu: ${data.status}.`,
     });
+    return { ok: true };
+  });
 
+export const adminSetRequestFields = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        due_date: z.string().nullable().optional(),
+        internal_note: z.string().max(5000).nullable().optional(),
+        admin_notes: z.string().max(5000).nullable().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { id, ...rest } = data;
+    const { error } = await supabase.from("change_requests").update(rest).eq("id", id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminPostComment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ request_id: z.string().uuid(), body: z.string().trim().min(1).max(4000) }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: req } = await supabase
+      .from("change_requests")
+      .select("user_id, title")
+      .eq("id", data.request_id)
+      .single();
+    const { error } = await supabase
+      .from("change_comments")
+      .insert({ request_id: data.request_id, author_id: userId, body: data.body });
+    if (error) throw new Error(error.message);
+
+    if (req) {
+      await supabase.from("notifications").insert({
+        user_id: req.user_id,
+        title: `Nieuw bericht: ${req.title}`,
+        message: data.body.slice(0, 140),
+      });
+    }
     return { ok: true };
   });
 
@@ -122,7 +220,6 @@ export const adminGrantCredits = createServerFn({ method: "POST" })
       title: "Extra changes toegevoegd",
       message: `Er zijn ${data.amount} extra change(s) aan je account toegevoegd.`,
     });
-
     return { ok: true };
   });
 
@@ -147,4 +244,166 @@ export const adminSendNotification = createServerFn({ method: "POST" })
     });
     if (error) throw new Error(error.message);
     return { ok: true };
+  });
+
+// Password reset / set
+export const adminSendPasswordReset = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ email: z.string().email(), redirectTo: z.string().url() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    return adminGenerateRecoveryLink(data.email, data.redirectTo);
+  });
+
+export const adminSetPassword = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({ user_id: z.string().uuid(), password: z.string().min(8).max(72) })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    await adminSetUserPassword(data.user_id, data.password);
+    return { ok: true };
+  });
+
+// Costs
+export const adminAddCost = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        description: z.string().trim().min(1).max(500),
+        amount_cents: z.number().int(),
+        cost_date: z.string().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("customer_costs").insert({
+      user_id: data.user_id,
+      description: data.description,
+      amount_cents: data.amount_cents,
+      cost_date: data.cost_date ?? new Date().toISOString().slice(0, 10),
+      created_by: userId,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminDeleteCost = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("customer_costs").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// Onboarding
+export const adminAddOnboardingItem = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        label: z.string().trim().min(1).max(200),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { count } = await supabase
+      .from("onboarding_items")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", data.user_id);
+    const { error } = await supabase
+      .from("onboarding_items")
+      .insert({ user_id: data.user_id, label: data.label, position: count ?? 0 });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminToggleOnboardingItem = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), done: z.boolean() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("onboarding_items")
+      .update({ done: data.done })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminDeleteOnboardingItem = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("onboarding_items").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// Snippets
+export const adminCreateSnippet = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        title: z.string().trim().min(1).max(200),
+        body: z.string().trim().min(1).max(4000),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("reply_snippets")
+      .insert({ title: data.title, body: data.body, created_by: userId });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminDeleteSnippet = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("reply_snippets").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// Signed URL for attachments (admin)
+export const adminAttachmentUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ file_path: z.string().max(500) }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: url, error } = await supabase.storage
+      .from("change-attachments")
+      .createSignedUrl(data.file_path, 3600);
+    if (error) throw new Error(error.message);
+    return { url: url.signedUrl };
   });
