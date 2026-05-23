@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { A11yBar } from "@/components/A11yBar";
 
 function NotFoundComponent() {
   return (
