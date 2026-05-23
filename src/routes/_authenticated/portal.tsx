@@ -284,6 +284,16 @@ function PortalPage() {
             </span>
             <span className="text-xs text-muted-foreground">{data.totalPings} pings</span>
           </div>
+          {data.requests[0] && (
+            <p className="mt-3 text-sm">
+              <span className="text-xs uppercase tracking-wide text-muted-foreground mr-2">Laatste change:</span>
+              <span className="font-medium">{data.requests[0].title}</span>
+              <span className="text-xs text-muted-foreground ml-2">
+                ({new Date(data.requests[0].created_at).toLocaleDateString("nl-NL")})
+              </span>
+            </p>
+          )}
+          <div className="hidden">
           {data.siteErrors.length > 0 && (
             <div className="mt-4">
               <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Laatste fouten</p>
