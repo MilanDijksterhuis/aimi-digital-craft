@@ -401,10 +401,11 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
   const [onbLabel, setOnbLabel] = useState("");
   const [tagsInput, setTagsInput] = useState("");
 
-  if (isLoading || !data) {
+  if (isLoading || !data || !data.profile) {
     return <Modal onClose={onClose} title="Laden…"><p>Laden…</p></Modal>;
   }
   const p = data.profile;
+
   const f = form ?? {
     full_name: p.full_name ?? "", company: p.company ?? "", email: p.email,
     phone: p.phone ?? "", address: p.address ?? "", kvk: p.kvk ?? "", btw: p.btw ?? "",
