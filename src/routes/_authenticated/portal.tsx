@@ -435,7 +435,7 @@ function PortalPage() {
               ⚡ Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
             </label>
             <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent">
-              📎 Screenshots ({files.length})
+              📎 Bestanden ({files.length})
               <input
                 type="file" multiple accept="image/*,.pdf" className="hidden"
                 onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
