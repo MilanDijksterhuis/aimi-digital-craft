@@ -37,6 +37,7 @@ import {
   adminToggleRequestPaid,
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
+import { AdminChatPanel } from "@/components/AdminChatPanel";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
@@ -53,7 +54,7 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken">(
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat">(
     "dashboard",
   );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
@@ -88,6 +89,7 @@ function AdminPage() {
           ["changes", `🔧 Changes (${data.requests.length})`],
           ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
           ["afspraken", "📅 Afspraken"],
+          ["chat", "💬 Chat"],
         ].map(([k, l]) => (
           <button
             key={k}
@@ -123,6 +125,7 @@ function AdminPage() {
 
       {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
       {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
+      {tab === "chat" && <AdminChatPanel />}
     </div>
   );
 }
