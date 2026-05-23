@@ -36,7 +36,11 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       requestsRes.data?.filter((r: any) => {
         const d = new Date(r.created_at);
         const now = new Date();
-        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        return (
+          !r.is_paid &&
+          d.getMonth() === now.getMonth() &&
+          d.getFullYear() === now.getFullYear()
+        );
       }).length ?? 0;
 
     const extraTotal =
