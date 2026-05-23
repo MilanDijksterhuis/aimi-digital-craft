@@ -68,8 +68,9 @@ export async function adminListCustomers() {
     usedMap.set(r.user_id, (usedMap.get(r.user_id) ?? 0) + 1);
   });
 
+  const STAFF_FILTER = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
   return (profiles ?? [])
-    .filter((p: any) => !(roleMap.get(p.id) ?? []).includes("admin"))
+    .filter((p: any) => !(roleMap.get(p.id) ?? []).some((r) => STAFF_FILTER.includes(r)))
     .map((p: any) => ({
       ...p,
       roles: roleMap.get(p.id) ?? [],
