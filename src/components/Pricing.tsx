@@ -4,33 +4,22 @@ import { Check } from "lucide-react";
 const tiers = [
   {
     name: "Starter",
-    price: "€ 1.250",
+    price: "€ 800",
     desc: "Voor solopreneurs en kleine bedrijven.",
     features: ["1-pagina site", "Mobile-first design", "Hosting (1 jaar)", "Basic SEO"],
   },
   {
     name: "Pro",
-    price: "€ 3.500",
+    price: "€ 1500",
     desc: "Onze sweet spot — perfect voor groeiende merken.",
-    features: [
-      "Tot 6 pagina's",
-      "Custom design system",
-      "CMS integratie",
-      "Hosting + monitoring",
-      "Performance audit",
-    ],
+    features: ["Tot 6 pagina's", "Custom design system", "CMS integratie", "Hosting + monitoring", "Performance audit"],
     featured: true,
   },
   {
     name: "Custom",
     price: "Op maat",
     desc: "Complexe builds, e-commerce, web apps.",
-    features: [
-      "Onbeperkt scope",
-      "Backend & integraties",
-      "Dedicated support",
-      "SLA op maat",
-    ],
+    features: ["Onbeperkt scope", "Backend & integraties", "Dedicated support", "SLA op maat"],
   },
 ];
 
@@ -39,12 +28,8 @@ export function Pricing() {
     <section id="pricing" className="py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
-          <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest">
-            04 — Pricing
-          </p>
-          <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight">
-            Simpel. Transparant.
-          </h2>
+          <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest">04 — Pricing</p>
+          <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight">Simpel. Transparant.</h2>
           <p className="mt-4 text-muted-foreground">Geen verborgen kosten. Geen verrassingen.</p>
         </div>
 
@@ -57,9 +42,7 @@ export function Pricing() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className={`relative p-8 rounded-2xl border flex flex-col ${
-                t.featured
-                  ? "border-primary/50 bg-surface-elevated glow-primary"
-                  : "border-border bg-surface/60"
+                t.featured ? "border-primary/50 bg-surface-elevated glow-primary" : "border-border bg-surface/60"
               }`}
             >
               {t.featured && (
