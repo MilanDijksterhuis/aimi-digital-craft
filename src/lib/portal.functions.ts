@@ -7,7 +7,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
 
-    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes] =
+    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes] =
       await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase
@@ -25,6 +25,11 @@ export const getMyDashboard = createServerFn({ method: "GET" })
         supabase.rpc("available_credits", { _user_id: userId }),
         supabase.from("user_roles").select("role").eq("user_id", userId),
         supabase.from("onboarding_items").select("*").eq("user_id", userId).order("position"),
+        supabase
+          .from("appointments")
+          .select("*")
+          .eq("user_id", userId)
+          .order("scheduled_at", { ascending: true }),
       ]);
 
     const usedThisMonth =
@@ -46,7 +51,31 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       extraTotal,
       roles: (roleRes.data ?? []).map((r: any) => r.role),
       onboarding: onbRes.data ?? [],
+      appointments: apptRes.data ?? [],
     };
+  });
+
+export const updateMyProfile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        full_name: z.string().trim().max(200).optional(),
+        company: z.string().trim().max(200).optional(),
+        phone: z.string().trim().max(50).optional(),
+        address: z.string().trim().max(500).optional(),
+        billing_address: z.string().trim().max(500).optional(),
+        contact_person: z.string().trim().max(200).optional(),
+        kvk: z.string().trim().max(50).optional(),
+        btw: z.string().trim().max(50).optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const { error } = await supabase.from("profiles").update(data).eq("id", userId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
 
 export const submitChangeRequest = createServerFn({ method: "POST" })
