@@ -19,9 +19,10 @@ import {
   adminAddOnboardingItem,
   adminToggleOnboardingItem,
   adminDeleteOnboardingItem,
-  adminCreateSnippet,
-  adminDeleteSnippet,
   adminAttachmentUrl,
+  adminListAppointments,
+  adminCreateAppointment,
+  adminDeleteAppointment,
 } from "@/lib/admin.functions";
 import { STATUS_LABEL, PRIORITY_LABEL, PRIORITY_WEIGHT, PRIORITY_COLOR } from "@/lib/status";
 
