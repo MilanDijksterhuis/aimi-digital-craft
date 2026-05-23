@@ -44,11 +44,17 @@ function PortalPage() {
   const postComment = useServerFn(postCustomerComment);
   const attUrl = useServerFn(getAttachmentUrl);
   const updateProfile = useServerFn(updateMyProfile);
+  const cancelChange = useServerFn(cancelMyChange);
   const qc = useQueryClient();
   const updateProfileM = useMutation({
     mutationFn: (i: any) => updateProfile({ data: i }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
   });
+  const cancelM = useMutation({
+    mutationFn: (i: { id: string; reason?: string }) => cancelChange({ data: i }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
+  });
+
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["dashboard"],
