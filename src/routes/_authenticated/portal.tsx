@@ -33,8 +33,12 @@ function PortalPage() {
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
   const postComment = useServerFn(postCustomerComment);
-  const attUrl = useServerFn(getAttachmentUrl);
+  const updateProfile = useServerFn(updateMyProfile);
   const qc = useQueryClient();
+  const updateProfileM = useMutation({
+    mutationFn: (i: any) => updateProfile({ data: i }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
+  });
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["dashboard"],
