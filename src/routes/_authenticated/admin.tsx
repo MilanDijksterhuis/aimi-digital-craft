@@ -118,7 +118,7 @@ function AdminPage() {
                 <div key={p.id} className="flex items-center justify-between rounded-lg border border-border p-3">
                   <div className="text-sm">
                     <p className="font-medium">{c?.full_name ?? p.user_id} ({c?.email})</p>
-                    <p className="text-muted-foreground">wil {p.amount} extra change(s) — €{p.amount * 49}</p>
+                    <p className="text-muted-foreground">wil {p.amount} extra change(s) — €{p.amount * 20}</p>
                   </div>
                   <button
                     onClick={() =>
