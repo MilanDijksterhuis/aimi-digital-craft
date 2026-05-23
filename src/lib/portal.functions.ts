@@ -7,7 +7,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
 
-    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes] =
+    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes, loginsRes, pingsRes, errorsRes] =
       await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase
@@ -30,6 +30,23 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .select("*")
           .eq("user_id", userId)
           .order("scheduled_at", { ascending: true }),
+        supabase
+          .from("login_events")
+          .select("*")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false })
+          .limit(5),
+        supabase
+          .from("site_pings")
+          .select("status_ok, created_at")
+          .eq("user_id", userId)
+          .gte("created_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
+        supabase
+          .from("site_errors")
+          .select("*")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false })
+          .limit(5),
       ]);
 
     const usedThisMonth =
@@ -46,6 +63,11 @@ export const getMyDashboard = createServerFn({ method: "GET" })
     const extraTotal =
       creditsRes.data?.reduce((s: number, c: any) => s + (c.amount ?? 0), 0) ?? 0;
 
+    const pings = pingsRes.data ?? [];
+    const totalPings = pings.length;
+    const okPings = pings.filter((p: any) => p.status_ok).length;
+    const uptimePct = totalPings > 0 ? (okPings / totalPings) * 100 : null;
+
     return {
       profile: profileRes.data,
       requests: requestsRes.data ?? [],
@@ -56,8 +78,13 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       roles: (roleRes.data ?? []).map((r: any) => r.role),
       onboarding: onbRes.data ?? [],
       appointments: apptRes.data ?? [],
+      loginEvents: loginsRes.data ?? [],
+      uptimePct,
+      totalPings,
+      siteErrors: errorsRes.data ?? [],
     };
   });
+
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -72,6 +99,14 @@ export const updateMyProfile = createServerFn({ method: "POST" })
         contact_person: z.string().trim().max(200).optional(),
         kvk: z.string().trim().max(50).optional(),
         btw: z.string().trim().max(50).optional(),
+        contacts: z
+          .object({
+            financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+          })
+          .partial()
+          .optional(),
       })
       .parse(d),
   )
@@ -81,6 +116,52 @@ export const updateMyProfile = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const logLogin = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_agent: z.string().max(500).optional() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    // Best effort ip extraction
+    let ip: string | null = null;
+    try {
+      const { getRequestHeader } = await import("@tanstack/react-start/server");
+      ip = getRequestHeader("x-forwarded-for") ?? getRequestHeader("cf-connecting-ip") ?? null;
+      if (ip && ip.includes(",")) ip = ip.split(",")[0].trim();
+    } catch {}
+    await supabase.from("login_events").insert({
+      user_id: userId,
+      ip,
+      user_agent: data.user_agent ?? null,
+    });
+    return { ok: true };
+  });
+
+export const cancelMyChange = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), reason: z.string().trim().max(500).optional() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const { data: req } = await supabase
+      .from("change_requests")
+      .select("user_id, status")
+      .eq("id", data.id)
+      .single();
+    if (!req || req.user_id !== userId) throw new Error("Niet gevonden.");
+    if (["in_progress", "review", "done", "invoiced"].includes(req.status)) {
+      throw new Error("Deze change is al in uitvoering en kan niet meer geannuleerd worden.");
+    }
+    const { error } = await supabase
+      .from("change_requests")
+      .update({ status: "cancelled" as any, cancellation_reason: data.reason ?? null })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+
 
 const SIMPLE_CATEGORIES_SERVER = new Set(["text", "styling", "media", "accessibility"]);
 
@@ -105,6 +186,7 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
           ])
           .default("other"),
         rush: z.boolean().default(false),
+        ticket_type: z.enum(["question", "bug", "feature", "complaint"]).default("question"),
         attachments: z
           .array(
             z.object({
@@ -164,10 +246,12 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
         category: data.category,
         is_paid: isPaid,
         rush: data.rush,
+        ticket_type: data.ticket_type,
       })
       .select()
       .single();
     if (error) throw new Error(error.message);
+
 
     if (data.attachments.length > 0) {
       const rows = data.attachments.map((a) => ({

@@ -517,3 +517,187 @@ export const adminDeleteAppointment = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+// ---------------- Bulk operations ----------------
+export const adminBulkComplete = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        ids: z.array(z.string().uuid()).min(1).max(50),
+        mark_paid: z.boolean().default(true),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const update: any = { status: "done" };
+    if (data.mark_paid) update.status = "invoiced";
+    const { error } = await supabase
+      .from("change_requests")
+      .update(update)
+      .in("id", data.ids);
+    if (error) throw new Error(error.message);
+    return { ok: true, count: data.ids.length };
+  });
+
+// ---------------- Contact moments ----------------
+export const adminListContactMoments = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: rows, error } = await supabase
+      .from("client_contacts")
+      .select("*")
+      .eq("user_id", data.user_id)
+      .order("occurred_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: rows ?? [] };
+  });
+
+export const adminCreateContactMoment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        kind: z.enum(["call", "meeting", "email"]),
+        summary: z.string().trim().min(1).max(2000),
+        occurred_at: z.string().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("client_contacts").insert({
+      user_id: data.user_id,
+      kind: data.kind,
+      summary: data.summary,
+      occurred_at: data.occurred_at ?? new Date().toISOString(),
+      created_by: userId,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminDeleteContactMoment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("client_contacts").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// ---------------- Login events (admin view per user) ----------------
+export const adminListLoginEvents = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: rows } = await supabase
+      .from("login_events")
+      .select("*")
+      .eq("user_id", data.user_id)
+      .order("created_at", { ascending: false })
+      .limit(5);
+    return { items: rows ?? [] };
+  });
+
+// ---------------- Site stats (admin view per user) ----------------
+export const adminGetSiteStats = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    const [pingsRes, errorsRes] = await Promise.all([
+      supabase.from("site_pings").select("status_ok").eq("user_id", data.user_id).gte("created_at", since),
+      supabase.from("site_errors").select("*").eq("user_id", data.user_id).order("created_at", { ascending: false }).limit(5),
+    ]);
+    const pings = pingsRes.data ?? [];
+    const okPings = pings.filter((p: any) => p.status_ok).length;
+    const uptimePct = pings.length > 0 ? (okPings / pings.length) * 100 : null;
+    return { uptimePct, totalPings: pings.length, errors: errorsRes.data ?? [] };
+  });
+
+// ---------------- Health score helper for customer list ----------------
+export const adminGetHealthScores = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    const [reqsRes, commentsRes] = await Promise.all([
+      supabase.from("change_requests").select("user_id, status, is_paid, created_at").gte("created_at", cutoff),
+      supabase.from("change_comments").select("request_id, author_id, created_at").gte("created_at", cutoff),
+    ]);
+    const reqs = reqsRes.data ?? [];
+    const scores: Record<string, "green" | "orange" | "red"> = {};
+    const byUser = new Map<string, any[]>();
+    reqs.forEach((r: any) => {
+      const arr = byUser.get(r.user_id) ?? [];
+      arr.push(r);
+      byUser.set(r.user_id, arr);
+    });
+    byUser.forEach((items, uid) => {
+      const paid = items.filter((i) => i.is_paid).length;
+      const total = items.length;
+      const cancelled = items.filter((i) => i.status === "cancelled" || i.status === "rejected").length;
+      // simple scoring: many cancellations = red, very active = green, otherwise orange
+      let score: "green" | "orange" | "red" = "orange";
+      if (cancelled > 2) score = "red";
+      else if (total >= 3 && paid >= 1) score = "green";
+      else if (total >= 1) score = "orange";
+      scores[uid] = score;
+    });
+    return { scores };
+  });
+
+// ---------------- All changes view (filterable) ----------------
+export const adminListAllChanges = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid().optional(),
+        status: z.string().optional(),
+        category: z.string().optional(),
+        ticket_type: z.string().optional(),
+        from_date: z.string().optional(),
+        to_date: z.string().optional(),
+        search: z.string().max(100).optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    let q = supabase
+      .from("change_requests")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(500);
+    if (data.user_id) q = q.eq("user_id", data.user_id);
+    if (data.status) q = q.eq("status", data.status as any);
+    if (data.category) q = q.eq("category", data.category);
+    if (data.ticket_type) q = q.eq("ticket_type", data.ticket_type);
+    if (data.from_date) q = q.gte("created_at", data.from_date);
+    if (data.to_date) q = q.lte("created_at", data.to_date);
+    if (data.search) {
+      const n = parseInt(data.search.replace(/\D/g, ""), 10);
+      if (!Number.isNaN(n)) q = q.eq("request_number", n);
+      else q = q.ilike("title", `%${data.search}%`);
+    }
+    const { data: rows, error } = await q;
+    if (error) throw new Error(error.message);
+    return { items: rows ?? [] };
+  });

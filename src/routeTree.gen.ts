@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as LoginRouteImport } from './routes/login'
@@ -16,7 +17,14 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
+import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 
+const TrackDotjsRoute = TrackDotjsRouteImport.update({
+  id: '/track.js',
+  path: '/track.js',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -51,22 +59,38 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const ApiPublicSitePingRoute = ApiPublicSitePingRouteImport.update({
+  id: '/api/public/site-ping',
+  path: '/api/public/site-ping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSiteErrorRoute = ApiPublicSiteErrorRouteImport.update({
+  id: '/api/public/site-error',
+  path: '/api/public/site-error',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/api/public/site-error': typeof ApiPublicSiteErrorRoute
+  '/api/public/site-ping': typeof ApiPublicSitePingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/api/public/site-error': typeof ApiPublicSiteErrorRoute
+  '/api/public/site-ping': typeof ApiPublicSitePingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -75,8 +99,11 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/track.js': typeof TrackDotjsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
+  '/api/public/site-error': typeof ApiPublicSiteErrorRoute
+  '/api/public/site-ping': typeof ApiPublicSitePingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -85,10 +112,22 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup-admin'
     | '/sitemap.xml'
+    | '/track.js'
     | '/admin'
     | '/portal'
+    | '/api/public/site-error'
+    | '/api/public/site-ping'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/setup-admin' | '/sitemap.xml' | '/admin' | '/portal'
+  to:
+    | '/'
+    | '/login'
+    | '/setup-admin'
+    | '/sitemap.xml'
+    | '/track.js'
+    | '/admin'
+    | '/portal'
+    | '/api/public/site-error'
+    | '/api/public/site-ping'
   id:
     | '__root__'
     | '/'
@@ -96,8 +135,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup-admin'
     | '/sitemap.xml'
+    | '/track.js'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
+    | '/api/public/site-error'
+    | '/api/public/site-ping'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,10 +148,20 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   SetupAdminRoute: typeof SetupAdminRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TrackDotjsRoute: typeof TrackDotjsRoute
+  ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
+  ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/track.js': {
+      id: '/track.js'
+      path: '/track.js'
+      fullPath: '/track.js'
+      preLoaderRoute: typeof TrackDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -159,6 +211,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/api/public/site-ping': {
+      id: '/api/public/site-ping'
+      path: '/api/public/site-ping'
+      fullPath: '/api/public/site-ping'
+      preLoaderRoute: typeof ApiPublicSitePingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/site-error': {
+      id: '/api/public/site-error'
+      path: '/api/public/site-error'
+      fullPath: '/api/public/site-error'
+      preLoaderRoute: typeof ApiPublicSiteErrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -182,6 +248,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   SetupAdminRoute: SetupAdminRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TrackDotjsRoute: TrackDotjsRoute,
+  ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
+  ApiPublicSitePingRoute: ApiPublicSitePingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
