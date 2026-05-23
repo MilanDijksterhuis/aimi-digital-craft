@@ -243,9 +243,12 @@ function PortalPage() {
 
       {/* Credits */}
       <section className="grid sm:grid-cols-3 gap-4">
-        <Stat label="Beschikbaar deze maand" value={data.availableCredits} accent />
-        <Stat label="Gebruikt deze maand" value={`${data.usedThisMonth} / ${3 + data.extraTotal}`} />
-        <Stat label="Extra gekochte changes" value={data.extraTotal} />
+        <Stat label="Gratis changes over deze maand" value={data.availableCredits} accent />
+        <Stat
+          label="Gratis gebruikt deze maand"
+          value={`${data.usedThisMonth} / ${(data.profile?.free_quota_override ?? 3) + data.extraTotal}`}
+        />
+        <Stat label="Open changes" value={`${openChanges} / 10`} />
       </section>
 
       {/* Onboarding (only if items exist) */}
@@ -267,7 +270,40 @@ function PortalPage() {
 
       {/* New request */}
       <section className="rounded-2xl border border-border bg-card p-6">
-        <h2 className="font-display text-2xl font-semibold mb-4">Nieuwe change indienen</h2>
+        <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
+          <h2 className="font-display text-2xl font-semibold">Nieuwe change indienen</h2>
+          <span
+            className={`text-xs font-medium px-3 py-1 rounded-full ${
+              formIsFree
+                ? "bg-primary/15 text-primary"
+                : "bg-amber-500/15 text-amber-600"
+            }`}
+          >
+            {formIsFree
+              ? `Gratis${rush ? ` + €${RUSH_SURCHARGE_EUR} spoed` : ""}`
+              : `€${formPrice}${rush ? " (incl. spoed)" : ""}`}
+          </span>
+        </div>
+
+        {/* Templates */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className="text-xs text-muted-foreground self-center">Snel starten:</span>
+          {CHANGE_TEMPLATES.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => {
+                setTitle(t.title);
+                setDescription(t.description);
+                setCategory(t.category);
+              }}
+              className="text-xs rounded-full border border-border bg-muted/30 px-3 py-1 hover:bg-accent"
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             required placeholder="Titel" value={title}
@@ -280,17 +316,46 @@ function PortalPage() {
             onChange={(e) => setDescription(e.target.value)}
             className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
           />
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            <label className="block text-sm">
+              <span className="text-muted-foreground text-xs">Categorie</span>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              >
+                {CATEGORY_KEYS.map((k) => (
+                  <option key={k} value={k}>
+                    {CATEGORY_LABEL[k]} {isCategoryFree(k) ? "· gratis" : `· €${PAID_CHANGE_PRICE_EUR}`}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="block text-sm">
+              <span className="text-muted-foreground text-xs">Prioriteit</span>
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as any)}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              >
+                <option value="low">Laag</option>
+                <option value="normal">Normaal</option>
+                <option value="high">Hoog</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </label>
+          </div>
+
           <div className="flex flex-wrap items-center gap-3">
-            <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value as any)}
-              className="rounded-md border border-input bg-background px-3 py-2 text-sm"
-            >
-              <option value="low">Laag</option>
-              <option value="normal">Normaal</option>
-              <option value="high">Hoog</option>
-              <option value="urgent">Urgent</option>
-            </select>
+            <label className="flex items-center gap-2 text-sm rounded-md border border-input bg-background px-3 py-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={rush}
+                onChange={(e) => setRush(e.target.checked)}
+              />
+              ⚡ Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
+            </label>
             <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent">
               📎 Screenshots ({files.length})
               <input
@@ -300,13 +365,25 @@ function PortalPage() {
             </label>
             <button
               type="submit"
-              disabled={submitM.isPending || uploading || data.availableCredits <= 0}
+              disabled={
+                submitM.isPending ||
+                uploading ||
+                reachedOpenLimit ||
+                (formIsFree && data.availableCredits <= 0)
+              }
               className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
             >
               {uploading || submitM.isPending ? "Bezig…" : "Indienen"}
             </button>
-            {data.availableCredits <= 0 && (
-              <span className="text-sm text-destructive">Geen credits — koop hieronder bij.</span>
+            {reachedOpenLimit && (
+              <span className="text-sm text-destructive">
+                Max. 10 openstaande changes bereikt.
+              </span>
+            )}
+            {formIsFree && data.availableCredits <= 0 && !reachedOpenLimit && (
+              <span className="text-sm text-destructive">
+                Geen gratis changes meer — kies een betaalde categorie of koop bij.
+              </span>
             )}
           </div>
           {files.length > 0 && (
