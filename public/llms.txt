@@ -1,0 +1,7 @@
+# AIMI
+
+> Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.
+
+## Pages
+
+- [Home](/): Overview of AIMI's services, work, pricing, and contact.
