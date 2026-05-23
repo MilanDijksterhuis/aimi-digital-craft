@@ -208,7 +208,6 @@ function PortalPage() {
         </div>
       </div>
 
-      <A11yBar />
 
       {/* Tabs */}
       <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border">
