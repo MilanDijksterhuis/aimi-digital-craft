@@ -648,7 +648,8 @@ function PortalPage() {
                       </form>
                     </div>
                   )}
-                </div>
+
+
 
                 {r.admin_notes && (
                   <p className="mt-2 rounded-md bg-muted/50 p-2 text-xs">
