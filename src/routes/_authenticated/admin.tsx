@@ -89,6 +89,7 @@ function AdminPage() {
           ["changes", `🔧 Changes (${data.requests.length})`],
           ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
           ["afspraken", "📅 Afspraken"],
+          ["chat", "💬 Chat"],
         ].map(([k, l]) => (
           <button
             key={k}
