@@ -365,6 +365,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
 function CustomerDetailModal({ userId, onClose, qc }: any) {
   const get = useServerFn(adminGetCustomer);
   const update = useServerFn(adminUpdateCustomer);
+  const setQuota = useServerFn(adminSetFreeQuota);
   const addCost = useServerFn(adminAddCost);
   const delCost = useServerFn(adminDeleteCost);
   const addOnb = useServerFn(adminAddOnboardingItem);
