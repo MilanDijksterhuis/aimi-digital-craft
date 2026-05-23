@@ -28,12 +28,20 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          className="text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
-        >
-          Let's talk
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="/portal"
+            className="hidden sm:inline-flex text-sm font-medium px-4 py-2 rounded-full border border-border hover:bg-accent transition"
+          >
+            Klantenportaal
+          </a>
+          <a
+            href="#contact"
+            className="text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
+          >
+            Let's talk
+          </a>
+        </div>
       </div>
     </motion.header>
   );
