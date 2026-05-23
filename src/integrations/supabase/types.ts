@@ -186,6 +186,71 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_messages: {
+        Row: {
+          attachments: Json
+          body: string | null
+          chat_id: string
+          created_at: string
+          id: string
+          is_read: boolean
+          sender_id: string
+          sender_type: string
+        }
+        Insert: {
+          attachments?: Json
+          body?: string | null
+          chat_id: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          sender_id: string
+          sender_type: string
+        }
+        Update: {
+          attachments?: Json
+          body?: string | null
+          chat_id?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          sender_id?: string
+          sender_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "chats"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chats: {
+        Row: {
+          client_id: string
+          created_at: string
+          id: string
+          last_message_at: string
+          status: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          status?: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          status?: string
+        }
+        Relationships: []
+      }
       client_contacts: {
         Row: {
           created_at: string
@@ -518,6 +583,27 @@ export type Database = {
           id?: number
           response_ms?: number | null
           status_ok?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_presence: {
+        Row: {
+          last_seen_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          last_seen_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          last_seen_at?: string
+          status?: string
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
