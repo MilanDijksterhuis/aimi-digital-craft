@@ -169,6 +169,50 @@ function PortalPage() {
         </div>
       </div>
 
+      {/* Quick actions */}
+      <div className="flex flex-wrap gap-2">
+        {data.profile?.website_url && (
+          <a
+            href={data.profile.website_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+          >
+            🌐 Mijn Website
+          </a>
+        )}
+      </div>
+
+      {/* Afspraken */}
+      {data.appointments && data.appointments.length > 0 && (
+        <section className="rounded-2xl border border-border bg-card p-6">
+          <h2 className="font-display text-2xl font-semibold mb-4">📅 Afspraken</h2>
+          <ul className="space-y-2">
+            {data.appointments.map((a: any) => {
+              const icon = a.kind === "teams" ? "💻" : a.kind === "in_person" ? "🤝" : "📞";
+              return (
+                <li key={a.id} className="rounded-lg border border-border p-3 text-sm">
+                  <p className="font-semibold">{icon} {a.title}</p>
+                  <p className="text-muted-foreground">
+                    {new Date(a.scheduled_at).toLocaleString("nl-NL")}
+                  </p>
+                  {a.location && (
+                    <p className="text-xs text-muted-foreground mt-1">📍 {a.location}</p>
+                  )}
+                  {a.notes && <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>}
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-xs text-muted-foreground mt-3">
+            Wil je een afspraak inplannen? Stuur een bericht via één van je changes of mail ons.
+          </p>
+        </section>
+      )}
+
+      {/* Mijn gegevens */}
+      <ProfileEditor profile={data.profile} onSave={(v) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
+
       {/* Credits */}
       <section className="grid sm:grid-cols-3 gap-4">
         <Stat label="Beschikbaar deze maand" value={data.availableCredits} accent />
