@@ -246,10 +246,12 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
         category: data.category,
         is_paid: isPaid,
         rush: data.rush,
+        ticket_type: data.ticket_type,
       })
       .select()
       .single();
     if (error) throw new Error(error.message);
+
 
     if (data.attachments.length > 0) {
       const rows = data.attachments.map((a) => ({
