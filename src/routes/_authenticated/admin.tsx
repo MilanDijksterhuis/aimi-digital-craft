@@ -237,31 +237,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
         {createM.error && <p className="mt-3 text-sm text-destructive">{(createM.error as Error).message}</p>}
       </section>
 
-      {/* Pending purchases */}
-      {data.pendingPurchases.length > 0 && (
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-semibold mb-4">Openstaande aankopen</h2>
-          <div className="space-y-2">
-            {data.pendingPurchases.map((p: any) => {
-              const c = data.customers.find((c: any) => c.id === p.user_id);
-              return (
-                <div key={p.id} className="flex items-center justify-between rounded-lg border border-border p-3">
-                  <div className="text-sm">
-                    <p className="font-medium">{c?.full_name ?? p.user_id} ({c?.email})</p>
-                    <p className="text-muted-foreground">{p.amount} extra change(s) — €{p.amount * 20}</p>
-                  </div>
-                  <button
-                    onClick={() => grantM.mutate({ user_id: p.user_id, amount: p.amount, reason: `Aankoop ${p.amount}× change`, purchase_id: p.id })}
-                    className="rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground"
-                  >
-                    Goedkeuren
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {/* Pending purchases moved to Aanvragen tab */}
 
       {/* Filter */}
       <input
