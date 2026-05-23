@@ -603,10 +603,8 @@ function PortalPage() {
                   )}
                 </div>
                 {openThread === r.id && (
-                  <div className="mt-3 border-t border-border pt-3">
-
-                  {openThread === r.id && (
                     <div className="mt-3 space-y-2">
+
                       {(r.change_comments ?? [])
                         .sort((a: any, b: any) => a.created_at.localeCompare(b.created_at))
                         .map((c: any) => {
