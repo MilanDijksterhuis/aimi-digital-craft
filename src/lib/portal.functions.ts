@@ -78,6 +78,8 @@ export const updateMyProfile = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+const SIMPLE_CATEGORIES_SERVER = new Set(["text", "styling", "media", "accessibility"]);
+
 export const submitChangeRequest = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
@@ -86,6 +88,19 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
         title: z.string().trim().min(3).max(200),
         description: z.string().trim().min(5).max(5000),
         priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
+        category: z
+          .enum([
+            "text",
+            "styling",
+            "functionality",
+            "media",
+            "data",
+            "seo",
+            "accessibility",
+            "other",
+          ])
+          .default("other"),
+        rush: z.boolean().default(false),
         attachments: z
           .array(
             z.object({
@@ -103,18 +118,38 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
-    const { data: avail } = await supabase.rpc("available_credits", { _user_id: userId });
-    if (((avail as number) ?? 0) <= 0) {
-      throw new Error("Geen changes meer beschikbaar deze maand. Koop er bij.");
+
+    // Bepaal of dit een gratis (simple) of betaalde (uitgebreide) change is.
+    const isFreeCategory = SIMPLE_CATEGORIES_SERVER.has(data.category);
+    const isPaid = !isFreeCategory;
+
+    // Voor gratis changes: check credits.
+    if (!isPaid) {
+      const { data: avail } = await supabase.rpc("available_credits", { _user_id: userId });
+      if (((avail as number) ?? 0) <= 0) {
+        throw new Error(
+          "Geen gratis changes meer beschikbaar deze maand. Kies een andere categorie of koop er bij.",
+        );
+      }
     }
+
+    // Max 10 openstaande changes.
+    const { count: openCount } = await supabase
+      .from("change_requests")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .not("status", "in", "(done,rejected)");
+    if ((openCount ?? 0) >= 10) {
+      throw new Error("Je hebt 10 openstaande changes. Wacht tot er een wordt afgerond.");
+    }
+
     const { data: prof } = await supabase
       .from("profiles")
       .select("website_url")
       .eq("id", userId)
       .maybeSingle();
-    const websitePrefix = prof?.website_url
-      ? `🌐 Website: ${prof.website_url}\n\n`
-      : "";
+    const websitePrefix = prof?.website_url ? `🌐 Website: ${prof.website_url}\n\n` : "";
+
     const { data: row, error } = await supabase
       .from("change_requests")
       .insert({
@@ -122,6 +157,9 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
         title: data.title,
         description: websitePrefix + data.description,
         priority: data.priority,
+        category: data.category,
+        is_paid: isPaid,
+        rush: data.rush,
       })
       .select()
       .single();
