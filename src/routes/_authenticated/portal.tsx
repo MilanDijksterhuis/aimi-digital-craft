@@ -275,14 +275,30 @@ function PortalPage() {
       )}
 
       {/* Site statistieken */}
-      {data.totalPings > 0 && (
+      {(data.profile?.website_url || data.totalPings > 0) && (
         <section className="rounded-2xl border border-border bg-card p-6">
           <h2 className="font-display text-2xl font-semibold mb-3">🌐 Website statistieken</h2>
+          {data.profile?.website_url && (
+            <p className="text-xs text-muted-foreground mb-3 break-all">
+              Gekoppelde site:{" "}
+              <a href={data.profile.website_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                {data.profile.website_url}
+              </a>
+            </p>
+          )}
           <div className="flex flex-wrap gap-4 items-center">
-            <span className={`text-sm font-medium px-3 py-1 rounded-full ${(data.uptimePct ?? 0) >= 99 ? "bg-primary/15 text-primary" : "bg-amber-500/15 text-amber-600"}`}>
-              Uptime: {data.uptimePct?.toFixed(2)}% (laatste 30 dagen)
-            </span>
-            <span className="text-xs text-muted-foreground">{data.totalPings} pings</span>
+            {data.totalPings > 0 ? (
+              <>
+                <span className={`text-sm font-medium px-3 py-1 rounded-full ${(data.uptimePct ?? 0) >= 99 ? "bg-primary/15 text-primary" : "bg-amber-500/15 text-amber-600"}`}>
+                  Uptime: {data.uptimePct?.toFixed(2)}% (laatste 30 dagen)
+                </span>
+                <span className="text-xs text-muted-foreground">{data.totalPings} pings</span>
+              </>
+            ) : (
+              <span className="text-sm text-muted-foreground">
+                Uptime nog niet beschikbaar — meting start zodra de tracking-snippet actief is.
+              </span>
+            )}
           </div>
           {data.requests[0] && (
             <p className="mt-3 text-sm">
