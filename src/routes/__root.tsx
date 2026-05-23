@@ -119,6 +119,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <A11yBar />
+      <Toaster />
     </QueryClientProvider>
   );
 }
