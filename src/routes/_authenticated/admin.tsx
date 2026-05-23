@@ -54,7 +54,7 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken">(
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat">(
     "dashboard",
   );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
