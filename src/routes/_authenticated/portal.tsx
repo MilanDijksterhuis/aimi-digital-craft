@@ -313,21 +313,7 @@ function PortalPage() {
         </section>
       )}
 
-      {/* Login geschiedenis */}
-      {data.loginEvents.length > 0 && (
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-2xl font-semibold mb-3">🔐 Laatste 5 inlogmomenten</h2>
-          <ul className="space-y-1 text-sm">
-            {data.loginEvents.map((l: any) => (
-              <li key={l.id} className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                <span>{new Date(l.created_at).toLocaleString("nl-NL")}</span>
-                {l.ip && <span>· IP {l.ip}</span>}
-                {l.user_agent && <span className="truncate max-w-md">· {l.user_agent}</span>}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+
 
       {/* Mijn gegevens */}
       <ProfileEditor profile={data.profile} onSave={(v: any) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
