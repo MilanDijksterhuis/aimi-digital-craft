@@ -227,9 +227,9 @@ const STAFF = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
 
 function genTempPw(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$";
-  let out = "";
-  for (let i = 0; i < 14; i++) out += chars[Math.floor(Math.random() * chars.length)];
-  return out;
+  const bytes = new Uint8Array(14);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes).map((b) => chars[b % chars.length]).join("");
 }
 
 export async function adminListStaffMembers() {
