@@ -478,6 +478,25 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
         </section>
 
         <section>
+          <h3 className="font-semibold mb-2">Gratis change-quotum</h3>
+          <p className="text-xs text-muted-foreground mb-2">Standaard 3 per maand. Leeg = standaard.</p>
+          <div className="flex items-center gap-2">
+            <input
+              type="number" min={0} max={100}
+              defaultValue={p.free_quota_override ?? ""}
+              placeholder="3"
+              onBlur={(e) => {
+                const v = e.target.value === "" ? null : parseInt(e.target.value, 10);
+                setQuotaM.mutate({ user_id: userId, free_quota_override: v });
+              }}
+              className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
+            />
+            <span className="text-xs text-muted-foreground">gratis changes / maand</span>
+            {setQuotaM.isSuccess && <span className="text-xs text-primary">✓</span>}
+          </div>
+        </section>
+
+        <section>
           <h3 className="font-semibold mb-2">Kosten / facturen</h3>
           <form
             onSubmit={(e) => {
