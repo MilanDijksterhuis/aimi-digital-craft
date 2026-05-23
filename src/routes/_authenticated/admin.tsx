@@ -392,6 +392,9 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
     package: p.package ?? "", monthly_price_cents: p.monthly_price_cents ?? 0,
     internal_notes: p.internal_notes ?? "",
     tags: p.tags ?? [],
+    website_url: p.website_url ?? "",
+    contact_person: p.contact_person ?? "",
+    billing_address: p.billing_address ?? "",
   };
 
   return (
@@ -402,7 +405,10 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               ["full_name", "Naam"], ["company", "Bedrijf"], ["email", "Email"],
-              ["phone", "Telefoon"], ["address", "Adres"], ["kvk", "KVK"], ["btw", "BTW"],
+              ["phone", "Telefoon"], ["contact_person", "Contactpersoon"],
+              ["address", "Adres"], ["billing_address", "Factuuradres"],
+              ["kvk", "KVK"], ["btw", "BTW"],
+              ["website_url", "Website URL (klant ziet 'Mijn Website' knop)"],
               ["package", "Pakket (bv. Starter/Pro)"],
             ].map(([k, label]) => (
               <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
