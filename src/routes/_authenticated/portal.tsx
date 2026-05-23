@@ -89,6 +89,7 @@ function PortalPage() {
   const [openThread, setOpenThread] = useState<string | null>(null);
   const [comment, setComment] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [tab, setTab] = useState<"overview" | "changes">("overview");
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
   if (error) return <p className="text-destructive">Fout: {(error as Error).message}</p>;
