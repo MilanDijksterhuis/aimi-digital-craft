@@ -7,7 +7,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
 
-    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes] =
+    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes, loginsRes, pingsRes, errorsRes] =
       await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase
@@ -30,6 +30,23 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .select("*")
           .eq("user_id", userId)
           .order("scheduled_at", { ascending: true }),
+        supabase
+          .from("login_events")
+          .select("*")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false })
+          .limit(5),
+        supabase
+          .from("site_pings")
+          .select("status_ok, created_at")
+          .eq("user_id", userId)
+          .gte("created_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
+        supabase
+          .from("site_errors")
+          .select("*")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: false })
+          .limit(5),
       ]);
 
     const usedThisMonth =
@@ -46,6 +63,11 @@ export const getMyDashboard = createServerFn({ method: "GET" })
     const extraTotal =
       creditsRes.data?.reduce((s: number, c: any) => s + (c.amount ?? 0), 0) ?? 0;
 
+    const pings = pingsRes.data ?? [];
+    const totalPings = pings.length;
+    const okPings = pings.filter((p: any) => p.status_ok).length;
+    const uptimePct = totalPings > 0 ? (okPings / totalPings) * 100 : null;
+
     return {
       profile: profileRes.data,
       requests: requestsRes.data ?? [],
@@ -56,8 +78,13 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       roles: (roleRes.data ?? []).map((r: any) => r.role),
       onboarding: onbRes.data ?? [],
       appointments: apptRes.data ?? [],
+      loginEvents: loginsRes.data ?? [],
+      uptimePct,
+      totalPings,
+      siteErrors: errorsRes.data ?? [],
     };
   });
+
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
