@@ -13,6 +13,7 @@ import {
   updateMyProfile,
   cancelMyChange,
 } from "@/lib/portal.functions";
+import { ChatWidget } from "@/components/ChatWidget";
 
 import { supabase } from "@/integrations/supabase/client";
 import {
