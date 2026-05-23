@@ -67,6 +67,7 @@ export const adminGetOverview = createServerFn({ method: "GET" })
       supabase
         .from("change_requests")
         .select("*, change_attachments(*), change_comments(*)")
+        .is("deleted_at", null)
         .order("created_at", { ascending: false }),
       supabase
         .from("purchase_requests")
