@@ -73,6 +73,8 @@ function PortalPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"low" | "normal" | "high" | "urgent">("normal");
+  const [category, setCategory] = useState<string>("text");
+  const [rush, setRush] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [purchaseQty, setPurchaseQty] = useState(1);
   const [showNotifs, setShowNotifs] = useState(false);
