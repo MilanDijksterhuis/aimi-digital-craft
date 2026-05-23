@@ -153,7 +153,7 @@ function PortalPage() {
     : "";
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 pb-24">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl font-bold">
@@ -208,7 +208,6 @@ function PortalPage() {
         </div>
       </div>
 
-      <A11yBar />
 
       {/* Tabs */}
       <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border">
@@ -684,6 +683,9 @@ function PortalPage() {
         )}
         </section>
       )}
+      <div className="fixed bottom-3 left-3 z-40 max-w-[calc(100vw-1.5rem)]">
+        <A11yBar />
+      </div>
     </div>
   );
 }
@@ -709,7 +711,7 @@ function A11yBar() {
     <div
       role="region"
       aria-label="Toegankelijkheid"
-      className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-2 text-xs"
+      className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/95 backdrop-blur p-2 text-xs shadow-lg"
     >
       <span className="text-muted-foreground px-2">Toegankelijkheid:</span>
       <button
