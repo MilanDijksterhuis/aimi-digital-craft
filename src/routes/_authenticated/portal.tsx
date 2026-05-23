@@ -453,9 +453,25 @@ function PortalPage() {
                     <h3 className="font-semibold">{r.title}</h3>
                     <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">{r.description}</p>
                   </div>
-                  <span className={`text-xs px-2 py-1 rounded-full ${STATUS_COLOR[r.status] ?? ""}`}>
-                    {STATUS_LABEL[r.status] ?? r.status}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className={`text-xs px-2 py-1 rounded-full ${STATUS_COLOR[r.status] ?? ""}`}>
+                      {STATUS_LABEL[r.status] ?? r.status}
+                    </span>
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded-full ${
+                        r.is_paid
+                          ? "bg-amber-500/15 text-amber-600"
+                          : "bg-primary/15 text-primary"
+                      }`}
+                    >
+                      {r.is_paid ? `€${PAID_CHANGE_PRICE_EUR}` : "Gratis"}
+                    </span>
+                    {r.rush && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">
+                        ⚡ Spoed
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Status stepper */}
