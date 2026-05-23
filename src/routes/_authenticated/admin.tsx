@@ -19,9 +19,10 @@ import {
   adminAddOnboardingItem,
   adminToggleOnboardingItem,
   adminDeleteOnboardingItem,
-  adminCreateSnippet,
-  adminDeleteSnippet,
   adminAttachmentUrl,
+  adminListAppointments,
+  adminCreateAppointment,
+  adminDeleteAppointment,
 } from "@/lib/admin.functions";
 import { STATUS_LABEL, PRIORITY_LABEL, PRIORITY_WEIGHT, PRIORITY_COLOR } from "@/lib/status";
 
@@ -40,7 +41,9 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "snippets">("dashboard");
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken">(
+    "dashboard",
+  );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
 
@@ -71,7 +74,8 @@ function AdminPage() {
           ["dashboard", "📊 Groei"],
           ["klanten", `👥 Klanten (${data.customers.length})`],
           ["changes", `🔧 Changes (${data.requests.length})`],
-          ["snippets", `💬 Snippets (${data.snippets.length})`],
+          ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
+          ["afspraken", "📅 Afspraken"],
         ].map(([k, l]) => (
           <button
             key={k}
@@ -105,7 +109,8 @@ function AdminPage() {
         />
       )}
 
-      {tab === "snippets" && <SnippetsTab data={data} qc={qc} />}
+      {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
+      {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
     </div>
   );
 }
@@ -114,11 +119,10 @@ function Dashboard({ metrics }: { metrics: any }) {
   const max = Math.max(1, ...metrics.months.map((m: any) => m.count));
   return (
     <div className="space-y-6">
-      <div className="grid sm:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-3 gap-4">
         <Card label="Klanten" value={metrics.totalCustomers} />
         <Card label="Actief (30d)" value={metrics.activeCount} accent />
         <Card label="Inactief" value={metrics.inactiveCount} />
-        <Card label="MRR" value={eur(metrics.mrr_cents)} accent />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <Card
@@ -233,31 +237,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
         {createM.error && <p className="mt-3 text-sm text-destructive">{(createM.error as Error).message}</p>}
       </section>
 
-      {/* Pending purchases */}
-      {data.pendingPurchases.length > 0 && (
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-xl font-semibold mb-4">Openstaande aankopen</h2>
-          <div className="space-y-2">
-            {data.pendingPurchases.map((p: any) => {
-              const c = data.customers.find((c: any) => c.id === p.user_id);
-              return (
-                <div key={p.id} className="flex items-center justify-between rounded-lg border border-border p-3">
-                  <div className="text-sm">
-                    <p className="font-medium">{c?.full_name ?? p.user_id} ({c?.email})</p>
-                    <p className="text-muted-foreground">{p.amount} extra change(s) — €{p.amount * 20}</p>
-                  </div>
-                  <button
-                    onClick={() => grantM.mutate({ user_id: p.user_id, amount: p.amount, reason: `Aankoop ${p.amount}× change`, purchase_id: p.id })}
-                    className="rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground"
-                  >
-                    Goedkeuren
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {/* Pending purchases moved to Aanvragen tab */}
 
       {/* Filter */}
       <input
@@ -412,6 +392,9 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
     package: p.package ?? "", monthly_price_cents: p.monthly_price_cents ?? 0,
     internal_notes: p.internal_notes ?? "",
     tags: p.tags ?? [],
+    website_url: p.website_url ?? "",
+    contact_person: p.contact_person ?? "",
+    billing_address: p.billing_address ?? "",
   };
 
   return (
@@ -422,7 +405,10 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               ["full_name", "Naam"], ["company", "Bedrijf"], ["email", "Email"],
-              ["phone", "Telefoon"], ["address", "Adres"], ["kvk", "KVK"], ["btw", "BTW"],
+              ["phone", "Telefoon"], ["contact_person", "Contactpersoon"],
+              ["address", "Adres"], ["billing_address", "Factuuradres"],
+              ["kvk", "KVK"], ["btw", "BTW"],
+              ["website_url", "Website URL (klant ziet 'Mijn Website' knop)"],
               ["package", "Pakket (bv. Starter/Pro)"],
             ].map(([k, label]) => (
               <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
@@ -693,47 +679,220 @@ function RequestDetail({ request, qc }: any) {
   );
 }
 
-function SnippetsTab({ data, qc }: any) {
-  const create = useServerFn(adminCreateSnippet);
-  const del = useServerFn(adminDeleteSnippet);
-  const inv = () => qc.invalidateQueries({ queryKey: ["admin-overview"] });
-  const createM = useMutation({ mutationFn: (i: any) => create({ data: i }), onSuccess: inv });
-  const delM = useMutation({ mutationFn: (id: string) => del({ data: { id } }), onSuccess: inv });
-  const [form, setForm] = useState({ title: "", body: "" });
+function AanvragenTab({ data, qc }: any) {
+  const grant = useServerFn(adminGrantCredits);
+  const grantM = useMutation({
+    mutationFn: (i: any) => grant({ data: i }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
+  });
+
+  if (data.pendingPurchases.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">
+        Geen openstaande aanvragen voor extra changes.
+      </p>
+    );
+  }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
+      <p className="text-sm text-muted-foreground">
+        Klanten die extra changes hebben aangevraagd. Stuur de factuur handmatig en klik
+        daarna op <strong>Toekennen</strong> zodat de klant de changes kan gebruiken.
+      </p>
+      {data.pendingPurchases.map((p: any) => {
+        const c = data.customers.find((c: any) => c.id === p.user_id) ?? {};
+        return (
+          <div key={p.id} className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <div className="text-sm space-y-1">
+                <p className="font-semibold text-base">{c.full_name || "—"}</p>
+                <p className="text-muted-foreground">{c.email}</p>
+                {c.company && <p className="text-muted-foreground">🏢 {c.company}</p>}
+                {c.phone && <p className="text-muted-foreground">📞 {c.phone}</p>}
+                {(c.billing_address || c.address) && (
+                  <p className="text-muted-foreground whitespace-pre-wrap">
+                    📍 {c.billing_address || c.address}
+                  </p>
+                )}
+                {c.kvk && <p className="text-muted-foreground">KVK: {c.kvk}</p>}
+                {c.btw && <p className="text-muted-foreground">BTW: {c.btw}</p>}
+                <p className="mt-2 font-medium text-foreground">
+                  Aangevraagd: <strong>{p.amount}</strong> extra change(s) — €{p.amount * 20}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {new Date(p.created_at).toLocaleString("nl-NL")}
+                </p>
+              </div>
+              <button
+                onClick={() =>
+                  grantM.mutate({
+                    user_id: p.user_id,
+                    amount: p.amount,
+                    reason: `Aankoop ${p.amount}× change`,
+                    purchase_id: p.id,
+                  })
+                }
+                disabled={grantM.isPending}
+                className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
+              >
+                ✓ Toekennen
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function AfsprakenTab({ customers, qc }: any) {
+  const list = useServerFn(adminListAppointments);
+  const create = useServerFn(adminCreateAppointment);
+  const del = useServerFn(adminDeleteAppointment);
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-appointments"],
+    queryFn: () => list({}),
+  });
+  const inv = () => qc.invalidateQueries({ queryKey: ["admin-appointments"] });
+  const createM = useMutation({ mutationFn: (i: any) => create({ data: i }), onSuccess: inv });
+  const delM = useMutation({ mutationFn: (id: string) => del({ data: { id } }), onSuccess: inv });
+
+  const [form, setForm] = useState({
+    user_id: "",
+    title: "",
+    scheduled_at: "",
+    kind: "phone" as "phone" | "teams" | "in_person",
+    location: "",
+    notes: "",
+  });
+
+  return (
+    <div className="space-y-6">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createM.mutate(form, { onSuccess: () => setForm({ title: "", body: "" }) });
+          createM.mutate(
+            { ...form, scheduled_at: new Date(form.scheduled_at).toISOString() },
+            {
+              onSuccess: () =>
+                setForm({
+                  user_id: "",
+                  title: "",
+                  scheduled_at: "",
+                  kind: "phone",
+                  location: "",
+                  notes: "",
+                }),
+            },
+          );
         }}
-        className="rounded-2xl border border-border bg-card p-4 space-y-2"
+        className="rounded-2xl border border-border bg-card p-4 space-y-3"
       >
-        <input required placeholder="Titel" value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-        <textarea required placeholder="Bericht" rows={3} value={form.body}
-          onChange={(e) => setForm({ ...form, body: e.target.value })}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-        <button className="rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground">Toevoegen</button>
+        <h3 className="font-semibold">Nieuwe afspraak inplannen</h3>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <select
+            required
+            value={form.user_id}
+            onChange={(e) => setForm({ ...form, user_id: e.target.value })}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          >
+            <option value="">Kies klant…</option>
+            {customers.map((c: any) => (
+              <option key={c.id} value={c.id}>
+                {c.full_name || c.email}
+              </option>
+            ))}
+          </select>
+          <input
+            required
+            placeholder="Onderwerp"
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <input
+            required
+            type="datetime-local"
+            value={form.scheduled_at}
+            onChange={(e) => setForm({ ...form, scheduled_at: e.target.value })}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <select
+            value={form.kind}
+            onChange={(e) => setForm({ ...form, kind: e.target.value as any })}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+          >
+            <option value="phone">📞 Telefoon</option>
+            <option value="teams">💻 Teams</option>
+            <option value="in_person">🤝 In het echt</option>
+          </select>
+          <input
+            placeholder="Locatie / Teams-link / nummer"
+            value={form.location}
+            onChange={(e) => setForm({ ...form, location: e.target.value })}
+            className="sm:col-span-2 rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <textarea
+            rows={2}
+            placeholder="Notities"
+            value={form.notes}
+            onChange={(e) => setForm({ ...form, notes: e.target.value })}
+            className="sm:col-span-2 rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+        </div>
+        <button
+          disabled={createM.isPending}
+          className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
+        >
+          {createM.isPending ? "Bezig…" : "Inplannen"}
+        </button>
+        {createM.error && (
+          <p className="text-sm text-destructive">{(createM.error as Error).message}</p>
+        )}
       </form>
-      <div className="space-y-2">
-        {data.snippets.map((s: any) => (
-          <div key={s.id} className="rounded-xl border border-border bg-card p-3">
-            <div className="flex justify-between items-start">
-              <p className="font-semibold text-sm">{s.title}</p>
-              <button onClick={() => delM.mutate(s.id)} className="text-destructive text-xs">×</button>
-            </div>
-            <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">{s.body}</p>
-            <button
-              onClick={() => navigator.clipboard.writeText(s.body)}
-              className="mt-2 text-xs text-primary hover:underline"
-            >Kopieer</button>
-          </div>
-        ))}
-        {data.snippets.length === 0 && <p className="text-muted-foreground text-sm">Nog geen snippets.</p>}
-      </div>
+
+      {isLoading ? (
+        <p className="text-sm text-muted-foreground">Laden…</p>
+      ) : data?.appointments.length === 0 ? (
+        <p className="text-sm text-muted-foreground">Nog geen afspraken.</p>
+      ) : (
+        <div className="space-y-2">
+          {data?.appointments.map((a: any) => {
+            const c = customers.find((c: any) => c.id === a.user_id);
+            const kindIcon =
+              a.kind === "teams" ? "💻" : a.kind === "in_person" ? "🤝" : "📞";
+            return (
+              <div
+                key={a.id}
+                className="rounded-xl border border-border bg-card p-3 flex justify-between items-start gap-4"
+              >
+                <div className="text-sm">
+                  <p className="font-semibold">
+                    {kindIcon} {a.title}
+                  </p>
+                  <p className="text-muted-foreground">
+                    {c?.full_name || c?.email || a.user_id} ·{" "}
+                    {new Date(a.scheduled_at).toLocaleString("nl-NL")}
+                  </p>
+                  {a.location && (
+                    <p className="text-xs text-muted-foreground mt-1">📍 {a.location}</p>
+                  )}
+                  {a.notes && (
+                    <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>
+                  )}
+                </div>
+                <button
+                  onClick={() => delM.mutate(a.id)}
+                  className="text-destructive text-xs"
+                >
+                  Verwijder
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

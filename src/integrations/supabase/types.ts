@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          kind: string
+          location: string | null
+          notes: string | null
+          scheduled_at: string
+          status: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind?: string
+          location?: string | null
+          notes?: string | null
+          scheduled_at: string
+          status?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind?: string
+          location?: string | null
+          notes?: string | null
+          scheduled_at?: string
+          status?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       change_attachments: {
         Row: {
           created_at: string
@@ -243,8 +282,10 @@ export type Database = {
       profiles: {
         Row: {
           address: string | null
+          billing_address: string | null
           btw: string | null
           company: string | null
+          contact_person: string | null
           created_at: string
           email: string
           full_name: string | null
@@ -257,11 +298,14 @@ export type Database = {
           referral_code: string | null
           tags: string[]
           updated_at: string
+          website_url: string | null
         }
         Insert: {
           address?: string | null
+          billing_address?: string | null
           btw?: string | null
           company?: string | null
+          contact_person?: string | null
           created_at?: string
           email: string
           full_name?: string | null
@@ -274,11 +318,14 @@ export type Database = {
           referral_code?: string | null
           tags?: string[]
           updated_at?: string
+          website_url?: string | null
         }
         Update: {
           address?: string | null
+          billing_address?: string | null
           btw?: string | null
           company?: string | null
+          contact_person?: string | null
           created_at?: string
           email?: string
           full_name?: string | null
@@ -291,6 +338,7 @@ export type Database = {
           referral_code?: string | null
           tags?: string[]
           updated_at?: string
+          website_url?: string | null
         }
         Relationships: []
       }

@@ -89,6 +89,9 @@ export const adminUpdateCustomer = createServerFn({ method: "POST" })
         monthly_price_cents: z.number().int().min(0).max(100000000).optional(),
         internal_notes: z.string().max(5000).optional(),
         tags: z.array(z.string().trim().min(1).max(50)).max(20).optional(),
+        website_url: z.string().trim().max(500).optional().nullable(),
+        contact_person: z.string().trim().max(200).optional().nullable(),
+        billing_address: z.string().trim().max(500).optional().nullable(),
       })
       .parse(d),
   )
@@ -406,4 +409,64 @@ export const adminAttachmentUrl = createServerFn({ method: "POST" })
       .createSignedUrl(data.file_path, 3600);
     if (error) throw new Error(error.message);
     return { url: url.signedUrl };
+  });
+
+// ---------------- Appointments ----------------
+export const adminListAppointments = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data, error } = await supabase
+      .from("appointments")
+      .select("*")
+      .order("scheduled_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { appointments: data ?? [] };
+  });
+
+export const adminCreateAppointment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200),
+        scheduled_at: z.string().min(1),
+        kind: z.enum(["phone", "teams", "in_person"]),
+        location: z.string().trim().max(500).optional(),
+        notes: z.string().trim().max(2000).optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("appointments").insert({
+      user_id: data.user_id,
+      title: data.title,
+      scheduled_at: data.scheduled_at,
+      kind: data.kind,
+      location: data.location ?? null,
+      notes: data.notes ?? null,
+      created_by: userId,
+    });
+    if (error) throw new Error(error.message);
+    await supabase.from("notifications").insert({
+      user_id: data.user_id,
+      title: "Nieuwe afspraak ingepland",
+      message: `${data.title} — ${new Date(data.scheduled_at).toLocaleString("nl-NL")}`,
+    });
+    return { ok: true };
+  });
+
+export const adminDeleteAppointment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("appointments").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
