@@ -58,11 +58,12 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat">(
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat" | "team" | "deleted">(
     "dashboard",
   );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
+  const perms = usePermissions();
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
   if (error) {
