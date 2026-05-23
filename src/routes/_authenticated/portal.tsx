@@ -211,7 +211,7 @@ function PortalPage() {
       )}
 
       {/* Mijn gegevens */}
-      <ProfileEditor profile={data.profile} onSave={(v) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
+      <ProfileEditor profile={data.profile} onSave={(v: any) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
 
       {/* Credits */}
       <section className="grid sm:grid-cols-3 gap-4">
