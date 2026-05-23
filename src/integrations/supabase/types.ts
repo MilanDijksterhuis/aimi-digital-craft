@@ -14,12 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
+      change_attachments: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          id: string
+          mime_type: string | null
+          request_id: string
+          size_bytes: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          id?: string
+          mime_type?: string | null
+          request_id: string
+          size_bytes?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          mime_type?: string | null
+          request_id?: string
+          size_bytes?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "change_attachments_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "change_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      change_comments: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          request_id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          request_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "change_comments_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "change_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       change_requests: {
         Row: {
           admin_notes: string | null
           created_at: string
           description: string
+          due_date: string | null
           id: string
+          internal_note: string | null
           priority: string
           status: Database["public"]["Enums"]["request_status"]
           title: string
@@ -30,7 +105,9 @@ export type Database = {
           admin_notes?: string | null
           created_at?: string
           description: string
+          due_date?: string | null
           id?: string
+          internal_note?: string | null
           priority?: string
           status?: Database["public"]["Enums"]["request_status"]
           title: string
@@ -41,11 +118,43 @@ export type Database = {
           admin_notes?: string | null
           created_at?: string
           description?: string
+          due_date?: string | null
           id?: string
+          internal_note?: string | null
           priority?: string
           status?: Database["public"]["Enums"]["request_status"]
           title?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      customer_costs: {
+        Row: {
+          amount_cents: number
+          cost_date: string
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          amount_cents: number
+          cost_date?: string
+          created_at?: string
+          created_by?: string | null
+          description: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number
+          cost_date?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
           user_id?: string
         }
         Relationships: []
@@ -104,29 +213,83 @@ export type Database = {
         }
         Relationships: []
       }
+      onboarding_items: {
+        Row: {
+          created_at: string
+          done: boolean
+          id: string
+          label: string
+          position: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          done?: boolean
+          id?: string
+          label: string
+          position?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          done?: boolean
+          id?: string
+          label?: string
+          position?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
+          address: string | null
+          btw: string | null
           company: string | null
           created_at: string
           email: string
           full_name: string | null
           id: string
+          internal_notes: string | null
+          kvk: string | null
+          monthly_price_cents: number
+          package: string | null
+          phone: string | null
+          referral_code: string | null
+          tags: string[]
           updated_at: string
         }
         Insert: {
+          address?: string | null
+          btw?: string | null
           company?: string | null
           created_at?: string
           email: string
           full_name?: string | null
           id: string
+          internal_notes?: string | null
+          kvk?: string | null
+          monthly_price_cents?: number
+          package?: string | null
+          phone?: string | null
+          referral_code?: string | null
+          tags?: string[]
           updated_at?: string
         }
         Update: {
+          address?: string | null
+          btw?: string | null
           company?: string | null
           created_at?: string
           email?: string
           full_name?: string | null
           id?: string
+          internal_notes?: string | null
+          kvk?: string | null
+          monthly_price_cents?: number
+          package?: string | null
+          phone?: string | null
+          referral_code?: string | null
+          tags?: string[]
           updated_at?: string
         }
         Relationships: []
@@ -152,6 +315,30 @@ export type Database = {
           id?: string
           status?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      reply_snippets: {
+        Row: {
+          body: string
+          created_at: string
+          created_by: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          title?: string
         }
         Relationships: []
       }
@@ -192,7 +379,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "customer"
-      request_status: "pending" | "in_progress" | "done" | "rejected"
+      request_status:
+        | "pending"
+        | "in_review"
+        | "in_progress"
+        | "review"
+        | "done"
+        | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -321,7 +514,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "customer"],
-      request_status: ["pending", "in_progress", "done", "rejected"],
+      request_status: [
+        "pending",
+        "in_review",
+        "in_progress",
+        "review",
+        "done",
+        "rejected",
+      ],
     },
   },
 } as const
