@@ -153,7 +153,7 @@ function PortalPage() {
     : "";
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 pb-24">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl font-bold">
