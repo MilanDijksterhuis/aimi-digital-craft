@@ -742,3 +742,259 @@ export const adminListAllChanges = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { items: rows ?? [] };
   });
+
+// ============================================================
+// ====================== RBAC & TEAM =========================
+// ============================================================
+
+export const adminGetMyRoles = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const roles = await getRoles(supabase, userId);
+    return { roles, userId };
+  });
+
+export const adminListStaff = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { adminListStaffMembers } = await import("./admin.server");
+    return adminListStaffMembers();
+  });
+
+export const adminInviteStaff = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        email: z.string().trim().email().max(255),
+        full_name: z.string().trim().min(1).max(200),
+        role: z.enum(["co_admin", "support_agent", "viewer"]),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    const { adminInviteStaffMember } = await import("./admin.server");
+    const result = await adminInviteStaffMember(data);
+    await logAudit(supabase, userId, "staff_invited", "user", result.user_id ?? null, {
+      email: data.email,
+      role: data.role,
+    });
+    return result;
+  });
+
+export const adminChangeRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        target_user_id: z.string().uuid(),
+        role: z.enum(["super_admin", "co_admin", "support_agent", "viewer", "customer"]),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    if (data.target_user_id === userId)
+      throw new Error("Je kunt je eigen rol niet wijzigen.");
+
+    const { adminReplaceRole } = await import("./admin.server");
+    await adminReplaceRole(data.target_user_id, data.role);
+    await logAudit(supabase, userId, "role_changed", "user", data.target_user_id, {
+      new_role: data.role,
+    });
+    return { ok: true };
+  });
+
+export const adminRemoveStaff = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ target_user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    if (data.target_user_id === userId)
+      throw new Error("Je kunt jezelf niet verwijderen.");
+    const { adminRemoveStaffRoles } = await import("./admin.server");
+    await adminRemoveStaffRoles(data.target_user_id);
+    await logAudit(supabase, userId, "staff_removed", "user", data.target_user_id, {});
+    return { ok: true };
+  });
+
+export const adminGetAuditLog = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    const { data, error } = await supabase
+      .from("audit_log")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(200);
+    if (error) throw new Error(error.message);
+    // enrich with email
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id, email, full_name")
+      .in(
+        "id",
+        Array.from(new Set([...(data ?? []).map((e: any) => e.user_id)])),
+      );
+    const pmap = new Map((profiles ?? []).map((p: any) => [p.id, p]));
+    return {
+      items: (data ?? []).map((e: any) => ({
+        ...e,
+        actor: pmap.get(e.user_id) ?? null,
+      })),
+    };
+  });
+
+// ============================================================
+// ================ CHANGE SOFT/HARD DELETE ===================
+// ============================================================
+
+export const adminSoftDeleteChange = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("change_requests")
+      .update({ deleted_at: new Date().toISOString(), deleted_by: userId })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "change_soft_deleted", "change_request", data.id);
+    return { ok: true };
+  });
+
+export const adminBulkSoftDelete = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ ids: z.array(z.string().uuid()).min(1).max(100) }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("change_requests")
+      .update({ deleted_at: new Date().toISOString(), deleted_by: userId })
+      .in("id", data.ids);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "change_bulk_soft_deleted", "change_request", null, {
+      ids: data.ids,
+    });
+    return { ok: true, count: data.ids.length };
+  });
+
+export const adminRestoreChange = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("change_requests")
+      .update({
+        deleted_at: null,
+        deleted_by: null,
+        restored_at: new Date().toISOString(),
+        restored_by: userId,
+      })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "change_restored", "change_request", data.id);
+    return { ok: true };
+  });
+
+export const adminHardDeleteChange = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    const { error } = await supabase.from("change_requests").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "change_hard_deleted", "change_request", data.id);
+    return { ok: true };
+  });
+
+export const adminListDeletedChanges = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data, error } = await supabase
+      .from("change_requests")
+      .select("*")
+      .not("deleted_at", "is", null)
+      .order("deleted_at", { ascending: false })
+      .limit(500);
+    if (error) throw new Error(error.message);
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id, email, full_name")
+      .in(
+        "id",
+        Array.from(new Set((data ?? []).map((r: any) => r.user_id))),
+      );
+    const pmap = new Map((profiles ?? []).map((p: any) => [p.id, p]));
+    return {
+      items: (data ?? []).map((r: any) => ({
+        ...r,
+        customer: pmap.get(r.user_id) ?? null,
+      })),
+    };
+  });
+
+// ============================================================
+// =========== ADMIN-CREATES-CHANGE FOR CUSTOMER ==============
+// ============================================================
+export const adminCreateChangeForCustomer = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        title: z.string().trim().min(3).max(200),
+        description: z.string().trim().min(3).max(5000),
+        priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
+        category: z.string().min(1).max(50).default("other"),
+        is_paid: z.boolean().default(false),
+        rush: z.boolean().default(false),
+        ticket_type: z.enum(["question", "bug", "feature", "complaint"]).default("question"),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: row, error } = await supabase
+      .from("change_requests")
+      .insert({
+        user_id: data.user_id,
+        title: data.title,
+        description: `[Aangemaakt door admin]\n\n${data.description}`,
+        priority: data.priority,
+        category: data.category,
+        is_paid: data.is_paid,
+        rush: data.rush,
+        ticket_type: data.ticket_type,
+      })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "change_created_for_customer", "change_request", row.id, {
+      customer_id: data.user_id,
+    });
+    await supabase.from("notifications").insert({
+      user_id: data.user_id,
+      title: `Nieuwe change door admin: ${data.title}`,
+      message: "Een admin heeft een change voor jou aangemaakt.",
+    });
+    return { ok: true, id: row.id };
+  });
