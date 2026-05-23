@@ -33,6 +33,7 @@ function PortalPage() {
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
   const postComment = useServerFn(postCustomerComment);
+  const attUrl = useServerFn(getAttachmentUrl);
   const updateProfile = useServerFn(updateMyProfile);
   const qc = useQueryClient();
   const updateProfileM = useMutation({
