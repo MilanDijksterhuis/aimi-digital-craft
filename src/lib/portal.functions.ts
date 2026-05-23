@@ -186,6 +186,7 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
           ])
           .default("other"),
         rush: z.boolean().default(false),
+        ticket_type: z.enum(["question", "bug", "feature", "complaint"]).default("question"),
         attachments: z
           .array(
             z.object({
