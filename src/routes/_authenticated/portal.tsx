@@ -477,3 +477,69 @@ function Stat({ label, value, accent }: { label: string; value: any; accent?: bo
     </div>
   );
 }
+
+function ProfileEditor({ profile, onSave, pending }: { profile: any; onSave: (v: any) => void; pending: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [f, setF] = useState({
+    full_name: profile?.full_name ?? "",
+    company: profile?.company ?? "",
+    phone: profile?.phone ?? "",
+    contact_person: profile?.contact_person ?? "",
+    address: profile?.address ?? "",
+    billing_address: profile?.billing_address ?? "",
+    kvk: profile?.kvk ?? "",
+    btw: profile?.btw ?? "",
+  });
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="rounded-2xl border border-border bg-card p-4 text-left w-full hover:bg-accent transition"
+      >
+        <p className="font-semibold">⚙️ Mijn gegevens</p>
+        <p className="text-sm text-muted-foreground">
+          Vul KVK, factuuradres, contactpersoon en meer aan.
+        </p>
+      </button>
+    );
+  }
+  const fields: [keyof typeof f, string][] = [
+    ["full_name", "Naam"],
+    ["company", "Bedrijf"],
+    ["contact_person", "Contactpersoon"],
+    ["phone", "Telefoon"],
+    ["address", "Adres"],
+    ["billing_address", "Factuuradres"],
+    ["kvk", "KVK-nummer"],
+    ["btw", "BTW-nummer"],
+  ];
+  return (
+    <section className="rounded-2xl border border-border bg-card p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-display text-2xl font-semibold">Mijn gegevens</h2>
+        <button onClick={() => setOpen(false)} className="text-sm text-muted-foreground">
+          Sluiten
+        </button>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-3">
+        {fields.map(([k, label]) => (
+          <label key={k} className="block text-sm">
+            <span className="text-muted-foreground">{label}</span>
+            <input
+              value={f[k]}
+              onChange={(e) => setF({ ...f, [k]: e.target.value })}
+              className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            />
+          </label>
+        ))}
+      </div>
+      <button
+        onClick={() => onSave(f)}
+        disabled={pending}
+        className="mt-4 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
+      >
+        {pending ? "Bezig…" : "Opslaan"}
+      </button>
+    </section>
+  );
+}
