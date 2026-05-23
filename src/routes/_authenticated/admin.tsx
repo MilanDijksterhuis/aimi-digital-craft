@@ -41,7 +41,9 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "snippets">("dashboard");
+  const [tab, setTab] = useState<"dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken">(
+    "dashboard",
+  );
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
 
@@ -72,7 +74,8 @@ function AdminPage() {
           ["dashboard", "📊 Groei"],
           ["klanten", `👥 Klanten (${data.customers.length})`],
           ["changes", `🔧 Changes (${data.requests.length})`],
-          ["snippets", `💬 Snippets (${data.snippets.length})`],
+          ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
+          ["afspraken", "📅 Afspraken"],
         ].map(([k, l]) => (
           <button
             key={k}
@@ -106,7 +109,8 @@ function AdminPage() {
         />
       )}
 
-      {tab === "snippets" && <SnippetsTab data={data} qc={qc} />}
+      {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
+      {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
     </div>
   );
 }
