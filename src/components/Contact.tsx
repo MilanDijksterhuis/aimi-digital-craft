@@ -1,9 +1,30 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { Send } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitContactForm } from "@/lib/contact.functions";
 
 export function Contact() {
+  const submit = useServerFn(submitContactForm);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setPending(true);
+    try {
+      await submit({ data: form });
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      setError(err?.message ?? "Verzenden mislukt.");
+    } finally {
+      setPending(false);
+    }
+  };
 
   return (
     <section id="contact" className="py-32 relative">
@@ -30,15 +51,25 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
+          onSubmit={onSubmit}
           className="mt-12 p-8 md:p-10 rounded-2xl border border-border bg-surface/80 backdrop-blur space-y-5"
         >
           <div className="grid md:grid-cols-2 gap-5">
-            <Field label="Naam" name="name" placeholder="Jouw naam" />
-            <Field label="Email" name="email" type="email" placeholder="jij@bedrijf.nl" />
+            <Field
+              label="Naam"
+              name="name"
+              placeholder="Jouw naam"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+            <Field
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="jij@bedrijf.nl"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
           </div>
           <div>
             <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
@@ -48,14 +79,18 @@ export function Contact() {
               required
               rows={5}
               placeholder="Vertel ons over je project…"
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="mt-2 w-full bg-background/60 border border-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary transition-colors resize-none"
             />
           </div>
+          {error && <p className="text-sm text-destructive">{error}</p>}
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:glow-primary transition-all"
+            disabled={pending}
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:glow-primary transition-all disabled:opacity-60"
           >
-            {sent ? "Verzonden ✓" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
+            {sent ? "Verzonden ✓" : pending ? "Versturen…" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
           </button>
         </motion.form>
       </div>
