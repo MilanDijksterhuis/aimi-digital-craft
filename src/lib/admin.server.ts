@@ -218,3 +218,104 @@ export async function adminGetCustomerDetail(userId: string) {
     extraCredits: extraTotal,
   };
 }
+
+// ============================================================
+// =================== STAFF / TEAM MGMT ======================
+// ============================================================
+
+const STAFF = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
+
+function genTempPw(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$";
+  let out = "";
+  for (let i = 0; i < 14; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  return out;
+}
+
+export async function adminListStaffMembers() {
+  const { data: roles } = await supabaseAdmin
+    .from("user_roles")
+    .select("user_id, role, created_at");
+  const staffIds = Array.from(
+    new Set((roles ?? []).filter((r: any) => STAFF.includes(r.role)).map((r: any) => r.user_id)),
+  );
+  if (staffIds.length === 0) return { members: [] };
+
+  const { data: profiles } = await supabaseAdmin
+    .from("profiles")
+    .select("*")
+    .in("id", staffIds);
+
+  const roleMap = new Map<string, string[]>();
+  (roles ?? []).forEach((r: any) => {
+    if (!staffIds.includes(r.user_id)) return;
+    const arr = roleMap.get(r.user_id) ?? [];
+    arr.push(r.role);
+    roleMap.set(r.user_id, arr);
+  });
+
+  return {
+    members: (profiles ?? []).map((p: any) => ({
+      ...p,
+      roles: roleMap.get(p.id) ?? [],
+    })),
+  };
+}
+
+export async function adminInviteStaffMember(input: {
+  email: string;
+  full_name: string;
+  role: "co_admin" | "support_agent" | "viewer";
+}) {
+  // Check if user exists
+  const { data: existing } = await supabaseAdmin
+    .from("profiles")
+    .select("id, email")
+    .eq("email", input.email)
+    .maybeSingle();
+
+  let userId: string | null = existing?.id ?? null;
+  let tempPassword: string | null = null;
+
+  if (!userId) {
+    tempPassword = genTempPw();
+    const { data, error } = await supabaseAdmin.auth.admin.createUser({
+      email: input.email,
+      password: tempPassword,
+      email_confirm: true,
+      user_metadata: { full_name: input.full_name },
+    });
+    if (error) throw new Error(error.message);
+    userId = data.user?.id ?? null;
+  }
+  if (!userId) throw new Error("Kon gebruiker niet aanmaken.");
+
+  // Remove default 'customer' role; add staff role
+  await supabaseAdmin.from("user_roles").delete().eq("user_id", userId).eq("role", "customer");
+  const { error: roleErr } = await supabaseAdmin
+    .from("user_roles")
+    .upsert({ user_id: userId, role: input.role }, { onConflict: "user_id,role" });
+  if (roleErr) throw new Error(roleErr.message);
+
+  return { user_id: userId, email: input.email, tempPassword };
+}
+
+export async function adminReplaceRole(
+  targetUserId: string,
+  role: "super_admin" | "co_admin" | "support_agent" | "viewer" | "customer",
+) {
+  // Remove ALL existing roles, then insert the new one
+  await supabaseAdmin.from("user_roles").delete().eq("user_id", targetUserId);
+  const { error } = await supabaseAdmin
+    .from("user_roles")
+    .insert({ user_id: targetUserId, role });
+  if (error) throw new Error(error.message);
+}
+
+export async function adminRemoveStaffRoles(targetUserId: string) {
+  // Demote to plain customer
+  await supabaseAdmin.from("user_roles").delete().eq("user_id", targetUserId);
+  await supabaseAdmin
+    .from("user_roles")
+    .insert({ user_id: targetUserId, role: "customer" });
+}
