@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   getMyDashboard,
   submitChangeRequest,
@@ -89,6 +89,7 @@ function PortalPage() {
   const [openThread, setOpenThread] = useState<string | null>(null);
   const [comment, setComment] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [tab, setTab] = useState<"overview" | "changes">("overview");
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
   if (error) return <p className="text-destructive">Fout: {(error as Error).message}</p>;
@@ -164,11 +165,13 @@ function PortalPage() {
         <div className="relative">
           <button
             onClick={() => setShowNotifs((v) => !v)}
-            className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent"
+            aria-label={`Meldingen openen${unread.length > 0 ? `, ${unread.length} ongelezen` : ""}`}
+            aria-expanded={showNotifs}
+            className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
           >
-            🔔
+            <span aria-hidden="true">🔔</span>
             {unread.length > 0 && (
-              <span className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
+              <span aria-hidden="true" className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
                 {unread.length}
               </span>
             )}
@@ -204,6 +207,31 @@ function PortalPage() {
           )}
         </div>
       </div>
+
+      <A11yBar />
+
+      {/* Tabs */}
+      <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border">
+        {([
+          ["overview", "Overzicht"],
+          ["changes", "Jouw changes"],
+        ] as const).map(([key, label]) => (
+          <button
+            key={key}
+            role="tab"
+            aria-selected={tab === key}
+            onClick={() => setTab(key)}
+            className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px focus-visible:ring-2 focus-visible:ring-ring ${
+              tab === key ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "overview" && (
+        <div className="space-y-10">
 
       {/* Quick actions */}
       <div className="flex flex-wrap gap-2">
@@ -256,6 +284,16 @@ function PortalPage() {
             </span>
             <span className="text-xs text-muted-foreground">{data.totalPings} pings</span>
           </div>
+          {data.requests[0] && (
+            <p className="mt-3 text-sm">
+              <span className="text-xs uppercase tracking-wide text-muted-foreground mr-2">Laatste change:</span>
+              <span className="font-medium">{data.requests[0].title}</span>
+              <span className="text-xs text-muted-foreground ml-2">
+                ({new Date(data.requests[0].created_at).toLocaleDateString("nl-NL")})
+              </span>
+            </p>
+          )}
+          
           {data.siteErrors.length > 0 && (
             <div className="mt-4">
               <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Laatste fouten</p>
@@ -275,21 +313,7 @@ function PortalPage() {
         </section>
       )}
 
-      {/* Login geschiedenis */}
-      {data.loginEvents.length > 0 && (
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="font-display text-2xl font-semibold mb-3">🔐 Laatste 5 inlogmomenten</h2>
-          <ul className="space-y-1 text-sm">
-            {data.loginEvents.map((l: any) => (
-              <li key={l.id} className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                <span>{new Date(l.created_at).toLocaleString("nl-NL")}</span>
-                {l.ip && <span>· IP {l.ip}</span>}
-                {l.user_agent && <span className="truncate max-w-md">· {l.user_agent}</span>}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+
 
       {/* Mijn gegevens */}
       <ProfileEditor profile={data.profile} onSave={(v: any) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
@@ -411,7 +435,7 @@ function PortalPage() {
               ⚡ Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
             </label>
             <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:bg-accent">
-              📎 Screenshots ({files.length})
+              📎 Bestanden ({files.length})
               <input
                 type="file" multiple accept="image/*,.pdf" className="hidden"
                 onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
@@ -472,29 +496,11 @@ function PortalPage() {
         </div>
       </section>
 
-      {/* Referral */}
-      {data.profile?.referral_code && (
-        <section className="rounded-2xl border border-primary/40 bg-primary/5 p-6">
-          <h2 className="font-display text-2xl font-semibold mb-2">Ken jij iemand?</h2>
-          <p className="text-sm text-muted-foreground mb-4">
-            Deel jouw referral-link. Wie via jou een site bestelt krijgt korting — jij ook.
-          </p>
-          <div className="flex items-center gap-2">
-            <code className="flex-1 rounded-md bg-background border border-border px-3 py-2 text-sm overflow-auto">
-              {referralLink}
-            </code>
-            <button
-              onClick={() => navigator.clipboard.writeText(referralLink)}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-            >
-              Kopieer
-            </button>
-          </div>
-        </section>
+        </div>
       )}
 
-      {/* Requests */}
-      <section>
+      {tab === "changes" && (
+        <section>
         <h2 className="font-display text-2xl font-semibold mb-4">Jouw changes</h2>
         {data.requests.length === 0 ? (
           <p className="text-muted-foreground text-sm">Nog geen changes ingediend.</p>
@@ -660,7 +666,58 @@ function PortalPage() {
             ))}
           </div>
         )}
-      </section>
+        </section>
+      )}
+    </div>
+  );
+}
+
+function A11yBar() {
+  const [contrast, setContrast] = useState(false);
+  const [size, setSize] = useState<"sm" | "md" | "lg">("md");
+  useEffect(() => {
+    const c = localStorage.getItem("a11y-contrast") === "1";
+    const s = (localStorage.getItem("a11y-size") as "sm" | "md" | "lg") || "md";
+    setContrast(c);
+    setSize(s);
+  }, []);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("high-contrast", contrast);
+    root.classList.remove("font-sm", "font-md", "font-lg");
+    root.classList.add(`font-${size}`);
+    localStorage.setItem("a11y-contrast", contrast ? "1" : "0");
+    localStorage.setItem("a11y-size", size);
+  }, [contrast, size]);
+  return (
+    <div
+      role="region"
+      aria-label="Toegankelijkheid"
+      className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card/60 p-2 text-xs"
+    >
+      <span className="text-muted-foreground px-2">Toegankelijkheid:</span>
+      <button
+        type="button"
+        onClick={() => setContrast((v) => !v)}
+        aria-pressed={contrast}
+        aria-label="Hoog contrast modus omschakelen"
+        className={`rounded-full border px-3 py-1 focus-visible:ring-2 focus-visible:ring-ring ${contrast ? "bg-primary text-primary-foreground border-primary" : "border-border"}`}
+      >
+        Hoog contrast
+      </button>
+      <span className="text-muted-foreground ml-2">Tekstgrootte:</span>
+      {(["sm", "md", "lg"] as const).map((s) => (
+        <button
+          key={s}
+          type="button"
+          onClick={() => setSize(s)}
+          aria-pressed={size === s}
+          aria-label={`Tekstgrootte ${s === "sm" ? "klein" : s === "md" ? "normaal" : "groot"}`}
+          className={`rounded-full border w-8 h-8 focus-visible:ring-2 focus-visible:ring-ring ${size === s ? "bg-primary text-primary-foreground border-primary" : "border-border"}`}
+        >
+          {s === "sm" ? "S" : s === "md" ? "M" : "L"}
+        </button>
+      ))}
     </div>
   );
 }
