@@ -410,3 +410,63 @@ export const adminAttachmentUrl = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { url: url.signedUrl };
   });
+
+// ---------------- Appointments ----------------
+export const adminListAppointments = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data, error } = await supabase
+      .from("appointments")
+      .select("*")
+      .order("scheduled_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { appointments: data ?? [] };
+  });
+
+export const adminCreateAppointment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200),
+        scheduled_at: z.string().min(1),
+        kind: z.enum(["phone", "teams", "in_person"]),
+        location: z.string().trim().max(500).optional(),
+        notes: z.string().trim().max(2000).optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("appointments").insert({
+      user_id: data.user_id,
+      title: data.title,
+      scheduled_at: data.scheduled_at,
+      kind: data.kind,
+      location: data.location ?? null,
+      notes: data.notes ?? null,
+      created_by: userId,
+    });
+    if (error) throw new Error(error.message);
+    await supabase.from("notifications").insert({
+      user_id: data.user_id,
+      title: "Nieuwe afspraak ingepland",
+      message: `${data.title} — ${new Date(data.scheduled_at).toLocaleString("nl-NL")}`,
+    });
+    return { ok: true };
+  });
+
+export const adminDeleteAppointment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase.from("appointments").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
