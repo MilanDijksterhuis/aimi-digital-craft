@@ -246,8 +246,54 @@ function PortalPage() {
         </section>
       )}
 
+      {/* Site statistieken */}
+      {data.totalPings > 0 && (
+        <section className="rounded-2xl border border-border bg-card p-6">
+          <h2 className="font-display text-2xl font-semibold mb-3">🌐 Website statistieken</h2>
+          <div className="flex flex-wrap gap-4 items-center">
+            <span className={`text-sm font-medium px-3 py-1 rounded-full ${(data.uptimePct ?? 0) >= 99 ? "bg-primary/15 text-primary" : "bg-amber-500/15 text-amber-600"}`}>
+              Uptime: {data.uptimePct?.toFixed(2)}% (laatste 30 dagen)
+            </span>
+            <span className="text-xs text-muted-foreground">{data.totalPings} pings</span>
+          </div>
+          {data.siteErrors.length > 0 && (
+            <div className="mt-4">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Laatste fouten</p>
+              <ul className="space-y-1 text-sm">
+                {data.siteErrors.map((e: any) => (
+                  <li key={e.id} className="rounded-md bg-muted/40 px-3 py-2">
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(e.created_at).toLocaleString("nl-NL")}
+                    </span>
+                    : {e.message}
+                    {e.resolved && <span className="text-primary text-xs ml-2">(opgelost)</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Login geschiedenis */}
+      {data.loginEvents.length > 0 && (
+        <section className="rounded-2xl border border-border bg-card p-6">
+          <h2 className="font-display text-2xl font-semibold mb-3">🔐 Laatste 5 inlogmomenten</h2>
+          <ul className="space-y-1 text-sm">
+            {data.loginEvents.map((l: any) => (
+              <li key={l.id} className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                <span>{new Date(l.created_at).toLocaleString("nl-NL")}</span>
+                {l.ip && <span>· IP {l.ip}</span>}
+                {l.user_agent && <span className="truncate max-w-md">· {l.user_agent}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* Mijn gegevens */}
       <ProfileEditor profile={data.profile} onSave={(v: any) => updateProfileM.mutate(v)} pending={updateProfileM.isPending} />
+
 
       {/* Credits */}
       <section className="grid sm:grid-cols-3 gap-4">
