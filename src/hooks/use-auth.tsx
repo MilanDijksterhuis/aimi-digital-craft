@@ -21,9 +21,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, s) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, s) => {
       setSession(s);
       setLoading(false);
+      if (event === "SIGNED_IN" && s?.user) {
+        // Fire-and-forget login event log
+        import("@/lib/portal.functions")
+          .then(({ logLogin }) =>
+            logLogin({ data: { user_agent: navigator.userAgent.slice(0, 500) } }).catch(() => {}),
+          )
+          .catch(() => {});
+      }
     });
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
@@ -31,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     return () => subscription.unsubscribe();
   }, []);
+
 
   return (
     <Ctx.Provider
