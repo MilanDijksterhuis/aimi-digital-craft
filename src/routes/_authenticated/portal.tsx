@@ -10,6 +10,7 @@ import {
   markAllNotificationsRead,
   postCustomerComment,
   getAttachmentUrl,
+  updateMyProfile,
 } from "@/lib/portal.functions";
 import { supabase } from "@/integrations/supabase/client";
 import {
