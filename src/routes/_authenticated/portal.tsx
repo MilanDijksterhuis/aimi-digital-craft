@@ -293,7 +293,7 @@ function PortalPage() {
               </span>
             </p>
           )}
-          <div className="hidden">
+          
           {data.siteErrors.length > 0 && (
             <div className="mt-4">
               <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Laatste fouten</p>
