@@ -165,11 +165,13 @@ function PortalPage() {
         <div className="relative">
           <button
             onClick={() => setShowNotifs((v) => !v)}
-            className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent"
+            aria-label={`Meldingen openen${unread.length > 0 ? `, ${unread.length} ongelezen` : ""}`}
+            aria-expanded={showNotifs}
+            className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
           >
-            🔔
+            <span aria-hidden="true">🔔</span>
             {unread.length > 0 && (
-              <span className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
+              <span aria-hidden="true" className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
                 {unread.length}
               </span>
             )}
