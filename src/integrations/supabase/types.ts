@@ -129,12 +129,15 @@ export type Database = {
       change_requests: {
         Row: {
           admin_notes: string | null
+          category: string
           created_at: string
           description: string
           due_date: string | null
           id: string
           internal_note: string | null
+          is_paid: boolean
           priority: string
+          rush: boolean
           status: Database["public"]["Enums"]["request_status"]
           title: string
           updated_at: string
@@ -142,12 +145,15 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          category?: string
           created_at?: string
           description: string
           due_date?: string | null
           id?: string
           internal_note?: string | null
+          is_paid?: boolean
           priority?: string
+          rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
           title: string
           updated_at?: string
@@ -155,12 +161,15 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          category?: string
           created_at?: string
           description?: string
           due_date?: string | null
           id?: string
           internal_note?: string | null
+          is_paid?: boolean
           priority?: string
+          rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
           title?: string
           updated_at?: string
@@ -288,6 +297,7 @@ export type Database = {
           contact_person: string | null
           created_at: string
           email: string
+          free_quota_override: number | null
           full_name: string | null
           id: string
           internal_notes: string | null
@@ -308,6 +318,7 @@ export type Database = {
           contact_person?: string | null
           created_at?: string
           email: string
+          free_quota_override?: number | null
           full_name?: string | null
           id: string
           internal_notes?: string | null
@@ -328,6 +339,7 @@ export type Database = {
           contact_person?: string | null
           created_at?: string
           email?: string
+          free_quota_override?: number | null
           full_name?: string | null
           id?: string
           internal_notes?: string | null
@@ -434,6 +446,9 @@ export type Database = {
         | "review"
         | "done"
         | "rejected"
+        | "approved"
+        | "waiting_customer"
+        | "invoiced"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -569,6 +584,9 @@ export const Constants = {
         "review",
         "done",
         "rejected",
+        "approved",
+        "waiting_customer",
+        "invoiced",
       ],
     },
   },

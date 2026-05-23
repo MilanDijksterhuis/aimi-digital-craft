@@ -116,7 +116,17 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
     z
       .object({
         id: z.string().uuid(),
-        status: z.enum(["pending", "in_review", "in_progress", "review", "done", "rejected"]),
+        status: z.enum([
+          "pending",
+          "in_review",
+          "approved",
+          "in_progress",
+          "waiting_customer",
+          "review",
+          "done",
+          "invoiced",
+          "rejected",
+        ]),
       })
       .parse(d),
   )
@@ -136,6 +146,43 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
       title: `Status update: ${req.title}`,
       message: `Je verzoek is nu: ${data.status}.`,
     });
+    return { ok: true };
+  });
+
+export const adminToggleRequestPaid = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), is_paid: z.boolean() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("change_requests")
+      .update({ is_paid: data.is_paid })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminSetFreeQuota = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        free_quota_override: z.number().int().min(0).max(100).nullable(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("profiles")
+      .update({ free_quota_override: data.free_quota_override })
+      .eq("id", data.user_id);
+    if (error) throw new Error(error.message);
     return { ok: true };
   });
 
