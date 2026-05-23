@@ -22,13 +22,42 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Design, development & hosting door Aidan & Milan.",
       },
+      { property: "og:url", content: "https://aimi-digital-craft.lovable.app/" },
     ],
     links: [
+      { rel: "canonical", href: "https://aimi-digital-craft.lovable.app/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "AIMI",
+          description:
+            "Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.",
+          url: "https://aimi-digital-craft.lovable.app/",
+          areaServed: "NL",
+          founder: [
+            { "@type": "Person", name: "Aidan" },
+            { "@type": "Person", name: "Milan" },
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Web services",
+            itemListElement: [
+              { "@type": "Offer", name: "Starter", price: "1250", priceCurrency: "EUR" },
+              { "@type": "Offer", name: "Pro", price: "3500", priceCurrency: "EUR" },
+              { "@type": "Offer", name: "Custom" },
+            ],
+          },
+        }),
       },
     ],
   }),
