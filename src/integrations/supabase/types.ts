@@ -129,6 +129,7 @@ export type Database = {
       change_requests: {
         Row: {
           admin_notes: string | null
+          cancellation_reason: string | null
           category: string
           created_at: string
           description: string
@@ -137,14 +138,17 @@ export type Database = {
           internal_note: string | null
           is_paid: boolean
           priority: string
+          request_number: number | null
           rush: boolean
           status: Database["public"]["Enums"]["request_status"]
+          ticket_type: string
           title: string
           updated_at: string
           user_id: string
         }
         Insert: {
           admin_notes?: string | null
+          cancellation_reason?: string | null
           category?: string
           created_at?: string
           description: string
@@ -153,14 +157,17 @@ export type Database = {
           internal_note?: string | null
           is_paid?: boolean
           priority?: string
+          request_number?: number | null
           rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
+          ticket_type?: string
           title: string
           updated_at?: string
           user_id: string
         }
         Update: {
           admin_notes?: string | null
+          cancellation_reason?: string | null
           category?: string
           created_at?: string
           description?: string
@@ -169,10 +176,42 @@ export type Database = {
           internal_note?: string | null
           is_paid?: boolean
           priority?: string
+          request_number?: number | null
           rush?: boolean
           status?: Database["public"]["Enums"]["request_status"]
+          ticket_type?: string
           title?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      client_contacts: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          kind: string
+          occurred_at: string
+          summary: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind?: string
+          occurred_at?: string
+          summary: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind?: string
+          occurred_at?: string
+          summary?: string
           user_id?: string
         }
         Relationships: []
@@ -230,6 +269,30 @@ export type Database = {
           granted_by?: string | null
           id?: string
           reason?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      login_events: {
+        Row: {
+          created_at: string
+          id: string
+          ip: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip?: string | null
+          user_agent?: string | null
           user_id?: string
         }
         Relationships: []
@@ -295,6 +358,7 @@ export type Database = {
           btw: string | null
           company: string | null
           contact_person: string | null
+          contacts: Json
           created_at: string
           email: string
           free_quota_override: number | null
@@ -316,6 +380,7 @@ export type Database = {
           btw?: string | null
           company?: string | null
           contact_person?: string | null
+          contacts?: Json
           created_at?: string
           email: string
           free_quota_override?: number | null
@@ -337,6 +402,7 @@ export type Database = {
           btw?: string | null
           company?: string | null
           contact_person?: string | null
+          contacts?: Json
           created_at?: string
           email?: string
           free_quota_override?: number | null
@@ -402,6 +468,60 @@ export type Database = {
         }
         Relationships: []
       }
+      site_errors: {
+        Row: {
+          created_at: string
+          id: number
+          message: string
+          resolved: boolean
+          resolved_at: string | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          message: string
+          resolved?: boolean
+          resolved_at?: string | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          message?: string
+          resolved?: boolean
+          resolved_at?: string | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      site_pings: {
+        Row: {
+          created_at: string
+          id: number
+          response_ms: number | null
+          status_ok: boolean
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          response_ms?: number | null
+          status_ok?: boolean
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          response_ms?: number | null
+          status_ok?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -449,6 +569,7 @@ export type Database = {
         | "approved"
         | "waiting_customer"
         | "invoiced"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -587,6 +708,7 @@ export const Constants = {
         "approved",
         "waiting_customer",
         "invoiced",
+        "cancelled",
       ],
     },
   },
