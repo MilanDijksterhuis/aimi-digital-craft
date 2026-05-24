@@ -545,9 +545,9 @@ function PortalPage() {
                   profileId={data.profile?.id}
                   websiteUrl={data.profile?.website_url}
                   expanded={!!expanded[r.id]}
-                  setExpanded={(v) => setExpanded({ ...expanded, [r.id]: v })}
+                  setExpanded={(v: boolean) => setExpanded({ ...expanded, [r.id]: v })}
                   openThread={openThread === r.id}
-                  setOpenThread={(v) => setOpenThread(v ? r.id : null)}
+                  setOpenThread={(v: boolean) => setOpenThread(v ? r.id : null)}
                   comment={comment}
                   setComment={setComment}
                   onPostComment={() => {
@@ -559,7 +559,7 @@ function PortalPage() {
                   }}
                   commentPending={commentM.isPending}
                   openAttachment={openAttachment}
-                  onCancel={(id, reason) => cancelM.mutate({ id, reason })}
+                  onCancel={(id: string, reason?: string) => cancelM.mutate({ id, reason })}
                 />
               ))}
             </div>
