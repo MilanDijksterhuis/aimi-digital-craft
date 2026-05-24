@@ -250,26 +250,6 @@ function PortalPage() {
     window.open(url, "_blank");
   };
 
-  // ----- Filtered & sorted changes -----
-  const filteredChanges = useMemo(() => {
-    let list = (data.requests as any[]).filter((r) => matchesFilter(r.status, filter));
-    if (search.trim()) {
-      const q = search.trim().toLowerCase();
-      list = list.filter((r) => {
-        const num = r.request_number ? `#chg-${String(r.request_number).padStart(4, "0")}` : "";
-        return (r.title ?? "").toLowerCase().includes(q) || num.includes(q);
-      });
-    }
-    list = [...list].sort((a, b) => {
-      if (sort === "priority") {
-        return (PRIORITY_WEIGHT[b.priority] ?? 0) - (PRIORITY_WEIGHT[a.priority] ?? 0);
-      }
-      const da = new Date(a.created_at).getTime();
-      const db = new Date(b.created_at).getTime();
-      return sort === "newest" ? db - da : da - db;
-    });
-    return list;
-  }, [data.requests, filter, sort, search]);
 
   return (
     <div className="space-y-10 pb-24">
