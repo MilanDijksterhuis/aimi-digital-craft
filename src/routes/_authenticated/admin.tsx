@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import {
   BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
   MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
-  ChevronDown, ArrowUp, ArrowDown,
+  ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -38,6 +38,22 @@ import {
   adminUpdateWebsiteLink,
 } from "@/lib/admin.functions";
 import {
+  adminListAllAccounts,
+  adminChangeAccountRole,
+  adminSetBlocked,
+  adminSetAccountTags,
+  adminSetAccessExpiry,
+  adminHardDeleteAccount,
+  adminCreateTempAccount,
+  adminListNotifications,
+  adminMarkNotificationRead,
+  adminMarkAllNotificationsRead,
+  adminArchiveChange,
+  adminUnarchiveChange,
+  adminAssignChange,
+  adminListArchivedChanges,
+} from "@/lib/accounts.functions";
+import {
   STATUS_LABEL,
   PRIORITY_LABEL,
   PRIORITY_WEIGHT,
@@ -56,6 +72,7 @@ import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
 import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
