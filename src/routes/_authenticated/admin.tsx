@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import {
   BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
   MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
-  ChevronDown, ArrowUp, ArrowDown,
+  ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -38,6 +38,22 @@ import {
   adminUpdateWebsiteLink,
 } from "@/lib/admin.functions";
 import {
+  adminListAllAccounts,
+  adminChangeAccountRole,
+  adminSetBlocked,
+  adminSetAccountTags,
+  adminSetAccessExpiry,
+  adminHardDeleteAccount,
+  adminCreateTempAccount,
+  adminListNotifications,
+  adminMarkNotificationRead,
+  adminMarkAllNotificationsRead,
+  adminArchiveChange,
+  adminUnarchiveChange,
+  adminAssignChange,
+  adminListArchivedChanges,
+} from "@/lib/accounts.functions";
+import {
   STATUS_LABEL,
   PRIORITY_LABEL,
   PRIORITY_WEIGHT,
@@ -56,6 +72,7 @@ import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
 import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
@@ -73,8 +90,8 @@ function AdminPage() {
   });
 
   type TabKey =
-    | "dashboard" | "klanten" | "password_resets" | "extra_changes"
-    | "changes" | "berichten" | "aanvragen"
+    | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
+    | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "team" | "afspraken"
     | "chat" | "deleted";
   const [tab, setTab] = useState<TabKey>("dashboard");
@@ -123,10 +140,13 @@ function AdminPage() {
     ]},
     { label: "Werk", items: [
       { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest },
+      { key: "archived", label: "Gearchiveerd", icon: Archive },
       { key: "berichten", label: "Berichten", icon: MessageSquare },
       { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox },
     ]},
     { label: "Beheer", items: [
+      { key: "accounts", label: "Accounts", icon: Users2 },
+      { key: "notifications", label: "Notificaties", icon: Bell },
       { key: "website_links", label: "Website koppelingen", icon: Link2 },
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
@@ -139,9 +159,12 @@ function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-4xl font-bold">Admin</h1>
-        <p className="text-muted-foreground">Beheer klanten, changes en groei.</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="font-display text-4xl font-bold">Admin</h1>
+          <p className="text-muted-foreground">Beheer klanten, changes en groei.</p>
+        </div>
+        <NotificationsBell onOpen={() => setTab("notifications")} />
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
@@ -150,9 +173,12 @@ function AdminPage() {
         <div className="flex-1 min-w-0">
           {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => setTab("changes")} onGoPending={() => setTab("password_resets")} />}
           {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
+          {tab === "accounts" && <AccountsPanel />}
+          {tab === "notifications" && <NotificationsPanel />}
           {tab === "password_resets" && <PasswordResetsPanel />}
           {tab === "extra_changes" && <ExtraChangesPanel />}
           {tab === "changes" && (<ChangesTab data={data} qc={qc} openRequest={openRequest} setOpenRequest={setOpenRequest} />)}
+          {tab === "archived" && <ArchivedChangesPanel />}
           {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
           {tab === "berichten" && <BerichtenTab />}
           {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
@@ -1345,5 +1371,280 @@ function Field({ label, value, onChange, type = "text", required }: any) {
         onChange={(e) => onChange(e.target.value)}
         className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
     </label>
+  );
+}
+
+// ============================================================
+// =================== ACCOUNTS PANEL =========================
+// ============================================================
+function AccountsPanel() {
+  const list = useServerFn(adminListAllAccounts);
+  const changeRole = useServerFn(adminChangeAccountRole);
+  const setBlocked = useServerFn(adminSetBlocked);
+  const setTags = useServerFn(adminSetAccountTags);
+  const setExpiry = useServerFn(adminSetAccessExpiry);
+  const hardDel = useServerFn(adminHardDeleteAccount);
+  const createTemp = useServerFn(adminCreateTempAccount);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-accounts"], queryFn: () => list({}) });
+
+  const [filter, setFilter] = useState("");
+  const [roleFilter, setRoleFilter] = useState<string>("all");
+  const [showTemp, setShowTemp] = useState(false);
+  const [tempForm, setTempForm] = useState({ email: "", full_name: "", company: "", days_valid: 14 });
+  const [tagsEditing, setTagsEditing] = useState<string | null>(null);
+  const [tagsDraft, setTagsDraft] = useState("");
+
+  // Realtime ping on profiles last_seen_at
+  useEffect(() => {
+    const ch = supabase
+      .channel("admin-accounts-presence")
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, () => {
+        qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
+  }, [qc]);
+
+  const inv = () => qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+  const roleM = useMutation({ mutationFn: (i: any) => changeRole({ data: i }), onSuccess: () => { inv(); toast.success("Rol gewijzigd."); }, onError: (e: any) => toast.error(e.message) });
+  const blockM = useMutation({ mutationFn: (i: any) => setBlocked({ data: i }), onSuccess: () => { inv(); toast.success("Bijgewerkt."); }, onError: (e: any) => toast.error(e.message) });
+  const tagsM = useMutation({ mutationFn: (i: any) => setTags({ data: i }), onSuccess: () => { inv(); setTagsEditing(null); toast.success("Tags opgeslagen."); }, onError: (e: any) => toast.error(e.message) });
+  const expM = useMutation({ mutationFn: (i: any) => setExpiry({ data: i }), onSuccess: () => { inv(); toast.success("Verloopdatum opgeslagen."); }, onError: (e: any) => toast.error(e.message) });
+  const delM = useMutation({
+    mutationFn: (id: string) => hardDel({ data: { user_id: id } }),
+    onSuccess: () => { inv(); toast.success("Account verwijderd."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const tempM = useMutation({
+    mutationFn: (i: any) => createTemp({ data: i }),
+    onSuccess: (r: any) => {
+      inv();
+      setShowTemp(false);
+      setTempForm({ email: "", full_name: "", company: "", days_valid: 14 });
+      navigator.clipboard?.writeText(`Email: ${r.email}\nWachtwoord: ${r.tempPassword}`).catch(() => {});
+      toast.success(`Aangemaakt. Wachtwoord (gekopieerd): ${r.tempPassword}`);
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const accounts = data?.accounts ?? [];
+  const filtered = accounts.filter((a: any) => {
+    const q = filter.toLowerCase();
+    const matchQ = !q || a.email?.toLowerCase().includes(q) || a.full_name?.toLowerCase().includes(q) || (a.tags ?? []).some((t: string) => t.toLowerCase().includes(q));
+    const matchRole =
+      roleFilter === "all" ? true :
+      roleFilter === "staff" ? (a.roles ?? []).some((r: string) => ["super_admin", "co_admin", "support_agent", "viewer", "admin"].includes(r)) :
+      (a.roles ?? []).includes(roleFilter);
+    return matchQ && matchRole;
+  });
+
+  const isOnline = (a: any) => a.last_seen_at && Date.now() - new Date(a.last_seen_at).getTime() < 3 * 60_000;
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-2 justify-between">
+        <div className="flex flex-wrap gap-2">
+          <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Zoek naam / email / tag…" className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} className="rounded-md border border-input bg-background px-3 py-2 text-sm">
+            <option value="all">Alle rollen</option>
+            <option value="customer">Klanten</option>
+            <option value="staff">Staff</option>
+            <option value="super_admin">Super admin</option>
+            <option value="co_admin">Co-admin</option>
+            <option value="support_agent">Support</option>
+            <option value="viewer">Viewer</option>
+          </select>
+        </div>
+        <button onClick={() => setShowTemp((v) => !v)} className="rounded-md bg-foreground text-background px-3 py-2 text-sm">+ Nieuw tijdelijk account</button>
+      </div>
+
+      {showTemp && (
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="font-semibold mb-3">Tijdelijk account aanmaken</h3>
+          <div className="grid sm:grid-cols-4 gap-3">
+            <input placeholder="E-mail" value={tempForm.email} onChange={(e) => setTempForm({ ...tempForm, email: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
+            <input placeholder="Volledige naam" value={tempForm.full_name} onChange={(e) => setTempForm({ ...tempForm, full_name: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
+            <input placeholder="Bedrijf (optioneel)" value={tempForm.company} onChange={(e) => setTempForm({ ...tempForm, company: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
+            <input type="number" min={1} max={365} value={tempForm.days_valid} onChange={(e) => setTempForm({ ...tempForm, days_valid: Number(e.target.value) })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Geldig (dagen)" />
+          </div>
+          <div className="mt-3 flex gap-2">
+            <button disabled={tempM.isPending || !tempForm.email || !tempForm.full_name} onClick={() => tempM.mutate(tempForm)} className="rounded-md bg-foreground text-background px-3 py-2 text-sm disabled:opacity-50">{tempM.isPending ? "Bezig…" : "Aanmaken"}</button>
+            <button onClick={() => setShowTemp(false)} className="rounded-md border border-border px-3 py-2 text-sm">Annuleer</button>
+          </div>
+        </div>
+      )}
+
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/30 text-muted-foreground">
+            <tr>
+              <th className="text-left p-3">Naam</th>
+              <th className="text-left p-3">E-mail</th>
+              <th className="text-left p-3">Rol</th>
+              <th className="text-left p-3">Tags</th>
+              <th className="text-left p-3">Verloopt</th>
+              <th className="text-left p-3">Status</th>
+              <th className="p-3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((a: any) => {
+              const primaryRole = (a.roles ?? [])[0] ?? "customer";
+              const online = isOnline(a);
+              return (
+                <tr key={a.id} className="border-t border-border align-top">
+                  <td className="p-3">
+                    <div className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${online ? "bg-emerald-500" : "bg-muted"}`} title={online ? "Online" : "Offline"} />
+                      <span>{a.full_name || "—"}</span>
+                    </div>
+                    {a.last_seen_at && <p className="text-xs text-muted-foreground ml-4">{online ? "Online nu" : new Date(a.last_seen_at).toLocaleString("nl-NL")}</p>}
+                  </td>
+                  <td className="p-3">{a.email}</td>
+                  <td className="p-3">
+                    <select value={primaryRole} onChange={(e) => roleM.mutate({ target_user_id: a.id, role: e.target.value as any })} className="rounded-md border border-input bg-background px-2 py-1 text-xs">
+                      <option value="customer">Klant</option>
+                      <option value="support_agent">Support</option>
+                      <option value="viewer">Viewer</option>
+                      <option value="co_admin">Co-admin</option>
+                      <option value="super_admin">Super admin</option>
+                    </select>
+                  </td>
+                  <td className="p-3">
+                    {tagsEditing === a.id ? (
+                      <div className="flex gap-1">
+                        <input value={tagsDraft} onChange={(e) => setTagsDraft(e.target.value)} placeholder="tag1, tag2" className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
+                        <button onClick={() => tagsM.mutate({ user_id: a.id, tags: tagsDraft.split(",").map((s) => s.trim()).filter(Boolean) })} className="text-xs text-primary">OK</button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-wrap gap-1 cursor-pointer" onClick={() => { setTagsEditing(a.id); setTagsDraft((a.tags ?? []).join(", ")); }}>
+                        {(a.tags ?? []).map((t: string) => <span key={t} className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">{t}</span>)}
+                        {(!a.tags || a.tags.length === 0) && <span className="text-xs text-muted-foreground">+ tag</span>}
+                      </div>
+                    )}
+                  </td>
+                  <td className="p-3">
+                    <input type="date" defaultValue={a.access_expires_at ? a.access_expires_at.slice(0, 10) : ""} onBlur={(e) => {
+                      const v = e.target.value ? new Date(e.target.value + "T23:59:59Z").toISOString() : null;
+                      if (v !== a.access_expires_at) expM.mutate({ user_id: a.id, access_expires_at: v });
+                    }} className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
+                  </td>
+                  <td className="p-3">
+                    {a.is_blocked ? <span className="text-xs text-destructive">Geblokkeerd</span> : <span className="text-xs text-emerald-600">Actief</span>}
+                  </td>
+                  <td className="p-3 text-right space-x-2 whitespace-nowrap">
+                    <button onClick={() => blockM.mutate({ user_id: a.id, is_blocked: !a.is_blocked })} className="text-xs text-primary hover:underline">{a.is_blocked ? "Deblokkeer" : "Blokkeer"}</button>
+                    <button onClick={() => { if (confirm(`Account ${a.email} permanent verwijderen?`)) delM.mutate(a.id); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                  </td>
+                </tr>
+              );
+            })}
+            {filtered.length === 0 && <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">Geen accounts.</td></tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// ============== ADMIN NOTIFICATIONS BELL + PANEL ============
+// ============================================================
+function NotificationsBell({ onOpen }: { onOpen: () => void }) {
+  const list = useServerFn(adminListNotifications);
+  const qc = useQueryClient();
+  const { data } = useQuery({ queryKey: ["admin-notifs"], queryFn: () => list({}), refetchInterval: 30_000 });
+  useEffect(() => {
+    const ch = supabase
+      .channel("admin-notifs-realtime")
+      .on("postgres_changes", { event: "*", schema: "public", table: "admin_notifications" }, () => {
+        qc.invalidateQueries({ queryKey: ["admin-notifs"] });
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
+  }, [qc]);
+  const unread = (data?.items ?? []).filter((n: any) => !n.is_read).length;
+  return (
+    <button onClick={onOpen} className="relative rounded-full border border-border bg-card p-2 hover:bg-accent" aria-label="Notificaties">
+      <Bell className="w-4 h-4" />
+      {unread > 0 && (
+        <span className="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[10px] font-semibold flex items-center justify-center">{unread}</span>
+      )}
+    </button>
+  );
+}
+
+function NotificationsPanel() {
+  const list = useServerFn(adminListNotifications);
+  const markRead = useServerFn(adminMarkNotificationRead);
+  const markAll = useServerFn(adminMarkAllNotificationsRead);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-notifs"], queryFn: () => list({}) });
+  const inv = () => qc.invalidateQueries({ queryKey: ["admin-notifs"] });
+  const readM = useMutation({ mutationFn: (id: string) => markRead({ data: { id } }), onSuccess: inv });
+  const allM = useMutation({ mutationFn: () => markAll({}), onSuccess: () => { inv(); toast.success("Alles gelezen."); } });
+
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const items = data?.items ?? [];
+  return (
+    <div className="space-y-3">
+      <div className="flex justify-between items-center">
+        <h2 className="font-display text-xl font-semibold">Notificaties</h2>
+        <button onClick={() => allM.mutate()} className="text-xs text-primary hover:underline">Alles markeren als gelezen</button>
+      </div>
+      <ul className="space-y-2">
+        {items.map((n: any) => (
+          <li key={n.id} className={`rounded-lg border p-3 ${n.is_read ? "border-border bg-card" : "border-primary/40 bg-primary/5"}`}>
+            <div className="flex justify-between gap-3">
+              <div>
+                <p className="text-sm font-medium">{n.title}</p>
+                <p className="text-xs text-muted-foreground mt-1">{n.message}</p>
+                <p className="text-xs text-muted-foreground mt-1">{new Date(n.created_at).toLocaleString("nl-NL")}</p>
+              </div>
+              {!n.is_read && <button onClick={() => readM.mutate(n.id)} className="text-xs text-primary hover:underline shrink-0">Gelezen</button>}
+            </div>
+          </li>
+        ))}
+        {items.length === 0 && <li className="text-muted-foreground text-sm">Geen notificaties.</li>}
+      </ul>
+    </div>
+  );
+}
+
+// ============================================================
+// ==================== ARCHIVED CHANGES ======================
+// ============================================================
+function ArchivedChangesPanel() {
+  const list = useServerFn(adminListArchivedChanges);
+  const unarch = useServerFn(adminUnarchiveChange);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-archived"], queryFn: () => list({}) });
+  const inv = () => { qc.invalidateQueries({ queryKey: ["admin-archived"] }); qc.invalidateQueries({ queryKey: ["admin-overview"] }); };
+  const unM = useMutation({ mutationFn: (id: string) => unarch({ data: { id } }), onSuccess: () => { inv(); toast.success("Hersteld."); } });
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const items = data?.items ?? [];
+  return (
+    <div className="overflow-x-auto rounded-lg border border-border">
+      <table className="w-full text-sm">
+        <thead className="bg-muted/30 text-muted-foreground">
+          <tr><th className="text-left p-3">#</th><th className="text-left p-3">Titel</th><th className="text-left p-3">Gearchiveerd</th><th className="p-3"></th></tr>
+        </thead>
+        <tbody>
+          {items.map((r: any) => (
+            <tr key={r.id} className="border-t border-border">
+              <td className="p-3">{r.request_number ?? "—"}</td>
+              <td className="p-3">{r.title}</td>
+              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "—"}</td>
+              <td className="p-3 text-right">
+                <button onClick={() => unM.mutate(r.id)} className="text-xs text-primary hover:underline">Herstel</button>
+              </td>
+            </tr>
+          ))}
+          {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen gearchiveerde changes.</td></tr>}
+        </tbody>
+      </table>
+    </div>
   );
 }

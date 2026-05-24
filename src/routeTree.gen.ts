@@ -20,6 +20,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
+import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
 
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
   id: '/track.js',
@@ -75,6 +76,12 @@ const ApiPublicSiteErrorRoute = ApiPublicSiteErrorRouteImport.update({
   path: '/api/public/site-error',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksExpireAccountsRoute =
+  ApiPublicHooksExpireAccountsRouteImport.update({
+    id: '/api/public/hooks/expire-accounts',
+    path: '/api/public/hooks/expire-accounts',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +107,7 @@ export interface FileRoutesByTo {
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +122,7 @@ export interface FileRoutesById {
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/public/hooks/expire-accounts'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/public/hooks/expire-accounts'
   id:
     | '__root__'
     | '/'
@@ -152,6 +164,7 @@ export interface FileRouteTypes {
     | '/_authenticated/portal'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/public/hooks/expire-accounts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -163,6 +176,7 @@ export interface RootRouteChildren {
   TrackDotjsRoute: typeof TrackDotjsRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
+  ApiPublicHooksExpireAccountsRoute: typeof ApiPublicHooksExpireAccountsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -244,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSiteErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/expire-accounts': {
+      id: '/api/public/hooks/expire-accounts'
+      path: '/api/public/hooks/expire-accounts'
+      fullPath: '/api/public/hooks/expire-accounts'
+      preLoaderRoute: typeof ApiPublicHooksExpireAccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -272,6 +293,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrackDotjsRoute: TrackDotjsRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
+  ApiPublicHooksExpireAccountsRoute: ApiPublicHooksExpireAccountsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
