@@ -90,8 +90,8 @@ function AdminPage() {
   });
 
   type TabKey =
-    | "dashboard" | "klanten" | "password_resets" | "extra_changes"
-    | "changes" | "berichten" | "aanvragen"
+    | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
+    | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "team" | "afspraken"
     | "chat" | "deleted";
   const [tab, setTab] = useState<TabKey>("dashboard");
