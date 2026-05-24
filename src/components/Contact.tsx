@@ -34,19 +34,16 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-32 relative">
-      <div className="absolute inset-0 grid-bg pointer-events-none opacity-40" />
       <div className="relative mx-auto max-w-3xl px-6">
-        <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest text-center">
-          05 — Contact
-        </p>
+        <p className="section-label mb-4 text-center">05 — Contact</p>
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-display font-bold text-4xl md:text-6xl tracking-tight text-center"
+          transition={{ duration: 0.5 }}
+          className="text-center"
         >
-          Laten we iets <em className="not-italic text-primary">bouwen</em> samen.
+          Laten we iets <span className="text-primary">bouwen</span> samen.
         </motion.h2>
         <p className="mt-4 text-center text-muted-foreground">
           Stuur ons een bericht — we reageren binnen 24 uur.
@@ -54,33 +51,29 @@ export function Contact() {
 
         {sent ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             role="status"
             aria-live="polite"
-            className="mt-12 p-10 rounded-2xl border-2 border-primary/40 bg-surface/80 backdrop-blur text-center space-y-4"
+            className="mt-12 p-10 rounded-lg border border-border bg-card text-center space-y-4"
           >
-            <CheckCircle2 className="w-14 h-14 text-primary mx-auto" aria-hidden />
-            <h3 className="font-display text-2xl font-semibold">Bericht verzonden!</h3>
+            <CheckCircle2 className="w-12 h-12 text-primary mx-auto" aria-hidden strokeWidth={1.5} />
+            <h3 className="text-2xl">Bericht verzonden!</h3>
             <p className="text-muted-foreground">
               Bedankt voor je bericht. We hebben het ontvangen en nemen binnen 24 uur contact met je op.
             </p>
-            <button
-              type="button"
-              onClick={() => setSent(false)}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-border hover:bg-accent text-sm font-medium transition-colors"
-            >
+            <button type="button" onClick={() => setSent(false)} className="btn-secondary">
               Nog een bericht sturen
             </button>
           </motion.div>
         ) : (
           <motion.form
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             onSubmit={onSubmit}
-            className="mt-12 p-8 md:p-10 rounded-2xl border border-border bg-surface/80 backdrop-blur space-y-5"
+            className="mt-12 p-8 md:p-10 rounded-lg border border-border bg-card space-y-5"
           >
             <div className="grid md:grid-cols-2 gap-5">
               <Field
@@ -100,7 +93,7 @@ export function Contact() {
               />
             </div>
             <div>
-              <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
                 Bericht
               </label>
               <textarea
@@ -109,7 +102,7 @@ export function Contact() {
                 placeholder="Vertel ons over je project…"
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-2 w-full bg-background/60 border border-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary transition-colors resize-none"
+                className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3 resize-none"
               />
             </div>
             {error && (
@@ -117,11 +110,7 @@ export function Contact() {
                 {error}
               </p>
             )}
-            <button
-              type="submit"
-              disabled={pending}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:glow-primary transition-all disabled:opacity-60"
-            >
+            <button type="submit" disabled={pending} className="btn-primary w-full disabled:opacity-60">
               {pending ? "Versturen…" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
             </button>
           </motion.form>
@@ -134,13 +123,13 @@ export function Contact() {
 function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+      <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
         {label}
       </label>
       <input
         required
         {...props}
-        className="mt-2 w-full bg-background/60 border border-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary transition-colors"
+        className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3"
       />
     </div>
   );
