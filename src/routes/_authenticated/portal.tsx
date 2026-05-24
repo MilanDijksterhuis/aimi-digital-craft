@@ -155,6 +155,7 @@ function PortalPage() {
   const [rush, setRush] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [purchaseQty, setPurchaseQty] = useState(1);
+  const [purchaseConfirm, setPurchaseConfirm] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
   const [openThread, setOpenThread] = useState<string | null>(null);
   const [comment, setComment] = useState("");
