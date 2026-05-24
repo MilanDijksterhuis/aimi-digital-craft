@@ -29,6 +29,31 @@ function AuthLayout() {
 function Inner() {
   const { user, loading, signOut } = useAuth();
   const nav = useNavigate();
+  const ping = useServerFn(pingLastSeen);
+  const checkAccess = useServerFn(checkMyAccess);
+
+  // Ping last_seen periodically + check access
+  useEffect(() => {
+    if (!user) return;
+    let active = true;
+    const doPing = () => { ping({}).catch(() => {}); };
+    const doCheck = async () => {
+      try {
+        const r = await checkAccess({});
+        if (!active) return;
+        if (r.blocked || r.expired) {
+          toast.error(r.expired ? "Je toegang is verlopen." : "Je account is geblokkeerd.");
+          await signOut();
+          nav({ to: "/login" });
+        }
+      } catch {}
+    };
+    doPing();
+    doCheck();
+    const pingI = setInterval(doPing, 60_000);
+    const checkI = setInterval(doCheck, 5 * 60_000);
+    return () => { active = false; clearInterval(pingI); clearInterval(checkI); };
+  }, [user]);
 
   if (loading) {
     return (
