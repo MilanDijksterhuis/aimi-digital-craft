@@ -101,7 +101,7 @@ function matchesFilter(s: string, f: FilterKey): boolean {
 function PortalPage() {
   const fetchDash = useServerFn(getMyDashboard);
   const submit = useServerFn(submitChangeRequest);
-  const buy = useServerFn(requestExtraCredits);
+  const buy = useServerFn(requestExtraChanges);
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
   const postComment = useServerFn(postCustomerComment);
