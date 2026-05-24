@@ -125,7 +125,11 @@ function PortalPage() {
   });
   const buyM = useMutation({
     mutationFn: (n: number) => buy({ data: { amount: n } }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["dashboard"] });
+      toast.success("Aanvraag ontvangen, wij verwerken dit binnen 1 werkdag.");
+    },
+    onError: (e: any) => toast.error(e.message ?? "Er ging iets mis."),
   });
   const readM = useMutation({
     mutationFn: (id: string) => markRead({ data: { id } }),
