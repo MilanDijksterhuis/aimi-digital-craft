@@ -97,7 +97,7 @@ function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => voi
           <ul className="py-1 text-sm">
             <li>
               <Link
-                to="/portal"
+                to="/account"
                 onClick={() => setOpen(false)}
                 className="block px-4 py-2 hover:bg-accent"
                 role="menuitem"
