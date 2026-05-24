@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Instrument Serif", serif;
-  --font-sans: "Syne", "Cabinet Grotesk", system-ui, sans-serif;
-  --font-mono: "Syne", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   --radius-sm: 2px;
   --radius-md: 4px;
@@ -124,13 +124,13 @@
 
   h1, h2 {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.02em;
     color: var(--color-foreground);
   }
   h3, h4, h5, h6 {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.01em;
   }

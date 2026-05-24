@@ -17,6 +17,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 
@@ -59,6 +60,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const ApiPublicSitePingRoute = ApiPublicSitePingRouteImport.update({
   id: '/api/public/site-ping',
   path: '/api/public/site-ping',
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
+    | '/account'
     | '/admin'
     | '/portal'
     | '/api/public/site-error'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
+    | '/account'
     | '/admin'
     | '/portal'
     | '/api/public/site-error'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
+    | '/_authenticated/account'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/api/public/site-error'
@@ -211,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/account': {
+      id: '/_authenticated/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AuthenticatedAccountRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/api/public/site-ping': {
       id: '/api/public/site-ping'
       path: '/api/public/site-ping'
@@ -229,11 +248,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAccountRoute: AuthenticatedAccountRoute,
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
 }
