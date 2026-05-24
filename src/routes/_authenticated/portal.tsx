@@ -160,8 +160,28 @@ function PortalPage() {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
-  if (error) return <p className="text-destructive">Fout: {(error as Error).message}</p>;
+  if (isLoading) {
+    return (
+      <div className="space-y-6 animate-pulse">
+        <div className="h-10 w-64 bg-muted rounded" />
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
+          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
+        </div>
+        <div className="h-24 bg-muted/40 rounded-lg border border-border" />
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-6">
+        <p className="text-sm text-destructive">Kon portaal niet laden: {(error as Error).message}</p>
+        <button onClick={() => qc.invalidateQueries({ queryKey: ["dashboard"] })} className="btn-secondary mt-3">
+          Probeer opnieuw
+        </button>
+      </div>
+    );
+  }
   if (!data) return null;
 
   const unread = data.notifications.filter((n: any) => !n.read);
