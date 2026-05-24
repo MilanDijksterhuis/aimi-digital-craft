@@ -998,3 +998,132 @@ export const adminCreateChangeForCustomer = createServerFn({ method: "POST" })
     });
     return { ok: true, id: row.id };
   });
+
+// ---------- Password reset requests ----------
+
+export const adminListPasswordResets = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data, error } = await supabase
+      .from("password_reset_requests")
+      .select("*")
+      .order("requested_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: data ?? [] };
+  });
+
+export const adminMarkPasswordResetHandled = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { error } = await supabase
+      .from("password_reset_requests")
+      .update({ status: "handled", handled_at: new Date().toISOString(), handled_by: userId })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// ---------- Extra change requests ----------
+
+export const adminListExtraChangeRequests = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data, error } = await supabase
+      .from("extra_change_requests")
+      .select("*")
+      .order("requested_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: data ?? [] };
+  });
+
+export const adminApproveExtraChangeRequest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: req, error: rErr } = await supabase
+      .from("extra_change_requests")
+      .select("user_id, amount, status")
+      .eq("id", data.id)
+      .single();
+    if (rErr || !req) throw new Error(rErr?.message ?? "Niet gevonden");
+    if (req.status !== "pending") throw new Error("Al verwerkt.");
+    const { error: cErr } = await supabase
+      .from("extra_credits")
+      .insert({ user_id: req.user_id, amount: req.amount, granted_by: userId, reason: "Extra change aanvraag goedgekeurd" });
+    if (cErr) throw new Error(cErr.message);
+    const { error: uErr } = await supabase
+      .from("extra_change_requests")
+      .update({ status: "approved", handled_at: new Date().toISOString(), handled_by: userId })
+      .eq("id", data.id);
+    if (uErr) throw new Error(uErr.message);
+    await supabase.from("notifications").insert({
+      user_id: req.user_id,
+      title: "Extra changes goedgekeurd",
+      message: `Je aanvraag van ${req.amount} extra change(s) is goedgekeurd.`,
+    });
+    return { ok: true };
+  });
+
+export const adminRejectExtraChangeRequest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabase
+      .from("extra_change_requests")
+      .update({ status: "rejected", handled_at: new Date().toISOString(), handled_by: userId })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// ---------- Website links ----------
+
+export const adminListWebsiteLinks = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: profiles, error } = await supabase
+      .from("profiles")
+      .select("id, full_name, email, company, website_url, snippet_active");
+    if (error) throw new Error(error.message);
+    const ids = (profiles ?? []).map((p: any) => p.id);
+    const { data: pings } = await supabase
+      .from("site_pings")
+      .select("user_id")
+      .in("user_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]);
+    const pingCounts: Record<string, number> = {};
+    for (const p of pings ?? []) pingCounts[(p as any).user_id] = (pingCounts[(p as any).user_id] ?? 0) + 1;
+    return {
+      items: (profiles ?? []).map((p: any) => ({ ...p, ping_count: pingCounts[p.id] ?? 0 })),
+    };
+  });
+
+export const adminUpdateWebsiteLink = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      user_id: z.string().uuid(),
+      website_url: z.string().trim().max(500).nullable().optional(),
+      snippet_active: z.boolean().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { user_id, ...rest } = data;
+    const { error } = await supabase.from("profiles").update(rest).eq("id", user_id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
