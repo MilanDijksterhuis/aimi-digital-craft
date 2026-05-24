@@ -72,14 +72,34 @@ function AdminPage() {
     queryFn: () => fetchOv({}),
   });
 
-  const [tab, setTab] = useState<
-    "dashboard" | "klanten" | "changes" | "aanvragen" | "afspraken" | "chat" | "berichten" | "team" | "deleted"
-  >("dashboard");
+  type TabKey =
+    | "dashboard" | "klanten" | "password_resets" | "extra_changes"
+    | "changes" | "berichten" | "aanvragen"
+    | "website_links" | "team" | "afspraken"
+    | "chat" | "deleted";
+  const [tab, setTab] = useState<TabKey>("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
   const perms = usePermissions();
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  // Pending counts for sidebar badges
+  const listResets = useServerFn(adminListPasswordResets);
+  const listExtras = useServerFn(adminListExtraChangeRequests);
+  const resetsQ = useQuery({ queryKey: ["admin-password-resets"], queryFn: () => listResets({}) });
+  const extrasQ = useQuery({ queryKey: ["admin-extra-changes"], queryFn: () => listExtras({}) });
+  const pendingResets = (resetsQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
+  const pendingExtras = (extrasQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4 animate-pulse">
+        <div className="h-10 w-40 bg-muted rounded" />
+        <div className="grid sm:grid-cols-3 gap-4">
+          {[1,2,3].map(i => <div key={i} className="h-28 bg-muted/60 rounded-lg border border-border" />)}
+        </div>
+      </div>
+    );
+  }
   if (error) {
     const msg = (error as Error).message;
     if (msg.includes("Forbidden")) {
@@ -94,16 +114,27 @@ function AdminPage() {
   }
   if (!data) return null;
 
-  const tabs: [typeof tab, string][] = [
-    ["dashboard", "📊 Groei"],
-    ["klanten", `👥 Klanten (${data.customers.length})`],
-    ["changes", `🔧 Changes (${data.requests.length})`],
-    ["aanvragen", `🛒 Aanvragen (${data.pendingPurchases.length})`],
-    ["berichten", "✉️ Berichten"],
-    ["afspraken", "📅 Afspraken"],
-    ["chat", "💬 Chat"],
-    ["team", "👤 Team"],
-    ["deleted", "🗑 Verwijderd"],
+  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number }[] }[] = [
+    { label: "Overzicht", items: [{ key: "dashboard", label: "Dashboard", icon: BarChart2 }] },
+    { label: "Klanten", items: [
+      { key: "klanten", label: `Alle klanten (${data.customers.length})`, icon: Users },
+      { key: "password_resets", label: "Wachtwoord reset verzoeken", icon: Key, badge: pendingResets },
+      { key: "extra_changes", label: "Extra change aanvragen", icon: ShoppingCart, badge: pendingExtras },
+    ]},
+    { label: "Werk", items: [
+      { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest },
+      { key: "berichten", label: "Berichten", icon: MessageSquare },
+      { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox },
+    ]},
+    { label: "Beheer", items: [
+      { key: "website_links", label: "Website koppelingen", icon: Link2 },
+      { key: "team", label: "Team", icon: UserCheck },
+      { key: "afspraken", label: "Afspraken", icon: Calendar },
+    ]},
+    { label: "Overig", items: [
+      { key: "chat", label: "Chat", icon: MessagesSquare },
+      { key: "deleted", label: "Verwijderd", icon: Trash2 },
+    ]},
   ];
 
   return (
@@ -114,50 +145,23 @@ function AdminPage() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
-        <nav
-          aria-label="Admin secties"
-          className="md:w-56 md:shrink-0 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-r border-border pb-2 md:pb-0 md:pr-4"
-        >
-          {tabs.map(([k, l]) => (
-            <button
-              key={k}
-              onClick={() => setTab(k)}
-              className={`text-left whitespace-nowrap rounded-lg px-3 py-2 text-sm transition ${
-                tab === k
-                  ? "bg-primary/10 text-primary font-medium"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
-              }`}
-            >
-              {l}
-            </button>
-          ))}
-        </nav>
+        <AdminSidebar groups={groups} active={tab} setActive={setTab} />
 
         <div className="flex-1 min-w-0">
-          {tab === "dashboard" && <Dashboard metrics={data.metrics} />}
-          {tab === "klanten" && (
-            <KlantenTab
-              data={data}
-              qc={qc}
-              openCustomer={openCustomer}
-              setOpenCustomer={setOpenCustomer}
-            />
-          )}
-          {tab === "changes" && (
-            <ChangesTab
-              data={data}
-              qc={qc}
-              openRequest={openRequest}
-              setOpenRequest={setOpenRequest}
-            />
-          )}
+          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => setTab("changes")} onGoPending={() => setTab("password_resets")} />}
+          {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
+          {tab === "password_resets" && <PasswordResetsPanel />}
+          {tab === "extra_changes" && <ExtraChangesPanel />}
+          {tab === "changes" && (<ChangesTab data={data} qc={qc} openRequest={openRequest} setOpenRequest={setOpenRequest} />)}
           {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
           {tab === "berichten" && <BerichtenTab />}
           {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
           {tab === "chat" && <AdminChatPanel />}
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
+          {tab === "website_links" && <WebsiteLinksPanel />}
         </div>
+
       </div>
     </div>
   );
