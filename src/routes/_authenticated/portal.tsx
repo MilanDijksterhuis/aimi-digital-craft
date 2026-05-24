@@ -21,6 +21,15 @@ import {
   getAttachmentUrl,
   cancelMyChange,
 } from "@/lib/portal.functions";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { ChatWidget } from "@/components/ChatWidget";
 
 import { supabase } from "@/integrations/supabase/client";
