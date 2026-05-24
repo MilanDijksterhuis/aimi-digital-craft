@@ -344,3 +344,44 @@ export const getAttachmentUrl = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { url: url.signedUrl };
   });
+
+export const requestPasswordReset = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const { data: prof } = await supabase
+      .from("profiles")
+      .select("email, full_name")
+      .eq("id", userId)
+      .maybeSingle();
+    if (!prof) throw new Error("Profiel niet gevonden.");
+    const { error } = await supabase.from("password_reset_requests").insert({
+      user_id: userId,
+      user_email: prof.email,
+      user_name: prof.full_name ?? null,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const requestExtraChanges = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ amount: z.number().int().min(1).max(50) }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const { data: prof } = await supabase
+      .from("profiles")
+      .select("email, full_name")
+      .eq("id", userId)
+      .maybeSingle();
+    if (!prof) throw new Error("Profiel niet gevonden.");
+    const { error } = await supabase.from("extra_change_requests").insert({
+      user_id: userId,
+      user_email: prof.email,
+      user_name: prof.full_name ?? null,
+      amount: data.amount,
+      total_eur: data.amount * 20,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
