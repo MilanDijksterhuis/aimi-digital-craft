@@ -21,6 +21,15 @@ import {
   getAttachmentUrl,
   cancelMyChange,
 } from "@/lib/portal.functions";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { ChatWidget } from "@/components/ChatWidget";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -146,6 +155,7 @@ function PortalPage() {
   const [rush, setRush] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [purchaseQty, setPurchaseQty] = useState(1);
+  const [purchaseConfirm, setPurchaseConfirm] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
   const [openThread, setOpenThread] = useState<string | null>(null);
   const [comment, setComment] = useState("");
@@ -334,7 +344,7 @@ function PortalPage() {
           onGoToChanges={() => setTab("changes")}
           purchaseQty={purchaseQty}
           setPurchaseQty={setPurchaseQty}
-          onBuy={() => buyM.mutate(purchaseQty)}
+          onBuy={() => setPurchaseConfirm(true)}
           buying={buyM.isPending}
         />
       )}
@@ -554,6 +564,49 @@ function PortalPage() {
         .change-card { animation: card-in 0.35s cubic-bezier(0.4,0,0.2,1) both; }
         .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
       `}</style>
+
+      <Dialog open={purchaseConfirm} onOpenChange={(open) => !buyM.isPending && setPurchaseConfirm(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Bevestig je aanvraag</DialogTitle>
+            <DialogDescription className="pt-2 space-y-3 text-sm">
+              <span className="block">
+                Je staat op het punt <strong>{purchaseQty} extra change{purchaseQty === 1 ? "" : "s"}</strong> aan te vragen.
+              </span>
+              <span className="block">
+                Kosten: <strong>€{purchaseQty * 20} excl. BTW</strong>
+              </span>
+              <span className="block">
+                Er wordt een factuur verzonden naar:{" "}
+                <strong>{data?.profile?.email ?? "je geregistreerde e-mailadres"}</strong>
+              </span>
+              <span className="block text-xs opacity-70 pt-1">
+                Betaling dient te geschieden binnen 14 dagen na ontvangst van de factuur.
+              </span>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setPurchaseConfirm(false)}
+              disabled={buyM.isPending}
+            >
+              Annuleer
+            </Button>
+            <Button
+              onClick={() => {
+                buyM.mutate(purchaseQty, {
+                  onSuccess: () => setPurchaseConfirm(false),
+                });
+              }}
+              disabled={buyM.isPending}
+              style={{ background: "#D4622A", color: "#F5F0E8" }}
+            >
+              {buyM.isPending ? "Bezig…" : "Ja, aanvragen en factuur ontvangen"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

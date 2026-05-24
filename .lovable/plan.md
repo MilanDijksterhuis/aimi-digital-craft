@@ -1,89 +1,57 @@
-Grote refactor van klantportaal en admin portaal. Twee nieuwe Supabase tabellen, sidebar herstructurering met Lucide icons, drie nieuwe admin pagina's, overzicht herontwerp, en bug fixes.
+Dit is een omvangrijke opdracht (8 features, ~15-20 nieuwe files, meerdere DB-migraties, een cron edge function en realtime). Ik wil dit graag in fases uitvoeren zodat je tussendoor kunt testen en credits gespaard blijven als iets niet hoeft.
 
-## Stap 1 — Database migratie
+## Voorgestelde fases
 
-Twee nieuwe tabellen aanmaken via migration:
+### Fase 1 — Database fundering (1 migratie)
+Eén migratie waarin alles tegelijk:
+- `profiles`: `is_blocked bool`, `access_expires_at timestamptz`, `last_seen_at timestamptz`
+- `profiles.tags` → `text[]` (was al array volgens schema, verifiëren + fix policy zodat admins kunnen schrijven)
+- `change_requests`: `archived bool`, `archived_at`, `archived_by`, `assigned_to uuid`
+  (let op: `internal_note` bestaat al, dus die hoeven we niet toe te voegen)
+- nieuwe tabel `admin_notifications` (id, type, title, message, link, is_read, created_at, triggered_by_user_id) + RLS (staff read/update eigen, system insert via service role)
+- realtime publicatie aan voor `profiles` en `admin_notifications`
+- RLS-update zodat admin `tags`, `is_blocked`, `access_expires_at` ook echt mag schrijven (huidig profiles UPDATE-policy blokkeert dit voor non-admin maar admin-pad zou al moeten werken — verifiëren)
 
-- `password_reset_requests` (id, user_id, user_email, user_name, requested_at, status default 'pending', handled_at, handled_by)
-  - RLS: user mag eigen INSERT/SELECT; staff (admin) mag alles
-- `extra_change_requests` (id, user_id, user_email, user_name, amount, total_eur, requested_at, status default 'pending', handled_at, handled_by)
-  - RLS: user mag eigen INSERT/SELECT; staff mag alles + UPDATE
-- Bestaande `profiles` tabel krijgt geen wijziging — `website_url` bestaat al. `snippet_active` boolean toevoegen.
+### Fase 2 — Accounts beheer pagina (punt 1 + 7 + 8)
+- nieuwe route `/admin/accounts` met tabel, zoek/filter, online-indicator, tags-modal
+- server fns: lijst accounts, rol wijzigen (met `is_super_admin` check), blokkeren, tags bijwerken, last_seen ping
+- realtime sub op `profiles.last_seen_at`
 
-## Stap 2 — Bug fix portaal initial load
+### Fase 3 — Tijdelijke accounts (punt 6)
+- "+ Nieuw tijdelijk account" modal in /admin/accounts
+- server fn met `supabaseAdmin.auth.admin.createUser` + welkomstmail
+- access-check in `requireSupabaseAuth` middleware (verlopen → 403)
+- waarschuwingsbanner in portal als < 3 dagen
+- cron edge function (dagelijks 02:00 UTC) die verlopen accounts blokkeert
+  ⚠ Resend voor welkomstmail: wil je dat ik dit nu opzet (vereist `RESEND_API_KEY` secret) of skip welkomstmail in v1 en alleen account aanmaken?
 
-In `src/routes/_authenticated/portal.tsx` (en `account.tsx`) wordt nu een errorComponent getoond bij race-condition. Oplossing:
-- `beforeLoad` toevoegen aan `_authenticated.tsx` met `supabase.auth.getUser()` hydratie (zoals docs voorschrijven), zodat bearer token aanwezig is voordat server fn draait.
-- Initial `isLoading` toont skeleton card i.p.v. "Try again" foutweergave.
+### Fase 4 — Changes archiveren + bulk + assign (punt 2)
+- archiveer/herstel/hard-delete knoppen + "Gearchiveerd" tab
+- bulk-archiveer met checkboxes
+- "Toegewezen aan" dropdown + notificatie naar toegewezen staff
+- "Prioriteit overschrijven" en "Interne notitie" UI (kolom bestaat al)
+- klant-side: filter `archived=false` toevoegen
 
-## Stap 3 — AccountMenu fixes (`src/routes/_authenticated.tsx`)
+### Fase 5 — Admin notificaties (punt 3)
+- bel-icoon in admin nav + dropdown met realtime
+- `/admin/notifications` pagina
+- triggers: server fns die al bestaan uitbreiden (nieuwe change, chat, reset, extra change, contact, change goedgekeurd, verlopen account)
+- "tijdelijk account bijna verlopen" → onderdeel van Fase 3 cron
 
-- Verwijder "Mijn changes" link.
-- Vervang "Wachtwoord wijzigen" door knop "Wachtwoord reset aanvragen" die `requestPasswordReset` server fn aanroept → insert in `password_reset_requests`. Sonner toast bevestiging.
+### Fase 6 — Bevestigingsdialoog extra changes (punt 4)
+Kleine wijziging in bestaande "Aanvragen" knop in portal.
 
-## Stap 4 — Portaal Overzicht herontwerp (`portal.tsx` overview tab)
+### Fase 7 — Tracking snippet (punt 5)
+Toevoegen aan `__root.tsx` head (geen `index.html` in TanStack Start).
+⚠ Let op: die URL lijkt jullie eigen `/track.js` route te zijn met een user-id parameter. Klopt het dat álle bezoekers (ook niet-ingelogd op de publieke site) onder die specifieke user-id getrackt moeten worden? Of moet `u=` dynamisch zijn per ingelogde gebruiker?
 
-- Verwijder 3 losse stat-cards.
-- Voeg toe: `BudgetCard` met progress bar (gebruikt/totaal, kleur #D4622A).
-- `OpenChangesCard` met grote teller en link naar Changes tab.
-- `RecentActivity` (laatste 3 changes, status dot + titel + datum).
-- `WebsiteStatusWidget` (groene/rode stip + url).
-- `ExtraChangesBanner` donker (#1C1917) met − / count / + en "Aanvragen" knop → roept `requestExtraChanges` server fn aan → insert in `extra_change_requests`.
+---
 
-## Stap 5 — Portaal Mijn website tab
+## Vragen voordat ik begin
 
-- Verwijder tracking snippet UI volledig.
-- Stats kaal → met context (percentage gekleurd, "Laatste check: X min geleden", lege-state vriendelijke melding).
+1. **Volgorde / scope nu**: alle 8 fases in één keer, of liever per fase met tussentijds testen? Dit is realistisch 8-12 grote edits.
+2. **Welkomstmail Resend** (Fase 3): nu opzetten of skip in v1?
+3. **Tracking snippet `u=` parameter** (Fase 7): vaste user-id of dynamisch?
+4. **Account verwijderen** (punt 1): hard delete van auth user via `supabaseAdmin.auth.admin.deleteUser` — bevestig dat dit OK is (verwijdert ook alle gerelateerde rows via cascade/triggers).
 
-## Stap 6 — Admin sidebar herstructurering (`admin.tsx`)
-
-Bouw een nieuwe linker sidebar component met:
-- Lucide icons (BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar, MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2).
-- 5 collapsible groepen (chevron rotatie):
-  1. OVERZICHT: Dashboard
-  2. KLANTEN: Alle klanten, Wachtwoord reset verzoeken, Extra change aanvragen
-  3. WERK: Changes, Berichten, Aanvragen
-  4. BEHEER: Website koppelingen, Team, Afspraken
-  5. OVERIG: Verwijderd
-- Stijl: actief = linker border 2px #D4622A + tekstkleur, hover alleen tekstkleur.
-- Pending count badges (rood) voor reset & extra-change verzoeken.
-
-Tab state uitbreiden met: `password_resets`, `extra_changes`, `website_links`.
-
-## Stap 7 — Admin nieuwe pagina's
-
-Drie nieuwe panel-componenten in `admin.tsx`:
-
-- **PasswordResetsPanel**: tabel met pending+handled tabs, "Markeer afgehandeld" knop → update status.
-- **ExtraChangesPanel**: tabel, "Goedkeuren" knop (insert in `extra_credits` + zet status approved) of "Afwijzen".
-- **WebsiteLinksPanel**: lijst klanten met expandable rij: website_url editable, generated snippet `<script src=".../track.js?u=USER_ID">` met copy-knop, snippet_active toggle, status indicator (groen check als pings>0, oranje vraag als geen data, grijs kruis als niet gekoppeld).
-
-Server functies toevoegen in `src/lib/admin.functions.ts`:
-- `adminListPasswordResets`, `adminMarkPasswordResetHandled`
-- `adminListExtraChangeRequests`, `adminApproveExtraChangeRequest`, `adminRejectExtraChangeRequest`
-- `adminListWebsiteLinks`, `adminUpdateWebsiteLink`
-
-## Stap 8 — Admin dashboard cards
-
-- Lucide icoontje #D4622A linksboven per card.
-- Trend indicator (pijl + percentage, 0% als geen vergelijking).
-- Subtekst per metric.
-- Extra cards: "Openstaande changes" (link) en "Pending verzoeken" (oranje als >0).
-
-## Stap 9 — Server functies portaal toevoegen (`src/lib/portal.functions.ts`)
-
-- `requestPasswordReset`: insert in password_reset_requests met user info.
-- `requestExtraChanges`: insert in extra_change_requests met amount + total.
-
-## Bestanden
-
-**Nieuwe migratie**: `supabase/migrations/<timestamp>_password_reset_and_extra_changes.sql`
-
-**Te bewerken**:
-- `src/routes/_authenticated.tsx` — AccountMenu, beforeLoad guard
-- `src/routes/_authenticated/portal.tsx` — overzicht & mijn website refactor, loading state
-- `src/routes/_authenticated/admin.tsx` — sidebar + nieuwe panels + dashboard cards
-- `src/lib/portal.functions.ts` — nieuwe server fns
-- `src/lib/admin.functions.ts` — nieuwe server fns
-
-Niets aan kleurenpalet, fonts, chat-widget, of bestaande auth logica.
+Zodra je deze 4 vragen beantwoordt + akkoord geeft op de fasering begin ik met Fase 1 (migratie).

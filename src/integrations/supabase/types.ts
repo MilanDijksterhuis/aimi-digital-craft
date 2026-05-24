@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          link: string | null
+          message: string
+          title: string
+          triggered_by_user_id: string | null
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          link?: string | null
+          message: string
+          title: string
+          triggered_by_user_id?: string | null
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          link?: string | null
+          message?: string
+          title?: string
+          triggered_by_user_id?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
       appointments: {
         Row: {
           created_at: string
@@ -159,6 +192,10 @@ export type Database = {
       change_requests: {
         Row: {
           admin_notes: string | null
+          archived: boolean
+          archived_at: string | null
+          archived_by: string | null
+          assigned_to: string | null
           cancellation_reason: string | null
           category: string
           created_at: string
@@ -182,6 +219,10 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          archived?: boolean
+          archived_at?: string | null
+          archived_by?: string | null
+          assigned_to?: string | null
           cancellation_reason?: string | null
           category?: string
           created_at?: string
@@ -205,6 +246,10 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          archived?: boolean
+          archived_at?: string | null
+          archived_by?: string | null
+          assigned_to?: string | null
           cancellation_reason?: string | null
           category?: string
           created_at?: string
@@ -562,6 +607,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          access_expires_at: string | null
           address: string | null
           billing_address: string | null
           btw: string | null
@@ -574,7 +620,9 @@ export type Database = {
           full_name: string | null
           id: string
           internal_notes: string | null
+          is_blocked: boolean
           kvk: string | null
+          last_seen_at: string | null
           monthly_price_cents: number
           package: string | null
           phone: string | null
@@ -585,6 +633,7 @@ export type Database = {
           website_url: string | null
         }
         Insert: {
+          access_expires_at?: string | null
           address?: string | null
           billing_address?: string | null
           btw?: string | null
@@ -597,7 +646,9 @@ export type Database = {
           full_name?: string | null
           id: string
           internal_notes?: string | null
+          is_blocked?: boolean
           kvk?: string | null
+          last_seen_at?: string | null
           monthly_price_cents?: number
           package?: string | null
           phone?: string | null
@@ -608,6 +659,7 @@ export type Database = {
           website_url?: string | null
         }
         Update: {
+          access_expires_at?: string | null
           address?: string | null
           billing_address?: string | null
           btw?: string | null
@@ -620,7 +672,9 @@ export type Database = {
           full_name?: string | null
           id?: string
           internal_notes?: string | null
+          is_blocked?: boolean
           kvk?: string | null
+          last_seen_at?: string | null
           monthly_price_cents?: number
           package?: string | null
           phone?: string | null
