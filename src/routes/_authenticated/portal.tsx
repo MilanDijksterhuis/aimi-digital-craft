@@ -344,7 +344,7 @@ function PortalPage() {
           onGoToChanges={() => setTab("changes")}
           purchaseQty={purchaseQty}
           setPurchaseQty={setPurchaseQty}
-          onBuy={() => buyM.mutate(purchaseQty)}
+          onBuy={() => setPurchaseConfirm(true)}
           buying={buyM.isPending}
         />
       )}
