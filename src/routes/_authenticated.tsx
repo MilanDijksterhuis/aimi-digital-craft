@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { requestPasswordReset } from "@/lib/portal.functions";
+import { pingLastSeen, checkMyAccess } from "@/lib/accounts.functions";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async () => {
