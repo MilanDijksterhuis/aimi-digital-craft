@@ -1,57 +1,52 @@
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
     <section className="relative pt-40 pb-32 overflow-hidden">
-      <div className="absolute inset-0 grid-bg pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-6 text-center">
+      <div className="absolute inset-0 grid-bg pointer-events-none opacity-60" />
+      <div className="relative mx-auto max-w-6xl px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-surface/60 text-xs font-mono text-muted-foreground mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="section-label mb-6"
         >
-          <Sparkles className="w-3.5 h-3.5 text-primary" />
-          Built & hosted by Aidan + Milan
+          — Built & hosted by Aidan + Milan
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05 }}
-          className="font-display font-bold text-[clamp(2.75rem,8vw,7rem)] leading-[0.95] tracking-tight text-gradient"
+          transition={{ duration: 0.6 }}
+          className="font-display italic font-normal text-[clamp(3rem,9vw,6rem)] leading-[0.98] tracking-tight text-foreground"
         >
-          We build websites<br />that <em className="not-italic text-primary">work.</em>
+          We build websites
+          <br />
+          that <span className="text-primary">work.</span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mt-8 max-w-xl mx-auto text-lg text-muted-foreground"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-8 max-w-xl mx-auto text-base text-muted-foreground"
         >
           Design, development en hosting onder één dak. Twee makers, scherpe
           uitvoering en sites die laden voordat je koffie koud is.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-3"
         >
-          <a
-            href="#work"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:glow-primary transition-all"
-          >
+          <a href="#work" className="btn-primary">
             Bekijk ons werk
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="w-4 h-4 arrow" />
           </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-surface/60 hover:bg-surface-elevated transition-colors font-medium"
-          >
+          <a href="#contact" className="btn-secondary">
             Neem contact op
           </a>
         </motion.div>
@@ -59,18 +54,18 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-16 flex items-center justify-center gap-4 text-sm text-muted-foreground"
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-16 flex items-center justify-center gap-3 text-sm text-muted-foreground"
         >
           <div className="flex -space-x-2">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-sm">
+            <div className="w-8 h-8 rounded-full bg-primary border-2 border-background grid place-items-center font-display italic text-primary-foreground text-sm">
               A
             </div>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-accent to-primary border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-sm">
+            <div className="w-8 h-8 rounded-full bg-foreground border-2 border-background grid place-items-center font-display italic text-background text-sm">
               M
             </div>
           </div>
-          <span className="font-mono text-xs">Aidan & Milan · founders</span>
+          <span className="text-xs uppercase tracking-[0.12em]">Aidan & Milan · founders</span>
         </motion.div>
       </div>
     </section>

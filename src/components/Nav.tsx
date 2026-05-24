@@ -11,34 +11,31 @@ const links = [
 export function Nav() {
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
+      initial={{ y: -10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border"
+      transition={{ duration: 0.4 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border"
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 font-display font-bold text-lg tracking-tight">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_var(--primary)]" />
+        <a href="#" className="font-display italic text-2xl text-foreground">
           AIMI<span className="text-primary">.</span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+        <nav className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-foreground transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              className="relative hover:text-foreground transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+            >
               {l.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a
-            href="/portal"
-            className="inline-flex text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-full border border-border hover:bg-accent transition whitespace-nowrap"
-          >
+          <a href="/portal" className="btn-secondary text-[13px] !py-2 !px-4 whitespace-nowrap">
             Klantenportaal
           </a>
-          <a
-            href="#contact"
-            className="text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
-          >
+          <a href="#contact" className="btn-primary text-[13px] !py-2 !px-4">
             Let's talk
           </a>
         </div>

@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { A11yBar } from "@/components/A11yBar";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -118,7 +117,6 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
-      <A11yBar />
       <Toaster />
     </QueryClientProvider>
   );

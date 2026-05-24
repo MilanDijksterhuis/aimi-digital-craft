@@ -31,11 +31,9 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
           <div>
-            <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest">
-              01 — Services
-            </p>
-            <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight max-w-2xl">
-              Alles wat je nodig hebt om <em className="text-primary not-italic">online</em> te winnen.
+            <p className="section-label mb-4">01 — Services</p>
+            <h2 className="max-w-2xl">
+              Alles wat je nodig hebt om <em className="text-primary">online</em> te winnen.
             </h2>
           </div>
         </div>
@@ -44,18 +42,17 @@ export function Services() {
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className={`group relative p-8 rounded-2xl border border-border bg-surface/60 hover:bg-surface-elevated transition-all overflow-hidden ${
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              className={`group relative p-6 rounded-lg border border-border bg-card transition-colors hover:border-primary/40 ${
                 s.muted ? "opacity-70" : ""
               }`}
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-              <s.icon className="w-7 h-7 text-primary mb-6" strokeWidth={1.5} />
-              <h3 className="font-display font-semibold text-2xl mb-3">{s.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
+              <s.icon className="w-6 h-6 text-primary mb-6" strokeWidth={1.5} />
+              <h3 className="text-xl mb-2">{s.title}</h3>
+              <p className="text-muted-foreground">{s.desc}</p>
             </motion.div>
           ))}
         </div>
