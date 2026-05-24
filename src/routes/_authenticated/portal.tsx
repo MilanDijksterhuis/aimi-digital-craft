@@ -327,77 +327,15 @@ function PortalPage() {
       </div>
 
       {tab === "overview" && (
-        <div className="space-y-10">
-          {/* Afspraken */}
-          {data.appointments && data.appointments.length > 0 && (
-            <section className="rounded-lg border border-border bg-card p-6">
-              <h2 className="font-display text-2xl font-semibold mb-4">📅 Afspraken</h2>
-              <ul className="space-y-2">
-                {data.appointments.map((a: any) => {
-                  const icon = a.kind === "teams" ? "💻" : a.kind === "in_person" ? "🤝" : "📞";
-                  return (
-                    <li key={a.id} className="rounded-md border border-border p-3 text-sm">
-                      <p className="font-semibold">{icon} {a.title}</p>
-                      <p className="text-muted-foreground">
-                        {new Date(a.scheduled_at).toLocaleString("nl-NL")}
-                      </p>
-                      {a.location && <p className="text-xs text-muted-foreground mt-1">📍 {a.location}</p>}
-                      {a.notes && <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>}
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          )}
-
-          {/* Credits */}
-          <section className="grid sm:grid-cols-3 gap-4">
-            <Stat label="Gratis changes over deze maand" value={data.availableCredits} accent />
-            <Stat
-              label="Gratis gebruikt deze maand"
-              value={`${data.usedThisMonth} / ${(data.profile?.free_quota_override ?? 3) + data.extraTotal}`}
-            />
-            <Stat label="Open changes" value={`${openChanges} / 10`} />
-          </section>
-
-          {/* Onboarding */}
-          {data.onboarding.length > 0 && (
-            <section className="rounded-lg border border-border bg-card p-6">
-              <h2 className="font-display text-2xl font-semibold mb-4">Onboarding</h2>
-              <ul className="space-y-2">
-                {data.onboarding.map((o: any) => (
-                  <li key={o.id} className="flex items-center gap-2 text-sm">
-                    <span className={o.done ? "text-primary" : "text-muted-foreground"}>
-                      {o.done ? "✓" : "○"}
-                    </span>
-                    <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          {/* Buy extra */}
-          <section className="rounded-lg border border-border bg-card p-6">
-            <h2 className="font-display text-2xl font-semibold mb-2">Extra changes bijkopen</h2>
-            <p className="text-sm text-muted-foreground mb-4">€20 per extra change.</p>
-            <div className="flex items-center gap-3 flex-wrap">
-              <input
-                type="number" min={1} max={50} value={purchaseQty}
-                onChange={(e) => setPurchaseQty(parseInt(e.target.value || "1", 10))}
-                className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
-              />
-              <button
-                onClick={() => buyM.mutate(purchaseQty)}
-                disabled={buyM.isPending}
-                className="btn-secondary"
-              >
-                {buyM.isPending ? "Bezig…" : `Aanvragen (€${purchaseQty * 20})`}
-              </button>
-              {buyM.isSuccess && <span className="text-sm text-primary">Verzoek verstuurd ✓</span>}
-            </div>
-          </section>
-        </div>
+        <OverviewSection
+          data={data}
+          openChanges={openChanges}
+          onGoToChanges={() => setTab("changes")}
+          purchaseQty={purchaseQty}
+          setPurchaseQty={setPurchaseQty}
+          onBuy={() => buyM.mutate(purchaseQty)}
+          buying={buyM.isPending}
+        />
       )}
 
       {tab === "website" && (
