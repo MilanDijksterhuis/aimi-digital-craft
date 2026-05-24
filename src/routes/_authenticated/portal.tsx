@@ -1,11 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
+import { toast } from "sonner";
+import {
+  CheckCircle2,
+  Circle,
+  ArrowRight,
+  Minus,
+  Plus,
+  Globe,
+} from "lucide-react";
 import {
   getMyDashboard,
   submitChangeRequest,
-  requestExtraCredits,
+  requestExtraChanges,
   markNotificationRead,
   markAllNotificationsRead,
   postCustomerComment,
@@ -91,7 +100,7 @@ function matchesFilter(s: string, f: FilterKey): boolean {
 function PortalPage() {
   const fetchDash = useServerFn(getMyDashboard);
   const submit = useServerFn(submitChangeRequest);
-  const buy = useServerFn(requestExtraCredits);
+  const buy = useServerFn(requestExtraChanges);
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
   const postComment = useServerFn(postCustomerComment);
@@ -115,7 +124,11 @@ function PortalPage() {
   });
   const buyM = useMutation({
     mutationFn: (n: number) => buy({ data: { amount: n } }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["dashboard"] });
+      toast.success("Aanvraag ontvangen, wij verwerken dit binnen 1 werkdag.");
+    },
+    onError: (e: any) => toast.error(e.message ?? "Er ging iets mis."),
   });
   const readM = useMutation({
     mutationFn: (id: string) => markRead({ data: { id } }),
@@ -146,8 +159,28 @@ function PortalPage() {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
-  if (error) return <p className="text-destructive">Fout: {(error as Error).message}</p>;
+  if (isLoading) {
+    return (
+      <div className="space-y-6 animate-pulse">
+        <div className="h-10 w-64 bg-muted rounded" />
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
+          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
+        </div>
+        <div className="h-24 bg-muted/40 rounded-lg border border-border" />
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-6">
+        <p className="text-sm text-destructive">Kon portaal niet laden: {(error as Error).message}</p>
+        <button onClick={() => qc.invalidateQueries({ queryKey: ["dashboard"] })} className="btn-secondary mt-3">
+          Probeer opnieuw
+        </button>
+      </div>
+    );
+  }
   if (!data) return null;
 
   const unread = data.notifications.filter((n: any) => !n.read);
@@ -293,77 +326,15 @@ function PortalPage() {
       </div>
 
       {tab === "overview" && (
-        <div className="space-y-10">
-          {/* Afspraken */}
-          {data.appointments && data.appointments.length > 0 && (
-            <section className="rounded-lg border border-border bg-card p-6">
-              <h2 className="font-display text-2xl font-semibold mb-4">📅 Afspraken</h2>
-              <ul className="space-y-2">
-                {data.appointments.map((a: any) => {
-                  const icon = a.kind === "teams" ? "💻" : a.kind === "in_person" ? "🤝" : "📞";
-                  return (
-                    <li key={a.id} className="rounded-md border border-border p-3 text-sm">
-                      <p className="font-semibold">{icon} {a.title}</p>
-                      <p className="text-muted-foreground">
-                        {new Date(a.scheduled_at).toLocaleString("nl-NL")}
-                      </p>
-                      {a.location && <p className="text-xs text-muted-foreground mt-1">📍 {a.location}</p>}
-                      {a.notes && <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>}
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          )}
-
-          {/* Credits */}
-          <section className="grid sm:grid-cols-3 gap-4">
-            <Stat label="Gratis changes over deze maand" value={data.availableCredits} accent />
-            <Stat
-              label="Gratis gebruikt deze maand"
-              value={`${data.usedThisMonth} / ${(data.profile?.free_quota_override ?? 3) + data.extraTotal}`}
-            />
-            <Stat label="Open changes" value={`${openChanges} / 10`} />
-          </section>
-
-          {/* Onboarding */}
-          {data.onboarding.length > 0 && (
-            <section className="rounded-lg border border-border bg-card p-6">
-              <h2 className="font-display text-2xl font-semibold mb-4">Onboarding</h2>
-              <ul className="space-y-2">
-                {data.onboarding.map((o: any) => (
-                  <li key={o.id} className="flex items-center gap-2 text-sm">
-                    <span className={o.done ? "text-primary" : "text-muted-foreground"}>
-                      {o.done ? "✓" : "○"}
-                    </span>
-                    <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          {/* Buy extra */}
-          <section className="rounded-lg border border-border bg-card p-6">
-            <h2 className="font-display text-2xl font-semibold mb-2">Extra changes bijkopen</h2>
-            <p className="text-sm text-muted-foreground mb-4">€20 per extra change.</p>
-            <div className="flex items-center gap-3 flex-wrap">
-              <input
-                type="number" min={1} max={50} value={purchaseQty}
-                onChange={(e) => setPurchaseQty(parseInt(e.target.value || "1", 10))}
-                className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
-              />
-              <button
-                onClick={() => buyM.mutate(purchaseQty)}
-                disabled={buyM.isPending}
-                className="btn-secondary"
-              >
-                {buyM.isPending ? "Bezig…" : `Aanvragen (€${purchaseQty * 20})`}
-              </button>
-              {buyM.isSuccess && <span className="text-sm text-primary">Verzoek verstuurd ✓</span>}
-            </div>
-          </section>
-        </div>
+        <OverviewSection
+          data={data}
+          openChanges={openChanges}
+          onGoToChanges={() => setTab("changes")}
+          purchaseQty={purchaseQty}
+          setPurchaseQty={setPurchaseQty}
+          onBuy={() => buyM.mutate(purchaseQty)}
+          buying={buyM.isPending}
+        />
       )}
 
       {tab === "website" && (
@@ -885,99 +856,81 @@ function ChangeCard({
 // ---------- Website tab ----------
 
 function WebsiteTab({ data }: { data: any }) {
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const snippet = data.profile?.id
-    ? `<script src="${origin}/track.js?u=${data.profile.id}"></script>`
-    : "";
-  const [copied, setCopied] = useState(false);
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(snippet);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {}
-  };
-
-  const uptime = data.uptimePct;
+  const uptime = data.uptimePct as number | null;
   const totalPings = data.totalPings ?? 0;
-  const lastPingAge = totalPings > 0 && data.siteErrors // we don't have lastPingAt directly; use lastPing surrogate
-    ? null : null;
+  const errorCount = data.siteErrors?.length ?? 0;
+  const uptimeColor = uptime == null ? "text-muted-foreground" : uptime >= 99 ? "text-emerald-600" : uptime >= 95 ? "text-amber-600" : "text-destructive";
+  const lastErr = data.siteErrors?.[0];
+  const lastCheck = lastErr ? new Date(lastErr.created_at) : null;
+
+  const minsAgo = (d: Date) => {
+    const m = Math.floor((Date.now() - d.getTime()) / 60000);
+    if (m < 1) return "zojuist";
+    if (m < 60) return `${m} minuten geleden`;
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h} uur geleden`;
+    return `${Math.floor(h / 24)} dagen geleden`;
+  };
 
   return (
     <div className="space-y-6">
       <section className="rounded-lg border border-border bg-card p-6">
-        <h2 className="font-display text-2xl font-semibold mb-2">🌐 Mijn website</h2>
+        <h2 className="font-display text-2xl font-semibold mb-2 flex items-center gap-2">
+          <Globe className="w-5 h-5 text-primary" /> Mijn website
+        </h2>
         {data.profile?.website_url ? (
-          <a
-            href={data.profile.website_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-primary hover:underline break-all"
-          >
-            {data.profile.website_url}
-            <span aria-hidden>↗</span>
+          <a href={data.profile.website_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline break-all">
+            {data.profile.website_url}<span aria-hidden>↗</span>
           </a>
         ) : (
-          <p className="text-sm text-muted-foreground">
-            Nog geen website gekoppeld. Voeg de URL toe via <em>Mijn gegevens</em>.
-          </p>
+          <p className="text-sm text-muted-foreground">Nog geen website gekoppeld. Voeg de URL toe via <em>Mijn gegevens</em>.</p>
         )}
       </section>
 
-      {/* Statistieken */}
       <section className="rounded-lg border border-border bg-card p-6">
         <h3 className="font-display text-xl font-semibold mb-4">Statistieken (laatste 30 dagen)</h3>
-        <div className="grid sm:grid-cols-3 gap-4">
-          <div className="rounded-md border border-border p-4">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Uptime</p>
-            <p className="mt-2 font-display text-3xl font-semibold">
-              {totalPings > 0 ? `${uptime?.toFixed(2)}%` : "—"}
+        {totalPings === 0 ? (
+          <div className="rounded-md border border-dashed border-border bg-background p-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              We zijn bezig je site te koppelen. Dit kan tot 24 uur duren.
             </p>
           </div>
-          <div className="rounded-md border border-border p-4">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Pings ontvangen</p>
-            <p className="mt-2 font-display text-3xl font-semibold">{totalPings}</p>
-          </div>
-          <div className="rounded-md border border-border p-4">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Fouten</p>
-            <p className="mt-2 font-display text-3xl font-semibold">{data.siteErrors?.length ?? 0}</p>
-          </div>
-        </div>
-
-        {totalPings === 0 && (
-          <p className="mt-4 text-sm text-muted-foreground">
-            Nog geen meetdata. Plaats de tracking-snippet hieronder op je website om uptime te meten.
-          </p>
+        ) : (
+          <>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="rounded-md border border-border p-4">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Uptime</p>
+                <p className={`mt-2 font-display text-3xl font-semibold ${uptimeColor}`}>
+                  {uptime?.toFixed(2)}%
+                </p>
+              </div>
+              <div className="rounded-md border border-border p-4">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Pings ontvangen</p>
+                <p className="mt-2 font-display text-3xl font-semibold">{totalPings}</p>
+              </div>
+              <div className="rounded-md border border-border p-4">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Fouten</p>
+                <p className={`mt-2 font-display text-3xl font-semibold ${errorCount > 0 ? "text-destructive" : ""}`}>
+                  {errorCount}
+                </p>
+              </div>
+            </div>
+            {lastCheck && (
+              <p className="mt-4 text-xs text-muted-foreground">
+                Laatste check: {minsAgo(lastCheck)}
+              </p>
+            )}
+          </>
         )}
       </section>
 
-      {/* Tracking snippet */}
-      {data.profile?.id && (
-        <section className="rounded-lg border border-border bg-card p-6">
-          <h3 className="font-display text-xl font-semibold mb-2">Tracking-snippet</h3>
-          <p className="text-sm text-muted-foreground mb-3">
-            Plaats deze code in de <code>&lt;head&gt;</code> van je website om uptime en fouten te meten.
-          </p>
-          <div className="rounded-md border border-border bg-background p-3 font-mono text-xs break-all">
-            {snippet}
-          </div>
-          <button onClick={copy} className="mt-3 btn-secondary text-sm">
-            {copied ? "Gekopieerd ✓" : "Kopieer snippet"}
-          </button>
-        </section>
-      )}
-
-      {/* Recente fouten */}
       {data.siteErrors && data.siteErrors.length > 0 && (
         <section className="rounded-lg border border-border bg-card p-6">
           <h3 className="font-display text-xl font-semibold mb-3">Laatste fouten</h3>
           <ul className="space-y-2 text-sm">
             {data.siteErrors.map((e: any) => (
               <li key={e.id} className="rounded-md border border-border p-3">
-                <p className="text-xs text-muted-foreground">
-                  {new Date(e.created_at).toLocaleString("nl-NL")}
-                </p>
+                <p className="text-xs text-muted-foreground">{new Date(e.created_at).toLocaleString("nl-NL")}</p>
                 <p className="mt-1">{e.message}</p>
                 {e.resolved && <span className="text-primary text-xs">(opgelost)</span>}
               </li>
@@ -988,3 +941,176 @@ function WebsiteTab({ data }: { data: any }) {
     </div>
   );
 }
+
+// ---------- Overview section ----------
+
+function OverviewSection({
+  data, openChanges, onGoToChanges, purchaseQty, setPurchaseQty, onBuy, buying,
+}: {
+  data: any;
+  openChanges: number;
+  onGoToChanges: () => void;
+  purchaseQty: number;
+  setPurchaseQty: (n: number) => void;
+  onBuy: () => void;
+  buying: boolean;
+}) {
+  const totalQuota = (data.profile?.free_quota_override ?? 3) + (data.extraTotal ?? 0);
+  const used = data.usedThisMonth ?? 0;
+  const pct = totalQuota > 0 ? Math.min(100, (used / totalQuota) * 100) : 100;
+  const exhausted = used >= totalQuota;
+  const recent = (data.requests as any[]).slice(0, 3);
+  const siteOk = (data.totalPings ?? 0) === 0 || ((data.uptimePct ?? 100) >= 95);
+
+  return (
+    <div className="space-y-8">
+      {/* Afspraken */}
+      {data.appointments && data.appointments.length > 0 && (
+        <section className="rounded-lg border border-border bg-card p-6">
+          <h2 className="font-display text-2xl font-semibold mb-4">Afspraken</h2>
+          <ul className="space-y-2">
+            {data.appointments.map((a: any) => (
+              <li key={a.id} className="rounded-md border border-border p-3 text-sm">
+                <p className="font-semibold">{a.title}</p>
+                <p className="text-muted-foreground">{new Date(a.scheduled_at).toLocaleString("nl-NL")}</p>
+                {a.location && <p className="text-xs text-muted-foreground mt-1">{a.location}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Budget + open + website grid */}
+      <div className="grid lg:grid-cols-3 gap-4">
+        {/* Budget card spanning 2 */}
+        <section className="lg:col-span-2 rounded-lg border border-border bg-card p-6">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="font-display text-lg font-semibold">Changes deze maand</h3>
+            <span className={`text-sm font-medium ${exhausted ? "text-destructive" : "text-foreground"}`}>
+              {used} van {totalQuota} gebruikt
+            </span>
+          </div>
+          <div className="h-3 w-full rounded-full overflow-hidden" style={{ background: "#E8E3D8" }}>
+            <div
+              className="h-full transition-all"
+              style={{ width: `${pct}%`, background: exhausted ? "#C0392B" : "#D4622A" }}
+            />
+          </div>
+          <p className={`mt-3 text-sm ${exhausted ? "text-destructive" : "text-muted-foreground"}`}>
+            {exhausted ? "Je gratis changes zijn op." : `Nog ${data.availableCredits} gratis change${data.availableCredits === 1 ? "" : "s"} over.`}
+          </p>
+
+          <div className="mt-6 pt-6 border-t border-border">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">Open changes</p>
+            <p className="font-display text-4xl font-semibold mt-1">{openChanges}</p>
+            <button
+              onClick={onGoToChanges}
+              className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline"
+            >
+              Bekijk je changes <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </section>
+
+        {/* Website status */}
+        <section className="rounded-lg border border-border bg-card p-6">
+          <h3 className="font-display text-lg font-semibold mb-3">Website</h3>
+          <div className="flex items-center gap-2">
+            <span className={`inline-block w-2.5 h-2.5 rounded-full ${siteOk ? "bg-emerald-500" : "bg-destructive"}`} />
+            <span className="text-sm font-medium">
+              {siteOk ? "Je site is online" : "Controleer je site"}
+            </span>
+          </div>
+          {data.profile?.website_url ? (
+            <a href={data.profile.website_url} target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs text-primary hover:underline break-all">
+              {data.profile.website_url}
+            </a>
+          ) : (
+            <p className="mt-3 text-xs text-muted-foreground">Nog geen website gekoppeld.</p>
+          )}
+        </section>
+      </div>
+
+      {/* Recente activiteit */}
+      {recent.length > 0 && (
+        <section className="rounded-lg border border-border bg-card p-6">
+          <h3 className="font-display text-lg font-semibold mb-4">Recente activiteit</h3>
+          <ul className="divide-y divide-border">
+            {recent.map((r: any) => {
+              const k = mapStatus(r.status);
+              const s = STATUS_STYLE[k];
+              return (
+                <li key={r.id} className="flex items-center justify-between py-3 gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: s.fg }} />
+                    <span className="text-sm truncate">{r.title}</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground shrink-0">
+                    {new Date(r.created_at).toLocaleDateString("nl-NL")}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <button onClick={onGoToChanges} className="mt-3 inline-flex items-center gap-1 text-sm text-primary hover:underline">
+            Bekijk alle changes <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </section>
+      )}
+
+      {/* Onboarding */}
+      {data.onboarding.length > 0 && (
+        <section className="rounded-lg border border-border bg-card p-6">
+          <h3 className="font-display text-lg font-semibold mb-3">Onboarding</h3>
+          <ul className="space-y-2">
+            {data.onboarding.map((o: any) => (
+              <li key={o.id} className="flex items-center gap-2 text-sm">
+                {o.done ? <CheckCircle2 className="w-4 h-4 text-primary" /> : <Circle className="w-4 h-4 text-muted-foreground" />}
+                <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Extra changes banner */}
+      <section className="rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style={{ background: "#1C1917", color: "#F5F0E8" }}>
+        <div>
+          <h3 className="font-display text-xl font-semibold">Meer changes nodig?</h3>
+          <p className="text-sm opacity-80 mt-1">€20 per extra change, direct verwerkt door ons team.</p>
+        </div>
+        <div className="flex flex-col items-start sm:items-end gap-2">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setPurchaseQty(Math.max(1, purchaseQty - 1))}
+              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              aria-label="Minder"
+            >
+              <Minus className="w-3.5 h-3.5" />
+            </button>
+            <span className="w-8 text-center text-sm font-medium">{purchaseQty}</span>
+            <button
+              type="button"
+              onClick={() => setPurchaseQty(Math.min(50, purchaseQty + 1))}
+              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              aria-label="Meer"
+            >
+              <Plus className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={onBuy}
+              disabled={buying}
+              className="ml-2 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
+              style={{ background: "#D4622A", color: "#F5F0E8" }}
+            >
+              {buying ? "Bezig…" : "Aanvragen"}
+            </button>
+          </div>
+          <p className="text-xs opacity-70">Totaal: €{purchaseQty * 20}</p>
+        </div>
+      </section>
+    </div>
+  );
+}
+

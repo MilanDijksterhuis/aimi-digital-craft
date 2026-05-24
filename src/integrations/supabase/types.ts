@@ -383,6 +383,45 @@ export type Database = {
         }
         Relationships: []
       }
+      extra_change_requests: {
+        Row: {
+          amount: number
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          requested_at: string
+          status: string
+          total_eur: number
+          user_email: string
+          user_id: string
+          user_name: string | null
+        }
+        Insert: {
+          amount: number
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          total_eur: number
+          user_email: string
+          user_id: string
+          user_name?: string | null
+        }
+        Update: {
+          amount?: number
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          total_eur?: number
+          user_email?: string
+          user_id?: string
+          user_name?: string | null
+        }
+        Relationships: []
+      }
       extra_credits: {
         Row: {
           amount: number
@@ -488,6 +527,39 @@ export type Database = {
         }
         Relationships: []
       }
+      password_reset_requests: {
+        Row: {
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          requested_at: string
+          status: string
+          user_email: string
+          user_id: string
+          user_name: string | null
+        }
+        Insert: {
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          user_email: string
+          user_id: string
+          user_name?: string | null
+        }
+        Update: {
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          user_email?: string
+          user_id?: string
+          user_name?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           address: string | null
@@ -507,6 +579,7 @@ export type Database = {
           package: string | null
           phone: string | null
           referral_code: string | null
+          snippet_active: boolean
           tags: string[]
           updated_at: string
           website_url: string | null
@@ -529,6 +602,7 @@ export type Database = {
           package?: string | null
           phone?: string | null
           referral_code?: string | null
+          snippet_active?: boolean
           tags?: string[]
           updated_at?: string
           website_url?: string | null
@@ -551,6 +625,7 @@ export type Database = {
           package?: string | null
           phone?: string | null
           referral_code?: string | null
+          snippet_active?: boolean
           tags?: string[]
           updated_at?: string
           website_url?: string | null
