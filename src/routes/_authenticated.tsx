@@ -1,8 +1,19 @@
-import { createFileRoute, Outlet, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Link, useNavigate, redirect } from "@tanstack/react-router";
 import { useAuth, AuthProvider } from "@/hooks/use-auth";
 import { useEffect, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { requestPasswordReset } from "@/lib/portal.functions";
 
 export const Route = createFileRoute("/_authenticated")({
+  beforeLoad: async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data.user) {
+      throw redirect({ to: "/login" });
+    }
+  },
   component: AuthLayout,
 });
 
@@ -60,6 +71,15 @@ function Inner() {
 function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => void | Promise<void> }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const reset = useServerFn(requestPasswordReset);
+  const resetM = useMutation({
+    mutationFn: () => reset({}),
+    onSuccess: () => {
+      toast.success("Je verzoek is verstuurd. Wij nemen contact op.");
+      setOpen(false);
+    },
+    onError: (e: any) => toast.error(e.message ?? "Er ging iets mis."),
+  });
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -106,24 +126,14 @@ function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => voi
               </Link>
             </li>
             <li>
-              <Link
-                to="/portal"
-                onClick={() => setOpen(false)}
-                className="block px-4 py-2 hover:bg-accent"
+              <button
+                onClick={() => resetM.mutate()}
+                disabled={resetM.isPending}
+                className="w-full text-left px-4 py-2 hover:bg-accent disabled:opacity-50"
                 role="menuitem"
               >
-                Mijn changes
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/reset-password"
-                onClick={() => setOpen(false)}
-                className="block px-4 py-2 hover:bg-accent"
-                role="menuitem"
-              >
-                Wachtwoord wijzigen
-              </Link>
+                {resetM.isPending ? "Bezig…" : "Wachtwoord reset aanvragen"}
+              </button>
             </li>
             <li className="border-t border-border mt-1">
               <button
