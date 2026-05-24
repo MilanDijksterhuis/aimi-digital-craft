@@ -167,31 +167,30 @@ function AdminPage() {
   );
 }
 
-function Dashboard({ metrics }: { metrics: any }) {
+function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPending }: { metrics: any; openChanges: number; pendingTotal: number; onGoChanges: () => void; onGoPending: () => void }) {
   const max = Math.max(1, ...metrics.months.map((m: any) => m.count));
   return (
     <div className="space-y-6">
-      <div className="grid sm:grid-cols-3 gap-4">
-        <Card label="Klanten" value={metrics.totalCustomers} />
-        <Card label="Actief (30d)" value={metrics.activeCount} accent />
-        <Card label="Inactief" value={metrics.inactiveCount} />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricCard icon={Users} label="Klanten" value={metrics.totalCustomers} sub="Totaal aantal accounts" trend={0} />
+        <MetricCard icon={UserCheck} label="Actief (30d)" value={metrics.activeCount} sub="Inlog in afgelopen 30 dagen" trend={0} />
+        <MetricCard icon={GitPullRequest} label="Totaal changes" value={metrics.totalRequests} sub="Sinds start" trend={0} />
+        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "—"} sub="Uren tot afronding" trend={0} />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <Card
-          label="Gem. responstijd (uur)"
-          value={metrics.avgResponseHours ?? "—"}
-        />
-        <Card label="Totaal changes" value={metrics.totalRequests} />
+        <button onClick={onGoChanges} className="text-left">
+          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes →" trend={0} />
+        </button>
+        <button onClick={onGoPending} className="text-left">
+          <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Reset + extra changes" trend={0} highlight={pendingTotal > 0} />
+        </button>
       </div>
-      <div className="rounded-2xl border border-border bg-card p-6">
+      <div className="rounded-lg border border-border bg-card p-6">
         <h3 className="font-semibold mb-4">Nieuwe klanten per maand</h3>
         <div className="flex items-end gap-2 h-32">
           {metrics.months.map((m: any) => (
             <div key={m.label} className="flex-1 flex flex-col items-center gap-1">
-              <div
-                className="w-full bg-primary rounded-t"
-                style={{ height: `${(m.count / max) * 100}%`, minHeight: m.count ? 4 : 0 }}
-              />
+              <div className="w-full bg-primary rounded-t" style={{ height: `${(m.count / max) * 100}%`, minHeight: m.count ? 4 : 0 }} />
               <span className="text-xs text-muted-foreground">{m.label.slice(5)}</span>
               <span className="text-xs font-semibold">{m.count}</span>
             </div>
@@ -202,14 +201,255 @@ function Dashboard({ metrics }: { metrics: any }) {
   );
 }
 
+function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon: any; label: string; value: any; sub: string; trend: number; highlight?: boolean }) {
+  const TrendIcon = trend >= 0 ? ArrowUp : ArrowDown;
+  const trendColor = trend > 0 ? "text-emerald-600" : trend < 0 ? "text-destructive" : "text-muted-foreground";
+  return (
+    <div className={`rounded-lg border p-5 ${highlight ? "border-amber-500/60 bg-amber-500/5" : "border-border bg-card"}`}>
+      <div className="flex items-center justify-between">
+        <Icon className="w-4 h-4" style={{ color: "#D4622A" }} />
+        <span className={`text-xs inline-flex items-center gap-0.5 ${trendColor}`}>
+          <TrendIcon className="w-3 h-3" />{Math.abs(trend)}%
+        </span>
+      </div>
+      <p className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className="mt-1 font-display text-2xl font-bold">{value}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{sub}</p>
+    </div>
+  );
+}
+
 function Card({ label, value, accent }: { label: string; value: any; accent?: boolean }) {
   return (
-    <div className={`rounded-2xl border p-5 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}>
+    <div className={`rounded-lg border p-5 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}>
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
       <p className="mt-2 font-display text-2xl font-bold">{value}</p>
     </div>
   );
 }
+
+function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: string; setActive: (k: any) => void }) {
+  const [open, setOpen] = useState<Record<string, boolean>>({ Overzicht: true, Klanten: true, Werk: true, Beheer: true, Overig: true });
+  return (
+    <nav aria-label="Admin secties" className="md:w-60 md:shrink-0 md:border-r border-border md:pr-4">
+      {groups.map((g) => {
+        const isOpen = open[g.label] ?? true;
+        return (
+          <div key={g.label} className="mb-2">
+            <button
+              type="button"
+              onClick={() => setOpen({ ...open, [g.label]: !isOpen })}
+              className="w-full flex items-center justify-between py-1 text-[10px] font-semibold uppercase"
+              style={{ letterSpacing: "0.1em", color: "#9B958F" }}
+            >
+              <span>{g.label}</span>
+              <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? "" : "-rotate-90"}`} />
+            </button>
+            {isOpen && (
+              <ul className="mt-1 space-y-0.5">
+                {g.items.map((it: any) => {
+                  const Icon = it.icon;
+                  const isActive = active === it.key;
+                  return (
+                    <li key={it.key}>
+                      <button
+                        onClick={() => setActive(it.key)}
+                        className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-sm transition-colors"
+                        style={{
+                          borderLeft: isActive ? "2px solid #D4622A" : "2px solid transparent",
+                          color: isActive ? "#D4622A" : undefined,
+                          paddingLeft: "8px",
+                        }}
+                        onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "#D4622A"; }}
+                        onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = ""; }}
+                      >
+                        <span className="flex items-center gap-2 min-w-0">
+                          <Icon className="w-4 h-4 shrink-0" />
+                          <span className="truncate text-left">{it.label}</span>
+                        </span>
+                        {it.badge > 0 && (
+                          <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-destructive text-destructive-foreground">
+                            {it.badge}
+                          </span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        );
+      })}
+    </nav>
+  );
+}
+
+function PasswordResetsPanel() {
+  const list = useServerFn(adminListPasswordResets);
+  const mark = useServerFn(adminMarkPasswordResetHandled);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-password-resets"], queryFn: () => list({}) });
+  const markM = useMutation({
+    mutationFn: (id: string) => mark({ data: { id } }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-password-resets"] }); toast.success("Gemarkeerd als afgehandeld."); },
+  });
+  const [view, setView] = useState<"pending" | "handled">("pending");
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const items = (data?.items ?? []).filter((r: any) => view === "pending" ? r.status === "pending" : r.status !== "pending");
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {(["pending", "handled"] as const).map(v => (
+          <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 text-sm rounded-md border ${view === v ? "bg-foreground text-background border-foreground" : "border-border"}`}>
+            {v === "pending" ? "Open" : "Afgehandeld"}
+          </button>
+        ))}
+      </div>
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/30 text-muted-foreground">
+            <tr><th className="text-left p-3">Naam</th><th className="text-left p-3">E-mail</th><th className="text-left p-3">Aangevraagd</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
+          </thead>
+          <tbody>
+            {items.map((r: any) => (
+              <tr key={r.id} className="border-t border-border">
+                <td className="p-3">{r.user_name || "—"}</td>
+                <td className="p-3">{r.user_email}</td>
+                <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
+                <td className="p-3">{r.status}</td>
+                <td className="p-3 text-right">
+                  {r.status === "pending" && (
+                    <button onClick={() => markM.mutate(r.id)} className="text-xs text-primary hover:underline">Markeer als afgehandeld</button>
+                  )}
+                </td>
+              </tr>
+            ))}
+            {items.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Geen verzoeken.</td></tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ExtraChangesPanel() {
+  const list = useServerFn(adminListExtraChangeRequests);
+  const approve = useServerFn(adminApproveExtraChangeRequest);
+  const reject = useServerFn(adminRejectExtraChangeRequest);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-extra-changes"], queryFn: () => list({}) });
+  const inv = () => qc.invalidateQueries({ queryKey: ["admin-extra-changes"] });
+  const approveM = useMutation({ mutationFn: (id: string) => approve({ data: { id } }), onSuccess: () => { inv(); toast.success("Goedgekeurd."); } });
+  const rejectM = useMutation({ mutationFn: (id: string) => reject({ data: { id } }), onSuccess: () => { inv(); toast.success("Afgewezen."); } });
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const items = data?.items ?? [];
+  return (
+    <div className="overflow-x-auto rounded-lg border border-border">
+      <table className="w-full text-sm">
+        <thead className="bg-muted/30 text-muted-foreground">
+          <tr><th className="text-left p-3">Naam</th><th className="text-left p-3">E-mail</th><th className="text-left p-3">Aantal</th><th className="text-left p-3">Bedrag</th><th className="text-left p-3">Aangevraagd</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
+        </thead>
+        <tbody>
+          {items.map((r: any) => (
+            <tr key={r.id} className="border-t border-border">
+              <td className="p-3">{r.user_name || "—"}</td>
+              <td className="p-3">{r.user_email}</td>
+              <td className="p-3">{r.amount}</td>
+              <td className="p-3">€{r.total_eur}</td>
+              <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
+              <td className="p-3">{r.status}</td>
+              <td className="p-3 text-right space-x-2 whitespace-nowrap">
+                {r.status === "pending" && (<>
+                  <button onClick={() => approveM.mutate(r.id)} className="text-xs text-primary hover:underline">Goedkeuren</button>
+                  <button onClick={() => rejectM.mutate(r.id)} className="text-xs text-destructive hover:underline">Afwijzen</button>
+                </>)}
+              </td>
+            </tr>
+          ))}
+          {items.length === 0 && <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">Geen aanvragen.</td></tr>}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function WebsiteLinksPanel() {
+  const list = useServerFn(adminListWebsiteLinks);
+  const update = useServerFn(adminUpdateWebsiteLink);
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery({ queryKey: ["admin-website-links"], queryFn: () => list({}) });
+  const updM = useMutation({
+    mutationFn: (i: any) => update({ data: i }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-website-links"] }); toast.success("Opgeslagen."); },
+  });
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [forms, setForms] = useState<Record<string, { website_url: string; snippet_active: boolean }>>({});
+
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  const items = data?.items ?? [];
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+
+  return (
+    <div className="overflow-x-auto rounded-lg border border-border">
+      <table className="w-full text-sm">
+        <thead className="bg-muted/30 text-muted-foreground">
+          <tr><th className="text-left p-3">Klant</th><th className="text-left p-3">Website</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
+        </thead>
+        <tbody>
+          {items.map((c: any) => {
+            const f = forms[c.id] ?? { website_url: c.website_url ?? "", snippet_active: !!c.snippet_active };
+            const isOpen = openId === c.id;
+            const snippet = `<script src="${origin}/track.js?u=${c.id}"></script>`;
+            const status = c.ping_count > 0
+              ? { color: "text-emerald-600", txt: "✓ Actief" }
+              : c.website_url ? { color: "text-amber-600", txt: "? Geen data" } : { color: "text-muted-foreground", txt: "✕ Niet gekoppeld" };
+            return (
+              <>
+                <tr key={c.id} className="border-t border-border">
+                  <td className="p-3">{c.full_name || c.email}</td>
+                  <td className="p-3 truncate max-w-xs">{c.website_url || "—"}</td>
+                  <td className={`p-3 ${status.color}`}>{status.txt}</td>
+                  <td className="p-3 text-right">
+                    <button onClick={() => setOpenId(isOpen ? null : c.id)} className="text-xs text-primary hover:underline">
+                      {isOpen ? "Sluit" : "Beheer koppeling"}
+                    </button>
+                  </td>
+                </tr>
+                {isOpen && (
+                  <tr><td colSpan={4} className="bg-muted/20 p-4">
+                    <div className="space-y-3 max-w-2xl">
+                      <label className="block text-sm">
+                        <span className="text-muted-foreground">Website URL</span>
+                        <input value={f.website_url} onChange={(e) => setForms({ ...forms, [c.id]: { ...f, website_url: e.target.value } })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                      </label>
+                      <div>
+                        <span className="text-muted-foreground text-sm">Tracking snippet</span>
+                        <div className="mt-1 rounded-md border border-border bg-background p-3 font-mono text-xs break-all">{snippet}</div>
+                        <button type="button" onClick={() => { navigator.clipboard.writeText(snippet); toast.success("Gekopieerd."); }} className="btn-secondary mt-2 text-xs">Kopieer</button>
+                        <p className="text-xs text-muted-foreground mt-2">Kopieer deze snippet en plak hem in de &lt;head&gt; van het Lovable project van deze klant.</p>
+                      </div>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input type="checkbox" checked={f.snippet_active} onChange={(e) => setForms({ ...forms, [c.id]: { ...f, snippet_active: e.target.checked } })} />
+                        Snippet actief
+                      </label>
+                      <button onClick={() => updM.mutate({ user_id: c.id, website_url: f.website_url || null, snippet_active: f.snippet_active })} disabled={updM.isPending} className="btn-primary text-sm">
+                        {updM.isPending ? "Bezig…" : "Opslaan"}
+                      </button>
+                    </div>
+                  </td></tr>
+                )}
+              </>
+            );
+          })}
+          {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+
 
 function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
   const createC = useServerFn(adminCreateCustomerFn);
