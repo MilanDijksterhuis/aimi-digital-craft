@@ -140,10 +140,13 @@ function AdminPage() {
     ]},
     { label: "Werk", items: [
       { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest },
+      { key: "archived", label: "Gearchiveerd", icon: Archive },
       { key: "berichten", label: "Berichten", icon: MessageSquare },
       { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox },
     ]},
     { label: "Beheer", items: [
+      { key: "accounts", label: "Accounts", icon: Users2 },
+      { key: "notifications", label: "Notificaties", icon: Bell },
       { key: "website_links", label: "Website koppelingen", icon: Link2 },
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
@@ -156,9 +159,12 @@ function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-4xl font-bold">Admin</h1>
-        <p className="text-muted-foreground">Beheer klanten, changes en groei.</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="font-display text-4xl font-bold">Admin</h1>
+          <p className="text-muted-foreground">Beheer klanten, changes en groei.</p>
+        </div>
+        <NotificationsBell onOpen={() => setTab("notifications")} />
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
@@ -167,9 +173,12 @@ function AdminPage() {
         <div className="flex-1 min-w-0">
           {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => setTab("changes")} onGoPending={() => setTab("password_resets")} />}
           {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
+          {tab === "accounts" && <AccountsPanel />}
+          {tab === "notifications" && <NotificationsPanel />}
           {tab === "password_resets" && <PasswordResetsPanel />}
           {tab === "extra_changes" && <ExtraChangesPanel />}
           {tab === "changes" && (<ChangesTab data={data} qc={qc} openRequest={openRequest} setOpenRequest={setOpenRequest} />)}
+          {tab === "archived" && <ArchivedChangesPanel />}
           {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
           {tab === "berichten" && <BerichtenTab />}
           {tab === "afspraken" && <AfsprakenTab customers={data.customers} qc={qc} />}
