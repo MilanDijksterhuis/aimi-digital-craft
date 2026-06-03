@@ -6,6 +6,7 @@ const links = [
   { label: "About", href: "#about" },
   { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
+  { label: "Afspraak", href: "/afspraak" },
 ];
 
 export function Nav() {
