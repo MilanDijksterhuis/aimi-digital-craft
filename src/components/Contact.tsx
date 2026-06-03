@@ -1,16 +1,35 @@
 import { motion } from "motion/react";
-import { useState } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Send, CheckCircle2, Calendar, Mail } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { submitContactForm } from "@/lib/contact.functions";
 
+type Mode = "choice" | "appointment" | "form";
+
 export function Contact() {
   const submit = useServerFn(submitContactForm);
+  const [mode, setMode] = useState<Mode>("choice");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  useEffect(() => {
+    if (mode !== "appointment") return;
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
+    );
+    if (existing) {
+      // Re-trigger init if script already loaded
+      (window as any).Calendly?.initInlineWidgets?.();
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = "https://assets.calendly.com/assets/external/widget.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }, [mode]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,74 +65,144 @@ export function Contact() {
           Laten we iets <span className="text-primary">bouwen</span> samen.
         </motion.h2>
         <p className="mt-4 text-center text-muted-foreground">
-          Stuur ons een bericht — we reageren binnen 24 uur.
+          Kies hoe je contact wil opnemen — plan een afspraak of stuur een bericht.
         </p>
 
-        {sent ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            role="status"
-            aria-live="polite"
-            className="mt-12 p-10 rounded-lg border border-border bg-card text-center space-y-4"
-          >
-            <CheckCircle2 className="w-12 h-12 text-primary mx-auto" aria-hidden strokeWidth={1.5} />
-            <h3 className="text-2xl">Bericht verzonden!</h3>
-            <p className="text-muted-foreground">
-              Bedankt voor je bericht. We hebben het ontvangen en nemen binnen 24 uur contact met je op.
-            </p>
-            <button type="button" onClick={() => setSent(false)} className="btn-secondary">
-              Nog een bericht sturen
+        {mode !== "choice" && (
+          <div className="mt-8 flex justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMode("appointment")}
+              className={mode === "appointment" ? "btn-primary text-[13px] !py-2 !px-4" : "btn-secondary text-[13px] !py-2 !px-4"}
+            >
+              <Calendar className="w-4 h-4" /> Afspraak
             </button>
-          </motion.div>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
+            <button
+              type="button"
+              onClick={() => { setMode("form"); setSent(false); }}
+              className={mode === "form" ? "btn-primary text-[13px] !py-2 !px-4" : "btn-secondary text-[13px] !py-2 !px-4"}
+            >
+              <Mail className="w-4 h-4" /> Contactformulier
+            </button>
+          </div>
+        )}
+
+        {mode === "choice" && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            onSubmit={onSubmit}
-            className="mt-12 p-8 md:p-10 rounded-lg border border-border bg-card space-y-5"
+            transition={{ duration: 0.5 }}
+            className="mt-12 grid md:grid-cols-2 gap-5"
           >
-            <div className="grid md:grid-cols-2 gap-5">
-              <Field
-                label="Naam"
-                name="name"
-                placeholder="Jouw naam"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-              <Field
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="jij@bedrijf.nl"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-            </div>
-            <div>
-              <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
-                Bericht
-              </label>
-              <textarea
-                required
-                rows={5}
-                placeholder="Vertel ons over je project…"
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3 resize-none"
-              />
-            </div>
-            {error && (
-              <p role="alert" className="text-sm text-destructive">
-                {error}
+            <button
+              type="button"
+              onClick={() => setMode("appointment")}
+              className="group text-left p-8 rounded-lg border border-border bg-card hover:border-primary transition-colors"
+            >
+              <Calendar className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
+              <h3 className="text-xl mb-2">Plan een afspraak</h3>
+              <p className="text-sm text-muted-foreground">
+                Boek direct een moment in onze agenda voor een kennismaking of projectbespreking.
               </p>
-            )}
-            <button type="submit" disabled={pending} className="btn-primary w-full disabled:opacity-60">
-              {pending ? "Versturen…" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
             </button>
-          </motion.form>
+            <button
+              type="button"
+              onClick={() => setMode("form")}
+              className="group text-left p-8 rounded-lg border border-border bg-card hover:border-primary transition-colors"
+            >
+              <Mail className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
+              <h3 className="text-xl mb-2">Stuur een bericht</h3>
+              <p className="text-sm text-muted-foreground">
+                Liever schrijven? Vul het contactformulier in — we reageren binnen 24 uur.
+              </p>
+            </button>
+          </motion.div>
+        )}
+
+        {mode === "appointment" && (
+          <motion.div
+            key="appointment"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mt-8 rounded-lg border border-border bg-card overflow-hidden"
+          >
+            <div
+              className="calendly-inline-widget"
+              data-url="https://calendly.com/milan2003"
+              style={{ minWidth: 320, height: 700 }}
+            />
+          </motion.div>
+        )}
+
+        {mode === "form" && (
+          sent ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              role="status"
+              aria-live="polite"
+              className="mt-8 p-10 rounded-lg border border-border bg-card text-center space-y-4"
+            >
+              <CheckCircle2 className="w-12 h-12 text-primary mx-auto" aria-hidden strokeWidth={1.5} />
+              <h3 className="text-2xl">Bericht verzonden!</h3>
+              <p className="text-muted-foreground">
+                Bedankt voor je bericht. We hebben het ontvangen en nemen binnen 24 uur contact met je op.
+              </p>
+              <button type="button" onClick={() => setSent(false)} className="btn-secondary">
+                Nog een bericht sturen
+              </button>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              onSubmit={onSubmit}
+              className="mt-8 p-8 md:p-10 rounded-lg border border-border bg-card space-y-5"
+            >
+              <div className="grid md:grid-cols-2 gap-5">
+                <Field
+                  label="Naam"
+                  name="name"
+                  placeholder="Jouw naam"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+                <Field
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="jij@bedrijf.nl"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
+                  Bericht
+                </label>
+                <textarea
+                  required
+                  rows={5}
+                  placeholder="Vertel ons over je project…"
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3 resize-none"
+                />
+              </div>
+              {error && (
+                <p role="alert" className="text-sm text-destructive">
+                  {error}
+                </p>
+              )}
+              <button type="submit" disabled={pending} className="btn-primary w-full disabled:opacity-60">
+                {pending ? "Versturen…" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
+              </button>
+            </motion.form>
+          )
         )}
       </div>
     </section>
