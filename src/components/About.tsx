@@ -12,7 +12,8 @@ export function About() {
           transition={{ duration: 0.5 }}
           className="leading-[1.1] max-w-4xl"
         >
-          We zijn <span className="text-primary">Aidan & Milan</span> — twee twintigers die geobsedeerd zijn door goed gebouwde producten.
+          We zijn <span className="text-primary">Aidan & Milan</span> — Twee twintigers die geloven dat iedere
+          ondernemer een sterke online aanwezigheid verdient.
         </motion.h2>
 
         <motion.p
@@ -22,7 +23,11 @@ export function About() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-8 text-base text-muted-foreground max-w-3xl"
         >
-          AIMI begon als zijproject en groeide uit tot een agency. We werken direct met onze klanten — geen account managers, geen ruis. Alleen twee makers die je site bouwen, hosten en laten groeien. Casual als het kan, professioneel waar het moet.
+          Wij zijn Aidan en Milan. We bouwen moderne, professionele websites voor ondernemers, verenigingen en
+          particulieren die online zichtbaar willen zijn zonder hoge kosten. In een tijd waarin alles duurder wordt,
+          vinden wij dat een goede website toegankelijk moet blijven voor iedereen. Daarom bieden wij betaalbare
+          maatwerkwebsites die snel, gebruiksvriendelijk en geschikt zijn voor alle apparaten. We luisteren naar jouw
+          wensen en zorgen voor een website die past bij jouw doelen, uitstraling en budget.
         </motion.p>
 
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
