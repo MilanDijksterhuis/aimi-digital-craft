@@ -12,7 +12,7 @@ export function Hero() {
           transition={{ duration: 0.4 }}
           className="section-label mb-6"
         >
-          Gebouwd & gehost door Aidan en Milan!
+          Gebouwd & gehost door Aidan en Milan!!
         </motion.div>
 
         <motion.h1
