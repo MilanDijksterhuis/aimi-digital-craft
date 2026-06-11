@@ -12,7 +12,7 @@ export function Hero() {
           transition={{ duration: 0.4 }}
           className="section-label mb-6"
         >
-          — Built & hosted by Aidan + Milan
+          — Built & hosted by Aidan en Milan
         </motion.div>
 
         <motion.h1
@@ -32,8 +32,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8 max-w-xl mx-auto text-base text-muted-foreground"
         >
-          Design, development en hosting onder één dak. Twee makers, scherpe
-          uitvoering en sites die laden voordat je koffie koud is.
+          Design, development en hosting onder één dak. Twee makers, scherpe uitvoering en sites die laden voordat je
+          koffie koud is.
         </motion.p>
 
         <motion.div
