@@ -87,7 +87,7 @@ function AccountPage() {
           >
             {m.isPending ? "Bezig…" : "Opslaan"}
           </button>
-          {m.isSuccess && <span className="text-sm text-primary">Opgeslagen ✓</span>}
+          {m.isSuccess && <span className="text-sm text-primary">Opgeslagen</span>}
           {m.error && <span className="text-sm text-destructive">{(m.error as Error).message}</span>}
         </div>
       </section>

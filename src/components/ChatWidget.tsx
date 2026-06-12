@@ -132,7 +132,7 @@ export function ChatWidget() {
         aria-label={open ? "Sluit chat" : "Open chat"}
         className="fixed bottom-4 right-4 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:opacity-90"
       >
-        <span className="text-2xl" aria-hidden>💬</span>
+        <span className="text-xs font-medium tracking-wide" aria-hidden>Chat</span>
         {unread > 0 && (
           <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs rounded-full h-5 min-w-5 px-1 flex items-center justify-center">
             {unread}
@@ -155,7 +155,7 @@ export function ChatWidget() {
               aria-label="Sluit chat"
               className="text-muted-foreground hover:text-foreground"
             >
-              ✕
+              Sluit
             </button>
           </header>
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 space-y-2">

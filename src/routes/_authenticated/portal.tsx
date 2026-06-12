@@ -266,7 +266,7 @@ function PortalPage() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl font-semibold">
-            Hoi {data.profile?.full_name || "klant"} 👋
+            Hoi {data.profile?.full_name || "klant"}
           </h1>
           <p className="text-muted-foreground">{data.profile?.company}</p>
         </div>
@@ -277,7 +277,7 @@ function PortalPage() {
             aria-expanded={showNotifs}
             className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span aria-hidden="true">🔔</span>
+            <span aria-hidden="true" className="text-xs font-medium tracking-wide">Inbox</span>
             {unread.length > 0 && (
               <span aria-hidden="true" className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
                 {unread.length}
@@ -483,7 +483,7 @@ function PortalPage() {
                     Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
                   </label>
                   <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:border-primary">
-                    📎 Bestanden ({files.length})
+                    Bestanden ({files.length})
                     <input type="file" multiple accept="image/*,.pdf" className="hidden"
                       onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />
                   </label>
@@ -625,7 +625,7 @@ function Stat({ label, value, accent }: { label: string; value: any; accent?: bo
 function EmptyChanges({ onNew, hasAny }: { onNew: () => void; hasAny: boolean }) {
   return (
     <div className="rounded-lg border border-border bg-card p-12 text-center">
-      <div className="text-5xl mb-4">📋</div>
+      <div className="text-xs uppercase tracking-[0.12em] text-muted-foreground mb-4">Geen items</div>
       <h3 className="font-display text-xl font-semibold mb-2">
         {hasAny ? "Geen changes voor dit filter" : "Nog geen changes ingediend"}
       </h3>
@@ -679,7 +679,7 @@ function Stepper({ k }: { k: StatusKey }) {
                 }`}
                 style={done || isCurrent ? { background: "#D4622A" } : undefined}
               >
-                {done ? "✓" : i + 1}
+                {done ? "OK" : i + 1}
                 {isCurrent && (
                   <span
                     className="absolute w-7 h-7 rounded-full pulse-dot pointer-events-none"
@@ -786,11 +786,11 @@ function ChangeCard({
 
       {/* Metadata row */}
       <div className="mt-5 grid grid-cols-2 sm:flex sm:flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
-        <span>📅 {new Date(r.created_at).toLocaleDateString("nl-NL")}</span>
-        <span className={priorityColor}>⚡ {PRIORITY_LABEL[r.priority] ?? r.priority}</span>
-        <span>📦 {r.due_date ? new Date(r.due_date).toLocaleDateString("nl-NL") : "Nog niet gepland"}</span>
-        <span>🕐 {r.estimated_hours ? `${r.estimated_hours} uur` : "Wordt beoordeeld"}</span>
-        <span>💶 {r.is_paid ? `€${PAID_CHANGE_PRICE_EUR}` : "Gratis"}</span>
+        <span>Aangemaakt: {new Date(r.created_at).toLocaleDateString("nl-NL")}</span>
+        <span className={priorityColor}>Prioriteit: {PRIORITY_LABEL[r.priority] ?? r.priority}</span>
+        <span>Deadline: {r.due_date ? new Date(r.due_date).toLocaleDateString("nl-NL") : "Nog niet gepland"}</span>
+        <span>Uren: {r.estimated_hours ? `${r.estimated_hours} uur` : "Wordt beoordeeld"}</span>
+        <span>Kosten: {r.is_paid ? `€${PAID_CHANGE_PRICE_EUR}` : "Gratis"}</span>
       </div>
 
       {/* Attachments */}
@@ -802,7 +802,7 @@ function ChangeCard({
               onClick={() => openAttachment(a.file_path)}
               className="text-xs rounded-md border border-border bg-background px-2 py-1 hover:border-primary"
             >
-              📎 {a.file_name}
+              {a.file_name}
             </button>
           ))}
         </div>
@@ -814,7 +814,7 @@ function ChangeCard({
           onClick={() => setOpenThread(!openThread)}
           className="inline-flex items-center gap-2 text-sm rounded-md border border-border bg-background px-3 py-1.5 hover:border-primary"
         >
-          💬 {comments.length} bericht{comments.length === 1 ? "" : "en"}
+          {comments.length} bericht{comments.length === 1 ? "" : "en"}
         </button>
 
         <div className="flex items-center gap-3">
@@ -838,7 +838,7 @@ function ChangeCard({
                 style={{ background: "#2E7D32", color: "#fff" }}
                 onClick={() => alert("Neem contact op met AIMI om goed te keuren.")}
               >
-                ✓ Goedkeuren
+                Goedkeuren
               </button>
               <button
                 onClick={() => setOpenThread(true)}

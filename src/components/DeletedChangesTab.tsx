@@ -68,7 +68,7 @@ export function DeletedChangesTab() {
                   }}
                   className="rounded-full border border-destructive px-3 py-1 text-xs text-destructive hover:bg-destructive hover:text-destructive-foreground"
                 >
-                  🗑 Permanent wissen
+                  Permanent wissen
                 </button>
               </div>
             )}

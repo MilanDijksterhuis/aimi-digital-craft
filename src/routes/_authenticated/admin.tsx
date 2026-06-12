@@ -428,8 +428,8 @@ function WebsiteLinksPanel() {
             const isOpen = openId === c.id;
             const snippet = `<script src="${origin}/track.js?u=${c.id}"></script>`;
             const status = c.ping_count > 0
-              ? { color: "text-emerald-600", txt: "✓ Actief" }
-              : c.website_url ? { color: "text-amber-600", txt: "? Geen data" } : { color: "text-muted-foreground", txt: "✕ Niet gekoppeld" };
+              ? { color: "text-emerald-600", txt: "Actief" }
+              : c.website_url ? { color: "text-amber-600", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
             return (
               <>
                 <tr key={c.id} className="border-t border-border">
@@ -634,7 +634,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
         </div>
       )}
       {setPwM.isSuccess && (
-        <p className="text-sm text-primary">Wachtwoord aangepast ✓</p>
+        <p className="text-sm text-primary">Wachtwoord aangepast</p>
       )}
       {(resetM.error || setPwM.error) && (
         <p className="text-sm text-destructive">{((resetM.error || setPwM.error) as Error).message}</p>
@@ -798,7 +798,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
               className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
             />
             <span className="text-xs text-muted-foreground">gratis changes / maand</span>
-            {setQuotaM.isSuccess && <span className="text-xs text-primary">✓</span>}
+            {setQuotaM.isSuccess && <span className="text-xs text-primary">Opgeslagen</span>}
           </div>
         </section>
 
@@ -1098,7 +1098,7 @@ function RequestDetail({ request, qc }: any) {
           {request.change_attachments.map((a: any) => (
             <button key={a.id} onClick={() => openAtt(a.file_path)}
               className="text-xs rounded-md border border-border bg-muted/40 px-2 py-1 hover:bg-accent">
-              📎 {a.file_name}
+              {a.file_name}
             </button>
           ))}
         </div>
@@ -1160,11 +1160,11 @@ function AanvragenTab({ data, qc }: any) {
               <div className="text-sm space-y-1">
                 <p className="font-semibold text-base">{c.full_name || "—"}</p>
                 <p className="text-muted-foreground">{c.email}</p>
-                {c.company && <p className="text-muted-foreground">🏢 {c.company}</p>}
-                {c.phone && <p className="text-muted-foreground">📞 {c.phone}</p>}
+                {c.company && <p className="text-muted-foreground">Bedrijf: {c.company}</p>}
+                {c.phone && <p className="text-muted-foreground">Tel: {c.phone}</p>}
                 {(c.billing_address || c.address) && (
                   <p className="text-muted-foreground whitespace-pre-wrap">
-                    📍 {c.billing_address || c.address}
+                    Adres: {c.billing_address || c.address}
                   </p>
                 )}
                 {c.kvk && <p className="text-muted-foreground">KVK: {c.kvk}</p>}
@@ -1188,7 +1188,7 @@ function AanvragenTab({ data, qc }: any) {
                 disabled={grantM.isPending}
                 className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
               >
-                ✓ Toekennen
+                Toekennen
               </button>
             </div>
           </div>
@@ -1275,9 +1275,9 @@ function AfsprakenTab({ customers, qc }: any) {
             onChange={(e) => setForm({ ...form, kind: e.target.value as any })}
             className="rounded-md border border-input bg-background px-3 py-2 text-sm"
           >
-            <option value="phone">📞 Telefoon</option>
-            <option value="teams">💻 Teams</option>
-            <option value="in_person">🤝 In het echt</option>
+            <option value="phone">Telefoon</option>
+            <option value="teams">Teams</option>
+            <option value="in_person">In het echt</option>
           </select>
           <input
             placeholder="Locatie / Teams-link / nummer"
@@ -1313,7 +1313,7 @@ function AfsprakenTab({ customers, qc }: any) {
           {data?.appointments.map((a: any) => {
             const c = customers.find((c: any) => c.id === a.user_id);
             const kindIcon =
-              a.kind === "teams" ? "💻" : a.kind === "in_person" ? "🤝" : "📞";
+              a.kind === "teams" ? "Teams" : a.kind === "in_person" ? "In persoon" : "Telefoon";
             return (
               <div
                 key={a.id}
@@ -1321,14 +1321,14 @@ function AfsprakenTab({ customers, qc }: any) {
               >
                 <div className="text-sm">
                   <p className="font-semibold">
-                    {kindIcon} {a.title}
+                    <span className="text-xs uppercase tracking-[0.08em] text-muted-foreground mr-2">{kindIcon}</span>{a.title}
                   </p>
                   <p className="text-muted-foreground">
                     {c?.full_name || c?.email || a.user_id} ·{" "}
                     {new Date(a.scheduled_at).toLocaleString("nl-NL")}
                   </p>
                   {a.location && (
-                    <p className="text-xs text-muted-foreground mt-1">📍 {a.location}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Locatie: {a.location}</p>
                   )}
                   {a.notes && (
                     <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>
