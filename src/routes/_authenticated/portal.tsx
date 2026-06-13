@@ -65,12 +65,12 @@ function mapStatus(s: string): StatusKey {
 }
 
 const STATUS_STYLE: Record<StatusKey, { bg: string; fg: string; border: string; label: string; dot?: boolean }> = {
-  ingediend:       { bg: "#EEF2FF", fg: "#3B5BDB", border: "#BAC8FF", label: "Ingediend" },
-  in_behandeling:  { bg: "#FFF3BF", fg: "#856404", border: "#FFD43B", label: "In behandeling" },
-  in_uitvoering:   { bg: "#FBF0E8", fg: "#D4622A", border: "#F0A070", label: "In uitvoering" },
-  review:          { bg: "#E8F5E9", fg: "#2E7D32", border: "#81C784", label: "Klaar voor review", dot: true },
-  afgerond:        { bg: "#F5F5F5", fg: "#6B6560", border: "#D9D4C8", label: "Afgerond" },
-  afgewezen:       { bg: "#FAEBEB", fg: "#C0392B", border: "#E57373", label: "Afgewezen" },
+  ingediend:       { bg: "#f9fafb", fg: "#2f2b4a", border: "#e5e7eb", label: "Ingediend" },
+  in_behandeling:  { bg: "#f9fafb", fg: "#4b5563", border: "#e5e7eb", label: "In behandeling" },
+  in_uitvoering:   { bg: "#eeedff", fg: "#7270ff", border: "#d6d5ff", label: "In uitvoering" },
+  review:          { bg: "#eeedff", fg: "#7270ff", border: "#d6d5ff", label: "Klaar voor review", dot: true },
+  afgerond:        { bg: "#f9fafb", fg: "#9ca3af", border: "#e5e7eb", label: "Afgerond" },
+  afgewezen:       { bg: "#fdecec", fg: "#c0392b", border: "#f5c2c2", label: "Afgewezen" },
 };
 
 const STEPS = ["Ingediend", "Beoordeeld", "In uitvoering", "Review", "Afgerond"] as const;
@@ -600,7 +600,7 @@ function PortalPage() {
                 });
               }}
               disabled={buyM.isPending}
-              style={{ background: "#D4622A", color: "#F5F0E8" }}
+              className="btn-primary"
             >
               {buyM.isPending ? "Bezig…" : "Ja, aanvragen en factuur ontvangen"}
             </Button>
@@ -834,8 +834,7 @@ function ChangeCard({
           {k === "review" && (
             <>
               <button
-                className="text-sm rounded-md px-4 py-1.5 font-medium"
-                style={{ background: "#2E7D32", color: "#fff" }}
+                className="btn-primary text-sm !py-1.5 !px-4"
                 onClick={() => alert("Neem contact op met AIMI om goed te keuren.")}
               >
                 Goedkeuren
@@ -1045,10 +1044,10 @@ function OverviewSection({
               {used} van {totalQuota} gebruikt
             </span>
           </div>
-          <div className="h-3 w-full rounded-full overflow-hidden" style={{ background: "#E8E3D8" }}>
+          <div className="h-3 w-full rounded-full overflow-hidden bg-muted">
             <div
               className="h-full transition-all"
-              style={{ width: `${pct}%`, background: exhausted ? "#C0392B" : "#D4622A" }}
+              style={{ width: `${pct}%`, background: exhausted ? "var(--destructive)" : "var(--primary)" }}
             />
           </div>
           <p className={`mt-3 text-sm ${exhausted ? "text-destructive" : "text-muted-foreground"}`}>
@@ -1129,26 +1128,26 @@ function OverviewSection({
       )}
 
       {/* Extra changes banner */}
-      <section className="rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style={{ background: "#1C1917", color: "#F5F0E8" }}>
+      <section className="rounded-lg border border-border bg-card p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
         <div>
-          <h3 className="font-display text-xl font-semibold">Meer changes nodig?</h3>
-          <p className="text-sm opacity-80 mt-1">€20 per extra change, direct verwerkt door ons team.</p>
+          <h3 className="font-display text-xl font-semibold text-foreground">Meer changes nodig?</h3>
+          <p className="text-sm text-muted-foreground mt-1">€20 per extra change, direct verwerkt door ons team.</p>
         </div>
         <div className="flex flex-col items-start sm:items-end gap-2">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setPurchaseQty(Math.max(1, purchaseQty - 1))}
-              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
               aria-label="Minder"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-8 text-center text-sm font-medium">{purchaseQty}</span>
+            <span className="w-8 text-center text-sm font-medium text-foreground">{purchaseQty}</span>
             <button
               type="button"
               onClick={() => setPurchaseQty(Math.min(50, purchaseQty + 1))}
-              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
               aria-label="Meer"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -1156,13 +1155,12 @@ function OverviewSection({
             <button
               onClick={onBuy}
               disabled={buying}
-              className="ml-2 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
-              style={{ background: "#D4622A", color: "#F5F0E8" }}
+              className="btn-primary ml-2 text-sm !py-2 !px-4 disabled:opacity-50"
             >
               {buying ? "Bezig…" : "Aanvragen"}
             </button>
           </div>
-          <p className="text-xs opacity-70">Totaal: €{purchaseQty * 20}</p>
+          <p className="text-xs text-muted-foreground">Totaal: €{purchaseQty * 20}</p>
         </div>
       </section>
     </div>
