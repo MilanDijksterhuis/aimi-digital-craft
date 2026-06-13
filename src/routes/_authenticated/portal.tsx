@@ -65,12 +65,12 @@ function mapStatus(s: string): StatusKey {
 }
 
 const STATUS_STYLE: Record<StatusKey, { bg: string; fg: string; border: string; label: string; dot?: boolean }> = {
-  ingediend:       { bg: "#EEF2FF", fg: "#3B5BDB", border: "#BAC8FF", label: "Ingediend" },
-  in_behandeling:  { bg: "#FFF3BF", fg: "#856404", border: "#FFD43B", label: "In behandeling" },
-  in_uitvoering:   { bg: "#FBF0E8", fg: "#D4622A", border: "#F0A070", label: "In uitvoering" },
-  review:          { bg: "#E8F5E9", fg: "#2E7D32", border: "#81C784", label: "Klaar voor review", dot: true },
-  afgerond:        { bg: "#F5F5F5", fg: "#6B6560", border: "#D9D4C8", label: "Afgerond" },
-  afgewezen:       { bg: "#FAEBEB", fg: "#C0392B", border: "#E57373", label: "Afgewezen" },
+  ingediend:       { bg: "#f9fafb", fg: "#2f2b4a", border: "#e5e7eb", label: "Ingediend" },
+  in_behandeling:  { bg: "#f9fafb", fg: "#4b5563", border: "#e5e7eb", label: "In behandeling" },
+  in_uitvoering:   { bg: "#eeedff", fg: "#7270ff", border: "#d6d5ff", label: "In uitvoering" },
+  review:          { bg: "#eeedff", fg: "#7270ff", border: "#d6d5ff", label: "Klaar voor review", dot: true },
+  afgerond:        { bg: "#f9fafb", fg: "#9ca3af", border: "#e5e7eb", label: "Afgerond" },
+  afgewezen:       { bg: "#fdecec", fg: "#c0392b", border: "#f5c2c2", label: "Afgewezen" },
 };
 
 const STEPS = ["Ingediend", "Beoordeeld", "In uitvoering", "Review", "Afgerond"] as const;
