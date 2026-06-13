@@ -265,8 +265,8 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
             <button
               type="button"
               onClick={() => setOpen({ ...open, [g.label]: !isOpen })}
-              className="w-full flex items-center justify-between py-1 text-[10px] font-semibold uppercase"
-              style={{ letterSpacing: "0.1em", color: "#9B958F" }}
+              className="w-full flex items-center justify-between py-1 text-[10px] font-semibold uppercase text-muted-foreground"
+              style={{ letterSpacing: "0.1em" }}
             >
               <span>{g.label}</span>
               <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? "" : "-rotate-90"}`} />
