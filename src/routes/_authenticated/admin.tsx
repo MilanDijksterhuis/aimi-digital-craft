@@ -233,7 +233,7 @@ function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon:
   return (
     <div className={`rounded-lg border p-5 ${highlight ? "border-amber-500/60 bg-amber-500/5" : "border-border bg-card"}`}>
       <div className="flex items-center justify-between">
-        <Icon className="w-4 h-4" style={{ color: "#D4622A" }} />
+        <Icon className="w-4 h-4 text-primary" />
         <span className={`text-xs inline-flex items-center gap-0.5 ${trendColor}`}>
           <TrendIcon className="w-3 h-3" />{Math.abs(trend)}%
         </span>
