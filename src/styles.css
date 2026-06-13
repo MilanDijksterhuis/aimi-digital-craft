@@ -5,22 +5,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Fonts — Roobert with Inter fallback */
-  --font-display: "Inter", "Roobert", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Inter", "Roobert", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-roobert: "Inter", "Roobert", ui-sans-serif, system-ui, sans-serif;
+  /* Fonts — Plus Jakarta Sans across the product */
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Radii — Dock pill/card system */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
-  --radius-3xl: 32px;
-  --radius-full: 48px;
+  /* Radii — Lottielab system */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 16px;
+  --radius-full: 9999px;
 
-  /* Semantic shadcn-compatible tokens */
+  /* Semantic shadcn tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -43,77 +42,70 @@
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
 
-  /* Dock brand tokens (also usable directly) */
-  --color-canvas-cream: #faf9f7;
-  --color-surface-ivory: #fbfaf7;
-  --color-pure-white: #ffffff;
-  --color-lavender-mist: #f4f0ff;
-  --color-powder-blue: #d6e4f1;
-  --color-ink-charcoal: #121722;
-  --color-deep-ink: #1d1d1d;
-  --color-mid-graphite: #2d2d2d;
-  --color-slate-gray: #777c86;
-  --color-steel-gray: #a5a5a5;
-  --color-hairline: #efefef;
-  --color-faint-gray: #cccccc;
-  --color-electric-cobalt: #0068f9;
-  --color-deep-cobalt: #024bb1;
-  --color-cerulean: #0074dd;
-  --color-vivid-violet: #6736eb;
-  --color-forest: #046645;
+  /* Lottielab brand tokens */
+  --color-electric-violet: #7270ff;
+  --color-signal-blue: #1560fb;
+  --color-deep-indigo: #2f2b4a;
+  --color-midnight-ink: #1c1a2c;
+  --color-slate: #4b5563;
+  --color-silver: #9ca3af;
+  --color-fog: #d9dbda;
+  --color-mist: #e5e7eb;
+  --color-paper: #ffffff;
+  --color-bone: #f9fafb;
+  --color-pebble: #f3f4f6;
 
-  --shadow-subtle: rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.04) 0px -1px 1px 0px inset, rgba(0, 0, 0, 0.14) 0px 0px 0px 0.5px inset;
-  --shadow-lg: rgba(0, 0, 0, 0.04) 0px 20px 20px -8px;
+  --shadow-subtle: none;
+  --shadow-lg: none;
   --shadow-glow: none;
-  --shadow-card: rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.04) 0px -1px 1px 0px inset, rgba(0, 0, 0, 0.14) 0px 0px 0px 0.5px inset;
+  --shadow-card: none;
 }
 
 :root {
-  --radius: 1rem; /* 16px cards */
+  --radius: 0.5rem; /* 8px cards */
 
-  /* Dock palette — light, cream, cobalt */
-  --background: #faf9f7;
-  --foreground: #121722;
+  /* Lottielab palette — pebble canvas, violet accent */
+  --background: #f3f4f6;
+  --foreground: #2f2b4a;
 
-  --surface: #fbfaf7;
+  --surface: #f9fafb;
   --surface-elevated: #ffffff;
 
   --card: #ffffff;
-  --card-foreground: #121722;
+  --card-foreground: #2f2b4a;
   --popover: #ffffff;
-  --popover-foreground: #121722;
+  --popover-foreground: #2f2b4a;
 
-  /* Electric cobalt is the only filled interactive color */
-  --primary: #0068f9;
+  --primary: #7270ff;
   --primary-foreground: #ffffff;
 
-  --secondary: #fbfaf7;
-  --secondary-foreground: #121722;
-  --muted: #fbfaf7;
-  --muted-foreground: #777c86;
-  --accent: #f4f0ff;
-  --accent-foreground: #121722;
+  --secondary: #f9fafb;
+  --secondary-foreground: #2f2b4a;
+  --muted: #f9fafb;
+  --muted-foreground: #4b5563;
+  --accent: #f3f4f6;
+  --accent-foreground: #2f2b4a;
   --destructive: #c0392b;
   --destructive-foreground: #ffffff;
 
-  --border: #efefef;
-  --input: #efefef;
-  --ring: #0068f9;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #7270ff;
 
-  --chart-1: #0068f9;
-  --chart-2: #6736eb;
-  --chart-3: #046645;
-  --chart-4: #0074dd;
-  --chart-5: #121722;
+  --chart-1: #7270ff;
+  --chart-2: #1560fb;
+  --chart-3: #4b5563;
+  --chart-4: #9ca3af;
+  --chart-5: #1c1a2c;
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #121722;
-  --sidebar-primary: #0068f9;
+  --sidebar-foreground: #2f2b4a;
+  --sidebar-primary: #7270ff;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #fbfaf7;
-  --sidebar-accent-foreground: #121722;
-  --sidebar-border: #efefef;
-  --sidebar-ring: #0068f9;
+  --sidebar-accent: #f9fafb;
+  --sidebar-accent-foreground: #2f2b4a;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #7270ff;
 }
 
 @layer base {
@@ -131,54 +123,51 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.56;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: "ss01" on, "kern" on;
-    position: relative;
+    font-feature-settings: "ss01" on, "cv11" on;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-style: normal;
-    letter-spacing: -0.02em;
+    font-weight: 700;
     color: var(--color-foreground);
+    letter-spacing: -0.025em;
   }
 
-  h1 { font-size: clamp(2.75rem, 8vw, 5.25rem); line-height: 1.06; font-weight: 600; }
-  h2 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; font-weight: 600; }
-  h3 { font-size: 1.5rem; line-height: 1.33; }
-  h4 { font-size: 1.25rem; line-height: 1.38; }
+  h1 { font-size: clamp(2.5rem, 6vw, 3.75rem); line-height: 1.0; }
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.11; }
+  h3 { font-size: 2.25rem; line-height: 1.11; }
+  h4 { font-size: 1.5rem; line-height: 1.25; }
 
   @media (max-width: 768px) {
-    h2 { font-size: 1.75rem; }
+    h2 { font-size: 1.875rem; }
+    h3 { font-size: 1.5rem; }
   }
 
-  small, .text-xs { font-size: 13px; letter-spacing: 0.012em; }
+  small, .text-xs { font-size: 12px; letter-spacing: 0.025em; }
 
   ::selection {
-    background: #0068f9;
+    background: #7270ff;
     color: #ffffff;
   }
 
-  /* Inputs — hairline borders, cobalt focus */
   input, textarea, select {
     background-color: #ffffff;
-    border-radius: 12px;
-    border-color: #efefef;
+    border-radius: 8px;
+    border-color: #e5e7eb;
   }
   input:focus-visible, textarea:focus-visible, select:focus-visible {
     outline: none;
-    border-color: #0068f9 !important;
-    box-shadow: 0 0 0 1px #0068f9;
+    border-color: #7270ff !important;
+    box-shadow: none;
   }
-  input::placeholder, textarea::placeholder { color: #a5a5a5; }
+  input::placeholder, textarea::placeholder { color: #9ca3af; }
 
-  /* Scrollbar */
-  * { scrollbar-width: thin; scrollbar-color: #efefef #faf9f7; }
+  * { scrollbar-width: thin; scrollbar-color: #e5e7eb #f3f4f6; }
   *::-webkit-scrollbar { width: 8px; height: 8px; }
-  *::-webkit-scrollbar-track { background: #faf9f7; }
-  *::-webkit-scrollbar-thumb { background: #efefef; border-radius: 4px; }
+  *::-webkit-scrollbar-track { background: #f3f4f6; }
+  *::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -202,7 +191,7 @@ html.high-contrast {
   --muted-foreground: #000000;
   --border: #000000;
   --input: #000000;
-  --primary: #024bb1;
+  --primary: #4b48d6;
   --primary-foreground: #ffffff;
   --accent: #ffffff;
   --accent-foreground: #000000;
@@ -210,8 +199,8 @@ html.high-contrast {
 
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, #12172210 1px, transparent 1px),
-    linear-gradient(to bottom, #12172210 1px, transparent 1px);
+    linear-gradient(to right, #2f2b4a08 1px, transparent 1px),
+    linear-gradient(to bottom, #2f2b4a08 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
 }
@@ -226,52 +215,50 @@ html.high-contrast {
   box-shadow: none;
 }
 
-/* Editorial section label */
+/* Eyebrow / mono label */
 .section-label {
   font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.077em;
-  text-transform: uppercase;
-  color: #777c86;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  color: #7270ff;
 }
 
-/* Primary filled pill button — Dock cobalt */
+/* Primary filled button — Lottielab violet */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #0068f9;
+  background: #7270ff;
   color: #ffffff;
-  border-radius: 48px;
+  border-radius: 12px;
   padding: 12px 24px;
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
   letter-spacing: normal;
   transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.btn-primary:hover { background: #024bb1; }
+.btn-primary:hover { background: #5d5bef; }
 .btn-primary .arrow { transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1); }
 .btn-primary:hover .arrow { transform: translateX(4px); }
 
-/* Ghost / neutral pill button */
+/* Outlined violet button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   background: #ffffff;
-  color: #121722;
-  border: 1px solid #efefef;
-  border-radius: 48px;
-  padding: 12px 24px;
-  font-weight: 500;
+  color: #7270ff;
+  border: 1px solid #7270ff;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-weight: 600;
   font-size: 15px;
-  letter-spacing: normal;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.btn-secondary:hover { background: #fbfaf7; border-color: #d6e4f1; }
+.btn-secondary:hover { background: #f9fafb; }
 
 * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
