@@ -1128,26 +1128,26 @@ function OverviewSection({
       )}
 
       {/* Extra changes banner */}
-      <section className="rounded-lg p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style={{ background: "#1C1917", color: "#F5F0E8" }}>
+      <section className="rounded-lg border border-border bg-card p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
         <div>
-          <h3 className="font-display text-xl font-semibold">Meer changes nodig?</h3>
-          <p className="text-sm opacity-80 mt-1">€20 per extra change, direct verwerkt door ons team.</p>
+          <h3 className="font-display text-xl font-semibold text-foreground">Meer changes nodig?</h3>
+          <p className="text-sm text-muted-foreground mt-1">€20 per extra change, direct verwerkt door ons team.</p>
         </div>
         <div className="flex flex-col items-start sm:items-end gap-2">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setPurchaseQty(Math.max(1, purchaseQty - 1))}
-              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
               aria-label="Minder"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-8 text-center text-sm font-medium">{purchaseQty}</span>
+            <span className="w-8 text-center text-sm font-medium text-foreground">{purchaseQty}</span>
             <button
               type="button"
               onClick={() => setPurchaseQty(Math.min(50, purchaseQty + 1))}
-              className="w-8 h-8 rounded-md border border-white/20 flex items-center justify-center hover:bg-white/10"
+              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
               aria-label="Meer"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -1155,13 +1155,12 @@ function OverviewSection({
             <button
               onClick={onBuy}
               disabled={buying}
-              className="ml-2 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
-              style={{ background: "#D4622A", color: "#F5F0E8" }}
+              className="btn-primary ml-2 text-sm !py-2 !px-4 disabled:opacity-50"
             >
               {buying ? "Bezig…" : "Aanvragen"}
             </button>
           </div>
-          <p className="text-xs opacity-70">Totaal: €{purchaseQty * 20}</p>
+          <p className="text-xs text-muted-foreground">Totaal: €{purchaseQty * 20}</p>
         </div>
       </section>
     </div>
