@@ -600,7 +600,7 @@ function PortalPage() {
                 });
               }}
               disabled={buyM.isPending}
-              style={{ background: "#D4622A", color: "#F5F0E8" }}
+              className="btn-primary"
             >
               {buyM.isPending ? "Bezig…" : "Ja, aanvragen en factuur ontvangen"}
             </Button>
