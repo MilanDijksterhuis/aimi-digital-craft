@@ -1044,10 +1044,10 @@ function OverviewSection({
               {used} van {totalQuota} gebruikt
             </span>
           </div>
-          <div className="h-3 w-full rounded-full overflow-hidden" style={{ background: "#E8E3D8" }}>
+          <div className="h-3 w-full rounded-full overflow-hidden bg-muted">
             <div
               className="h-full transition-all"
-              style={{ width: `${pct}%`, background: exhausted ? "#C0392B" : "#D4622A" }}
+              style={{ width: `${pct}%`, background: exhausted ? "var(--destructive)" : "var(--primary)" }}
             />
           </div>
           <p className={`mt-3 text-sm ${exhausted ? "text-destructive" : "text-muted-foreground"}`}>
