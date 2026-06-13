@@ -834,8 +834,7 @@ function ChangeCard({
           {k === "review" && (
             <>
               <button
-                className="text-sm rounded-md px-4 py-1.5 font-medium"
-                style={{ background: "#2E7D32", color: "#fff" }}
+                className="btn-primary text-sm !py-1.5 !px-4"
                 onClick={() => alert("Neem contact op met AIMI om goed te keuren.")}
               >
                 Goedkeuren
