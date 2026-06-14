@@ -876,7 +876,9 @@ function ChangeCard({
             </>
           )}
           {k === "afgerond" && (
-            <span className="text-sm text-muted-foreground">⭐ Beoordeel deze change</span>
+            <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+              <Star className="w-4 h-4" /> Beoordeel deze change
+            </span>
           )}
         </div>
       </div>
