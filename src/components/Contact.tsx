@@ -140,8 +140,7 @@ export function Contact() {
             className="mt-8 rounded-lg border border-border bg-card overflow-hidden"
           >
             <div
-              className="calendly-inline-widget"
-              data-url="https://calendly.com/milan2003"
+              ref={calendlyRef}
               style={{ minWidth: 320, height: 700 }}
             />
           </motion.div>
