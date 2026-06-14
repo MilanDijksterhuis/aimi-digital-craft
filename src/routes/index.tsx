@@ -72,7 +72,7 @@ function Index() {
         <Hero />
         <Services />
         <About />
-        <Work />
+        
         <Pricing />
         <Contact />
       </main>
