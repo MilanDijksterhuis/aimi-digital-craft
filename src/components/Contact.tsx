@@ -17,18 +17,26 @@ export function Contact() {
 
   useEffect(() => {
     if (mode !== "appointment") return;
+    const init = () => {
+      try {
+        (window as any).Calendly?.initInlineWidgets?.();
+      } catch {}
+    };
     const existing = document.querySelector<HTMLScriptElement>(
       'script[src="https://assets.calendly.com/assets/external/widget.js"]'
     );
-    if (existing) {
-      // Re-trigger init if script already loaded
-      (window as any).Calendly?.initInlineWidgets?.();
+    if (existing && (window as any).Calendly) {
+      // Re-init for the newly mounted widget div
+      requestAnimationFrame(init);
       return;
     }
-    const s = document.createElement("script");
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    document.body.appendChild(s);
+    const s = existing ?? document.createElement("script");
+    if (!existing) {
+      s.src = "https://assets.calendly.com/assets/external/widget.js";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+    s.addEventListener("load", init, { once: true });
   }, [mode]);
 
   const onSubmit = async (e: React.FormEvent) => {
