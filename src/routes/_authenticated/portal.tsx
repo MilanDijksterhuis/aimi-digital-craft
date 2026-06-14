@@ -667,36 +667,52 @@ function Stepper({ k }: { k: StatusKey }) {
   if (k === "afgewezen") return null;
   const current = stepIndex(k);
   return (
-    <div className="flex items-center gap-1 overflow-x-auto">
+    <div className="flex items-start gap-1 overflow-x-auto pb-1">
       {STEPS.map((label, i) => {
         const done = i < current;
         const isCurrent = i === current;
+        const isFuture = i > current;
         return (
-          <div key={label} className="flex items-center flex-1 min-w-[80px]">
-            <div className="flex flex-col items-center gap-1">
-              <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold transition-all ${
-                  done || isCurrent
-                    ? "text-primary-foreground"
-                    : "bg-background text-muted-foreground border border-border"
-                }`}
-                style={done || isCurrent ? { background: "#D4622A" } : undefined}
-              >
-                {done ? "OK" : i + 1}
+          <div key={label} className="flex items-start flex-1 min-w-[88px]">
+            <div className="flex flex-col items-center gap-1.5 flex-1">
+              <div className="relative">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-semibold transition-all ${
+                    done
+                      ? "bg-primary text-primary-foreground border border-primary"
+                      : isCurrent
+                        ? "bg-primary text-primary-foreground border border-primary"
+                        : "bg-background text-muted-foreground border border-border"
+                  }`}
+                >
+                  {done ? <Check className="w-4 h-4" strokeWidth={2.5} /> : i + 1}
+                </div>
                 {isCurrent && (
                   <span
-                    className="absolute w-7 h-7 rounded-full pulse-dot pointer-events-none"
-                    style={{ boxShadow: "0 0 0 3px rgba(212,98,42,0.25)" }}
+                    className="absolute inset-0 rounded-full pulse-dot pointer-events-none"
+                    style={{ boxShadow: "0 0 0 4px rgba(114,112,255,0.22)" }}
                     aria-hidden
                   />
                 )}
               </div>
-              <span className={`text-[10px] text-center whitespace-nowrap ${isCurrent ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+              <span
+                className={`text-[11px] text-center whitespace-nowrap leading-tight ${
+                  isCurrent
+                    ? "text-foreground font-semibold"
+                    : done
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                }`}
+              >
                 {label}
               </span>
             </div>
             {i < STEPS.length - 1 && (
-              <div className={`flex-1 h-px mx-1 mb-5 ${i < current ? "bg-primary" : "bg-border"}`} />
+              <div
+                className={`flex-1 h-0.5 mx-1 mt-4 rounded-full transition-colors ${
+                  i < current ? "bg-primary" : "bg-border"
+                }`}
+              />
             )}
           </div>
         );
