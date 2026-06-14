@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Send, CheckCircle2, Calendar, Mail } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -15,19 +15,22 @@ export function Contact() {
   const [pending, setPending] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
+  const calendlyRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (mode !== "appointment") return;
-    const init = () => {
-      try {
-        (window as any).Calendly?.initInlineWidgets?.();
-      } catch {}
+    const url = "https://calendly.com/milan2003";
+    const mount = () => {
+      const el = calendlyRef.current;
+      if (!el || !(window as any).Calendly) return;
+      el.innerHTML = "";
+      (window as any).Calendly.initInlineWidget({ url, parentElement: el });
     };
     const existing = document.querySelector<HTMLScriptElement>(
       'script[src="https://assets.calendly.com/assets/external/widget.js"]'
     );
-    if (existing && (window as any).Calendly) {
-      // Re-init for the newly mounted widget div
-      requestAnimationFrame(init);
+    if ((window as any).Calendly) {
+      requestAnimationFrame(mount);
       return;
     }
     const s = existing ?? document.createElement("script");
@@ -36,7 +39,7 @@ export function Contact() {
       s.async = true;
       document.body.appendChild(s);
     }
-    s.addEventListener("load", init, { once: true });
+    s.addEventListener("load", mount, { once: true });
   }, [mode]);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -137,8 +140,7 @@ export function Contact() {
             className="mt-8 rounded-lg border border-border bg-card overflow-hidden"
           >
             <div
-              className="calendly-inline-widget"
-              data-url="https://calendly.com/milan2003"
+              ref={calendlyRef}
               style={{ minWidth: 320, height: 700 }}
             />
           </motion.div>

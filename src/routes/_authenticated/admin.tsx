@@ -282,11 +282,11 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                         onClick={() => setActive(it.key)}
                         className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-sm transition-colors"
                         style={{
-                          borderLeft: isActive ? "2px solid #D4622A" : "2px solid transparent",
-                          color: isActive ? "#D4622A" : undefined,
+                          borderLeft: isActive ? "2px solid var(--primary)" : "2px solid transparent",
+                          color: isActive ? "var(--primary)" : undefined,
                           paddingLeft: "8px",
                         }}
-                        onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "#D4622A"; }}
+                        onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "var(--primary)"; }}
                         onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = ""; }}
                       >
                         <span className="flex items-center gap-2 min-w-0">

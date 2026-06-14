@@ -10,6 +10,9 @@ import {
   Minus,
   Plus,
   Globe,
+  Check,
+  Star,
+  ExternalLink,
 } from "lucide-react";
 import {
   getMyDashboard,
@@ -664,36 +667,52 @@ function Stepper({ k }: { k: StatusKey }) {
   if (k === "afgewezen") return null;
   const current = stepIndex(k);
   return (
-    <div className="flex items-center gap-1 overflow-x-auto">
+    <div className="flex items-start gap-1 overflow-x-auto pb-1">
       {STEPS.map((label, i) => {
         const done = i < current;
         const isCurrent = i === current;
+        const isFuture = i > current;
         return (
-          <div key={label} className="flex items-center flex-1 min-w-[80px]">
-            <div className="flex flex-col items-center gap-1">
-              <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold transition-all ${
-                  done || isCurrent
-                    ? "text-primary-foreground"
-                    : "bg-background text-muted-foreground border border-border"
-                }`}
-                style={done || isCurrent ? { background: "#D4622A" } : undefined}
-              >
-                {done ? "OK" : i + 1}
+          <div key={label} className="flex items-start flex-1 min-w-[88px]">
+            <div className="flex flex-col items-center gap-1.5 flex-1">
+              <div className="relative">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-semibold transition-all ${
+                    done
+                      ? "bg-primary text-primary-foreground border border-primary"
+                      : isCurrent
+                        ? "bg-primary text-primary-foreground border border-primary"
+                        : "bg-background text-muted-foreground border border-border"
+                  }`}
+                >
+                  {done ? <Check className="w-4 h-4" strokeWidth={2.5} /> : i + 1}
+                </div>
                 {isCurrent && (
                   <span
-                    className="absolute w-7 h-7 rounded-full pulse-dot pointer-events-none"
-                    style={{ boxShadow: "0 0 0 3px rgba(212,98,42,0.25)" }}
+                    className="absolute inset-0 rounded-full pulse-dot pointer-events-none"
+                    style={{ boxShadow: "0 0 0 4px rgba(114,112,255,0.22)" }}
                     aria-hidden
                   />
                 )}
               </div>
-              <span className={`text-[10px] text-center whitespace-nowrap ${isCurrent ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+              <span
+                className={`text-[11px] text-center whitespace-nowrap leading-tight ${
+                  isCurrent
+                    ? "text-foreground font-semibold"
+                    : done
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                }`}
+              >
                 {label}
               </span>
             </div>
             {i < STEPS.length - 1 && (
-              <div className={`flex-1 h-px mx-1 mb-5 ${i < current ? "bg-primary" : "bg-border"}`} />
+              <div
+                className={`flex-1 h-0.5 mx-1 mt-4 rounded-full transition-colors ${
+                  i < current ? "bg-primary" : "bg-border"
+                }`}
+              />
             )}
           </div>
         );
@@ -723,9 +742,11 @@ function ChangeCard({
     ? [...comments].sort((a: any, b: any) => b.created_at.localeCompare(a.created_at))[0]
     : null;
 
-  // Extract URL out of description prefix "🌐 Website: ..."
-  const urlMatch = desc.match(/🌐 Website: (\S+)/);
+  // Extract URL out of description prefix (legacy "🌐 Website: ..." or "Website: ...")
+  const urlMatch = desc.match(/(?:🌐\s*)?Website:\s*(\S+)/);
   const linkUrl = urlMatch?.[1] ?? websiteUrl;
+  const cleanDesc = desc.replace(/^(?:🌐\s*)?Website:\s*\S+\s*\n?/, "");
+  const displayDesc = longDesc && !expanded ? cleanDesc.slice(0, 180) + "…" : cleanDesc;
 
   return (
     <article
@@ -753,9 +774,9 @@ function ChangeCard({
       {/* Title + description */}
       <div className="mt-3">
         <h3 className="text-[17px] font-semibold text-foreground leading-snug">{r.title}</h3>
-        {desc && (
+        {cleanDesc && (
           <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">
-            {shortDesc}
+            {displayDesc}
             {longDesc && (
               <button
                 onClick={() => setExpanded(!expanded)}
@@ -771,16 +792,23 @@ function ChangeCard({
             href={linkUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 mt-2 text-sm text-primary hover:underline break-all"
+            className="inline-flex items-center gap-1.5 mt-2 text-sm text-primary hover:underline break-all"
           >
+            <Globe className="w-3.5 h-3.5 shrink-0" />
             {linkUrl}
-            <span aria-hidden>↗</span>
+            <ExternalLink className="w-3 h-3 shrink-0" aria-hidden />
           </a>
         )}
       </div>
 
-      {/* Stepper */}
-      <div className="mt-5 relative">
+      {/* Voortgang */}
+      <div className="mt-5 rounded-md border border-border bg-muted/40 p-4">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[11px] uppercase tracking-wide text-muted-foreground font-semibold">Voortgang</span>
+          <span className="text-xs text-foreground font-medium">
+            {k === "afgewezen" ? "Geannuleerd" : `Stap ${stepIndex(k) + 1} van ${STEPS.length} · ${STEPS[stepIndex(k)]}`}
+          </span>
+        </div>
         <Stepper k={k} />
       </div>
 
@@ -848,7 +876,9 @@ function ChangeCard({
             </>
           )}
           {k === "afgerond" && (
-            <span className="text-sm text-muted-foreground">⭐ Beoordeel deze change</span>
+            <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+              <Star className="w-4 h-4" /> Beoordeel deze change
+            </span>
           )}
         </div>
       </div>
