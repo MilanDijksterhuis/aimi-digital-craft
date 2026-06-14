@@ -15,19 +15,22 @@ export function Contact() {
   const [pending, setPending] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
+  const calendlyRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (mode !== "appointment") return;
-    const init = () => {
-      try {
-        (window as any).Calendly?.initInlineWidgets?.();
-      } catch {}
+    const url = "https://calendly.com/milan2003";
+    const mount = () => {
+      const el = calendlyRef.current;
+      if (!el || !(window as any).Calendly) return;
+      el.innerHTML = "";
+      (window as any).Calendly.initInlineWidget({ url, parentElement: el });
     };
     const existing = document.querySelector<HTMLScriptElement>(
       'script[src="https://assets.calendly.com/assets/external/widget.js"]'
     );
-    if (existing && (window as any).Calendly) {
-      // Re-init for the newly mounted widget div
-      requestAnimationFrame(init);
+    if ((window as any).Calendly) {
+      requestAnimationFrame(mount);
       return;
     }
     const s = existing ?? document.createElement("script");
@@ -36,7 +39,7 @@ export function Contact() {
       s.async = true;
       document.body.appendChild(s);
     }
-    s.addEventListener("load", init, { once: true });
+    s.addEventListener("load", mount, { once: true });
   }, [mode]);
 
   const onSubmit = async (e: React.FormEvent) => {
