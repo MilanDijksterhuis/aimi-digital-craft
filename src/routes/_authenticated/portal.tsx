@@ -742,9 +742,11 @@ function ChangeCard({
     ? [...comments].sort((a: any, b: any) => b.created_at.localeCompare(a.created_at))[0]
     : null;
 
-  // Extract URL out of description prefix "🌐 Website: ..."
-  const urlMatch = desc.match(/🌐 Website: (\S+)/);
+  // Extract URL out of description prefix (legacy "🌐 Website: ..." or "Website: ...")
+  const urlMatch = desc.match(/(?:🌐\s*)?Website:\s*(\S+)/);
   const linkUrl = urlMatch?.[1] ?? websiteUrl;
+  const cleanDesc = desc.replace(/^(?:🌐\s*)?Website:\s*\S+\s*\n?/, "");
+  const displayDesc = longDesc && !expanded ? cleanDesc.slice(0, 180) + "…" : cleanDesc;
 
   return (
     <article
