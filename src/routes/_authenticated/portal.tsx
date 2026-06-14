@@ -774,9 +774,9 @@ function ChangeCard({
       {/* Title + description */}
       <div className="mt-3">
         <h3 className="text-[17px] font-semibold text-foreground leading-snug">{r.title}</h3>
-        {desc && (
+        {cleanDesc && (
           <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">
-            {shortDesc}
+            {displayDesc}
             {longDesc && (
               <button
                 onClick={() => setExpanded(!expanded)}
@@ -792,16 +792,23 @@ function ChangeCard({
             href={linkUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 mt-2 text-sm text-primary hover:underline break-all"
+            className="inline-flex items-center gap-1.5 mt-2 text-sm text-primary hover:underline break-all"
           >
+            <Globe className="w-3.5 h-3.5 shrink-0" />
             {linkUrl}
-            <span aria-hidden>↗</span>
+            <ExternalLink className="w-3 h-3 shrink-0" aria-hidden />
           </a>
         )}
       </div>
 
-      {/* Stepper */}
-      <div className="mt-5 relative">
+      {/* Voortgang */}
+      <div className="mt-5 rounded-md border border-border bg-muted/40 p-4">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[11px] uppercase tracking-wide text-muted-foreground font-semibold">Voortgang</span>
+          <span className="text-xs text-foreground font-medium">
+            {k === "afgewezen" ? "Geannuleerd" : `Stap ${stepIndex(k) + 1} van ${STEPS.length} · ${STEPS[stepIndex(k)]}`}
+          </span>
+        </div>
         <Stepper k={k} />
       </div>
 
