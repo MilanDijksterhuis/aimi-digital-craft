@@ -10,6 +10,9 @@ import {
   Minus,
   Plus,
   Globe,
+  Check,
+  Star,
+  ExternalLink,
 } from "lucide-react";
 import {
   getMyDashboard,
