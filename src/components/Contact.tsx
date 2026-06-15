@@ -19,7 +19,7 @@ export function Contact() {
 
   useEffect(() => {
     if (mode !== "appointment") return;
-    const url = "https://calendly.com/milan2003";
+    const url = "https://calendly.com/aimi-development-sales?primary_color=5fa7ff";
     const mount = () => {
       const el = calendlyRef.current;
       if (!el || !(window as any).Calendly) return;
