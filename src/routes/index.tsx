@@ -22,10 +22,12 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Design, development & hosting door Aidan & Milan.",
       },
-      { property: "og:url", content: "https://aimi-digital-craft.lovable.app/" },
+      { property: "og:url", content: "https://aimi-development.nl/" },
+      { property: "og:image", content: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png" },
+      { property: "twitter:image", content: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png" },
     ],
     links: [
-      { rel: "canonical", href: "https://aimi-digital-craft.lovable.app/" },
+      { rel: "canonical", href: "https://aimi-development.nl/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -42,7 +44,9 @@ export const Route = createFileRoute("/")({
           name: "AIMI",
           description:
             "Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.",
-          url: "https://aimi-digital-craft.lovable.app/",
+          url: "https://aimi-development.nl/",
+          logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          image: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
           areaServed: "NL",
           founder: [
             { "@type": "Person", name: "Aidan" },
