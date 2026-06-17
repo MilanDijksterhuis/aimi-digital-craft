@@ -18,8 +18,8 @@ export function Nav() {
       className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border"
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-display italic text-2xl text-foreground">
-          AIMI<span className="text-primary">.</span>
+        <a href="#" className="flex items-center gap-2" aria-label="AIMI home">
+          <img src={logoAsset.url} alt="AIMI" className="h-8 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
           {links.map((l) => (
