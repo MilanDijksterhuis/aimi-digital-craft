@@ -44,7 +44,9 @@ export const Route = createFileRoute("/")({
           name: "AIMI",
           description:
             "Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.",
-          url: "https://aimi-digital-craft.lovable.app/",
+          url: "https://aimi-development.nl/",
+          logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          image: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
           areaServed: "NL",
           founder: [
             { "@type": "Person", name: "Aidan" },
