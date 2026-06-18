@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import logoAsset from "@/assets/aimi-logo.png.asset.json";
 
 const links = [
   { label: "Services", href: "#services" },
