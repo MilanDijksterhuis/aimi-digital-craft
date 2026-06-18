@@ -18,7 +18,7 @@ export function Nav() {
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2" aria-label="AIMI home">
-          <img src={logoAsset.url} alt="AIMI" className="h-8 w-auto" />
+          <span className="text-xl font-semibold tracking-tight text-foreground">AIMI.</span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
           {links.map((l) => (
