@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 
 const services = [
   {
-    num: "01",
     title: "Design & Development",
     short: "Maatwerk in React en TypeScript.",
     desc: "We ontwerpen en bouwen websites die precies passen bij jouw merk en doelgroep. Geen templates, geen compromissen. Wij luisteren naar wat je nodig hebt en leveren een site die werkt.",
@@ -15,7 +14,6 @@ const services = [
     ],
   },
   {
-    num: "02",
     title: "Hosting & Beheer",
     short: "Wij regelen alles achter de schermen.",
     desc: "Wij zorgen voor een stabiele, snelle en veilige omgeving voor jouw website. Van serveropzet tot maandelijkse updates. Jij hoeft er niet naar om te kijken.",
@@ -27,7 +25,6 @@ const services = [
     ],
   },
   {
-    num: "03",
     title: "Performance",
     short: "Snelle laadtijden en sterke SEO scores.",
     desc: "Een trage site kost bezoekers en conversies. Wij optimaliseren je website op snelheid en vindbaarheid. Niet als betaald extra, maar als onderdeel van elk project.",
@@ -39,7 +36,6 @@ const services = [
     ],
   },
   {
-    num: "04",
     title: "Hosting Only",
     short: "Heb je al een site? Wij nemen de hosting over.",
     desc: "Al een bestaande website maar geen zin meer in serverproblemen? Wij migreren jouw site naar onze infrastructuur en zorgen dat alles snel, veilig en up-to-date blijft. Geen setup-kosten.",
@@ -80,7 +76,6 @@ export function Services() {
               const isActive = active === i;
               return (
                 <button
-                  key={s.num}
                   onClick={() => setActive(i)}
                   className="group text-left py-4 pr-4 flex items-start gap-5 transition-all duration-200"
                   style={{ borderColor: "#2a2b2b" }}
@@ -92,7 +87,6 @@ export function Services() {
                       color: isActive ? "#fe2c02" : "#4a4b4b",
                     }}
                   >
-                    {s.num}
                   </span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3">
@@ -159,7 +153,6 @@ export function Services() {
                   className="text-xs mb-3"
                   style={{ color: "#fe2c02", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}
                 >
-                  {current.num}
                 </div>
 
                 <h3
