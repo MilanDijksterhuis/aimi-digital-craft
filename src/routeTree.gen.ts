@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
+import { Route as PrivacybeleidRouteImport } from './routes/privacybeleid'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
@@ -37,9 +39,19 @@ const SetupAdminRoute = SetupAdminRouteImport.update({
   path: '/setup-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacybeleidRoute = PrivacybeleidRouteImport.update({
+  id: '/privacybeleid',
+  path: '/privacybeleid',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
+  id: '/algemene-voorwaarden',
+  path: '/algemene-voorwaarden',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
@@ -85,7 +97,9 @@ const ApiPublicHooksExpireAccountsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/login': typeof LoginRoute
+  '/privacybeleid': typeof PrivacybeleidRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -98,7 +112,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/login': typeof LoginRoute
+  '/privacybeleid': typeof PrivacybeleidRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -113,7 +129,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/login': typeof LoginRoute
+  '/privacybeleid': typeof PrivacybeleidRoute
   '/setup-admin': typeof SetupAdminRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -128,7 +146,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/algemene-voorwaarden'
     | '/login'
+    | '/privacybeleid'
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
@@ -141,7 +161,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/algemene-voorwaarden'
     | '/login'
+    | '/privacybeleid'
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
@@ -155,7 +177,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/algemene-voorwaarden'
     | '/login'
+    | '/privacybeleid'
     | '/setup-admin'
     | '/sitemap.xml'
     | '/track.js'
@@ -170,7 +194,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
   LoginRoute: typeof LoginRoute
+  PrivacybeleidRoute: typeof PrivacybeleidRoute
   SetupAdminRoute: typeof SetupAdminRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrackDotjsRoute: typeof TrackDotjsRoute
@@ -202,11 +228,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetupAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacybeleid': {
+      id: '/privacybeleid'
+      path: '/privacybeleid'
+      fullPath: '/privacybeleid'
+      preLoaderRoute: typeof PrivacybeleidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/algemene-voorwaarden': {
+      id: '/algemene-voorwaarden'
+      path: '/algemene-voorwaarden'
+      fullPath: '/algemene-voorwaarden'
+      preLoaderRoute: typeof AlgemeneVoorwaardenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -287,7 +327,9 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
   LoginRoute: LoginRoute,
+  PrivacybeleidRoute: PrivacybeleidRoute,
   SetupAdminRoute: SetupAdminRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrackDotjsRoute: TrackDotjsRoute,

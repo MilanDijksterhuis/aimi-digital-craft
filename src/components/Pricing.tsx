@@ -10,7 +10,7 @@ const tiers = [
   },
   {
     name: "Pro",
-    price: "€ 750",
+    price: "€ 749",
     desc: "Meerdere pagina's, eigen design en CMS. Voor bedrijven die meer controle willen.",
     features: [
       "Tot 6 pagina's",
