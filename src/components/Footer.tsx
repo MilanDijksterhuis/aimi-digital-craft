@@ -16,7 +16,7 @@ export function Footer() {
             Privacybeleid
           </Link>
           <Link to="/algemene-voorwaarden" className="hover:text-white transition-colors">
-            Algemene voorwaarden
+            Algemene Voorwaarden AIMI
           </Link>
         </div>
       </div>
