@@ -1,12 +1,13 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import heroImg from "../assets/hero-forest.jpg";
 
 export function Hero() {
   return (
     <section
       className="relative min-h-screen flex flex-col"
       style={{
-        backgroundImage: "url('/hero-forest.jpg')",
+        backgroundImage: `url(${heroImg})`,
         backgroundSize: "cover",
         backgroundPosition: "center 30%",
       }}

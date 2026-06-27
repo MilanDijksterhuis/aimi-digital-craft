@@ -69,8 +69,8 @@ function Inner() {
   }
 
   return (
-    <div className="portal-theme min-h-screen bg-[#f9f9f9] text-[#111111]">
-      <header className="border-b border-[#e5e7eb] bg-white/90 backdrop-blur sticky top-0 z-40">
+    <div className="portal-theme min-h-screen" style={{ background: "#f9f9f9", color: "#111111" }}>
+      <header style={{ borderBottom: "1px solid #e5e7eb", background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", position: "sticky", top: 0, zIndex: 40 }}>
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
           <Link to="/" className="font-display font-bold tracking-tight">
             AIMI<span className="text-primary">.</span>
@@ -88,7 +88,7 @@ function Inner() {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6 py-10 bg-[#f9f9f9] text-[#111111]">
+      <main className="mx-auto max-w-7xl px-6 py-10" style={{ color: "#111111" }}>
         <Outlet />
       </main>
     </div>

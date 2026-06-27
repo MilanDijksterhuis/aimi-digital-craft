@@ -25,18 +25,44 @@ export function Nav() {
           </span>
         </a>
 
-        <nav
-          className="hidden md:flex items-center gap-8 text-[13px]"
-          style={{ color: "rgba(255,255,255,0.65)", fontFamily: "Inter, sans-serif" }}
-        >
+        <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a
+            <motion.a
               key={l.href}
               href={l.href}
-              className="hover:text-white transition-colors duration-150"
+              className="relative text-[13px] py-1"
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "Inter, sans-serif" }}
+              whileHover="hover"
+              initial="rest"
             >
-              {l.label}
-            </a>
+              <motion.span
+                variants={{
+                  rest: { color: "rgba(255,255,255,0.65)", y: 0 },
+                  hover: { color: "rgba(255,255,255,1)", y: -1 },
+                }}
+                transition={{ duration: 0.15 }}
+                style={{ display: "inline-block" }}
+              >
+                {l.label}
+              </motion.span>
+              {/* Underline */}
+              <motion.span
+                variants={{
+                  rest: { scaleX: 0, originX: 0 },
+                  hover: { scaleX: 1, originX: 0 },
+                }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "1px",
+                  background: "#fe2c02",
+                  display: "block",
+                }}
+              />
+            </motion.a>
           ))}
         </nav>
 

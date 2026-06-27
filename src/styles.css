@@ -94,7 +94,8 @@
 }
 
 /* ── Portal / Admin override (clean light) ── */
-.portal-theme {
+.portal-theme,
+.portal-theme * {
   --background: #f9f9f9;
   --foreground: #111111;
   --surface: #f3f4f6;
@@ -122,7 +123,52 @@
   --sidebar-accent-foreground: #111111;
   --sidebar-border: #e5e7eb;
   --sidebar-ring: #111111;
+  color-scheme: light;
 }
+
+.portal-theme {
+  background-color: #f9f9f9 !important;
+  color: #111111 !important;
+}
+
+.portal-theme h1,
+.portal-theme h2,
+.portal-theme h3,
+.portal-theme h4,
+.portal-theme h5,
+.portal-theme h6 {
+  color: #111111;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.portal-theme p,
+.portal-theme span,
+.portal-theme td,
+.portal-theme th,
+.portal-theme label,
+.portal-theme li,
+.portal-theme div {
+  color: inherit;
+}
+
+/* Ensure cards in portal are white with dark text */
+.portal-theme .bg-card,
+.portal-theme [class*="bg-card"] {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+.portal-theme .bg-background {
+  background-color: #f9f9f9 !important;
+}
+
+.portal-theme .text-foreground { color: #111111 !important; }
+.portal-theme .text-muted-foreground { color: #6b7280 !important; }
+.portal-theme .text-white { color: #ffffff !important; }
+.portal-theme .border-border { border-color: #e5e7eb !important; }
+.portal-theme .bg-muted { background-color: #f3f4f6 !important; }
+.portal-theme .bg-accent { background-color: #eeeeee !important; }
 
 @layer base {
   * { border-color: var(--color-border); }
