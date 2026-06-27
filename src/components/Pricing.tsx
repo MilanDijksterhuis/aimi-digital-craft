@@ -4,7 +4,7 @@ import { Check, ArrowRight } from "lucide-react";
 const tiers = [
   {
     name: "Starter",
-    price: "€ 500",
+    price: "€ 499",
     desc: "Voor solopreneurs en kleine bedrijven.",
     features: ["1-pagina site", "Mobile-first design", "Hosting (1 jaar)", "Basic SEO"],
   },
