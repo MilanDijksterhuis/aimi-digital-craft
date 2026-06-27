@@ -1,71 +1,230 @@
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 const services = [
   {
     num: "01",
     title: "Design & Development",
-    desc: "Maatwerk in React & TypeScript. We bouwen wat je nodig hebt, niet meer en niet minder.",
+    short: "Maatwerk in React en TypeScript.",
+    desc: "We ontwerpen en bouwen websites die precies passen bij jouw merk en doelgroep. Geen templates, geen compromissen. Wij luisteren naar wat je nodig hebt en leveren een site die werkt.",
+    steps: [
+      "Intake en briefing",
+      "Design concept opstellen",
+      "Bouwen en testen",
+      "Live zetten",
+    ],
   },
   {
     num: "02",
     title: "Hosting & Beheer",
-    desc: "Wij regelen de hosting, updates en monitoring. Jij hoeft er niet naar om te kijken.",
+    short: "Wij regelen alles achter de schermen.",
+    desc: "Wij zorgen voor een stabiele, snelle en veilige omgeving voor jouw website. Van serveropzet tot maandelijkse updates. Jij hoeft er niet naar om te kijken.",
+    steps: [
+      "Server configuratie",
+      "SSL en beveiliging",
+      "Uptime monitoring",
+      "Maandelijkse updates",
+    ],
   },
   {
     num: "03",
     title: "Performance",
-    desc: "Snelle laadtijden en goede SEO-scores. Standaard inbegrepen, geen extra kosten.",
+    short: "Snelle laadtijden en sterke SEO scores.",
+    desc: "Een trage site kost bezoekers en conversies. Wij optimaliseren je website op snelheid en vindbaarheid. Niet als betaald extra, maar als onderdeel van elk project.",
+    steps: [
+      "Core Web Vitals optimalisatie",
+      "SEO technische basis",
+      "Beeldcompressie en caching",
+      "Google PageSpeed rapport",
+    ],
   },
   {
     num: "04",
-    title: "Hosting Only — €30/maand",
-    desc: "Heb je al een site? Wij nemen de hosting over. SSL, backups, updates — geen setup-kosten.",
+    title: "Hosting Only",
+    short: "Heb je al een site? Wij nemen de hosting over.",
+    desc: "Al een bestaande website maar geen zin meer in serverproblemen? Wij migreren jouw site naar onze infrastructuur en zorgen dat alles snel, veilig en up-to-date blijft. Geen setup-kosten.",
+    steps: [
+      "Site migratie",
+      "SSL certificaat",
+      "Automatische backups",
+      "Security updates",
+    ],
+    tag: "30 per maand",
   },
 ];
 
 export function Services() {
+  const [active, setActive] = useState(0);
+  const current = services[active];
+
   return (
     <section id="services" className="py-28" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
+
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-white mb-16 max-w-sm"
+          className="text-white mb-16"
         >
           Wat we doen
         </motion.h2>
 
-        <div className="divide-y" style={{ borderColor: "#2a2b2b" }}>
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="group grid grid-cols-[40px_1fr_24px] items-start gap-8 py-7 cursor-default"
-            >
-              <span className="text-xs pt-1" style={{ color: "#8a8f98", fontFamily: "var(--font-mono)" }}>
-                {s.num}
-              </span>
-              <div>
-                <h3
-                  className="text-white mb-1.5 group-hover:text-[#fe2c02] transition-colors duration-200"
-                  style={{ fontSize: "1.125rem", fontWeight: 500, fontFamily: "Inter, sans-serif", letterSpacing: "-0.01em" }}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-4 lg:gap-8">
+
+          {/* Left — service list */}
+          <div className="flex flex-col divide-y" style={{ borderColor: "#2a2b2b" }}>
+            {services.map((s, i) => {
+              const isActive = active === i;
+              return (
+                <button
+                  key={s.num}
+                  onClick={() => setActive(i)}
+                  className="group text-left py-6 pr-4 flex items-start gap-5 transition-all duration-200"
+                  style={{ borderColor: "#2a2b2b" }}
                 >
-                  {s.title}
+                  <span
+                    className="text-xs pt-1 shrink-0 transition-colors duration-200"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      color: isActive ? "#fe2c02" : "#4a4b4b",
+                    }}
+                  >
+                    {s.num}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="text-sm font-medium transition-colors duration-200"
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          color: isActive ? "#ffffff" : "#8a8f98",
+                        }}
+                      >
+                        {s.title}
+                      </span>
+                      {s.tag && (
+                        <span
+                          className="text-[10px] px-2 py-0.5 shrink-0"
+                          style={{
+                            background: "rgba(254,44,2,0.12)",
+                            color: "#fe2c02",
+                            borderRadius: "9999px",
+                            fontFamily: "Inter, sans-serif",
+                            border: "1px solid rgba(254,44,2,0.25)",
+                          }}
+                        >
+                          {s.tag}
+                        </span>
+                      )}
+                    </div>
+                    <p
+                      className="text-xs mt-1 transition-colors duration-200"
+                      style={{
+                        color: isActive ? "#8a8f98" : "#3a3b3b",
+                        fontFamily: "Inter, sans-serif",
+                      }}
+                    >
+                      {s.short}
+                    </p>
+                  </div>
+                  {/* Active indicator */}
+                  <motion.div
+                    animate={{ opacity: isActive ? 1 : 0, scaleY: isActive ? 1 : 0.4 }}
+                    transition={{ duration: 0.2 }}
+                    className="w-px self-stretch shrink-0"
+                    style={{ background: "#fe2c02", originY: "center" }}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right — detail panel */}
+          <div
+            className="relative rounded-2xl p-8 lg:p-10 overflow-hidden"
+            style={{ background: "#1e1f1f", minHeight: 340 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div
+                  className="text-xs mb-6"
+                  style={{ color: "#fe2c02", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}
+                >
+                  {current.num}
+                </div>
+
+                <h3
+                  className="text-white mb-4"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                    fontWeight: 300,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {current.title}
                 </h3>
-                <p className="text-sm" style={{ color: "#8a8f98" }}>{s.desc}</p>
-              </div>
-              <ArrowRight
-                className="w-4 h-4 mt-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-0.5"
-                style={{ color: "#fe2c02" }}
-              />
-            </motion.div>
-          ))}
+
+                <p
+                  className="text-sm leading-relaxed mb-10"
+                  style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+                >
+                  {current.desc}
+                </p>
+
+                <div className="flex flex-col gap-3">
+                  {current.steps.map((step, i) => (
+                    <motion.div
+                      key={step}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.22, delay: i * 0.06 }}
+                      className="flex items-center gap-3"
+                    >
+                      <div
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ background: "#49de80" }}
+                      />
+                      <span
+                        className="text-sm"
+                        style={{ color: "#ffffff", fontFamily: "Inter, sans-serif", fontWeight: 400 }}
+                      >
+                        {step}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.a
+                  href="#contact"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.25 }}
+                  className="inline-flex items-center gap-2 mt-10 text-sm font-medium hover:opacity-75 transition-opacity"
+                  style={{
+                    color: "#ffffff",
+                    fontFamily: "Inter, sans-serif",
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: "9999px",
+                    padding: "10px 20px",
+                  }}
+                >
+                  Neem contact op
+                </motion.a>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </section>
