@@ -60,7 +60,6 @@ function MagneticButton() {
 export function Hero() {
   return (
     <section className="relative pt-40 pb-32 overflow-hidden">
-      <div className="absolute inset-0 grid-bg pointer-events-none opacity-60" />
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -75,7 +74,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="font-display italic font-normal text-[clamp(3rem,9vw,6rem)] leading-[0.98] tracking-tight text-foreground"
+          className="font-display font-extrabold text-[clamp(3rem,9vw,5.5rem)] leading-[1.0] tracking-[-0.04em] text-foreground"
         >
           Websites die
           <br />
@@ -108,14 +107,14 @@ export function Hero() {
           className="mt-16 flex items-center justify-center gap-3 text-sm text-muted-foreground"
         >
           <div className="flex -space-x-2">
-            <div className="w-8 h-8 rounded-full bg-primary border-2 border-background grid place-items-center font-display italic text-primary-foreground text-sm">
+            <div className="w-7 h-7 rounded-full bg-primary border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-xs">
               A
             </div>
-            <div className="w-8 h-8 rounded-full bg-foreground border-2 border-background grid place-items-center font-display italic text-background text-sm">
+            <div className="w-7 h-7 rounded-full bg-surface-elevated border-2 border-background grid place-items-center font-display font-bold text-foreground text-xs">
               M
             </div>
           </div>
-          <span className="text-xs uppercase tracking-[0.12em]">Aidan & Milan</span>
+          <span className="text-xs text-muted-foreground tracking-wide">Aidan & Milan</span>
         </motion.div>
       </div>
     </section>

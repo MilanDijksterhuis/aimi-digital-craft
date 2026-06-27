@@ -5,21 +5,18 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Fonts — Plus Jakarta Sans across the product */
-  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Radii — Lottielab system */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-2xl: 12px;
-  --radius-3xl: 16px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-3xl: 12px;
   --radius-full: 9999px;
 
-  /* Semantic shadcn tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,19 +39,6 @@
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
 
-  /* Lottielab brand tokens */
-  --color-electric-violet: #7270ff;
-  --color-signal-blue: #1560fb;
-  --color-deep-indigo: #2f2b4a;
-  --color-midnight-ink: #1c1a2c;
-  --color-slate: #4b5563;
-  --color-silver: #9ca3af;
-  --color-fog: #d9dbda;
-  --color-mist: #e5e7eb;
-  --color-paper: #ffffff;
-  --color-bone: #f9fafb;
-  --color-pebble: #f3f4f6;
-
   --shadow-subtle: none;
   --shadow-lg: none;
   --shadow-glow: none;
@@ -62,50 +46,51 @@
 }
 
 :root {
-  --radius: 0.5rem; /* 8px cards */
+  --radius: 0.375rem;
 
-  /* Lottielab palette — pebble canvas, violet accent */
-  --background: #f3f4f6;
-  --foreground: #2f2b4a;
+  /* Dark editorial palette */
+  --background: #0d0d0d;
+  --foreground: #ede9e3;
 
-  --surface: #f9fafb;
-  --surface-elevated: #ffffff;
+  --surface: #111111;
+  --surface-elevated: #181818;
 
-  --card: #ffffff;
-  --card-foreground: #2f2b4a;
-  --popover: #ffffff;
-  --popover-foreground: #2f2b4a;
+  --card: #141414;
+  --card-foreground: #ede9e3;
+  --popover: #1a1a1a;
+  --popover-foreground: #ede9e3;
 
-  --primary: #7270ff;
-  --primary-foreground: #ffffff;
+  /* Warm gold accent */
+  --primary: #c8a96e;
+  --primary-foreground: #0d0d0d;
 
-  --secondary: #f9fafb;
-  --secondary-foreground: #2f2b4a;
-  --muted: #f9fafb;
-  --muted-foreground: #4b5563;
-  --accent: #f3f4f6;
-  --accent-foreground: #2f2b4a;
-  --destructive: #c0392b;
+  --secondary: #1e1e1e;
+  --secondary-foreground: #ede9e3;
+  --muted: #1a1a1a;
+  --muted-foreground: #888880;
+  --accent: #1e1e1e;
+  --accent-foreground: #ede9e3;
+  --destructive: #e05252;
   --destructive-foreground: #ffffff;
 
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #7270ff;
+  --border: #242424;
+  --input: #1e1e1e;
+  --ring: #c8a96e;
 
-  --chart-1: #7270ff;
-  --chart-2: #1560fb;
-  --chart-3: #4b5563;
-  --chart-4: #9ca3af;
-  --chart-5: #1c1a2c;
+  --chart-1: #c8a96e;
+  --chart-2: #ede9e3;
+  --chart-3: #888880;
+  --chart-4: #444440;
+  --chart-5: #0d0d0d;
 
-  --sidebar: #ffffff;
-  --sidebar-foreground: #2f2b4a;
-  --sidebar-primary: #7270ff;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f9fafb;
-  --sidebar-accent-foreground: #2f2b4a;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #7270ff;
+  --sidebar: #111111;
+  --sidebar-foreground: #ede9e3;
+  --sidebar-primary: #c8a96e;
+  --sidebar-primary-foreground: #0d0d0d;
+  --sidebar-accent: #1e1e1e;
+  --sidebar-accent-foreground: #ede9e3;
+  --sidebar-border: #242424;
+  --sidebar-ring: #c8a96e;
 }
 
 @layer base {
@@ -123,51 +108,50 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: "ss01" on, "cv11" on;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--color-foreground);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
 
-  h1 { font-size: clamp(2.5rem, 6vw, 3.75rem); line-height: 1.0; }
-  h2 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.11; }
-  h3 { font-size: 2.25rem; line-height: 1.11; }
-  h4 { font-size: 1.5rem; line-height: 1.25; }
+  h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
 
   @media (max-width: 768px) {
-    h2 { font-size: 1.875rem; }
-    h3 { font-size: 1.5rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.25rem; }
   }
 
-  small, .text-xs { font-size: 12px; letter-spacing: 0.025em; }
-
   ::selection {
-    background: #7270ff;
-    color: #ffffff;
+    background: #c8a96e;
+    color: #0d0d0d;
   }
 
   input, textarea, select {
-    background-color: #ffffff;
-    border-radius: 8px;
-    border-color: #e5e7eb;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    border-color: #242424;
+    color: #ede9e3;
   }
   input:focus-visible, textarea:focus-visible, select:focus-visible {
     outline: none;
-    border-color: #7270ff !important;
+    border-color: #c8a96e !important;
     box-shadow: none;
   }
-  input::placeholder, textarea::placeholder { color: #9ca3af; }
+  input::placeholder, textarea::placeholder { color: #555550; }
 
-  * { scrollbar-width: thin; scrollbar-color: #e5e7eb #f3f4f6; }
-  *::-webkit-scrollbar { width: 8px; height: 8px; }
-  *::-webkit-scrollbar-track { background: #f3f4f6; }
-  *::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+  * { scrollbar-width: thin; scrollbar-color: #2a2a2a #111111; }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: #111111; }
+  *::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -179,30 +163,27 @@ html.font-md { font-size: 16px; }
 html.font-lg { font-size: 18px; }
 
 html.high-contrast {
-  --background: #ffffff;
-  --foreground: #000000;
-  --surface: #ffffff;
-  --surface-elevated: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #000000;
-  --popover: #ffffff;
-  --popover-foreground: #000000;
-  --muted: #f0f0f0;
-  --muted-foreground: #000000;
-  --border: #000000;
-  --input: #000000;
-  --primary: #4b48d6;
-  --primary-foreground: #ffffff;
-  --accent: #ffffff;
-  --accent-foreground: #000000;
+  --background: #000000;
+  --foreground: #ffffff;
+  --surface: #0a0a0a;
+  --surface-elevated: #111111;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --muted: #111111;
+  --muted-foreground: #aaaaaa;
+  --border: #333333;
+  --input: #1a1a1a;
+  --primary: #d4b87e;
+  --primary-foreground: #000000;
+  --accent: #111111;
+  --accent-foreground: #ffffff;
 }
 
+/* No grid — clean background */
 @utility grid-bg {
-  background-image:
-    linear-gradient(to right, #2f2b4a08 1px, transparent 1px),
-    linear-gradient(to bottom, #2f2b4a08 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
+  background: none;
 }
 
 @utility text-gradient {
@@ -215,50 +196,51 @@ html.high-contrast {
   box-shadow: none;
 }
 
-/* Eyebrow / mono label */
+/* Eyebrow label */
 .section-label {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  color: #7270ff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c8a96e;
 }
 
-/* Primary filled button — Lottielab violet */
+/* Primary button */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #7270ff;
-  color: #ffffff;
-  border-radius: 12px;
+  background: #c8a96e;
+  color: #0d0d0d;
+  border-radius: 4px;
   padding: 12px 24px;
   font-weight: 600;
-  font-size: 16px;
-  letter-spacing: normal;
-  transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  transition: background 180ms ease, opacity 180ms ease;
 }
-.btn-primary:hover { background: #5d5bef; }
-.btn-primary .arrow { transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1); }
+.btn-primary:hover { background: #b8975c; }
+.btn-primary .arrow { transition: transform 180ms ease; }
 .btn-primary:hover .arrow { transform: translateX(4px); }
 
-/* Outlined violet button */
+/* Secondary button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #ffffff;
-  color: #7270ff;
-  border: 1px solid #7270ff;
-  border-radius: 12px;
-  padding: 10px 20px;
-  font-weight: 600;
-  font-size: 15px;
-  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  color: #ede9e3;
+  border: 1px solid #333330;
+  border-radius: 4px;
+  padding: 11px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: border-color 180ms ease, background 180ms ease;
 }
-.btn-secondary:hover { background: #f9fafb; }
+.btn-secondary:hover { border-color: #c8a96e; background: #1a1a1a; }
 
 * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
