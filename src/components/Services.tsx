@@ -58,7 +58,7 @@ export function Services() {
   const current = services[active];
 
   return (
-    <section id="services" className="py-28" style={{ background: "#161717" }}>
+    <section id="services" className="py-16" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.h2
@@ -66,7 +66,8 @@ export function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-white mb-16"
+          className="text-white mb-8"
+          style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
         >
           Wat we doen
         </motion.h2>
@@ -81,7 +82,7 @@ export function Services() {
                 <button
                   key={s.num}
                   onClick={() => setActive(i)}
-                  className="group text-left py-6 pr-4 flex items-start gap-5 transition-all duration-200"
+                  className="group text-left py-4 pr-4 flex items-start gap-5 transition-all duration-200"
                   style={{ borderColor: "#2a2b2b" }}
                 >
                   <span
@@ -143,8 +144,8 @@ export function Services() {
 
           {/* Right — detail panel */}
           <div
-            className="relative rounded-2xl p-8 lg:p-10 overflow-hidden"
-            style={{ background: "#1e1f1f", minHeight: 340 }}
+            className="relative rounded-2xl p-6 lg:p-8 overflow-hidden"
+            style={{ background: "#1e1f1f", minHeight: 300 }}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -155,17 +156,17 @@ export function Services() {
                 transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div
-                  className="text-xs mb-6"
+                  className="text-xs mb-3"
                   style={{ color: "#fe2c02", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}
                 >
                   {current.num}
                 </div>
 
                 <h3
-                  className="text-white mb-4"
+                  className="text-white mb-3"
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                    fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
                     fontWeight: 300,
                     letterSpacing: "-0.02em",
                     lineHeight: 1.15,
@@ -175,7 +176,7 @@ export function Services() {
                 </h3>
 
                 <p
-                  className="text-sm leading-relaxed mb-10"
+                  className="text-sm leading-relaxed mb-6"
                   style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
                 >
                   {current.desc}
@@ -209,7 +210,7 @@ export function Services() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.25 }}
-                  className="inline-flex items-center gap-2 mt-10 text-sm font-medium hover:opacity-75 transition-opacity"
+                  className="inline-flex items-center gap-2 mt-6 text-sm font-medium hover:opacity-75 transition-opacity"
                   style={{
                     color: "#ffffff",
                     fontFamily: "Inter, sans-serif",

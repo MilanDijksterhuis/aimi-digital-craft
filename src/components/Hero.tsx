@@ -30,7 +30,7 @@ export function Hero() {
           className="text-white max-w-3xl"
           style={{
             fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: "clamp(3rem, 7vw, 5.5rem)",
+            fontSize: "clamp(4rem, 9vw, 7.5rem)",
             fontWeight: 300,
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
@@ -45,7 +45,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 max-w-md text-sm leading-relaxed"
+          className="mt-8 max-w-lg text-base leading-relaxed"
           style={{ color: "rgba(255,255,255,0.72)" }}
         >
           Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen
@@ -56,7 +56,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex items-center gap-4"
+          className="mt-10 flex items-center gap-4 text-base"
         >
           <a href="#contact" className="btn-primary group">
             Neem contact op
@@ -79,13 +79,13 @@ export function Hero() {
             {["A", "M"].map((l) => (
               <div
                 key={l}
-                className="w-7 h-7 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm grid place-items-center text-white text-xs font-medium"
+                className="w-8 h-8 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm grid place-items-center text-white text-sm font-medium"
               >
                 {l}
               </div>
             ))}
           </div>
-          <span className="text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
+          <span className="text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
             Aidan & Milan
           </span>
         </motion.div>
@@ -99,7 +99,7 @@ export function Hero() {
         className="relative flex justify-center pb-10"
       >
         <div className="flex flex-col items-center gap-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
-          <span className="text-[10px] tracking-widest uppercase" style={{ fontFamily: "Inter, sans-serif" }}>
+          <span className="text-xs tracking-widest uppercase" style={{ fontFamily: "Inter, sans-serif" }}>
             scroll
           </span>
           <div className="w-px h-8 bg-white/20" />
