@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { About } from "@/components/About";
+import { CookieBanner } from "@/components/CookieBanner";
 
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
@@ -83,6 +84,7 @@ function Index() {
         <Contact />
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

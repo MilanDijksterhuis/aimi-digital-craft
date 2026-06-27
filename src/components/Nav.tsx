@@ -18,7 +18,7 @@ export function Nav() {
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
         <a href="#" aria-label="AIMI home">
           <span
-            className="font-medium text-white text-base tracking-tight"
+            className="font-medium text-white text-3xl tracking-tight"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
@@ -30,7 +30,7 @@ export function Nav() {
             <motion.a
               key={l.href}
               href={l.href}
-              className="relative text-[13px] py-1"
+              className="relative text-[15px] py-1"
               style={{ color: "rgba(255,255,255,0.65)", fontFamily: "Inter, sans-serif" }}
               whileHover="hover"
               initial="rest"
@@ -67,10 +67,10 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="/portal" className="btn-secondary !text-[13px] !py-1.5 !px-4">
+          <a href="/portal" className="btn-secondary !text-[15px] !py-1.5 !px-4">
             Portaal
           </a>
-          <a href="#contact" className="btn-primary !text-[13px] !py-1.5 !px-4">
+          <a href="#contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
             Contact
           </a>
         </div>
