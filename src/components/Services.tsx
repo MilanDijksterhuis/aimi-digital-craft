@@ -1,58 +1,58 @@
 import { motion } from "motion/react";
-import { Code2, Server, Gauge, Cloud } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
-    icon: Code2,
+    num: "01",
     title: "Design & Development",
     desc: "Maatwerk in React & TypeScript. We bouwen wat je nodig hebt, niet meer en niet minder.",
   },
   {
-    icon: Server,
+    num: "02",
     title: "Hosting & Beheer",
     desc: "Wij regelen de hosting, updates en monitoring. Jij hoeft er niet naar om te kijken.",
   },
   {
-    icon: Gauge,
+    num: "03",
     title: "Performance",
     desc: "Snelle laadtijden en goede SEO-scores. Niet als extra — standaard inbegrepen.",
   },
   {
-    icon: Cloud,
+    num: "04",
     title: "Hosting Only — €30/maand",
-    desc: "Heb je al een site maar wil je die snel en veilig laten hosten? Wij nemen het over. SSL, backups, updates — geen setup-kosten.",
-    highlight: true,
+    desc: "Heb je al een site? Wij nemen de hosting over. SSL, backups en updates — geen setup-kosten.",
   },
 ];
 
 export function Services() {
   return (
-    <section id="services" className="py-32 relative">
+    <section id="services" className="py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
-          <div>
-            <p className="section-label mb-4">Wat we doen</p>
-            <h2 className="max-w-xl">
-              Websites bouwen en <em className="text-primary">onderhouden</em>.
-            </h2>
-          </div>
+        <div className="mb-16">
+          <p className="section-label mb-4">Wat we doen</p>
+          <h2 className="max-w-sm">
+            Websites bouwen en onderhouden.
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="divide-y divide-border border-y border-border">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className={`group relative p-6 rounded-lg border bg-card transition-colors hover:border-primary/40 ${
-                s.highlight ? "border-primary/40 bg-primary/5" : "border-border"
-              }`}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="group grid grid-cols-[48px_1fr_auto] items-center gap-8 py-7 cursor-default"
             >
-              <s.icon className="w-6 h-6 text-primary mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl mb-2">{s.title}</h3>
-              <p className="text-muted-foreground">{s.desc}</p>
+              <span className="font-mono text-xs text-muted-foreground">{s.num}</span>
+              <div>
+                <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors duration-200">
+                  {s.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{s.desc}</p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" />
             </motion.div>
           ))}
         </div>

@@ -23,8 +23,8 @@ function MagneticButton() {
     const el = ref.current;
     if (el) {
       el.animate(
-        [{ transform: "scale(1)" }, { transform: "scale(0.94)" }, { transform: "scale(1)" }],
-        { duration: 220, easing: "ease-out" },
+        [{ transform: "scale(1)" }, { transform: "scale(0.96)" }, { transform: "scale(1)" }],
+        { duration: 200, easing: "ease-out" },
       );
     }
     setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 110);
@@ -38,84 +38,97 @@ function MagneticButton() {
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ x: sx, y: sy }}
-      whileHover={{ scale: 1.06 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group inline-flex items-center gap-2 px-7 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm hover:opacity-80 transition-opacity duration-200"
+      className="group inline-flex items-center gap-3 px-7 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm hover:opacity-80 transition-opacity duration-200"
     >
       Neem contact op
-      <motion.span
-        className="inline-block"
-        variants={{ rest: { x: 0 }, hover: { x: 5 } }}
-        initial="rest"
-        whileHover="hover"
-        transition={{ type: "spring", stiffness: 400, damping: 18 }}
-      >
-        <ArrowRight className="w-4 h-4" />
-      </motion.span>
+      <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
     </motion.a>
   );
 }
 
 export function Hero() {
   return (
-    <section className="relative pt-40 pb-32 overflow-hidden">
-      <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="section-label mb-6"
-        >
-          Web agency — Aidan & Milan
-        </motion.div>
+    <section className="relative min-h-[90vh] flex items-center pt-24 pb-20">
+      <div className="mx-auto max-w-7xl px-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-end">
 
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="font-display font-extrabold text-[clamp(3rem,9vw,5.5rem)] leading-[1.0] tracking-[-0.04em] text-foreground"
-        >
-          Websites die
-          <br />
-          écht <span className="text-primary">werken.</span>
-        </motion.h1>
+          {/* Left — main content */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="section-label mb-8"
+            >
+              Web agency — Aidan & Milan
+            </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 max-w-lg mx-auto text-base text-muted-foreground"
-        >
-          Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen genoegen nemen
-          met een template. Vaste prijs, geen verrassingen.
-        </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="font-display font-extrabold leading-[1.0] tracking-[-0.03em] text-foreground"
+              style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
+            >
+              Websites die
+              <br />
+              écht <em className="not-italic text-primary">werken.</em>
+            </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 flex items-center justify-center"
-        >
-          <MagneticButton />
-        </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="mt-6 max-w-md text-base text-muted-foreground leading-relaxed"
+            >
+              Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen genoegen nemen
+              met een template. Vaste prijs, geen verrassingen.
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="mt-16 flex items-center justify-center gap-3 text-sm text-muted-foreground"
-        >
-          <div className="flex -space-x-2">
-            <div className="w-7 h-7 rounded-full bg-primary border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-xs">
-              A
-            </div>
-            <div className="w-7 h-7 rounded-full bg-surface-elevated border-2 border-background grid place-items-center font-display font-bold text-foreground text-xs">
-              M
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.22 }}
+              className="mt-10 flex flex-wrap items-center gap-6"
+            >
+              <MagneticButton />
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-primary border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-xs">
+                    A
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-foreground/10 border-2 border-background grid place-items-center font-display font-bold text-foreground text-xs">
+                    M
+                  </div>
+                </div>
+                <span className="text-xs text-muted-foreground">Aidan & Milan</span>
+              </div>
+            </motion.div>
           </div>
-          <span className="text-xs text-muted-foreground tracking-wide">Aidan & Milan</span>
-        </motion.div>
+
+          {/* Right — vertical stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="hidden lg:flex flex-col gap-8 pb-2 text-right"
+          >
+            {[
+              ["12+", "projecten"],
+              ["< 2w", "doorlooptijd"],
+              ["€499", "vanaf"],
+            ].map(([num, label]) => (
+              <div key={label}>
+                <div className="font-display font-bold text-3xl text-foreground">{num}</div>
+                <div className="text-xs text-muted-foreground mt-0.5 uppercase tracking-widest">{label}</div>
+              </div>
+            ))}
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
