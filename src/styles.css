@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Syne", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -48,49 +48,49 @@
 :root {
   --radius: 0.375rem;
 
-  /* Dark editorial palette */
-  --background: #0d0d0d;
-  --foreground: #ede9e3;
+  /* Warm off-white, near-black text */
+  --background: #f8f7f4;
+  --foreground: #1a1a18;
 
-  --surface: #111111;
-  --surface-elevated: #181818;
+  --surface: #f2f1ee;
+  --surface-elevated: #ffffff;
 
-  --card: #141414;
-  --card-foreground: #ede9e3;
-  --popover: #1a1a1a;
-  --popover-foreground: #ede9e3;
+  --card: #ffffff;
+  --card-foreground: #1a1a18;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a18;
 
-  /* Warm gold accent */
-  --primary: #c8a96e;
-  --primary-foreground: #0d0d0d;
+  /* Primary = deep ink blue — understated, professional */
+  --primary: #1c2b3a;
+  --primary-foreground: #f8f7f4;
 
-  --secondary: #1e1e1e;
-  --secondary-foreground: #ede9e3;
-  --muted: #1a1a1a;
-  --muted-foreground: #888880;
-  --accent: #1e1e1e;
-  --accent-foreground: #ede9e3;
-  --destructive: #e05252;
+  --secondary: #f2f1ee;
+  --secondary-foreground: #1a1a18;
+  --muted: #f2f1ee;
+  --muted-foreground: #6b6b68;
+  --accent: #eeede9;
+  --accent-foreground: #1a1a18;
+  --destructive: #c0392b;
   --destructive-foreground: #ffffff;
 
-  --border: #242424;
-  --input: #1e1e1e;
-  --ring: #c8a96e;
+  --border: #e2e1dd;
+  --input: #e2e1dd;
+  --ring: #1c2b3a;
 
-  --chart-1: #c8a96e;
-  --chart-2: #ede9e3;
-  --chart-3: #888880;
-  --chart-4: #444440;
-  --chart-5: #0d0d0d;
+  --chart-1: #1a1a18;
+  --chart-2: #6b6b68;
+  --chart-3: #b0afa8;
+  --chart-4: #d8d7d2;
+  --chart-5: #f8f7f4;
 
-  --sidebar: #111111;
-  --sidebar-foreground: #ede9e3;
-  --sidebar-primary: #c8a96e;
-  --sidebar-primary-foreground: #0d0d0d;
-  --sidebar-accent: #1e1e1e;
-  --sidebar-accent-foreground: #ede9e3;
-  --sidebar-border: #242424;
-  --sidebar-ring: #c8a96e;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a18;
+  --sidebar-primary: #1c2b3a;
+  --sidebar-primary-foreground: #f8f7f4;
+  --sidebar-accent: #f2f1ee;
+  --sidebar-accent-foreground: #1a1a18;
+  --sidebar-border: #e2e1dd;
+  --sidebar-ring: #1c2b3a;
 }
 
 @layer base {
@@ -108,7 +108,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -131,27 +131,27 @@
   }
 
   ::selection {
-    background: #c8a96e;
-    color: #0d0d0d;
+    background: #1c2b3a;
+    color: #f8f7f4;
   }
 
   input, textarea, select {
-    background-color: #1a1a1a;
+    background-color: #ffffff;
     border-radius: 4px;
-    border-color: #242424;
-    color: #ede9e3;
+    border-color: #e2e1dd;
+    color: #1a1a18;
   }
   input:focus-visible, textarea:focus-visible, select:focus-visible {
     outline: none;
-    border-color: #c8a96e !important;
+    border-color: #1a1a18 !important;
     box-shadow: none;
   }
-  input::placeholder, textarea::placeholder { color: #555550; }
+  input::placeholder, textarea::placeholder { color: #b0afa8; }
 
-  * { scrollbar-width: thin; scrollbar-color: #2a2a2a #111111; }
+  * { scrollbar-width: thin; scrollbar-color: #d8d7d2 #f8f7f4; }
   *::-webkit-scrollbar { width: 6px; height: 6px; }
-  *::-webkit-scrollbar-track { background: #111111; }
-  *::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+  *::-webkit-scrollbar-track { background: #f8f7f4; }
+  *::-webkit-scrollbar-thumb { background: #d8d7d2; border-radius: 3px; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -163,25 +163,22 @@ html.font-md { font-size: 16px; }
 html.font-lg { font-size: 18px; }
 
 html.high-contrast {
-  --background: #000000;
-  --foreground: #ffffff;
-  --surface: #0a0a0a;
-  --surface-elevated: #111111;
-  --card: #0a0a0a;
-  --card-foreground: #ffffff;
-  --popover: #0a0a0a;
-  --popover-foreground: #ffffff;
-  --muted: #111111;
-  --muted-foreground: #aaaaaa;
-  --border: #333333;
-  --input: #1a1a1a;
-  --primary: #d4b87e;
-  --primary-foreground: #000000;
-  --accent: #111111;
-  --accent-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface: #f5f5f5;
+  --surface-elevated: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --muted: #f5f5f5;
+  --muted-foreground: #444444;
+  --border: #aaaaaa;
+  --input: #aaaaaa;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --accent: #f5f5f5;
+  --accent-foreground: #000000;
 }
 
-/* No grid — clean background */
 @utility grid-bg {
   background: none;
 }
@@ -203,7 +200,7 @@ html.high-contrast {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c8a96e;
+  color: #6b6b68;
 }
 
 /* Primary button */
@@ -212,16 +209,16 @@ html.high-contrast {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #c8a96e;
-  color: #0d0d0d;
+  background: #1c2b3a;
+  color: #f8f7f4;
   border-radius: 4px;
   padding: 12px 24px;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.01em;
-  transition: background 180ms ease, opacity 180ms ease;
+  transition: opacity 180ms ease;
 }
-.btn-primary:hover { background: #b8975c; }
+.btn-primary:hover { background: #253749; }
 .btn-primary .arrow { transition: transform 180ms ease; }
 .btn-primary:hover .arrow { transform: translateX(4px); }
 
@@ -232,15 +229,15 @@ html.high-contrast {
   justify-content: center;
   gap: 0.5rem;
   background: transparent;
-  color: #ede9e3;
-  border: 1px solid #333330;
+  color: #1c2b3a;
+  border: 1px solid #d0cfc9;
   border-radius: 4px;
   padding: 11px 20px;
   font-weight: 500;
   font-size: 14px;
   transition: border-color 180ms ease, background 180ms ease;
 }
-.btn-secondary:hover { border-color: #c8a96e; background: #1a1a1a; }
+.btn-secondary:hover { border-color: #1c2b3a; background: #f2f1ee; }
 
 * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

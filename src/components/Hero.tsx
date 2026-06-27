@@ -41,7 +41,7 @@ function MagneticButton() {
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-medium text-sm shadow-[0_0_0_0_hsl(var(--primary)/0.4)] hover:shadow-[0_0_28px_8px_hsl(var(--primary)/0.3)] transition-shadow duration-300"
+      className="group inline-flex items-center gap-2 px-7 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm hover:opacity-80 transition-opacity duration-200"
     >
       Neem contact op
       <motion.span
