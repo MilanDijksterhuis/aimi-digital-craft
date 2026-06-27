@@ -103,15 +103,15 @@ function Inner() {
   }
 
   return (
-    <div className="portal-theme min-h-screen" style={{ background: "#f9f9f9", color: "#111111" }}>
-      <header style={{ borderBottom: "1px solid #e5e7eb", background: "rgba(255,255,255,0.95)", backdropFilter: "blur(8px)", position: "sticky", top: 0, zIndex: 40 }}>
+    <div className="portal-dark min-h-screen" style={{ background: "#1a1b1e", color: "#f4f4f5" }}>
+      <header style={{ borderBottom: "1px solid #35363a", background: "rgba(30,31,35,0.97)", backdropFilter: "blur(8px)", position: "sticky", top: 0, zIndex: 40 }}>
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display font-bold tracking-tight">
-            AIMI<span className="text-primary">.</span>
+          <Link to="/" className="font-medium text-white text-xl tracking-tight" style={{ fontFamily: "Inter, sans-serif" }}>
+            AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </Link>
-          <div className="flex items-center gap-4 text-sm">
-            <Link to="/portal" className="hover:text-primary">Portaal</Link>
-            <Link to="/admin" className="hover:text-primary">Admin</Link>
+          <div className="flex items-center gap-4 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+            <Link to="/portal" className="text-white/60 hover:text-white transition-colors">Portaal</Link>
+            <Link to="/admin" className="text-white/60 hover:text-white transition-colors">Admin</Link>
             <AccountMenu
               email={user.email ?? ""}
               onSignOut={async () => {
@@ -122,7 +122,7 @@ function Inner() {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6 py-10" style={{ color: "#111111" }}>
+      <main className="mx-auto max-w-7xl px-6 py-10">
         <Outlet />
       </main>
     </div>
@@ -158,7 +158,8 @@ function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => voi
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center gap-2 rounded-full border border-border bg-card pl-1 pr-3 py-1 hover:bg-accent"
+        className="flex items-center gap-2 rounded-full pl-1 pr-3 py-1 transition-colors"
+        style={{ border: "1px solid #2a2b2b", background: "#161717" }}
       >
         <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-semibold">
           {initials}
@@ -169,18 +170,19 @@ function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => voi
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-2 w-64 rounded-xl border border-border bg-card shadow-lg z-50 overflow-hidden"
+          className="absolute right-0 mt-2 w-64 rounded-xl shadow-lg z-50 overflow-hidden"
+          style={{ border: "1px solid #2a2b2b", background: "#161717" }}
         >
-          <div className="px-4 py-3 border-b border-border">
-            <p className="text-xs text-muted-foreground">Ingelogd als</p>
-            <p className="text-sm font-medium truncate">{email}</p>
+          <div className="px-4 py-3" style={{ borderBottom: "1px solid #2a2b2b" }}>
+            <p className="text-xs" style={{ color: "#8a8f98" }}>Ingelogd als</p>
+            <p className="text-sm font-medium truncate text-white">{email}</p>
           </div>
           <ul className="py-1 text-sm">
             <li>
               <Link
                 to="/account"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 hover:bg-accent"
+                className="block px-4 py-2 text-white/80 hover:text-white hover:bg-white/5 transition-colors"
                 role="menuitem"
               >
                 Mijn gegevens
@@ -190,19 +192,20 @@ function AccountMenu({ email, onSignOut }: { email: string; onSignOut: () => voi
               <button
                 onClick={() => resetM.mutate()}
                 disabled={resetM.isPending}
-                className="w-full text-left px-4 py-2 hover:bg-accent disabled:opacity-50"
+                className="w-full text-left px-4 py-2 text-white/80 hover:text-white hover:bg-white/5 transition-colors disabled:opacity-50"
                 role="menuitem"
               >
                 {resetM.isPending ? "Bezig…" : "Wachtwoord reset aanvragen"}
               </button>
             </li>
-            <li className="border-t border-border mt-1">
+            <li style={{ borderTop: "1px solid #2a2b2b", marginTop: 4 }}>
               <button
                 onClick={() => {
                   setOpen(false);
                   void onSignOut();
                 }}
-                className="w-full text-left px-4 py-2 hover:bg-accent text-destructive"
+                className="w-full text-left px-4 py-2 hover:bg-white/5 transition-colors"
+                style={{ color: "#fe2c02" }}
                 role="menuitem"
               >
                 Uitloggen

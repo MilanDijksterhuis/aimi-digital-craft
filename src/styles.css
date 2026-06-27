@@ -60,6 +60,14 @@
   --popover: #1e1f1f;
   --popover-foreground: #ffffff;
 
+  /* Portal/Admin overrides — slightly lighter */
+  --portal-background: #1a1b1e;
+  --portal-card: #25262b;
+  --portal-border: #35363a;
+  --portal-input: #2c2d32;
+  --portal-muted: #2c2d32;
+  --portal-muted-fg: #9ca3af;
+
   /* Ember — single accent, used sparingly */
   --primary: #fe2c02;
   --primary-foreground: #ffffff;
@@ -91,6 +99,26 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a2b2b;
   --sidebar-ring: #fe2c02;
+}
+
+/* ── Portal / Admin dark override ── */
+.portal-dark,
+.portal-dark * {
+  --background: #1a1b1e;
+  --foreground: #f4f4f5;
+  --card: #25262b;
+  --card-foreground: #f4f4f5;
+  --popover: #2c2d32;
+  --popover-foreground: #f4f4f5;
+  --muted: #2c2d32;
+  --muted-foreground: #9ca3af;
+  --border: #35363a;
+  --input: #2c2d32;
+  --accent: #2c2d32;
+  --accent-foreground: #f4f4f5;
+  --secondary: #2c2d32;
+  --secondary-foreground: #f4f4f5;
+  color-scheme: dark;
 }
 
 /* ── Portal / Admin override (clean light) ── */

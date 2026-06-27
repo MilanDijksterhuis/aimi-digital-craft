@@ -29,14 +29,26 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-28" style={{ background: "#0f0e0d" }}>
+    <section id="faq" className="py-24" style={{ background: "#0f0e0d" }}>
       <div className="mx-auto max-w-3xl px-6">
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-3 text-sm font-medium"
+          style={{ color: "#fe2c02", fontFamily: "Inter, sans-serif", letterSpacing: "0.05em" }}
+        >
+          Alles wat je wil weten
+        </motion.p>
+
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-white mb-14"
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="text-white mb-12"
         >
           Veelgestelde vragen
         </motion.h2>
@@ -48,10 +60,10 @@ export function FAQ() {
               <div key={i} style={{ borderColor: "#2a2b2b" }}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-6 py-5 text-left"
+                  className="w-full flex items-center justify-between gap-6 py-6 text-left"
                 >
                   <span
-                    className="text-sm font-medium text-white"
+                    className="text-base font-medium text-white"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     {item.q}
@@ -62,7 +74,7 @@ export function FAQ() {
                     className="shrink-0"
                     style={{ color: isOpen ? "#fe2c02" : "#8a8f98" }}
                   >
-                    <Plus className="w-4 h-4" strokeWidth={1.5} />
+                    <Plus className="w-5 h-5" strokeWidth={1.5} />
                   </motion.div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -74,7 +86,7 @@ export function FAQ() {
                       transition={{ duration: 0.22, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 text-sm leading-relaxed" style={{ color: "#8a8f98" }}>
+                      <p className="pb-6 text-base leading-relaxed" style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}>
                         {item.a}
                       </p>
                     </motion.div>

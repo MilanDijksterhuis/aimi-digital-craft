@@ -357,107 +357,93 @@ function PortalPage() {
       )}
 
       {tab === "changes" && (
-        <section className="space-y-5">
-          {/* Filterbar + new change CTA */}
-          <div className="flex flex-wrap items-center gap-3 justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              {(Object.keys(FILTER_LABEL) as FilterKey[]).map((k) => (
-                <button
-                  key={k}
-                  onClick={() => setFilter(k)}
-                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${
-                    filter === k
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-card text-foreground border-border hover:border-primary"
-                  }`}
-                >
-                  {FILTER_LABEL[k]}
-                </button>
-              ))}
+        <section className="space-y-6">
+
+          {/* Header row */}
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h2 className="font-display text-2xl font-semibold">Jouw changes</h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                {data.requests.length === 0
+                  ? "Nog geen aanvragen ingediend."
+                  : `${data.requests.length} aanvra${data.requests.length === 1 ? "ag" : "gen"} totaal`}
+              </p>
             </div>
             <button
-              onClick={() => setShowNewChange((v) => !v)}
-              className="btn-primary"
+              onClick={() => setShowNewChange(true)}
+              className="btn-primary shrink-0"
             >
               + Nieuwe change
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value as any)}
-                className="rounded-md border border-input bg-background px-3 py-2 text-sm"
-              >
-                <option value="newest">Nieuwste eerst</option>
-                <option value="oldest">Oudste eerst</option>
-                <option value="priority">Prioriteit</option>
-              </select>
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Zoek op titel of #CHG-nummer"
-                className="rounded-md border border-input bg-background px-3 py-2 text-sm min-w-[240px]"
-              />
-            </div>
-            <span className="text-sm text-muted-foreground">
-              {filteredChanges.length} change{filteredChanges.length === 1 ? "" : "s"} gevonden
-            </span>
-          </div>
-
-          {/* New change form (collapsible) */}
+          {/* Inline nieuwe change form */}
           {showNewChange && (
-            <section className="rounded-lg border border-border bg-card p-6">
-              <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
-                <h2 className="font-display text-xl font-semibold">Nieuwe change indienen</h2>
-                <span
-                  className={`text-xs font-medium px-3 py-1 rounded-md ${
-                    formIsFree ? "bg-primary/15 text-primary" : "bg-amber-500/15 text-amber-600"
-                  }`}
+            <div className="rounded-xl border border-border bg-card overflow-hidden">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+                <div>
+                  <h3 className="font-semibold text-foreground">Nieuwe change indienen</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">Beschrijf wat je wil aanpassen. Hoe duidelijker, hoe sneller wij het oppakken.</p>
+                </div>
+                <button
+                  onClick={() => setShowNewChange(false)}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-lg leading-none"
                 >
-                  {formIsFree
-                    ? `Gratis${rush ? ` + €${RUSH_SURCHARGE_EUR} spoed` : ""}`
-                    : `€${formPrice}${rush ? " (incl. spoed)" : ""}`}
-                </span>
+                  ×
+                </button>
               </div>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="text-xs text-muted-foreground self-center">Snel starten:</span>
-                {CHANGE_TEMPLATES.map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => {
-                      setTitle(t.title); setDescription(t.description); setCategory(t.category);
-                    }}
-                    className="text-xs rounded-md border border-border bg-background px-3 py-1 hover:border-primary"
-                  >
-                    {t.label}
-                  </button>
-                ))}
+              {/* Templates */}
+              <div className="px-6 py-4 border-b border-border bg-muted/20">
+                <p className="text-xs text-muted-foreground mb-2 font-medium">Snel starten met een template</p>
+                <div className="flex flex-wrap gap-2">
+                  {CHANGE_TEMPLATES.map((t) => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      onClick={() => { setTitle(t.title); setDescription(t.description); setCategory(t.category); }}
+                      className="text-xs rounded-full border border-border bg-background px-3 py-1.5 hover:border-primary hover:text-primary transition-colors"
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <input
-                  required placeholder="Titel" value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-                <textarea
-                  required placeholder="Wat moet er aangepast worden?" rows={4}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                />
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <label className="block text-sm">
-                    <span className="text-muted-foreground text-xs">Categorie</span>
+              <form className="px-6 py-5 space-y-5" onSubmit={handleSubmit}>
+                {/* Titel */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Wat moet er aangepast worden? *</label>
+                  <input
+                    required
+                    placeholder="Bijv. Tekst aanpassen op de homepage"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
+                  />
+                </div>
+
+                {/* Omschrijving */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Meer details *</label>
+                  <textarea
+                    required
+                    placeholder="Geef aan wat er precies veranderd moet worden, waar op de pagina, en wat het gewenste resultaat is."
+                    rows={4}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
+                  />
+                </div>
+
+                {/* Categorie + Prioriteit */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Categorie</label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
                     >
                       {CATEGORY_KEYS.map((k) => (
                         <option key={k} value={k}>
@@ -465,58 +451,106 @@ function PortalPage() {
                         </option>
                       ))}
                     </select>
-                  </label>
-                  <label className="block text-sm">
-                    <span className="text-muted-foreground text-xs">Prioriteit</span>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Prioriteit</label>
                     <select
                       value={priority}
                       onChange={(e) => setPriority(e.target.value as any)}
-                      className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
                     >
                       <option value="low">Laag</option>
                       <option value="normal">Normaal</option>
                       <option value="high">Hoog</option>
                       <option value="urgent">Urgent</option>
                     </select>
-                  </label>
-                </div>
-                <div className="flex flex-wrap items-center gap-3">
-                  <label className="flex items-center gap-2 text-sm rounded-md border border-input bg-background px-3 py-2 cursor-pointer">
-                    <input type="checkbox" checked={rush} onChange={(e) => setRush(e.target.checked)} />
-                    Spoed (binnen 24u, +€{RUSH_SURCHARGE_EUR})
-                  </label>
-                  <label className="rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer hover:border-primary">
-                    Bestanden ({files.length})
-                    <input type="file" multiple accept="image/*,.pdf" className="hidden"
-                      onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />
-                  </label>
-                  <button
-                    type="submit"
-                    disabled={submitM.isPending || uploading || reachedOpenLimit || (formIsFree && data.availableCredits <= 0)}
-                    className="btn-primary disabled:opacity-50"
-                  >
-                    {uploading || submitM.isPending ? "Bezig…" : "Indienen"}
-                  </button>
-                  {reachedOpenLimit && (
-                    <span className="text-sm text-destructive">Max. 10 openstaande changes bereikt.</span>
-                  )}
-                  {formIsFree && data.availableCredits <= 0 && !reachedOpenLimit && (
-                    <span className="text-sm text-destructive">
-                      Geen gratis changes meer — kies een betaalde categorie of koop bij.
-                    </span>
-                  )}
-                </div>
-                {files.length > 0 && (
-                  <div className="text-xs text-muted-foreground">
-                    {files.map((f) => f.name).join(", ")}
                   </div>
+                </div>
+
+                {/* Extra opties */}
+                <div className="flex flex-wrap gap-4 items-center">
+                  <label className="flex items-center gap-2 text-sm cursor-pointer select-none">
+                    <input type="checkbox" checked={rush} onChange={(e) => setRush(e.target.checked)} className="rounded" />
+                    <span>Spoed — binnen 24u <span className="text-muted-foreground">(+€{RUSH_SURCHARGE_EUR})</span></span>
+                  </label>
+                  <label className="text-sm cursor-pointer">
+                    <span className="rounded-lg border border-input bg-background px-4 py-2 text-sm hover:border-primary transition-colors inline-block">
+                      {files.length === 0 ? "Bestand bijvoegen" : `${files.length} bestand${files.length === 1 ? "" : "en"}`}
+                    </span>
+                    <input type="file" multiple accept="image/*,.pdf" className="hidden" onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />
+                  </label>
+                </div>
+
+                {files.length > 0 && (
+                  <p className="text-xs text-muted-foreground">{files.map((f) => f.name).join(", ")}</p>
                 )}
-                {submitM.error && (
-                  <p className="text-sm text-destructive">{(submitM.error as Error).message}</p>
-                )}
+
+                {/* Kosten + submit */}
+                <div className="flex items-center justify-between pt-2 border-t border-border flex-wrap gap-3">
+                  <div className="text-sm">
+                    <span className={formIsFree ? "text-primary font-medium" : "text-amber-600 font-medium"}>
+                      {formIsFree ? `Gratis${rush ? ` + €${RUSH_SURCHARGE_EUR} spoed` : ""}` : `€${formPrice}${rush ? " incl. spoed" : ""}`}
+                    </span>
+                    {formIsFree && <span className="text-muted-foreground ml-2 text-xs">({data.availableCredits} gratis over)</span>}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {reachedOpenLimit && <span className="text-xs text-destructive">Max. 10 open changes bereikt.</span>}
+                    {formIsFree && data.availableCredits <= 0 && !reachedOpenLimit && (
+                      <span className="text-xs text-destructive">Geen gratis changes meer.</span>
+                    )}
+                    {submitM.error && <span className="text-xs text-destructive">{(submitM.error as Error).message}</span>}
+                    <button
+                      type="submit"
+                      disabled={submitM.isPending || uploading || reachedOpenLimit || (formIsFree && data.availableCredits <= 0)}
+                      className="btn-primary disabled:opacity-50"
+                    >
+                      {uploading || submitM.isPending ? "Bezig…" : "Indienen"}
+                    </button>
+                  </div>
+                </div>
               </form>
-            </section>
+            </div>
           )}
+
+          {/* Filter + zoek */}
+          <div className="rounded-lg border border-border bg-card p-4 flex flex-wrap items-center gap-3 justify-between">
+            <div className="flex flex-wrap items-center gap-2">
+              {(Object.keys(FILTER_LABEL) as FilterKey[]).map((k) => (
+                <button
+                  key={k}
+                  onClick={() => setFilter(k)}
+                  className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
+                    filter === k
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-background text-muted-foreground border-border hover:border-foreground hover:text-foreground"
+                  }`}
+                >
+                  {FILTER_LABEL[k]}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Zoek op titel…"
+                className="rounded-md border border-input bg-background px-3 py-1.5 text-sm min-w-[180px]"
+              />
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as any)}
+                className="rounded-md border border-input bg-background px-3 py-1.5 text-sm"
+              >
+                <option value="newest">Nieuwste eerst</option>
+                <option value="oldest">Oudste eerst</option>
+                <option value="priority">Prioriteit</option>
+              </select>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                {filteredChanges.length} resultaat{filteredChanges.length === 1 ? "" : "en"}
+              </span>
+            </div>
+          </div>
 
           {/* Changes list */}
           {filteredChanges.length === 0 ? (
@@ -552,6 +586,7 @@ function PortalPage() {
           )}
         </section>
       )}
+
 
       <ChatWidget />
 

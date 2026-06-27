@@ -874,6 +874,7 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
   const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [paidFilter, setPaidFilter] = useState<string>("");
   const [customerFilter, setCustomerFilter] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
 
   const togglePaid = useServerFn(adminToggleRequestPaid);
   const softDelete = useServerFn(adminSoftDeleteChange);
@@ -896,6 +897,20 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
     if (categoryFilter) arr = arr.filter((r: any) => (r.category ?? "other") === categoryFilter);
     if (paidFilter) arr = arr.filter((r: any) => (paidFilter === "paid" ? r.is_paid : !r.is_paid));
     if (customerFilter) arr = arr.filter((r: any) => r.user_id === customerFilter);
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      arr = arr.filter((r: any) => {
+        const c = data.customers.find((c: any) => c.id === r.user_id);
+        const num = r.request_number ? `#${r.request_number}` : "";
+        return (
+          (r.title ?? "").toLowerCase().includes(q) ||
+          (r.description ?? "").toLowerCase().includes(q) ||
+          (c?.full_name ?? "").toLowerCase().includes(q) ||
+          (c?.email ?? "").toLowerCase().includes(q) ||
+          num.includes(q)
+        );
+      });
+    }
     arr.sort((a: any, b: any) => {
       if (sortBy === "priority") {
         return (PRIORITY_WEIGHT[b.priority] ?? 0) - (PRIORITY_WEIGHT[a.priority] ?? 0);
@@ -975,33 +990,47 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-2 items-center">
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-          <option value="priority">Prioriteit</option>
-          <option value="date">Nieuwste eerst</option>
-        </select>
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-          <option value="">Alle statussen</option>
-          {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-        </select>
-        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-          <option value="">Alle categorieën</option>
-          {CATEGORY_KEYS.map((k) => <option key={k} value={k}>{CATEGORY_LABEL[k]}</option>)}
-        </select>
-        <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-          <option value="">Gratis + betaald</option>
-          <option value="free">Gratis</option>
-          <option value="paid">Betaald</option>
-        </select>
-        <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-          <option value="">Alle klanten</option>
-          {data.customers.map((c: any) => (
-            <option key={c.id} value={c.id}>{c.full_name || c.email}</option>
-          ))}
-        </select>
-        <button onClick={exportCsv} className="ml-auto rounded-full border border-border px-3 py-1.5 text-xs hover:bg-muted">
-          Export CSV
-        </button>
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Zoek op titel, klant, omschrijving of #nummer…"
+            className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
+            {sorted.length} van {data.requests.length}
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+            <option value="priority">Prioriteit</option>
+            <option value="date">Nieuwste eerst</option>
+          </select>
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+            <option value="">Alle statussen</option>
+            {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+          </select>
+          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+            <option value="">Alle categorieën</option>
+            {CATEGORY_KEYS.map((k) => <option key={k} value={k}>{CATEGORY_LABEL[k]}</option>)}
+          </select>
+          <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+            <option value="">Gratis + betaald</option>
+            <option value="free">Gratis</option>
+            <option value="paid">Betaald</option>
+          </select>
+          <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+            <option value="">Alle klanten</option>
+            {data.customers.map((c: any) => (
+              <option key={c.id} value={c.id}>{c.full_name || c.email}</option>
+            ))}
+          </select>
+          <button onClick={exportCsv} className="ml-auto rounded-full border border-border px-3 py-1.5 text-xs hover:bg-muted">
+            Export CSV
+          </button>
+        </div>
       </div>
 
       {/* Change lijst */}
