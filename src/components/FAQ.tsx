@@ -9,7 +9,7 @@ const items = [
   },
   {
     q: "Wat als ik geen content of teksten heb?",
-    a: "Geen probleem. We helpen je met een basis copystructuur en kunnen placeholder-teksten schrijven die je later aanvult. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers — vraag ernaar tijdens het intakegesprek.",
+    a: "Geen probleem. We helpen je met een basis copystructuur en kunnen placeholder-teksten schrijven die je later aanvult. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers vraag ernaar tijdens het intakegesprek.",
   },
   {
     q: "Kan ik later upgraden van Starter naar Pro?",
@@ -17,11 +17,11 @@ const items = [
   },
   {
     q: "Wat is inbegrepen bij hosting?",
-    a: "SSL-certificaat, uptime-monitoring, maandelijkse backups en security-updates. Alles draait op onze eigen VPS — geen gedeelde hosting, geen verborgen limieten.",
+    a: "SSL-certificaat, uptime-monitoring, maandelijkse backups en security-updates. Alles draait op onze eigen VPS geen gedeelde hosting, geen verborgen limieten.",
   },
   {
     q: "Wat als ik al een website heb?",
-    a: "Dan kun je kiezen voor ons Hosting Only-pakket (€30/maand) en wij nemen je site over. Of we bouwen een nieuwe versie en migreren alles voor je — inclusief domein en e-mail.",
+    a: "Dan kun je kiezen voor ons Hosting Only-pakket (€30/maand) en wij nemen je site over. Of we bouwen een nieuwe versie en migreren alles voor je inclusief domein en e-mail.",
   },
 ];
 
