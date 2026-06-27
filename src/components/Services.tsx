@@ -49,7 +49,7 @@ const services = [
       "Automatische backups",
       "Security updates",
     ],
-    tag: "30 per maand",
+    tag: "€30 per maand",
   },
 ];
 
