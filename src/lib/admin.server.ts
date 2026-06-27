@@ -1,4 +1,5 @@
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { sendWelcomeEmail } from "./email.server";
 
 function generateTempPassword(): string {
   const chars =
@@ -24,6 +25,15 @@ export async function adminCreateCustomer(input: {
     },
   });
   if (error) throw new Error(error.message);
+
+  // Stuur welkomstmail met inloggegevens
+  try {
+    await sendWelcomeEmail(input.email, input.full_name, tempPassword);
+  } catch (mailErr) {
+    console.error("[email] Welkomstmail mislukt:", mailErr);
+    // Account is al aangemaakt — geen fatal error, log het alleen
+  }
+
   return {
     user_id: data.user?.id,
     email: input.email,

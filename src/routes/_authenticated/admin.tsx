@@ -5,7 +5,7 @@ import { useState, useMemo, useEffect } from "react";
 import {
   BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
   MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
-  ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
+  ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive, Plug,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -67,6 +67,7 @@ import {
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
 import { AdminChatPanel } from "@/components/AdminChatPanel";
+import { ConnectorsTab } from "@/components/ConnectorsTab";
 import { TeamTab } from "@/components/TeamTab";
 import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
@@ -93,7 +94,7 @@ function AdminPage() {
     | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
     | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "team" | "afspraken"
-    | "chat" | "deleted";
+    | "chat" | "deleted" | "connectors";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
@@ -194,6 +195,9 @@ function AdminPage() {
       { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
       { key: "deleted", label: "Verwijderd", icon: Trash2 },
     ]},
+    { label: "Integraties", items: [
+      { key: "connectors", label: "Connectors", icon: Plug },
+    ]},
   ];
 
   return (
@@ -225,6 +229,7 @@ function AdminPage() {
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
           {tab === "website_links" && <WebsiteLinksPanel />}
+          {tab === "connectors" && <ConnectorsTab />}
         </div>
 
       </div>

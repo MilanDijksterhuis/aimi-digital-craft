@@ -911,6 +911,48 @@ export const adminRestoreChange = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+// ── Connectors ────────────────────────────────────────────────────────────────
+
+export const adminGetConnectorSettings = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { getGmailSettings, getGoogleAuthUrl } = await import("./gmail.server");
+    const settings = await getGmailSettings();
+    const authUrl = getGoogleAuthUrl();
+    return { ...settings, authUrl };
+  });
+
+export const adminSaveConnectorSettings = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      from_email: z.string().email().max(200),
+      from_name: z.string().trim().max(200),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { saveSetting } = await import("./gmail.server");
+    await Promise.all([
+      saveSetting("gmail_from_email", data.from_email),
+      saveSetting("gmail_from_name", data.from_name),
+    ]);
+    return { ok: true };
+  });
+
+export const adminDisconnectGmail = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { disconnectGmail } = await import("./gmail.server");
+    await disconnectGmail();
+    return { ok: true };
+  });
+
 export const adminHardDeleteChange = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
