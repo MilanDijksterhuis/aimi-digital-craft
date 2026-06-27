@@ -1,126 +1,109 @@
-import { useRef } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-
-function MagneticButton() {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 200, damping: 18 });
-  const sy = useSpring(y, { stiffness: 200, damping: 18 });
-
-  const onMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set((e.clientX - (rect.left + rect.width / 2)) * 0.25);
-    y.set((e.clientY - (rect.top + rect.height / 2)) * 0.25);
-  };
-
-  const onLeave = () => { x.set(0); y.set(0); };
-
-  const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const el = ref.current;
-    if (el) {
-      el.animate(
-        [{ transform: "scale(1)" }, { transform: "scale(0.96)" }, { transform: "scale(1)" }],
-        { duration: 200, easing: "ease-out" },
-      );
-    }
-    setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 110);
-  };
-
-  return (
-    <motion.a
-      ref={ref}
-      href="#contact"
-      onClick={onClick}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ x: sx, y: sy }}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.96 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group inline-flex items-center gap-3 px-7 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm hover:opacity-80 transition-opacity duration-200"
-    >
-      Neem contact op
-      <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-    </motion.a>
-  );
-}
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-24 pb-20">
-      <div className="mx-auto max-w-7xl px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-end">
+    <section
+      className="relative min-h-screen flex flex-col"
+      style={{
+        backgroundImage: "url('/hero-forest.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center 30%",
+      }}
+    >
+      {/* Dark gradient overlay — top for nav legibility */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.65) 100%)",
+        }}
+      />
 
-          {/* Left — main content */}
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="font-display font-extrabold leading-[1.0] tracking-[-0.03em] text-foreground"
-              style={{ fontSize: "clamp(2.8rem, 6.5vw, 5rem)" }}
-            >
-              Websites die
-              <br />
-              écht <em className="not-italic text-primary">werken.</em>
-            </motion.h1>
+      {/* Content — floats over photo */}
+      <div className="relative flex-1 flex flex-col items-center justify-center text-center px-6 pt-24 pb-20">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-white max-w-3xl"
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: "clamp(3rem, 7vw, 5.5rem)",
+            fontWeight: 300,
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
+          }}
+        >
+          Websites die écht
+          <br />
+          <em style={{ fontStyle: "italic" }}>werken.</em>
+        </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="mt-6 max-w-md text-base text-muted-foreground leading-relaxed"
-            >
-              Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen genoegen nemen
-              met een template. Vaste prijs, geen verrassingen.
-            </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 max-w-md text-sm leading-relaxed"
+          style={{ color: "rgba(255,255,255,0.72)" }}
+        >
+          Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen
+          genoegen nemen met een template. Vaste prijs, geen verrassingen.
+        </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.22 }}
-              className="mt-10 flex flex-wrap items-center gap-6"
-            >
-              <MagneticButton />
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-primary border-2 border-background grid place-items-center font-display font-bold text-primary-foreground text-xs">
-                    A
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-foreground/10 border-2 border-background grid place-items-center font-display font-bold text-foreground text-xs">
-                    M
-                  </div>
-                </div>
-                <span className="text-xs text-muted-foreground">Aidan & Milan</span>
-              </div>
-            </motion.div>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 flex items-center gap-4"
+        >
+          <a href="#contact" className="btn-primary group">
+            Neem contact op
+            <ArrowRight className="w-4 h-4 arrow" />
+          </a>
+          <a href="#services" className="btn-secondary">
+            Bekijk services
+          </a>
+        </motion.div>
 
-          {/* Right — vertical stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="hidden lg:flex flex-col gap-8 pb-2 text-right"
-          >
-            {[
-              ["12+", "projecten"],
-              ["< 2w", "doorlooptijd"],
-              ["€499", "vanaf"],
-            ].map(([num, label]) => (
-              <div key={label}>
-                <div className="font-display font-bold text-3xl text-foreground">{num}</div>
-                <div className="text-xs text-muted-foreground mt-0.5 uppercase tracking-widest">{label}</div>
+        {/* Founders */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-14 flex items-center gap-3"
+          style={{ color: "rgba(255,255,255,0.5)" }}
+        >
+          <div className="flex -space-x-2">
+            {["A", "M"].map((l) => (
+              <div
+                key={l}
+                className="w-7 h-7 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm grid place-items-center text-white text-xs font-medium"
+              >
+                {l}
               </div>
             ))}
-          </motion.div>
-
-        </div>
+          </div>
+          <span className="text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
+            Aidan & Milan
+          </span>
+        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="relative flex justify-center pb-10"
+      >
+        <div className="flex flex-col items-center gap-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
+          <span className="text-[10px] tracking-widest uppercase" style={{ fontFamily: "Inter, sans-serif" }}>
+            scroll
+          </span>
+          <div className="w-px h-8 bg-white/20" />
+        </div>
+      </motion.div>
     </section>
   );
 }

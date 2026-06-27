@@ -1,9 +1,12 @@
 export function Footer() {
   return (
-    <footer className="border-t border-border py-10 bg-background">
-      <div className="mx-auto max-w-7xl px-6 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
-        <span className="font-display font-bold text-base text-foreground tracking-tight">
-          AIMI<span className="text-primary">.</span>
+    <footer className="py-10" style={{ background: "#161717", borderTop: "1px solid #2a2b2b" }}>
+      <div
+        className="mx-auto max-w-7xl px-6 flex flex-wrap items-center justify-between gap-4 text-xs"
+        style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+      >
+        <span className="text-white font-medium">
+          AIMI<span style={{ color: "#fe2c02" }}>.</span>
         </span>
         <span>© {new Date().getFullYear()} AIMI — Aidan & Milan</span>
       </div>

@@ -63,18 +63,18 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 relative">
-      <div className="relative mx-auto max-w-3xl px-6">
+    <section id="contact" className="py-28" style={{ background: "#161717" }}>
+      <div className="mx-auto max-w-3xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="text-center text-white"
         >
-          Stel je vraag of plan een <span className="text-primary">gesprek</span>.
+          Stel je vraag of plan een gesprek.
         </motion.h2>
-        <p className="mt-4 text-center text-muted-foreground">
+        <p className="mt-4 text-center text-sm" style={{ color: "#8a8f98" }}>
           Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag.
         </p>
 
