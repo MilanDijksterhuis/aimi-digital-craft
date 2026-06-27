@@ -358,7 +358,15 @@ export const getAttachmentUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ file_path: z.string().max(500) }).parse(d))
   .handler(async ({ context, data }) => {
-    const { supabase } = context;
+    const { supabase, userId } = context;
+    // Verify this file belongs to the authenticated user
+    const { data: attachment } = await supabase
+      .from("change_attachments")
+      .select("user_id")
+      .eq("file_path", data.file_path)
+      .eq("user_id", userId)
+      .maybeSingle();
+    if (!attachment) throw new Error("Bestand niet gevonden of geen toegang.");
     const { data: url, error } = await supabase.storage
       .from("change-attachments")
       .createSignedUrl(data.file_path, 3600);

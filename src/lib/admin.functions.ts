@@ -492,6 +492,13 @@ export const adminAttachmentUrl = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
+    // Verify this file_path exists as a legitimate attachment
+    const { data: attachment } = await supabase
+      .from("change_attachments")
+      .select("file_path")
+      .eq("file_path", data.file_path)
+      .maybeSingle();
+    if (!attachment) throw new Error("Bestand niet gevonden.");
     const { data: url, error } = await supabase.storage
       .from("change-attachments")
       .createSignedUrl(data.file_path, 3600);
