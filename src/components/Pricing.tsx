@@ -5,31 +5,31 @@ const tiers = [
   {
     name: "Starter",
     price: "€ 499",
-    desc: "Voor solopreneurs en kleine bedrijven.",
+    desc: "Een professionele één-pagina site. Goed voor ZZP'ers en kleine bedrijven die snel online willen.",
     features: ["1-pagina site", "Mobile-first design", "Hosting (1 jaar)", "Basic SEO"],
   },
   {
     name: "Pro",
     price: "€ 750",
-    desc: "Onze sweet spot — perfect voor groeiende merken.",
+    desc: "Meerdere pagina's, eigen design en CMS. Voor bedrijven die meer controle willen.",
     features: [
       "Tot 6 pagina's",
-      "Custom design system",
+      "Custom design",
       "CMS integratie",
       "Hosting + monitoring",
-      "Performance audit",
+      "Performance optimalisatie",
     ],
     featured: true,
   },
   {
     name: "Custom",
     price: "Op maat",
-    desc: "Complexe builds, e-commerce, web apps.",
+    desc: "Grotere builds, webshops of web-applicaties. We bespreken de scope en maken een offerte.",
     features: [
-      "Onbeperkt scope",
+      "Onbeperkte scope",
       "Backend & integraties",
-      "Dedicated support",
-      "SLA op maat",
+      "Persoonlijke begeleiding",
+      "Afspraken op maat",
     ],
   },
 ];
@@ -40,12 +40,12 @@ export function Pricing() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
           <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest">
-            04 — Pricing
+            Tarieven
           </p>
           <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight">
-            Simpel. Transparant.
+            Vaste prijzen.
           </h2>
-          <p className="mt-4 text-muted-foreground">Geen verborgen kosten. Geen verrassingen.</p>
+          <p className="mt-4 text-muted-foreground">Je weet vooraf wat het kost. Geen uurtje-factuurtje.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -63,7 +63,7 @@ export function Pricing() {
             >
               {t.featured && (
                 <span className="absolute -top-3 left-8 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-mono font-medium">
-                  Most popular
+                  Meest gekozen
                 </span>
               )}
               <h3 className="font-display text-2xl font-bold">{t.name}</h3>
@@ -86,7 +86,7 @@ export function Pricing() {
                   : "border border-border bg-surface hover:bg-surface-elevated"
                   }`}
               >
-                Aan de slag
+                Neem contact op
               </a>
             </motion.div>
           ))}

@@ -4,23 +4,23 @@ import { Code2, Server, Gauge, Cloud } from "lucide-react";
 const services = [
   {
     icon: Code2,
-    title: "Website Design & Development",
-    desc: "Maatwerk sites in React & TypeScript. Strak design, snel gebouwd.",
+    title: "Design & Development",
+    desc: "Maatwerk in React & TypeScript. We bouwen wat je nodig hebt, niet meer en niet minder.",
   },
   {
     icon: Server,
-    title: "Hosting & Maintenance",
-    desc: "Wij hosten, monitoren en updaten. Jij doet je werk zonder zorgen.",
+    title: "Hosting & Beheer",
+    desc: "Wij regelen de hosting, updates en monitoring. Jij hoeft er niet naar om te kijken.",
   },
   {
     icon: Gauge,
-    title: "Performance Optimization",
-    desc: "Core Web Vitals, SEO en snelheid die je conversie laat zien.",
+    title: "Performance",
+    desc: "Snelle laadtijden en goede SEO-scores. Niet als extra — standaard inbegrepen.",
   },
   {
     icon: Cloud,
     title: "Hosting Only — €30/maand",
-    desc: "Heb je al een site maar wil je 'm snel, veilig en zonder zorgen laten draaien? Wij hosten, monitoren en patchen 'm voor je. SSL, backups, updates — geen setup-kosten.",
+    desc: "Heb je al een site maar wil je die snel en veilig laten hosten? Wij nemen het over. SSL, backups, updates — geen setup-kosten.",
     highlight: true,
   },
 ];
@@ -31,9 +31,9 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
           <div>
-            <p className="section-label mb-4">01 — Services</p>
-            <h2 className="max-w-2xl">
-              Alles wat je nodig hebt om <em className="text-primary">online</em> te winnen.
+            <p className="section-label mb-4">Wat we doen</p>
+            <h2 className="max-w-xl">
+              Websites bouwen en <em className="text-primary">onderhouden</em>.
             </h2>
           </div>
         </div>

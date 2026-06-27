@@ -65,7 +65,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-32 relative">
       <div className="relative mx-auto max-w-3xl px-6">
-        <p className="section-label mb-4 text-center">05 — Contact</p>
+        <p className="section-label mb-4 text-center">Contact</p>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,10 +73,10 @@ export function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          Laten we iets <span className="text-primary">bouwen</span> samen.
+          Stel je vraag of plan een <span className="text-primary">gesprek</span>.
         </motion.h2>
         <p className="mt-4 text-center text-muted-foreground">
-          Kies hoe je contact wil opnemen — plan een afspraak of stuur een bericht.
+          Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag.
         </p>
 
         {mode !== "choice" && (

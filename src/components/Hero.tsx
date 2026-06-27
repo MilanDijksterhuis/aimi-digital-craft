@@ -68,7 +68,7 @@ export function Hero() {
           transition={{ duration: 0.4 }}
           className="section-label mb-6"
         >
-          Gebouwd en gehost door Aidan en Milan
+          Web agency — Aidan & Milan
         </motion.div>
 
         <motion.h1
@@ -77,19 +77,19 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="font-display italic font-normal text-[clamp(3rem,9vw,6rem)] leading-[0.98] tracking-tight text-foreground"
         >
-          We build websites
+          Websites die
           <br />
-          that <span className="text-primary">work.</span>
+          écht <span className="text-primary">werken.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 max-w-xl mx-auto text-base text-muted-foreground"
+          className="mt-8 max-w-lg mx-auto text-base text-muted-foreground"
         >
-          Design, development en hosting onder één dak. Twee makers, scherpe uitvoering en sites die laden voordat je
-          koffie koud is.
+          Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen genoegen nemen
+          met een template. Vaste prijs, geen verrassingen.
         </motion.p>
 
         <motion.div
@@ -115,7 +115,7 @@ export function Hero() {
               M
             </div>
           </div>
-          <span className="text-xs uppercase tracking-[0.12em]">Aidan & Milan · founders</span>
+          <span className="text-xs uppercase tracking-[0.12em]">Aidan & Milan</span>
         </motion.div>
       </div>
     </section>

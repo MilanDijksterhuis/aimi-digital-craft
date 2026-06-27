@@ -31,7 +31,7 @@ export function FAQ() {
   return (
     <section id="faq" className="py-32">
       <div className="mx-auto max-w-3xl px-6">
-        <p className="section-label mb-4">05 — FAQ</p>
+        <p className="section-label mb-4">Vragen</p>
         <h2 className="mb-12">
           Veelgestelde <em className="text-primary">vragen</em>
         </h2>
