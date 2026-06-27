@@ -107,6 +107,27 @@ function AdminPage() {
   const pendingResets = (resetsQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
   const pendingExtras = (extrasQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
 
+  // New-activity tracking via localStorage
+  const [adminSeen, setAdminSeen] = useState<Record<string, number>>(() => {
+    try { return JSON.parse(localStorage.getItem("aimi_admin_seen") ?? "{}"); } catch { return {}; }
+  });
+  const markAdminTabSeen = (tabKey: string) => {
+    const updated = { ...adminSeen, [tabKey]: Date.now() };
+    setAdminSeen(updated);
+    localStorage.setItem("aimi_admin_seen", JSON.stringify(updated));
+  };
+
+  // Unread chat messages from client
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
+  useEffect(() => {
+    supabase
+      .from("chat_messages")
+      .select("id", { count: "exact", head: true })
+      .eq("sender_type", "client")
+      .eq("is_read", false)
+      .then(({ count }) => setUnreadChatCount(count ?? 0));
+  }, []);
+
   if (isLoading) {
     return (
       <div className="space-y-4 animate-pulse">
@@ -131,7 +152,25 @@ function AdminPage() {
   }
   if (!data) return null;
 
-  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number }[] }[] = [
+  const cutoff24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const customerIds = new Set(data.customers.map((c: any) => c.id));
+
+  // New requests since last time "changes" tab was opened
+  const lastSeenChanges = adminSeen["changes"] ?? 0;
+  const newChanges = data.requests.filter(
+    (r: any) => new Date(r.created_at).getTime() > lastSeenChanges,
+  ).length;
+
+  // New customer comments since last time "berichten" tab was opened
+  const lastSeenBerichten = adminSeen["berichten"] ?? 0;
+  const newBerichten = data.requests.reduce((acc: number, r: any) => {
+    const comments: any[] = r.change_comments ?? [];
+    return acc + comments.filter(
+      (c) => customerIds.has(c.author_id) && new Date(c.created_at).getTime() > lastSeenBerichten,
+    ).length;
+  }, 0);
+
+  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number; alert?: boolean }[] }[] = [
     { label: "Overzicht", items: [{ key: "dashboard", label: "Dashboard", icon: BarChart2 }] },
     { label: "Klanten", items: [
       { key: "klanten", label: `Alle klanten (${data.customers.length})`, icon: Users },
@@ -139,10 +178,10 @@ function AdminPage() {
       { key: "extra_changes", label: "Extra change aanvragen", icon: ShoppingCart, badge: pendingExtras },
     ]},
     { label: "Werk", items: [
-      { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest },
+      { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest, alert: newChanges > 0, badge: newChanges || undefined },
       { key: "archived", label: "Gearchiveerd", icon: Archive },
-      { key: "berichten", label: "Berichten", icon: MessageSquare },
-      { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox },
+      { key: "berichten", label: "Berichten", icon: MessageSquare, alert: newBerichten > 0, badge: newBerichten || undefined },
+      { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox, badge: data.pendingPurchases.length || undefined },
     ]},
     { label: "Beheer", items: [
       { key: "accounts", label: "Accounts", icon: Users2 },
@@ -152,7 +191,7 @@ function AdminPage() {
       { key: "afspraken", label: "Afspraken", icon: Calendar },
     ]},
     { label: "Overig", items: [
-      { key: "chat", label: "Chat", icon: MessagesSquare },
+      { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
       { key: "deleted", label: "Verwijderd", icon: Trash2 },
     ]},
   ];
@@ -168,10 +207,10 @@ function AdminPage() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
-        <AdminSidebar groups={groups} active={tab} setActive={setTab} />
+        <AdminSidebar groups={groups} active={tab} setActive={(k) => { setTab(k); markAdminTabSeen(k); }} />
 
         <div className="flex-1 min-w-0">
-          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => setTab("changes")} onGoPending={() => setTab("password_resets")} />}
+          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => { setTab("changes"); markAdminTabSeen("changes"); }} onGoPending={() => setTab("password_resets")} recentRequests={data.requests.filter((r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000))} recentComments={data.requests.flatMap((r: any) => (r.change_comments ?? []).filter((c: any) => customerIds.has(c.author_id) && new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).map((c: any) => ({ ...c, requestTitle: r.title })))} onGoBerichten={() => { setTab("berichten"); markAdminTabSeen("berichten"); }} />}
           {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
           {tab === "accounts" && <AccountsPanel />}
           {tab === "notifications" && <NotificationsPanel />}
@@ -193,10 +232,48 @@ function AdminPage() {
   );
 }
 
-function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPending }: { metrics: any; openChanges: number; pendingTotal: number; onGoChanges: () => void; onGoPending: () => void }) {
+function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPending, recentRequests, recentComments, onGoBerichten }: {
+  metrics: any; openChanges: number; pendingTotal: number;
+  onGoChanges: () => void; onGoPending: () => void; onGoBerichten: () => void;
+  recentRequests: any[]; recentComments: any[];
+}) {
   const max = Math.max(1, ...metrics.months.map((m: any) => m.count));
+  const hasNew = recentRequests.length > 0 || recentComments.length > 0;
   return (
     <div className="space-y-6">
+      {hasNew && (
+        <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 space-y-3">
+          <h3 className="font-semibold text-sm flex items-center gap-2">
+            <span style={{ color: "#fe2c02" }}>!</span> Nieuw binnengekomen (afgelopen 24 uur)
+          </h3>
+          {recentRequests.length > 0 && (
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">Nieuwe changes ({recentRequests.length})</p>
+              <ul className="space-y-1">
+                {recentRequests.slice(0, 5).map((r: any) => (
+                  <li key={r.id} className="flex items-center justify-between text-sm">
+                    <button onClick={onGoChanges} className="text-left hover:text-primary truncate max-w-[70%]">{r.title}</button>
+                    <span className="text-xs text-muted-foreground shrink-0">{new Date(r.created_at).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" })}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {recentComments.length > 0 && (
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">Nieuwe berichten van klanten ({recentComments.length})</p>
+              <ul className="space-y-1">
+                {recentComments.slice(0, 5).map((c: any) => (
+                  <li key={c.id} className="flex items-center justify-between text-sm">
+                    <button onClick={onGoBerichten} className="text-left hover:text-primary truncate max-w-[70%]">{c.requestTitle}: {c.body?.slice(0, 60)}</button>
+                    <span className="text-xs text-muted-foreground shrink-0">{new Date(c.created_at).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" })}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard icon={Users} label="Klanten" value={metrics.totalCustomers} sub="Totaal aantal accounts" trend={0} />
         <MetricCard icon={UserCheck} label="Actief (30d)" value={metrics.activeCount} sub="Inlog in afgelopen 30 dagen" trend={0} />
@@ -293,11 +370,15 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                           <Icon className="w-4 h-4 shrink-0" />
                           <span className="truncate text-left">{it.label}</span>
                         </span>
-                        {it.badge > 0 && (
+                        {it.alert && it.badge > 0 ? (
+                          <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-primary text-white flex items-center gap-0.5">
+                            <span>!</span><span>{it.badge}</span>
+                          </span>
+                        ) : it.badge > 0 ? (
                           <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-destructive text-destructive-foreground">
                             {it.badge}
                           </span>
-                        )}
+                        ) : null}
                       </button>
                     </li>
                   );

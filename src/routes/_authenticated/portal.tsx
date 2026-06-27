@@ -165,6 +165,24 @@ function PortalPage() {
   const [uploading, setUploading] = useState(false);
   const [tab, setTab] = useState<"overview" | "changes" | "website">("overview");
   const [showNewChange, setShowNewChange] = useState(false);
+  const [seenThreads, setSeenThreads] = useState<Record<string, number>>(() => {
+    try { return JSON.parse(localStorage.getItem("aimi_seen_threads") ?? "{}"); } catch { return {}; }
+  });
+
+  const markThreadSeen = (id: string) => {
+    const updated = { ...seenThreads, [id]: Date.now() };
+    setSeenThreads(updated);
+    localStorage.setItem("aimi_seen_threads", JSON.stringify(updated));
+  };
+
+  const hasUnread = (r: any, profileId: string) => {
+    const comments = r.change_comments ?? [];
+    const adminComments = comments.filter((c: any) => c.author_id !== profileId);
+    if (adminComments.length === 0) return false;
+    const lastAdmin = Math.max(...adminComments.map((c: any) => new Date(c.created_at).getTime()));
+    const lastSeen = seenThreads[r.id] ?? 0;
+    return lastAdmin > lastSeen;
+  };
 
   // Changes tab filters
   const [filter, setFilter] = useState<FilterKey>("all");
@@ -567,7 +585,11 @@ function PortalPage() {
                   expanded={!!expanded[r.id]}
                   setExpanded={(v: boolean) => setExpanded({ ...expanded, [r.id]: v })}
                   openThread={openThread === r.id}
-                  setOpenThread={(v: boolean) => setOpenThread(v ? r.id : null)}
+                  unread={hasUnread(r, data.profile?.id ?? "")}
+                  setOpenThread={(v: boolean) => {
+                    setOpenThread(v ? r.id : null);
+                    if (v) markThreadSeen(r.id);
+                  }}
                   comment={comment}
                   setComment={setComment}
                   onPostComment={() => {
@@ -758,7 +780,7 @@ function Stepper({ k }: { k: StatusKey }) {
 
 function ChangeCard({
   r, idx, profileId, websiteUrl, expanded, setExpanded,
-  openThread, setOpenThread, comment, setComment, onPostComment, commentPending,
+  openThread, setOpenThread, unread, comment, setComment, onPostComment, commentPending,
   openAttachment, onCancel,
 }: any) {
   const k = mapStatus(r.status);
@@ -766,6 +788,10 @@ function ChangeCard({
   const desc: string = r.description ?? "";
   const longDesc = desc.length > 180;
   const shortDesc = longDesc && !expanded ? desc.slice(0, 180) + "…" : desc;
+
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [cancelConfirmed, setCancelConfirmed] = useState(false);
 
   const priorityColor =
     r.priority === "urgent" ? "text-destructive" :
@@ -875,20 +901,27 @@ function ChangeCard({
       <div className="mt-5 border-t border-border pt-3 flex items-center justify-between gap-3 flex-wrap">
         <button
           onClick={() => setOpenThread(!openThread)}
-          className="inline-flex items-center gap-2 text-sm rounded-md border border-border bg-background px-3 py-1.5 hover:border-primary"
+          className="inline-flex items-center gap-2 text-sm rounded-md border px-3 py-1.5 transition-colors relative"
+          style={{
+            borderColor: unread ? "#fe2c02" : undefined,
+            background: unread ? "rgba(254,44,2,0.08)" : undefined,
+          }}
         >
+          {unread && (
+            <span
+              className="w-2 h-2 rounded-full shrink-0"
+              style={{ background: "#fe2c02" }}
+              title="Nieuw bericht"
+            />
+          )}
           {comments.length} bericht{comments.length === 1 ? "" : "en"}
+          {unread && <span style={{ color: "#fe2c02" }}>!</span>}
         </button>
 
         <div className="flex items-center gap-3">
           {(k === "ingediend" || k === "in_behandeling") && (
             <button
-              onClick={() => {
-                const reason = window.prompt("Reden voor annulering? (optioneel)") ?? undefined;
-                if (window.confirm("Weet je zeker dat je deze change wilt annuleren?")) {
-                  onCancel(r.id, reason);
-                }
-              }}
+              onClick={() => { setShowCancelDialog(true); setCancelReason(""); setCancelConfirmed(false); }}
               className="text-sm text-destructive hover:underline"
             >
               Annuleer
@@ -967,6 +1000,68 @@ function ChangeCard({
         <p className="mt-3 rounded-md bg-muted/50 p-2 text-xs">
           <strong>AIMI:</strong> {r.admin_notes}
         </p>
+      )}
+
+      {/* Annuleer dialog */}
+      {showCancelDialog && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.6)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowCancelDialog(false); }}
+        >
+          <div
+            className="w-full max-w-md rounded-xl border border-border p-6 space-y-5 shadow-2xl"
+            style={{ background: "#25262b" }}
+          >
+            <div>
+              <h3 className="font-semibold text-lg text-foreground">Change annuleren</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Je staat op het punt <strong className="text-foreground">{r.title}</strong> te annuleren.
+                Dit kan niet ongedaan worden gemaakt.
+              </p>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Reden (optioneel)</label>
+              <textarea
+                value={cancelReason}
+                onChange={(e) => setCancelReason(e.target.value)}
+                placeholder="Vertel ons waarom je annuleert…"
+                rows={3}
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground resize-none focus:outline-none focus:border-primary"
+              />
+            </div>
+            <label className="flex items-start gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={cancelConfirmed}
+                onChange={(e) => setCancelConfirmed(e.target.checked)}
+                className="mt-0.5 accent-destructive w-4 h-4 shrink-0"
+              />
+              <span className="text-sm text-foreground">
+                Ik begrijp dat deze change geannuleerd wordt en dit niet ongedaan gemaakt kan worden.
+              </span>
+            </label>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setShowCancelDialog(false)}
+                className="px-4 py-2 rounded-md border border-border text-sm text-foreground hover:bg-muted transition-colors"
+              >
+                Terug
+              </button>
+              <button
+                disabled={!cancelConfirmed}
+                onClick={() => {
+                  onCancel(r.id, cancelReason.trim() || undefined);
+                  setShowCancelDialog(false);
+                }}
+                className="px-4 py-2 rounded-md text-sm font-medium text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ background: cancelConfirmed ? "#e05252" : undefined }}
+              >
+                Ja, annuleer deze change
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </article>
   );

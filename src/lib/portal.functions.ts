@@ -330,6 +330,27 @@ export const postCustomerComment = createServerFn({ method: "POST" })
       .from("change_comments")
       .insert({ request_id: data.request_id, author_id: userId, body: data.body });
     if (error) throw new Error(error.message);
+
+    // Notify all admins
+    const { data: changeReq } = await supabase
+      .from("change_requests")
+      .select("title")
+      .eq("id", data.request_id)
+      .single();
+    const { data: admins } = await supabase
+      .from("profiles")
+      .select("id")
+      .in("role", ["admin", "superadmin"]);
+    if (changeReq && admins && admins.length > 0) {
+      await supabase.from("notifications").insert(
+        admins.map((a: any) => ({
+          user_id: a.id,
+          title: `Klant reageerde: ${changeReq.title}`,
+          message: data.body.slice(0, 140),
+        })),
+      );
+    }
+
     return { ok: true };
   });
 
