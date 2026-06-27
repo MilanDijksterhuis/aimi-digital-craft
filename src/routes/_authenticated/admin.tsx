@@ -872,13 +872,22 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
   const [sortBy, setSortBy] = useState<"date" | "priority">("priority");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [categoryFilter, setCategoryFilter] = useState<string>("");
-  const [paidFilter, setPaidFilter] = useState<string>(""); // "", "free", "paid"
+  const [paidFilter, setPaidFilter] = useState<string>("");
   const [customerFilter, setCustomerFilter] = useState<string>("");
 
   const togglePaid = useServerFn(adminToggleRequestPaid);
+  const softDelete = useServerFn(adminSoftDeleteChange);
+
+  const inv = () => qc.invalidateQueries({ queryKey: ["admin-overview"] });
+
   const togglePaidM = useMutation({
     mutationFn: (i: any) => togglePaid({ data: i }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
+    onSuccess: inv,
+  });
+  const deleteM = useMutation({
+    mutationFn: (id: string) => softDelete({ data: { id } }),
+    onSuccess: () => { inv(); toast.success("Change verwijderd."); },
+    onError: (e: any) => toast.error(e.message),
   });
 
   const sorted = useMemo(() => {
@@ -896,7 +905,6 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
     return arr;
   }, [data.requests, sortBy, statusFilter, categoryFilter, paidFilter, customerFilter]);
 
-  // Inzicht: top 5 klanten + gemiddelde doorlooptijd (created→done)
   const insights = useMemo(() => {
     const counts: Record<string, number> = {};
     let totalHours = 0;
@@ -946,100 +954,151 @@ function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
   };
 
   return (
-    <div className="space-y-3">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 rounded-2xl border border-border bg-card p-4">
-        <div>
-          <p className="text-xs uppercase text-muted-foreground">Gem. doorlooptijd</p>
-          <p className="text-xl font-bold">{insights.avgHours !== null ? `${insights.avgHours} uur` : "—"}</p>
+    <div className="space-y-4">
+      {/* Statistieken */}
+      <div className="grid sm:grid-cols-3 gap-3">
+        <div className="rounded-lg border border-border bg-card p-4">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Gem. doorlooptijd</p>
+          <p className="mt-1 text-2xl font-bold">{insights.avgHours !== null ? `${insights.avgHours} uur` : "—"}</p>
         </div>
-        <div className="sm:col-span-2">
-          <p className="text-xs uppercase text-muted-foreground mb-1">Top 5 klanten (changes)</p>
+        <div className="sm:col-span-2 rounded-lg border border-border bg-card p-4">
+          <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Top 5 klanten</p>
           <ol className="text-sm space-y-0.5">
             {insights.top.map((t, i) => (
-              <li key={i}>{i + 1}. {t.name} — {t.count}</li>
+              <li key={i} className="flex justify-between">
+                <span>{i + 1}. {t.name}</span>
+                <span className="font-semibold">{t.count}</span>
+              </li>
             ))}
           </ol>
         </div>
       </div>
 
+      {/* Filters */}
       <div className="flex flex-wrap gap-2 items-center">
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
-          <option value="priority">Sorteer: prioriteit</option>
-          <option value="date">Sorteer: datum</option>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
+          <option value="priority">Prioriteit</option>
+          <option value="date">Nieuwste eerst</option>
         </select>
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
           <option value="">Alle statussen</option>
           {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
         </select>
-        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+        <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
           <option value="">Alle categorieën</option>
           {CATEGORY_KEYS.map((k) => <option key={k} value={k}>{CATEGORY_LABEL[k]}</option>)}
         </select>
-        <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+        <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
           <option value="">Gratis + betaald</option>
-          <option value="free">Alleen gratis</option>
-          <option value="paid">Alleen betaald</option>
+          <option value="free">Gratis</option>
+          <option value="paid">Betaald</option>
         </select>
-        <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1 text-sm">
+        <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
           <option value="">Alle klanten</option>
           {data.customers.map((c: any) => (
             <option key={c.id} value={c.id}>{c.full_name || c.email}</option>
           ))}
         </select>
-        <button onClick={exportCsv} className="ml-auto rounded-full border border-primary px-3 py-1 text-xs text-primary hover:bg-primary hover:text-primary-foreground">
-          ⬇ Export CSV (betaald + gereed)
+        <button onClick={exportCsv} className="ml-auto rounded-full border border-border px-3 py-1.5 text-xs hover:bg-muted">
+          Export CSV
         </button>
       </div>
 
-      {sorted.map((r: any) => {
-        const c = data.customers.find((c: any) => c.id === r.user_id);
-        return (
-          <div key={r.id} className="rounded-xl border border-border bg-card p-4">
-            <div className="flex justify-between items-start gap-4">
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground">
-                  {c?.email ?? r.user_id} · {new Date(r.created_at).toLocaleDateString("nl-NL")} ·{" "}
-                  <span className={PRIORITY_COLOR[r.priority]}>{PRIORITY_LABEL[r.priority]}</span>
-                  {r.due_date && ` · oplever ${new Date(r.due_date).toLocaleDateString("nl-NL")}`}
-                </p>
-                <h3 className="font-semibold mt-1">{r.title}</h3>
-                <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">{r.description}</p>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted">
-                    {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
-                  </span>
-                  {r.rush && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">Spoed</span>
-                  )}
+      {/* Change lijst */}
+      <div className="space-y-2">
+        {sorted.map((r: any) => {
+          const c = data.customers.find((c: any) => c.id === r.user_id);
+          const isOpen = openRequest === r.id;
+          return (
+            <div key={r.id} className="rounded-xl border border-border bg-card overflow-hidden">
+              {/* Kaart header */}
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-4">
+                  {/* Links: klant + titel */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <span className="text-sm font-semibold truncate">{c?.full_name || c?.email || r.user_id}</span>
+                      {r.request_number && (
+                        <span className="text-xs text-muted-foreground">#{r.request_number}</span>
+                      )}
+                      <span className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString("nl-NL")}</span>
+                      {r.due_date && (
+                        <span className="text-xs text-amber-600">oplever {new Date(r.due_date).toLocaleDateString("nl-NL")}</span>
+                      )}
+                    </div>
+                    <p className="font-semibold text-base leading-snug">{r.title}</p>
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{r.description}</p>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                        {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
+                      </span>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full bg-muted ${PRIORITY_COLOR[r.priority]}`}>
+                        {PRIORITY_LABEL[r.priority]}
+                      </span>
+                      {r.rush && (
+                        <span className="text-[11px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">Spoed</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Rechts: status + betaald + verwijder */}
+                  <div className="flex flex-col items-end gap-2 shrink-0">
+                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted">
+                      {STATUS_LABEL[r.status]}
+                    </span>
+                    <button
+                      onClick={() => togglePaidM.mutate({ id: r.id, is_paid: !r.is_paid })}
+                      className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors ${
+                        r.is_paid
+                          ? "border-amber-400/40 bg-amber-500/10 text-amber-600 hover:bg-amber-500/20"
+                          : "border-primary/30 bg-primary/10 text-primary hover:bg-primary/20"
+                      }`}
+                    >
+                      {r.is_paid ? `Betaald €${PAID_CHANGE_PRICE_EUR}` : "Gratis"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Change "${r.title}" verwijderen? Deze wordt verplaatst naar de prullenbak en kan worden teruggeplaatst.`)) {
+                          deleteM.mutate(r.id);
+                        }
+                      }}
+                      className="text-xs text-destructive hover:underline"
+                    >
+                      Verwijder
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col items-end gap-1">
-                <span className="text-xs px-2 py-1 rounded-full bg-muted">{STATUS_LABEL[r.status]}</span>
+
+              {/* Details toggle */}
+              <div className="border-t border-border px-4 py-2 flex items-center justify-between bg-muted/20">
+                <span className="text-xs text-muted-foreground">
+                  {(r.change_comments?.length ?? 0)} berichten · {(r.change_attachments?.length ?? 0)} bijlagen
+                </span>
                 <button
-                  onClick={() => togglePaidM.mutate({ id: r.id, is_paid: !r.is_paid })}
-                  className={`text-[10px] px-2 py-0.5 rounded-full cursor-pointer ${
-                    r.is_paid ? "bg-amber-500/15 text-amber-600" : "bg-primary/15 text-primary"
-                  }`}
-                  title="Klik om te wisselen tussen gratis en betaald"
+                  onClick={() => setOpenRequest(isOpen ? null : r.id)}
+                  className="text-xs text-primary hover:underline"
                 >
-                  {r.is_paid ? `€${PAID_CHANGE_PRICE_EUR} · klik voor gratis` : "Gratis · klik voor €20"}
+                  {isOpen ? "Inklappen" : "Details & thread"}
                 </button>
               </div>
+
+              {isOpen && (
+                <div className="border-t border-border">
+                  <div className="p-4">
+                    <RequestDetail request={r} qc={qc} />
+                  </div>
+                </div>
+              )}
             </div>
-            <button
-              onClick={() => setOpenRequest(openRequest === r.id ? null : r.id)}
-              className="mt-3 text-xs text-primary hover:underline"
-            >
-              {openRequest === r.id ? "Inklappen" : "Open details / thread"}
-              ({(r.change_comments?.length ?? 0)} berichten, {(r.change_attachments?.length ?? 0)} bijlagen)
-            </button>
-            {openRequest === r.id && (
-              <RequestDetail request={r} qc={qc} />
-            )}
+          );
+        })}
+        {sorted.length === 0 && (
+          <div className="rounded-xl border border-border bg-card p-8 text-center text-sm text-muted-foreground">
+            Geen changes gevonden.
           </div>
-        );
-      })}
-      {sorted.length === 0 && <p className="text-muted-foreground text-sm">Geen changes.</p>}
+        )}
+      </div>
     </div>
   );
 }
