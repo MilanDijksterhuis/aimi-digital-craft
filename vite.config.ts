@@ -1,18 +1,11 @@
-import { defineConfig } from '@tanstack/start/config'
-import tailwindcss from '@tailwindcss/vite'
-import tsConfigPaths from 'vite-tsconfig-paths'
+// Switch from Cloudflare to Node.js adapter for VPS deployment
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  server: {
-    preset: 'node-server',
-  },
-  vite: {
-    plugins: [
-      tailwindcss(),
-      tsConfigPaths({ projects: ['./tsconfig.json'] }),
-    ],
-    resolve: {
-      alias: { '@': '/src' },
+  tanstackStart: {
+    server: {
+      entry: "server",
+      preset: "node-server",
     },
   },
-})
+});
