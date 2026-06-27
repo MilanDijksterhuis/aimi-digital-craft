@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Code2, Server, Gauge, Plus } from "lucide-react";
+import { Code2, Server, Gauge, Cloud } from "lucide-react";
 
 const services = [
   {
@@ -18,10 +18,10 @@ const services = [
     desc: "Core Web Vitals, SEO en snelheid die je conversie laat zien.",
   },
   {
-    icon: Plus,
-    title: "More coming soon…",
-    desc: "We breiden uit met automatisering, AI en digitale producten.",
-    muted: true,
+    icon: Cloud,
+    title: "Hosting Only — €30/maand",
+    desc: "Heb je al een site maar wil je 'm snel, veilig en zonder zorgen laten draaien? Wij hosten, monitoren en patchen 'm voor je. SSL, backups, updates — geen setup-kosten.",
+    highlight: true,
   },
 ];
 
@@ -46,8 +46,8 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className={`group relative p-6 rounded-lg border border-border bg-card transition-colors hover:border-primary/40 ${
-                s.muted ? "opacity-70" : ""
+              className={`group relative p-6 rounded-lg border bg-card transition-colors hover:border-primary/40 ${
+                s.highlight ? "border-primary/40 bg-primary/5" : "border-border"
               }`}
             >
               <s.icon className="w-6 h-6 text-primary mb-6" strokeWidth={1.5} />
