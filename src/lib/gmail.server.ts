@@ -32,7 +32,7 @@ export async function getGmailSettings(): Promise<{
   refresh_token: string | null;
   access_token: string | null;
 }> {
-  const { data: rows } = await supabaseAdmin
+  const { data: rows } = await (supabaseAdmin as any)
     .from("app_settings")
     .select("key, value")
     .in("key", ["gmail_refresh_token", "gmail_access_token", "gmail_connected_email", "gmail_from_email", "gmail_from_name"]);
@@ -51,13 +51,13 @@ export async function getGmailSettings(): Promise<{
 }
 
 export async function saveSetting(key: string, value: string) {
-  await supabaseAdmin
+  await (supabaseAdmin as any)
     .from("app_settings")
     .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: "key" });
 }
 
 export async function disconnectGmail() {
-  await supabaseAdmin
+  await (supabaseAdmin as any)
     .from("app_settings")
     .delete()
     .in("key", ["gmail_refresh_token", "gmail_access_token", "gmail_connected_email"]);

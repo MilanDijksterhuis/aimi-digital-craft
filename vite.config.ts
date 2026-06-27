@@ -8,4 +8,9 @@ export default defineConfig({
       preset: "node-server",
     },
   },
+  build: {
+    rollupOptions: {
+      external: ["googleapis", "nodemailer", "google-auth-library"],
+    },
+  },
 });
