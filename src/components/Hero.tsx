@@ -57,15 +57,6 @@ export function Hero() {
 
           {/* Left — main content */}
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="section-label mb-8"
-            >
-              Web agency — Aidan & Milan
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}

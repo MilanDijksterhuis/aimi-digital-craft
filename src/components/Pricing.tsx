@@ -39,9 +39,6 @@ export function Pricing() {
     <section id="pricing" className="py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
-          <p className="font-mono text-xs text-primary mb-3 uppercase tracking-widest">
-            Tarieven
-          </p>
           <h2 className="font-display font-bold text-4xl md:text-6xl tracking-tight">
             Vaste prijzen.
           </h2>

@@ -29,7 +29,6 @@ export function Services() {
     <section id="services" className="py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16">
-          <p className="section-label mb-4">Wat we doen</p>
           <h2 className="max-w-sm">
             Websites bouwen en onderhouden.
           </h2>

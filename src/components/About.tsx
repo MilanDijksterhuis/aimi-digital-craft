@@ -7,7 +7,6 @@ export function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div>
-            <p className="section-label mb-6" style={{ color: "#8fa8c0" }}>Over ons</p>
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}

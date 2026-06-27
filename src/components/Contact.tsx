@@ -65,7 +65,6 @@ export function Contact() {
   return (
     <section id="contact" className="py-32 relative">
       <div className="relative mx-auto max-w-3xl px-6">
-        <p className="section-label mb-4 text-center">Contact</p>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
