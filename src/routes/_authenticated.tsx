@@ -33,10 +33,29 @@ function Inner() {
   const ping = useServerFn(pingLastSeen);
   const checkAccess = useServerFn(checkMyAccess);
 
-  // Ping last_seen periodically + check access
+  const SESSION_MAX_MS = 10 * 60 * 1000; // 10 minuten
+  const SESSION_KEY = "aimi_session_start";
+
+  // Ping last_seen periodically + check access + session timeout
   useEffect(() => {
     if (!user) return;
     let active = true;
+
+    // Sla login-tijdstip op (alleen als nog niet gezet)
+    if (!localStorage.getItem(SESSION_KEY)) {
+      localStorage.setItem(SESSION_KEY, String(Date.now()));
+    }
+
+    const doSessionCheck = async () => {
+      const start = Number(localStorage.getItem(SESSION_KEY) ?? 0);
+      if (Date.now() - start >= SESSION_MAX_MS) {
+        localStorage.removeItem(SESSION_KEY);
+        toast.error("Je sessie is verlopen. Log opnieuw in.");
+        await signOut();
+        nav({ to: "/login" });
+      }
+    };
+
     const doPing = () => { ping({}).catch(() => {}); };
     const doCheck = async () => {
       try {
@@ -49,11 +68,26 @@ function Inner() {
         }
       } catch {}
     };
+
     doPing();
     doCheck();
+    doSessionCheck();
+
     const pingI = setInterval(doPing, 60_000);
     const checkI = setInterval(doCheck, 5 * 60_000);
-    return () => { active = false; clearInterval(pingI); clearInterval(checkI); };
+    const sessionI = setInterval(doSessionCheck, 5 * 60_000); // check elke 5 min
+
+    return () => {
+      active = false;
+      clearInterval(pingI);
+      clearInterval(checkI);
+      clearInterval(sessionI);
+    };
+  }, [user]);
+
+  // Wis sessie-tijdstip bij uitloggen
+  useEffect(() => {
+    return () => { if (!user) localStorage.removeItem(SESSION_KEY); };
   }, [user]);
 
   if (loading) {
