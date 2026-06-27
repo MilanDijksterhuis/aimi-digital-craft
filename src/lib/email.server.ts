@@ -1,14 +1,22 @@
-import { buildGmailTransporter } from "./gmail.server";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT ?? 587),
+  secure: process.env.SMTP_SECURE === "true",
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function sendWelcomeEmail(to: string, fullName: string, tempPassword: string) {
   const loginUrl = process.env.VITE_APP_URL
     ? `${process.env.VITE_APP_URL}/login`
     : "https://portal.aimi-development.nl/login";
 
-  const { transporter, from } = await buildGmailTransporter();
-
   await transporter.sendMail({
-    from,
+    from: `"AIMI Backoffice" <${process.env.SMTP_USER ?? "backoffice@aimi-development.nl"}>`,
     to,
     subject: "Welkom bij AIMI — jouw inloggegevens",
     html: `
