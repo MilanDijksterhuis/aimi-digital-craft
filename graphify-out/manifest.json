@@ -1,0 +1,1812 @@
+{
+  "plugins/known_marketplaces.json": {
+    "mtime": 1782663580.4143176,
+    "ast_hash": "54175637cedc46f60d6ad7b3803f7378",
+    "semantic_hash": "54175637cedc46f60d6ad7b3803f7378"
+  },
+  "plugins/marketplaces/claude-plugins-official/.claude-plugin/marketplace.json": {
+    "mtime": 1782652510.1739907,
+    "ast_hash": "968c3cc8be10f970cfc839caba6c81b3",
+    "semantic_hash": "968c3cc8be10f970cfc839caba6c81b3"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.2254908,
+    "ast_hash": "1bc2cb74bf37b6a46d4edf962d13263c",
+    "semantic_hash": "1bc2cb74bf37b6a46d4edf962d13263c"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/asana/.mcp.json": {
+    "mtime": 1782652510.2589912,
+    "ast_hash": "d5eb5a9049096fa739c88f9155a69c9b",
+    "semantic_hash": "d5eb5a9049096fa739c88f9155a69c9b"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.2714891,
+    "ast_hash": "9f4b9232a9a9e4dda300ba49bf7ac371",
+    "semantic_hash": "9f4b9232a9a9e4dda300ba49bf7ac371"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/context7/.mcp.json": {
+    "mtime": 1782652510.2729902,
+    "ast_hash": "6dcbdeed9e9247e5843ce94f86a83abc",
+    "semantic_hash": "6dcbdeed9e9247e5843ce94f86a83abc"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.3004904,
+    "ast_hash": "5a380f790e070ee703594f71d71ff958",
+    "semantic_hash": "5a380f790e070ee703594f71d71ff958"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/.mcp.json": {
+    "mtime": 1782652510.3019917,
+    "ast_hash": "634854d91272e8ee2558ce5ef6e9fde5",
+    "semantic_hash": "634854d91272e8ee2558ce5ef6e9fde5"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/package.json": {
+    "mtime": 1782652510.3209908,
+    "ast_hash": "dd18c52ab9a19857264fd2a11c4682b1",
+    "semantic_hash": "dd18c52ab9a19857264fd2a11c4682b1"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/server.ts": {
+    "mtime": 1782652510.3264928,
+    "ast_hash": "45fe8a330371a466a23db330891c8b83",
+    "semantic_hash": "45fe8a330371a466a23db330891c8b83"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.3349922,
+    "ast_hash": "99469a1492b9ce3ce26700ec93ec0ae8",
+    "semantic_hash": "99469a1492b9ce3ce26700ec93ec0ae8"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.mcp.json": {
+    "mtime": 1782652510.3494904,
+    "ast_hash": "6ccc8fc58feeed80f580e9413c00abdf",
+    "semantic_hash": "6ccc8fc58feeed80f580e9413c00abdf"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/package.json": {
+    "mtime": 1782652510.38149,
+    "ast_hash": "9b5cdd6793faeace73c34b83d38b5d85",
+    "semantic_hash": "9b5cdd6793faeace73c34b83d38b5d85"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/server.ts": {
+    "mtime": 1782652510.3824914,
+    "ast_hash": "1e710621435905ba0df74c3724b1d9e9",
+    "semantic_hash": "1e710621435905ba0df74c3724b1d9e9"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.3874898,
+    "ast_hash": "4c90f90dbe60d73c0fc2a4c522d131a7",
+    "semantic_hash": "4c90f90dbe60d73c0fc2a4c522d131a7"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/firebase/.mcp.json": {
+    "mtime": 1782652510.3889892,
+    "ast_hash": "b43c814a02ff9d75c54453febb3b74fe",
+    "semantic_hash": "b43c814a02ff9d75c54453febb3b74fe"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/github/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.41099,
+    "ast_hash": "47db419e97f7d38e1949b7416c9a89b4",
+    "semantic_hash": "47db419e97f7d38e1949b7416c9a89b4"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/github/.mcp.json": {
+    "mtime": 1782652510.4164903,
+    "ast_hash": "f93a8a33dcd2f8ae8c9932815322699e",
+    "semantic_hash": "f93a8a33dcd2f8ae8c9932815322699e"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.4299912,
+    "ast_hash": "a0b81c72b602c729cd6af86107c0f1ac",
+    "semantic_hash": "a0b81c72b602c729cd6af86107c0f1ac"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/gitlab/.mcp.json": {
+    "mtime": 1782652510.431489,
+    "ast_hash": "40aa0fdd6efd7c323a810a43972c88be",
+    "semantic_hash": "40aa0fdd6efd7c323a810a43972c88be"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.4339886,
+    "ast_hash": "40c7b249511a2dec18e59cc5ccbf0b22",
+    "semantic_hash": "40c7b249511a2dec18e59cc5ccbf0b22"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/.mcp.json": {
+    "mtime": 1782652510.4354904,
+    "ast_hash": "f42d2e22c9973f8a93827b1c5308ce37",
+    "semantic_hash": "f42d2e22c9973f8a93827b1c5308ce37"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.4389906,
+    "ast_hash": "791fc918c4f153e7d6c093416fdcabc9",
+    "semantic_hash": "791fc918c4f153e7d6c093416fdcabc9"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/.mcp.json": {
+    "mtime": 1782652510.44049,
+    "ast_hash": "a77681c35d1fe83c2ad1862152791130",
+    "semantic_hash": "a77681c35d1fe83c2ad1862152791130"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/package.json": {
+    "mtime": 1782652510.4769917,
+    "ast_hash": "d2060efd48a5431b4fe645d40aea9570",
+    "semantic_hash": "d2060efd48a5431b4fe645d40aea9570"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/server.ts": {
+    "mtime": 1782652510.4844916,
+    "ast_hash": "d19466e03ad871a98b094cef98a640fb",
+    "semantic_hash": "d19466e03ad871a98b094cef98a640fb"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.499494,
+    "ast_hash": "19cb15c1aac80074327e6cd323d6a843",
+    "semantic_hash": "19cb15c1aac80074327e6cd323d6a843"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/laravel-boost/.mcp.json": {
+    "mtime": 1782652510.5034926,
+    "ast_hash": "3e254dca68b8504f8e5e192808c3c63d",
+    "semantic_hash": "3e254dca68b8504f8e5e192808c3c63d"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.5069907,
+    "ast_hash": "261011690dc59e10f98cd3bc25712435",
+    "semantic_hash": "261011690dc59e10f98cd3bc25712435"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/linear/.mcp.json": {
+    "mtime": 1782652510.511489,
+    "ast_hash": "43cd1b8f176ce369fe1ea1b402cf4fb9",
+    "semantic_hash": "43cd1b8f176ce369fe1ea1b402cf4fb9"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.5189903,
+    "ast_hash": "d070a340539788ba5a86a34ed01bac04",
+    "semantic_hash": "d070a340539788ba5a86a34ed01bac04"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/playwright/.mcp.json": {
+    "mtime": 1782652510.5234923,
+    "ast_hash": "b617a63bf3ab1159243e9189f5137c57",
+    "semantic_hash": "b617a63bf3ab1159243e9189f5137c57"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.527991,
+    "ast_hash": "4e3ad85d1df12648f525bc382ae31253",
+    "semantic_hash": "4e3ad85d1df12648f525bc382ae31253"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/serena/.mcp.json": {
+    "mtime": 1782652510.5364902,
+    "ast_hash": "3fb0898e51e1d7b5a45a0a7af23186a4",
+    "semantic_hash": "3fb0898e51e1d7b5a45a0a7af23186a4"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.544491,
+    "ast_hash": "da34800effa7c3b53b5db5d146a5555f",
+    "semantic_hash": "da34800effa7c3b53b5db5d146a5555f"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.mcp.json": {
+    "mtime": 1782652510.5854897,
+    "ast_hash": "46ac4a0c17198a0ab8dbc5051a476836",
+    "semantic_hash": "46ac4a0c17198a0ab8dbc5051a476836"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/package.json": {
+    "mtime": 1782652510.6294909,
+    "ast_hash": "e4593b3ceca7c2bd219960cca44f596f",
+    "semantic_hash": "e4593b3ceca7c2bd219960cca44f596f"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/server.ts": {
+    "mtime": 1782652510.6309917,
+    "ast_hash": "0addeba1e4bd7d2f300dd5c861692b80",
+    "semantic_hash": "0addeba1e4bd7d2f300dd5c861692b80"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.640991,
+    "ast_hash": "1808d6bf24d5d5532173409fc82311e6",
+    "semantic_hash": "1808d6bf24d5d5532173409fc82311e6"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/terraform/.mcp.json": {
+    "mtime": 1782652510.6424909,
+    "ast_hash": "8a62985124aca6884e9949178d377565",
+    "semantic_hash": "8a62985124aca6884e9949178d377565"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.6459897,
+    "ast_hash": "5b685bde2ab1b3114c7dfd3645296b4f",
+    "semantic_hash": "5b685bde2ab1b3114c7dfd3645296b4f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.72836,
+    "ast_hash": "1117c0343830adfbddd29832e13617cf",
+    "semantic_hash": "1117c0343830adfbddd29832e13617cf"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.797358,
+    "ast_hash": "b1e19a70d16393510f325abcfb018e64",
+    "semantic_hash": "b1e19a70d16393510f325abcfb018e64"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/.claude-plugin/plugin.json": {
+    "mtime": 1782652510.9428594,
+    "ast_hash": "81a1dcd0bac90fb3d13caedb24b115ff",
+    "semantic_hash": "81a1dcd0bac90fb3d13caedb24b115ff"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/workflows/extract-rules.js": {
+    "mtime": 1782652511.0868611,
+    "ast_hash": "b41a137cf11b34070744512d27b93d74",
+    "semantic_hash": "b41a137cf11b34070744512d27b93d74"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/workflows/harden-scan.js": {
+    "mtime": 1782652511.094359,
+    "ast_hash": "62b9666ab76f15bbd2c38175b519d9fa",
+    "semantic_hash": "62b9666ab76f15bbd2c38175b519d9fa"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/workflows/portfolio-assess.js": {
+    "mtime": 1782652511.1008594,
+    "ast_hash": "00a9e7d6621ba0a11a83b3248ca47b34",
+    "semantic_hash": "00a9e7d6621ba0a11a83b3248ca47b34"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/workflows/reimagine-scaffold.js": {
+    "mtime": 1782652511.1028595,
+    "ast_hash": "cc88dcc6353368c21268f11db83a4681",
+    "semantic_hash": "cc88dcc6353368c21268f11db83a4681"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/workflows/uplift-deltas.js": {
+    "mtime": 1782652511.1053598,
+    "ast_hash": "e035dad729b603118ee534289293fba7",
+    "semantic_hash": "e035dad729b603118ee534289293fba7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-review/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.1148582,
+    "ast_hash": "a36e000cb599efba5e7d35c9d71489eb",
+    "semantic_hash": "a36e000cb599efba5e7d35c9d71489eb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.1728573,
+    "ast_hash": "b3c65b22ddd4b161d6bc8ccd9bfd525a",
+    "semantic_hash": "b3c65b22ddd4b161d6bc8ccd9bfd525a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.1833782,
+    "ast_hash": "3fe64cc9c04ced6dc0e6fa9fd82d1448",
+    "semantic_hash": "3fe64cc9c04ced6dc0e6fa9fd82d1448"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.21936,
+    "ast_hash": "3461872c8fb7bf724467452671eaa762",
+    "semantic_hash": "3461872c8fb7bf724467452671eaa762"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.2388592,
+    "ast_hash": "1c68d0862e40fb238e4df4294218ccc6",
+    "semantic_hash": "1c68d0862e40fb238e4df4294218ccc6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/.mcp.json": {
+    "mtime": 1782652511.2413638,
+    "ast_hash": "a27389b5b54fb0c86a569910e3697bbf",
+    "semantic_hash": "a27389b5b54fb0c86a569910e3697bbf"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.2748606,
+    "ast_hash": "dd0ec340f52192e16ae5eb862a290fd6",
+    "semantic_hash": "dd0ec340f52192e16ae5eb862a290fd6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks-handlers/session-start.sh": {
+    "mtime": 1782652511.2963593,
+    "ast_hash": "7d5691a61af8e42e13b19f694a5a596e",
+    "semantic_hash": "7d5691a61af8e42e13b19f694a5a596e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks/hooks.json": {
+    "mtime": 1782652511.2903593,
+    "ast_hash": "cef09306568ae7667dcaff66b74cd021",
+    "semantic_hash": "cef09306568ae7667dcaff66b74cd021"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.30436,
+    "ast_hash": "a3e3eb935895850d242c2e1b182eb1e6",
+    "semantic_hash": "a3e3eb935895850d242c2e1b182eb1e6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.3433597,
+    "ast_hash": "df58656fa161d75537099adae7089322",
+    "semantic_hash": "df58656fa161d75537099adae7089322"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.3643568,
+    "ast_hash": "29c7c331e9e6afa9c708247517c129c1",
+    "semantic_hash": "29c7c331e9e6afa9c708247517c129c1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/__init__.py": {
+    "mtime": 1782652511.3988583,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/config_loader.py": {
+    "mtime": 1782652511.4013596,
+    "ast_hash": "4b4024bd183e39dbadab43e725205c72",
+    "semantic_hash": "4b4024bd183e39dbadab43e725205c72"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/core/rule_engine.py": {
+    "mtime": 1782652511.40386,
+    "ast_hash": "65851729d0bc54efa1de4a7413c1ddc8",
+    "semantic_hash": "65851729d0bc54efa1de4a7413c1ddc8"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/__init__.py": {
+    "mtime": 1782652511.4158585,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/hooks.json": {
+    "mtime": 1782652511.4263582,
+    "ast_hash": "2208bec5c58d62c2a3b213201ffb8064",
+    "semantic_hash": "2208bec5c58d62c2a3b213201ffb8064"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/posttooluse.py": {
+    "mtime": 1782652511.4273612,
+    "ast_hash": "ea1019ee5f59fb3ec2307e98df7e2702",
+    "semantic_hash": "ea1019ee5f59fb3ec2307e98df7e2702"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/pretooluse.py": {
+    "mtime": 1782652511.4293594,
+    "ast_hash": "5e732c755897fc9e658cc8bc8a3fc5fb",
+    "semantic_hash": "5e732c755897fc9e658cc8bc8a3fc5fb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/stop.py": {
+    "mtime": 1782652511.4303584,
+    "ast_hash": "572cd3c023592d84f0dd81b416cf4666",
+    "semantic_hash": "572cd3c023592d84f0dd81b416cf4666"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/hooks/userpromptsubmit.py": {
+    "mtime": 1782652511.4318593,
+    "ast_hash": "b649f031d79b00b4f1fdc4d0bbab2634",
+    "semantic_hash": "b649f031d79b00b4f1fdc4d0bbab2634"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/matchers/__init__.py": {
+    "mtime": 1782652511.43536,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/utils/__init__.py": {
+    "mtime": 1782652511.4393592,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.455367,
+    "ast_hash": "b3cca030095de03cf92485b8351dba3e",
+    "semantic_hash": "b3cca030095de03cf92485b8351dba3e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks-handlers/session-start.sh": {
+    "mtime": 1782652511.4729145,
+    "ast_hash": "c246db1e6df829339a671b2bbd50ff52",
+    "semantic_hash": "c246db1e6df829339a671b2bbd50ff52"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks/hooks.json": {
+    "mtime": 1782652511.4704158,
+    "ast_hash": "a7cf23dafdeb89be530ce768e349c577",
+    "semantic_hash": "a7cf23dafdeb89be530ce768e349c577"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.4839137,
+    "ast_hash": "a7852549185ea5e8ec0eb63efcc67bab",
+    "semantic_hash": "a7852549185ea5e8ec0eb63efcc67bab"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/evals/trigger_eval.json": {
+    "mtime": 1782652511.4984145,
+    "ast_hash": "fce2dcdbd2053909557f7d073b40778f",
+    "semantic_hash": "fce2dcdbd2053909557f7d073b40778f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/check_latex.sh": {
+    "mtime": 1782652511.5259154,
+    "ast_hash": "70c28312bf140e1d822181c0170af684",
+    "semantic_hash": "70c28312bf140e1d822181c0170af684"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/scripts/compile_pdf.sh": {
+    "mtime": 1782652511.534915,
+    "ast_hash": "8e5c79a9c6abbf37fce688b8145c8c2e",
+    "semantic_hash": "8e5c79a9c6abbf37fce688b8145c8c2e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.5419147,
+    "ast_hash": "958787e11236e7caa0636e82cb32a9df",
+    "semantic_hash": "958787e11236e7caa0636e82cb32a9df"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.645415,
+    "ast_hash": "3c303fa6de459e7f2ab65e7a88709fab",
+    "semantic_hash": "3c303fa6de459e7f2ab65e7a88709fab"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.6729157,
+    "ast_hash": "376813470a43131e09c9e1264b65e944",
+    "semantic_hash": "376813470a43131e09c9e1264b65e944"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.7004147,
+    "ast_hash": "2417ae2fd015658b0998a5b1c5490d54",
+    "semantic_hash": "2417ae2fd015658b0998a5b1c5490d54"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/scripts/validate-agent.sh": {
+    "mtime": 1782652511.776914,
+    "ast_hash": "1d8772a8ff02aeebf088c17f10fbd974",
+    "semantic_hash": "1d8772a8ff02aeebf088c17f10fbd974"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/load-context.sh": {
+    "mtime": 1782652511.8544183,
+    "ast_hash": "61c0f0e3d36585fe47255ba18987fd30",
+    "semantic_hash": "61c0f0e3d36585fe47255ba18987fd30"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-bash.sh": {
+    "mtime": 1782652511.8564146,
+    "ast_hash": "73ce0170ae964ae6f29a1f70e3a03ce7",
+    "semantic_hash": "73ce0170ae964ae6f29a1f70e3a03ce7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/examples/validate-write.sh": {
+    "mtime": 1782652511.8579147,
+    "ast_hash": "9e523034ba835e19b4aaf41477578979",
+    "semantic_hash": "9e523034ba835e19b4aaf41477578979"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/hook-linter.sh": {
+    "mtime": 1782652511.873415,
+    "ast_hash": "b8beac56d7b35bc1811dd711167aa23d",
+    "semantic_hash": "b8beac56d7b35bc1811dd711167aa23d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/test-hook.sh": {
+    "mtime": 1782652511.8769143,
+    "ast_hash": "435f797cb404a187db1650adbcbf0322",
+    "semantic_hash": "435f797cb404a187db1650adbcbf0322"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/validate-hook-schema.sh": {
+    "mtime": 1782652511.8794124,
+    "ast_hash": "88dd5d9375c2080239cd17d15b95584e",
+    "semantic_hash": "88dd5d9375c2080239cd17d15b95584e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/http-server.json": {
+    "mtime": 1782652511.8999152,
+    "ast_hash": "95b71ba3b5ae2d367cc61ce684d99d96",
+    "semantic_hash": "95b71ba3b5ae2d367cc61ce684d99d96"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/sse-server.json": {
+    "mtime": 1782652511.9014134,
+    "ast_hash": "93fb92305d86a3fad5490681454b8f3f",
+    "semantic_hash": "93fb92305d86a3fad5490681454b8f3f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/examples/stdio-server.json": {
+    "mtime": 1782652511.9039142,
+    "ast_hash": "75e1f58d01d63fc53fcc6291076576d7",
+    "semantic_hash": "75e1f58d01d63fc53fcc6291076576d7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/read-settings-hook.sh": {
+    "mtime": 1782652511.9274125,
+    "ast_hash": "305e68af5e384f5b3604bbb7e9fa8d7e",
+    "semantic_hash": "305e68af5e384f5b3604bbb7e9fa8d7e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/parse-frontmatter.sh": {
+    "mtime": 1782652511.9499125,
+    "ast_hash": "ea376cea81bb723adbac95c723c36bab",
+    "semantic_hash": "ea376cea81bb723adbac95c723c36bab"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/scripts/validate-settings.sh": {
+    "mtime": 1782652511.951914,
+    "ast_hash": "955f2e69dc7f12c02e24a5f7e0f0e63e",
+    "semantic_hash": "955f2e69dc7f12c02e24a5f7e0f0e63e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/.claude-plugin/plugin.json": {
+    "mtime": 1782652511.9879155,
+    "ast_hash": "67d72d3afeec8976c2055535f53184a4",
+    "semantic_hash": "67d72d3afeec8976c2055535f53184a4"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/project-artifact/.claude-plugin/plugin.json": {
+    "mtime": 1782652512.0204172,
+    "ast_hash": "a7c12ff6fb56bf2961ff01a02a5a5fd5",
+    "semantic_hash": "a7c12ff6fb56bf2961ff01a02a5a5fd5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/.claude-plugin/plugin.json": {
+    "mtime": 1782652512.042415,
+    "ast_hash": "cc7f0e9b88cfb7a444b38dce6dd7a42d",
+    "semantic_hash": "cc7f0e9b88cfb7a444b38dce6dd7a42d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/hooks.json": {
+    "mtime": 1782652512.0609174,
+    "ast_hash": "4b73b519513fb58af3c000ebf16db6eb",
+    "semantic_hash": "4b73b519513fb58af3c000ebf16db6eb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/stop-hook.sh": {
+    "mtime": 1782652512.0624137,
+    "ast_hash": "c8b5275a038080de1aefe353367275d5",
+    "semantic_hash": "c8b5275a038080de1aefe353367275d5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/scripts/setup-ralph-loop.sh": {
+    "mtime": 1782652512.0769134,
+    "ast_hash": "7b7667edd5399014285ad80173fa0940",
+    "semantic_hash": "7b7667edd5399014285ad80173fa0940"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/.claude-plugin/plugin.json": {
+    "mtime": 1782652512.0854144,
+    "ast_hash": "194fbd7997998bee5dee13ca8c6ae074",
+    "semantic_hash": "194fbd7997998bee5dee13ca8c6ae074"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/_base.py": {
+    "mtime": 1782652512.0979137,
+    "ast_hash": "5347348658a983f6f71f8b37a45ff1cc",
+    "semantic_hash": "5347348658a983f6f71f8b37a45ff1cc"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/diffstate.py": {
+    "mtime": 1782652512.1164134,
+    "ast_hash": "3fff610a51bff01f5f17c4fe66098b2d",
+    "semantic_hash": "3fff610a51bff01f5f17c4fe66098b2d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/ensure_agent_sdk.py": {
+    "mtime": 1782652512.1189153,
+    "ast_hash": "2fff8a02c369218f76161cac51f79826",
+    "semantic_hash": "2fff8a02c369218f76161cac51f79826"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/extensibility.py": {
+    "mtime": 1782652512.120415,
+    "ast_hash": "5b49662761ce514be1f53ff0acd91ee5",
+    "semantic_hash": "5b49662761ce514be1f53ff0acd91ee5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/gitutil.py": {
+    "mtime": 1782652512.1229148,
+    "ast_hash": "657ef885375da1910e8faae4a60f6733",
+    "semantic_hash": "657ef885375da1910e8faae4a60f6733"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/hooks.json": {
+    "mtime": 1782652512.1274154,
+    "ast_hash": "136ccb49de47b40135787ee0994e9742",
+    "semantic_hash": "136ccb49de47b40135787ee0994e9742"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/llm.py": {
+    "mtime": 1782652512.1334162,
+    "ast_hash": "601d575f1b1a7d7a68fba3e2e8a4ac5c",
+    "semantic_hash": "601d575f1b1a7d7a68fba3e2e8a4ac5c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/patterns.py": {
+    "mtime": 1782652512.1354158,
+    "ast_hash": "c3ea19895c4b27a7fa08cdf85eec5b07",
+    "semantic_hash": "c3ea19895c4b27a7fa08cdf85eec5b07"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/review_api.py": {
+    "mtime": 1782652512.1364138,
+    "ast_hash": "7788a8123247b3337b255ff366dc14f5",
+    "semantic_hash": "7788a8123247b3337b255ff366dc14f5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/security_reminder_hook.py": {
+    "mtime": 1782652512.1454163,
+    "ast_hash": "28770e6f814760006400cedfb37ee463",
+    "semantic_hash": "28770e6f814760006400cedfb37ee463"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/session_state.py": {
+    "mtime": 1782652512.1474154,
+    "ast_hash": "b40c5b78ee9703c72a0bc0f0d03b336e",
+    "semantic_hash": "b40c5b78ee9703c72a0bc0f0d03b336e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/sg-python.sh": {
+    "mtime": 1782652512.1484175,
+    "ast_hash": "94d9d4d3fd664db1fa3c6bb505d2e4f5",
+    "semantic_hash": "94d9d4d3fd664db1fa3c6bb505d2e4f5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/analyze-sessions.mjs": {
+    "mtime": 1782652512.1659143,
+    "ast_hash": "02914e1218cc68e70ae3e14b169b5050",
+    "semantic_hash": "02914e1218cc68e70ae3e14b169b5050"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/.claude-plugin/plugin.json": {
+    "mtime": 1782652512.1704137,
+    "ast_hash": "5d4d8ee6606004d718a4c8371c20b0b6",
+    "semantic_hash": "5d4d8ee6606004d718a4c8371c20b0b6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/generate_review.py": {
+    "mtime": 1782652512.1994126,
+    "ast_hash": "d7f883f3d3596e62618faecf298c4f5f",
+    "semantic_hash": "d7f883f3d3596e62618faecf298c4f5f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/__init__.py": {
+    "mtime": 1782652512.206915,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/aggregate_benchmark.py": {
+    "mtime": 1782652512.2214148,
+    "ast_hash": "5c2dfb44a0a33c588e9e9f3df60a3537",
+    "semantic_hash": "5c2dfb44a0a33c588e9e9f3df60a3537"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/generate_report.py": {
+    "mtime": 1782652512.2309153,
+    "ast_hash": "09607615aed355c104f9c4f6dec7c9aa",
+    "semantic_hash": "09607615aed355c104f9c4f6dec7c9aa"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/improve_description.py": {
+    "mtime": 1782652512.2324145,
+    "ast_hash": "b20bbcc3d69bc299b541c8b62c25cefe",
+    "semantic_hash": "b20bbcc3d69bc299b541c8b62c25cefe"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/package_skill.py": {
+    "mtime": 1782652512.2344146,
+    "ast_hash": "ba8744b000bd7d7ffcb5c85113113f0e",
+    "semantic_hash": "ba8744b000bd7d7ffcb5c85113113f0e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/quick_validate.py": {
+    "mtime": 1782652512.2359154,
+    "ast_hash": "8247be9cfc7938843f586b6509a64641",
+    "semantic_hash": "8247be9cfc7938843f586b6509a64641"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_eval.py": {
+    "mtime": 1782652512.2374153,
+    "ast_hash": "75269360a221e48f79425605de5e5cb6",
+    "semantic_hash": "75269360a221e48f79425605de5e5cb6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/run_loop.py": {
+    "mtime": 1782652512.2459145,
+    "ast_hash": "c3365f6c1927bf535f463f841c32ae81",
+    "semantic_hash": "c3365f6c1927bf535f463f841c32ae81"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/scripts/utils.py": {
+    "mtime": 1782652512.2514133,
+    "ast_hash": "6cf213a77cbadc39febbaf9ee57fac10",
+    "semantic_hash": "6cf213a77cbadc39febbaf9ee57fac10"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/ec5b5ce6-8cd7-4785-91f6-1e4c5d69d318/subagents/agent-a5bf838ed9e86d5dd.meta.json": {
+    "mtime": 1782565105.330026,
+    "ast_hash": "05b4c97d8f7c99127c7df7d5c95d7de4",
+    "semantic_hash": "05b4c97d8f7c99127c7df7d5c95d7de4"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/ec5b5ce6-8cd7-4785-91f6-1e4c5d69d318/subagents/agent-aaca8ae1fb1a980ec.meta.json": {
+    "mtime": 1782576172.3243423,
+    "ast_hash": "cacf293dfbc3e18acf4e7e0c732a5a45",
+    "semantic_hash": "cacf293dfbc3e18acf4e7e0c732a5a45"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/ec5b5ce6-8cd7-4785-91f6-1e4c5d69d318/subagents/agent-abd64fc6bd813e2a2.meta.json": {
+    "mtime": 1782555492.8434498,
+    "ast_hash": "818893634ece3b4f88510aaebdf52fa2",
+    "semantic_hash": "818893634ece3b4f88510aaebdf52fa2"
+  },
+  "sessions/15220.json": {
+    "mtime": 1782663961.9953318,
+    "ast_hash": "4f2ed450382e65a48c10c92022e667c8",
+    "semantic_hash": "4f2ed450382e65a48c10c92022e667c8"
+  },
+  "settings.json": {
+    "mtime": 1782653315.0887337,
+    "ast_hash": "c0e408e2c28b164e983c3005357c868b",
+    "semantic_hash": "c0e408e2c28b164e983c3005357c868b"
+  },
+  "shell-snapshots/snapshot-bash-1782663382644-n5199y.sh": {
+    "mtime": 1782663383.8066308,
+    "ast_hash": "195a89f0de59d9d3799e5b8ce32bc544",
+    "semantic_hash": "195a89f0de59d9d3799e5b8ce32bc544"
+  },
+  "CLAUDE.md": {
+    "mtime": 1782663198.1146665,
+    "ast_hash": "86277c7d227a84e7da66c9ccae3bd5fb",
+    "semantic_hash": "86277c7d227a84e7da66c9ccae3bd5fb"
+  },
+  "cache/changelog.md": {
+    "mtime": 1782547318.9862313,
+    "ast_hash": "cb56e75f5104b3caefbc319ad078c20a",
+    "semantic_hash": "cb56e75f5104b3caefbc319ad078c20a"
+  },
+  "plugins/marketplaces/claude-plugins-official/README.md": {
+    "mtime": 1782652510.2179914,
+    "ast_hash": "7890eaac19d19104c3586a72163aedbc",
+    "semantic_hash": "7890eaac19d19104c3586a72163aedbc"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/ACCESS.md": {
+    "mtime": 1782652510.3074915,
+    "ast_hash": "d27606b222b062ebf399ecc74b015dbf",
+    "semantic_hash": "d27606b222b062ebf399ecc74b015dbf"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/README.md": {
+    "mtime": 1782652510.317491,
+    "ast_hash": "eb25d45a482a3a99ea0d9a4001880335",
+    "semantic_hash": "eb25d45a482a3a99ea0d9a4001880335"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/access/SKILL.md": {
+    "mtime": 1782652510.3294911,
+    "ast_hash": "5fd1ef576db1e9ab8c6c0700c3a98cc5",
+    "semantic_hash": "5fd1ef576db1e9ab8c6c0700c3a98cc5"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/discord/skills/configure/SKILL.md": {
+    "mtime": 1782652510.3309922,
+    "ast_hash": "ad7e971e6258f9f40550a088d1890401",
+    "semantic_hash": "ad7e971e6258f9f40550a088d1890401"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/README.md": {
+    "mtime": 1782652510.3569884,
+    "ast_hash": "016ef5deda30b14559248abb28f4b17c",
+    "semantic_hash": "016ef5deda30b14559248abb28f4b17c"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/greptile/README.md": {
+    "mtime": 1782652510.4369907,
+    "ast_hash": "131335b93ece98bfead96bdd85470cd5",
+    "semantic_hash": "131335b93ece98bfead96bdd85470cd5"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/ACCESS.md": {
+    "mtime": 1782652510.4689906,
+    "ast_hash": "67e9298fb467f8ef2ea5676c8b12fbe8",
+    "semantic_hash": "67e9298fb467f8ef2ea5676c8b12fbe8"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/README.md": {
+    "mtime": 1782652510.472491,
+    "ast_hash": "fe3830b148093b07b50c4b98632061d8",
+    "semantic_hash": "fe3830b148093b07b50c4b98632061d8"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/access/SKILL.md": {
+    "mtime": 1782652510.4949918,
+    "ast_hash": "e8efa2f3c84543d04951ba3887ec1bf9",
+    "semantic_hash": "e8efa2f3c84543d04951ba3887ec1bf9"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/imessage/skills/configure/SKILL.md": {
+    "mtime": 1782652510.4964917,
+    "ast_hash": "84e1b833e04136fc9fa85c91a64ced90",
+    "semantic_hash": "84e1b833e04136fc9fa85c91a64ced90"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/ACCESS.md": {
+    "mtime": 1782652510.6244962,
+    "ast_hash": "319026c5a11c802d62e5013f181a21af",
+    "semantic_hash": "319026c5a11c802d62e5013f181a21af"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/README.md": {
+    "mtime": 1782652510.6269917,
+    "ast_hash": "932c99ac1a099da21dd0d00f14aeffb2",
+    "semantic_hash": "932c99ac1a099da21dd0d00f14aeffb2"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/access/SKILL.md": {
+    "mtime": 1782652510.632993,
+    "ast_hash": "11337e926dc204528460d66a0147bf77",
+    "semantic_hash": "11337e926dc204528460d66a0147bf77"
+  },
+  "plugins/marketplaces/claude-plugins-official/external_plugins/telegram/skills/configure/SKILL.md": {
+    "mtime": 1782652510.637493,
+    "ast_hash": "267fa04cdd9f132a08e76743944c99de",
+    "semantic_hash": "267fa04cdd9f132a08e76743944c99de"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/README.md": {
+    "mtime": 1782652510.6927118,
+    "ast_hash": "d9f6128d5ce5c98ec3541d3ab2f6b5dc",
+    "semantic_hash": "d9f6128d5ce5c98ec3541d3ab2f6b5dc"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-py.md": {
+    "mtime": 1782652510.6947758,
+    "ast_hash": "72af5be65ab47d6329d4dca7fd7c55c6",
+    "semantic_hash": "72af5be65ab47d6329d4dca7fd7c55c6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/agents/agent-sdk-verifier-ts.md": {
+    "mtime": 1782652510.7040882,
+    "ast_hash": "cd40efa2e8bcffc83aa4bb0fd48f6049",
+    "semantic_hash": "cd40efa2e8bcffc83aa4bb0fd48f6049"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/agent-sdk-dev/commands/new-sdk-app.md": {
+    "mtime": 1782652510.7128596,
+    "ast_hash": "9498852f131d18627a45b287eb672e07",
+    "semantic_hash": "9498852f131d18627a45b287eb672e07"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/clangd-lsp/README.md": {
+    "mtime": 1782652510.7213597,
+    "ast_hash": "243b3b06cb235b14ca3a105f114c3198",
+    "semantic_hash": "243b3b06cb235b14ca3a105f114c3198"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/README.md": {
+    "mtime": 1782652510.7353573,
+    "ast_hash": "bc1750fa7cf787406e5fac73799d9f45",
+    "semantic_hash": "bc1750fa7cf787406e5fac73799d9f45"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md": {
+    "mtime": 1782652510.7613597,
+    "ast_hash": "b40998879ae01c9b32d3d774fd1f068c",
+    "semantic_hash": "b40998879ae01c9b32d3d774fd1f068c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/hooks-patterns.md": {
+    "mtime": 1782652510.7633638,
+    "ast_hash": "bf393e21125942adf8dae093888690b1",
+    "semantic_hash": "bf393e21125942adf8dae093888690b1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/mcp-servers.md": {
+    "mtime": 1782652510.7653637,
+    "ast_hash": "e6c6c21957b76c8a2f3cf91efbbf0233",
+    "semantic_hash": "e6c6c21957b76c8a2f3cf91efbbf0233"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/plugins-reference.md": {
+    "mtime": 1782652510.7703595,
+    "ast_hash": "ff995064234392f3a00691a8b029feea",
+    "semantic_hash": "ff995064234392f3a00691a8b029feea"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/skills-reference.md": {
+    "mtime": 1782652510.7863586,
+    "ast_hash": "981b88cc53d0cf273c7dde6a845c0d2b",
+    "semantic_hash": "981b88cc53d0cf273c7dde6a845c0d2b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/skills/claude-automation-recommender/references/subagent-templates.md": {
+    "mtime": 1782652510.7888598,
+    "ast_hash": "0a7e003448a752cc4a829d7792b5615d",
+    "semantic_hash": "0a7e003448a752cc4a829d7792b5615d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/README.md": {
+    "mtime": 1782652510.8403587,
+    "ast_hash": "49f016b4cf6645cc721b942b469577bf",
+    "semantic_hash": "49f016b4cf6645cc721b942b469577bf"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/commands/revise-claude-md.md": {
+    "mtime": 1782652510.8613591,
+    "ast_hash": "198bf430485522f8c041ad214de78159",
+    "semantic_hash": "198bf430485522f8c041ad214de78159"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/SKILL.md": {
+    "mtime": 1782652510.8788602,
+    "ast_hash": "883b2485f6f2f3dbad60579b53c631c9",
+    "semantic_hash": "883b2485f6f2f3dbad60579b53c631c9"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/quality-criteria.md": {
+    "mtime": 1782652510.8873599,
+    "ast_hash": "d9c4154494210941e65a134c4afd3eb6",
+    "semantic_hash": "d9c4154494210941e65a134c4afd3eb6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/templates.md": {
+    "mtime": 1782652510.909361,
+    "ast_hash": "1e38615a38565aeb8985f19681036ae5",
+    "semantic_hash": "1e38615a38565aeb8985f19681036ae5"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/skills/claude-md-improver/references/update-guidelines.md": {
+    "mtime": 1782652510.9168627,
+    "ast_hash": "c1e6f94dbceab7658d63e2e46021bfae",
+    "semantic_hash": "c1e6f94dbceab7658d63e2e46021bfae"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/README.md": {
+    "mtime": 1782652510.9458592,
+    "ast_hash": "2637389327d6385e39126b8bb8799ce1",
+    "semantic_hash": "2637389327d6385e39126b8bb8799ce1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/architecture-critic.md": {
+    "mtime": 1782652510.9488585,
+    "ast_hash": "9921d2e2c552219a62317448f6ab822c",
+    "semantic_hash": "9921d2e2c552219a62317448f6ab822c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/business-rules-extractor.md": {
+    "mtime": 1782652510.9548576,
+    "ast_hash": "d64ac377fc5d96c70750b2efe996bd51",
+    "semantic_hash": "d64ac377fc5d96c70750b2efe996bd51"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/legacy-analyst.md": {
+    "mtime": 1782652510.9578593,
+    "ast_hash": "bb1796d789fb8cbe6f7cf5b79f2bbc3f",
+    "semantic_hash": "bb1796d789fb8cbe6f7cf5b79f2bbc3f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/scaffolder.md": {
+    "mtime": 1782652510.9663594,
+    "ast_hash": "d07b8eb3d3b8c7ea44b65b4987b9d25b",
+    "semantic_hash": "d07b8eb3d3b8c7ea44b65b4987b9d25b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/security-auditor.md": {
+    "mtime": 1782652510.9703593,
+    "ast_hash": "5cdd40c8acb9472d9391463ffc6ee4e6",
+    "semantic_hash": "5cdd40c8acb9472d9391463ffc6ee4e6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/test-engineer.md": {
+    "mtime": 1782652510.9813592,
+    "ast_hash": "baf9b97b1ab06e73de3283a90b223363",
+    "semantic_hash": "baf9b97b1ab06e73de3283a90b223363"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/agents/version-delta-analyst.md": {
+    "mtime": 1782652510.987859,
+    "ast_hash": "11ac79a3002636e39bebc8fc9b872c4c",
+    "semantic_hash": "11ac79a3002636e39bebc8fc9b872c4c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/assets/topology-viewer.html": {
+    "mtime": 1782652511.0078592,
+    "ast_hash": "56a2dd7690a7a012701e6e2c9db8d2e7",
+    "semantic_hash": "56a2dd7690a7a012701e6e2c9db8d2e7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-assess.md": {
+    "mtime": 1782652511.0133588,
+    "ast_hash": "a18e0093e0076b877168a670effea3bc",
+    "semantic_hash": "a18e0093e0076b877168a670effea3bc"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-brief.md": {
+    "mtime": 1782652511.0188577,
+    "ast_hash": "0ae4b104fe08faef1f9ee9753d088acb",
+    "semantic_hash": "0ae4b104fe08faef1f9ee9753d088acb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-extract-rules.md": {
+    "mtime": 1782652511.0228586,
+    "ast_hash": "75203f9e95fbe559f13f12bcbcc31e4d",
+    "semantic_hash": "75203f9e95fbe559f13f12bcbcc31e4d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-harden.md": {
+    "mtime": 1782652511.0243592,
+    "ast_hash": "b5302b58454c2c36627e48e5edf653b1",
+    "semantic_hash": "b5302b58454c2c36627e48e5edf653b1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-map.md": {
+    "mtime": 1782652511.0523596,
+    "ast_hash": "93f508085143be4ae098d5cdde9b1769",
+    "semantic_hash": "93f508085143be4ae098d5cdde9b1769"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-preflight.md": {
+    "mtime": 1782652511.0543592,
+    "ast_hash": "c49cab32d121d2dfcb566629e8694987",
+    "semantic_hash": "c49cab32d121d2dfcb566629e8694987"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-reimagine.md": {
+    "mtime": 1782652511.0608585,
+    "ast_hash": "dfcdf84f3d00992a3a1c092f63eb4518",
+    "semantic_hash": "dfcdf84f3d00992a3a1c092f63eb4518"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-status.md": {
+    "mtime": 1782652511.0663598,
+    "ast_hash": "bff9258537e91c8965fe1a104a9e1f87",
+    "semantic_hash": "bff9258537e91c8965fe1a104a9e1f87"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-transform.md": {
+    "mtime": 1782652511.0718584,
+    "ast_hash": "ac155ab80f9ab2ad9319e6b1b9fbf5fd",
+    "semantic_hash": "ac155ab80f9ab2ad9319e6b1b9fbf5fd"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/commands/modernize-uplift.md": {
+    "mtime": 1782652511.08086,
+    "ast_hash": "d1ef0a591b4ab563b95666620b3417ee",
+    "semantic_hash": "d1ef0a591b4ab563b95666620b3417ee"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-review/README.md": {
+    "mtime": 1782652511.1628597,
+    "ast_hash": "4e92ae335c8681b04f4ad77907e9d656",
+    "semantic_hash": "4e92ae335c8681b04f4ad77907e9d656"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-review/commands/code-review.md": {
+    "mtime": 1782652511.1653614,
+    "ast_hash": "13f6d149ee03d9c25bacf06439559e3a",
+    "semantic_hash": "13f6d149ee03d9c25bacf06439559e3a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-simplifier/agents/code-simplifier.md": {
+    "mtime": 1782652511.1778593,
+    "ast_hash": "920d602d146d26070b2465bd883cd338",
+    "semantic_hash": "920d602d146d26070b2465bd883cd338"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/README.md": {
+    "mtime": 1782652511.194359,
+    "ast_hash": "00ae2806c44c72b5add5f5a5e3385f61",
+    "semantic_hash": "00ae2806c44c72b5add5f5a5e3385f61"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/clean_gone.md": {
+    "mtime": 1782652511.1968586,
+    "ast_hash": "54b7b2faca20460335b9b21d1869a5e9",
+    "semantic_hash": "54b7b2faca20460335b9b21d1869a5e9"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit-push-pr.md": {
+    "mtime": 1782652511.1988573,
+    "ast_hash": "ade7c8ed8a98250e9e6aafee61f115d7",
+    "semantic_hash": "ade7c8ed8a98250e9e6aafee61f115d7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/commit-commands/commands/commit.md": {
+    "mtime": 1782652511.2058597,
+    "ast_hash": "6fa3c54cca186f6b4512407be5223992",
+    "semantic_hash": "6fa3c54cca186f6b4512407be5223992"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/csharp-lsp/README.md": {
+    "mtime": 1782652511.2113588,
+    "ast_hash": "34137737a80fb0328b3448c142087fd7",
+    "semantic_hash": "34137737a80fb0328b3448c142087fd7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/README.md": {
+    "mtime": 1782652511.222859,
+    "ast_hash": "1da747a9174e3bc65e41efb6ffc4a18b",
+    "semantic_hash": "1da747a9174e3bc65e41efb6ffc4a18b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/commands/maker-setup.md": {
+    "mtime": 1782652511.2263584,
+    "ast_hash": "0865721a81cc7664c6fbd9ce343a5334",
+    "semantic_hash": "0865721a81cc7664c6fbd9ce343a5334"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/cardputer-buddy/SKILL.md": {
+    "mtime": 1782652511.2298586,
+    "ast_hash": "bdcc8ee3d89fd170e62799102d8b480c",
+    "semantic_hash": "bdcc8ee3d89fd170e62799102d8b480c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/cwc-makers/skills/m5-onboard/SKILL.md": {
+    "mtime": 1782652511.2348578,
+    "ast_hash": "70d093893de2900bd784adf4996197fe",
+    "semantic_hash": "70d093893de2900bd784adf4996197fe"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/README.md": {
+    "mtime": 1782652511.2553575,
+    "ast_hash": "af7f1991ba10a8ca045229b62a2b5bb3",
+    "semantic_hash": "af7f1991ba10a8ca045229b62a2b5bb3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/commands/example-command.md": {
+    "mtime": 1782652511.2573583,
+    "ast_hash": "e37a87c030df032b85417e55ab0bd553",
+    "semantic_hash": "e37a87c030df032b85417e55ab0bd553"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-command/SKILL.md": {
+    "mtime": 1782652511.2703576,
+    "ast_hash": "df8ba4f0d5698ae6a65e3ea7ec0bb967",
+    "semantic_hash": "df8ba4f0d5698ae6a65e3ea7ec0bb967"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/example-plugin/skills/example-skill/SKILL.md": {
+    "mtime": 1782652511.2723575,
+    "ast_hash": "0695997d4e131bf379221533f55f6370",
+    "semantic_hash": "0695997d4e131bf379221533f55f6370"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/explanatory-output-style/README.md": {
+    "mtime": 1782652511.2778606,
+    "ast_hash": "186904d9cddc8c1ae0c002d8292b5fce",
+    "semantic_hash": "186904d9cddc8c1ae0c002d8292b5fce"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/README.md": {
+    "mtime": 1782652511.3148596,
+    "ast_hash": "36fd0b3ab963d5881f52abb538004c28",
+    "semantic_hash": "36fd0b3ab963d5881f52abb538004c28"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-architect.md": {
+    "mtime": 1782652511.3188605,
+    "ast_hash": "6097967bfcb3d45fba6aabdffac9a8ac",
+    "semantic_hash": "6097967bfcb3d45fba6aabdffac9a8ac"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-explorer.md": {
+    "mtime": 1782652511.320361,
+    "ast_hash": "551e3ab01edaae2c5e082f42ca63028e",
+    "semantic_hash": "551e3ab01edaae2c5e082f42ca63028e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/agents/code-reviewer.md": {
+    "mtime": 1782652511.3213606,
+    "ast_hash": "ef1ff21d60d0b7c1a13b09f5f58d39ca",
+    "semantic_hash": "ef1ff21d60d0b7c1a13b09f5f58d39ca"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/feature-dev/commands/feature-dev.md": {
+    "mtime": 1782652511.3263605,
+    "ast_hash": "b31209c1841c2491acd037fb19c97b8e",
+    "semantic_hash": "b31209c1841c2491acd037fb19c97b8e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/README.md": {
+    "mtime": 1782652511.3528595,
+    "ast_hash": "2fd3c6e9ecda1f5a78072a2528c9b0ff",
+    "semantic_hash": "2fd3c6e9ecda1f5a78072a2528c9b0ff"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/skills/frontend-design/LICENSE.txt": {
+    "mtime": 1782652511.3553631,
+    "ast_hash": "2ee41112a44fe7014dce33e26468ba93",
+    "semantic_hash": "2ee41112a44fe7014dce33e26468ba93"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/frontend-design/skills/frontend-design/SKILL.md": {
+    "mtime": 1782652511.356862,
+    "ast_hash": "31c633612585bf2dd4e6d1103afc9f33",
+    "semantic_hash": "31c633612585bf2dd4e6d1103afc9f33"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/gopls-lsp/README.md": {
+    "mtime": 1782652511.361859,
+    "ast_hash": "a7535c9236ac68afd95d754102dcb4b6",
+    "semantic_hash": "a7535c9236ac68afd95d754102dcb4b6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/README.md": {
+    "mtime": 1782652511.3768585,
+    "ast_hash": "5ea347c8ece6dfce3c1adebaee94f279",
+    "semantic_hash": "5ea347c8ece6dfce3c1adebaee94f279"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/agents/conversation-analyzer.md": {
+    "mtime": 1782652511.3793583,
+    "ast_hash": "aa6afc63aece5b699ddd4952e2670534",
+    "semantic_hash": "aa6afc63aece5b699ddd4952e2670534"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/configure.md": {
+    "mtime": 1782652511.3828597,
+    "ast_hash": "07afbc286c692d6ff3a44a949c747fe3",
+    "semantic_hash": "07afbc286c692d6ff3a44a949c747fe3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/help.md": {
+    "mtime": 1782652511.384859,
+    "ast_hash": "77a0861d36f8f4e7c9d302644308e1de",
+    "semantic_hash": "77a0861d36f8f4e7c9d302644308e1de"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/hookify.md": {
+    "mtime": 1782652511.3863575,
+    "ast_hash": "6091e9a07803f6548f53764e17185f85",
+    "semantic_hash": "6091e9a07803f6548f53764e17185f85"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/commands/list.md": {
+    "mtime": 1782652511.3873594,
+    "ast_hash": "2ab657430eda98d441c2231e88d08082",
+    "semantic_hash": "2ab657430eda98d441c2231e88d08082"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/console-log-warning.local.md": {
+    "mtime": 1782652511.4053583,
+    "ast_hash": "350296eb191db5ede83f699292e9aa18",
+    "semantic_hash": "350296eb191db5ede83f699292e9aa18"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/dangerous-rm.local.md": {
+    "mtime": 1782652511.406859,
+    "ast_hash": "7833ec1f105367883e3e1f0f543ddb46",
+    "semantic_hash": "7833ec1f105367883e3e1f0f543ddb46"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/require-tests-stop.local.md": {
+    "mtime": 1782652511.4078596,
+    "ast_hash": "7019a98e34d66ffa89caf5133c96dfef",
+    "semantic_hash": "7019a98e34d66ffa89caf5133c96dfef"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/examples/sensitive-files-warning.local.md": {
+    "mtime": 1782652511.410859,
+    "ast_hash": "bf7545bf228b1f0139160dc426c1b019",
+    "semantic_hash": "bf7545bf228b1f0139160dc426c1b019"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/hookify/skills/writing-rules/SKILL.md": {
+    "mtime": 1782652511.4378598,
+    "ast_hash": "abf494778e571b821a39de05c5140d58",
+    "semantic_hash": "abf494778e571b821a39de05c5140d58"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/jdtls-lsp/README.md": {
+    "mtime": 1782652511.447374,
+    "ast_hash": "224753882b01f24dbf846b37f8123fda",
+    "semantic_hash": "224753882b01f24dbf846b37f8123fda"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/kotlin-lsp/README.md": {
+    "mtime": 1782652511.45087,
+    "ast_hash": "8bb1c3fe60611dc8139f7555ef5024f7",
+    "semantic_hash": "8bb1c3fe60611dc8139f7555ef5024f7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/learning-output-style/README.md": {
+    "mtime": 1782652511.4628923,
+    "ast_hash": "46efabfbf5227d0d41a6035000821009",
+    "semantic_hash": "46efabfbf5227d0d41a6035000821009"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/lua-lsp/README.md": {
+    "mtime": 1782652511.4789145,
+    "ast_hash": "819abf6195f2c500b656b96746d87912",
+    "semantic_hash": "819abf6195f2c500b656b96746d87912"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/README.md": {
+    "mtime": 1782652511.4939146,
+    "ast_hash": "45f78c80b91c6867e6c214619349dc0b",
+    "semantic_hash": "45f78c80b91c6867e6c214619349dc0b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/SKILL.md": {
+    "mtime": 1782652511.4964142,
+    "ast_hash": "df3957838697c27636aa9ba6ed6d8911",
+    "semantic_hash": "df3957838697c27636aa9ba6ed6d8911"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/adversarial_prompts.md": {
+    "mtime": 1782652511.5004158,
+    "ast_hash": "02693e57fc1c1a5a4eeddeb867ae347f",
+    "semantic_hash": "02693e57fc1c1a5a4eeddeb867ae347f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/attempt_agent.md": {
+    "mtime": 1782652511.503415,
+    "ast_hash": "c6c10f3b426cbdf118e220b50e0cf110",
+    "semantic_hash": "c6c10f3b426cbdf118e220b50e0cf110"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/known_constructions.md": {
+    "mtime": 1782652511.5069146,
+    "ast_hash": "f1b74164f669412c229a3f23de9a02ea",
+    "semantic_hash": "f1b74164f669412c229a3f23de9a02ea"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/model_tier_defaults.md": {
+    "mtime": 1782652511.508914,
+    "ast_hash": "e4858722eda5f88c23a46bcabbccc3d3",
+    "semantic_hash": "e4858722eda5f88c23a46bcabbccc3d3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/presentation_prompts.md": {
+    "mtime": 1782652511.5099154,
+    "ast_hash": "33d8f4c27ac00e8e18c7c81f14c13214",
+    "semantic_hash": "33d8f4c27ac00e8e18c7c81f14c13214"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/solver_heuristics.md": {
+    "mtime": 1782652511.5164146,
+    "ast_hash": "f3b37c792390a099c3f3fee6652190ed",
+    "semantic_hash": "f3b37c792390a099c3f3fee6652190ed"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/math-olympiad/skills/math-olympiad/references/verifier_patterns.md": {
+    "mtime": 1782652511.5239158,
+    "ast_hash": "d8188912d6c2473406c51fe18b8f637f",
+    "semantic_hash": "d8188912d6c2473406c51fe18b8f637f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/README.md": {
+    "mtime": 1782652511.5444162,
+    "ast_hash": "5f6f1613869e4d0d882176625a79c5fd",
+    "semantic_hash": "5f6f1613869e4d0d882176625a79c5fd"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/SKILL.md": {
+    "mtime": 1782652511.5494158,
+    "ast_hash": "ac6a44af3275cbe9bc67b2abbdc62767",
+    "semantic_hash": "ac6a44af3275cbe9bc67b2abbdc62767"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/abuse-protection.md": {
+    "mtime": 1782652511.5529144,
+    "ast_hash": "4c8f34066a262b75cd049584e4085175",
+    "semantic_hash": "4c8f34066a262b75cd049584e4085175"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/apps-sdk-messages.md": {
+    "mtime": 1782652511.5579147,
+    "ast_hash": "e56ca683a891b38bfad380d27735d268",
+    "semantic_hash": "e56ca683a891b38bfad380d27735d268"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/directory-checklist.md": {
+    "mtime": 1782652511.560421,
+    "ast_hash": "e68aa9e4c71f8aa146ac2bbcda5a6295",
+    "semantic_hash": "e68aa9e4c71f8aa146ac2bbcda5a6295"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/iframe-sandbox.md": {
+    "mtime": 1782652511.5639167,
+    "ast_hash": "e60faed4d652885831af95a5ec25cb3e",
+    "semantic_hash": "e60faed4d652885831af95a5ec25cb3e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/payload-budgeting.md": {
+    "mtime": 1782652511.565915,
+    "ast_hash": "61ef545f14d59098bc34f65835acb6cf",
+    "semantic_hash": "61ef545f14d59098bc34f65835acb6cf"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-app/references/widget-templates.md": {
+    "mtime": 1782652511.5689144,
+    "ast_hash": "18d0a7621fd210e79360bdf314085556",
+    "semantic_hash": "18d0a7621fd210e79360bdf314085556"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/SKILL.md": {
+    "mtime": 1782652511.570914,
+    "ast_hash": "d59aaf2f900043b8350e09e6953c8836",
+    "semantic_hash": "d59aaf2f900043b8350e09e6953c8836"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/auth.md": {
+    "mtime": 1782652511.5769145,
+    "ast_hash": "38d6defae4a301475113651d538cfdbe",
+    "semantic_hash": "38d6defae4a301475113651d538cfdbe"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/deploy-cloudflare-workers.md": {
+    "mtime": 1782652511.5849128,
+    "ast_hash": "894cb5089dcd05150d2722a5f95636ab",
+    "semantic_hash": "894cb5089dcd05150d2722a5f95636ab"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/elicitation.md": {
+    "mtime": 1782652511.5949144,
+    "ast_hash": "73ba3cb7ef4fd96728a14f0049858be2",
+    "semantic_hash": "73ba3cb7ef4fd96728a14f0049858be2"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/remote-http-scaffold.md": {
+    "mtime": 1782652511.5969117,
+    "ast_hash": "6762997b76d232360607fe633e79f0d8",
+    "semantic_hash": "6762997b76d232360607fe633e79f0d8"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/resources-and-prompts.md": {
+    "mtime": 1782652511.605417,
+    "ast_hash": "dfdc54062ab5d25f4dfd2ffa6d4197e7",
+    "semantic_hash": "dfdc54062ab5d25f4dfd2ffa6d4197e7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/server-capabilities.md": {
+    "mtime": 1782652511.606914,
+    "ast_hash": "be73bcf552c70e8a304d30fada0bb3ad",
+    "semantic_hash": "be73bcf552c70e8a304d30fada0bb3ad"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/tool-design.md": {
+    "mtime": 1782652511.6124148,
+    "ast_hash": "1d6a0fdc56f1d69e5b8f0fa7a0317816",
+    "semantic_hash": "1d6a0fdc56f1d69e5b8f0fa7a0317816"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcp-server/references/versions.md": {
+    "mtime": 1782652511.6279125,
+    "ast_hash": "39bc6699dd0f437d682160d9266e8e8b",
+    "semantic_hash": "39bc6699dd0f437d682160d9266e8e8b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/SKILL.md": {
+    "mtime": 1782652511.6294143,
+    "ast_hash": "9e118fe1dd0ab2a9360be8398f1284ae",
+    "semantic_hash": "9e118fe1dd0ab2a9360be8398f1284ae"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/local-security.md": {
+    "mtime": 1782652511.6419134,
+    "ast_hash": "d2eb11963b4ee72d6dd0429b8296d657",
+    "semantic_hash": "d2eb11963b4ee72d6dd0429b8296d657"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-server-dev/skills/build-mcpb/references/manifest-schema.md": {
+    "mtime": 1782652511.643423,
+    "ast_hash": "4c3f56430be5a77d3fb9967965e8df67",
+    "semantic_hash": "4c3f56430be5a77d3fb9967965e8df67"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/README.md": {
+    "mtime": 1782652511.6479156,
+    "ast_hash": "1a0b0fc2fbb1acd9597fa40bc650eb6a",
+    "semantic_hash": "1a0b0fc2fbb1acd9597fa40bc650eb6a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/mcp-tunnels/commands/create-docker-mcp-tunnel.md": {
+    "mtime": 1782652511.6504152,
+    "ast_hash": "0b31b24807b29b21802cfcf13574ca80",
+    "semantic_hash": "0b31b24807b29b21802cfcf13574ca80"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/php-lsp/README.md": {
+    "mtime": 1782652511.6704152,
+    "ast_hash": "99639f3b602a22eb1e3dd05e01254ff1",
+    "semantic_hash": "99639f3b602a22eb1e3dd05e01254ff1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/README.md": {
+    "mtime": 1782652511.6754138,
+    "ast_hash": "b80cf40523fe88c9ce3d18debaa9f502",
+    "semantic_hash": "b80cf40523fe88c9ce3d18debaa9f502"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/SKILL.md": {
+    "mtime": 1782652511.677915,
+    "ast_hash": "8495bb09a9e19ed70e10c080322f44da",
+    "semantic_hash": "8495bb09a9e19ed70e10c080322f44da"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/code-map.md": {
+    "mtime": 1782652511.6799147,
+    "ast_hash": "17bf9a446548c3782e265d63c14fb0d1",
+    "semantic_hash": "17bf9a446548c3782e265d63c14fb0d1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/concept-map.md": {
+    "mtime": 1782652511.6809154,
+    "ast_hash": "e97afd7c7306e789a385c357be63bd3e",
+    "semantic_hash": "e97afd7c7306e789a385c357be63bd3e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/data-explorer.md": {
+    "mtime": 1782652511.690917,
+    "ast_hash": "df163f6057ccc0c50934d016ebe08d74",
+    "semantic_hash": "df163f6057ccc0c50934d016ebe08d74"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/design-playground.md": {
+    "mtime": 1782652511.6939135,
+    "ast_hash": "6a15e0de12ad61a3f01e45dc4a4caead",
+    "semantic_hash": "6a15e0de12ad61a3f01e45dc4a4caead"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/diff-review.md": {
+    "mtime": 1782652511.6954148,
+    "ast_hash": "8aa13754ad398ee8b153d0894607eb3d",
+    "semantic_hash": "8aa13754ad398ee8b153d0894607eb3d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/playground/skills/playground/templates/document-critique.md": {
+    "mtime": 1782652511.6979156,
+    "ast_hash": "7a3c63b672848cd644dd5e853da9a0c0",
+    "semantic_hash": "7a3c63b672848cd644dd5e853da9a0c0"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/README.md": {
+    "mtime": 1782652511.7104156,
+    "ast_hash": "743bf5790c4893898c5d0ddd1abed1e0",
+    "semantic_hash": "743bf5790c4893898c5d0ddd1abed1e0"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/agent-creator.md": {
+    "mtime": 1782652511.714414,
+    "ast_hash": "e5cf4e318d80780e3eb166cf78a7d604",
+    "semantic_hash": "e5cf4e318d80780e3eb166cf78a7d604"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/plugin-validator.md": {
+    "mtime": 1782652511.7194152,
+    "ast_hash": "1bb4811ce927879e5622ae01e40ca150",
+    "semantic_hash": "1bb4811ce927879e5622ae01e40ca150"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/agents/skill-reviewer.md": {
+    "mtime": 1782652511.721415,
+    "ast_hash": "03e62b183006bf0357e5317f24322871",
+    "semantic_hash": "03e62b183006bf0357e5317f24322871"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/commands/create-plugin.md": {
+    "mtime": 1782652511.7354133,
+    "ast_hash": "eda2c747a0b29257491e3dad1d9ff1c9",
+    "semantic_hash": "eda2c747a0b29257491e3dad1d9ff1c9"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/SKILL.md": {
+    "mtime": 1782652511.7664135,
+    "ast_hash": "417ab24d640adfe416ad44631f65ca06",
+    "semantic_hash": "417ab24d640adfe416ad44631f65ca06"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/agent-creation-prompt.md": {
+    "mtime": 1782652511.7679138,
+    "ast_hash": "cb1cb7cfd45e35cc0d9d027d9a03011f",
+    "semantic_hash": "cb1cb7cfd45e35cc0d9d027d9a03011f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/examples/complete-agent-examples.md": {
+    "mtime": 1782652511.7704163,
+    "ast_hash": "654667d64739263f69cd2e94d7cef80e",
+    "semantic_hash": "654667d64739263f69cd2e94d7cef80e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/agent-creation-system-prompt.md": {
+    "mtime": 1782652511.7724142,
+    "ast_hash": "116f3c6e555e80f0a030a3490ffe955e",
+    "semantic_hash": "116f3c6e555e80f0a030a3490ffe955e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/system-prompt-design.md": {
+    "mtime": 1782652511.773914,
+    "ast_hash": "fd63a877ad5a04b10e2c49263cbf2d39",
+    "semantic_hash": "fd63a877ad5a04b10e2c49263cbf2d39"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/agent-development/references/triggering-examples.md": {
+    "mtime": 1782652511.7754157,
+    "ast_hash": "9a1badb9882dc0ee0c6559756db4ddd4",
+    "semantic_hash": "9a1badb9882dc0ee0c6559756db4ddd4"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/README.md": {
+    "mtime": 1782652511.8109126,
+    "ast_hash": "baa06aa36e6f6d43d22e4a41ba189384",
+    "semantic_hash": "baa06aa36e6f6d43d22e4a41ba189384"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/SKILL.md": {
+    "mtime": 1782652511.8189137,
+    "ast_hash": "97bd0f7c25db59566bbbc5f7cf1fd89a",
+    "semantic_hash": "97bd0f7c25db59566bbbc5f7cf1fd89a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/plugin-commands.md": {
+    "mtime": 1782652511.8204134,
+    "ast_hash": "b6229d5d71f9ce68c86597cd0c98a3da",
+    "semantic_hash": "b6229d5d71f9ce68c86597cd0c98a3da"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/examples/simple-commands.md": {
+    "mtime": 1782652511.821415,
+    "ast_hash": "3c232950ec488cb4b09870603394d07a",
+    "semantic_hash": "3c232950ec488cb4b09870603394d07a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/advanced-workflows.md": {
+    "mtime": 1782652511.8234143,
+    "ast_hash": "bbee4b7db3b0d322b729d417d4b46b66",
+    "semantic_hash": "bbee4b7db3b0d322b729d417d4b46b66"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/documentation-patterns.md": {
+    "mtime": 1782652511.8244135,
+    "ast_hash": "7e46fab7b2f7a70f20d6a7225a510df4",
+    "semantic_hash": "7e46fab7b2f7a70f20d6a7225a510df4"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/frontmatter-reference.md": {
+    "mtime": 1782652511.8259156,
+    "ast_hash": "acc822f33cbaa12bb626e2b33698d982",
+    "semantic_hash": "acc822f33cbaa12bb626e2b33698d982"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/interactive-commands.md": {
+    "mtime": 1782652511.8274121,
+    "ast_hash": "7214bd1380c47bec00175710522a2a91",
+    "semantic_hash": "7214bd1380c47bec00175710522a2a91"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/marketplace-considerations.md": {
+    "mtime": 1782652511.8294158,
+    "ast_hash": "e703bf89ddede896e68b730ce8ab4cf3",
+    "semantic_hash": "e703bf89ddede896e68b730ce8ab4cf3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/plugin-features-reference.md": {
+    "mtime": 1782652511.8399138,
+    "ast_hash": "b2a65e7ebd945dfa9dd5989731c69633",
+    "semantic_hash": "b2a65e7ebd945dfa9dd5989731c69633"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/command-development/references/testing-strategies.md": {
+    "mtime": 1782652511.841433,
+    "ast_hash": "a750696ef7a8becfab019126313dee1c",
+    "semantic_hash": "a750696ef7a8becfab019126313dee1c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/SKILL.md": {
+    "mtime": 1782652511.8444135,
+    "ast_hash": "90fe540c6fbb2eafed616395ee162085",
+    "semantic_hash": "90fe540c6fbb2eafed616395ee162085"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/advanced.md": {
+    "mtime": 1782652511.860414,
+    "ast_hash": "305687b2f85a90e1fd25f614f89f14d7",
+    "semantic_hash": "305687b2f85a90e1fd25f614f89f14d7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/migration.md": {
+    "mtime": 1782652511.8614144,
+    "ast_hash": "8fd84c7ddf2bdb6e94031262ea30cbd8",
+    "semantic_hash": "8fd84c7ddf2bdb6e94031262ea30cbd8"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/references/patterns.md": {
+    "mtime": 1782652511.8629153,
+    "ast_hash": "185c7fc37342cec587238de01d2f7606",
+    "semantic_hash": "185c7fc37342cec587238de01d2f7606"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/hook-development/scripts/README.md": {
+    "mtime": 1782652511.864414,
+    "ast_hash": "985818824fb010bef660337052519262",
+    "semantic_hash": "985818824fb010bef660337052519262"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/SKILL.md": {
+    "mtime": 1782652511.897912,
+    "ast_hash": "2c4ed1bff5f8fe4cc46132a9c0af8f80",
+    "semantic_hash": "2c4ed1bff5f8fe4cc46132a9c0af8f80"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/authentication.md": {
+    "mtime": 1782652511.905914,
+    "ast_hash": "9dd0ce81fb200e78729b74fe0870e33f",
+    "semantic_hash": "9dd0ce81fb200e78729b74fe0870e33f"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/server-types.md": {
+    "mtime": 1782652511.907916,
+    "ast_hash": "fc4ceebd9dafb258edcc7fbb2b7e79f4",
+    "semantic_hash": "fc4ceebd9dafb258edcc7fbb2b7e79f4"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/mcp-integration/references/tool-usage.md": {
+    "mtime": 1782652511.9104133,
+    "ast_hash": "6dd4d592cb2785e55ff027968da6ee6d",
+    "semantic_hash": "6dd4d592cb2785e55ff027968da6ee6d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/SKILL.md": {
+    "mtime": 1782652511.9159153,
+    "ast_hash": "80dedef17fe0e07d2f3654547ab0a354",
+    "semantic_hash": "80dedef17fe0e07d2f3654547ab0a354"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/create-settings-command.md": {
+    "mtime": 1782652511.922413,
+    "ast_hash": "f7b0733c101ee1366deda39e3bd26a49",
+    "semantic_hash": "f7b0733c101ee1366deda39e3bd26a49"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/examples/example-settings.md": {
+    "mtime": 1782652511.924415,
+    "ast_hash": "46fb966631fe3875bbc6fb6ccdefee59",
+    "semantic_hash": "46fb966631fe3875bbc6fb6ccdefee59"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/parsing-techniques.md": {
+    "mtime": 1782652511.9409132,
+    "ast_hash": "1ae1ba7b71ac62a6d722b9ee12dfba2d",
+    "semantic_hash": "1ae1ba7b71ac62a6d722b9ee12dfba2d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-settings/references/real-world-examples.md": {
+    "mtime": 1782652511.942916,
+    "ast_hash": "16441c0db888f6eded9323d9e300553e",
+    "semantic_hash": "16441c0db888f6eded9323d9e300553e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/README.md": {
+    "mtime": 1782652511.9554148,
+    "ast_hash": "bd3b2b82951181ee9f607691780bb628",
+    "semantic_hash": "bd3b2b82951181ee9f607691780bb628"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/SKILL.md": {
+    "mtime": 1782652511.956915,
+    "ast_hash": "8a9ce1e479b93c7a523182ed74b020df",
+    "semantic_hash": "8a9ce1e479b93c7a523182ed74b020df"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/advanced-plugin.md": {
+    "mtime": 1782652511.9654152,
+    "ast_hash": "9b44a64b415fbe6174ea97a5c4b6ac56",
+    "semantic_hash": "9b44a64b415fbe6174ea97a5c4b6ac56"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/minimal-plugin.md": {
+    "mtime": 1782652511.9669137,
+    "ast_hash": "a826af386435fab27a725b12cb4f9e2c",
+    "semantic_hash": "a826af386435fab27a725b12cb4f9e2c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/examples/standard-plugin.md": {
+    "mtime": 1782652511.9684153,
+    "ast_hash": "cd3418188585a32e302e570118058fc3",
+    "semantic_hash": "cd3418188585a32e302e570118058fc3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/component-patterns.md": {
+    "mtime": 1782652511.9714162,
+    "ast_hash": "09bb3b37782cc1e773bc31fa32806345",
+    "semantic_hash": "09bb3b37782cc1e773bc31fa32806345"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/plugin-structure/references/manifest-reference.md": {
+    "mtime": 1782652511.9734147,
+    "ast_hash": "8a67c040a91eebd2b13909ac05edb3b0",
+    "semantic_hash": "8a67c040a91eebd2b13909ac05edb3b0"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/SKILL.md": {
+    "mtime": 1782652511.9804142,
+    "ast_hash": "5487474f733e3bb4b3f279d136996516",
+    "semantic_hash": "5487474f733e3bb4b3f279d136996516"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/plugin-dev/skills/skill-development/references/skill-creator-original.md": {
+    "mtime": 1782652511.9824147,
+    "ast_hash": "7d41161e687ce615c0ad9e44f4f8cfd6",
+    "semantic_hash": "7d41161e687ce615c0ad9e44f4f8cfd6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/README.md": {
+    "mtime": 1782652511.9909165,
+    "ast_hash": "b65b746c5e5d23833e598b168db5d007",
+    "semantic_hash": "b65b746c5e5d23833e598b168db5d007"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-reviewer.md": {
+    "mtime": 1782652511.995916,
+    "ast_hash": "71e2e261dcf8919d161ceec3373d35a3",
+    "semantic_hash": "71e2e261dcf8919d161ceec3373d35a3"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/code-simplifier.md": {
+    "mtime": 1782652511.9969144,
+    "ast_hash": "8e2bd3053ffd5c5d70f2c5519e464448",
+    "semantic_hash": "8e2bd3053ffd5c5d70f2c5519e464448"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/comment-analyzer.md": {
+    "mtime": 1782652511.9989147,
+    "ast_hash": "6b1654f39e59d7264ffa809fcbd0219c",
+    "semantic_hash": "6b1654f39e59d7264ffa809fcbd0219c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/pr-test-analyzer.md": {
+    "mtime": 1782652512.0004172,
+    "ast_hash": "9e8ec451a03e8e2c92a1c01148ddcc4e",
+    "semantic_hash": "9e8ec451a03e8e2c92a1c01148ddcc4e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/silent-failure-hunter.md": {
+    "mtime": 1782652512.005913,
+    "ast_hash": "886a88c51d6b39863a0add9abc9be407",
+    "semantic_hash": "886a88c51d6b39863a0add9abc9be407"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/agents/type-design-analyzer.md": {
+    "mtime": 1782652512.0094144,
+    "ast_hash": "87060c56472162fc6de56ba3f86b1052",
+    "semantic_hash": "87060c56472162fc6de56ba3f86b1052"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pr-review-toolkit/commands/review-pr.md": {
+    "mtime": 1782652512.0139165,
+    "ast_hash": "d879200c0e369efad0d084db39c09114",
+    "semantic_hash": "d879200c0e369efad0d084db39c09114"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/project-artifact/README.md": {
+    "mtime": 1782652512.022914,
+    "ast_hash": "f24ed198117a258f9b9ded06f0a328a0",
+    "semantic_hash": "f24ed198117a258f9b9ded06f0a328a0"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/project-artifact/skills/project-artifact/SKILL.md": {
+    "mtime": 1782652512.0279152,
+    "ast_hash": "90bf8eac9559ea25599a9e8ff2cf0898",
+    "semantic_hash": "90bf8eac9559ea25599a9e8ff2cf0898"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/project-artifact/skills/project-artifact/swe.md": {
+    "mtime": 1782652512.0294147,
+    "ast_hash": "09e4bcecfedf8258685c9a874b0c8aae",
+    "semantic_hash": "09e4bcecfedf8258685c9a874b0c8aae"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/project-artifact/skills/project-artifact/template.html": {
+    "mtime": 1782652512.031915,
+    "ast_hash": "e922065ccdd9798fa2bf8db570c6597e",
+    "semantic_hash": "e922065ccdd9798fa2bf8db570c6597e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/pyright-lsp/README.md": {
+    "mtime": 1782652512.0349157,
+    "ast_hash": "1da99ae5b0365dfee7075fb3b666eb8a",
+    "semantic_hash": "1da99ae5b0365dfee7075fb3b666eb8a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/README.md": {
+    "mtime": 1782652512.0489144,
+    "ast_hash": "a1c53524e25c555dbff83713262ffb05",
+    "semantic_hash": "a1c53524e25c555dbff83713262ffb05"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/cancel-ralph.md": {
+    "mtime": 1782652512.0549147,
+    "ast_hash": "1f656c9cea1f8d24bc331bdebbaa34c7",
+    "semantic_hash": "1f656c9cea1f8d24bc331bdebbaa34c7"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/help.md": {
+    "mtime": 1782652512.0569143,
+    "ast_hash": "184953e0e60140c0798b9b628ba6c244",
+    "semantic_hash": "184953e0e60140c0798b9b628ba6c244"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ralph-loop/commands/ralph-loop.md": {
+    "mtime": 1782652512.0584142,
+    "ast_hash": "dd4e69ae5bec329087fac609da10392b",
+    "semantic_hash": "dd4e69ae5bec329087fac609da10392b"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/ruby-lsp/README.md": {
+    "mtime": 1782652512.0799155,
+    "ast_hash": "d099b5b38967964213c64cbcc419cd08",
+    "semantic_hash": "d099b5b38967964213c64cbcc419cd08"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/rust-analyzer-lsp/README.md": {
+    "mtime": 1782652512.082915,
+    "ast_hash": "4773f9b7d67b9ca018c475bd81c8824c",
+    "semantic_hash": "4773f9b7d67b9ca018c475bd81c8824c"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/security-guidance/README.md": {
+    "mtime": 1782652512.0879166,
+    "ast_hash": "64d7cf2e33f7bdcc502c63c44e4d2bfb",
+    "semantic_hash": "64d7cf2e33f7bdcc502c63c44e4d2bfb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/SKILL.md": {
+    "mtime": 1782652512.159415,
+    "ast_hash": "2d25d88f75a340edda3a3e5b0491d284",
+    "semantic_hash": "2d25d88f75a340edda3a3e5b0491d284"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/session-report/skills/session-report/template.html": {
+    "mtime": 1782652512.1674135,
+    "ast_hash": "ac59ba088ac380c038c5c7f3d408eab6",
+    "semantic_hash": "ac59ba088ac380c038c5c7f3d408eab6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/README.md": {
+    "mtime": 1782652512.1774137,
+    "ast_hash": "5bb9788987ea1f06199ae263d476fa03",
+    "semantic_hash": "5bb9788987ea1f06199ae263d476fa03"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/LICENSE.txt": {
+    "mtime": 1782652512.1864126,
+    "ast_hash": "175792518e4ac015ab6696d16c4f607e",
+    "semantic_hash": "175792518e4ac015ab6696d16c4f607e"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/SKILL.md": {
+    "mtime": 1782652512.1879134,
+    "ast_hash": "a1277b9e97e7a84dbd80a984164ad373",
+    "semantic_hash": "a1277b9e97e7a84dbd80a984164ad373"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/analyzer.md": {
+    "mtime": 1782652512.1929135,
+    "ast_hash": "b78964a8d55ff0e038d657a9cb79f46a",
+    "semantic_hash": "b78964a8d55ff0e038d657a9cb79f46a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/comparator.md": {
+    "mtime": 1782652512.1944137,
+    "ast_hash": "1b3e8695c8a40d1ad7af30b622190c99",
+    "semantic_hash": "1b3e8695c8a40d1ad7af30b622190c99"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/agents/grader.md": {
+    "mtime": 1782652512.1959138,
+    "ast_hash": "c8913119223249181559ec9cf9a5e8c6",
+    "semantic_hash": "c8913119223249181559ec9cf9a5e8c6"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/assets/eval_review.html": {
+    "mtime": 1782652512.1974146,
+    "ast_hash": "215a74d6269d72e8ffd254cedc1e0b0a",
+    "semantic_hash": "215a74d6269d72e8ffd254cedc1e0b0a"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/eval-viewer/viewer.html": {
+    "mtime": 1782652512.200915,
+    "ast_hash": "bef0b26fd04ee3a25344b7ae361a5bd1",
+    "semantic_hash": "bef0b26fd04ee3a25344b7ae361a5bd1"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/skill-creator/skills/skill-creator/references/schemas.md": {
+    "mtime": 1782652512.2024148,
+    "ast_hash": "466f2adac472716df6867541ff75c462",
+    "semantic_hash": "466f2adac472716df6867541ff75c462"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/swift-lsp/README.md": {
+    "mtime": 1782652512.255413,
+    "ast_hash": "323d56c8b698903278dd76a84cc639cb",
+    "semantic_hash": "323d56c8b698903278dd76a84cc639cb"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/typescript-lsp/README.md": {
+    "mtime": 1782652512.2669137,
+    "ast_hash": "194039be9da8e1a79bf1faa7686e674d",
+    "semantic_hash": "194039be9da8e1a79bf1faa7686e674d"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/memory/MEMORY.md": {
+    "mtime": 1782566999.5073493,
+    "ast_hash": "9735fec45bfc9a67fad44c0382f3ace5",
+    "semantic_hash": "9735fec45bfc9a67fad44c0382f3ace5"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/memory/feedback-workflow.md": {
+    "mtime": 1782566989.6072989,
+    "ast_hash": "bc289ff779a5e318c92ec0fde6b89029",
+    "semantic_hash": "bc289ff779a5e318c92ec0fde6b89029"
+  },
+  "projects/C--Users-milan-Documents-AIMI-aimi-digital-craft/memory/project-aimi.md": {
+    "mtime": 1782557332.0438368,
+    "ast_hash": "419879c278173daf8b64d584a5c6c3db",
+    "semantic_hash": "419879c278173daf8b64d584a5c6c3db"
+  },
+  "skills/graphify/SKILL.md": {
+    "mtime": 1782663198.111664,
+    "ast_hash": "6e3620a6a1270903d86e309ba0996a23",
+    "semantic_hash": "6e3620a6a1270903d86e309ba0996a23"
+  },
+  "skills/graphify/references/add-watch.md": {
+    "mtime": 1782653396.5310245,
+    "ast_hash": "d59d027fe449f06aa03905a01184e779",
+    "semantic_hash": "d59d027fe449f06aa03905a01184e779"
+  },
+  "skills/graphify/references/exports.md": {
+    "mtime": 1782653396.5320246,
+    "ast_hash": "9da2a2152e60a22f07f05fed5158f287",
+    "semantic_hash": "9da2a2152e60a22f07f05fed5158f287"
+  },
+  "skills/graphify/references/extraction-spec.md": {
+    "mtime": 1782653396.532525,
+    "ast_hash": "2e620982acb506f557538cdcfb1ef6da",
+    "semantic_hash": "2e620982acb506f557538cdcfb1ef6da"
+  },
+  "skills/graphify/references/github-and-merge.md": {
+    "mtime": 1782653396.5335236,
+    "ast_hash": "cde13df085e4c492aeb7ba298a996d0d",
+    "semantic_hash": "cde13df085e4c492aeb7ba298a996d0d"
+  },
+  "skills/graphify/references/hooks.md": {
+    "mtime": 1782653396.5345252,
+    "ast_hash": "3f545db6ce646650bb9de588f5512a27",
+    "semantic_hash": "3f545db6ce646650bb9de588f5512a27"
+  },
+  "skills/graphify/references/query.md": {
+    "mtime": 1782653396.535524,
+    "ast_hash": "9e5aadc2c57ab561bc56600fcfa70735",
+    "semantic_hash": "9e5aadc2c57ab561bc56600fcfa70735"
+  },
+  "skills/graphify/references/transcribe.md": {
+    "mtime": 1782653396.536023,
+    "ast_hash": "67b6a5fa6c0974e18f60db9f8932fbd8",
+    "semantic_hash": "67b6a5fa6c0974e18f60db9f8932fbd8"
+  },
+  "skills/graphify/references/update.md": {
+    "mtime": 1782653396.5375264,
+    "ast_hash": "c698309979460d0f02ba616417844399",
+    "semantic_hash": "c698309979460d0f02ba616417844399"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-code-setup/automation-recommender-example.png": {
+    "mtime": 1782652510.7403595,
+    "ast_hash": "35e29512eb482237579a83f4061fe620",
+    "semantic_hash": "35e29512eb482237579a83f4061fe620"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/claude-md-improver-example.png": {
+    "mtime": 1782652510.85636,
+    "ast_hash": "cb3ce0c633c78dce76986fe46d57fb8d",
+    "semantic_hash": "cb3ce0c633c78dce76986fe46d57fb8d"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/claude-md-management/revise-claude-md-example.png": {
+    "mtime": 1782652510.873861,
+    "ast_hash": "a6e854d1adce5e58e0b7d46af8abf872",
+    "semantic_hash": "a6e854d1adce5e58e0b7d46af8abf872"
+  },
+  "plugins/marketplaces/claude-plugins-official/plugins/code-modernization/assets/topology-viewer-screenshot.jpg": {
+    "mtime": 1782652510.9983597,
+    "ast_hash": "23700889a66af07d3816eb59a23bf19a",
+    "semantic_hash": "23700889a66af07d3816eb59a23bf19a"
+  }
+}

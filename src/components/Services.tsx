@@ -202,8 +202,10 @@ export function Services() {
                   href="#contact"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.25 }}
-                  className="inline-flex items-center gap-2 mt-6 text-sm font-medium hover:opacity-75 transition-opacity"
+                  whileHover={{ scale: 1.04, backgroundColor: "rgba(255,255,255,0.13)" }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ delay: 0.25, type: "spring", stiffness: 300, damping: 20 }}
+                  className="inline-flex items-center gap-2 mt-6 text-sm font-medium"
                   style={{
                     color: "#ffffff",
                     fontFamily: "Inter, sans-serif",
