@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "3f3d3410887922d3",
+        "id": "6740143517516d76",
         "type": "tabs",
         "children": [
           {
-            "id": "5bb8180cf0928ab3",
+            "id": "4d6849681603a2fb",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -74,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "25f940246998b16b",
@@ -176,8 +176,14 @@
       "bases:Nieuwe basis maken": false
     }
   },
-  "active": "5bb8180cf0928ab3",
+  "active": "4d6849681603a2fb",
   "lastOpenFiles": [
+    "src/server.ts.tmp.20460.70ef37658d74",
+    "src/server.ts.tmp.20460.d19c33a0f75d",
+    "src/lib/rate-limit.ts",
+    "src/lib/rate-limit.ts.tmp.20460.c15949cc7a2d",
+    "node_modules/run-parallel/README.md",
+    "src/graphify-out",
     "src/components/Services.tsx.tmp.20460.4ea5ea38741b",
     "node_modules/@radix-ui/react-collection/README.md",
     "CLAUDE.md",

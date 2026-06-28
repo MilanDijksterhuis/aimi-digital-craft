@@ -2,6 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { checkRateLimit, getClientIp } from "./lib/rate-limit";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -66,8 +67,41 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   return brandedErrorResponse();
 }
 
+function rateLimitedResponse(retryAfter: number): Response {
+  return new Response(JSON.stringify({ error: "Too many requests" }), {
+    status: 429,
+    headers: {
+      "Content-Type": "application/json",
+      "Retry-After": String(retryAfter),
+    },
+  });
+}
+
+function applyRateLimit(request: Request): Response | null {
+  if (request.method !== "POST" && request.method !== "PUT") return null;
+
+  const ip = getClientIp(request);
+  const url = new URL(request.url);
+  const path = url.pathname;
+
+  // Contact form server function and site-error: strict limit
+  if (path.includes("submitContactForm") || path === "/api/public/site-error") {
+    const { allowed, retryAfter } = checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
+    if (!allowed) return rateLimitedResponse(retryAfter);
+    return null;
+  }
+
+  // All other POST/PUT endpoints: moderate limit
+  const { allowed, retryAfter } = checkRateLimit(`general:${ip}`, 30, 60 * 1000);
+  if (!allowed) return rateLimitedResponse(retryAfter);
+  return null;
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const limited = applyRateLimit(request);
+    if (limited) return limited;
+
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
