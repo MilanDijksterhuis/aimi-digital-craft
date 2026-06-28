@@ -1,0 +1,17 @@
+---
+source_file: "src/routes/__root.tsx"
+type: "code"
+community: "Automation Recommender UI"
+location: "L112"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Automation_Recommender_UI
+---
+
+# RootShell()
+
+## Connections
+- [[__root.tsx]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Automation_Recommender_UI

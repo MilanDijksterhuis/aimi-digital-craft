@@ -2,7 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
-import { checkRateLimit, getClientIp } from "./lib/rate-limit";
+import { checkRateLimit, getClientIp, isIpBanned, recordStrike } from "./lib/rate-limit";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -78,22 +78,33 @@ function rateLimitedResponse(retryAfter: number): Response {
 }
 
 function applyRateLimit(request: Request): Response | null {
+  const ip = getClientIp(request);
+
+  // Geblokkeerde IP's worden direct geweigerd, ongeacht methode
+  const ban = isIpBanned(ip);
+  if (ban.banned) return rateLimitedResponse(ban.retryAfter);
+
   if (request.method !== "POST" && request.method !== "PUT") return null;
 
-  const ip = getClientIp(request);
   const url = new URL(request.url);
   const path = url.pathname;
 
   // Contact form server function and site-error: strict limit
   if (path.includes("submitContactForm") || path === "/api/public/site-error") {
     const { allowed, retryAfter } = checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
-    if (!allowed) return rateLimitedResponse(retryAfter);
+    if (!allowed) {
+      recordStrike(ip);
+      return rateLimitedResponse(retryAfter);
+    }
     return null;
   }
 
   // All other POST/PUT endpoints: moderate limit
   const { allowed, retryAfter } = checkRateLimit(`general:${ip}`, 30, 60 * 1000);
-  if (!allowed) return rateLimitedResponse(retryAfter);
+  if (!allowed) {
+    recordStrike(ip);
+    return rateLimitedResponse(retryAfter);
+  }
   return null;
 }
 

@@ -1,6 +1,16 @@
 type Entry = { count: number; resetAt: number };
+type BanEntry = { until: number; strikes: number };
 
 const store = new Map<string, Entry>();
+const bans = new Map<string, BanEntry>();
+
+// Ban durations per strike: 5min → 1h → 24h → 7d
+const BAN_DURATIONS_MS = [
+  5 * 60 * 1000,
+  60 * 60 * 1000,
+  24 * 60 * 60 * 1000,
+  7 * 24 * 60 * 60 * 1000,
+];
 
 export function checkRateLimit(
   key: string,
@@ -21,6 +31,20 @@ export function checkRateLimit(
 
   entry.count++;
   return { allowed: true, retryAfter: 0 };
+}
+
+export function isIpBanned(ip: string): { banned: boolean; retryAfter: number } {
+  const ban = bans.get(ip);
+  if (!ban) return { banned: false, retryAfter: 0 };
+  if (Date.now() >= ban.until) return { banned: false, retryAfter: 0 };
+  return { banned: true, retryAfter: Math.ceil((ban.until - Date.now()) / 1000) };
+}
+
+export function recordStrike(ip: string): void {
+  const existing = bans.get(ip);
+  const strikes = (existing?.strikes ?? 0) + 1;
+  const durationMs = BAN_DURATIONS_MS[Math.min(strikes - 1, BAN_DURATIONS_MS.length - 1)];
+  bans.set(ip, { until: Date.now() + durationMs, strikes });
 }
 
 export function getClientIp(request: Request): string {
