@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { About } from "@/components/About";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { CookieBanner } from "@/components/CookieBanner";
 
 import { Pricing } from "@/components/Pricing";
@@ -78,6 +79,7 @@ function Index() {
       <main>
         <Hero />
         <Services />
+        <ProcessTimeline />
         <About />
         
         <Pricing />

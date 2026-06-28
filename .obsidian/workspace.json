@@ -176,8 +176,12 @@
       "bases:Nieuwe basis maken": false
     }
   },
-  "active": "9a035a54e5957502",
+  "active": "4d6849681603a2fb",
   "lastOpenFiles": [
+    "src/routes/index.tsx.tmp.20460.90b645905064",
+    "src/routes/index.tsx.tmp.20460.3997e0a807b9",
+    "src/components/ProcessTimeline.tsx",
+    "src/components/ProcessTimeline.tsx.tmp.20460.640cebb40c40",
     "graphify-out/obsidian/graph.canvas",
     "graphify-out/obsidian/_COMMUNITY_Diff State & Git Utilities.md",
     "graphify-out/obsidian/_COMMUNITY_Session Report Analyzer.md",
