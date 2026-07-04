@@ -7,10 +7,12 @@
 CREATE TABLE IF NOT EXISTS site_response_times (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id uuid NOT NULL,
-  response_ms integer NOT NULL,
+  response_ms integer, -- nullable: uptime-pings schrijven alleen status_ok, geen response_ms
   status_ok boolean NOT NULL DEFAULT true,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+-- Voor bestaande installaties waar de kolom nog NOT NULL is:
+ALTER TABLE site_response_times ALTER COLUMN response_ms DROP NOT NULL;
 CREATE INDEX IF NOT EXISTS idx_srt_user_time ON site_response_times(user_id, created_at DESC);
 
 -- SSL checks (1x per dag)
@@ -104,3 +106,10 @@ CREATE POLICY "svc_perms" ON role_permissions FOR ALL TO service_role USING (tru
 
 -- Klanten mogen eigen response times lezen
 CREATE POLICY "own_srt" ON site_response_times FOR SELECT TO authenticated USING (user_id = auth.uid());
+
+-- site_pings RLS (fallback-bron voor uptime in portal/admin)
+ALTER TABLE site_pings ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "svc_pings" ON site_pings;
+CREATE POLICY "svc_pings" ON site_pings FOR ALL TO service_role USING (true) WITH CHECK (true);
+DROP POLICY IF EXISTS "own_pings" ON site_pings;
+CREATE POLICY "own_pings" ON site_pings FOR SELECT TO authenticated USING (user_id = auth.uid());

@@ -601,8 +601,11 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
 
   const syncM = useMutation({
     mutationFn: async () => {
+      // Responstijdmeting is de kern — als die faalt (bijv. geen website_url)
+      // moet dat zichtbaar zijn i.p.v. stil weggeslikt worden.
+      await syncFn({ data: { user_id: userId } });
+      // SSL & DNS zijn aanvullend; die mogen best afzonderlijk falen.
       await Promise.allSettled([
-        syncFn({ data: { user_id: userId } }),
         runSSL({ data: { user_id: userId } }),
         runDNS({ data: { user_id: userId } }),
       ]);
@@ -611,7 +614,7 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
       qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] });
       toast.success("Sync voltooid — responstijd, SSL & DNS gecheckt.");
     },
-    onError: (e: any) => toast.error(e.message),
+    onError: (e: any) => toast.error(`Sync mislukt: ${e.message}`),
   });
 
   // Auto-sync als er nog geen responstijdmeting is
