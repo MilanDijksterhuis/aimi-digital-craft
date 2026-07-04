@@ -1,15 +1,28 @@
 export async function measureResponseTime(url: string): Promise<{ response_ms: number; status_ok: boolean }> {
   try {
-    const mod = await import(url.startsWith("https") ? "https" : "http");
+    // Normaliseer: klant-URL's staan vaak opgeslagen zonder protocol
+    // (bijv. "aimi-development.nl"). Zonder scheme gooit http/https.get "Invalid URL".
+    const target = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+    const mod = await import(target.startsWith("https") ? "https" : "http");
     return new Promise((resolve) => {
       const start = Date.now();
-      const req = (mod as any).get(url, { timeout: 10000 }, (res: any) => {
-        const ms = Date.now() - start;
-        res.resume();
-        resolve({ response_ms: ms, status_ok: res.statusCode >= 200 && res.statusCode < 400 });
-      });
-      req.on("error", () => resolve({ response_ms: Date.now() - start, status_ok: false }));
-      req.on("timeout", () => { req.destroy(); resolve({ response_ms: 10000, status_ok: false }); });
+      let settled = false;
+      const finish = (r: { response_ms: number; status_ok: boolean }) => {
+        if (settled) return;
+        settled = true;
+        resolve(r);
+      };
+      try {
+        const req = (mod as any).get(target, { timeout: 10000 }, (res: any) => {
+          const ms = Date.now() - start;
+          res.resume();
+          finish({ response_ms: ms, status_ok: res.statusCode >= 200 && res.statusCode < 400 });
+        });
+        req.on("error", () => finish({ response_ms: Date.now() - start, status_ok: false }));
+        req.on("timeout", () => { req.destroy(); finish({ response_ms: 10000, status_ok: false }); });
+      } catch {
+        finish({ response_ms: 10000, status_ok: false });
+      }
     });
   } catch {
     return { response_ms: 10000, status_ok: false };
