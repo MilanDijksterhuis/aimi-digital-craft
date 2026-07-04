@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { computeMonitoringStats } from "./monitoring.shared";
+import { computeMonitoringStats, measureResponseTime } from "./monitoring.shared";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export const getMyDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -157,6 +158,50 @@ export const logLogin = createServerFn({ method: "POST" })
       ip,
       user_agent: data.user_agent ?? null,
     });
+
+    // Responstijd meten bij inloggen — alleen als laatste meting > 1 uur geleden
+    (async () => {
+      try {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("website_url")
+          .eq("id", userId)
+          .maybeSingle();
+        if (!profile?.website_url) return;
+
+        const since1h = new Date(Date.now() - 3600000).toISOString();
+        const { data: recentMeasure } = await supabaseAdmin
+          .from("site_response_times" as any)
+          .select("id")
+          .eq("user_id", userId)
+          .not("response_ms", "is", null)
+          .gte("created_at", since1h)
+          .limit(1)
+          .maybeSingle();
+        if (recentMeasure) return;
+
+        const measured = await measureResponseTime(profile.website_url);
+        await supabaseAdmin.from("site_response_times" as any).insert({
+          user_id: userId,
+          response_ms: measured.response_ms,
+          status_ok: measured.status_ok,
+        });
+
+        if (measured.response_ms > 3000) {
+          const { data: existingAlert } = await supabaseAdmin
+            .from("monitoring_alerts" as any)
+            .select("id").eq("user_id", userId).eq("type", "response_time")
+            .is("archived_at", null).gte("created_at", since1h).limit(1).maybeSingle();
+          if (!existingAlert) {
+            await supabaseAdmin.from("monitoring_alerts" as any).insert({
+              user_id: userId, type: "response_time", severity: "warning",
+              message: `Hoge response time: ${measured.response_ms}ms (limiet: 3000ms)`,
+            });
+          }
+        }
+      } catch { /* niet kritiek */ }
+    })();
+
     return { ok: true };
   });
 

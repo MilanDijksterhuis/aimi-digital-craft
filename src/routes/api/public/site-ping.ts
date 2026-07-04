@@ -5,7 +5,7 @@ import { z } from "zod";
 const Body = z.object({
   user_id: z.string().uuid(),
   status_ok: z.boolean().optional().default(true),
-  response_ms: z.number().int().min(0).max(60000).optional(),
+  // response_ms wordt hier genegeerd — meting gebeurt server-side via Sync of inloggen
 });
 
 const cors = {
@@ -21,11 +21,10 @@ export const Route = createFileRoute("/api/public/site-ping")({
       POST: async ({ request }) => {
         try {
           const body = Body.parse(await request.json());
-          const now = new Date();
 
-          // Rate limit: max 1 meting per 5 minuten per klant in site_response_times
+          // Rate limit: max 1 uptime-meting per 5 minuten per klant
           const since5m = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-          const { data: recentRt } = await supabaseAdmin
+          const { data: recent } = await supabaseAdmin
             .from("site_response_times" as any)
             .select("id")
             .eq("user_id", body.user_id)
@@ -33,17 +32,16 @@ export const Route = createFileRoute("/api/public/site-ping")({
             .limit(1)
             .maybeSingle();
 
-          if (!recentRt) {
-            // Schrijf naar site_response_times (response_ms mag null zijn)
+          if (!recent) {
             try {
               await supabaseAdmin.from("site_response_times" as any).insert({
                 user_id: body.user_id,
-                response_ms: body.response_ms ?? null,
+                response_ms: null, // alleen uptime bijhouden, geen response_ms
                 status_ok: body.status_ok,
               });
-            } catch { /* tabel bestaat nog niet */ }
+            } catch { /* tabel bestaat nog niet — SQL migratie nog uitvoeren */ }
 
-            // Occasionele cleanup: verwijder records ouder dan 7 dagen (1 op 20 kans)
+            // Occasionele cleanup: verwijder records ouder dan 7 dagen (5% kans)
             if (Math.random() < 0.05) {
               const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
               try {
@@ -59,66 +57,37 @@ export const Route = createFileRoute("/api/public/site-ping")({
           await supabaseAdmin.from("site_pings").insert({
             user_id: body.user_id,
             status_ok: body.status_ok,
-            response_ms: body.response_ms ?? null,
+            response_ms: null,
           });
 
-          // Alert: response time > 3000ms (max 1 per uur)
-          if (body.response_ms !== undefined && body.response_ms > 3000) {
-            const since1h = new Date(Date.now() - 3600000).toISOString();
-            const { data: existing } = await supabaseAdmin
-              .from("monitoring_alerts" as any)
-              .select("id")
-              .eq("user_id", body.user_id)
-              .eq("type", "response_time")
-              .is("archived_at", null)
-              .gte("created_at", since1h)
-              .limit(1)
-              .maybeSingle();
-            if (!existing) {
-              await supabaseAdmin.from("monitoring_alerts" as any).insert({
-                user_id: body.user_id,
-                type: "response_time",
-                severity: "warning",
-                message: `Hoge response time: ${body.response_ms}ms (limiet: 3000ms)`,
-              });
-            }
-          }
-
-          // Alert: uptime < 95% afgelopen 24u (max 1 per uur)
+          // Alert: uptime < 95% in afgelopen 24u (max 1 per uur)
           if (!body.status_ok) {
             try {
               const since24h = new Date(Date.now() - 86400000).toISOString();
-              const { data: recent } = await supabaseAdmin
+              const { data: rows } = await supabaseAdmin
                 .from("site_response_times" as any)
                 .select("status_ok")
                 .eq("user_id", body.user_id)
                 .gte("created_at", since24h)
                 .limit(300);
-              if (recent && recent.length >= 5) {
-                const okCount = (recent as any[]).filter((r: any) => r.status_ok).length;
-                const pct = (okCount / recent.length) * 100;
+              if (rows && rows.length >= 5) {
+                const ok = (rows as any[]).filter((r) => r.status_ok).length;
+                const pct = (ok / rows.length) * 100;
                 if (pct < 95) {
                   const since1h = new Date(Date.now() - 3600000).toISOString();
-                  const { data: ex2 } = await supabaseAdmin
+                  const { data: ex } = await supabaseAdmin
                     .from("monitoring_alerts" as any)
-                    .select("id")
-                    .eq("user_id", body.user_id)
-                    .eq("type", "uptime")
-                    .is("archived_at", null)
-                    .gte("created_at", since1h)
-                    .limit(1)
-                    .maybeSingle();
-                  if (!ex2) {
+                    .select("id").eq("user_id", body.user_id).eq("type", "uptime")
+                    .is("archived_at", null).gte("created_at", since1h).limit(1).maybeSingle();
+                  if (!ex) {
                     await supabaseAdmin.from("monitoring_alerts" as any).insert({
-                      user_id: body.user_id,
-                      type: "uptime",
-                      severity: "critical",
+                      user_id: body.user_id, type: "uptime", severity: "critical",
                       message: `Uptime gedaald naar ${pct.toFixed(1)}% in de afgelopen 24 uur`,
                     });
                   }
                 }
               }
-            } catch { /* ignore als tabel ontbreekt */ }
+            } catch { /* ignore als monitoring_alerts ontbreekt */ }
           }
 
           return new Response(JSON.stringify({ ok: true }), {

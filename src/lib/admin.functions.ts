@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { computeMonitoringStats } from "./monitoring.shared";
+import { computeMonitoringStats, measureResponseTime } from "./monitoring.shared";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -1174,24 +1174,6 @@ async function checkDNSHealth(url: string): Promise<{ healthy: boolean; issues: 
     return { healthy: issues.length === 0, issues };
   } catch (e: any) {
     return { healthy: false, issues: [`DNS check mislukt: ${e.message}`] };
-  }
-}
-
-async function measureResponseTime(url: string): Promise<{ response_ms: number; status_ok: boolean }> {
-  try {
-    const http = await import(url.startsWith("https") ? "https" : "http");
-    return new Promise((resolve) => {
-      const start = Date.now();
-      const req = (http as any).get(url, { timeout: 10000 }, (res: any) => {
-        const ms = Date.now() - start;
-        res.resume();
-        resolve({ response_ms: ms, status_ok: res.statusCode >= 200 && res.statusCode < 400 });
-      });
-      req.on("error", () => resolve({ response_ms: Date.now() - start, status_ok: false }));
-      req.on("timeout", () => { req.destroy(); resolve({ response_ms: 10000, status_ok: false }); });
-    });
-  } catch {
-    return { response_ms: 10000, status_ok: false };
   }
 }
 

@@ -1,3 +1,21 @@
+export async function measureResponseTime(url: string): Promise<{ response_ms: number; status_ok: boolean }> {
+  try {
+    const mod = await import(url.startsWith("https") ? "https" : "http");
+    return new Promise((resolve) => {
+      const start = Date.now();
+      const req = (mod as any).get(url, { timeout: 10000 }, (res: any) => {
+        const ms = Date.now() - start;
+        res.resume();
+        resolve({ response_ms: ms, status_ok: res.statusCode >= 200 && res.statusCode < 400 });
+      });
+      req.on("error", () => resolve({ response_ms: Date.now() - start, status_ok: false }));
+      req.on("timeout", () => { req.destroy(); resolve({ response_ms: 10000, status_ok: false }); });
+    });
+  } catch {
+    return { response_ms: 10000, status_ok: false };
+  }
+}
+
 export type DayUptime = {
   date: string;
   label: string;
