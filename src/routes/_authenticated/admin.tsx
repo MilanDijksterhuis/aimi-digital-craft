@@ -591,10 +591,24 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
   const runDNS = useServerFn(adminRunDNSCheck);
   const qc = useQueryClient();
 
-  const { data, isLoading, dataUpdatedAt } = useQuery({
+  const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ["admin-monitoring", userId],
     queryFn: () => getMonitoring({ data: { user_id: userId } }),
     refetchInterval: 60_000,
+  });
+
+  const syncM = useMutation({
+    mutationFn: async () => {
+      await Promise.allSettled([
+        runSSL({ data: { user_id: userId } }),
+        runDNS({ data: { user_id: userId } }),
+      ]);
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] });
+      toast.success("Sync voltooid — SSL & DNS gecheckt.");
+    },
+    onError: (e: any) => toast.error(e.message),
   });
 
   const sslM = useMutation({
@@ -609,31 +623,34 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
   });
 
   const mon = data as any;
-  const responseTimes: any[] = mon?.response_times ?? [];
+  const responseTimes: any[] = mon?.responseTimes ?? [];
   const ssl = mon?.ssl ?? null;
   const dns = mon?.dns ?? null;
   const alerts: any[] = mon?.alerts ?? [];
+  const avgMs: number | null = mon?.avg ?? null;
+  const p95Ms: number | null = mon?.p95 ?? null;
+  const uptimePct: string | null = mon?.uptimePct != null ? (mon.uptimePct as number).toFixed(1) : null;
 
-  const avgMs = responseTimes.length
-    ? Math.round(responseTimes.reduce((s: number, r: any) => s + r.response_ms, 0) / responseTimes.length)
-    : null;
-  const sorted = [...responseTimes].sort((a: any, b: any) => a.response_ms - b.response_ms);
-  const p95idx = Math.max(0, Math.ceil(sorted.length * 0.95) - 1);
-  const p95Ms = sorted.length ? sorted[p95idx]?.response_ms : null;
-
-  const okCount = responseTimes.filter((r: any) => r.status_ok).length;
-  const uptimePct = responseTimes.length ? ((okCount / responseTimes.length) * 100).toFixed(1) : null;
-
-  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms));
+  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms ?? 0));
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center gap-3">
-        <button onClick={onBack} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-          <ChevronLeft className="w-4 h-4" /> Terug
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button onClick={onBack} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <ChevronLeft className="w-4 h-4" /> Terug
+          </button>
+          <span className="text-muted-foreground">/</span>
+          <span className="text-sm font-medium">Monitoring</span>
+        </div>
+        <button
+          onClick={() => syncM.mutate()}
+          disabled={syncM.isPending || isFetching}
+          className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-border hover:border-primary hover:text-primary transition-colors disabled:opacity-50"
+        >
+          <RefreshCw className={`w-4 h-4 ${syncM.isPending || isFetching ? "animate-spin" : ""}`} />
+          {syncM.isPending ? "Bezig…" : "Sync"}
         </button>
-        <span className="text-muted-foreground">/</span>
-        <span className="text-sm font-medium">Monitoring</span>
       </div>
 
       {isLoading ? (
@@ -773,7 +790,7 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
           {/* Last sync */}
           <p className="text-xs text-muted-foreground flex items-center gap-1">
             <Clock className="w-3 h-3" />
-            Laatste update: {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleTimeString("nl-NL") : "—"}
+            Laatste ping: {mon?.lastSync ? new Date(mon.lastSync).toLocaleString("nl-NL") : "—"}
           </p>
         </>
       )}
