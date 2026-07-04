@@ -1071,20 +1071,25 @@ function ChangeCard({
 
 function WebsiteTab({ data }: { data: any }) {
   const uptime = data.uptimePct as number | null;
-  const totalPings = data.totalPings ?? 0;
+  const avgMs: number | null = data.avgResponseMs ?? null;
+  const p95Ms: number | null = data.p95Ms ?? null;
+  const lastSyncAt: string | null = data.lastSyncAt ?? null;
+  const responseTimes: any[] = data.responseTimes ?? [];
   const errorCount = data.siteErrors?.length ?? 0;
-  const uptimeColor = uptime == null ? "text-muted-foreground" : uptime >= 99 ? "text-emerald-600" : uptime >= 95 ? "text-amber-600" : "text-destructive";
-  const lastErr = data.siteErrors?.[0];
-  const lastCheck = lastErr ? new Date(lastErr.created_at) : null;
 
-  const minsAgo = (d: Date) => {
-    const m = Math.floor((Date.now() - d.getTime()) / 60000);
+  const uptimeColor = uptime == null ? "text-muted-foreground" : uptime >= 99 ? "text-emerald-500" : uptime >= 95 ? "text-amber-500" : "text-destructive";
+  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms ?? 0));
+
+  const minsAgo = (iso: string) => {
+    const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
     if (m < 1) return "zojuist";
-    if (m < 60) return `${m} minuten geleden`;
+    if (m < 60) return `${m} min geleden`;
     const h = Math.floor(m / 60);
     if (h < 24) return `${h} uur geleden`;
     return `${Math.floor(h / 24)} dagen geleden`;
   };
+
+  const hasData = responseTimes.length > 0;
 
   return (
     <div className="space-y-6">
@@ -1102,8 +1107,8 @@ function WebsiteTab({ data }: { data: any }) {
       </section>
 
       <section className="rounded-lg border border-border bg-card p-6">
-        <h3 className="font-display text-xl font-semibold mb-4">Statistieken (laatste 30 dagen)</h3>
-        {totalPings === 0 ? (
+        <h3 className="font-display text-xl font-semibold mb-4">Statistieken (afgelopen 24 uur)</h3>
+        {!hasData ? (
           <div className="rounded-md border border-dashed border-border bg-background p-6 text-center">
             <p className="text-sm text-muted-foreground">
               We zijn bezig je site te koppelen. Dit kan tot 24 uur duren.
@@ -1115,30 +1120,53 @@ function WebsiteTab({ data }: { data: any }) {
               <div className="rounded-md border border-border p-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Uptime</p>
                 <p className={`mt-2 font-display text-3xl font-semibold ${uptimeColor}`}>
-                  {uptime?.toFixed(2)}%
+                  {uptime != null ? `${uptime.toFixed(1)}%` : "—"}
                 </p>
               </div>
               <div className="rounded-md border border-border p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Pings ontvangen</p>
-                <p className="mt-2 font-display text-3xl font-semibold">{totalPings}</p>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Gem. responstijd</p>
+                <p className={`mt-2 font-display text-3xl font-semibold ${avgMs && avgMs > 3000 ? "text-amber-500" : ""}`}>
+                  {avgMs != null ? `${avgMs}ms` : "—"}
+                </p>
               </div>
               <div className="rounded-md border border-border p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Fouten</p>
-                <p className={`mt-2 font-display text-3xl font-semibold ${errorCount > 0 ? "text-destructive" : ""}`}>
-                  {errorCount}
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">P95 responstijd</p>
+                <p className={`mt-2 font-display text-3xl font-semibold ${p95Ms && p95Ms > 3000 ? "text-destructive" : ""}`}>
+                  {p95Ms != null ? `${p95Ms}ms` : "—"}
                 </p>
               </div>
             </div>
-            {lastCheck && (
-              <p className="mt-4 text-xs text-muted-foreground">
-                Laatste check: {minsAgo(lastCheck)}
+
+            {/* Uptime grafiek */}
+            <div className="mt-5">
+              <p className="text-xs text-muted-foreground mb-2">Response time (laatste {Math.min(responseTimes.length, 50)} metingen)</p>
+              <div className="flex items-end gap-0.5 h-14 bg-background rounded-md px-2 py-1">
+                {responseTimes.slice(0, 50).reverse().map((r: any, i: number) => (
+                  <div
+                    key={i}
+                    title={`${r.response_ms ?? 0}ms`}
+                    className={`flex-1 rounded-t min-h-[2px] ${!r.status_ok ? "bg-destructive" : (r.response_ms ?? 0) > 3000 ? "bg-amber-500" : "bg-emerald-500"}`}
+                    style={{ height: `${Math.max(8, ((r.response_ms ?? 0) / maxMs) * 100)}%` }}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-muted-foreground mt-1 px-2">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />OK</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" />&gt;3s</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-destructive inline-block" />Down</span>
+              </div>
+            </div>
+
+            {lastSyncAt && (
+              <p className="mt-3 text-xs text-muted-foreground">
+                Laatste sync: {minsAgo(lastSyncAt)}
               </p>
             )}
           </>
         )}
       </section>
 
-      {data.siteErrors && data.siteErrors.length > 0 && (
+      {errorCount > 0 && (
         <section className="rounded-lg border border-border bg-card p-6">
           <h3 className="font-display text-xl font-semibold mb-3">Laatste fouten</h3>
           <ul className="space-y-2 text-sm">
@@ -1174,7 +1202,7 @@ function OverviewSection({
   const pct = totalQuota > 0 ? Math.min(100, (used / totalQuota) * 100) : 100;
   const exhausted = used >= totalQuota;
   const recent = (data.requests as any[]).slice(0, 3);
-  const siteOk = (data.totalPings ?? 0) === 0 || ((data.uptimePct ?? 100) >= 95);
+  const siteOk = !data.responseTimes?.length || ((data.uptimePct ?? 100) >= 95);
 
   return (
     <div className="space-y-8">

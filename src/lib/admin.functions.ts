@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -1133,5 +1134,158 @@ export const adminUpdateWebsiteLink = createServerFn({ method: "POST" })
     const { user_id, ...rest } = data;
     const { error } = await supabase.from("profiles").update(rest).eq("id", user_id);
     if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// ============================================================
+// ==================== MONITORING ============================
+// ============================================================
+
+async function checkSSLCert(url: string): Promise<{ valid: boolean; expires_at: string | null; days_remaining: number | null; issuer: string | null; error: string | null }> {
+  const https = await import("https");
+  return new Promise((resolve) => {
+    try {
+      const hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+      const req = (https as any).request({ hostname, port: 443, method: "HEAD", rejectUnauthorized: false }, (res: any) => {
+        try {
+          const cert = res.socket?.getPeerCertificate?.();
+          if (!cert?.valid_to) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: "Geen certificaat" }); return; }
+          const expiresAt = new Date(cert.valid_to);
+          const daysRemaining = Math.floor((expiresAt.getTime() - Date.now()) / 86400000);
+          resolve({ valid: daysRemaining > 0, expires_at: expiresAt.toISOString(), days_remaining: daysRemaining, issuer: cert.issuer?.CN ?? cert.issuer?.O ?? null, error: null });
+        } catch (e: any) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }); }
+      });
+      req.on("error", (e: any) => resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }));
+      req.setTimeout(10000, () => { req.destroy(); resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: "Timeout" }); });
+      req.end();
+    } catch (e: any) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }); }
+  });
+}
+
+async function checkDNSHealth(url: string): Promise<{ healthy: boolean; issues: string[] }> {
+  try {
+    const dns = await import("dns");
+    const { promisify } = await import("util");
+    const resolve4 = promisify((dns as any).resolve4);
+    const hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+    const issues: string[] = [];
+    try { await resolve4(hostname); } catch { issues.push(`Geen A-record voor ${hostname}`); }
+    return { healthy: issues.length === 0, issues };
+  } catch (e: any) {
+    return { healthy: false, issues: [`DNS check mislukt: ${e.message}`] };
+  }
+}
+
+export const adminGetCustomerMonitoring = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const [rtRes, sslRes, dnsRes] = await Promise.all([
+      supabaseAdmin.from("site_response_times" as any).select("response_ms,status_ok,created_at").eq("user_id", data.user_id).gte("created_at", since7d).order("created_at", { ascending: false }).limit(500),
+      supabaseAdmin.from("ssl_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
+      supabaseAdmin.from("dns_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
+    ]);
+    const responseTimes: any[] = (rtRes.data as any) ?? [];
+    const total = responseTimes.length;
+    const ok = responseTimes.filter((r) => r.status_ok).length;
+    const uptimePct = total > 0 ? (ok / total) * 100 : null;
+    const msList = responseTimes.filter((r) => r.response_ms != null).map((r) => r.response_ms as number);
+    const avg = msList.length > 0 ? Math.round(msList.reduce((a, b) => a + b, 0) / msList.length) : null;
+    const sorted = [...msList].sort((a, b) => a - b);
+    const p95 = sorted.length > 0 ? (sorted[Math.floor(sorted.length * 0.95)] ?? sorted[sorted.length - 1]) : null;
+    return { responseTimes: responseTimes.slice(0, 100), avg, p95, uptimePct, total, lastSync: responseTimes[0]?.created_at ?? null, ssl: (sslRes.data as any) ?? null, dns: (dnsRes.data as any) ?? null };
+  });
+
+export const adminRunSSLCheck = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
+    const result = await checkSSLCert(profile.website_url);
+    await supabaseAdmin.from("ssl_checks" as any).insert({ user_id: data.user_id, ...result, checked_at: new Date().toISOString() });
+    if (!result.valid || (result.days_remaining !== null && result.days_remaining < 30)) {
+      const severity = !result.valid || result.days_remaining! < 7 ? "critical" : "warning";
+      const message = !result.valid ? `SSL certificaat ongeldig: ${result.error}` : `SSL verloopt over ${result.days_remaining} dagen`;
+      await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "ssl", severity, message });
+    }
+    return { ok: true, result };
+  });
+
+export const adminRunDNSCheck = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
+    const result = await checkDNSHealth(profile.website_url);
+    await supabaseAdmin.from("dns_checks" as any).insert({ user_id: data.user_id, healthy: result.healthy, issues: result.issues, checked_at: new Date().toISOString() });
+    if (!result.healthy) {
+      await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "dns", severity: "critical", message: result.issues.join("; ") });
+    }
+    return { ok: true, result };
+  });
+
+export const adminGetAllAlerts = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const [activeRes, archivedRes, profilesRes] = await Promise.all([
+      supabaseAdmin.from("monitoring_alerts" as any).select("*").is("archived_at", null).order("created_at", { ascending: false }),
+      supabaseAdmin.from("monitoring_alerts" as any).select("*").not("archived_at", "is", null).gte("archived_at", new Date(Date.now() - 30 * 86400000).toISOString()).order("archived_at", { ascending: false }),
+      supabaseAdmin.from("profiles").select("id,full_name,email"),
+    ]);
+    const profileMap: Record<string, any> = {};
+    for (const p of (profilesRes.data ?? []) as any[]) profileMap[p.id] = p;
+    const enrich = (a: any) => ({ ...a, customer: profileMap[a.user_id] ?? null });
+    return { active: ((activeRes.data as any) ?? []).map(enrich), archived: ((archivedRes.data as any) ?? []).map(enrich) };
+  });
+
+export const adminSnoozeAlert = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), hours: z.number().int().min(1).max(168) }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const snoozedUntil = new Date(Date.now() + data.hours * 3600000).toISOString();
+    await supabaseAdmin.from("monitoring_alerts" as any).update({ snoozed_until: snoozedUntil }).eq("id", data.id);
+    return { ok: true };
+  });
+
+export const adminMarkAlertSeen = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const now = new Date().toISOString();
+    await supabaseAdmin.from("monitoring_alerts" as any).update({ seen_at: now, archived_at: now }).eq("id", data.id);
+    return { ok: true };
+  });
+
+export const adminGetRolePermissions = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    const { data } = await supabaseAdmin.from("role_permissions" as any).select("*");
+    return { items: (data as any) ?? [] };
+  });
+
+export const adminSetRolePermission = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ role: z.string(), permission: z.string(), allowed: z.boolean() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+    await supabaseAdmin.from("role_permissions" as any).upsert({ role: data.role, permission: data.permission, allowed: data.allowed, updated_at: new Date().toISOString() }, { onConflict: "role,permission" });
     return { ok: true };
   });

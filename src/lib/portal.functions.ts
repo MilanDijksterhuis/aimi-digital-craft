@@ -37,10 +37,12 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .order("created_at", { ascending: false })
           .limit(5),
         supabase
-          .from("site_pings")
-          .select("status_ok, created_at")
+          .from("site_response_times" as any)
+          .select("status_ok, response_ms, created_at")
           .eq("user_id", userId)
-          .gte("created_at", new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
+          .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+          .order("created_at", { ascending: false })
+          .limit(200),
         supabase
           .from("site_errors")
           .select("*")
@@ -63,10 +65,16 @@ export const getMyDashboard = createServerFn({ method: "GET" })
     const extraTotal =
       creditsRes.data?.reduce((s: number, c: any) => s + (c.amount ?? 0), 0) ?? 0;
 
-    const pings = pingsRes.data ?? [];
-    const totalPings = pings.length;
-    const okPings = pings.filter((p: any) => p.status_ok).length;
-    const uptimePct = totalPings > 0 ? (okPings / totalPings) * 100 : null;
+    const responseTimes: any[] = (pingsRes.data as any[]) ?? [];
+    const okCount = responseTimes.filter((r: any) => r.status_ok).length;
+    const uptimePct = responseTimes.length > 0 ? (okCount / responseTimes.length) * 100 : null;
+    const avgResponseMs = responseTimes.length > 0
+      ? Math.round(responseTimes.reduce((s: number, r: any) => s + (r.response_ms ?? 0), 0) / responseTimes.length)
+      : null;
+    const sortedMs = [...responseTimes].sort((a: any, b: any) => (a.response_ms ?? 0) - (b.response_ms ?? 0));
+    const p95idx = Math.max(0, Math.ceil(sortedMs.length * 0.95) - 1);
+    const p95Ms = sortedMs.length > 0 ? (sortedMs[p95idx]?.response_ms ?? null) : null;
+    const lastSyncAt = responseTimes[0]?.created_at ?? null;
 
     return {
       profile: profileRes.data,
@@ -80,7 +88,10 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       appointments: apptRes.data ?? [],
       loginEvents: loginsRes.data ?? [],
       uptimePct,
-      totalPings,
+      avgResponseMs,
+      p95Ms,
+      lastSyncAt,
+      responseTimes,
       siteErrors: errorsRes.data ?? [],
     };
   });

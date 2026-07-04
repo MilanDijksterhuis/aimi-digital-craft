@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
   MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
   ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
+  AlertTriangle, Shield, ChevronLeft, RefreshCw, CheckCircle, XCircle,
+  Clock, Activity,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -36,12 +38,19 @@ import {
   adminRejectExtraChangeRequest,
   adminListWebsiteLinks,
   adminUpdateWebsiteLink,
+  adminGetCustomerMonitoring,
+  adminRunSSLCheck,
+  adminRunDNSCheck,
+  adminGetAllAlerts,
+  adminSnoozeAlert,
+  adminMarkAlertSeen,
+  adminGetRolePermissions,
+  adminSetRolePermission,
 } from "@/lib/admin.functions";
 import {
   adminListAllAccounts,
   adminChangeAccountRole,
   adminSetBlocked,
-  adminSetAccountTags,
   adminSetAccessExpiry,
   adminHardDeleteAccount,
   adminCreateTempAccount,
@@ -92,7 +101,7 @@ function AdminPage() {
   type TabKey =
     | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
     | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
-    | "website_links" | "team" | "afspraken"
+    | "website_links" | "alerts" | "role_permissions" | "team" | "afspraken"
     | "chat" | "deleted";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
@@ -187,6 +196,8 @@ function AdminPage() {
       { key: "accounts", label: "Accounts", icon: Users2 },
       { key: "notifications", label: "Notificaties", icon: Bell },
       { key: "website_links", label: "Website koppelingen", icon: Link2 },
+      { key: "alerts", label: "Alerts", icon: AlertTriangle },
+      ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield }] : []),
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
     ]},
@@ -225,6 +236,8 @@ function AdminPage() {
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
           {tab === "website_links" && <WebsiteLinksPanel />}
+          {tab === "alerts" && <AlertsPanel />}
+          {tab === "role_permissions" && perms.isSuperAdmin && <RollenPermissiesPanel />}
         </div>
 
       </div>
@@ -482,6 +495,14 @@ function ExtraChangesPanel() {
 }
 
 function WebsiteLinksPanel() {
+  const [detailUserId, setDetailUserId] = useState<string | null>(null);
+  if (detailUserId) {
+    return <WebsiteLinkDetail userId={detailUserId} onBack={() => setDetailUserId(null)} />;
+  }
+  return <WebsiteLinksOverview onOpenDetail={setDetailUserId} />;
+}
+
+function WebsiteLinksOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void }) {
   const list = useServerFn(adminListWebsiteLinks);
   const update = useServerFn(adminUpdateWebsiteLink);
   const qc = useQueryClient();
@@ -501,7 +522,12 @@ function WebsiteLinksPanel() {
     <div className="overflow-x-auto rounded-lg border border-border">
       <table className="w-full text-sm">
         <thead className="bg-muted/30 text-muted-foreground">
-          <tr><th className="text-left p-3">Klant</th><th className="text-left p-3">Website</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
+          <tr>
+            <th className="text-left p-3">Klant</th>
+            <th className="text-left p-3">Website</th>
+            <th className="text-left p-3">Status</th>
+            <th className="p-3"></th>
+          </tr>
         </thead>
         <tbody>
           {items.map((c: any) => {
@@ -509,17 +535,20 @@ function WebsiteLinksPanel() {
             const isOpen = openId === c.id;
             const snippet = `<script src="${origin}/track.js?u=${c.id}"></script>`;
             const status = c.ping_count > 0
-              ? { color: "text-emerald-600", txt: "Actief" }
-              : c.website_url ? { color: "text-amber-600", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
+              ? { color: "text-emerald-500", txt: "Actief" }
+              : c.website_url ? { color: "text-amber-500", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
             return (
-              <>
-                <tr key={c.id} className="border-t border-border">
-                  <td className="p-3">{c.full_name || c.email}</td>
-                  <td className="p-3 truncate max-w-xs">{c.website_url || "—"}</td>
-                  <td className={`p-3 ${status.color}`}>{status.txt}</td>
-                  <td className="p-3 text-right">
-                    <button onClick={() => setOpenId(isOpen ? null : c.id)} className="text-xs text-primary hover:underline">
-                      {isOpen ? "Sluit" : "Beheer koppeling"}
+              <React.Fragment key={c.id}>
+                <tr className="border-t border-border">
+                  <td className="p-3 font-medium">{c.full_name || c.email}</td>
+                  <td className="p-3 truncate max-w-xs text-muted-foreground">{c.website_url || "—"}</td>
+                  <td className={`p-3 text-xs font-medium ${status.color}`}>{status.txt}</td>
+                  <td className="p-3 text-right space-x-3">
+                    <button onClick={() => onOpenDetail(c.id)} className="text-xs text-primary hover:underline">
+                      Monitoring
+                    </button>
+                    <button onClick={() => setOpenId(isOpen ? null : c.id)} className="text-xs text-muted-foreground hover:text-foreground">
+                      {isOpen ? "Sluit" : "Koppeling"}
                     </button>
                   </td>
                 </tr>
@@ -546,12 +575,208 @@ function WebsiteLinksPanel() {
                     </div>
                   </td></tr>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
           {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => void }) {
+  const getMonitoring = useServerFn(adminGetCustomerMonitoring);
+  const runSSL = useServerFn(adminRunSSLCheck);
+  const runDNS = useServerFn(adminRunDNSCheck);
+  const qc = useQueryClient();
+
+  const { data, isLoading, dataUpdatedAt } = useQuery({
+    queryKey: ["admin-monitoring", userId],
+    queryFn: () => getMonitoring({ data: { user_id: userId } }),
+    refetchInterval: 60_000,
+  });
+
+  const sslM = useMutation({
+    mutationFn: () => runSSL({ data: { user_id: userId } }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] }); toast.success("SSL check uitgevoerd."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const dnsM = useMutation({
+    mutationFn: () => runDNS({ data: { user_id: userId } }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] }); toast.success("DNS check uitgevoerd."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const mon = data as any;
+  const responseTimes: any[] = mon?.response_times ?? [];
+  const ssl = mon?.ssl ?? null;
+  const dns = mon?.dns ?? null;
+  const alerts: any[] = mon?.alerts ?? [];
+
+  const avgMs = responseTimes.length
+    ? Math.round(responseTimes.reduce((s: number, r: any) => s + r.response_ms, 0) / responseTimes.length)
+    : null;
+  const sorted = [...responseTimes].sort((a: any, b: any) => a.response_ms - b.response_ms);
+  const p95idx = Math.max(0, Math.ceil(sorted.length * 0.95) - 1);
+  const p95Ms = sorted.length ? sorted[p95idx]?.response_ms : null;
+
+  const okCount = responseTimes.filter((r: any) => r.status_ok).length;
+  const uptimePct = responseTimes.length ? ((okCount / responseTimes.length) * 100).toFixed(1) : null;
+
+  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms));
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3">
+        <button onClick={onBack} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <ChevronLeft className="w-4 h-4" /> Terug
+        </button>
+        <span className="text-muted-foreground">/</span>
+        <span className="text-sm font-medium">Monitoring</span>
+      </div>
+
+      {isLoading ? (
+        <div className="space-y-3 animate-pulse">
+          {[1,2,3].map(i => <div key={i} className="h-24 bg-muted rounded-lg" />)}
+        </div>
+      ) : (
+        <>
+          {/* Statistieken */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="rounded-lg border border-border bg-card p-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Uptime (24u)</p>
+              <p className={`mt-1 text-2xl font-bold ${uptimePct && parseFloat(uptimePct) < 95 ? "text-destructive" : "text-emerald-500"}`}>
+                {uptimePct ? `${uptimePct}%` : "—"}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-card p-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Gem. respons</p>
+              <p className={`mt-1 text-2xl font-bold ${avgMs && avgMs > 3000 ? "text-amber-500" : ""}`}>
+                {avgMs ? `${avgMs}ms` : "—"}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-card p-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">P95 respons</p>
+              <p className={`mt-1 text-2xl font-bold ${p95Ms && p95Ms > 3000 ? "text-destructive" : ""}`}>
+                {p95Ms ? `${p95Ms}ms` : "—"}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-card p-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Metingen (24u)</p>
+              <p className="mt-1 text-2xl font-bold">{responseTimes.length}</p>
+            </div>
+          </div>
+
+          {/* Uptime grafiek */}
+          {responseTimes.length > 0 && (
+            <div className="rounded-lg border border-border bg-card p-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-3 flex items-center gap-2">
+                <Activity className="w-3 h-3" /> Response time (laatste 50 metingen)
+              </p>
+              <div className="flex items-end gap-0.5 h-16">
+                {responseTimes.slice(-50).map((r: any, i: number) => (
+                  <div
+                    key={i}
+                    title={`${r.response_ms}ms`}
+                    className={`flex-1 rounded-t min-h-[2px] transition-all ${!r.status_ok ? "bg-destructive" : r.response_ms > 3000 ? "bg-amber-500" : "bg-emerald-500"}`}
+                    style={{ height: `${Math.max(4, (r.response_ms / maxMs) * 100)}%` }}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>Ouder</span><span>Recent</span>
+              </div>
+            </div>
+          )}
+
+          {/* SSL */}
+          <div className="rounded-lg border border-border bg-card p-4">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide flex items-center gap-2">
+                <Shield className="w-3 h-3" /> SSL Certificaat
+              </p>
+              <button onClick={() => sslM.mutate()} disabled={sslM.isPending} className="text-xs text-primary hover:underline flex items-center gap-1">
+                <RefreshCw className={`w-3 h-3 ${sslM.isPending ? "animate-spin" : ""}`} />
+                {sslM.isPending ? "Bezig…" : "Check uitvoeren"}
+              </button>
+            </div>
+            {ssl ? (
+              <div className="space-y-1 text-sm">
+                <div className="flex items-center gap-2">
+                  {ssl.valid ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-destructive" />}
+                  <span>{ssl.valid ? "Geldig" : "Ongeldig"}</span>
+                  {ssl.days_remaining !== null && (
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${ssl.days_remaining < 14 ? "bg-destructive/20 text-destructive" : ssl.days_remaining < 30 ? "bg-amber-500/20 text-amber-500" : "bg-emerald-500/20 text-emerald-600"}`}>
+                      {ssl.days_remaining}d resterend
+                    </span>
+                  )}
+                </div>
+                {ssl.issuer && <p className="text-xs text-muted-foreground">Uitgever: {ssl.issuer}</p>}
+                {ssl.expires_at && <p className="text-xs text-muted-foreground">Verloopt: {new Date(ssl.expires_at).toLocaleDateString("nl-NL")}</p>}
+                {ssl.error && <p className="text-xs text-destructive">{ssl.error}</p>}
+                <p className="text-xs text-muted-foreground">Gecontroleerd: {new Date(ssl.checked_at).toLocaleString("nl-NL")}</p>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">Nog geen SSL check uitgevoerd.</p>
+            )}
+          </div>
+
+          {/* DNS */}
+          <div className="rounded-lg border border-border bg-card p-4">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide flex items-center gap-2">
+                <Activity className="w-3 h-3" /> DNS Status
+              </p>
+              <button onClick={() => dnsM.mutate()} disabled={dnsM.isPending} className="text-xs text-primary hover:underline flex items-center gap-1">
+                <RefreshCw className={`w-3 h-3 ${dnsM.isPending ? "animate-spin" : ""}`} />
+                {dnsM.isPending ? "Bezig…" : "Check uitvoeren"}
+              </button>
+            </div>
+            {dns ? (
+              <div className="space-y-1 text-sm">
+                <div className="flex items-center gap-2">
+                  {dns.healthy ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-destructive" />}
+                  <span>{dns.healthy ? "Gezond" : "Problemen gevonden"}</span>
+                </div>
+                {dns.issues?.length > 0 && (
+                  <ul className="text-xs text-destructive space-y-0.5 mt-1">
+                    {dns.issues.map((issue: string, i: number) => <li key={i}>• {issue}</li>)}
+                  </ul>
+                )}
+                <p className="text-xs text-muted-foreground">Gecontroleerd: {new Date(dns.checked_at).toLocaleString("nl-NL")}</p>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">Nog geen DNS check uitgevoerd.</p>
+            )}
+          </div>
+
+          {/* Actieve alerts */}
+          {alerts.length > 0 && (
+            <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
+              <p className="text-xs text-amber-500 uppercase tracking-wide mb-2 flex items-center gap-2">
+                <AlertTriangle className="w-3 h-3" /> Actieve alerts ({alerts.length})
+              </p>
+              <ul className="space-y-1">
+                {alerts.map((a: any) => (
+                  <li key={a.id} className="text-sm flex items-start gap-2">
+                    <span className={`text-xs px-1.5 py-0.5 rounded shrink-0 ${a.severity === "critical" ? "bg-destructive/20 text-destructive" : "bg-amber-500/20 text-amber-600"}`}>
+                      {a.severity}
+                    </span>
+                    <span>{a.message}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Last sync */}
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <Clock className="w-3 h-3" />
+            Laatste update: {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleTimeString("nl-NL") : "—"}
+          </p>
+        </>
+      )}
     </div>
   );
 }
@@ -589,13 +814,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
 
   const filtered = data.customers.filter((c: any) => {
     const q = filter.toLowerCase();
-    return (
-      !q ||
-      c.email?.toLowerCase().includes(q) ||
-      c.full_name?.toLowerCase().includes(q) ||
-      c.company?.toLowerCase().includes(q) ||
-      (c.tags ?? []).some((t: string) => t.toLowerCase().includes(q))
-    );
+    return !q || c.email?.toLowerCase().includes(q) || c.full_name?.toLowerCase().includes(q) || c.company?.toLowerCase().includes(q);
   });
 
   return (
@@ -654,7 +873,6 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
               <th className="text-left p-3">Naam</th>
               <th className="text-left p-3">Email</th>
               <th className="text-left p-3">Pakket</th>
-              <th className="text-left p-3">Tags</th>
               <th className="text-left p-3">Gebruikt</th>
               <th className="text-left p-3">Acties</th>
             </tr>
@@ -669,13 +887,6 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
                 </td>
                 <td className="p-3">{c.email}</td>
                 <td className="p-3">{c.package || "—"} {c.monthly_price_cents ? `(${eur(c.monthly_price_cents)})` : ""}</td>
-                <td className="p-3">
-                  {(c.tags ?? []).map((t: string) => (
-                    <span key={t} className="inline-block mr-1 mb-1 text-xs rounded-full bg-muted px-2 py-0.5">
-                      {t}
-                    </span>
-                  ))}
-                </td>
                 <td className="p-3">{c.usedThisMonth}/{3 + c.extraCredits}</td>
                 <td className="p-3 space-x-2 whitespace-nowrap">
                   <button onClick={() => setOpenCustomer(c.id)} className="text-xs text-primary hover:underline">bewerk</button>
@@ -702,7 +913,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={6} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>
             )}
           </tbody>
         </table>
@@ -780,7 +991,6 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
   const [form, setForm] = useState<any>(null);
   const [costForm, setCostForm] = useState({ description: "", amount: "" });
   const [onbLabel, setOnbLabel] = useState("");
-  const [tagsInput, setTagsInput] = useState("");
 
   if (isLoading || !data || !data.profile) {
     return <Modal onClose={onClose} title="Laden…"><p>Laden…</p></Modal>;
@@ -792,7 +1002,6 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
     phone: p.phone ?? "", address: p.address ?? "", kvk: p.kvk ?? "", btw: p.btw ?? "",
     package: p.package ?? "", monthly_price_cents: p.monthly_price_cents ?? 0,
     internal_notes: p.internal_notes ?? "",
-    tags: p.tags ?? [],
     website_url: p.website_url ?? "",
     contact_person: p.contact_person ?? "",
     billing_address: p.billing_address ?? "",
@@ -830,30 +1039,6 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
               onChange={(e) => setForm({ ...f, internal_notes: e.target.value })}
               className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
           </label>
-          <div className="mt-3">
-            <span className="text-muted-foreground text-sm">Tags</span>
-            <div className="mt-1 flex flex-wrap gap-1">
-              {f.tags.map((t: string) => (
-                <span key={t} className="text-xs rounded-full bg-muted px-2 py-0.5 flex items-center gap-1">
-                  {t}
-                  <button onClick={() => setForm({ ...f, tags: f.tags.filter((x: string) => x !== t) })}>×</button>
-                </span>
-              ))}
-              <input
-                value={tagsInput}
-                onChange={(e) => setTagsInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && tagsInput.trim()) {
-                    e.preventDefault();
-                    setForm({ ...f, tags: [...f.tags, tagsInput.trim()] });
-                    setTagsInput("");
-                  }
-                }}
-                placeholder="+ tag (Enter)"
-                className="rounded-md border border-input bg-background px-2 py-1 text-xs"
-              />
-            </div>
-          </div>
           <button
             onClick={() => updateM.mutate({ user_id: userId, ...f })}
             disabled={updateM.isPending}
@@ -1550,7 +1735,6 @@ function AccountsPanel() {
   const list = useServerFn(adminListAllAccounts);
   const changeRole = useServerFn(adminChangeAccountRole);
   const setBlocked = useServerFn(adminSetBlocked);
-  const setTags = useServerFn(adminSetAccountTags);
   const setExpiry = useServerFn(adminSetAccessExpiry);
   const hardDel = useServerFn(adminHardDeleteAccount);
   const createTemp = useServerFn(adminCreateTempAccount);
@@ -1559,10 +1743,6 @@ function AccountsPanel() {
 
   const [filter, setFilter] = useState("");
   const [roleFilter, setRoleFilter] = useState<string>("all");
-  const [showTemp, setShowTemp] = useState(false);
-  const [tempForm, setTempForm] = useState({ email: "", full_name: "", company: "", days_valid: 14 });
-  const [tagsEditing, setTagsEditing] = useState<string | null>(null);
-  const [tagsDraft, setTagsDraft] = useState("");
 
   // Realtime ping on profiles last_seen_at
   useEffect(() => {
@@ -1575,10 +1755,12 @@ function AccountsPanel() {
     return () => { supabase.removeChannel(ch); };
   }, [qc]);
 
+  const [showTemp, setShowTemp] = useState(false);
+  const [tempForm, setTempForm] = useState({ email: "", full_name: "", company: "", days_valid: 14 });
+
   const inv = () => qc.invalidateQueries({ queryKey: ["admin-accounts"] });
   const roleM = useMutation({ mutationFn: (i: any) => changeRole({ data: i }), onSuccess: () => { inv(); toast.success("Rol gewijzigd."); }, onError: (e: any) => toast.error(e.message) });
   const blockM = useMutation({ mutationFn: (i: any) => setBlocked({ data: i }), onSuccess: () => { inv(); toast.success("Bijgewerkt."); }, onError: (e: any) => toast.error(e.message) });
-  const tagsM = useMutation({ mutationFn: (i: any) => setTags({ data: i }), onSuccess: () => { inv(); setTagsEditing(null); toast.success("Tags opgeslagen."); }, onError: (e: any) => toast.error(e.message) });
   const expM = useMutation({ mutationFn: (i: any) => setExpiry({ data: i }), onSuccess: () => { inv(); toast.success("Verloopdatum opgeslagen."); }, onError: (e: any) => toast.error(e.message) });
   const delM = useMutation({
     mutationFn: (id: string) => hardDel({ data: { user_id: id } }),
@@ -1601,7 +1783,7 @@ function AccountsPanel() {
   const accounts = data?.accounts ?? [];
   const filtered = accounts.filter((a: any) => {
     const q = filter.toLowerCase();
-    const matchQ = !q || a.email?.toLowerCase().includes(q) || a.full_name?.toLowerCase().includes(q) || (a.tags ?? []).some((t: string) => t.toLowerCase().includes(q));
+    const matchQ = !q || a.email?.toLowerCase().includes(q) || a.full_name?.toLowerCase().includes(q);
     const matchRole =
       roleFilter === "all" ? true :
       roleFilter === "staff" ? (a.roles ?? []).some((r: string) => ["super_admin", "co_admin", "support_agent", "viewer", "admin"].includes(r)) :
@@ -1652,7 +1834,6 @@ function AccountsPanel() {
               <th className="text-left p-3">Naam</th>
               <th className="text-left p-3">E-mail</th>
               <th className="text-left p-3">Rol</th>
-              <th className="text-left p-3">Tags</th>
               <th className="text-left p-3">Verloopt</th>
               <th className="text-left p-3">Status</th>
               <th className="p-3"></th>
@@ -1662,6 +1843,7 @@ function AccountsPanel() {
             {filtered.map((a: any) => {
               const primaryRole = (a.roles ?? [])[0] ?? "customer";
               const online = isOnline(a);
+              const isSuperAdmin = (a.roles ?? []).includes("super_admin");
               return (
                 <tr key={a.id} className="border-t border-border align-top">
                   <td className="p-3">
@@ -1673,44 +1855,42 @@ function AccountsPanel() {
                   </td>
                   <td className="p-3">{a.email}</td>
                   <td className="p-3">
-                    <select value={primaryRole} onChange={(e) => roleM.mutate({ target_user_id: a.id, role: e.target.value as any })} className="rounded-md border border-input bg-background px-2 py-1 text-xs">
-                      <option value="customer">Klant</option>
-                      <option value="support_agent">Support</option>
-                      <option value="viewer">Viewer</option>
-                      <option value="co_admin">Co-admin</option>
-                      <option value="super_admin">Super admin</option>
-                    </select>
-                  </td>
-                  <td className="p-3">
-                    {tagsEditing === a.id ? (
-                      <div className="flex gap-1">
-                        <input value={tagsDraft} onChange={(e) => setTagsDraft(e.target.value)} placeholder="tag1, tag2" className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
-                        <button onClick={() => tagsM.mutate({ user_id: a.id, tags: tagsDraft.split(",").map((s) => s.trim()).filter(Boolean) })} className="text-xs text-primary">OK</button>
-                      </div>
+                    {isSuperAdmin ? (
+                      <span className="text-xs rounded-full bg-primary/20 text-primary px-2 py-1 font-medium">Super Admin</span>
                     ) : (
-                      <div className="flex flex-wrap gap-1 cursor-pointer" onClick={() => { setTagsEditing(a.id); setTagsDraft((a.tags ?? []).join(", ")); }}>
-                        {(a.tags ?? []).map((t: string) => <span key={t} className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">{t}</span>)}
-                        {(!a.tags || a.tags.length === 0) && <span className="text-xs text-muted-foreground">+ tag</span>}
-                      </div>
+                      <select value={primaryRole} onChange={(e) => roleM.mutate({ target_user_id: a.id, role: e.target.value as any })} className="rounded-md border border-input bg-background px-2 py-1 text-xs">
+                        <option value="customer">Klant</option>
+                        <option value="support_agent">Support</option>
+                        <option value="viewer">Viewer</option>
+                        <option value="co_admin">Co-admin</option>
+                      </select>
                     )}
                   </td>
                   <td className="p-3">
-                    <input type="date" defaultValue={a.access_expires_at ? a.access_expires_at.slice(0, 10) : ""} onBlur={(e) => {
-                      const v = e.target.value ? new Date(e.target.value + "T23:59:59Z").toISOString() : null;
-                      if (v !== a.access_expires_at) expM.mutate({ user_id: a.id, access_expires_at: v });
-                    }} className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
+                    {isSuperAdmin ? (
+                      <span className="text-xs text-muted-foreground">—</span>
+                    ) : (
+                      <input type="date" defaultValue={a.access_expires_at ? a.access_expires_at.slice(0, 10) : ""} onBlur={(e) => {
+                        const v = e.target.value ? new Date(e.target.value + "T23:59:59Z").toISOString() : null;
+                        if (v !== a.access_expires_at) expM.mutate({ user_id: a.id, access_expires_at: v });
+                      }} className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
+                    )}
                   </td>
                   <td className="p-3">
                     {a.is_blocked ? <span className="text-xs text-destructive">Geblokkeerd</span> : <span className="text-xs text-emerald-600">Actief</span>}
                   </td>
                   <td className="p-3 text-right space-x-2 whitespace-nowrap">
-                    <button onClick={() => blockM.mutate({ user_id: a.id, is_blocked: !a.is_blocked })} className="text-xs text-primary hover:underline">{a.is_blocked ? "Deblokkeer" : "Blokkeer"}</button>
-                    <button onClick={() => { if (confirm(`Account ${a.email} permanent verwijderen?`)) delM.mutate(a.id); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                    {!isSuperAdmin && (
+                      <>
+                        <button onClick={() => blockM.mutate({ user_id: a.id, is_blocked: !a.is_blocked })} className="text-xs text-primary hover:underline">{a.is_blocked ? "Deblokkeer" : "Blokkeer"}</button>
+                        <button onClick={() => { if (confirm(`Account ${a.email} permanent verwijderen?`)) delM.mutate(a.id); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                      </>
+                    )}
                   </td>
                 </tr>
               );
             })}
-            {filtered.length === 0 && <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">Geen accounts.</td></tr>}
+            {filtered.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-muted-foreground">Geen accounts.</td></tr>}
           </tbody>
         </table>
       </div>
@@ -1814,6 +1994,202 @@ function ArchivedChangesPanel() {
           {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen gearchiveerde changes.</td></tr>}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+// ============================================================
+// ======================= ALERTS PANEL =======================
+// ============================================================
+function AlertsPanel() {
+  const getAlerts = useServerFn(adminGetAllAlerts);
+  const snooze = useServerFn(adminSnoozeAlert);
+  const markSeen = useServerFn(adminMarkAlertSeen);
+  const qc = useQueryClient();
+  const [view, setView] = useState<"active" | "archived">("active");
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-all-alerts"],
+    queryFn: () => getAlerts({}),
+    refetchInterval: 60_000,
+  });
+
+  const snoozeM = useMutation({
+    mutationFn: ({ id, hours }: { id: string; hours: number }) => snooze({ data: { id, hours } }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-all-alerts"] }); toast.success("Alert gesnoozed."); },
+  });
+  const seenM = useMutation({
+    mutationFn: (id: string) => markSeen({ data: { id } }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-all-alerts"] }); toast.success("Alert gearchiveerd."); },
+  });
+
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+
+  const allAlerts: any[] = (data as any)?.alerts ?? [];
+  const active = allAlerts.filter((a: any) => !a.archived_at);
+  const archived = allAlerts.filter((a: any) => !!a.archived_at);
+  const items = view === "active" ? active : archived;
+
+  const severityColor = (s: string) =>
+    s === "critical" ? "text-destructive bg-destructive/10 border-destructive/30" : "text-amber-500 bg-amber-500/10 border-amber-500/30";
+
+  const typeIcon = (t: string) => {
+    if (t === "ssl") return <Shield className="w-3.5 h-3.5" />;
+    if (t === "dns") return <Activity className="w-3.5 h-3.5" />;
+    return <AlertTriangle className="w-3.5 h-3.5" />;
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex gap-2">
+          {(["active", "archived"] as const).map(v => (
+            <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${view === v ? "bg-foreground text-background border-foreground" : "border-border hover:border-foreground/40"}`}>
+              {v === "active" ? `Actief (${active.length})` : `Archief (${archived.length})`}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="rounded-lg border border-border p-12 text-center text-muted-foreground">
+          <CheckCircle className="w-8 h-8 mx-auto mb-2 text-emerald-500/60" />
+          <p className="text-sm">{view === "active" ? "Geen actieve alerts." : "Archief leeg."}</p>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {items.map((a: any) => (
+            <div key={a.id} className={`rounded-lg border p-4 ${severityColor(a.severity)}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-2 min-w-0">
+                  <span className="mt-0.5 shrink-0">{typeIcon(a.type)}</span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{a.message}</p>
+                    <p className="text-xs opacity-70 mt-0.5">
+                      {a.customer_name || a.customer_email || a.user_id} · {new Date(a.created_at).toLocaleString("nl-NL")}
+                    </p>
+                    {a.snoozed_until && new Date(a.snoozed_until) > new Date() && (
+                      <p className="text-xs opacity-60 mt-0.5 flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> Gesnoozed tot {new Date(a.snoozed_until).toLocaleString("nl-NL")}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {view === "active" && (
+                  <div className="flex gap-2 shrink-0">
+                    <div className="relative group">
+                      <button className="text-xs px-2 py-1 rounded border border-current/30 hover:bg-current/10 transition-colors whitespace-nowrap flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> Snooze
+                      </button>
+                      <div className="absolute right-0 top-full mt-1 hidden group-hover:flex flex-col bg-card border border-border rounded-md shadow-lg z-10 min-w-[120px]">
+                        {[1, 4, 24].map(h => (
+                          <button key={h} onClick={() => snoozeM.mutate({ id: a.id, hours: h })} className="text-left px-3 py-1.5 text-xs hover:bg-muted transition-colors">
+                            {h === 1 ? "1 uur" : h === 4 ? "4 uur" : "24 uur"}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <button onClick={() => seenM.mutate(a.id)} className="text-xs px-2 py-1 rounded border border-current/30 hover:bg-current/10 transition-colors whitespace-nowrap flex items-center gap-1">
+                      <CheckCircle className="w-3 h-3" /> Gezien
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// ================== ROLLEN & PERMISSIES =====================
+// ============================================================
+const ALL_PERMISSIONS = [
+  { key: "view_all_changes", label: "Changes bekijken" },
+  { key: "edit_change_status", label: "Change status wijzigen" },
+  { key: "edit_change_fields", label: "Change velden bewerken" },
+  { key: "delete_change_soft", label: "Change verwijderen (soft)" },
+  { key: "force_paid", label: "Betaald forceren" },
+  { key: "create_change_for_customer", label: "Change aanmaken voor klant" },
+  { key: "manage_customers", label: "Klanten beheren" },
+  { key: "generate_invoice", label: "Factuur genereren" },
+  { key: "export_csv", label: "CSV exporteren" },
+  { key: "chat_with_customers", label: "Chat met klanten" },
+  { key: "website_links_view", label: "Website koppelingen bekijken" },
+  { key: "website_links_manage", label: "Website koppelingen beheren" },
+  { key: "appointments_manage", label: "Afspraken beheren" },
+  { key: "alerts_view", label: "Alerts bekijken" },
+];
+
+const ROLES = ["co_admin", "support_agent", "viewer"] as const;
+
+function RollenPermissiesPanel() {
+  const getPerms = useServerFn(adminGetRolePermissions);
+  const setPermFn = useServerFn(adminSetRolePermission);
+  const qc = useQueryClient();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-role-permissions"],
+    queryFn: () => getPerms({}),
+  });
+
+  const setM = useMutation({
+    mutationFn: (v: { role: string; permission: string; allowed: boolean }) => setPermFn({ data: v }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-role-permissions"] }),
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+
+  const rows: any[] = (data as any)?.permissions ?? [];
+  const lookup: Record<string, boolean> = {};
+  rows.forEach((r: any) => { lookup[`${r.role}:${r.permission}`] = r.allowed; });
+
+  const isAllowed = (role: string, perm: string) => lookup[`${role}:${perm}`] ?? false;
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <Shield className="w-4 h-4 text-primary" />
+        <h3 className="font-semibold">Rollen & Permissies</h3>
+      </div>
+      <p className="text-sm text-muted-foreground">Stel in welke acties elke rol mag uitvoeren. Super admin heeft altijd alle rechten.</p>
+
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/30">
+            <tr>
+              <th className="text-left p-3 text-muted-foreground font-medium">Permissie</th>
+              {ROLES.map(role => (
+                <th key={role} className="p-3 text-center text-muted-foreground font-medium capitalize whitespace-nowrap">
+                  {role.replace("_", " ")}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {ALL_PERMISSIONS.map((perm) => (
+              <tr key={perm.key} className="border-t border-border hover:bg-muted/20 transition-colors">
+                <td className="p-3">{perm.label}</td>
+                {ROLES.map(role => (
+                  <td key={role} className="p-3 text-center">
+                    <input
+                      type="checkbox"
+                      checked={isAllowed(role, perm.key)}
+                      onChange={(e) => setM.mutate({ role, permission: perm.key, allowed: e.target.checked })}
+                      disabled={setM.isPending}
+                      className="w-4 h-4 accent-primary cursor-pointer"
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-xs text-muted-foreground">Wijzigingen worden direct opgeslagen.</p>
     </div>
   );
 }

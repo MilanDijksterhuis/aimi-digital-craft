@@ -45,6 +45,11 @@
   --shadow-card: none;
 }
 
+/* ── Portal/Admin: gebruik gewone sans-serif voor koppen ── */
+.portal-dark {
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* ── Marketing site (dark cinematic) ── */
 :root {
   --radius: 9999px;
