@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
-        src: "https://4dab5c7f-05f0-4df1-a69c-328eb1306f47.lovableproject.com/track.js?u=6a34e404-ba3e-42d4-965c-62d04aef0f93",
+        src: "https://aimi-development.nl/track.js?u=6a34e404-ba3e-42d4-965c-62d04aef0f93",
         async: true,
       },
     ],
