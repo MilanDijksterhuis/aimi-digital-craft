@@ -22,14 +22,14 @@ export const Route = createFileRoute("/api/public/site-ping")({
         try {
           const body = Body.parse(await request.json());
 
-          // Sla op in site_response_times (nieuw)
-          if (body.response_ms !== undefined) {
+          // Schrijf altijd naar site_response_times (response_ms mag null zijn na migratie)
+          try {
             await supabaseAdmin.from("site_response_times" as any).insert({
               user_id: body.user_id,
-              response_ms: body.response_ms,
+              response_ms: body.response_ms ?? null,
               status_ok: body.status_ok,
             });
-          }
+          } catch { /* ignore */ }
 
           // Behoud site_pings voor backward compat
           await supabaseAdmin.from("site_pings").insert({

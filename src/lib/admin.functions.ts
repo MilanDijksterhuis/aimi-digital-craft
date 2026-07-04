@@ -1176,6 +1176,65 @@ async function checkDNSHealth(url: string): Promise<{ healthy: boolean; issues: 
   }
 }
 
+async function measureResponseTime(url: string): Promise<{ response_ms: number; status_ok: boolean }> {
+  try {
+    const http = await import(url.startsWith("https") ? "https" : "http");
+    return new Promise((resolve) => {
+      const start = Date.now();
+      const req = (http as any).get(url, { timeout: 10000 }, (res: any) => {
+        const ms = Date.now() - start;
+        res.resume();
+        resolve({ response_ms: ms, status_ok: res.statusCode >= 200 && res.statusCode < 400 });
+      });
+      req.on("error", () => resolve({ response_ms: Date.now() - start, status_ok: false }));
+      req.on("timeout", () => { req.destroy(); resolve({ response_ms: 10000, status_ok: false }); });
+    });
+  } catch {
+    return { response_ms: 10000, status_ok: false };
+  }
+}
+
+export const adminSyncCustomerMonitoring = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
+
+    const measured = await measureResponseTime(profile.website_url);
+
+    // Schrijf naar site_response_times (nieuwe tabel, alleen als die bestaat)
+    try {
+      await supabaseAdmin.from("site_response_times" as any).insert({
+        user_id: data.user_id,
+        response_ms: measured.response_ms,
+        status_ok: measured.status_ok,
+      });
+    } catch { /* tabel bestaat nog niet */ }
+
+    // Altijd ook site_pings (backward compat)
+    await supabaseAdmin.from("site_pings").insert({
+      user_id: data.user_id,
+      status_ok: measured.status_ok,
+      response_ms: measured.response_ms,
+    });
+
+    // Alert als response time > 3000ms
+    if (measured.response_ms > 3000) {
+      const since1h = new Date(Date.now() - 3600000).toISOString();
+      try {
+        const { data: existing } = await supabaseAdmin.from("monitoring_alerts" as any).select("id").eq("user_id", data.user_id).eq("type", "response_time").is("archived_at", null).gte("created_at", since1h).limit(1).maybeSingle();
+        if (!existing) {
+          await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "response_time", severity: "warning", message: `Hoge response time: ${measured.response_ms}ms (limiet: 3000ms)` });
+        }
+      } catch { /* tabel bestaat nog niet */ }
+    }
+
+    return { ok: true, ...measured };
+  });
+
 export const adminGetCustomerMonitoring = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))

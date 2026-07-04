@@ -7,7 +7,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
 
-    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes, loginsRes, pingsRes, errorsRes] =
+    const [profileRes, requestsRes, creditsRes, notifsRes, availRes, roleRes, onbRes, apptRes, loginsRes, errorsRes] =
       await Promise.all([
         supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
         supabase
@@ -37,19 +37,47 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .order("created_at", { ascending: false })
           .limit(5),
         supabase
-          .from("site_response_times" as any)
-          .select("status_ok, response_ms, created_at")
-          .eq("user_id", userId)
-          .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
-          .order("created_at", { ascending: false })
-          .limit(200),
-        supabase
           .from("site_errors")
           .select("*")
           .eq("user_id", userId)
           .order("created_at", { ascending: false })
           .limit(5),
       ]);
+
+    // Haal response times op — probeer nieuwe tabel, fallback naar site_pings
+    const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    let pingsRes: { data: any[] | null } = { data: [] };
+    try {
+      const rtResult = await supabase
+        .from("site_response_times" as any)
+        .select("status_ok, response_ms, created_at")
+        .eq("user_id", userId)
+        .gte("created_at", since24h)
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (rtResult.error || !rtResult.data?.length) {
+        // Tabel bestaat niet of leeg — val terug op site_pings
+        const fallback = await supabase
+          .from("site_pings")
+          .select("status_ok, response_ms, created_at")
+          .eq("user_id", userId)
+          .gte("created_at", since24h)
+          .order("created_at", { ascending: false })
+          .limit(200);
+        pingsRes = { data: (fallback.data ?? []) as any[] };
+      } else {
+        pingsRes = { data: (rtResult.data ?? []) as any[] };
+      }
+    } catch {
+      const fallback = await supabase
+        .from("site_pings")
+        .select("status_ok, response_ms, created_at")
+        .eq("user_id", userId)
+        .gte("created_at", since24h)
+        .order("created_at", { ascending: false })
+        .limit(200);
+      pingsRes = { data: (fallback.data ?? []) as any[] };
+    }
 
     const usedThisMonth =
       requestsRes.data?.filter((r: any) => {

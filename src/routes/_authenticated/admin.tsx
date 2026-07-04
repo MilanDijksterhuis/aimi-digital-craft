@@ -39,6 +39,7 @@ import {
   adminListWebsiteLinks,
   adminUpdateWebsiteLink,
   adminGetCustomerMonitoring,
+  adminSyncCustomerMonitoring,
   adminRunSSLCheck,
   adminRunDNSCheck,
   adminGetAllAlerts,
@@ -587,6 +588,7 @@ function WebsiteLinksOverview({ onOpenDetail }: { onOpenDetail: (id: string) => 
 
 function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => void }) {
   const getMonitoring = useServerFn(adminGetCustomerMonitoring);
+  const syncFn = useServerFn(adminSyncCustomerMonitoring);
   const runSSL = useServerFn(adminRunSSLCheck);
   const runDNS = useServerFn(adminRunDNSCheck);
   const qc = useQueryClient();
@@ -599,14 +601,16 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
 
   const syncM = useMutation({
     mutationFn: async () => {
+      // Live ping meten + SSL + DNS parallel uitvoeren
       await Promise.allSettled([
+        syncFn({ data: { user_id: userId } }),
         runSSL({ data: { user_id: userId } }),
         runDNS({ data: { user_id: userId } }),
       ]);
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] });
-      toast.success("Sync voltooid — SSL & DNS gecheckt.");
+      toast.success("Sync voltooid — responstijd, SSL & DNS gecheckt.");
     },
     onError: (e: any) => toast.error(e.message),
   });
