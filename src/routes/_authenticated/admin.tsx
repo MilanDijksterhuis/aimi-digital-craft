@@ -627,15 +627,13 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
   });
 
   const mon = data as any;
-  const responseTimes: any[] = mon?.responseTimes ?? [];
   const ssl = mon?.ssl ?? null;
   const dns = mon?.dns ?? null;
   const alerts: any[] = mon?.alerts ?? [];
   const avgMs: number | null = mon?.avg ?? null;
-  const p95Ms: number | null = mon?.p95 ?? null;
   const uptimePct: string | null = mon?.uptimePct != null ? (mon.uptimePct as number).toFixed(1) : null;
-
-  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms ?? 0));
+  const dailyUptime: any[] = mon?.dailyUptime ?? [];
+  const hasData = (mon?.total24h ?? 0) > 0 || dailyUptime.some((d: any) => d.total > 0);
 
   return (
     <div className="space-y-5">
@@ -661,52 +659,56 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
         <div className="space-y-3 animate-pulse">
           {[1,2,3].map(i => <div key={i} className="h-24 bg-muted rounded-lg" />)}
         </div>
+      ) : !hasData ? (
+        <div className="rounded-lg border border-dashed border-border p-8 text-center text-muted-foreground text-sm">
+          Nog geen meetdata. Druk op Sync om een eerste meting te starten.
+        </div>
       ) : (
         <>
           {/* Statistieken */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <div className="rounded-lg border border-border bg-card p-4">
               <p className="text-xs text-muted-foreground uppercase tracking-wide">Uptime (24u)</p>
-              <p className={`mt-1 text-2xl font-bold ${uptimePct && parseFloat(uptimePct) < 95 ? "text-destructive" : "text-emerald-500"}`}>
+              <p className={`mt-1 text-2xl font-bold ${uptimePct && parseFloat(uptimePct) < 95 ? "text-destructive" : uptimePct ? "text-emerald-500" : ""}`}>
                 {uptimePct ? `${uptimePct}%` : "—"}
               </p>
             </div>
             <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Gem. respons</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Gem. respons (24u)</p>
               <p className={`mt-1 text-2xl font-bold ${avgMs && avgMs > 3000 ? "text-amber-500" : ""}`}>
                 {avgMs ? `${avgMs}ms` : "—"}
               </p>
             </div>
             <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">P95 respons</p>
-              <p className={`mt-1 text-2xl font-bold ${p95Ms && p95Ms > 3000 ? "text-destructive" : ""}`}>
-                {p95Ms ? `${p95Ms}ms` : "—"}
-              </p>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4">
               <p className="text-xs text-muted-foreground uppercase tracking-wide">Metingen (24u)</p>
-              <p className="mt-1 text-2xl font-bold">{responseTimes.length}</p>
+              <p className="mt-1 text-2xl font-bold">{mon?.total24h ?? 0}</p>
             </div>
           </div>
 
           {/* Uptime grafiek */}
-          {responseTimes.length > 0 && (
+          {dailyUptime.length > 0 && (
             <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-3 flex items-center gap-2">
-                <Activity className="w-3 h-3" /> Response time (laatste 50 metingen)
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4 flex items-center gap-2">
+                <Activity className="w-3 h-3" /> Uptime afgelopen 7 dagen
               </p>
-              <div className="flex items-end gap-0.5 h-16">
-                {responseTimes.slice(-50).map((r: any, i: number) => (
-                  <div
-                    key={i}
-                    title={`${r.response_ms}ms`}
-                    className={`flex-1 rounded-t min-h-[2px] transition-all ${!r.status_ok ? "bg-destructive" : r.response_ms > 3000 ? "bg-amber-500" : "bg-emerald-500"}`}
-                    style={{ height: `${Math.max(4, (r.response_ms / maxMs) * 100)}%` }}
-                  />
-                ))}
+              <div className="flex items-end gap-2 h-20">
+                {dailyUptime.map((d: any) => {
+                  const pct = d.uptime;
+                  const color = pct == null ? "bg-muted" : pct >= 99 ? "bg-emerald-500" : pct >= 95 ? "bg-amber-500" : "bg-destructive";
+                  return (
+                    <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+                      <span className="text-[10px] text-muted-foreground">{pct != null ? `${pct}%` : "—"}</span>
+                      <div className={`w-full rounded-t ${color}`} style={{ height: `${pct != null ? Math.max(8, pct) : 20}%` }} title={d.total > 0 ? `${d.ok}/${d.total} OK` : "Geen data"} />
+                      <span className="text-[10px] text-muted-foreground capitalize">{d.label}</span>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                <span>Ouder</span><span>Recent</span>
+              <div className="flex gap-4 mt-2 text-[10px] text-muted-foreground">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-emerald-500 inline-block" />≥99%</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500 inline-block" />95–99%</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-destructive inline-block" />&lt;95%</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-muted inline-block" />Geen data</span>
               </div>
             </div>
           )}

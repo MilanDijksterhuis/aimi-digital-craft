@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { computeMonitoringStats } from "./monitoring.shared";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -1241,49 +1242,40 @@ export const adminGetCustomerMonitoring = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureStaff(supabase, userId);
-    const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
-    // Haal data op — graceful fallback als nieuwe tabellen nog niet bestaan
-    let responseTimes: any[] = [];
+    let rows: any[] = [];
     let ssl: any = null;
     let dns: any = null;
     let alerts: any[] = [];
 
     try {
       const [rtRes, sslRes, dnsRes, alertsRes] = await Promise.all([
-        supabaseAdmin.from("site_response_times" as any).select("response_ms,status_ok,created_at").eq("user_id", data.user_id).gte("created_at", since24h).order("created_at", { ascending: false }).limit(500),
+        supabaseAdmin.from("site_response_times" as any).select("response_ms,status_ok,created_at").eq("user_id", data.user_id).gte("created_at", since7d).order("created_at", { ascending: false }).limit(2016),
         supabaseAdmin.from("ssl_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
         supabaseAdmin.from("dns_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
         supabaseAdmin.from("monitoring_alerts" as any).select("*").eq("user_id", data.user_id).is("archived_at", null).order("created_at", { ascending: false }).limit(20),
       ]);
-      responseTimes = (rtRes.data as any[]) ?? [];
+      rows = (rtRes.data as any[]) ?? [];
       ssl = (sslRes.data as any) ?? null;
       dns = (dnsRes.data as any) ?? null;
       alerts = (alertsRes.data as any[]) ?? [];
-    } catch {
-      // Nieuwe tabellen bestaan nog niet — val terug op site_pings
-    }
+    } catch { /* nieuwe tabellen bestaan nog niet */ }
 
-    // Fallback: als site_response_times leeg is, laad uit site_pings
-    if (responseTimes.length === 0) {
+    // Fallback naar site_pings als site_response_times leeg is
+    if (rows.length === 0) {
       const { data: pings } = await supabaseAdmin
         .from("site_pings")
         .select("status_ok,response_ms,created_at")
         .eq("user_id", data.user_id)
-        .gte("created_at", since24h)
+        .gte("created_at", since7d)
         .order("created_at", { ascending: false })
-        .limit(500);
-      responseTimes = (pings as any[]) ?? [];
+        .limit(2016);
+      rows = (pings as any[]) ?? [];
     }
 
-    const total = responseTimes.length;
-    const ok = responseTimes.filter((r) => r.status_ok).length;
-    const uptimePct = total > 0 ? (ok / total) * 100 : null;
-    const msList = responseTimes.filter((r) => r.response_ms != null).map((r) => r.response_ms as number);
-    const avg = msList.length > 0 ? Math.round(msList.reduce((a, b) => a + b, 0) / msList.length) : null;
-    const sorted = [...msList].sort((a, b) => a - b);
-    const p95 = sorted.length > 0 ? (sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))] ?? null) : null;
-    return { responseTimes: responseTimes.slice(0, 100), avg, p95, uptimePct, total, lastSync: responseTimes[0]?.created_at ?? null, ssl, dns, alerts };
+    const stats = computeMonitoringStats(rows);
+    return { ...stats, ssl, dns, alerts };
   });
 
 export const adminRunSSLCheck = createServerFn({ method: "POST" })

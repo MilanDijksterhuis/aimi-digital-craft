@@ -1069,18 +1069,44 @@ function ChangeCard({
 
 // ---------- Website tab ----------
 
+function UptimeChart({ dailyUptime }: { dailyUptime: any[] }) {
+  return (
+    <div>
+      <div className="flex items-end gap-2 h-20">
+        {dailyUptime.map((d: any) => {
+          const pct = d.uptime;
+          const color = pct == null ? "bg-muted" : pct >= 99 ? "bg-emerald-500" : pct >= 95 ? "bg-amber-500" : "bg-destructive";
+          const height = pct == null ? 20 : Math.max(8, pct);
+          return (
+            <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
+              <span className="text-[10px] text-muted-foreground">{pct != null ? `${pct}%` : "—"}</span>
+              <div className={`w-full rounded-t ${color} transition-all`} style={{ height: `${height}%` }} title={d.total > 0 ? `${d.ok}/${d.total} OK` : "Geen data"} />
+              <span className="text-[10px] text-muted-foreground capitalize">{d.label}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex gap-4 mt-2 text-[10px] text-muted-foreground">
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-emerald-500 inline-block" />≥99%</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500 inline-block" />95–99%</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-destructive inline-block" />&lt;95%</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-muted inline-block" />Geen data</span>
+      </div>
+    </div>
+  );
+}
+
 function WebsiteTab({ data }: { data: any }) {
   const uptime = data.uptimePct as number | null;
-  const avgMs: number | null = data.avgResponseMs ?? null;
-  const p95Ms: number | null = data.p95Ms ?? null;
-  const lastSyncAt: string | null = data.lastSyncAt ?? null;
-  const responseTimes: any[] = data.responseTimes ?? [];
+  const avgMs: number | null = data.avg ?? null;
+  const dailyUptime: any[] = data.dailyUptime ?? [];
+  const lastSync: string | null = data.lastSync ?? null;
   const errorCount = data.siteErrors?.length ?? 0;
+  const hasData = (data.total24h ?? 0) > 0 || dailyUptime.some((d: any) => d.total > 0);
 
   const uptimeColor = uptime == null ? "text-muted-foreground" : uptime >= 99 ? "text-emerald-500" : uptime >= 95 ? "text-amber-500" : "text-destructive";
-  const maxMs = Math.max(1, ...responseTimes.map((r: any) => r.response_ms ?? 0));
 
-  const minsAgo = (iso: string) => {
+  const timeAgo = (iso: string) => {
     const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
     if (m < 1) return "zojuist";
     if (m < 60) return `${m} min geleden`;
@@ -1088,8 +1114,6 @@ function WebsiteTab({ data }: { data: any }) {
     if (h < 24) return `${h} uur geleden`;
     return `${Math.floor(h / 24)} dagen geleden`;
   };
-
-  const hasData = responseTimes.length > 0;
 
   return (
     <div className="space-y-6">
@@ -1107,7 +1131,7 @@ function WebsiteTab({ data }: { data: any }) {
       </section>
 
       <section className="rounded-lg border border-border bg-card p-6">
-        <h3 className="font-display text-xl font-semibold mb-4">Statistieken (afgelopen 24 uur)</h3>
+        <h3 className="font-display text-xl font-semibold mb-4">Website monitoring</h3>
         {!hasData ? (
           <div className="rounded-md border border-dashed border-border bg-background p-6 text-center">
             <p className="text-sm text-muted-foreground">
@@ -1115,54 +1139,35 @@ function WebsiteTab({ data }: { data: any }) {
             </p>
           </div>
         ) : (
-          <>
-            <div className="grid sm:grid-cols-3 gap-4">
+          <div className="space-y-5">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-md border border-border p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Uptime</p>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Uptime (24u)</p>
                 <p className={`mt-2 font-display text-3xl font-semibold ${uptimeColor}`}>
                   {uptime != null ? `${uptime.toFixed(1)}%` : "—"}
                 </p>
               </div>
               <div className="rounded-md border border-border p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">Gem. responstijd</p>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Gem. responstijd (24u)</p>
                 <p className={`mt-2 font-display text-3xl font-semibold ${avgMs && avgMs > 3000 ? "text-amber-500" : ""}`}>
                   {avgMs != null ? `${avgMs}ms` : "—"}
                 </p>
               </div>
-              <div className="rounded-md border border-border p-4">
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">P95 responstijd</p>
-                <p className={`mt-2 font-display text-3xl font-semibold ${p95Ms && p95Ms > 3000 ? "text-destructive" : ""}`}>
-                  {p95Ms != null ? `${p95Ms}ms` : "—"}
-                </p>
-              </div>
             </div>
 
-            {/* Uptime grafiek */}
-            <div className="mt-5">
-              <p className="text-xs text-muted-foreground mb-2">Response time (laatste {Math.min(responseTimes.length, 50)} metingen)</p>
-              <div className="flex items-end gap-0.5 h-14 bg-background rounded-md px-2 py-1">
-                {responseTimes.slice(0, 50).reverse().map((r: any, i: number) => (
-                  <div
-                    key={i}
-                    title={`${r.response_ms ?? 0}ms`}
-                    className={`flex-1 rounded-t min-h-[2px] ${!r.status_ok ? "bg-destructive" : (r.response_ms ?? 0) > 3000 ? "bg-amber-500" : "bg-emerald-500"}`}
-                    style={{ height: `${Math.max(8, ((r.response_ms ?? 0) / maxMs) * 100)}%` }}
-                  />
-                ))}
+            {dailyUptime.length > 0 && (
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-3">Uptime afgelopen 7 dagen</p>
+                <UptimeChart dailyUptime={dailyUptime} />
               </div>
-              <div className="flex justify-between text-xs text-muted-foreground mt-1 px-2">
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />OK</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" />&gt;3s</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-destructive inline-block" />Down</span>
-              </div>
-            </div>
+            )}
 
-            {lastSyncAt && (
-              <p className="mt-3 text-xs text-muted-foreground">
-                Laatste sync: {minsAgo(lastSyncAt)}
+            {lastSync && (
+              <p className="text-xs text-muted-foreground">
+                Laatste meting: {timeAgo(lastSync)}
               </p>
             )}
-          </>
+          </div>
         )}
       </section>
 
@@ -1202,7 +1207,7 @@ function OverviewSection({
   const pct = totalQuota > 0 ? Math.min(100, (used / totalQuota) * 100) : 100;
   const exhausted = used >= totalQuota;
   const recent = (data.requests as any[]).slice(0, 3);
-  const siteOk = !data.responseTimes?.length || ((data.uptimePct ?? 100) >= 95);
+  const siteOk = !data.total24h || ((data.uptimePct ?? 100) >= 95);
 
   return (
     <div className="space-y-8">

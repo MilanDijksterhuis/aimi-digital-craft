@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { computeMonitoringStats } from "./monitoring.shared";
 
 export const getMyDashboard = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -44,39 +45,31 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .limit(5),
       ]);
 
-    // Haal response times op — probeer nieuwe tabel, fallback naar site_pings
-    const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-    let pingsRes: { data: any[] | null } = { data: [] };
+    // Haal response times op (7 dagen) — probeer nieuwe tabel, fallback naar site_pings
+    const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    let pingRows: any[] = [];
     try {
       const rtResult = await supabase
         .from("site_response_times" as any)
         .select("status_ok, response_ms, created_at")
         .eq("user_id", userId)
-        .gte("created_at", since24h)
+        .gte("created_at", since7d)
         .order("created_at", { ascending: false })
-        .limit(200);
-      if (rtResult.error || !rtResult.data?.length) {
-        // Tabel bestaat niet of leeg — val terug op site_pings
-        const fallback = await supabase
-          .from("site_pings")
-          .select("status_ok, response_ms, created_at")
-          .eq("user_id", userId)
-          .gte("created_at", since24h)
-          .order("created_at", { ascending: false })
-          .limit(200);
-        pingsRes = { data: (fallback.data ?? []) as any[] };
+        .limit(2016);
+      if (!rtResult.error && rtResult.data && rtResult.data.length > 0) {
+        pingRows = rtResult.data as any[];
       } else {
-        pingsRes = { data: (rtResult.data ?? []) as any[] };
+        throw new Error("leeg");
       }
     } catch {
       const fallback = await supabase
         .from("site_pings")
         .select("status_ok, response_ms, created_at")
         .eq("user_id", userId)
-        .gte("created_at", since24h)
+        .gte("created_at", since7d)
         .order("created_at", { ascending: false })
-        .limit(200);
-      pingsRes = { data: (fallback.data ?? []) as any[] };
+        .limit(2016);
+      pingRows = (fallback.data ?? []) as any[];
     }
 
     const usedThisMonth =
@@ -93,16 +86,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
     const extraTotal =
       creditsRes.data?.reduce((s: number, c: any) => s + (c.amount ?? 0), 0) ?? 0;
 
-    const responseTimes: any[] = (pingsRes.data as any[]) ?? [];
-    const okCount = responseTimes.filter((r: any) => r.status_ok).length;
-    const uptimePct = responseTimes.length > 0 ? (okCount / responseTimes.length) * 100 : null;
-    const avgResponseMs = responseTimes.length > 0
-      ? Math.round(responseTimes.reduce((s: number, r: any) => s + (r.response_ms ?? 0), 0) / responseTimes.length)
-      : null;
-    const sortedMs = [...responseTimes].sort((a: any, b: any) => (a.response_ms ?? 0) - (b.response_ms ?? 0));
-    const p95idx = Math.max(0, Math.ceil(sortedMs.length * 0.95) - 1);
-    const p95Ms = sortedMs.length > 0 ? (sortedMs[p95idx]?.response_ms ?? null) : null;
-    const lastSyncAt = responseTimes[0]?.created_at ?? null;
+    const monStats = computeMonitoringStats(pingRows);
 
     return {
       profile: profileRes.data,
@@ -115,11 +99,11 @@ export const getMyDashboard = createServerFn({ method: "GET" })
       onboarding: onbRes.data ?? [],
       appointments: apptRes.data ?? [],
       loginEvents: loginsRes.data ?? [],
-      uptimePct,
-      avgResponseMs,
-      p95Ms,
-      lastSyncAt,
-      responseTimes,
+      uptimePct: monStats.uptimePct,
+      avg: monStats.avg,
+      dailyUptime: monStats.dailyUptime,
+      total24h: monStats.total24h,
+      lastSync: monStats.lastSync,
       siteErrors: errorsRes.data ?? [],
     };
   });
