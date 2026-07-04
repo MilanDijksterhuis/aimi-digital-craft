@@ -1143,23 +1143,53 @@ export const adminUpdateWebsiteLink = createServerFn({ method: "POST" })
 // ============================================================
 
 async function checkSSLCert(url: string): Promise<{ valid: boolean; expires_at: string | null; days_remaining: number | null; issuer: string | null; error: string | null }> {
-  const https = await import("https");
+  const tls = await import("tls");
+  const fail = (error: string) => ({ valid: false, expires_at: null as string | null, days_remaining: null as number | null, issuer: null as string | null, error });
+
+  let hostname: string;
+  try {
+    hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+  } catch {
+    return fail("Ongeldige URL");
+  }
+
   return new Promise((resolve) => {
-    try {
-      const hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
-      const req = (https as any).request({ hostname, port: 443, method: "HEAD", rejectUnauthorized: false }, (res: any) => {
+    let settled = false;
+    const done = (result: Awaited<ReturnType<typeof checkSSLCert>>) => {
+      if (settled) return;
+      settled = true;
+      try { socket.destroy(); } catch { /* noop */ }
+      resolve(result);
+    };
+
+    // Directe TLS-handshake met expliciete SNI en zonder sessie-hergebruik,
+    // zodat het volledige certificaat gegarandeerd over de lijn komt.
+    const socket = (tls as any).connect(
+      { host: hostname, port: 443, servername: hostname, rejectUnauthorized: false, session: undefined },
+      () => {
         try {
-          const cert = res.socket?.getPeerCertificate?.();
-          if (!cert?.valid_to) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: "Geen certificaat" }); return; }
+          const cert = socket.getPeerCertificate?.();
+          if (!cert || !cert.valid_to) {
+            done(fail("Geen certificaat"));
+            return;
+          }
           const expiresAt = new Date(cert.valid_to);
           const daysRemaining = Math.floor((expiresAt.getTime() - Date.now()) / 86400000);
-          resolve({ valid: daysRemaining > 0, expires_at: expiresAt.toISOString(), days_remaining: daysRemaining, issuer: cert.issuer?.CN ?? cert.issuer?.O ?? null, error: null });
-        } catch (e: any) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }); }
-      });
-      req.on("error", (e: any) => resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }));
-      req.setTimeout(10000, () => { req.destroy(); resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: "Timeout" }); });
-      req.end();
-    } catch (e: any) { resolve({ valid: false, expires_at: null, days_remaining: null, issuer: null, error: e.message }); }
+          done({
+            valid: daysRemaining > 0,
+            expires_at: expiresAt.toISOString(),
+            days_remaining: daysRemaining,
+            issuer: cert.issuer?.CN ?? cert.issuer?.O ?? null,
+            error: null,
+          });
+        } catch (e: any) {
+          done(fail(e?.message ?? "Certificaat-parsefout"));
+        }
+      },
+    );
+
+    socket.setTimeout(10000, () => done(fail("Timeout")));
+    socket.on("error", (e: any) => done(fail(e?.message ?? "Verbindingsfout")));
   });
 }
 
