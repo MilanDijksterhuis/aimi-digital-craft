@@ -601,7 +601,6 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
 
   const syncM = useMutation({
     mutationFn: async () => {
-      // Live ping meten + SSL + DNS parallel uitvoeren
       await Promise.allSettled([
         syncFn({ data: { user_id: userId } }),
         runSSL({ data: { user_id: userId } }),
@@ -614,6 +613,14 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
     },
     onError: (e: any) => toast.error(e.message),
   });
+
+  // Auto-sync als er nog geen responstijdmeting is
+  const monAvg = (data as any)?.avg;
+  useEffect(() => {
+    if (!isLoading && data && monAvg == null && !syncM.isPending) {
+      syncM.mutate();
+    }
+  }, [isLoading, monAvg]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sslM = useMutation({
     mutationFn: () => runSSL({ data: { user_id: userId } }),
