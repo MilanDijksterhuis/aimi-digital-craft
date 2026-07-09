@@ -6,7 +6,7 @@ const tiers = [
     name: "Starter",
     price: "€ 499",
     desc: "Een professionele één-pagina site. Voor ZZP'ers en kleine bedrijven.",
-    features: ["1-pagina site", "Mobile-first design", "Hosting (1 jaar)", "Basic SEO"],
+    features: ["1-pagina site", "Mobile-first design", "Domein (1 jaar)", "Basic SEO"],
   },
   {
     name: "Pro",
@@ -15,8 +15,7 @@ const tiers = [
     features: [
       "Tot 6 pagina's",
       "Custom design",
-      "CMS integratie",
-      "Hosting + monitoring",
+      "Domein + monitoring",
       "Performance optimalisatie",
     ],
     featured: true,
@@ -24,7 +23,7 @@ const tiers = [
   {
     name: "Custom",
     price: "Op maat",
-    desc: "Grotere builds, webshops of web-applicaties. We maken een offerte na een gesprek.",
+    desc: "Grotere builds, webshops, CMS of web-applicaties. We maken een offerte na een gesprek.",
     features: [
       "Onbeperkte scope",
       "Backend & integraties",
@@ -73,7 +72,7 @@ export function Pricing() {
                     background: "#fe2c02",
                     color: "#ffffff",
                     borderRadius: "9999px",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                     letterSpacing: "0.02em",
                   }}
                 >
@@ -83,14 +82,14 @@ export function Pricing() {
 
               <div
                 className="text-white mb-1"
-                style={{ fontSize: "13px", fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+                style={{ fontSize: "13px", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 500 }}
               >
                 {t.name}
               </div>
               <div
                 className="text-white mt-2 mb-3"
                 style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                   fontSize: "3rem",
                   fontWeight: 300,
                   letterSpacing: "-0.03em",
@@ -119,7 +118,7 @@ export function Pricing() {
                   border: t.featured ? "none" : "1px solid rgba(255,255,255,0.2)",
                   borderRadius: "9999px",
                   padding: "10px 20px",
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                 }}
               >
                 Neem contact op

@@ -39,7 +39,7 @@ export function Work() {
               </div>
               <div className="absolute bottom-0 inset-x-0 p-6">
                 <div className="section-label mb-2">{p.type}</div>
-                <h3 className="font-display italic text-3xl font-normal mb-4 text-foreground group-hover:text-primary transition-colors">
+                <h3 className="font-display text-3xl font-normal mb-4 text-foreground group-hover:text-primary transition-colors">
                   {p.name}
                 </h3>
                 <div className="flex flex-wrap gap-2">

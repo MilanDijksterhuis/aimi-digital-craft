@@ -63,7 +63,7 @@ export function CookieBanner() {
             style={{
               background: "#1e1f1f",
               border: "1px solid #2a2b2b",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
             }}
           >
             <p className="text-white text-sm font-medium mb-1">

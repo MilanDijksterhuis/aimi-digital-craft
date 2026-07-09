@@ -48,7 +48,7 @@ export function About() {
                 <div
                   className="text-white"
                   style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                     fontSize: "2.5rem",
                     fontWeight: 300,
                     letterSpacing: "-0.03em",

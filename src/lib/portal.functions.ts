@@ -16,6 +16,7 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .from("change_requests")
           .select("*, change_attachments(*), change_comments(*)")
           .eq("user_id", userId)
+          .is("deleted_at", null)
           .order("created_at", { ascending: false }),
         supabase.from("extra_credits").select("amount").eq("user_id", userId),
         supabase
@@ -292,6 +293,7 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
       .from("change_requests")
       .select("*", { count: "exact", head: true })
       .eq("user_id", userId)
+      .is("deleted_at", null)
       .not("status", "in", "(done,rejected)");
     if ((openCount ?? 0) >= 10) {
       throw new Error("Je hebt 10 openstaande changes. Wacht tot er een wordt afgerond.");

@@ -101,6 +101,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         src: "https://aimi-development.nl/track.js?u=6a34e404-ba3e-42d4-965c-62d04aef0f93",
         async: true,
       },
+      {
+        // Structured data: laat Google het AIMI-logo tonen naast de site in de zoekresultaten.
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "AIMI",
+          alternateName: "AIMI Development",
+          url: "https://aimi-development.nl",
+          logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          description:
+            "AIMI is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

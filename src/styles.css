@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Cormorant Garamond", "Georgia", serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Eén basaal font voor de hele site (geen sierlijke serif meer). */
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --radius-sm: 2px;
@@ -45,9 +46,31 @@
   --shadow-card: none;
 }
 
+/* Verberg de scrollbar visueel (scrollen blijft mogelijk) — voor tab-balken e.d. */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
 /* ── Portal/Admin: gebruik gewone sans-serif voor koppen ── */
 .portal-dark {
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Expliciete, duidelijke koppen in portaal/admin — geen dunne/sierlijke
+   serif, maar een strak sans-serif op leesbaar gewicht. */
+.portal-dark h1,
+.portal-dark h2,
+.portal-dark h3,
+.portal-dark h4,
+.portal-dark h5,
+.portal-dark h6 {
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 /* ── Marketing site (dark cinematic) ── */
@@ -171,7 +194,7 @@
 .portal-theme h5,
 .portal-theme h6 {
   color: #111111;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;
 }
 
@@ -222,9 +245,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 300;
+    font-weight: 600;
     color: var(--color-foreground);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1.1;
   }
 

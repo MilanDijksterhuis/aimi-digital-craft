@@ -14,13 +14,13 @@ export const Route = createFileRoute("/privacybeleid")({
 
 function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
+    <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
       <div className="mx-auto max-w-3xl px-6 py-20">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
           ← Terug naar home
         </Link>
 
-        <h1 className="mt-8 text-4xl font-bold" style={{ fontFamily: "Cormorant Garamond, serif" }}>
+        <h1 className="mt-8 text-4xl font-bold" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
           Privacybeleid
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">Laatst bijgewerkt: juni 2025</p>

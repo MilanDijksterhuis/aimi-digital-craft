@@ -29,16 +29,16 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-white max-w-3xl"
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: "clamp(4rem, 9vw, 7.5rem)",
-            fontWeight: 300,
-            letterSpacing: "-0.03em",
+            fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
             lineHeight: 1.1,
           }}
         >
           Websites die écht
           <br />
-          <em style={{ fontStyle: "italic" }}>werken.</em>
+          werken.
         </motion.h1>
 
         <motion.p
@@ -85,7 +85,7 @@ export function Hero() {
               </div>
             ))}
           </div>
-          <span className="text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+          <span className="text-sm" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
             Aidan & Milan
           </span>
         </motion.div>
@@ -98,12 +98,28 @@ export function Hero() {
         transition={{ duration: 0.6, delay: 0.8 }}
         className="relative flex justify-center pb-10"
       >
-        <div className="flex flex-col items-center gap-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
-          <span className="text-xs tracking-widest uppercase" style={{ fontFamily: "Inter, sans-serif" }}>
+        <motion.div
+          className="flex flex-col items-center gap-1.5"
+          style={{ color: "rgba(255,255,255,0.35)" }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <motion.span
+            className="text-xs tracking-widest uppercase"
+            style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+            animate={{ opacity: [0.35, 1, 0.35] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          >
             scroll
-          </span>
-          <div className="w-px h-8 bg-white/20" />
-        </div>
+          </motion.span>
+          <div className="relative w-px h-8 overflow-hidden bg-white/20">
+            <motion.div
+              className="absolute left-0 top-0 w-px h-3 bg-white/80"
+              animate={{ y: [-12, 32] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );

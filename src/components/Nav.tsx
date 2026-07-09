@@ -20,7 +20,7 @@ export function Nav() {
         <a href="#" aria-label="AIMI home">
           <span
             className="font-medium text-white text-3xl tracking-tight"
-            style={{ fontFamily: "Inter, sans-serif" }}
+            style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
           >
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </span>
@@ -32,7 +32,7 @@ export function Nav() {
               key={l.href}
               href={l.href}
               className="relative text-[15px] py-1"
-              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "Inter, sans-serif" }}
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
               whileHover="hover"
               initial="rest"
             >

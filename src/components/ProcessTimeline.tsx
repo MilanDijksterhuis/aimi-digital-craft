@@ -5,31 +5,31 @@ import { ClipboardList, Paintbrush, Code2, Rocket, CheckCircle } from "lucide-re
 const phases = [
   {
     id: "intake",
-    name: "Intake & Briefing",
+    name: "Intake & planning",
     duration: "1 week",
     icon: ClipboardList,
     description:
-      "We luisteren naar wat je nodig hebt. Geen standaard formulieren — een echt gesprek over je merk, je doelgroep en wat je wilt bereiken.",
+      "We luisteren naar wat je nodig hebt. Geen standaard formulieren een echt gesprek over je merk, je doelgroep en wat je wilt bereiken.",
     clientAction: "Stuur ons je content, logo en eventuele huisstijlgidsen. Hoe meer input, hoe beter het resultaat.",
     deliverables: ["Kickoff gesprek", "Doelen & doelgroepanalyse", "Projectplan & planning", "Prijsofferte"],
   },
   {
-    id: "design",
-    name: "Design",
+    id: "ontwerp",
+    name: "Ontwerp",
     duration: "2 weken",
     icon: Paintbrush,
     description:
-      "We ontwerpen een concept dat past bij jouw merk. Geen templates. Je ziet wat we bouwen voordat we beginnen, en je geeft feedback totdat het klopt.",
+      "Wij ontwerpen een concept dat past bij jouw merk. Geen templates. Je ziet wat we bouwen voordat we beginnen, en je geeft feedback totdat het klopt.",
     clientAction: "Geef feedback op het design concept. Twee revisierondes zijn inbegrepen.",
     deliverables: ["Design concept", "Typografie & kleurpalet", "Goedgekeurd design", "Responsive layout"],
   },
   {
-    id: "development",
-    name: "Development",
+    id: "ontwikkeling",
+    name: "ontwikkeling",
     duration: "2–3 weken",
     icon: Code2,
     description:
-      "We bouwen de site op basis van het goedgekeurde design. Snelle laadtijden, schone code en solide SEO-basis zijn standaard — geen betaalde extra's.",
+      "We bouwen de site op basis van het goedgekeurde design. Snelle laadtijden, schone code en solide SEO-basis zijn standaard geen betaalde extra's.",
     clientAction: "Controleer de stagingversie en meld eventuele aanpassingen. Jij bepaalt wanneer we live gaan.",
     deliverables: ["Volledig gebouwde site", "Core Web Vitals optimalisatie", "SEO technische basis", "Stagingomgeving"],
   },
@@ -70,7 +70,7 @@ export function ProcessTimeline() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-sm mb-10"
-          style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+          style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
         >
           Transparant proces, geen verrassingen.
         </motion.p>
@@ -118,7 +118,7 @@ export function ProcessTimeline() {
                     <span
                       className="block text-sm font-medium transition-colors duration-200"
                       style={{
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                         color: isActive ? "#ffffff" : isDone ? "#8a8f98" : "#8a8f98",
                       }}
                     >
@@ -127,7 +127,7 @@ export function ProcessTimeline() {
                     <span
                       className="block text-xs mt-0.5"
                       style={{
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                         color: isActive ? "#fe2c02" : "#3a3b3b",
                       }}
                     >
@@ -169,7 +169,7 @@ export function ProcessTimeline() {
                   <h3
                     className="text-white mb-3"
                     style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                       fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
                       fontWeight: 300,
                       letterSpacing: "-0.02em",
@@ -180,7 +180,7 @@ export function ProcessTimeline() {
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+                    style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                   >
                     {current.description}
                   </p>
@@ -199,7 +199,7 @@ export function ProcessTimeline() {
                   </p>
                   <p
                     className="text-sm"
-                    style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+                    style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                   >
                     {current.clientAction}
                   </p>
@@ -229,7 +229,7 @@ export function ProcessTimeline() {
                       />
                       <span
                         className="text-sm"
-                        style={{ color: "#ffffff", fontFamily: "Inter, sans-serif", fontWeight: 400 }}
+                        style={{ color: "#ffffff", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 400 }}
                       >
                         {item}
                       </span>
@@ -245,7 +245,7 @@ export function ProcessTimeline() {
                   className="inline-flex items-center gap-2 mt-8 text-sm font-medium"
                   style={{
                     color: "#ffffff",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                     background: "rgba(255,255,255,0.08)",
                     border: "1px solid rgba(255,255,255,0.12)",
                     borderRadius: "9999px",

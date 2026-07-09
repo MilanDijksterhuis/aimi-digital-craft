@@ -338,7 +338,7 @@ function PortalPage() {
       </div>
 
       {/* Tabs */}
-      <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border overflow-x-auto">
+      <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border overflow-x-auto no-scrollbar">
         {([
           ["overview", "Overzicht"],
           ["changes", "Jouw changes"],

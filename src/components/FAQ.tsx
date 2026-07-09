@@ -9,7 +9,7 @@ const items = [
   },
   {
     q: "Wat als ik geen content of teksten heb?",
-    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers — vraag ernaar tijdens het intakegesprek.",
+    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers vraag ernaar tijdens het intakegesprek.",
   },
   {
     q: "Kan ik later upgraden van Starter naar Pro?",
@@ -17,7 +17,7 @@ const items = [
   },
   {
     q: "Wat is inbegrepen bij hosting?",
-    a: "SSL-certificaat, uptime-monitoring, maandelijkse backups en security-updates. Alles draait op onze eigen VPS — geen gedeelde hosting, geen verborgen limieten.",
+    a: "SSL-certificaat, uptime-monitoring, maandelijkse backups en security-updates. Alles draait op onze eigen VPS (virtual private server) geen gedeelde hosting, geen verborgen limieten.",
   },
   {
     q: "Wat als ik al een website heb?",
@@ -38,7 +38,7 @@ export function FAQ() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="mb-3 text-sm font-medium"
-          style={{ color: "#fe2c02", fontFamily: "Inter, sans-serif", letterSpacing: "0.05em" }}
+          style={{ color: "#fe2c02", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", letterSpacing: "0.05em" }}
         >
           Alles wat je wil weten
         </motion.p>
@@ -64,7 +64,7 @@ export function FAQ() {
                 >
                   <span
                     className="text-base font-medium text-white"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                   >
                     {item.q}
                   </span>
@@ -86,7 +86,7 @@ export function FAQ() {
                       transition={{ duration: 0.22, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-base leading-relaxed" style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}>
+                      <p className="pb-6 text-base leading-relaxed" style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
                         {item.a}
                       </p>
                     </motion.div>

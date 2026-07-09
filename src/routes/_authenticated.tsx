@@ -106,10 +106,10 @@ function Inner() {
     <div className="portal-dark min-h-screen" style={{ background: "#1a1b1e", color: "#f4f4f5" }}>
       <header style={{ borderBottom: "1px solid #35363a", background: "rgba(30,31,35,0.97)", backdropFilter: "blur(8px)", position: "sticky", top: 0, zIndex: 40 }}>
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-medium text-white text-xl tracking-tight" style={{ fontFamily: "Inter, sans-serif" }}>
+          <Link to="/" className="font-medium text-white text-xl tracking-tight" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </Link>
-          <div className="flex items-center gap-4 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+          <div className="flex items-center gap-4 text-sm" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
             <Link to="/portal" className="text-white/60 hover:text-white transition-colors">Portaal</Link>
             <Link to="/admin" className="text-white/60 hover:text-white transition-colors">Admin</Link>
             <AccountMenu

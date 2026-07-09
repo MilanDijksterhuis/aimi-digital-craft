@@ -93,7 +93,7 @@ export function Services() {
                       <span
                         className="text-sm font-medium transition-colors duration-200"
                         style={{
-                          fontFamily: "Inter, sans-serif",
+                          fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                           color: isActive ? "#ffffff" : "#8a8f98",
                         }}
                       >
@@ -106,7 +106,7 @@ export function Services() {
                             background: "rgba(254,44,2,0.12)",
                             color: "#fe2c02",
                             borderRadius: "9999px",
-                            fontFamily: "Inter, sans-serif",
+                            fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                             border: "1px solid rgba(254,44,2,0.25)",
                           }}
                         >
@@ -118,7 +118,7 @@ export function Services() {
                       className="text-xs mt-1 transition-colors duration-200"
                       style={{
                         color: isActive ? "#8a8f98" : "#3a3b3b",
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                       }}
                     >
                       {s.short}
@@ -158,7 +158,7 @@ export function Services() {
                 <h3
                   className="text-white mb-3"
                   style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                     fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
                     fontWeight: 300,
                     letterSpacing: "-0.02em",
@@ -170,7 +170,7 @@ export function Services() {
 
                 <p
                   className="text-sm leading-relaxed mb-6"
-                  style={{ color: "#8a8f98", fontFamily: "Inter, sans-serif" }}
+                  style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                 >
                   {current.desc}
                 </p>
@@ -190,7 +190,7 @@ export function Services() {
                       />
                       <span
                         className="text-sm"
-                        style={{ color: "#ffffff", fontFamily: "Inter, sans-serif", fontWeight: 400 }}
+                        style={{ color: "#ffffff", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 400 }}
                       >
                         {step}
                       </span>
@@ -208,7 +208,7 @@ export function Services() {
                   className="inline-flex items-center gap-2 mt-6 text-sm font-medium"
                   style={{
                     color: "#ffffff",
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                     background: "rgba(255,255,255,0.08)",
                     border: "1px solid rgba(255,255,255,0.12)",
                     borderRadius: "9999px",
