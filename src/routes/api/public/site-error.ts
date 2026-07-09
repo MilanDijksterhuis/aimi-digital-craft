@@ -21,6 +21,22 @@ export const Route = createFileRoute("/api/public/site-error")({
       POST: async ({ request }) => {
         try {
           const body = Body.parse(await request.json());
+
+          // Valideer dat de user_id een bestaand profiel is — voorkomt dat
+          // willekeurige/gespoofde ID's rijen aanmaken. Onbekende users worden
+          // stil genegeerd (geen enumeratie, geen breuk voor de tracking-snippet).
+          const { data: profile } = await supabaseAdmin
+            .from("profiles")
+            .select("id")
+            .eq("id", body.user_id)
+            .maybeSingle();
+          if (!profile) {
+            return new Response(JSON.stringify({ ok: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...cors },
+            });
+          }
+
           await supabaseAdmin.from("site_errors").insert({
             user_id: body.user_id,
             message: body.message,
@@ -30,8 +46,9 @@ export const Route = createFileRoute("/api/public/site-error")({
             status: 200,
             headers: { "Content-Type": "application/json", ...cors },
           });
-        } catch (e: any) {
-          return new Response(JSON.stringify({ error: e.message }), {
+        } catch {
+          // Geen interne details lekken naar de client.
+          return new Response(JSON.stringify({ error: "Invalid request" }), {
             status: 400,
             headers: { "Content-Type": "application/json", ...cors },
           });

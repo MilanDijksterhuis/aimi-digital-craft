@@ -22,6 +22,20 @@ export const Route = createFileRoute("/api/public/site-ping")({
         try {
           const body = Body.parse(await request.json());
 
+          // Valideer dat de user_id een bestaand profiel is — gespoofte/onbekende
+          // ID's worden stil genegeerd (voorkomt vervuilde uptime-data).
+          const { data: profile } = await supabaseAdmin
+            .from("profiles")
+            .select("id")
+            .eq("id", body.user_id)
+            .maybeSingle();
+          if (!profile) {
+            return new Response(JSON.stringify({ ok: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...cors },
+            });
+          }
+
           // Rate limit: max 1 uptime-meting per 5 minuten per klant
           const since5m = new Date(Date.now() - 5 * 60 * 1000).toISOString();
           const { data: recent } = await supabaseAdmin
@@ -94,8 +108,9 @@ export const Route = createFileRoute("/api/public/site-ping")({
             status: 200,
             headers: { "Content-Type": "application/json", ...cors },
           });
-        } catch (e: any) {
-          return new Response(JSON.stringify({ error: e.message }), {
+        } catch {
+          // Geen interne details lekken naar de client.
+          return new Response(JSON.stringify({ error: "Invalid request" }), {
             status: 400,
             headers: { "Content-Type": "application/json", ...cors },
           });

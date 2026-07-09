@@ -2176,7 +2176,7 @@ function RollenPermissiesPanel() {
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
 
-  const rows: any[] = (data as any)?.permissions ?? [];
+  const rows: any[] = (data as any)?.items ?? [];
   const lookup: Record<string, boolean> = {};
   rows.forEach((r: any) => { lookup[`${r.role}:${r.permission}`] = r.allowed; });
 

@@ -77,12 +77,51 @@ function rateLimitedResponse(retryAfter: number): Response {
   });
 }
 
+// Security headers — defense-in-depth tegen clickjacking, MIME-sniffing,
+// referrer-lek en om HTTPS af te dwingen (HSTS, alleen over https).
+const SECURITY_HEADERS: Record<string, string> = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "X-DNS-Prefetch-Control": "off",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+};
+
+function isHttps(request: Request): boolean {
+  const proto = request.headers.get("x-forwarded-proto");
+  if (proto) return proto.split(",")[0].trim() === "https";
+  try {
+    return new URL(request.url).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function applySecurityHeaders(response: Response, request: Request): Response {
+  try {
+    for (const [k, v] of Object.entries(SECURITY_HEADERS)) response.headers.set(k, v);
+    // HSTS alleen over https, zodat lokale http-dev niet breekt.
+    if (isHttps(request)) {
+      response.headers.set(
+        "Strict-Transport-Security",
+        "max-age=31536000; includeSubDomains",
+      );
+    }
+  } catch {
+    /* immutable headers op sommige responses — dan overslaan */
+  }
+  return response;
+}
+
 function applyRateLimit(request: Request): Response | null {
   const ip = getClientIp(request);
 
   // Geblokkeerde IP's worden direct geweigerd, ongeacht methode
   const ban = isIpBanned(ip);
-  if (ban.banned) return rateLimitedResponse(ban.retryAfter);
+  if (ban.banned) {
+    console.warn(`[security] geweigerd (ban actief) ip=${ip} retryAfter=${ban.retryAfter}s path=${new URL(request.url).pathname}`);
+    return rateLimitedResponse(ban.retryAfter);
+  }
 
   if (request.method !== "POST" && request.method !== "PUT") return null;
 
@@ -94,6 +133,7 @@ function applyRateLimit(request: Request): Response | null {
     const { allowed, retryAfter } = checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
     if (!allowed) {
       recordStrike(ip);
+      console.warn(`[security] rate limit overschreden ip=${ip} path=${new URL(request.url).pathname}`);
       return rateLimitedResponse(retryAfter);
     }
     return null;
@@ -111,15 +151,16 @@ function applyRateLimit(request: Request): Response | null {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     const limited = applyRateLimit(request);
-    if (limited) return limited;
+    if (limited) return applySecurityHeaders(limited, request);
 
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      const normalized = await normalizeCatastrophicSsrResponse(response);
+      return applySecurityHeaders(normalized, request);
     } catch (error) {
       console.error(error);
-      return brandedErrorResponse();
+      return applySecurityHeaders(brandedErrorResponse(), request);
     }
   },
 };
