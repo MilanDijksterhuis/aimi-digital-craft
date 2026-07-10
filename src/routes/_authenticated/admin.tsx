@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
@@ -194,7 +194,7 @@ function AdminPage() {
     ).length;
   }, 0);
 
-  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number; alert?: boolean }[] }[] = [
+  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number; alert?: boolean; href?: string }[] }[] = [
     { label: "Overzicht", items: [{ key: "dashboard", label: "Dashboard", icon: BarChart2 }] },
     { label: "Klanten", items: [
       { key: "klanten", label: `Alle klanten (${data.customers.length})`, icon: Users },
@@ -215,6 +215,7 @@ function AdminPage() {
       ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield }] : []),
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
+      { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
     ]},
     ...(perms.can("leads_view")
       ? [{ label: "Sales", items: [{ key: "leads" as TabKey, label: "Leads", icon: Target }] }]
@@ -387,31 +388,44 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                   const isActive = active === it.key;
                   return (
                     <li key={it.key}>
-                      <button
-                        onClick={() => setActive(it.key)}
-                        className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-sm transition-colors"
-                        style={{
-                          borderLeft: isActive ? "2px solid var(--primary)" : "2px solid transparent",
-                          color: isActive ? "var(--primary)" : undefined,
-                          paddingLeft: "8px",
-                        }}
-                        onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "var(--primary)"; }}
-                        onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = ""; }}
-                      >
-                        <span className="flex items-center gap-2 min-w-0">
+                      {it.href ? (
+                        <Link
+                          to={it.href}
+                          className="w-full flex items-center gap-2 px-2 py-1.5 text-sm transition-colors"
+                          style={{ borderLeft: "2px solid transparent", paddingLeft: "8px" }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--primary)"; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = ""; }}
+                        >
                           <Icon className="w-4 h-4 shrink-0" />
-                          <span className="truncate text-left">{it.label}</span>
-                        </span>
-                        {it.alert && it.badge > 0 ? (
-                          <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-primary text-white flex items-center gap-0.5">
-                            <span>!</span><span>{it.badge}</span>
+                          <span className="truncate">{it.label}</span>
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => setActive(it.key)}
+                          className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-sm transition-colors"
+                          style={{
+                            borderLeft: isActive ? "2px solid var(--primary)" : "2px solid transparent",
+                            color: isActive ? "var(--primary)" : undefined,
+                            paddingLeft: "8px",
+                          }}
+                          onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "var(--primary)"; }}
+                          onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = ""; }}
+                        >
+                          <span className="flex items-center gap-2 min-w-0">
+                            <Icon className="w-4 h-4 shrink-0" />
+                            <span className="truncate text-left">{it.label}</span>
                           </span>
-                        ) : it.badge > 0 ? (
-                          <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-destructive text-destructive-foreground">
-                            {it.badge}
-                          </span>
-                        ) : null}
-                      </button>
+                          {it.alert && it.badge > 0 ? (
+                            <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-primary text-white flex items-center gap-0.5">
+                              <span>!</span><span>{it.badge}</span>
+                            </span>
+                          ) : it.badge > 0 ? (
+                            <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-destructive text-destructive-foreground">
+                              {it.badge}
+                            </span>
+                          ) : null}
+                        </button>
+                      )}
                     </li>
                   );
                 })}

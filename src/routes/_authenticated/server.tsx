@@ -1,11 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from "recharts";
-import { Activity, Cpu, HardDrive, MemoryStick, Clock, AlertTriangle } from "lucide-react";
+import { Activity, Cpu, HardDrive, MemoryStick, Clock, AlertTriangle, ChevronLeft } from "lucide-react";
 import { usePermissions } from "@/hooks/use-permissions";
 import {
   getMonitoringLatest,
@@ -142,6 +142,14 @@ function ServerPage() {
 
   return (
     <div className="space-y-6">
+      {/* Terug */}
+      <Link
+        to="/admin"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <ChevronLeft className="w-4 h-4" /> Terug naar Admin
+      </Link>
+
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
