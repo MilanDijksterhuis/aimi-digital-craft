@@ -780,7 +780,7 @@ export const adminInviteStaff = createServerFn({ method: "POST" })
       .object({
         email: z.string().trim().email().max(255),
         full_name: z.string().trim().min(1).max(200),
-        role: z.enum(["co_admin", "support_agent", "viewer"]),
+        role: z.enum(["co_admin", "support_agent", "viewer", "sales"]),
       })
       .parse(d),
   )
@@ -802,7 +802,7 @@ export const adminChangeRole = createServerFn({ method: "POST" })
     z
       .object({
         target_user_id: z.string().uuid(),
-        role: z.enum(["super_admin", "co_admin", "support_agent", "viewer", "customer"]),
+        role: z.enum(["super_admin", "co_admin", "support_agent", "viewer", "sales", "customer"]),
       })
       .parse(d),
   )
@@ -1379,4 +1379,262 @@ export const adminSetRolePermission = createServerFn({ method: "POST" })
     await ensureSuperAdmin(supabase, userId);
     await supabaseAdmin.from("role_permissions" as any).upsert({ role: data.role, permission: data.permission, allowed: data.allowed, updated_at: new Date().toISOString() }, { onConflict: "role,permission" });
     return { ok: true };
+  });
+
+// ============================================================
+// ====================== SALES / LEADS =======================
+// ============================================================
+
+const LEADS_ROLES = ["sales", "super_admin", "admin"];
+
+async function ensureLeadsAccess(supabase: any, userId: string) {
+  await ensureRoles(supabase, userId, LEADS_ROLES, "sales only");
+}
+
+export const LEAD_STATUSES = ["nieuw", "gebeld", "gemaild", "interesse", "geen_interesse", "klant"] as const;
+const LeadStatus = z.enum(LEAD_STATUSES);
+
+const normPhone = (v: string | null | undefined) => {
+  const t = (v ?? "").trim();
+  return t.length > 0 ? t : null;
+};
+
+export const adminListLeads = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    const { data: leads, error } = await supabaseAdmin
+      .from("leads" as any)
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(2000);
+    if (error) throw new Error(error.message);
+
+    // Laatste activiteit per lead meesturen voor de lijstweergave.
+    const { data: acts } = await supabaseAdmin
+      .from("lead_activities" as any)
+      .select("lead_id,type,note,created_at")
+      .order("created_at", { ascending: false })
+      .limit(5000);
+
+    const lastByLead = new Map<string, any>();
+    for (const a of (acts as any[]) ?? []) {
+      if (!lastByLead.has(a.lead_id)) lastByLead.set(a.lead_id, a);
+    }
+
+    return {
+      items: ((leads as any[]) ?? []).map((l) => ({
+        ...l,
+        last_activity: lastByLead.get(l.id) ?? null,
+      })),
+    };
+  });
+
+export const adminGetLeadActivities = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ lead_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { data: items } = await supabaseAdmin
+      .from("lead_activities" as any)
+      .select("*")
+      .eq("lead_id", data.lead_id)
+      .order("created_at", { ascending: false });
+    return { items: (items as any[]) ?? [] };
+  });
+
+export const adminCreateLead = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      company_name: z.string().trim().min(1).max(200),
+      has_website: z.boolean().default(false),
+      phone: z.string().trim().max(50).nullable().optional(),
+      email: z.string().trim().max(200).nullable().optional(),
+      notes: z.string().trim().max(2000).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { error } = await supabaseAdmin.from("leads" as any).insert({
+      company_name: data.company_name,
+      has_website: data.has_website,
+      phone: normPhone(data.phone),
+      email: normPhone(data.email),
+      notes: data.notes ?? null,
+      created_by: userId,
+    });
+    if (error) {
+      if (error.code === "23505") throw new Error("Deze lead bestaat al (zelfde bedrijfsnaam + telefoonnummer).");
+      throw new Error(error.message);
+    }
+    return { ok: true };
+  });
+
+export const adminImportLeads = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      rows: z.array(
+        z.object({
+          company_name: z.string().trim().min(1).max(200),
+          has_website: z.boolean(),
+          phone: z.string().trim().max(50).nullable(),
+          email: z.string().trim().max(200).nullable(),
+        }),
+      ).min(1).max(5000),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    // Dedupe binnen het bestand zelf (bedrijfsnaam + telefoon).
+    const key = (c: string, p: string | null) => `${c.trim().toLowerCase()}|${p ?? ""}`;
+    const seen = new Set<string>();
+    const cleaned = data.rows
+      .map((r) => ({ ...r, phone: normPhone(r.phone), email: normPhone(r.email) }))
+      .filter((r) => {
+        const k = key(r.company_name, r.phone);
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
+
+    // Dedupe tegen wat al in de database staat.
+    const { data: existing } = await supabaseAdmin
+      .from("leads" as any)
+      .select("company_name,phone")
+      .limit(5000);
+    const existingKeys = new Set(
+      ((existing as any[]) ?? []).map((e) => key(e.company_name, normPhone(e.phone))),
+    );
+
+    const toInsert = cleaned.filter((r) => !existingKeys.has(key(r.company_name, r.phone)));
+    const skipped = data.rows.length - toInsert.length;
+
+    if (toInsert.length === 0) return { ok: true, imported: 0, skipped };
+
+    const { error } = await supabaseAdmin.from("leads" as any).insert(
+      toInsert.map((r) => ({
+        company_name: r.company_name,
+        has_website: r.has_website,
+        phone: r.phone,
+        email: r.email,
+        created_by: userId,
+      })),
+    );
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "leads_imported", "lead", null, { imported: toInsert.length, skipped });
+    return { ok: true, imported: toInsert.length, skipped };
+  });
+
+export const adminUpdateLead = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      id: z.string().uuid(),
+      company_name: z.string().trim().min(1).max(200).optional(),
+      has_website: z.boolean().optional(),
+      phone: z.string().trim().max(50).nullable().optional(),
+      email: z.string().trim().max(200).nullable().optional(),
+      status: LeadStatus.optional(),
+      notes: z.string().trim().max(2000).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { id, ...rest } = data;
+    const patch: Record<string, any> = { ...rest, updated_at: new Date().toISOString() };
+    if ("phone" in rest) patch.phone = normPhone(rest.phone);
+    if ("email" in rest) patch.email = normPhone(rest.email);
+
+    const { error } = await supabaseAdmin.from("leads" as any).update(patch).eq("id", id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminAddLeadActivity = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      lead_id: z.string().uuid(),
+      type: z.enum(["call", "email", "note"]),
+      note: z.string().trim().max(2000).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    const { error } = await supabaseAdmin.from("lead_activities" as any).insert({
+      lead_id: data.lead_id,
+      user_id: userId,
+      type: data.type,
+      note: data.note ?? null,
+    });
+    if (error) throw new Error(error.message);
+
+    // Bel/mail-actie zet meteen de status door (tenzij de lead al verder is).
+    if (data.type === "call" || data.type === "email") {
+      const { data: lead } = await supabaseAdmin
+        .from("leads" as any)
+        .select("status")
+        .eq("id", data.lead_id)
+        .maybeSingle();
+      const current = (lead as any)?.status;
+      if (current === "nieuw") {
+        await supabaseAdmin
+          .from("leads" as any)
+          .update({ status: data.type === "call" ? "gebeld" : "gemaild", updated_at: new Date().toISOString() })
+          .eq("id", data.lead_id);
+      }
+    }
+    return { ok: true };
+  });
+
+export const adminDeleteLead = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { error } = await supabaseAdmin.from("leads" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "lead_deleted", "lead", data.id);
+    return { ok: true };
+  });
+
+export const adminBulkUpdateLeadStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ ids: z.array(z.string().uuid()).min(1).max(1000), status: LeadStatus }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { error } = await supabaseAdmin
+      .from("leads" as any)
+      .update({ status: data.status, updated_at: new Date().toISOString() })
+      .in("id", data.ids);
+    if (error) throw new Error(error.message);
+    return { ok: true, updated: data.ids.length };
+  });
+
+export const adminBulkDeleteLeads = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ ids: z.array(z.string().uuid()).min(1).max(1000) }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { error } = await supabaseAdmin.from("leads" as any).delete().in("id", data.ids);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "leads_bulk_deleted", "lead", null, { count: data.ids.length });
+    return { ok: true, deleted: data.ids.length };
   });

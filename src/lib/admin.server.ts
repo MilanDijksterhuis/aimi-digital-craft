@@ -265,7 +265,7 @@ export async function adminListStaffMembers() {
 export async function adminInviteStaffMember(input: {
   email: string;
   full_name: string;
-  role: "co_admin" | "support_agent" | "viewer";
+  role: "co_admin" | "support_agent" | "viewer" | "sales";
 }) {
   // Check if user exists
   const { data: existing } = await supabaseAdmin
@@ -302,7 +302,7 @@ export async function adminInviteStaffMember(input: {
 
 export async function adminReplaceRole(
   targetUserId: string,
-  role: "super_admin" | "co_admin" | "support_agent" | "viewer" | "customer",
+  role: "super_admin" | "co_admin" | "support_agent" | "viewer" | "sales" | "customer",
 ) {
   // Remove ALL existing roles, then insert the new one
   await supabaseAdmin.from("user_roles").delete().eq("user_id", targetUserId);

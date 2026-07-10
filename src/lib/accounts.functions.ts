@@ -58,7 +58,7 @@ export const adminChangeAccountRole = createServerFn({ method: "POST" })
     z
       .object({
         target_user_id: z.string().uuid(),
-        role: z.enum(["super_admin", "co_admin", "support_agent", "viewer", "customer"]),
+        role: z.enum(["super_admin", "co_admin", "support_agent", "viewer", "sales", "customer"]),
       })
       .parse(d),
   )

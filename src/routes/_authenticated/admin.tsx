@@ -7,7 +7,7 @@ import {
   MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
   ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
   AlertTriangle, Shield, ChevronLeft, RefreshCw, CheckCircle, XCircle,
-  Clock, Activity,
+  Clock, Activity, Target,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -82,6 +82,7 @@ import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
 import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
+import { LeadsPanel } from "@/components/LeadsPanel";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -103,7 +104,7 @@ function AdminPage() {
     | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
     | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "alerts" | "role_permissions" | "team" | "afspraken"
-    | "chat" | "deleted";
+    | "chat" | "deleted" | "leads";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const [openRequest, setOpenRequest] = useState<string | null>(null);
@@ -151,6 +152,19 @@ function AdminPage() {
   if (error) {
     const msg = (error as Error).message;
     if (msg.includes("Forbidden")) {
+      if (perms.isLoading) return <p className="text-muted-foreground">Laden…</p>;
+      // Sales-rol: geen toegang tot de admin-overzichtsdata, wel tot Leads.
+      if (perms.can("leads_view")) {
+        return (
+          <div className="space-y-6">
+            <div>
+              <h1 className="font-display text-4xl font-bold">Sales</h1>
+              <p className="text-muted-foreground">Beheer je leads en houd contact bij.</p>
+            </div>
+            <LeadsPanel />
+          </div>
+        );
+      }
       return (
         <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-6">
           <h2 className="font-display text-xl font-semibold">Geen toegang</h2>
@@ -202,6 +216,9 @@ function AdminPage() {
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
     ]},
+    ...(perms.can("leads_view")
+      ? [{ label: "Sales", items: [{ key: "leads" as TabKey, label: "Leads", icon: Target }] }]
+      : []),
     { label: "Overig", items: [
       { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
       { key: "deleted", label: "Verwijderd", icon: Trash2 },
@@ -239,6 +256,7 @@ function AdminPage() {
           {tab === "website_links" && <WebsiteLinksPanel />}
           {tab === "alerts" && <AlertsPanel />}
           {tab === "role_permissions" && perms.isSuperAdmin && <RollenPermissiesPanel />}
+          {tab === "leads" && perms.can("leads_view") && <LeadsPanel />}
         </div>
 
       </div>
@@ -1839,6 +1857,7 @@ function AccountsPanel() {
             <option value="co_admin">Co-admin</option>
             <option value="support_agent">Support</option>
             <option value="viewer">Viewer</option>
+            <option value="sales">Sales</option>
           </select>
         </div>
         <button onClick={() => setShowTemp((v) => !v)} className="rounded-md bg-foreground text-background px-3 py-2 text-sm">+ Nieuw tijdelijk account</button>
@@ -1896,6 +1915,7 @@ function AccountsPanel() {
                         <option value="support_agent">Support</option>
                         <option value="viewer">Viewer</option>
                         <option value="co_admin">Co-admin</option>
+                        <option value="sales">Sales</option>
                       </select>
                     )}
                   </td>
@@ -2154,9 +2174,11 @@ const ALL_PERMISSIONS = [
   { key: "website_links_manage", label: "Website koppelingen beheren" },
   { key: "appointments_manage", label: "Afspraken beheren" },
   { key: "alerts_view", label: "Alerts bekijken" },
+  { key: "leads_view", label: "Leads bekijken" },
+  { key: "leads_manage", label: "Leads beheren" },
 ];
 
-const ROLES = ["co_admin", "support_agent", "viewer"] as const;
+const ROLES = ["co_admin", "support_agent", "viewer", "sales"] as const;
 
 function RollenPermissiesPanel() {
   const getPerms = useServerFn(adminGetRolePermissions);

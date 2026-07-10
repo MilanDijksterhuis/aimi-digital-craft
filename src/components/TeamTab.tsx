@@ -74,6 +74,7 @@ export function TeamTab() {
                 <option value="co_admin">Co-Admin</option>
                 <option value="support_agent">Support Agent</option>
                 <option value="viewer">Viewer</option>
+                <option value="sales">Sales</option>
               </select>
             </label>
             <button

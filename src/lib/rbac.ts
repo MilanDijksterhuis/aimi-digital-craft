@@ -4,6 +4,7 @@ export type AppRole =
   | "co_admin"
   | "support_agent"
   | "viewer"
+  | "sales"
   | "admin" // legacy alias
   | "customer";
 
@@ -12,6 +13,7 @@ export const ROLE_LABEL: Record<AppRole, string> = {
   co_admin: "Co-Admin",
   support_agent: "Support Agent",
   viewer: "Viewer",
+  sales: "Sales",
   admin: "Admin (legacy)",
   customer: "Klant",
 };
@@ -21,6 +23,7 @@ export const STAFF_ROLES: AppRole[] = [
   "co_admin",
   "support_agent",
   "viewer",
+  "sales",
   "admin",
 ];
 
@@ -35,11 +38,16 @@ export function can(roles: string[], action: PermissionAction): boolean {
   const isCo = set.has("co_admin");
   const isSupport = set.has("support_agent");
   const isViewer = set.has("viewer");
+  const isSales = set.has("sales");
   const adminLike = isSuper || isCo;
 
   switch (action) {
     case "view_admin":
-      return isSuper || isCo || isSupport || isViewer;
+      return isSuper || isCo || isSupport || isViewer || isSales;
+    case "leads_view":
+      return isSuper || isSales;
+    case "leads_manage":
+      return isSuper || isSales;
     case "view_all_changes":
       return isSuper || isCo || isSupport || isViewer;
     case "edit_change_status":
@@ -88,4 +96,6 @@ export type PermissionAction =
   | "export_csv"
   | "view_audit_log"
   | "manage_team"
-  | "chat_with_customers";
+  | "chat_with_customers"
+  | "leads_view"
+  | "leads_manage";

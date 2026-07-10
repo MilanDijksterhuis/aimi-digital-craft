@@ -861,6 +861,7 @@ export type Database = {
         | "co_admin"
         | "support_agent"
         | "viewer"
+        | "sales"
       request_status:
         | "pending"
         | "in_review"
@@ -1006,6 +1007,7 @@ export const Constants = {
         "co_admin",
         "support_agent",
         "viewer",
+        "sales",
       ],
       request_status: [
         "pending",
