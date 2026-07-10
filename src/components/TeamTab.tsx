@@ -4,8 +4,6 @@ import { useServerFn } from "@tanstack/react-start";
 import {
   adminListStaff,
   adminInviteStaff,
-  adminChangeRole,
-  adminRemoveStaff,
   adminGetAuditLog,
 } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
@@ -16,8 +14,6 @@ export function TeamTab() {
   const qc = useQueryClient();
   const listFn = useServerFn(adminListStaff);
   const inviteFn = useServerFn(adminInviteStaff);
-  const roleFn = useServerFn(adminChangeRole);
-  const removeFn = useServerFn(adminRemoveStaff);
   const auditFn = useServerFn(adminGetAuditLog);
 
   const { data, isLoading } = useQuery({
@@ -35,8 +31,6 @@ export function TeamTab() {
     qc.invalidateQueries({ queryKey: ["admin-audit"] });
   };
   const inviteM = useMutation({ mutationFn: (i: any) => inviteFn({ data: i }), onSuccess: inv });
-  const roleM = useMutation({ mutationFn: (i: any) => roleFn({ data: i }), onSuccess: inv });
-  const removeM = useMutation({ mutationFn: (i: any) => removeFn({ data: i }), onSuccess: inv });
 
   const [form, setForm] = useState({ email: "", full_name: "", role: "co_admin" as any });
 
@@ -115,7 +109,6 @@ export function TeamTab() {
               <th className="text-left p-3">Naam</th>
               <th className="text-left p-3">Email</th>
               <th className="text-left p-3">Rollen</th>
-              {perms.isSuperAdmin && <th className="text-left p-3">Acties</th>}
             </tr>
           </thead>
           <tbody>
@@ -130,42 +123,10 @@ export function TeamTab() {
                     </span>
                   ))}
                 </td>
-                {perms.isSuperAdmin && (
-                  <td className="p-3 space-x-2 whitespace-nowrap">
-                    <select
-                      defaultValue=""
-                      onChange={(e) => {
-                        if (!e.target.value) return;
-                        if (confirm(`Rol wijzigen naar ${e.target.value}?`)) {
-                          roleM.mutate({ target_user_id: m.id, role: e.target.value });
-                        }
-                        e.target.value = "";
-                      }}
-                      className="text-xs rounded-md border border-input bg-background px-2 py-1"
-                    >
-                      <option value="">Wijzig rol…</option>
-                      <option value="super_admin">→ Super Admin</option>
-                      <option value="co_admin">→ Co-Admin</option>
-                      <option value="support_agent">→ Support Agent</option>
-                      <option value="viewer">→ Viewer</option>
-                      <option value="customer">→ Klant (demote)</option>
-                    </select>
-                    <button
-                      onClick={() => {
-                        if (confirm(`Verwijder ${m.email} als staff? (Wordt klant)`)) {
-                          removeM.mutate({ target_user_id: m.id });
-                        }
-                      }}
-                      className="text-xs text-destructive hover:underline"
-                    >
-                      verwijder
-                    </button>
-                  </td>
-                )}
               </tr>
             ))}
             {(data?.members ?? []).length === 0 && (
-              <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen team-leden.</td></tr>
+              <tr><td colSpan={3} className="p-6 text-center text-muted-foreground">Geen team-leden.</td></tr>
             )}
           </tbody>
         </table>

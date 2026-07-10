@@ -176,18 +176,24 @@
       "bases:Nieuwe basis maken": false
     }
   },
-  "active": "9a035a54e5957502",
+  "active": "72c051647c9c8cb3",
   "lastOpenFiles": [
-    "Naamloos",
+    "src/components/Pricing.tsx.tmp.3548.3f152dd0930f",
+    "src/components/Pricing.tsx.tmp.3548.6afe7c2a6044",
+    "src/components/TeamTab.tsx.tmp.19900.859ea0a57816",
+    "src/components/TeamTab.tsx.tmp.19900.05d2ca9715a7",
+    "src/components/TeamTab.tsx.tmp.19900.411b132eb933",
+    "src/components/TeamTab.tsx.tmp.19900.dd3bdc525559",
+    "src/components/TeamTab.tsx.tmp.19900.eda121261a24",
+    "src/components/TeamTab.tsx.tmp.19900.9ebff08c0b9a",
+    "src/components/TeamTab.tsx.tmp.19900.06853eed7f64",
+    "src/components/TeamTab.tsx.tmp.19900.72a3f1dd5303",
+    "src/components/TeamTab.tsx.tmp.19900.45f4ed47942a",
     "node_modules/date-fns/SECURITY.md",
     "node_modules/h3-v2/dist/docs/3.migration/0.index/index.md",
     "node_modules/h3-v2/dist/docs/README.md",
     "graphify-out/obsidian/_COMMUNITY_Diff State & Git Utilities.md",
     "graphify-out/obsidian/TabsList.md",
-    "src/routes/index.tsx.tmp.20460.90b645905064",
-    "src/routes/index.tsx.tmp.20460.3997e0a807b9",
-    "src/components/ProcessTimeline.tsx",
-    "src/components/ProcessTimeline.tsx.tmp.20460.640cebb40c40",
     "graphify-out/obsidian/graph.canvas",
     "graphify-out/obsidian/_COMMUNITY_Session Report Analyzer.md",
     "graphify-out/obsidian/_COMMUNITY_Skill Creator Scripts.md",
@@ -208,12 +214,6 @@
     "graphify-out/obsidian/start.ts.md",
     "graphify-out/obsidian/fetch().md",
     "graphify-out/obsidian/normalizeCatastrophicSsrResponse().md",
-    "graphify-out/obsidian/isCatastrophicSsrErrorBody().md",
-    "graphify-out/obsidian",
-    "src/server.ts.tmp.20460.70ef37658d74",
-    "src/server.ts.tmp.20460.d19c33a0f75d",
-    "src/lib/rate-limit.ts",
-    "src/lib/rate-limit.ts.tmp.20460.c15949cc7a2d",
-    "src/graphify-out"
+    "graphify-out/obsidian/isCatastrophicSsrErrorBody().md"
   ]
 }

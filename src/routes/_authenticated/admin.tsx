@@ -1846,6 +1846,9 @@ function AccountsPanel() {
 
   return (
     <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="font-display text-xl font-semibold">Accounts ({accounts.length})</h2>
+      </div>
       <div className="flex flex-wrap items-center gap-2 justify-between">
         <div className="flex flex-wrap gap-2">
           <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Zoek naam / email / tag…" className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
