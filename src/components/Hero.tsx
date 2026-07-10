@@ -48,8 +48,7 @@ export function Hero() {
           className="mt-8 max-w-lg text-base leading-relaxed"
           style={{ color: "rgba(255,255,255,0.72)" }}
         >
-          Wij ontwerpen, bouwen en hosten websites voor ondernemers die geen
-          genoegen nemen met een template. Vaste prijs, geen verrassingen.
+          Wij ontwerpen, bouwen en hosten websites met als focus voor kleine ondernemers die net begonnen zijn. Onze focus ligt op lage kosten, hoge kwaliteit en een snelle oplevering. Zo kan jij je focussen op wat echt belangrijk is.
         </motion.p>
 
         <motion.div

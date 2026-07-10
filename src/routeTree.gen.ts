@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedServerRouteImport } from './routes/_authenticated/server'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
@@ -63,6 +64,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedServerRoute = AuthenticatedServerRouteImport.update({
+  id: '/server',
+  path: '/server',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   id: '/portal',
   path: '/portal',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
+  '/_authenticated/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/portal'
+    | '/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
     | '/api/public/hooks/expire-accounts'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/admin'
     | '/portal'
+    | '/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
     | '/api/public/hooks/expire-accounts'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/_authenticated/account'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
+    | '/_authenticated/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
     | '/api/public/hooks/expire-accounts'
@@ -263,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/server': {
+      id: '/_authenticated/server'
+      path: '/server'
+      fullPath: '/server'
+      preLoaderRoute: typeof AuthenticatedServerRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/portal': {
       id: '/_authenticated/portal'
       path: '/portal'
@@ -312,12 +331,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
+  AuthenticatedServerRoute: typeof AuthenticatedServerRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedPortalRoute: AuthenticatedPortalRoute,
+  AuthenticatedServerRoute: AuthenticatedServerRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -340,13 +361,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
