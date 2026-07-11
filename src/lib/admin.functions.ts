@@ -1138,6 +1138,151 @@ export const adminUpdateWebsiteLink = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+// ---------- Projecten ----------
+// Een project = 1 website (koppeling), gekoppeld aan 1 of meer klanten.
+// De monitoring zelf blijft draaien op primary_user_id (profiles.id),
+// zodat bestaande tracking snippets en site_pings ongewijzigd blijven werken.
+
+export const adminListProjects = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: projects, error } = await supabaseAdmin
+      .from("projects" as any)
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+
+    const ids = (projects ?? []).map((p: any) => p.id);
+    const [membersRes, profilesRes, pingsRes] = await Promise.all([
+      supabaseAdmin.from("project_members" as any).select("project_id, user_id").in("project_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]),
+      supabase.from("profiles").select("id, full_name, email"),
+      supabaseAdmin.from("site_pings").select("user_id"),
+    ]);
+
+    const profileMap: Record<string, any> = {};
+    for (const p of (profilesRes.data ?? []) as any[]) profileMap[p.id] = p;
+    const pingCounts: Record<string, number> = {};
+    for (const p of (pingsRes.data ?? []) as any[]) pingCounts[p.user_id] = (pingCounts[p.user_id] ?? 0) + 1;
+
+    const membersByProject: Record<string, any[]> = {};
+    for (const m of (membersRes.data ?? []) as any[]) {
+      (membersByProject[m.project_id] ??= []).push(profileMap[m.user_id] ?? { id: m.user_id });
+    }
+
+    return {
+      items: (projects ?? []).map((p: any) => ({
+        ...p,
+        primary_customer: profileMap[p.primary_user_id] ?? null,
+        members: membersByProject[p.id] ?? [],
+        ping_count: pingCounts[p.primary_user_id] ?? 0,
+      })),
+    };
+  });
+
+export const adminCreateProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      name: z.string().trim().min(1).max(200),
+      website_url: z.string().trim().max(500).nullable().optional(),
+      snippet_active: z.boolean().optional(),
+      primary_user_id: z.string().uuid(),
+      member_ids: z.array(z.string().uuid()).optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { member_ids, ...rest } = data;
+    const { data: project, error } = await supabaseAdmin
+      .from("projects" as any)
+      .insert(rest)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    // Zelfde website/snippet ook op het profiel zetten, zodat monitoring
+    // (die op profiles.website_url draait) meteen werkt.
+    await supabase.from("profiles").update({
+      website_url: rest.website_url ?? null,
+      snippet_active: rest.snippet_active ?? false,
+    }).eq("id", rest.primary_user_id);
+
+    const memberSet = new Set([rest.primary_user_id, ...(member_ids ?? [])]);
+    const rows = Array.from(memberSet).map((uid) => ({ project_id: (project as any).id, user_id: uid }));
+    if (rows.length) {
+      const { error: memErr } = await supabaseAdmin.from("project_members" as any).insert(rows);
+      if (memErr) throw new Error(memErr.message);
+    }
+    return { ok: true, project };
+  });
+
+export const adminUpdateProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      name: z.string().trim().min(1).max(200).optional(),
+      website_url: z.string().trim().max(500).nullable().optional(),
+      snippet_active: z.boolean().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { project_id, ...rest } = data;
+    const { data: project, error } = await supabaseAdmin
+      .from("projects" as any)
+      .update(rest)
+      .eq("id", project_id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    if (rest.website_url !== undefined || rest.snippet_active !== undefined) {
+      const updates: Record<string, any> = {};
+      if (rest.website_url !== undefined) updates.website_url = rest.website_url;
+      if (rest.snippet_active !== undefined) updates.snippet_active = rest.snippet_active;
+      await supabase.from("profiles").update(updates as any).eq("id", (project as any).primary_user_id);
+    }
+    return { ok: true, project };
+  });
+
+export const adminDeleteProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("projects" as any).delete().eq("id", data.project_id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminSetProjectMembers = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      member_ids: z.array(z.string().uuid()),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: project } = await supabaseAdmin.from("projects" as any).select("primary_user_id").eq("id", data.project_id).maybeSingle();
+    if (!project) throw new Error("Project niet gevonden");
+    const memberSet = new Set([(project as any).primary_user_id, ...data.member_ids]);
+
+    await supabaseAdmin.from("project_members" as any).delete().eq("project_id", data.project_id);
+    const rows = Array.from(memberSet).map((uid) => ({ project_id: data.project_id, user_id: uid }));
+    const { error } = await supabaseAdmin.from("project_members" as any).insert(rows);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 // ============================================================
 // ==================== MONITORING ============================
 // ============================================================

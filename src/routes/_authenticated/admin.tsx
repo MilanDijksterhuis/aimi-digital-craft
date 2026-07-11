@@ -38,6 +38,11 @@ import {
   adminRejectExtraChangeRequest,
   adminListWebsiteLinks,
   adminUpdateWebsiteLink,
+  adminListProjects,
+  adminCreateProject,
+  adminUpdateProject,
+  adminDeleteProject,
+  adminSetProjectMembers,
   adminGetCustomerMonitoring,
   adminSyncCustomerMonitoring,
   adminRunSSLCheck,
@@ -210,7 +215,7 @@ function AdminPage() {
     { label: "Beheer", items: [
       { key: "accounts", label: "Accounts", icon: Users2 },
       { key: "notifications", label: "Notificaties", icon: Bell },
-      { key: "website_links", label: "Website koppelingen", icon: Link2 },
+      { key: "website_links", label: "Projecten", icon: Link2 },
       { key: "alerts", label: "Alerts", icon: AlertTriangle },
       ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield }] : []),
       { key: "team", label: "Team", icon: UserCheck },
@@ -254,7 +259,7 @@ function AdminPage() {
           {tab === "chat" && <AdminChatPanel />}
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
-          {tab === "website_links" && <WebsiteLinksPanel />}
+          {tab === "website_links" && <ProjectsPanel />}
           {tab === "alerts" && <AlertsPanel />}
           {tab === "role_permissions" && perms.isSuperAdmin && <RollenPermissiesPanel />}
           {tab === "leads" && perms.can("leads_view") && <LeadsPanel />}
@@ -527,93 +532,175 @@ function ExtraChangesPanel() {
   );
 }
 
-function WebsiteLinksPanel() {
+function ProjectsPanel() {
   const [detailUserId, setDetailUserId] = useState<string | null>(null);
   if (detailUserId) {
     return <WebsiteLinkDetail userId={detailUserId} onBack={() => setDetailUserId(null)} />;
   }
-  return <WebsiteLinksOverview onOpenDetail={setDetailUserId} />;
+  return <ProjectsOverview onOpenDetail={setDetailUserId} />;
 }
 
-function WebsiteLinksOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void }) {
-  const list = useServerFn(adminListWebsiteLinks);
-  const update = useServerFn(adminUpdateWebsiteLink);
+function ProjectsOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void }) {
+  const list = useServerFn(adminListProjects);
+  const listCustomers = useServerFn(adminListWebsiteLinks); // levert simpele klantenlijst (id/naam/email)
+  const create = useServerFn(adminCreateProject);
+  const update = useServerFn(adminUpdateProject);
+  const del = useServerFn(adminDeleteProject);
+  const setMembers = useServerFn(adminSetProjectMembers);
   const qc = useQueryClient();
-  const { data, isLoading } = useQuery({ queryKey: ["admin-website-links"], queryFn: () => list({}) });
-  const updM = useMutation({
-    mutationFn: (i: any) => update({ data: i }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-website-links"] }); toast.success("Opgeslagen."); },
-  });
+
+  const { data, isLoading } = useQuery({ queryKey: ["admin-projects"], queryFn: () => list({}) });
+  const { data: customersData } = useQuery({ queryKey: ["admin-website-links"], queryFn: () => listCustomers({}) });
+  const customers = customersData?.items ?? [];
+
+  const invalidate = () => qc.invalidateQueries({ queryKey: ["admin-projects"] });
+  const updM = useMutation({ mutationFn: (i: any) => update({ data: i }), onSuccess: () => { invalidate(); toast.success("Opgeslagen."); } });
+  const delM = useMutation({ mutationFn: (i: any) => del({ data: i }), onSuccess: () => { invalidate(); toast.success("Project verwijderd."); } });
+  const membersM = useMutation({ mutationFn: (i: any) => setMembers({ data: i }), onSuccess: () => { invalidate(); toast.success("Klanten bijgewerkt."); } });
+
   const [openId, setOpenId] = useState<string | null>(null);
-  const [forms, setForms] = useState<Record<string, { website_url: string; snippet_active: boolean }>>({});
+  const [forms, setForms] = useState<Record<string, { website_url: string; snippet_active: boolean; member_ids: string[] }>>({});
+  const [showAdd, setShowAdd] = useState(false);
+  const [newForm, setNewForm] = useState({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] as string[] });
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
   const items = data?.items ?? [];
   const origin = typeof window !== "undefined" ? window.location.origin : "";
 
+  const createM = useMutation({
+    mutationFn: () => create({ data: newForm }),
+    onSuccess: () => { invalidate(); toast.success("Project aangemaakt."); setShowAdd(false); setNewForm({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] }); },
+  });
+
   return (
-    <div className="overflow-x-auto rounded-lg border border-border">
-      <table className="w-full text-sm">
-        <thead className="bg-muted/30 text-muted-foreground">
-          <tr>
-            <th className="text-left p-3">Klant</th>
-            <th className="text-left p-3">Website</th>
-            <th className="text-left p-3">Status</th>
-            <th className="p-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((c: any) => {
-            const f = forms[c.id] ?? { website_url: c.website_url ?? "", snippet_active: !!c.snippet_active };
-            const isOpen = openId === c.id;
-            const snippet = `<script src="${origin}/track.js?u=${c.id}"></script>`;
-            const status = c.ping_count > 0
-              ? { color: "text-emerald-500", txt: "Actief" }
-              : c.website_url ? { color: "text-amber-500", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
-            return (
-              <React.Fragment key={c.id}>
-                <tr className="border-t border-border">
-                  <td className="p-3 font-medium">{c.full_name || c.email}</td>
-                  <td className="p-3 truncate max-w-xs text-muted-foreground">{c.website_url || "—"}</td>
-                  <td className={`p-3 text-xs font-medium ${status.color}`}>{status.txt}</td>
-                  <td className="p-3 text-right space-x-3">
-                    <button onClick={() => onOpenDetail(c.id)} className="text-xs text-primary hover:underline">
-                      Monitoring
-                    </button>
-                    <button onClick={() => setOpenId(isOpen ? null : c.id)} className="text-xs text-muted-foreground hover:text-foreground">
-                      {isOpen ? "Sluit" : "Koppeling"}
-                    </button>
-                  </td>
-                </tr>
-                {isOpen && (
-                  <tr><td colSpan={4} className="bg-muted/20 p-4">
-                    <div className="space-y-3 max-w-2xl">
-                      <label className="block text-sm">
-                        <span className="text-muted-foreground">Website URL</span>
-                        <input value={f.website_url} onChange={(e) => setForms({ ...forms, [c.id]: { ...f, website_url: e.target.value } })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-                      </label>
-                      <div>
-                        <span className="text-muted-foreground text-sm">Tracking snippet</span>
-                        <div className="mt-1 rounded-md border border-border bg-background p-3 font-mono text-xs break-all">{snippet}</div>
-                        <button type="button" onClick={() => { navigator.clipboard.writeText(snippet); toast.success("Gekopieerd."); }} className="btn-secondary mt-2 text-xs">Kopieer</button>
-                        <p className="text-xs text-muted-foreground mt-2">Kopieer deze snippet en plak hem in de &lt;head&gt; van het Lovable project van deze klant.</p>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Projecten</h2>
+        <button onClick={() => setShowAdd((s) => !s)} className="btn-primary text-sm">{showAdd ? "Annuleren" : "+ Project toevoegen"}</button>
+      </div>
+
+      {showAdd && (
+        <div className="rounded-lg border border-border p-4 space-y-3 max-w-2xl">
+          <label className="block text-sm">
+            <span className="text-muted-foreground">Projectnaam</span>
+            <input value={newForm.name} onChange={(e) => setNewForm({ ...newForm, name: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="bijv. aimi-development.nl" />
+          </label>
+          <label className="block text-sm">
+            <span className="text-muted-foreground">Website URL</span>
+            <input value={newForm.website_url} onChange={(e) => setNewForm({ ...newForm, website_url: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          </label>
+          <label className="block text-sm">
+            <span className="text-muted-foreground">Hoofdklant (drijft de monitoring)</span>
+            <select value={newForm.primary_user_id} onChange={(e) => setNewForm({ ...newForm, primary_user_id: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+              <option value="">Kies klant…</option>
+              {customers.map((c: any) => <option key={c.id} value={c.id}>{c.full_name || c.email}</option>)}
+            </select>
+          </label>
+          <div>
+            <span className="text-muted-foreground text-sm">Extra gekoppelde klanten</span>
+            <div className="mt-1 max-h-40 overflow-y-auto rounded-md border border-border p-2 space-y-1">
+              {customers.filter((c: any) => c.id !== newForm.primary_user_id).map((c: any) => (
+                <label key={c.id} className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={newForm.member_ids.includes(c.id)}
+                    onChange={(e) => setNewForm({ ...newForm, member_ids: e.target.checked ? [...newForm.member_ids, c.id] : newForm.member_ids.filter((id) => id !== c.id) })}
+                  />
+                  {c.full_name || c.email}
+                </label>
+              ))}
+            </div>
+          </div>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" checked={newForm.snippet_active} onChange={(e) => setNewForm({ ...newForm, snippet_active: e.target.checked })} />
+            Snippet actief
+          </label>
+          <button onClick={() => createM.mutate()} disabled={!newForm.name || !newForm.primary_user_id || createM.isPending} className="btn-primary text-sm">
+            {createM.isPending ? "Bezig…" : "Project aanmaken"}
+          </button>
+        </div>
+      )}
+
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/30 text-muted-foreground">
+            <tr>
+              <th className="text-left p-3">Project</th>
+              <th className="text-left p-3">Website</th>
+              <th className="text-left p-3">Klanten</th>
+              <th className="text-left p-3">Status</th>
+              <th className="p-3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((p: any) => {
+              const f = forms[p.id] ?? { website_url: p.website_url ?? "", snippet_active: !!p.snippet_active, member_ids: (p.members ?? []).filter((m: any) => m.id !== p.primary_user_id).map((m: any) => m.id) };
+              const isOpen = openId === p.id;
+              const snippet = `<script src="${origin}/track.js?u=${p.primary_user_id}"></script>`;
+              const status = p.ping_count > 0
+                ? { color: "text-emerald-500", txt: "Actief" }
+                : p.website_url ? { color: "text-amber-500", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
+              return (
+                <React.Fragment key={p.id}>
+                  <tr className="border-t border-border">
+                    <td className="p-3 font-medium">{p.name}</td>
+                    <td className="p-3 truncate max-w-xs text-muted-foreground">{p.website_url || "—"}</td>
+                    <td className="p-3 text-muted-foreground">{(p.members ?? []).map((m: any) => m.full_name || m.email).join(", ") || "—"}</td>
+                    <td className={`p-3 text-xs font-medium ${status.color}`}>{status.txt}</td>
+                    <td className="p-3 text-right space-x-3">
+                      <button onClick={() => onOpenDetail(p.primary_user_id)} className="text-xs text-primary hover:underline">Monitoring</button>
+                      <button onClick={() => setOpenId(isOpen ? null : p.id)} className="text-xs text-muted-foreground hover:text-foreground">{isOpen ? "Sluit" : "Beheer"}</button>
+                      <button onClick={() => { if (confirm(`Project "${p.name}" verwijderen?`)) delM.mutate({ project_id: p.id }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                    </td>
+                  </tr>
+                  {isOpen && (
+                    <tr><td colSpan={5} className="bg-muted/20 p-4">
+                      <div className="space-y-3 max-w-2xl">
+                        <label className="block text-sm">
+                          <span className="text-muted-foreground">Website URL</span>
+                          <input value={f.website_url} onChange={(e) => setForms({ ...forms, [p.id]: { ...f, website_url: e.target.value } })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                        </label>
+                        <div>
+                          <span className="text-muted-foreground text-sm">Tracking snippet</span>
+                          <div className="mt-1 rounded-md border border-border bg-background p-3 font-mono text-xs break-all">{snippet}</div>
+                          <button type="button" onClick={() => { navigator.clipboard.writeText(snippet); toast.success("Gekopieerd."); }} className="btn-secondary mt-2 text-xs">Kopieer</button>
+                        </div>
+                        <label className="flex items-center gap-2 text-sm">
+                          <input type="checkbox" checked={f.snippet_active} onChange={(e) => setForms({ ...forms, [p.id]: { ...f, snippet_active: e.target.checked } })} />
+                          Snippet actief
+                        </label>
+                        <button onClick={() => updM.mutate({ project_id: p.id, website_url: f.website_url || null, snippet_active: f.snippet_active })} disabled={updM.isPending} className="btn-primary text-sm">
+                          {updM.isPending ? "Bezig…" : "Opslaan"}
+                        </button>
+
+                        <div className="pt-2 border-t border-border">
+                          <span className="text-muted-foreground text-sm">Gekoppelde klanten</span>
+                          <div className="mt-1 max-h-40 overflow-y-auto rounded-md border border-border p-2 space-y-1">
+                            {customers.filter((c: any) => c.id !== p.primary_user_id).map((c: any) => (
+                              <label key={c.id} className="flex items-center gap-2 text-sm">
+                                <input
+                                  type="checkbox"
+                                  checked={f.member_ids.includes(c.id)}
+                                  onChange={(e) => setForms({ ...forms, [p.id]: { ...f, member_ids: e.target.checked ? [...f.member_ids, c.id] : f.member_ids.filter((id: string) => id !== c.id) } })}
+                                />
+                                {c.full_name || c.email}
+                              </label>
+                            ))}
+                          </div>
+                          <button onClick={() => membersM.mutate({ project_id: p.id, member_ids: f.member_ids })} disabled={membersM.isPending} className="btn-secondary text-sm mt-2">
+                            {membersM.isPending ? "Bezig…" : "Klanten opslaan"}
+                          </button>
+                        </div>
                       </div>
-                      <label className="flex items-center gap-2 text-sm">
-                        <input type="checkbox" checked={f.snippet_active} onChange={(e) => setForms({ ...forms, [c.id]: { ...f, snippet_active: e.target.checked } })} />
-                        Snippet actief
-                      </label>
-                      <button onClick={() => updM.mutate({ user_id: c.id, website_url: f.website_url || null, snippet_active: f.snippet_active })} disabled={updM.isPending} className="btn-primary text-sm">
-                        {updM.isPending ? "Bezig…" : "Opslaan"}
-                      </button>
-                    </div>
-                  </td></tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-          {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>}
-        </tbody>
-      </table>
+                    </td></tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+            {items.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Nog geen projecten.</td></tr>}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -113,3 +113,54 @@ DROP POLICY IF EXISTS "svc_pings" ON site_pings;
 CREATE POLICY "svc_pings" ON site_pings FOR ALL TO service_role USING (true) WITH CHECK (true);
 DROP POLICY IF EXISTS "own_pings" ON site_pings;
 CREATE POLICY "own_pings" ON site_pings FOR SELECT TO authenticated USING (user_id = auth.uid());
+
+-- =============================================
+-- Projecten (vervangt "website koppelingen" overzicht)
+-- Een project = 1 website, gekoppeld aan een of meer klanten.
+-- De monitoring (site_pings/site_response_times/ssl/dns) blijft
+-- gekoppeld aan profiles.id via primary_user_id, zodat de bestaande
+-- tracking snippets (track.js?u=<profile-id>) blijven werken.
+-- =============================================
+CREATE TABLE IF NOT EXISTS projects (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  website_url text,
+  snippet_active boolean NOT NULL DEFAULT false,
+  primary_user_id uuid NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_projects_primary_user ON projects(primary_user_id);
+
+CREATE TABLE IF NOT EXISTS project_members (
+  project_id uuid NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (project_id, user_id)
+);
+CREATE INDEX IF NOT EXISTS idx_project_members_user ON project_members(user_id);
+
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_members ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "svc_projects" ON projects FOR ALL TO service_role USING (true) WITH CHECK (true);
+CREATE POLICY "svc_project_members" ON project_members FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- Klanten mogen de projecten zien waar ze lid van zijn
+CREATE POLICY "own_projects" ON projects FOR SELECT TO authenticated
+  USING (id IN (SELECT project_id FROM project_members WHERE user_id = auth.uid()));
+CREATE POLICY "own_project_members" ON project_members FOR SELECT TO authenticated
+  USING (user_id = auth.uid());
+
+-- Eenmalige backfill: bestaande "website koppeling" van Milantest (aimi-development.nl)
+-- omzetten naar een project. Pas de WHERE-clause aan als de klant anders heet.
+INSERT INTO projects (name, website_url, snippet_active, primary_user_id)
+SELECT 'aimi-development.nl', p.website_url, p.snippet_active, p.id
+FROM profiles p
+WHERE (p.full_name ILIKE '%milantest%' OR p.website_url ILIKE '%aimi-development.nl%')
+  AND p.website_url IS NOT NULL
+LIMIT 1;
+
+INSERT INTO project_members (project_id, user_id)
+SELECT pr.id, pr.primary_user_id FROM projects pr
+WHERE pr.name = 'aimi-development.nl'
+ON CONFLICT DO NOTHING;
