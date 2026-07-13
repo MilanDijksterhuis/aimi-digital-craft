@@ -643,11 +643,14 @@ function ProjectsOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void
               return (
                 <React.Fragment key={p.id}>
                   <tr className="border-t border-border">
-                    <td className="p-3 font-medium">{p.name}</td>
+                    <td className="p-3 font-medium">
+                      <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="hover:text-primary hover:underline">{p.name}</Link>
+                    </td>
                     <td className="p-3 truncate max-w-xs text-muted-foreground">{p.website_url || "—"}</td>
                     <td className="p-3 text-muted-foreground">{(p.members ?? []).map((m: any) => m.full_name || m.email).join(", ") || "—"}</td>
                     <td className={`p-3 text-xs font-medium ${status.color}`}>{status.txt}</td>
                     <td className="p-3 text-right space-x-3">
+                      <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="text-xs text-primary hover:underline">Details</Link>
                       <button onClick={() => onOpenDetail(p.primary_user_id)} className="text-xs text-primary hover:underline">Monitoring</button>
                       <button onClick={() => setOpenId(isOpen ? null : p.id)} className="text-xs text-muted-foreground hover:text-foreground">{isOpen ? "Sluit" : "Beheer"}</button>
                       <button onClick={() => { if (confirm(`Project "${p.name}" verwijderen?`)) delM.mutate({ project_id: p.id }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
