@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
@@ -36,17 +36,7 @@ import {
   adminListExtraChangeRequests,
   adminApproveExtraChangeRequest,
   adminRejectExtraChangeRequest,
-  adminListWebsiteLinks,
   adminUpdateWebsiteLink,
-  adminListProjects,
-  adminCreateProject,
-  adminUpdateProject,
-  adminDeleteProject,
-  adminSetProjectMembers,
-  adminGetCustomerMonitoring,
-  adminSyncCustomerMonitoring,
-  adminRunSSLCheck,
-  adminRunDNSCheck,
   adminGetAllAlerts,
   adminSnoozeAlert,
   adminMarkAlertSeen,
@@ -120,6 +110,12 @@ export const Route = createFileRoute("/_authenticated/admin")({
 const eur = (cents: number) => `€${(cents / 100).toFixed(2)}`;
 
 function AdminPage() {
+  // Kind-routes (bv. /admin/projecten) delen deze route als parent
+  // (TanStack Router file-based routing) en moeten via Outlet gerenderd worden
+  // in plaats van het dashboard hieronder. Deze check staat ná alle hooks
+  // (verderop) om de Rules of Hooks niet te schenden.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
   const fetchOv = useServerFn(adminGetOverview);
   const qc = useQueryClient();
   const { data, isLoading, error } = useQuery({
@@ -165,6 +161,8 @@ function AdminPage() {
       .eq("is_read", false)
       .then(({ count }) => setUnreadChatCount(count ?? 0));
   }, []);
+
+  if (pathname !== "/admin") return <Outlet />;
 
   if (isLoading) {
     return (
@@ -238,7 +236,7 @@ function AdminPage() {
     { label: "Beheer", items: [
       { key: "accounts", label: "Accounts", icon: Users2 },
       { key: "notifications", label: "Notificaties", icon: Bell },
-      { key: "website_links", label: "Projecten", icon: Link2 },
+      { key: "projecten" as TabKey, label: "Projecten", icon: Link2, href: "/admin/projecten" },
       { key: "alerts", label: "Alerts", icon: AlertTriangle },
       ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield }] : []),
       { key: "team", label: "Team", icon: UserCheck },
@@ -282,7 +280,6 @@ function AdminPage() {
           {tab === "chat" && <AdminChatPanel />}
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
-          {tab === "website_links" && <ProjectsPanel />}
           {tab === "alerts" && <AlertsPanel />}
           {tab === "role_permissions" && perms.isSuperAdmin && <RollenPermissiesPanel />}
           {tab === "leads" && perms.can("leads_view") && <LeadsPanel />}
@@ -554,409 +551,6 @@ function ExtraChangesPanel() {
     </div>
   );
 }
-
-function ProjectsPanel() {
-  const [detailUserId, setDetailUserId] = useState<string | null>(null);
-  if (detailUserId) {
-    return <WebsiteLinkDetail userId={detailUserId} onBack={() => setDetailUserId(null)} />;
-  }
-  return <ProjectsOverview onOpenDetail={setDetailUserId} />;
-}
-
-function ProjectsOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void }) {
-  const list = useServerFn(adminListProjects);
-  const listCustomers = useServerFn(adminListWebsiteLinks); // levert simpele klantenlijst (id/naam/email)
-  const create = useServerFn(adminCreateProject);
-  const update = useServerFn(adminUpdateProject);
-  const del = useServerFn(adminDeleteProject);
-  const setMembers = useServerFn(adminSetProjectMembers);
-  const qc = useQueryClient();
-
-  const { data, isLoading } = useQuery({ queryKey: ["admin-projects"], queryFn: () => list({}) });
-  const { data: customersData } = useQuery({ queryKey: ["admin-website-links"], queryFn: () => listCustomers({}) });
-  const customers = customersData?.items ?? [];
-
-  const invalidate = () => qc.invalidateQueries({ queryKey: ["admin-projects"] });
-  const updM = useMutation({ mutationFn: (i: any) => update({ data: i }), onSuccess: () => { invalidate(); toast.success("Opgeslagen."); } });
-  const delM = useMutation({ mutationFn: (i: any) => del({ data: i }), onSuccess: () => { invalidate(); toast.success("Project verwijderd."); } });
-  const membersM = useMutation({ mutationFn: (i: any) => setMembers({ data: i }), onSuccess: () => { invalidate(); toast.success("Klanten bijgewerkt."); } });
-
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [forms, setForms] = useState<Record<string, { website_url: string; snippet_active: boolean; member_ids: string[] }>>({});
-  const [showAdd, setShowAdd] = useState(false);
-  const [newForm, setNewForm] = useState({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] as string[] });
-
-  const createM = useMutation({
-    mutationFn: () => create({ data: newForm }),
-    onSuccess: () => { invalidate(); toast.success("Project aangemaakt."); setShowAdd(false); setNewForm({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] }); },
-  });
-
-  if (isLoading) return <TableSkeleton cols={4} />;
-  const items = data?.items ?? [];
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Projecten</h2>
-        <button onClick={() => setShowAdd((s) => !s)} className="btn-primary text-sm">{showAdd ? "Annuleren" : "+ Project toevoegen"}</button>
-      </div>
-
-      {showAdd && (
-        <div className="rounded-lg border border-border p-4 space-y-3 max-w-2xl">
-          <label className="block text-sm">
-            <span className="text-muted-foreground">Projectnaam</span>
-            <input value={newForm.name} onChange={(e) => setNewForm({ ...newForm, name: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="bijv. aimi-development.nl" />
-          </label>
-          <label className="block text-sm">
-            <span className="text-muted-foreground">Website URL</span>
-            <input value={newForm.website_url} onChange={(e) => setNewForm({ ...newForm, website_url: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-          </label>
-          <label className="block text-sm">
-            <span className="text-muted-foreground">Hoofdklant (drijft de monitoring)</span>
-            <select value={newForm.primary_user_id} onChange={(e) => setNewForm({ ...newForm, primary_user_id: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-              <option value="">Kies klant…</option>
-              {customers.map((c: any) => <option key={c.id} value={c.id}>{c.full_name || c.email}</option>)}
-            </select>
-          </label>
-          <div>
-            <span className="text-muted-foreground text-sm">Extra gekoppelde klanten</span>
-            <div className="mt-1 max-h-40 overflow-y-auto rounded-md border border-border p-2 space-y-1">
-              {customers.filter((c: any) => c.id !== newForm.primary_user_id).map((c: any) => (
-                <label key={c.id} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={newForm.member_ids.includes(c.id)}
-                    onChange={(e) => setNewForm({ ...newForm, member_ids: e.target.checked ? [...newForm.member_ids, c.id] : newForm.member_ids.filter((id) => id !== c.id) })}
-                  />
-                  {c.full_name || c.email}
-                </label>
-              ))}
-            </div>
-          </div>
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={newForm.snippet_active} onChange={(e) => setNewForm({ ...newForm, snippet_active: e.target.checked })} />
-            Snippet actief
-          </label>
-          <button onClick={() => createM.mutate()} disabled={!newForm.name || !newForm.primary_user_id || createM.isPending} className="btn-primary text-sm">
-            {createM.isPending ? "Bezig…" : "Project aanmaken"}
-          </button>
-        </div>
-      )}
-
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/30 text-muted-foreground">
-            <tr>
-              <th className="text-left p-3">Project</th>
-              <th className="text-left p-3">Website</th>
-              <th className="text-left p-3">Klanten</th>
-              <th className="text-left p-3">Status</th>
-              <th className="p-3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((p: any) => {
-              const f = forms[p.id] ?? { website_url: p.website_url ?? "", snippet_active: !!p.snippet_active, member_ids: (p.members ?? []).filter((m: any) => m.id !== p.primary_user_id).map((m: any) => m.id) };
-              const isOpen = openId === p.id;
-              const snippet = `<script src="${origin}/track.js?u=${p.primary_user_id}"></script>`;
-              const status = p.ping_count > 0
-                ? { color: "text-emerald-500", txt: "Actief" }
-                : p.website_url ? { color: "text-amber-500", txt: "Geen data" } : { color: "text-muted-foreground", txt: "Niet gekoppeld" };
-              return (
-                <React.Fragment key={p.id}>
-                  <tr className="border-t border-border">
-                    <td className="p-3 font-medium">{p.name}</td>
-                    <td className="p-3 truncate max-w-xs text-muted-foreground">{p.website_url || "—"}</td>
-                    <td className="p-3 text-muted-foreground">{(p.members ?? []).map((m: any) => m.full_name || m.email).join(", ") || "—"}</td>
-                    <td className={`p-3 text-xs font-medium ${status.color}`}>{status.txt}</td>
-                    <td className="p-3 text-right space-x-3">
-                      <button onClick={() => onOpenDetail(p.primary_user_id)} className="text-xs text-primary hover:underline">Monitoring</button>
-                      <button onClick={() => setOpenId(isOpen ? null : p.id)} className="text-xs text-muted-foreground hover:text-foreground">{isOpen ? "Sluit" : "Beheer"}</button>
-                      <button onClick={() => { if (confirm(`Project "${p.name}" verwijderen?`)) delM.mutate({ project_id: p.id }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
-                    </td>
-                  </tr>
-                  {isOpen && (
-                    <tr><td colSpan={5} className="bg-muted/20 p-4">
-                      <div className="space-y-3 max-w-2xl">
-                        <label className="block text-sm">
-                          <span className="text-muted-foreground">Website URL</span>
-                          <input value={f.website_url} onChange={(e) => setForms({ ...forms, [p.id]: { ...f, website_url: e.target.value } })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-                        </label>
-                        <div>
-                          <span className="text-muted-foreground text-sm">Tracking snippet</span>
-                          <div className="mt-1 rounded-md border border-border bg-background p-3 font-mono text-xs break-all">{snippet}</div>
-                          <button type="button" onClick={() => { navigator.clipboard.writeText(snippet); toast.success("Gekopieerd."); }} className="btn-secondary mt-2 text-xs">Kopieer</button>
-                        </div>
-                        <label className="flex items-center gap-2 text-sm">
-                          <input type="checkbox" checked={f.snippet_active} onChange={(e) => setForms({ ...forms, [p.id]: { ...f, snippet_active: e.target.checked } })} />
-                          Snippet actief
-                        </label>
-                        <button onClick={() => updM.mutate({ project_id: p.id, website_url: f.website_url || null, snippet_active: f.snippet_active })} disabled={updM.isPending} className="btn-primary text-sm">
-                          {updM.isPending ? "Bezig…" : "Opslaan"}
-                        </button>
-
-                        <div className="pt-2 border-t border-border">
-                          <span className="text-muted-foreground text-sm">Gekoppelde klanten</span>
-                          <div className="mt-1 max-h-40 overflow-y-auto rounded-md border border-border p-2 space-y-1">
-                            {customers.filter((c: any) => c.id !== p.primary_user_id).map((c: any) => (
-                              <label key={c.id} className="flex items-center gap-2 text-sm">
-                                <input
-                                  type="checkbox"
-                                  checked={f.member_ids.includes(c.id)}
-                                  onChange={(e) => setForms({ ...forms, [p.id]: { ...f, member_ids: e.target.checked ? [...f.member_ids, c.id] : f.member_ids.filter((id: string) => id !== c.id) } })}
-                                />
-                                {c.full_name || c.email}
-                              </label>
-                            ))}
-                          </div>
-                          <button onClick={() => membersM.mutate({ project_id: p.id, member_ids: f.member_ids })} disabled={membersM.isPending} className="btn-secondary text-sm mt-2">
-                            {membersM.isPending ? "Bezig…" : "Klanten opslaan"}
-                          </button>
-                        </div>
-                      </div>
-                    </td></tr>
-                  )}
-                </React.Fragment>
-              );
-            })}
-            {items.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Nog geen projecten.</td></tr>}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => void }) {
-  const getMonitoring = useServerFn(adminGetCustomerMonitoring);
-  const syncFn = useServerFn(adminSyncCustomerMonitoring);
-  const runSSL = useServerFn(adminRunSSLCheck);
-  const runDNS = useServerFn(adminRunDNSCheck);
-  const qc = useQueryClient();
-
-  const { data, isLoading, refetch, isFetching } = useQuery({
-    queryKey: ["admin-monitoring", userId],
-    queryFn: () => getMonitoring({ data: { user_id: userId } }),
-    refetchInterval: 60_000,
-  });
-
-  const syncM = useMutation({
-    mutationFn: async () => {
-      // Responstijdmeting is de kern — als die faalt (bijv. geen website_url)
-      // moet dat zichtbaar zijn i.p.v. stil weggeslikt worden.
-      await syncFn({ data: { user_id: userId } });
-      // SSL & DNS zijn aanvullend; die mogen best afzonderlijk falen.
-      await Promise.allSettled([
-        runSSL({ data: { user_id: userId } }),
-        runDNS({ data: { user_id: userId } }),
-      ]);
-    },
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] });
-      toast.success("Sync voltooid — responstijd, SSL & DNS gecheckt.");
-    },
-    onError: (e: any) => toast.error(`Sync mislukt: ${e.message}`),
-  });
-
-  // Auto-sync als er nog geen responstijdmeting is
-  const monAvg = (data as any)?.avg;
-  useEffect(() => {
-    if (!isLoading && data && monAvg == null && !syncM.isPending) {
-      syncM.mutate();
-    }
-  }, [isLoading, monAvg]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const sslM = useMutation({
-    mutationFn: () => runSSL({ data: { user_id: userId } }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] }); toast.success("SSL check uitgevoerd."); },
-    onError: (e: any) => toast.error(e.message),
-  });
-  const dnsM = useMutation({
-    mutationFn: () => runDNS({ data: { user_id: userId } }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-monitoring", userId] }); toast.success("DNS check uitgevoerd."); },
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  const mon = data as any;
-  const ssl = mon?.ssl ?? null;
-  const dns = mon?.dns ?? null;
-  const alerts: any[] = mon?.alerts ?? [];
-  const avgMs: number | null = mon?.avg ?? null;
-  const uptimePct: string | null = mon?.uptimePct != null ? (mon.uptimePct as number).toFixed(1) : null;
-  const dailyUptime: any[] = mon?.dailyUptime ?? [];
-  const hasData = (mon?.total24h ?? 0) > 0 || dailyUptime.some((d: any) => d.total > 0);
-
-  return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button onClick={onBack} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ChevronLeft className="w-4 h-4" /> Terug
-          </button>
-          <span className="text-muted-foreground">/</span>
-          <span className="text-sm font-medium">Monitoring</span>
-        </div>
-        <button
-          onClick={() => syncM.mutate()}
-          disabled={syncM.isPending || isFetching}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-border hover:border-primary hover:text-primary transition-colors disabled:opacity-50"
-        >
-          <RefreshCw className={`w-4 h-4 ${syncM.isPending || isFetching ? "animate-spin" : ""}`} />
-          {syncM.isPending ? "Bezig…" : "Sync"}
-        </button>
-      </div>
-
-      {isLoading ? (
-        <div className="space-y-3 animate-pulse">
-          {[1,2,3].map(i => <div key={i} className="h-24 bg-muted rounded-lg" />)}
-        </div>
-      ) : !hasData ? (
-        <div className="rounded-lg border border-dashed border-border p-8 text-center text-muted-foreground text-sm">
-          Nog geen meetdata. Druk op Sync om een eerste meting te starten.
-        </div>
-      ) : (
-        <>
-          {/* Statistieken */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Uptime (24u)</p>
-              <p className={`mt-1 text-2xl font-bold ${uptimePct && parseFloat(uptimePct) < 95 ? "text-destructive" : uptimePct ? "text-emerald-500" : ""}`}>
-                {uptimePct ? `${uptimePct}%` : "—"}
-              </p>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Gem. respons (24u)</p>
-              <p className={`mt-1 text-2xl font-bold ${avgMs && avgMs > 3000 ? "text-amber-500" : ""}`}>
-                {avgMs ? `${avgMs}ms` : "—"}
-              </p>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide">Metingen (24u)</p>
-              <p className="mt-1 text-2xl font-bold">{mon?.total24h ?? 0}</p>
-            </div>
-          </div>
-
-          {/* Uptime grafiek */}
-          {dailyUptime.length > 0 && (
-            <div className="rounded-lg border border-border bg-card p-4">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4 flex items-center gap-2">
-                <Activity className="w-3 h-3" /> Uptime afgelopen 7 dagen
-              </p>
-              <div className="flex items-end gap-2 h-20">
-                {dailyUptime.map((d: any) => {
-                  const pct = d.uptime;
-                  const color = pct == null ? "bg-muted" : pct >= 99 ? "bg-emerald-500" : pct >= 95 ? "bg-amber-500" : "bg-destructive";
-                  return (
-                    <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
-                      <span className="text-[10px] text-muted-foreground">{pct != null ? `${pct}%` : "—"}</span>
-                      <div className={`w-full rounded-t ${color}`} style={{ height: `${pct != null ? Math.max(8, pct) : 20}%` }} title={d.total > 0 ? `${d.ok}/${d.total} OK` : "Geen data"} />
-                      <span className="text-[10px] text-muted-foreground capitalize">{d.label}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="flex gap-4 mt-2 text-[10px] text-muted-foreground">
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-emerald-500 inline-block" />≥99%</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-amber-500 inline-block" />95–99%</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-destructive inline-block" />&lt;95%</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-muted inline-block" />Geen data</span>
-              </div>
-            </div>
-          )}
-
-          {/* SSL */}
-          <div className="rounded-lg border border-border bg-card p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-                <Shield className="w-3 h-3" /> SSL Certificaat
-              </p>
-              <button onClick={() => sslM.mutate()} disabled={sslM.isPending} className="text-xs text-primary hover:underline flex items-center gap-1">
-                <RefreshCw className={`w-3 h-3 ${sslM.isPending ? "animate-spin" : ""}`} />
-                {sslM.isPending ? "Bezig…" : "Check uitvoeren"}
-              </button>
-            </div>
-            {ssl ? (
-              <div className="space-y-1 text-sm">
-                <div className="flex items-center gap-2">
-                  {ssl.valid ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-destructive" />}
-                  <span>{ssl.valid ? "Geldig" : "Ongeldig"}</span>
-                  {ssl.days_remaining !== null && (
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${ssl.days_remaining < 14 ? "bg-destructive/20 text-destructive" : ssl.days_remaining < 30 ? "bg-amber-500/20 text-amber-500" : "bg-emerald-500/20 text-emerald-600"}`}>
-                      {ssl.days_remaining}d resterend
-                    </span>
-                  )}
-                </div>
-                {ssl.issuer && <p className="text-xs text-muted-foreground">Uitgever: {ssl.issuer}</p>}
-                {ssl.expires_at && <p className="text-xs text-muted-foreground">Verloopt: {new Date(ssl.expires_at).toLocaleDateString("nl-NL")}</p>}
-                {ssl.error && <p className="text-xs text-destructive">{ssl.error}</p>}
-                <p className="text-xs text-muted-foreground">Gecontroleerd: {new Date(ssl.checked_at).toLocaleString("nl-NL")}</p>
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">Nog geen SSL check uitgevoerd.</p>
-            )}
-          </div>
-
-          {/* DNS */}
-          <div className="rounded-lg border border-border bg-card p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-                <Activity className="w-3 h-3" /> DNS Status
-              </p>
-              <button onClick={() => dnsM.mutate()} disabled={dnsM.isPending} className="text-xs text-primary hover:underline flex items-center gap-1">
-                <RefreshCw className={`w-3 h-3 ${dnsM.isPending ? "animate-spin" : ""}`} />
-                {dnsM.isPending ? "Bezig…" : "Check uitvoeren"}
-              </button>
-            </div>
-            {dns ? (
-              <div className="space-y-1 text-sm">
-                <div className="flex items-center gap-2">
-                  {dns.healthy ? <CheckCircle className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-destructive" />}
-                  <span>{dns.healthy ? "Gezond" : "Problemen gevonden"}</span>
-                </div>
-                {dns.issues?.length > 0 && (
-                  <ul className="text-xs text-destructive space-y-0.5 mt-1">
-                    {dns.issues.map((issue: string, i: number) => <li key={i}>• {issue}</li>)}
-                  </ul>
-                )}
-                <p className="text-xs text-muted-foreground">Gecontroleerd: {new Date(dns.checked_at).toLocaleString("nl-NL")}</p>
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">Nog geen DNS check uitgevoerd.</p>
-            )}
-          </div>
-
-          {/* Actieve alerts */}
-          {alerts.length > 0 && (
-            <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
-              <p className="text-xs text-amber-500 uppercase tracking-wide mb-2 flex items-center gap-2">
-                <AlertTriangle className="w-3 h-3" /> Actieve alerts ({alerts.length})
-              </p>
-              <ul className="space-y-1">
-                {alerts.map((a: any) => (
-                  <li key={a.id} className="text-sm flex items-start gap-2">
-                    <span className={`text-xs px-1.5 py-0.5 rounded shrink-0 ${a.severity === "critical" ? "bg-destructive/20 text-destructive" : "bg-amber-500/20 text-amber-600"}`}>
-                      {a.severity}
-                    </span>
-                    <span>{a.message}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Last sync */}
-          <p className="text-xs text-muted-foreground flex items-center gap-1">
-            <Clock className="w-3 h-3" />
-            Laatste ping: {mon?.lastSync ? new Date(mon.lastSync).toLocaleString("nl-NL") : "—"}
-          </p>
-        </>
-      )}
-    </div>
-  );
-}
-
-
 
 function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
   const createC = useServerFn(adminCreateCustomerFn);

@@ -463,6 +463,86 @@ export const requestPasswordReset = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+// ---------- Klant: project detail (alleen eigen project) ----------
+
+async function assertOwnProject(supabase: any, userId: string, projectId: string) {
+  const { data: project, error } = await supabase
+    .from("projects" as any)
+    .select("*")
+    .eq("id", projectId)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  if (!project) throw new Error("Project niet gevonden of geen toegang.");
+
+  if ((project as any).primary_user_id === userId) return project;
+
+  const { data: membership } = await supabase
+    .from("project_members" as any)
+    .select("project_id")
+    .eq("project_id", projectId)
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (!membership) throw new Error("Geen toegang tot dit project.");
+  return project;
+}
+
+export const portalListMyProjects = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase } = context;
+    // RLS ("customers read own projects") beperkt dit al tot eigen project(en).
+    const { data, error } = await supabase
+      .from("projects" as any)
+      .select("*")
+      .is("deleted_at", null)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: data ?? [] };
+  });
+
+export const portalGetProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const project = await assertOwnProject(supabase, userId, data.project_id);
+    return { project };
+  });
+
+export const portalListProjectMilestones = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await assertOwnProject(supabase, userId, data.project_id);
+    const { data: items, error } = await supabase
+      .from("project_milestones" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("order", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const portalListProjectNotes = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await assertOwnProject(supabase, userId, data.project_id);
+    // RLS beperkt dit voor de klant sowieso al tot is_client_visible = true,
+    // maar we filteren hier ook expliciet zodat het contract duidelijk is
+    // ongeacht welke client wordt gebruikt.
+    const { data: items, error } = await supabase
+      .from("project_notes" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .eq("is_client_visible", true)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
 export const requestExtraChanges = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ amount: z.number().int().min(1).max(50) }).parse(d))

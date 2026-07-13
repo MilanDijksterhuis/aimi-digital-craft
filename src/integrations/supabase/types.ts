@@ -686,6 +686,230 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          archived: boolean
+          archived_at: string | null
+          budget: number | null
+          category: string | null
+          client_visible_notes: string | null
+          completed_at: string | null
+          created_at: string
+          deadline: string | null
+          deleted_at: string | null
+          description: string | null
+          hours_estimated: number | null
+          hours_spent: number
+          id: string
+          internal_notes: string | null
+          name: string
+          priority: Database["public"]["Enums"]["project_priority"]
+          primary_user_id: string
+          progress_percentage: number
+          snippet_active: boolean
+          start_date: string | null
+          status: Database["public"]["Enums"]["project_status"]
+          tags: string[]
+          website_url: string | null
+        }
+        Insert: {
+          archived?: boolean
+          archived_at?: string | null
+          budget?: number | null
+          category?: string | null
+          client_visible_notes?: string | null
+          completed_at?: string | null
+          created_at?: string
+          deadline?: string | null
+          deleted_at?: string | null
+          description?: string | null
+          hours_estimated?: number | null
+          hours_spent?: number
+          id?: string
+          internal_notes?: string | null
+          name: string
+          priority?: Database["public"]["Enums"]["project_priority"]
+          primary_user_id: string
+          progress_percentage?: number
+          snippet_active?: boolean
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          tags?: string[]
+          website_url?: string | null
+        }
+        Update: {
+          archived?: boolean
+          archived_at?: string | null
+          budget?: number | null
+          category?: string | null
+          client_visible_notes?: string | null
+          completed_at?: string | null
+          created_at?: string
+          deadline?: string | null
+          deleted_at?: string | null
+          description?: string | null
+          hours_estimated?: number | null
+          hours_spent?: number
+          id?: string
+          internal_notes?: string | null
+          name?: string
+          priority?: Database["public"]["Enums"]["project_priority"]
+          primary_user_id?: string
+          progress_percentage?: number
+          snippet_active?: boolean
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          tags?: string[]
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      project_contacts: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          phone: string | null
+          project_id: string
+          role: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          phone?: string | null
+          project_id: string
+          role?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          project_id?: string
+          role?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_contacts_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_members: {
+        Row: {
+          created_at: string
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_milestones: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          order: number
+          project_id: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          order?: number
+          project_id: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          order?: number
+          project_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_notes: {
+        Row: {
+          author_id: string | null
+          content: string
+          created_at: string
+          id: string
+          is_client_visible: boolean
+          project_id: string
+        }
+        Insert: {
+          author_id?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          is_client_visible?: boolean
+          project_id: string
+        }
+        Update: {
+          author_id?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          is_client_visible?: boolean
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_notes_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       purchase_requests: {
         Row: {
           amount: number
@@ -873,6 +1097,14 @@ export type Database = {
         | "waiting_customer"
         | "invoiced"
         | "cancelled"
+      project_status:
+        | "concept"
+        | "in_uitvoering"
+        | "review"
+        | "afgerond"
+        | "on_hold"
+        | "geannuleerd"
+      project_priority: "laag" | "normaal" | "hoog" | "urgent"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1021,6 +1253,15 @@ export const Constants = {
         "invoiced",
         "cancelled",
       ],
+      project_status: [
+        "concept",
+        "in_uitvoering",
+        "review",
+        "afgerond",
+        "on_hold",
+        "geannuleerd",
+      ],
+      project_priority: ["laag", "normaal", "hoog", "urgent"],
     },
   },
 } as const

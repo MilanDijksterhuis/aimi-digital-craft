@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -23,7 +23,9 @@ import {
   postCustomerComment,
   getAttachmentUrl,
   cancelMyChange,
+  portalListMyProjects,
 } from "@/lib/portal.functions";
+import { PROJECT_STATUS_LABEL, PROJECT_STATUS_COLOR, isProjectOverdue } from "@/lib/project-status";
 import {
   Dialog,
   DialogContent,
@@ -120,6 +122,12 @@ function matchesFilter(s: string, f: FilterKey): boolean {
 // ---------- Page ----------
 
 function PortalPage() {
+  // Kind-routes (bv. /portal/projecten) delen deze route als parent
+  // (TanStack Router file-based routing) en moeten via Outlet gerenderd worden
+  // in plaats van het dashboard hieronder. Deze check staat ná alle hooks
+  // (verderop) om de Rules of Hooks niet te schenden.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
   const fetchDash = useServerFn(getMyDashboard);
   const submit = useServerFn(submitChangeRequest);
   const buy = useServerFn(requestExtraChanges);
@@ -221,6 +229,8 @@ function PortalPage() {
     });
     return list;
   }, [data?.requests, filter, sort, search]);
+
+  if (pathname !== "/portal") return <Outlet />;
 
   if (isLoading) {
     return (
@@ -1121,6 +1131,47 @@ function UptimeChart({ dailyUptime }: { dailyUptime: any[] }) {
   );
 }
 
+function MyProjectsSection() {
+  const list = useServerFn(portalListMyProjects);
+  const { data, isLoading } = useQuery({ queryKey: ["portal-my-projects"], queryFn: () => list({}) });
+  const items = data?.items ?? [];
+
+  if (isLoading) return <Skeleton className="h-24 w-full rounded-lg" />;
+  if (items.length === 0) return null;
+
+  return (
+    <section className="rounded-lg border border-border bg-card p-6">
+      <h2 className="font-display text-2xl font-semibold mb-4">Mijn projecten</h2>
+      <ul className="space-y-2">
+        {items.map((p: any) => {
+          const overdue = isProjectOverdue(p.deadline, p.status);
+          return (
+            <li key={p.id}>
+              <Link
+                to="/portal/projecten/$projectId"
+                params={{ projectId: p.id }}
+                className="flex items-center justify-between rounded-md border border-border p-3 text-sm hover:border-primary transition-colors"
+              >
+                <span className="font-medium">{p.name}</span>
+                <span className="flex items-center gap-3">
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${PROJECT_STATUS_COLOR[p.status] ?? "bg-muted"}`}>
+                    {PROJECT_STATUS_LABEL[p.status] ?? p.status}
+                  </span>
+                  {p.deadline && (
+                    <span className={`text-xs ${overdue ? "text-destructive font-semibold" : "text-muted-foreground"}`}>
+                      {new Date(p.deadline).toLocaleDateString("nl-NL")}
+                    </span>
+                  )}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 function WebsiteTab({ data }: { data: any }) {
   const uptime = data.uptimePct as number | null;
   const avgMs: number | null = data.avg ?? null;
@@ -1142,6 +1193,7 @@ function WebsiteTab({ data }: { data: any }) {
 
   return (
     <div className="space-y-6">
+      <MyProjectsSection />
       <section className="rounded-lg border border-border bg-card p-6">
         <h2 className="font-display text-2xl font-semibold mb-2 flex items-center gap-2">
           <Globe className="w-5 h-5 text-primary" /> Mijn website

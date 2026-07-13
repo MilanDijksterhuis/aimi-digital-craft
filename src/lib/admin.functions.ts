@@ -1206,6 +1206,9 @@ export const adminListProjects = createServerFn({ method: "GET" })
     };
   });
 
+const PROJECT_STATUS_VALUES = ["concept", "in_uitvoering", "review", "afgerond", "on_hold", "geannuleerd"] as const;
+const PROJECT_PRIORITY_VALUES = ["laag", "normaal", "hoog", "urgent"] as const;
+
 export const adminCreateProject = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
@@ -1215,6 +1218,15 @@ export const adminCreateProject = createServerFn({ method: "POST" })
       snippet_active: z.boolean().optional(),
       primary_user_id: z.string().uuid(),
       member_ids: z.array(z.string().uuid()).optional(),
+      status: z.enum(PROJECT_STATUS_VALUES).optional(),
+      priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
+      description: z.string().trim().max(5000).nullable().optional(),
+      start_date: z.string().trim().max(30).nullable().optional(),
+      deadline: z.string().trim().max(30).nullable().optional(),
+      budget: z.number().nonnegative().nullable().optional(),
+      hours_estimated: z.number().nonnegative().nullable().optional(),
+      category: z.string().trim().max(100).nullable().optional(),
+      tags: z.array(z.string().trim().max(50)).optional(),
     }).parse(d),
   )
   .handler(async ({ context, data }) => {
@@ -1241,6 +1253,8 @@ export const adminCreateProject = createServerFn({ method: "POST" })
       const { error: memErr } = await supabaseAdmin.from("project_members" as any).insert(rows);
       if (memErr) throw new Error(memErr.message);
     }
+
+    await logAudit(supabase, userId, "project_created", "project", (project as any).id, { name: rest.name });
     return { ok: true, project };
   });
 
@@ -1252,6 +1266,19 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
       name: z.string().trim().min(1).max(200).optional(),
       website_url: z.string().trim().max(500).nullable().optional(),
       snippet_active: z.boolean().optional(),
+      status: z.enum(PROJECT_STATUS_VALUES).optional(),
+      priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
+      description: z.string().trim().max(5000).nullable().optional(),
+      start_date: z.string().trim().max(30).nullable().optional(),
+      deadline: z.string().trim().max(30).nullable().optional(),
+      budget: z.number().nonnegative().nullable().optional(),
+      hours_estimated: z.number().nonnegative().nullable().optional(),
+      hours_spent: z.number().nonnegative().optional(),
+      progress_percentage: z.number().int().min(0).max(100).optional(),
+      category: z.string().trim().max(100).nullable().optional(),
+      tags: z.array(z.string().trim().max(50)).optional(),
+      client_visible_notes: z.string().trim().max(5000).nullable().optional(),
+      internal_notes: z.string().trim().max(5000).nullable().optional(),
     }).parse(d),
   )
   .handler(async ({ context, data }) => {
@@ -1272,6 +1299,8 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
       if (rest.snippet_active !== undefined) updates.snippet_active = rest.snippet_active;
       await supabase.from("profiles").update(updates as any).eq("id", (project as any).primary_user_id);
     }
+
+    await logAudit(supabase, userId, "project_updated", "project", project_id, { fields: Object.keys(rest) });
     return { ok: true, project };
   });
 
@@ -1283,7 +1312,95 @@ export const adminDeleteProject = createServerFn({ method: "POST" })
     await ensureAdmin(supabase, userId);
     const { error } = await supabaseAdmin.from("projects" as any).delete().eq("id", data.project_id);
     if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "project_deleted", "project", data.project_id);
     return { ok: true };
+  });
+
+export const adminArchiveProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ project_id: z.string().uuid(), archived: z.boolean() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: project, error } = await supabaseAdmin
+      .from("projects" as any)
+      .update({
+        archived: data.archived,
+        archived_at: data.archived ? new Date().toISOString() : null,
+      })
+      .eq("id", data.project_id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(
+      supabase,
+      userId,
+      data.archived ? "project_archived" : "project_unarchived",
+      "project",
+      data.project_id,
+    );
+    return { ok: true, project };
+  });
+
+export const adminGetProject = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+
+    const { data: project, error } = await supabaseAdmin
+      .from("projects" as any)
+      .select("*")
+      .eq("id", data.project_id)
+      .single();
+    if (error) throw new Error(error.message);
+
+    const [membersRes, milestonesRes, notesRes, contactsRes, auditRes] = await Promise.all([
+      supabaseAdmin.from("project_members" as any).select("project_id, user_id").eq("project_id", data.project_id),
+      supabaseAdmin
+        .from("project_milestones" as any)
+        .select("*")
+        .eq("project_id", data.project_id)
+        .order("order", { ascending: true }),
+      supabaseAdmin
+        .from("project_notes" as any)
+        .select("*")
+        .eq("project_id", data.project_id)
+        .order("created_at", { ascending: false }),
+      supabaseAdmin
+        .from("project_contacts" as any)
+        .select("*")
+        .eq("project_id", data.project_id)
+        .order("created_at", { ascending: false }),
+      supabaseAdmin
+        .from("audit_log" as any)
+        .select("*")
+        .eq("target_type", "project")
+        .eq("target_id", data.project_id)
+        .order("created_at", { ascending: false })
+        .limit(100),
+    ]);
+
+    const memberIds = (membersRes.data ?? []).map((m: any) => m.user_id);
+    const idsToFetch = Array.from(new Set([...memberIds, (project as any).primary_user_id].filter(Boolean)));
+    const { data: profiles } = idsToFetch.length
+      ? await supabase.from("profiles").select("id, full_name, email, company").in("id", idsToFetch)
+      : { data: [] as any[] };
+    const profileMap: Record<string, any> = {};
+    for (const p of (profiles ?? []) as any[]) profileMap[p.id] = p;
+
+    return {
+      project,
+      primary_customer: profileMap[(project as any).primary_user_id] ?? null,
+      members: memberIds.map((id: string) => profileMap[id] ?? { id }),
+      milestones: milestonesRes.data ?? [],
+      notes: notesRes.data ?? [],
+      contacts: contactsRes.data ?? [],
+      activity: auditRes.data ?? [],
+    };
   });
 
 export const adminSetProjectMembers = createServerFn({ method: "POST" })
@@ -1305,6 +1422,257 @@ export const adminSetProjectMembers = createServerFn({ method: "POST" })
     const rows = Array.from(memberSet).map((uid) => ({ project_id: data.project_id, user_id: uid }));
     const { error } = await supabaseAdmin.from("project_members" as any).insert(rows);
     if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// ---------- Project milestones ----------
+
+export const adminListProjectMilestones = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("project_milestones" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("order", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const adminCreateProjectMilestone = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      title: z.string().trim().min(1).max(200),
+      description: z.string().trim().max(2000).nullable().optional(),
+      due_date: z.string().trim().max(30).nullable().optional(),
+      order: z.number().int().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: milestone, error } = await supabaseAdmin
+      .from("project_milestones" as any)
+      .insert(data)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "milestone_created", "project", data.project_id, {
+      milestone_id: (milestone as any).id,
+      title: data.title,
+    });
+    return { ok: true, milestone };
+  });
+
+// Milestone-status is een vrij tekstveld in de database (geen CHECK-
+// constraint). De UI gebruikt alleen "open" en "done" als toggle-waarden.
+export const adminUpdateProjectMilestone = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      id: z.string().uuid(),
+      project_id: z.string().uuid(),
+      title: z.string().trim().min(1).max(200).optional(),
+      description: z.string().trim().max(2000).nullable().optional(),
+      due_date: z.string().trim().max(30).nullable().optional(),
+      status: z.enum(["open", "done"]).optional(),
+      order: z.number().int().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { id, project_id, ...rest } = data;
+    const updates: Record<string, any> = { ...rest, updated_at: new Date().toISOString() };
+    if (rest.status !== undefined) {
+      updates.completed_at = rest.status === "done" ? new Date().toISOString() : null;
+    }
+    const { data: milestone, error } = await supabaseAdmin
+      .from("project_milestones" as any)
+      .update(updates)
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "milestone_updated", "project", project_id, {
+      milestone_id: id,
+      fields: Object.keys(rest),
+    });
+    return { ok: true, milestone };
+  });
+
+export const adminDeleteProjectMilestone = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_milestones" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "milestone_deleted", "project", data.project_id, { milestone_id: data.id });
+    return { ok: true };
+  });
+
+// ---------- Project notes ----------
+
+export const adminListProjectNotes = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("project_notes" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const adminCreateProjectNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      content: z.string().trim().min(1).max(4000),
+      is_client_visible: z.boolean().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: note, error } = await supabaseAdmin
+      .from("project_notes" as any)
+      .insert({ ...data, author_id: userId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "note_created", "project", data.project_id, { note_id: (note as any).id });
+    return { ok: true, note };
+  });
+
+// project_notes heeft geen updated_at-kolom — notities zijn niet bewerkbaar
+// na aanmaken. Deze functie ondersteunt daarom alleen het omzetten van
+// is_client_visible; de inhoud (content) kan niet worden gewijzigd.
+export const adminUpdateProjectNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      id: z.string().uuid(),
+      project_id: z.string().uuid(),
+      is_client_visible: z.boolean().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { id, project_id, ...rest } = data;
+    const { data: note, error } = await supabaseAdmin
+      .from("project_notes" as any)
+      .update(rest)
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "note_updated", "project", project_id, { note_id: id, fields: Object.keys(rest) });
+    return { ok: true, note };
+  });
+
+export const adminDeleteProjectNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_notes" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "note_deleted", "project", data.project_id, { note_id: data.id });
+    return { ok: true };
+  });
+
+// ---------- Project contacts ----------
+
+export const adminListProjectContacts = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("project_contacts" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const adminCreateProjectContact = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      name: z.string().trim().min(1).max(200),
+      role: z.string().trim().max(100).nullable().optional(),
+      email: z.string().trim().max(200).nullable().optional(),
+      phone: z.string().trim().max(50).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: contact, error } = await supabaseAdmin
+      .from("project_contacts" as any)
+      .insert(data)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "contact_created", "project", data.project_id, { contact_id: (contact as any).id });
+    return { ok: true, contact };
+  });
+
+export const adminUpdateProjectContact = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      id: z.string().uuid(),
+      project_id: z.string().uuid(),
+      name: z.string().trim().min(1).max(200).optional(),
+      role: z.string().trim().max(100).nullable().optional(),
+      email: z.string().trim().max(200).nullable().optional(),
+      phone: z.string().trim().max(50).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { id, project_id, ...rest } = data;
+    const { data: contact, error } = await supabaseAdmin
+      .from("project_contacts" as any)
+      .update(rest)
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "contact_updated", "project", project_id, { contact_id: id, fields: Object.keys(rest) });
+    return { ok: true, contact };
+  });
+
+export const adminDeleteProjectContact = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_contacts" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "contact_deleted", "project", data.project_id, { contact_id: data.id });
     return { ok: true };
   });
 
