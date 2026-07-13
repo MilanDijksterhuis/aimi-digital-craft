@@ -23,8 +23,6 @@ import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticate
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
-import { Route as AuthenticatedPortalProjectenProjectIdRouteImport } from './routes/_authenticated/portal.projecten.$projectId'
-import { Route as AuthenticatedAdminProjectenProjectIdRouteImport } from './routes/_authenticated/admin.projecten.$projectId'
 
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
   id: '/track.js',
@@ -96,18 +94,6 @@ const ApiPublicHooksExpireAccountsRoute =
     path: '/api/public/hooks/expire-accounts',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AuthenticatedPortalProjectenProjectIdRoute =
-  AuthenticatedPortalProjectenProjectIdRouteImport.update({
-    id: '/projecten/$projectId',
-    path: '/projecten/$projectId',
-    getParentRoute: () => AuthenticatedPortalRoute,
-  } as any)
-const AuthenticatedAdminProjectenProjectIdRoute =
-  AuthenticatedAdminProjectenProjectIdRouteImport.update({
-    id: '/projecten/$projectId',
-    path: '/projecten/$projectId',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -117,13 +103,11 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
   '/account': typeof AuthenticatedAccountRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
-  '/portal': typeof AuthenticatedPortalRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
+  '/portal': typeof AuthenticatedPortalRoute
   '/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
-  '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
-  '/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRoutesByTo {
@@ -134,13 +118,11 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
   '/account': typeof AuthenticatedAccountRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
-  '/portal': typeof AuthenticatedPortalRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
+  '/portal': typeof AuthenticatedPortalRoute
   '/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
-  '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
-  '/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRoutesById {
@@ -153,13 +135,11 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
-  '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/_authenticated/server': typeof AuthenticatedServerRoute
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
-  '/_authenticated/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
-  '/_authenticated/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
 export interface FileRouteTypes {
@@ -177,8 +157,6 @@ export interface FileRouteTypes {
     | '/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
-    | '/admin/projecten/$projectId'
-    | '/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -194,8 +172,6 @@ export interface FileRouteTypes {
     | '/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
-    | '/admin/projecten/$projectId'
-    | '/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   id:
     | '__root__'
@@ -212,8 +188,6 @@ export interface FileRouteTypes {
     | '/_authenticated/server'
     | '/api/public/site-error'
     | '/api/public/site-ping'
-    | '/_authenticated/admin/projecten/$projectId'
-    | '/_authenticated/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   fileRoutesById: FileRoutesById
 }
@@ -330,58 +304,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksExpireAccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/portal/projecten/$projectId': {
-      id: '/_authenticated/portal/projecten/$projectId'
-      path: '/projecten/$projectId'
-      fullPath: '/portal/projecten/$projectId'
-      preLoaderRoute: typeof AuthenticatedPortalProjectenProjectIdRouteImport
-      parentRoute: typeof AuthenticatedPortalRoute
-    }
-    '/_authenticated/admin/projecten/$projectId': {
-      id: '/_authenticated/admin/projecten/$projectId'
-      path: '/projecten/$projectId'
-      fullPath: '/admin/projecten/$projectId'
-      preLoaderRoute: typeof AuthenticatedAdminProjectenProjectIdRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
   }
 }
 
-interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminProjectenProjectIdRoute: typeof AuthenticatedAdminProjectenProjectIdRoute
-}
-
-const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminProjectenProjectIdRoute:
-    AuthenticatedAdminProjectenProjectIdRoute,
-}
-
-const AuthenticatedAdminRouteWithChildren =
-  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
-
-interface AuthenticatedPortalRouteChildren {
-  AuthenticatedPortalProjectenProjectIdRoute: typeof AuthenticatedPortalProjectenProjectIdRoute
-}
-
-const AuthenticatedPortalRouteChildren: AuthenticatedPortalRouteChildren = {
-  AuthenticatedPortalProjectenProjectIdRoute:
-    AuthenticatedPortalProjectenProjectIdRoute,
-}
-
-const AuthenticatedPortalRouteWithChildren =
-  AuthenticatedPortalRoute._addFileChildren(AuthenticatedPortalRouteChildren)
-
 interface AuthenticatedRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
-  AuthenticatedPortalRoute: typeof AuthenticatedPortalRouteWithChildren
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedPortalRoute: typeof AuthenticatedPortalRoute
   AuthenticatedServerRoute: typeof AuthenticatedServerRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
-  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
-  AuthenticatedPortalRoute: AuthenticatedPortalRouteWithChildren,
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedPortalRoute: AuthenticatedPortalRoute,
   AuthenticatedServerRoute: AuthenticatedServerRoute,
 }
 
