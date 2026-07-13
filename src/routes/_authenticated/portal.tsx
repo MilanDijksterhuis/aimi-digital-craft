@@ -24,6 +24,7 @@ import {
   getAttachmentUrl,
   cancelMyChange,
 } from "@/lib/portal.functions";
+import { getMyProjectIds } from "@/lib/project-detail.functions";
 import {
   Dialog,
   DialogContent,
@@ -111,6 +112,12 @@ function matchesFilter(s: string, f: FilterKey): boolean {
 
 function PortalPage() {
   const fetchDash = useServerFn(getMyDashboard);
+  const fetchMyProjectIds = useServerFn(getMyProjectIds);
+  const { data: myProjects } = useQuery({
+    queryKey: ["my-project-ids"],
+    queryFn: () => fetchMyProjectIds({}),
+  });
+  const myProjectId = myProjects?.project_ids?.[0] as string | undefined;
   const submit = useServerFn(submitChangeRequest);
   const buy = useServerFn(requestExtraChanges);
   const markRead = useServerFn(markNotificationRead);
@@ -371,7 +378,7 @@ function PortalPage() {
       )}
 
       {tab === "website" && (
-        <WebsiteTab data={data} />
+        <WebsiteTab data={data} myProjectId={myProjectId} />
       )}
 
       {tab === "changes" && (
@@ -1096,7 +1103,7 @@ function UptimeChart({ dailyUptime }: { dailyUptime: any[] }) {
   );
 }
 
-function WebsiteTab({ data }: { data: any }) {
+function WebsiteTab({ data, myProjectId }: { data: any; myProjectId?: string }) {
   const uptime = data.uptimePct as number | null;
   const avgMs: number | null = data.avg ?? null;
   const dailyUptime: any[] = data.dailyUptime ?? [];
@@ -1118,9 +1125,20 @@ function WebsiteTab({ data }: { data: any }) {
   return (
     <div className="space-y-6">
       <section className="rounded-lg border border-border bg-card p-6">
-        <h2 className="font-display text-2xl font-semibold mb-2 flex items-center gap-2">
-          <Globe className="w-5 h-5 text-primary" /> Mijn website
-        </h2>
+        <div className="flex items-center justify-between gap-3 flex-wrap mb-2">
+          <h2 className="font-display text-2xl font-semibold flex items-center gap-2">
+            <Globe className="w-5 h-5 text-primary" /> Mijn website
+          </h2>
+          {myProjectId && (
+            <Link
+              to="/portal/projecten/$projectId"
+              params={{ projectId: myProjectId }}
+              className="text-sm text-primary hover:underline"
+            >
+              Bekijk projectdetails →
+            </Link>
+          )}
+        </div>
         {data.profile?.website_url ? (
           <a href={data.profile.website_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline break-all">
             {data.profile.website_url}<span aria-hidden>↗</span>
