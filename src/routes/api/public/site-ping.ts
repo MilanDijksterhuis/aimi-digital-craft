@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { checkRateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
 
 const Body = z.object({
@@ -21,6 +22,18 @@ export const Route = createFileRoute("/api/public/site-ping")({
       POST: async ({ request }) => {
         try {
           const body = Body.parse(await request.json());
+
+          // Per-user_id rate limit: de UID staat publiek in de track.js-snippet
+          // (view-source van de klantsite). Zonder deze limiet kan iedereen die
+          // UID kent onbeperkt status_ok:false sturen (ook verspreid over veel
+          // IP's) en zo een vals "critical uptime"-alert forceren voor die klant.
+          const { allowed } = checkRateLimit(`site-ping:${body.user_id}`, 12, 5 * 60 * 1000);
+          if (!allowed) {
+            return new Response(JSON.stringify({ ok: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...cors },
+            });
+          }
 
           // Valideer dat de user_id een bestaand profiel is — gespoofte/onbekende
           // ID's worden stil genegeerd (voorkomt vervuilde uptime-data).

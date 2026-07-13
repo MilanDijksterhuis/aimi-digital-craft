@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { computeMonitoringStats, measureResponseTime } from "./monitoring.shared";
+import { computeMonitoringStats, measureResponseTime, assertPublicHost } from "./monitoring.shared";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -340,10 +340,35 @@ export const adminSendNotification = createServerFn({ method: "POST" })
   });
 
 // Password reset / set
+const ALLOWED_REDIRECT_HOSTS = new Set(
+  [
+    process.env.VITE_APP_URL,
+    "https://aimi-development.nl",
+    "https://portal.aimi-development.nl",
+  ]
+    .filter((v): v is string => !!v)
+    .map((v) => {
+      try {
+        return new URL(v).hostname;
+      } catch {
+        return null;
+      }
+    })
+    .filter((v): v is string => !!v),
+);
+
 export const adminSendPasswordReset = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({ email: z.string().email(), redirectTo: z.string().url() }).parse(d),
+    z
+      .object({
+        email: z.string().email(),
+        redirectTo: z.string().url().refine(
+          (u) => ALLOWED_REDIRECT_HOSTS.has(new URL(u).hostname),
+          "redirectTo host niet toegestaan",
+        ),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1298,6 +1323,12 @@ async function checkSSLCert(url: string): Promise<{ valid: boolean; expires_at: 
     return fail("Ongeldige URL");
   }
 
+  try {
+    await assertPublicHost(hostname);
+  } catch (e: any) {
+    return fail(e?.message ?? "Interne/private IP-adressen zijn niet toegestaan.");
+  }
+
   return new Promise((resolve) => {
     let settled = false;
     const done = (result: Awaited<ReturnType<typeof checkSSLCert>>) => {
@@ -1344,6 +1375,7 @@ async function checkDNSHealth(url: string): Promise<{ healthy: boolean; issues: 
     const { promisify } = await import("util");
     const resolve4 = promisify((dns as any).resolve4);
     const hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+    await assertPublicHost(hostname);
     const issues: string[] = [];
     try { await resolve4(hostname); } catch { issues.push(`Geen A-record voor ${hostname}`); }
     return { healthy: issues.length === 0, issues };

@@ -1,8 +1,48 @@
+// SSRF-bescherming: monitoring-URL's komen uit profiles.website_url (admin-invoer) en
+// worden server-side opgevraagd. Zonder deze check kan een kwaadaardige/gecompromitteerde
+// staff-invoer de server requests laten doen naar interne diensten of cloud metadata-endpoints.
+export async function assertPublicHost(hostname: string): Promise<void> {
+  const net = await import("net");
+  const dns = await import("dns/promises");
+
+  if (net.isIP(hostname)) {
+    if (isPrivateOrReservedIp(hostname)) {
+      throw new Error("Interne/private IP-adressen zijn niet toegestaan.");
+    }
+    return;
+  }
+
+  const lower = hostname.toLowerCase();
+  if (lower === "localhost" || lower.endsWith(".localhost") || lower.endsWith(".local")) {
+    throw new Error("Interne hostnamen zijn niet toegestaan.");
+  }
+
+  const addrs = await dns.lookup(hostname, { all: true });
+  for (const { address } of addrs) {
+    if (isPrivateOrReservedIp(address)) {
+      throw new Error("Hostname resolvet naar een interne/private IP-adres.");
+    }
+  }
+}
+
+function isPrivateOrReservedIp(address: string): boolean {
+  if (address === "0.0.0.0" || address === "::" || address === "::1") return true;
+  if (address.startsWith("127.")) return true;
+  if (address.startsWith("10.")) return true;
+  if (address.startsWith("169.254.")) return true; // link-local incl. cloud metadata
+  if (address.startsWith("192.168.")) return true;
+  if (/^172\.(1[6-9]|2\d|3[01])\./.test(address)) return true;
+  if (address.startsWith("fc") || address.startsWith("fd")) return true; // IPv6 ULA
+  if (address.startsWith("fe80:")) return true; // IPv6 link-local
+  return false;
+}
+
 export async function measureResponseTime(url: string): Promise<{ response_ms: number; status_ok: boolean }> {
   try {
     // Normaliseer: klant-URL's staan vaak opgeslagen zonder protocol
     // (bijv. "aimi-development.nl"). Zonder scheme gooit http/https.get "Invalid URL".
     const target = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+    await assertPublicHost(new URL(target).hostname);
     const mod = await import(target.startsWith("https") ? "https" : "http");
     return new Promise((resolve) => {
       const start = Date.now();

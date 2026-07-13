@@ -246,7 +246,7 @@ function ExpandableMetricCard({ icon: Icon, label, value, sub, warn, children }:
   );
 }
 
-type ServerSection = "server-basis" | "security" | "pm2" | "overzicht" | "historie" | "netwerk" | "disk-groei" | "week" | "hetzner" | "logs";
+type ServerSection = "algemeen" | "security" | "pm2" | "historie" | "netwerk" | "disk-groei" | "week" | "hetzner" | "logs";
 
 function ServerSidebar({ groups, active, setActive }: {
   groups: { label: string; items: { key: ServerSection; label: string; icon: any; badge?: number; alert?: boolean }[] }[];
@@ -334,7 +334,7 @@ function ServerPage() {
   });
   const [diskAutoScale, setDiskAutoScale] = useState(true);
   const [sshTab, setSshTab] = useState<"success" | "failed">("success");
-  const [activeSection, setActiveSection] = useState<ServerSection>("server-basis");
+  const [activeSection, setActiveSection] = useState<ServerSection>("algemeen");
 
   const latestFn = useServerFn(getMonitoringLatest);
   const historyFn = useServerFn(getMonitoringHistory);
@@ -550,17 +550,14 @@ function ServerPage() {
   }
 
   const sidebarGroups: { label: string; items: { key: ServerSection; label: string; icon: any; badge?: number; alert?: boolean }[] }[] = [
-    { label: "Server-basis", items: [
-      { key: "server-basis", label: "Server-basis", icon: Info },
+    { label: "Algemeen", items: [
+      { key: "algemeen", label: "Algemeen", icon: BarChart2 },
     ]},
     { label: "Security", items: [
       { key: "security", label: "Security", icon: Shield, badge: sshFailed.length > 10 ? sshFailed.length : undefined, alert: true },
     ]},
     { label: "PM2", items: [
       { key: "pm2", label: "PM2", icon: Boxes, badge: m?.pm2_apps_online != null && m?.pm2_apps_total != null && m.pm2_apps_online !== m.pm2_apps_total ? 1 : undefined, alert: true },
-    ]},
-    { label: "Status", items: [
-      { key: "overzicht", label: "Overzicht", icon: BarChart2 },
     ]},
     { label: "Grafieken", items: [
       { key: "historie", label: "Historie (CPU/RAM/Disk)", icon: Activity },
@@ -611,33 +608,6 @@ function ServerPage() {
         <ServerSidebar groups={sidebarGroups} active={activeSection} setActive={setActiveSection} />
 
         <div className="flex-1 min-w-0 space-y-6">
-      {activeSection === "server-basis" && (
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h2 className="font-semibold flex items-center gap-2">
-          <Info className="w-4 h-4" /> Server-basis
-        </h2>
-        {dailyCheckQ.isLoading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map(i => <SkeletonCard key={i} />)}
-          </div>
-        ) : dailyCheckQ.isError ? (
-          <ErrorBox message={(dailyCheckQ.error as Error).message} />
-        ) : dc ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <MetricCard icon={Globe} label="Datacenter" value={dc.datacenter_location ?? "Falkenstein"} />
-            <MetricCard icon={ServerIcon} label="OS-versie" value={dc.os_version ?? "n.v.t."} />
-            <MetricCard icon={ServerIcon} label="Kernel-versie" value={dc.kernel_version ?? "n.v.t."} />
-            <MetricCard icon={Network} label="IP-adres" value={dc.ip_address ?? "n.v.t."} />
-            <MetricCard icon={ServerIcon} label="Hostname" value={dc.hostname ?? "n.v.t."} />
-            <MetricCard icon={Clock} label="Tijdzone" value={dc.timezone ?? "n.v.t."} />
-            <MetricCard icon={Activity} label="Server-leeftijd" value={formatServerAge(dc.server_created_at)} />
-          </div>
-        ) : (
-          <p className="text-sm text-muted-foreground py-6 text-center">Nog geen daily-check data ontvangen.</p>
-        )}
-      </div>
-      )}
-
       {activeSection === "security" && (
         <>
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
@@ -867,8 +837,11 @@ function ServerPage() {
       </div>
       )}
 
-      {activeSection === "overzicht" && (
+      {activeSection === "algemeen" && (
         <>
+      <h2 className="font-semibold flex items-center gap-2">
+        <BarChart2 className="w-4 h-4" /> Algemeen
+      </h2>
       {/* Live cards */}
       {latestQ.isLoading ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -980,6 +953,32 @@ function ServerPage() {
               }
               sub="RX / TX"
             />
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground py-6 text-center">Nog geen daily-check data ontvangen.</p>
+        )}
+      </div>
+
+      {/* Server-basis */}
+      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+        <h2 className="font-semibold flex items-center gap-2">
+          <Info className="w-4 h-4" /> Server-basis
+        </h2>
+        {dailyCheckQ.isLoading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3, 4, 5, 6].map(i => <SkeletonCard key={i} />)}
+          </div>
+        ) : dailyCheckQ.isError ? (
+          <ErrorBox message={(dailyCheckQ.error as Error).message} />
+        ) : dc ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MetricCard icon={Globe} label="Datacenter" value={dc.datacenter_location ?? "Falkenstein"} />
+            <MetricCard icon={ServerIcon} label="OS-versie" value={dc.os_version ?? "n.v.t."} />
+            <MetricCard icon={ServerIcon} label="Kernel-versie" value={dc.kernel_version ?? "n.v.t."} />
+            <MetricCard icon={Network} label="IP-adres" value={dc.ip_address ?? "n.v.t."} />
+            <MetricCard icon={ServerIcon} label="Hostname" value={dc.hostname ?? "n.v.t."} />
+            <MetricCard icon={Clock} label="Tijdzone" value={dc.timezone ?? "n.v.t."} />
+            <MetricCard icon={Activity} label="Server-leeftijd" value={formatServerAge(dc.server_created_at)} />
           </div>
         ) : (
           <p className="text-sm text-muted-foreground py-6 text-center">Nog geen daily-check data ontvangen.</p>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { checkRateLimit } from "@/lib/rate-limit";
 import { z } from "zod";
 
 const Body = z.object({
@@ -21,6 +22,18 @@ export const Route = createFileRoute("/api/public/site-error")({
       POST: async ({ request }) => {
         try {
           const body = Body.parse(await request.json());
+
+          // Per-user_id rate limit: de UID staat publiek in de track.js-snippet
+          // (view-source van de klantsite) en is dus door iedereen te achterhalen.
+          // Zonder deze limiet kan een aanvaller met een bekende UID onbeperkt
+          // valse errors namens die klant injecteren, ongeacht het eigen IP.
+          const { allowed } = checkRateLimit(`site-error:${body.user_id}`, 20, 10 * 60 * 1000);
+          if (!allowed) {
+            return new Response(JSON.stringify({ ok: true }), {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...cors },
+            });
+          }
 
           // Valideer dat de user_id een bestaand profiel is — voorkomt dat
           // willekeurige/gespoofde ID's rijen aanmaken. Onbekende users worden

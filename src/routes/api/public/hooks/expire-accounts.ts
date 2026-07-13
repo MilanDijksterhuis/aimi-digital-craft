@@ -1,23 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { timingSafeEqual } from "node:crypto";
 import { expireBlockedAccountsImpl } from "@/lib/accounts.server";
 
 // Beveiliging: dit endpoint muteert data (accounts blokkeren) en mag niet
-// publiek aanroepbaar zijn. Als CRON_SECRET is gezet, is een matchende
-// Authorization: Bearer <secret> (of x-cron-secret header) verplicht.
-// Is CRON_SECRET niet gezet, dan blijft het oude gedrag werken (zodat een
-// bestaande cron niet breekt) maar wordt er gewaarschuwd in de logs.
+// publiek aanroepbaar zijn. CRON_SECRET is verplicht — ontbreekt het, dan
+// weigert het endpoint elk verzoek (fail-closed) in plaats van open te staan.
+function timingSafeStringEqual(a: string, b: string): boolean {
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return timingSafeEqual(bufA, bufB);
+}
+
 function isAuthorized(request: Request): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) {
-    console.warn(
-      "[security] /api/public/hooks/expire-accounts wordt zonder CRON_SECRET aangeroepen — stel CRON_SECRET in en beveilig de cron.",
+    console.error(
+      "[security] CRON_SECRET is niet ingesteld — expire-accounts weigert alle verzoeken totdat dit is geconfigureerd.",
     );
-    return true;
+    return false;
   }
   const auth = request.headers.get("authorization");
   const bearer = auth?.startsWith("Bearer ") ? auth.slice(7).trim() : null;
   const headerSecret = request.headers.get("x-cron-secret");
-  return bearer === secret || headerSecret === secret;
+  return (
+    (bearer !== null && timingSafeStringEqual(bearer, secret)) ||
+    (headerSecret !== null && timingSafeStringEqual(headerSecret, secret))
+  );
 }
 
 export const Route = createFileRoute("/api/public/hooks/expire-accounts")({

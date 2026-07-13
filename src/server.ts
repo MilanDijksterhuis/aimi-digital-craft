@@ -85,6 +85,22 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "X-DNS-Prefetch-Control": "off",
   "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+  "Content-Security-Policy": [
+    "default-src 'self'",
+    "img-src 'self' data: https://*.supabase.co",
+    "connect-src 'self' https://*.supabase.co",
+    "style-src 'self' 'unsafe-inline'",
+    // 'unsafe-inline' is nodig omdat TanStack Start zijn SSR-hydration bootstrap
+    // (window.$_TSR) als inline <script> injecteert — zonder deze toestemming
+    // faalt hydration op elke pagina (zwart scherm). We hebben geen
+    // dangerouslySetInnerHTML met user-content of andere plek waar user-input
+    // in een <script> terechtkomt (zie security-audit), dus het reële
+    // aanvalsoppervlak hiervan is beperkt tot als er ooit wél zo'n plek bijkomt.
+    "script-src 'self' 'unsafe-inline'",
+    "frame-ancestors 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+  ].join("; "),
 };
 
 function isHttps(request: Request): boolean {

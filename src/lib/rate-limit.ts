@@ -47,10 +47,14 @@ export function recordStrike(ip: string): void {
   bans.set(ip, { until: Date.now() + durationMs, strikes });
 }
 
+// Dit project draait op Cloudflare Workers: cf-connecting-ip wordt door
+// Cloudflare zelf gezet en is niet door de client te overschrijven. De
+// x-forwarded-for fallback is dat wél — een client kan die header vrij
+// spoofen om rate limits en IP-bans te omzeilen. Gebruik x-forwarded-for
+// daarom alleen als cf-connecting-ip echt ontbreekt (buiten Cloudflare, bv.
+// lokale dev), nooit als primaire bron in productie.
 export function getClientIp(request: Request): string {
-  return (
-    request.headers.get("cf-connecting-ip") ??
-    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
-    "unknown"
-  );
+  const cfIp = request.headers.get("cf-connecting-ip");
+  if (cfIp) return cfIp;
+  return request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
 }

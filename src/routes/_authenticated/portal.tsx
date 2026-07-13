@@ -33,9 +33,19 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ChatWidget } from "@/components/ChatWidget";
 
 import { supabase } from "@/integrations/supabase/client";
+
+const ALLOWED_ATTACHMENT_MIME = new Set([
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/gif",
+  "application/pdf",
+]);
+const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 import {
   STATUS_LABEL,
   PRIORITY_LABEL,
@@ -214,13 +224,18 @@ function PortalPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-10 w-64 bg-muted rounded" />
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-64" />
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
-          <div className="h-40 bg-muted/60 rounded-lg border border-border" />
+          <Skeleton className="h-40 rounded-lg" />
+          <Skeleton className="h-40 rounded-lg" />
         </div>
-        <div className="h-24 bg-muted/40 rounded-lg border border-border" />
+        <Skeleton className="h-24 rounded-lg" />
+        <div className="space-y-2">
+          <Skeleton className="h-14 w-full rounded-lg" />
+          <Skeleton className="h-14 w-full rounded-lg" />
+          <Skeleton className="h-14 w-full rounded-lg" />
+        </div>
       </div>
     );
   }
@@ -245,6 +260,16 @@ function PortalPage() {
       const uploaded: any[] = [];
       if (files.length && data.profile) {
         for (const f of files) {
+          if (!ALLOWED_ATTACHMENT_MIME.has(f.type)) {
+            toast.error(`Bestandstype niet toegestaan: ${f.name}`);
+            setUploading(false);
+            return;
+          }
+          if (f.size > MAX_ATTACHMENT_BYTES) {
+            toast.error(`Bestand te groot (max 10MB): ${f.name}`);
+            setUploading(false);
+            return;
+          }
           const path = `${data.profile.id}/pending/${crypto.randomUUID()}-${f.name}`;
           const { error: upErr } = await supabase.storage
             .from("change-attachments")

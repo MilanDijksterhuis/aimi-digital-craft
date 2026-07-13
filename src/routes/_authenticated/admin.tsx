@@ -89,6 +89,28 @@ import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
 import { LeadsPanel } from "@/components/LeadsPanel";
 import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: number }) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-border">
+      <div className="bg-muted/30 p-3 flex gap-4">
+        {Array.from({ length: cols }).map((_, i) => (
+          <Skeleton key={i} className="h-4 flex-1" />
+        ))}
+      </div>
+      <div className="divide-y divide-border">
+        {Array.from({ length: rows }).map((_, r) => (
+          <div key={r} className="p-3 flex gap-4">
+            {Array.from({ length: cols }).map((_, c) => (
+              <Skeleton key={c} className="h-4 flex-1" />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
@@ -146,11 +168,12 @@ function AdminPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-4 animate-pulse">
-        <div className="h-10 w-40 bg-muted rounded" />
+      <div className="space-y-4">
+        <Skeleton className="h-10 w-40" />
         <div className="grid sm:grid-cols-3 gap-4">
-          {[1,2,3].map(i => <div key={i} className="h-28 bg-muted/60 rounded-lg border border-border" />)}
+          {[1,2,3].map(i => <Skeleton key={i} className="h-28 rounded-lg" />)}
         </div>
+        <TableSkeleton cols={5} />
       </div>
     );
   }
@@ -453,7 +476,7 @@ function PasswordResetsPanel() {
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-password-resets"] }); toast.success("Gemarkeerd als afgehandeld."); },
   });
   const [view, setView] = useState<"pending" | "handled">("pending");
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={5} />;
   const items = (data?.items ?? []).filter((r: any) => view === "pending" ? r.status === "pending" : r.status !== "pending");
   return (
     <div className="space-y-4">
@@ -500,7 +523,7 @@ function ExtraChangesPanel() {
   const inv = () => qc.invalidateQueries({ queryKey: ["admin-extra-changes"] });
   const approveM = useMutation({ mutationFn: (id: string) => approve({ data: { id } }), onSuccess: () => { inv(); toast.success("Goedgekeurd."); } });
   const rejectM = useMutation({ mutationFn: (id: string) => reject({ data: { id } }), onSuccess: () => { inv(); toast.success("Afgewezen."); } });
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={7} />;
   const items = data?.items ?? [];
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
@@ -563,14 +586,14 @@ function ProjectsOverview({ onOpenDetail }: { onOpenDetail: (id: string) => void
   const [showAdd, setShowAdd] = useState(false);
   const [newForm, setNewForm] = useState({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] as string[] });
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
-  const items = data?.items ?? [];
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-
   const createM = useMutation({
     mutationFn: () => create({ data: newForm }),
     onSuccess: () => { invalidate(); toast.success("Project aangemaakt."); setShowAdd(false); setNewForm({ name: "", website_url: "", snippet_active: false, primary_user_id: "", member_ids: [] }); },
   });
+
+  if (isLoading) return <TableSkeleton cols={4} />;
+  const items = data?.items ?? [];
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
 
   return (
     <div className="space-y-4">
@@ -1145,7 +1168,16 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
   const [onbLabel, setOnbLabel] = useState("");
 
   if (isLoading || !data || !data.profile) {
-    return <Modal onClose={onClose} title="Laden…"><p>Laden…</p></Modal>;
+    return (
+      <Modal onClose={onClose} title="Laden…">
+        <div className="space-y-3">
+          <Skeleton className="h-5 w-1/2" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-24 w-full" />
+        </div>
+      </Modal>
+    );
   }
   const p = data.profile;
 
@@ -1811,7 +1843,11 @@ function AfsprakenTab({ customers, qc }: any) {
       </form>
 
       {isLoading ? (
-        <p className="text-sm text-muted-foreground">Laden…</p>
+        <div className="space-y-2">
+          <Skeleton className="h-14 w-full" />
+          <Skeleton className="h-14 w-full" />
+          <Skeleton className="h-14 w-full" />
+        </div>
       ) : data?.appointments.length === 0 ? (
         <p className="text-sm text-muted-foreground">Nog geen afspraken.</p>
       ) : (
@@ -1931,7 +1967,7 @@ function AccountsPanel() {
     onError: (e: any) => toast.error(e.message),
   });
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={5} />;
   const accounts = data?.accounts ?? [];
   const filtered = accounts.filter((a: any) => {
     const q = filter.toLowerCase();
@@ -2092,7 +2128,7 @@ function NotificationsPanel() {
   const readM = useMutation({ mutationFn: (id: string) => markRead({ data: { id } }), onSuccess: inv });
   const allM = useMutation({ mutationFn: () => markAll({}), onSuccess: () => { inv(); toast.success("Alles gelezen."); } });
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={3} />;
   const items = data?.items ?? [];
   return (
     <div className="space-y-3">
@@ -2129,7 +2165,7 @@ function ArchivedChangesPanel() {
   const { data, isLoading } = useQuery({ queryKey: ["admin-archived"], queryFn: () => list({}) });
   const inv = () => { qc.invalidateQueries({ queryKey: ["admin-archived"] }); qc.invalidateQueries({ queryKey: ["admin-overview"] }); };
   const unM = useMutation({ mutationFn: (id: string) => unarch({ data: { id } }), onSuccess: () => { inv(); toast.success("Hersteld."); } });
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={4} />;
   const items = data?.items ?? [];
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
@@ -2180,7 +2216,7 @@ function AlertsPanel() {
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-all-alerts"] }); toast.success("Alert gearchiveerd."); },
   });
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={4} />;
 
   const allAlerts: any[] = (data as any)?.alerts ?? [];
   const active = allAlerts.filter((a: any) => !a.archived_at);
@@ -2300,7 +2336,7 @@ function RollenPermissiesPanel() {
     onError: (e: any) => toast.error(e.message),
   });
 
-  if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
+  if (isLoading) return <TableSkeleton cols={3} />;
 
   const rows: any[] = (data as any)?.items ?? [];
   const lookup: Record<string, boolean> = {};
