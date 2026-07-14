@@ -307,7 +307,7 @@ export const adminCreateChangeRequest = createServerFn({ method: "POST" })
       }
     }
 
-    const { data: row, error } = await supabase
+    const { data: row, error } = await supabaseAdmin
       .from("change_requests")
       .insert({
         user_id: data.user_id,

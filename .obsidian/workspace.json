@@ -178,6 +178,7 @@
   },
   "active": "72c051647c9c8cb3",
   "lastOpenFiles": [
+    "src/lib/admin.functions.ts.tmp.7232.f9d8f9caa33d",
     "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.ad80d2b7dbef",
     "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.632be5809dcd",
     "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.3920aff78cc9",
@@ -188,7 +189,6 @@
     "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.32a4840e2051",
     "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.6d38b5a117a3",
     "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.aeb9aec0c6f4",
-    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.8497aeb5ff1a",
     "portal-verbeterideeen.md",
     "node_modules/date-fns/SECURITY.md",
     "node_modules/h3-v2/dist/docs/3.migration/0.index/index.md",
