@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
 import {
   BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
-  MessagesSquare, UserCheck, Trash2, Key, ShoppingCart, Link2,
+  MessagesSquare, UserCheck, Trash2, Key, Link2,
   ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
   AlertTriangle, Shield, ChevronLeft, RefreshCw, CheckCircle, XCircle,
   Clock, Activity, Target,
@@ -12,26 +12,12 @@ import {
 import { toast } from "sonner";
 import {
   adminGetOverview,
-  adminGetCustomer,
-  adminCreateCustomerFn,
-  adminUpdateCustomer,
   adminGrantCredits,
-  adminSendNotification,
-  adminSendPasswordReset,
-  adminSetPassword,
-  adminAddCost,
-  adminDeleteCost,
-  adminAddOnboardingItem,
-  adminToggleOnboardingItem,
-  adminDeleteOnboardingItem,
   adminListAppointments,
   adminCreateAppointment,
   adminDeleteAppointment,
   adminListPasswordResets,
   adminMarkPasswordResetHandled,
-  adminListExtraChangeRequests,
-  adminApproveExtraChangeRequest,
-  adminRejectExtraChangeRequest,
   adminUpdateWebsiteLink,
   adminGetAllAlerts,
   adminSnoozeAlert,
@@ -46,9 +32,6 @@ import {
   adminAssignChange,
   adminListArchivedChanges,
 } from "@/lib/accounts.functions";
-import {
-  adminSetFreeQuota,
-} from "@/lib/admin.functions";
 import { AdminChatPanel } from "@/components/AdminChatPanel";
 import { TeamTab } from "@/components/TeamTab";
 import { DeletedChangesTab } from "@/components/DeletedChangesTab";
@@ -84,8 +67,6 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
-const eur = (cents: number) => `â‚¬${(cents / 100).toFixed(2)}`;
-
 function AdminPage() {
   // Kind-routes (bv. /admin/projecten) delen deze route als parent
   // (TanStack Router file-based routing) en moeten via Outlet gerenderd worden
@@ -101,21 +82,17 @@ function AdminPage() {
   });
 
   type TabKey =
-    | "dashboard" | "klanten" | "accounts" | "password_resets" | "extra_changes"
+    | "dashboard" | "accounts" | "password_resets"
     | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "alerts" | "role_permissions" | "team" | "afspraken"
     | "chat" | "deleted" | "leads";
   const [tab, setTab] = useState<TabKey>("dashboard");
-  const [openCustomer, setOpenCustomer] = useState<string | null>(null);
   const perms = usePermissions();
 
   // Pending counts for sidebar badges
   const listResets = useServerFn(adminListPasswordResets);
-  const listExtras = useServerFn(adminListExtraChangeRequests);
   const resetsQ = useQuery({ queryKey: ["admin-password-resets"], queryFn: () => listResets({}) });
-  const extrasQ = useQuery({ queryKey: ["admin-extra-changes"], queryFn: () => listExtras({}) });
   const pendingResets = (resetsQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
-  const pendingExtras = (extrasQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
 
   // New-activity tracking via localStorage
   const [adminSeen, setAdminSeen] = useState<Record<string, number>>(() => {
@@ -198,10 +175,9 @@ function AdminPage() {
 
   const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number; alert?: boolean; href?: string }[] }[] = [
     { label: "Overzicht", items: [{ key: "dashboard", label: "Dashboard", icon: BarChart2 }] },
-    { label: "Klanten", items: [
-      { key: "klanten", label: `Alle klanten (${data.customers.length})`, icon: Users },
+    { label: "Klanten & accounts", items: [
+      { key: "accounts" as TabKey, label: "Accounts", icon: Users2, href: "/admin/accounts" },
       { key: "password_resets", label: "Wachtwoord reset verzoeken", icon: Key, badge: pendingResets },
-      { key: "extra_changes", label: "Extra change aanvragen", icon: ShoppingCart, badge: pendingExtras },
     ]},
     { label: "Werk", items: [
       { key: "changes" as TabKey, label: `Changes (${data.requests.length})`, icon: GitPullRequest, alert: newChanges > 0, badge: newChanges || undefined, href: "/admin/changes" },
@@ -210,7 +186,6 @@ function AdminPage() {
       { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox, badge: data.pendingPurchases.length || undefined },
     ]},
     { label: "Beheer", items: [
-      { key: "accounts" as TabKey, label: "Accounts", icon: Users2, href: "/admin/accounts" },
       { key: "notifications", label: "Notificaties", icon: Bell },
       { key: "projecten" as TabKey, label: "Projecten", icon: Link2, href: "/admin/projecten" },
       { key: "alerts", label: "Alerts", icon: AlertTriangle },
@@ -242,11 +217,9 @@ function AdminPage() {
         <AdminSidebar groups={groups} active={tab} setActive={(k) => { setTab(k); markAdminTabSeen(k); }} />
 
         <div className="flex-1 min-w-0">
-          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => { setTab("changes"); markAdminTabSeen("changes"); }} onGoPending={() => setTab("password_resets")} recentRequests={data.requests.filter((r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000))} recentComments={data.requests.flatMap((r: any) => (r.change_comments ?? []).filter((c: any) => customerIds.has(c.author_id) && new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).map((c: any) => ({ ...c, requestTitle: r.title })))} onGoBerichten={() => { setTab("berichten"); markAdminTabSeen("berichten"); }} />}
-          {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
+          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets} onGoChanges={() => { setTab("changes"); markAdminTabSeen("changes"); }} onGoPending={() => setTab("password_resets")} recentRequests={data.requests.filter((r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000))} recentComments={data.requests.flatMap((r: any) => (r.change_comments ?? []).filter((c: any) => customerIds.has(c.author_id) && new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).map((c: any) => ({ ...c, requestTitle: r.title })))} onGoBerichten={() => { setTab("berichten"); markAdminTabSeen("berichten"); }} />}
           {tab === "notifications" && <NotificationsPanel />}
           {tab === "password_resets" && <PasswordResetsPanel />}
-          {tab === "extra_changes" && <ExtraChangesPanel />}
           {tab === "archived" && <ArchivedChangesPanel />}
           {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
           {tab === "berichten" && <BerichtenTab />}
@@ -316,7 +289,7 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
           <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes â†’" trend={0} />
         </button>
         <button onClick={onGoPending} className="text-left">
-          <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Reset + extra changes" trend={0} highlight={pendingTotal > 0} />
+          <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Wachtwoord reset-verzoeken" trend={0} highlight={pendingTotal > 0} />
         </button>
       </div>
       <div className="rounded-lg border border-border bg-card p-6">
@@ -481,407 +454,6 @@ function PasswordResetsPanel() {
         </table>
       </div>
     </div>
-  );
-}
-
-function ExtraChangesPanel() {
-  const list = useServerFn(adminListExtraChangeRequests);
-  const approve = useServerFn(adminApproveExtraChangeRequest);
-  const reject = useServerFn(adminRejectExtraChangeRequest);
-  const qc = useQueryClient();
-  const { data, isLoading } = useQuery({ queryKey: ["admin-extra-changes"], queryFn: () => list({}) });
-  const inv = () => qc.invalidateQueries({ queryKey: ["admin-extra-changes"] });
-  const approveM = useMutation({ mutationFn: (id: string) => approve({ data: { id } }), onSuccess: () => { inv(); toast.success("Goedgekeurd."); } });
-  const rejectM = useMutation({ mutationFn: (id: string) => reject({ data: { id } }), onSuccess: () => { inv(); toast.success("Afgewezen."); } });
-  if (isLoading) return <TableSkeleton cols={7} />;
-  const items = data?.items ?? [];
-  return (
-    <div className="overflow-x-auto rounded-lg border border-border">
-      <table className="w-full text-sm">
-        <thead className="bg-muted/30 text-muted-foreground">
-          <tr><th className="text-left p-3">Naam</th><th className="text-left p-3">E-mail</th><th className="text-left p-3">Aantal</th><th className="text-left p-3">Bedrag</th><th className="text-left p-3">Aangevraagd</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
-        </thead>
-        <tbody>
-          {items.map((r: any) => (
-            <tr key={r.id} className="border-t border-border">
-              <td className="p-3">{r.user_name || "â€”"}</td>
-              <td className="p-3">{r.user_email}</td>
-              <td className="p-3">{r.amount}</td>
-              <td className="p-3">â‚¬{r.total_eur}</td>
-              <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
-              <td className="p-3">{r.status}</td>
-              <td className="p-3 text-right space-x-2 whitespace-nowrap">
-                {r.status === "pending" && (<>
-                  <button onClick={() => approveM.mutate(r.id)} className="text-xs text-primary hover:underline">Goedkeuren</button>
-                  <button onClick={() => rejectM.mutate(r.id)} className="text-xs text-destructive hover:underline">Afwijzen</button>
-                </>)}
-              </td>
-            </tr>
-          ))}
-          {items.length === 0 && <tr><td colSpan={7} className="p-6 text-center text-muted-foreground">Geen aanvragen.</td></tr>}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
-  const createC = useServerFn(adminCreateCustomerFn);
-  const grant = useServerFn(adminGrantCredits);
-  const notify = useServerFn(adminSendNotification);
-  const sendReset = useServerFn(adminSendPasswordReset);
-  const setPw = useServerFn(adminSetPassword);
-
-  const createM = useMutation({
-    mutationFn: (i: any) => createC({ data: i }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
-  });
-  const grantM = useMutation({
-    mutationFn: (i: any) => grant({ data: i }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
-  });
-  const notifyM = useMutation({
-    mutationFn: (i: any) => notify({ data: i }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-overview"] }),
-  });
-  const resetM = useMutation({
-    mutationFn: (email: string) =>
-      sendReset({ data: { email, redirectTo: `${window.location.origin}/reset-password` } }),
-  });
-  const setPwM = useMutation({ mutationFn: (i: any) => setPw({ data: i }) });
-
-  const [newC, setNewC] = useState({ email: "", full_name: "", company: "" });
-  const [notifyState, setNotifyState] = useState<any>(null);
-  const [filter, setFilter] = useState("");
-
-  const filtered = data.customers.filter((c: any) => {
-    const q = filter.toLowerCase();
-    return !q || c.email?.toLowerCase().includes(q) || c.full_name?.toLowerCase().includes(q) || c.company?.toLowerCase().includes(q);
-  });
-
-  return (
-    <div className="space-y-6">
-      {/* Create */}
-      <section className="rounded-2xl border border-border bg-card p-6">
-        <h2 className="font-display text-xl font-semibold mb-4">Nieuwe klant</h2>
-        <form
-          className="grid sm:grid-cols-4 gap-3 items-end"
-          onSubmit={(e) => {
-            e.preventDefault();
-            createM.mutate(newC, {
-              onSuccess: () => setNewC({ email: "", full_name: "", company: "" }),
-            });
-          }}
-        >
-          <Field label="Naam" value={newC.full_name} onChange={(v: string) => setNewC({ ...newC, full_name: v })} required />
-          <Field label="Email" type="email" value={newC.email} onChange={(v: string) => setNewC({ ...newC, email: v })} required />
-          <Field label="Bedrijf" value={newC.company} onChange={(v: string) => setNewC({ ...newC, company: v })} />
-          <button
-
-            type="submit"
-            disabled={createM.isPending}
-            className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
-          >
-            {createM.isPending ? "Bezigâ€¦" : "Aanmaken"}
-          </button>
-        </form>
-        {createM.data && (
-          <div className="mt-4 rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm">
-            <p className="font-semibold">Account aangemaakt voor {createM.data.email}</p>
-            <p className="mt-2">Tijdelijk wachtwoord:</p>
-            <code className="block mt-1 rounded bg-background px-2 py-1 font-mono">
-              {createM.data.tempPassword}
-            </code>
-          </div>
-        )}
-        {createM.error && <p className="mt-3 text-sm text-destructive">{(createM.error as Error).message}</p>}
-      </section>
-
-      {/* Pending purchases moved to Aanvragen tab */}
-
-      {/* Filter */}
-      <input
-        placeholder="Zoeken (naam, email, tag)â€¦"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-sm"
-      />
-
-      {/* Customers */}
-      <div className="overflow-x-auto rounded-xl border border-border">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/30 text-muted-foreground">
-            <tr>
-              <th className="text-left p-3">Naam</th>
-              <th className="text-left p-3">Email</th>
-              <th className="text-left p-3">Pakket</th>
-              <th className="text-left p-3">Gebruikt</th>
-              <th className="text-left p-3">Acties</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((c: any) => (
-              <tr key={c.id} className="border-t border-border hover:bg-muted/20">
-                <td className="p-3">
-                  <button onClick={() => setOpenCustomer(c.id)} className="text-primary hover:underline">
-                    {c.full_name || "â€”"}
-                  </button>
-                </td>
-                <td className="p-3">{c.email}</td>
-                <td className="p-3">{c.package || "â€”"} {c.monthly_price_cents ? `(${eur(c.monthly_price_cents)})` : ""}</td>
-                <td className="p-3">{c.usedThisMonth}/{3 + c.extraCredits}</td>
-                <td className="p-3 space-x-2 whitespace-nowrap">
-                  <button onClick={() => setOpenCustomer(c.id)} className="text-xs text-primary hover:underline">bewerk</button>
-                  <button
-                    onClick={() => {
-                      const n = parseInt(prompt(`Extra credits voor ${c.email}?`, "1") || "0", 10);
-                      if (n > 0) grantM.mutate({ user_id: c.id, amount: n, reason: "Handmatig" });
-                    }}
-                    className="text-xs text-primary hover:underline"
-                  >+credits</button>
-                  <button onClick={() => setNotifyState({ user_id: c.id, title: "", message: "" })} className="text-xs text-primary hover:underline">notify</button>
-                  <button
-                    onClick={() => resetM.mutate(c.email)}
-                    className="text-xs text-primary hover:underline"
-                  >reset-mail</button>
-                  <button
-                    onClick={() => {
-                      const pw = prompt(`Nieuw wachtwoord voor ${c.email} (min 8):`);
-                      if (pw && pw.length >= 8) setPwM.mutate({ user_id: c.id, password: pw });
-                    }}
-                    className="text-xs text-primary hover:underline"
-                  >set-pw</button>
-                </td>
-              </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Geen klanten.</td></tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {resetM.data?.link && (
-        <div className="rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm">
-          <p className="font-semibold">Reset-link gegenereerd & gemaild:</p>
-          <code className="block mt-1 break-all rounded bg-background p-2 text-xs">{resetM.data.link}</code>
-        </div>
-      )}
-      {setPwM.isSuccess && (
-        <p className="text-sm text-primary">Wachtwoord aangepast</p>
-      )}
-      {(resetM.error || setPwM.error) && (
-        <p className="text-sm text-destructive">{((resetM.error || setPwM.error) as Error).message}</p>
-      )}
-
-      {/* Notification modal */}
-      {notifyState && (
-        <Modal onClose={() => setNotifyState(null)} title="Notificatie sturen">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              notifyM.mutate(notifyState, { onSuccess: () => setNotifyState(null) });
-            }}
-            className="space-y-3"
-          >
-            <input required placeholder="Titel" value={notifyState.title}
-              onChange={(e) => setNotifyState({ ...notifyState, title: e.target.value })}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <textarea required placeholder="Bericht" rows={4} value={notifyState.message}
-              onChange={(e) => setNotifyState({ ...notifyState, message: e.target.value })}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <button type="submit" className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Verstuur</button>
-          </form>
-        </Modal>
-      )}
-
-      {openCustomer && (
-        <CustomerDetailModal userId={openCustomer} onClose={() => setOpenCustomer(null)} qc={qc} />
-      )}
-    </div>
-  );
-}
-
-function CustomerDetailModal({ userId, onClose, qc }: any) {
-  const get = useServerFn(adminGetCustomer);
-  const update = useServerFn(adminUpdateCustomer);
-  const setQuota = useServerFn(adminSetFreeQuota);
-  const addCost = useServerFn(adminAddCost);
-  const delCost = useServerFn(adminDeleteCost);
-  const addOnb = useServerFn(adminAddOnboardingItem);
-  const togOnb = useServerFn(adminToggleOnboardingItem);
-  const delOnb = useServerFn(adminDeleteOnboardingItem);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["admin-customer", userId],
-    queryFn: () => get({ data: { user_id: userId } }),
-  });
-
-  const inv = () => {
-    qc.invalidateQueries({ queryKey: ["admin-customer", userId] });
-    qc.invalidateQueries({ queryKey: ["admin-overview"] });
-  };
-
-  const updateM = useMutation({ mutationFn: (i: any) => update({ data: i }), onSuccess: inv });
-  const setQuotaM = useMutation({ mutationFn: (i: any) => setQuota({ data: i }), onSuccess: inv });
-  const addCostM = useMutation({ mutationFn: (i: any) => addCost({ data: i }), onSuccess: inv });
-  const delCostM = useMutation({ mutationFn: (id: string) => delCost({ data: { id } }), onSuccess: inv });
-  const addOnbM = useMutation({ mutationFn: (i: any) => addOnb({ data: i }), onSuccess: inv });
-  const togOnbM = useMutation({ mutationFn: (i: any) => togOnb({ data: i }), onSuccess: inv });
-  const delOnbM = useMutation({ mutationFn: (id: string) => delOnb({ data: { id } }), onSuccess: inv });
-
-  const [form, setForm] = useState<any>(null);
-  const [costForm, setCostForm] = useState({ description: "", amount: "" });
-  const [onbLabel, setOnbLabel] = useState("");
-
-  if (isLoading || !data || !data.profile) {
-    return (
-      <Modal onClose={onClose} title="Ladenâ€¦">
-        <div className="space-y-3">
-          <Skeleton className="h-5 w-1/2" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-24 w-full" />
-        </div>
-      </Modal>
-    );
-  }
-  const p = data.profile;
-
-  const f = form ?? {
-    full_name: p.full_name ?? "", company: p.company ?? "", email: p.email,
-    phone: p.phone ?? "", address: p.address ?? "", kvk: p.kvk ?? "", btw: p.btw ?? "",
-    package: p.package ?? "", monthly_price_cents: p.monthly_price_cents ?? 0,
-    internal_notes: p.internal_notes ?? "",
-    website_url: p.website_url ?? "",
-    contact_person: p.contact_person ?? "",
-    billing_address: p.billing_address ?? "",
-  };
-
-  return (
-    <Modal onClose={onClose} title={`Klant: ${p.full_name || p.email}`} wide>
-      <div className="space-y-6 text-sm">
-        <section>
-          <h3 className="font-semibold mb-2">Account</h3>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {[
-              ["full_name", "Naam"], ["company", "Bedrijf"], ["email", "Email"],
-              ["phone", "Telefoon"], ["contact_person", "Contactpersoon"],
-              ["address", "Adres"], ["billing_address", "Factuuradres"],
-              ["kvk", "KVK"], ["btw", "BTW"],
-              ["website_url", "Website URL (klant ziet 'Mijn Website' knop)"],
-              ["package", "Pakket (bv. Starter/Pro)"],
-            ].map(([k, label]) => (
-              <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
-            ))}
-            <label className="block text-sm">
-              <span className="text-muted-foreground">Maandprijs (â‚¬)</span>
-              <input
-                type="number" step="0.01"
-                value={(f.monthly_price_cents / 100).toFixed(2)}
-                onChange={(e) => setForm({ ...f, monthly_price_cents: Math.round(parseFloat(e.target.value || "0") * 100) })}
-                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-              />
-            </label>
-          </div>
-          <label className="block text-sm mt-3">
-            <span className="text-muted-foreground">Interne notities (klant ziet dit niet)</span>
-            <textarea rows={3} value={f.internal_notes}
-              onChange={(e) => setForm({ ...f, internal_notes: e.target.value })}
-              className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-          </label>
-          <button
-            onClick={() => updateM.mutate({ user_id: userId, ...f })}
-            disabled={updateM.isPending}
-            className="mt-4 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground"
-          >
-            {updateM.isPending ? "Bezigâ€¦" : "Opslaan"}
-          </button>
-          {updateM.error && <p className="mt-2 text-destructive">{(updateM.error as Error).message}</p>}
-        </section>
-
-        <section>
-          <h3 className="font-semibold mb-2">Gratis change-quotum</h3>
-          <p className="text-xs text-muted-foreground mb-2">Standaard 3 per maand. Leeg = standaard.</p>
-          <div className="flex items-center gap-2">
-            <input
-              type="number" min={0} max={100}
-              defaultValue={p.free_quota_override ?? ""}
-              placeholder="3"
-              onBlur={(e) => {
-                const v = e.target.value === "" ? null : parseInt(e.target.value, 10);
-                setQuotaM.mutate({ user_id: userId, free_quota_override: v });
-              }}
-              className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
-            />
-            <span className="text-xs text-muted-foreground">gratis changes / maand</span>
-            {setQuotaM.isSuccess && <span className="text-xs text-primary">Opgeslagen</span>}
-          </div>
-        </section>
-
-        <section>
-          <h3 className="font-semibold mb-2">Kosten / facturen</h3>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              addCostM.mutate({
-                user_id: userId,
-                description: costForm.description,
-                amount_cents: Math.round(parseFloat(costForm.amount) * 100),
-              }, { onSuccess: () => setCostForm({ description: "", amount: "" }) });
-            }}
-            className="flex gap-2 mb-3"
-          >
-            <input required placeholder="Omschrijving" value={costForm.description}
-              onChange={(e) => setCostForm({ ...costForm, description: e.target.value })}
-              className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <input required type="number" step="0.01" placeholder="â‚¬" value={costForm.amount}
-              onChange={(e) => setCostForm({ ...costForm, amount: e.target.value })}
-              className="w-28 rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <button className="rounded-full bg-primary px-4 text-sm text-primary-foreground">+</button>
-          </form>
-          <div className="space-y-1">
-            {data.costs.map((c: any) => (
-              <div key={c.id} className="flex justify-between border-b border-border py-1">
-                <span>{c.cost_date} Â· {c.description}</span>
-                <span>
-                  {eur(c.amount_cents)}
-                  <button onClick={() => delCostM.mutate(c.id)} className="ml-2 text-destructive">Ã—</button>
-                </span>
-              </div>
-            ))}
-            {data.costs.length === 0 && <p className="text-muted-foreground text-xs">Geen kosten geregistreerd.</p>}
-          </div>
-        </section>
-
-        <section>
-          <h3 className="font-semibold mb-2">Onboarding checklist</h3>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!onbLabel.trim()) return;
-              addOnbM.mutate({ user_id: userId, label: onbLabel }, { onSuccess: () => setOnbLabel("") });
-            }}
-            className="flex gap-2 mb-3"
-          >
-            <input value={onbLabel} onChange={(e) => setOnbLabel(e.target.value)}
-              placeholder="Stap (bv. Domein gekoppeld)"
-              className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <button className="rounded-full bg-primary px-4 text-sm text-primary-foreground">+</button>
-          </form>
-          <ul className="space-y-1">
-            {data.onboarding.map((o: any) => (
-              <li key={o.id} className="flex items-center gap-2">
-                <input type="checkbox" checked={o.done}
-                  onChange={() => togOnbM.mutate({ id: o.id, done: !o.done })} />
-                <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
-                <button onClick={() => delOnbM.mutate(o.id)} className="ml-auto text-destructive text-xs">Ã—</button>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </Modal>
   );
 }
 
@@ -1104,31 +676,6 @@ function AfsprakenTab({ customers, qc }: any) {
         </div>
       )}
     </div>
-  );
-}
-
-function Modal({ children, onClose, title, wide }: any) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-      <div className={`w-full ${wide ? "max-w-3xl" : "max-w-md"} max-h-[90vh] overflow-auto rounded-2xl border border-border bg-card p-6`}>
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-display text-xl font-semibold">{title}</h3>
-          <button onClick={onClose} className="text-muted-foreground hover:text-foreground">Ã—</button>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function Field({ label, value, onChange, type = "text", required }: any) {
-  return (
-    <label className="block text-sm">
-      <span className="text-muted-foreground">{label}</span>
-      <input type={type} required={required} value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
-    </label>
   );
 }
 

@@ -1,0 +1,1 @@
+{"nodes":[{"id":"ui_aspect_ratio","label":"aspect-ratio.tsx","file_type":"code","source_file":"src/components/ui/aspect-ratio.tsx","source_location":"L1"}],"edges":[{"source":"ui_aspect_ratio","target":"react_aspect_ratio","relation":"imports_from","confidence":"EXTRACTED","source_file":"src/components/ui/aspect-ratio.tsx","source_location":"L1","weight":1}]}

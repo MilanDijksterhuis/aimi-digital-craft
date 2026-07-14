@@ -160,6 +160,14 @@ export const adminUpdateCustomer = createServerFn({ method: "POST" })
         website_url: z.string().trim().max(500).optional().nullable(),
         contact_person: z.string().trim().max(200).optional().nullable(),
         billing_address: z.string().trim().max(500).optional().nullable(),
+        contacts: z
+          .object({
+            financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+          })
+          .partial()
+          .optional(),
       })
       .parse(d),
   )
@@ -175,6 +183,126 @@ export const adminUpdateCustomer = createServerFn({ method: "POST" })
 
     const { error } = await supabase.from("profiles").update(update).eq("id", user_id);
     if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminSaveOnboardingStep = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        step: z.number().int().min(0).max(5),
+        fields: z
+          .object({
+            full_name: z.string().trim().max(200).optional(),
+            company: z.string().trim().max(200).optional(),
+            phone: z.string().trim().max(50).optional(),
+            address: z.string().trim().max(500).optional(),
+            kvk: z.string().trim().max(50).optional(),
+            btw: z.string().trim().max(50).optional(),
+            package: z.string().trim().max(100).optional(),
+            monthly_price_cents: z.number().int().min(0).max(100000000).optional(),
+            internal_notes: z.string().max(5000).optional(),
+            tags: z.array(z.string().trim().min(1).max(50)).max(20).optional(),
+            website_url: z.string().trim().max(500).optional().nullable(),
+            contact_person: z.string().trim().max(200).optional().nullable(),
+            billing_address: z.string().trim().max(500).optional().nullable(),
+            contacts: z
+              .object({
+                financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+                technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+                general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+              })
+              .partial()
+              .optional(),
+          })
+          .partial()
+          .default({}),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { data: existing } = await supabase
+      .from("profiles")
+      .select("onboarding_started_at" as any)
+      .eq("id", data.user_id)
+      .single();
+
+    const update: any = {
+      ...data.fields,
+      onboarding_status: "in_progress",
+      onboarding_step: data.step,
+    };
+    if (!(existing as any)?.onboarding_started_at) {
+      update.onboarding_started_at = new Date().toISOString();
+    }
+
+    const { error } = await supabase.from("profiles").update(update as any).eq("id", data.user_id);
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "onboarding_step_saved", "customer_onboarding", data.user_id, { step: data.step });
+    return { ok: true };
+  });
+
+export const adminCompleteOnboarding = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ onboarding_status: "completed", onboarding_completed_at: new Date().toISOString() } as any)
+      .eq("id", data.user_id);
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "onboarding_completed", "customer_onboarding", data.user_id);
+    return { ok: true };
+  });
+
+export const adminResetOnboarding = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        onboarding_status: "not_started",
+        onboarding_step: 0,
+        onboarding_started_at: null,
+        onboarding_completed_at: null,
+      } as any)
+      .eq("id", data.user_id);
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "onboarding_reset", "customer_onboarding", data.user_id);
+    return { ok: true };
+  });
+
+export const adminSetSelfOnboarding = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ onboarding_self_enabled: data.enabled } as any)
+      .eq("id", data.user_id);
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, data.enabled ? "self_onboarding_enabled" : "self_onboarding_disabled", "customer_onboarding", data.user_id);
     return { ok: true };
   });
 
@@ -1236,63 +1364,6 @@ export const adminMarkPasswordResetHandled = createServerFn({ method: "POST" })
   });
 
 // ---------- Extra change requests ----------
-
-export const adminListExtraChangeRequests = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabase, userId } = context;
-    await ensureStaff(supabase, userId);
-    const { data, error } = await supabase
-      .from("extra_change_requests")
-      .select("*")
-      .order("requested_at", { ascending: false });
-    if (error) throw new Error(error.message);
-    return { items: data ?? [] };
-  });
-
-export const adminApproveExtraChangeRequest = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
-  .handler(async ({ context, data }) => {
-    const { supabase, userId } = context;
-    await ensureAdmin(supabase, userId);
-    const { data: req, error: rErr } = await supabase
-      .from("extra_change_requests")
-      .select("user_id, amount, status")
-      .eq("id", data.id)
-      .single();
-    if (rErr || !req) throw new Error(rErr?.message ?? "Niet gevonden");
-    if (req.status !== "pending") throw new Error("Al verwerkt.");
-    const { error: cErr } = await supabase
-      .from("extra_credits")
-      .insert({ user_id: req.user_id, amount: req.amount, granted_by: userId, reason: "Extra change aanvraag goedgekeurd" });
-    if (cErr) throw new Error(cErr.message);
-    const { error: uErr } = await supabase
-      .from("extra_change_requests")
-      .update({ status: "approved", handled_at: new Date().toISOString(), handled_by: userId })
-      .eq("id", data.id);
-    if (uErr) throw new Error(uErr.message);
-    await supabase.from("notifications").insert({
-      user_id: req.user_id,
-      title: "Extra changes goedgekeurd",
-      message: `Je aanvraag van ${req.amount} extra change(s) is goedgekeurd.`,
-    });
-    return { ok: true };
-  });
-
-export const adminRejectExtraChangeRequest = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
-  .handler(async ({ context, data }) => {
-    const { supabase, userId } = context;
-    await ensureAdmin(supabase, userId);
-    const { error } = await supabase
-      .from("extra_change_requests")
-      .update({ status: "rejected", handled_at: new Date().toISOString(), handled_by: userId })
-      .eq("id", data.id);
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
 
 // ---------- Website links ----------
 

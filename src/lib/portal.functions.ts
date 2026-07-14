@@ -142,6 +142,84 @@ export const updateMyProfile = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const portalGetOnboardingState = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        "company, address, kvk, contact_person, phone, website_url, contacts, email, onboarding_status, onboarding_step, onboarding_self_enabled" as any,
+      )
+      .eq("id", userId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    return { profile: data };
+  });
+
+export const portalSaveOnboardingStep = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        step: z.number().int().min(0).max(5),
+        fields: z
+          .object({
+            company: z.string().trim().max(200).optional(),
+            address: z.string().trim().max(500).optional(),
+            kvk: z.string().trim().max(50).optional(),
+            contact_person: z.string().trim().max(200).optional(),
+            phone: z.string().trim().max(50).optional(),
+            website_url: z.string().trim().max(500).optional().nullable(),
+            contacts: z
+              .object({
+                financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+                technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+                general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+              })
+              .partial()
+              .optional(),
+          })
+          .partial()
+          .default({}),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+
+    const { data: existing } = await supabase
+      .from("profiles")
+      .select("onboarding_started_at" as any)
+      .eq("id", userId)
+      .single();
+
+    const update: any = {
+      ...data.fields,
+      onboarding_status: "in_progress",
+      onboarding_step: data.step,
+    };
+    if (!(existing as any)?.onboarding_started_at) {
+      update.onboarding_started_at = new Date().toISOString();
+    }
+
+    const { error } = await supabase.from("profiles").update(update as any).eq("id", userId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const portalCompleteOnboarding = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const { error } = await supabase
+      .from("profiles")
+      .update({ onboarding_status: "completed", onboarding_completed_at: new Date().toISOString() } as any)
+      .eq("id", userId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 export const logLogin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ user_agent: z.string().max(500).optional() }).parse(d))
@@ -540,6 +618,59 @@ export const portalGetProject = createServerFn({ method: "POST" })
     return { project, changeRequests: changeRequests ?? [] };
   });
 
+export const portalGetProjectMonitoring = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    const project = await assertOwnProject(supabase, userId, data.project_id);
+    const targetUserId = (project as any).primary_user_id as string;
+
+    const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    let pingRows: any[] = [];
+    try {
+      const rtResult = await supabaseAdmin
+        .from("site_response_times" as any)
+        .select("status_ok, response_ms, created_at")
+        .eq("user_id", targetUserId)
+        .gte("created_at", since7d)
+        .order("created_at", { ascending: false })
+        .limit(2016);
+      if (!rtResult.error && rtResult.data && rtResult.data.length > 0) {
+        pingRows = rtResult.data as any[];
+      } else {
+        throw new Error("leeg");
+      }
+    } catch {
+      const fallback = await supabaseAdmin
+        .from("site_pings")
+        .select("status_ok, response_ms, created_at")
+        .eq("user_id", targetUserId)
+        .gte("created_at", since7d)
+        .order("created_at", { ascending: false })
+        .limit(2016);
+      pingRows = (fallback.data ?? []) as any[];
+    }
+
+    const { data: siteErrors } = await supabaseAdmin
+      .from("site_errors")
+      .select("*")
+      .eq("user_id", targetUserId)
+      .order("created_at", { ascending: false })
+      .limit(5);
+
+    const monStats = computeMonitoringStats(pingRows);
+
+    return {
+      uptimePct: monStats.uptimePct,
+      avg: monStats.avg,
+      dailyUptime: monStats.dailyUptime,
+      total24h: monStats.total24h,
+      lastSync: monStats.lastSync,
+      siteErrors: siteErrors ?? [],
+    };
+  });
+
 export const portalListProjectMilestones = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
@@ -595,24 +726,3 @@ export const portalListProjectNotes = createServerFn({ method: "POST" })
     return { items: items ?? [] };
   });
 
-export const requestExtraChanges = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ amount: z.number().int().min(1).max(50) }).parse(d))
-  .handler(async ({ context, data }) => {
-    const { supabase, userId } = context;
-    const { data: prof } = await supabase
-      .from("profiles")
-      .select("email, full_name")
-      .eq("id", userId)
-      .maybeSingle();
-    if (!prof) throw new Error("Profiel niet gevonden.");
-    const { error } = await supabase.from("extra_change_requests").insert({
-      user_id: userId,
-      user_email: prof.email,
-      user_name: prof.full_name ?? null,
-      amount: data.amount,
-      total_eur: data.amount * 20,
-    });
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });

@@ -5,8 +5,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import {
   ChevronLeft, FileText, Shield, Activity, StickyNote, Settings, Trash2, Mail, Building2, Phone,
-  FolderKanban, KeyRound, Ban, CheckCircle2,
+  FolderKanban, KeyRound, Ban, CheckCircle2, Wallet, ListChecks, Bell, Sparkles, UserCog,
 } from "lucide-react";
+import { OnboardingWizard } from "@/components/OnboardingWizard";
 import {
   adminGetAccountDetail,
   adminChangeAccountRole,
@@ -15,12 +16,23 @@ import {
   adminHardDeleteAccount,
 } from "@/lib/accounts.functions";
 import {
+  adminGetCustomer,
   adminUpdateCustomer,
   adminSendPasswordReset,
+  adminSetPassword,
+  adminSendNotification,
+  adminSetFreeQuota,
+  adminGrantCredits,
+  adminAddCost,
+  adminDeleteCost,
+  adminAddOnboardingItem,
+  adminToggleOnboardingItem,
+  adminDeleteOnboardingItem,
   adminListRoles,
   adminListUserCustomRoles,
   adminAssignCustomRole,
   adminRemoveCustomRole,
+  adminSetSelfOnboarding,
 } from "@/lib/admin.functions";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -76,36 +88,94 @@ function AdminAccountDetailPage() {
   return <AccountDetail data={data} accountId={accountId} />;
 }
 
+const ONBOARDING_STATUS_LABEL: Record<string, string> = {
+  not_started: "Onboarding: Niet gestart",
+  in_progress: "Onboarding: Bezig",
+  completed: "Onboarding: Afgerond",
+};
+
+const ONBOARDING_STATUS_COLOR: Record<string, string> = {
+  not_started: "bg-muted text-muted-foreground",
+  in_progress: "bg-amber-500/20 text-amber-600",
+  completed: "bg-emerald-500/20 text-emerald-600",
+};
+
 function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
   const qc = useQueryClient();
   const invalidate = () => qc.invalidateQueries({ queryKey: ["admin-account", accountId] });
+  const [wizardOpen, setWizardOpen] = useState(false);
 
   const profile = data.profile;
   const roles: string[] = data.roles ?? [];
   const status = accountStatus(profile);
   const isSuperAdmin = roles.includes("super_admin");
+  const isCustomer = !roles.some((r) => STAFF_BASE_ROLES.includes(r));
+  const onboardingStatus = profile.onboarding_status ?? "not_started";
+
+  const setSelfOnboarding = useServerFn(adminSetSelfOnboarding);
+  const selfOnboardingM = useMutation({
+    mutationFn: (enabled: boolean) => setSelfOnboarding({ data: { user_id: accountId, enabled } }),
+    onSuccess: () => { invalidate(); toast.success("Bijgewerkt."); },
+    onError: (e: any) => toast.error(e.message),
+  });
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2 text-sm">
+      <div className="flex items-center justify-between gap-2 text-sm">
         <Link to="/admin/accounts" className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
           <ChevronLeft className="w-4 h-4" /> Terug naar Accounts
         </Link>
+        {isCustomer && (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => selfOnboardingM.mutate(!profile.onboarding_self_enabled)}
+              disabled={selfOnboardingM.isPending}
+              className={`text-sm inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 transition-colors ${
+                profile.onboarding_self_enabled
+                  ? "border-emerald-500/40 text-emerald-600 hover:bg-emerald-500/10"
+                  : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+              }`}
+            >
+              <UserCog className="w-3.5 h-3.5" />
+              Klant onboardt zelf: {profile.onboarding_self_enabled ? "Aan" : "Uit"}
+            </button>
+            <button onClick={() => setWizardOpen(true)} className="btn-secondary text-sm inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" /> Onboarding
+            </button>
+          </div>
+        )}
       </div>
 
-      <AccountHeader profile={profile} roles={roles} status={status} />
+      <AccountHeader
+        profile={profile}
+        roles={roles}
+        status={status}
+        onboardingStatus={isCustomer ? onboardingStatus : null}
+      />
+
+      {wizardOpen && (
+        <OnboardingWizard
+          userId={accountId}
+          onClose={() => {
+            setWizardOpen(false);
+            invalidate();
+          }}
+        />
+      )}
 
       <Tabs defaultValue="overzicht">
         <TabsList className="flex-wrap h-auto">
           <TabsTrigger value="overzicht"><FileText className="w-3.5 h-3.5 mr-1.5" />Overzicht</TabsTrigger>
           <TabsTrigger value="toegang"><Shield className="w-3.5 h-3.5 mr-1.5" />Toegang &amp; rechten</TabsTrigger>
           <TabsTrigger value="activiteit"><Activity className="w-3.5 h-3.5 mr-1.5" />Activiteit</TabsTrigger>
+          {isCustomer && <TabsTrigger value="financieel"><Wallet className="w-3.5 h-3.5 mr-1.5" />Financieel</TabsTrigger>}
+          {isCustomer && <TabsTrigger value="onboarding"><ListChecks className="w-3.5 h-3.5 mr-1.5" />Onboarding</TabsTrigger>}
           <TabsTrigger value="notities"><StickyNote className="w-3.5 h-3.5 mr-1.5" />Notities</TabsTrigger>
           <TabsTrigger value="instellingen"><Settings className="w-3.5 h-3.5 mr-1.5" />Instellingen</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overzicht">
-          <OverzichtTab profile={profile} projects={data.projects ?? []} onChanged={invalidate} />
+          <OverzichtTab accountId={accountId} profile={profile} projects={data.projects ?? []} isCustomer={isCustomer} onChanged={invalidate} />
         </TabsContent>
         <TabsContent value="toegang">
           <ToegangTab accountId={accountId} profile={profile} roles={roles} projects={data.projects ?? []} isSuperAdmin={isSuperAdmin} onChanged={invalidate} />
@@ -113,6 +183,16 @@ function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
         <TabsContent value="activiteit">
           <ActiviteitTab loginEvents={data.loginEvents ?? []} auditLog={data.auditLog ?? []} />
         </TabsContent>
+        {isCustomer && (
+          <TabsContent value="financieel">
+            <FinancieelTab accountId={accountId} onChanged={invalidate} />
+          </TabsContent>
+        )}
+        {isCustomer && (
+          <TabsContent value="onboarding">
+            <OnboardingTab accountId={accountId} onChanged={invalidate} />
+          </TabsContent>
+        )}
         <TabsContent value="notities">
           <NotitiesTab accountId={accountId} profile={profile} onChanged={invalidate} />
         </TabsContent>
@@ -124,7 +204,7 @@ function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
   );
 }
 
-function AccountHeader({ profile, roles, status }: { profile: any; roles: string[]; status: string }) {
+function AccountHeader({ profile, roles, status, onboardingStatus }: { profile: any; roles: string[]; status: string; onboardingStatus?: string | null }) {
   return (
     <div className="rounded-lg border border-border bg-card p-6 space-y-3">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -132,6 +212,11 @@ function AccountHeader({ profile, roles, status }: { profile: any; roles: string
           <div className="flex items-center flex-wrap gap-2">
             <h1 className="font-display text-2xl font-bold truncate">{profile.full_name || "—"}</h1>
             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${ACCOUNT_STATUS_COLOR[status]}`}>{ACCOUNT_STATUS_LABEL[status]}</span>
+            {onboardingStatus && (
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${ONBOARDING_STATUS_COLOR[onboardingStatus]}`}>
+                {ONBOARDING_STATUS_LABEL[onboardingStatus]}
+              </span>
+            )}
           </div>
           {profile.company && (
             <p className="text-sm text-muted-foreground flex items-center gap-1.5"><Building2 className="w-3.5 h-3.5" />{profile.company}</p>
@@ -153,51 +238,291 @@ function AccountHeader({ profile, roles, status }: { profile: any; roles: string
 
 // ---------------- Overzicht ----------------
 
-function OverzichtTab({ profile, projects, onChanged }: { profile: any; projects: any[]; onChanged: () => void }) {
+function ProjectsCard({ projects }: { projects: any[] }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+      <h3 className="font-semibold text-sm flex items-center gap-1.5"><FolderKanban className="w-4 h-4" />Gekoppelde projecten ({projects.length})</h3>
+      {projects.length === 0 ? (
+        <p className="text-sm text-muted-foreground">Geen projecten gekoppeld.</p>
+      ) : (
+        <ul className="space-y-1.5">
+          {projects.map((p: any) => (
+            <li key={p.id} className="text-sm flex items-center justify-between">
+              <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="hover:text-primary">{p.name}</Link>
+              <span className="text-xs text-muted-foreground">{p.status}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function OverzichtTab({ accountId, profile, projects, isCustomer, onChanged }: { accountId: string; profile: any; projects: any[]; isCustomer: boolean; onChanged: () => void }) {
+  const update = useServerFn(adminUpdateCustomer);
+  const [form, setForm] = useState<any>(null);
+
+  const updateM = useMutation({
+    mutationFn: (i: any) => update({ data: i }),
+    onSuccess: () => { onChanged(); toast.success("Opgeslagen."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  if (!isCustomer) {
+    return (
+      <div className="space-y-4 mt-2">
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+            <h3 className="font-semibold text-sm">Contactgegevens</h3>
+            <dl className="text-sm space-y-1">
+              <div className="flex justify-between"><dt className="text-muted-foreground">Contactpersoon</dt><dd>{profile.contact_person || "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">Telefoon</dt><dd>{profile.phone || "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">Adres</dt><dd className="text-right max-w-[60%]">{profile.address || "—"}</dd></div>
+            </dl>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+            <h3 className="font-semibold text-sm">Bedrijfsgegevens</h3>
+            <dl className="text-sm space-y-1">
+              <div className="flex justify-between"><dt className="text-muted-foreground">Bedrijf</dt><dd>{profile.company || "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">KvK</dt><dd>{profile.kvk || "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">BTW</dt><dd>{profile.btw || "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-muted-foreground">Factuuradres</dt><dd className="text-right max-w-[60%]">{profile.billing_address || "—"}</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+          <h3 className="font-semibold text-sm">Abonnement / pakket</h3>
+          <dl className="text-sm space-y-1">
+            <div className="flex justify-between"><dt className="text-muted-foreground">Pakket</dt><dd>{profile.package || "—"}</dd></div>
+            <div className="flex justify-between"><dt className="text-muted-foreground">Maandprijs</dt><dd>{profile.monthly_price_cents != null ? `€${(profile.monthly_price_cents / 100).toFixed(2)}` : "—"}</dd></div>
+          </dl>
+        </div>
+
+        <ProjectsCard projects={projects} />
+      </div>
+    );
+  }
+
+  const f = form ?? {
+    full_name: profile.full_name ?? "", company: profile.company ?? "", email: profile.email ?? "",
+    phone: profile.phone ?? "", address: profile.address ?? "", kvk: profile.kvk ?? "", btw: profile.btw ?? "",
+    package: profile.package ?? "", monthly_price_cents: profile.monthly_price_cents ?? 0,
+    website_url: profile.website_url ?? "", contact_person: profile.contact_person ?? "",
+    billing_address: profile.billing_address ?? "",
+  };
+
   return (
     <div className="space-y-4 mt-2">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="rounded-lg border border-border bg-card p-4 space-y-2">
-          <h3 className="font-semibold text-sm">Contactgegevens</h3>
-          <dl className="text-sm space-y-1">
-            <div className="flex justify-between"><dt className="text-muted-foreground">Contactpersoon</dt><dd>{profile.contact_person || "—"}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">Telefoon</dt><dd>{profile.phone || "—"}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">Adres</dt><dd className="text-right max-w-[60%]">{profile.address || "—"}</dd></div>
-          </dl>
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Accountgegevens</h3>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {[
+            ["full_name", "Naam"], ["company", "Bedrijf"], ["email", "Email"],
+            ["phone", "Telefoon"], ["contact_person", "Contactpersoon"],
+            ["address", "Adres"], ["billing_address", "Factuuradres"],
+            ["kvk", "KVK"], ["btw", "BTW"],
+            ["website_url", "Website URL (klant ziet 'Mijn Website' knop)"],
+            ["package", "Pakket (bv. Starter/Pro)"],
+          ].map(([k, label]) => (
+            <label key={k} className="block text-sm">
+              <span className="text-muted-foreground">{label}</span>
+              <input value={f[k] ?? ""} onChange={(e) => setForm({ ...f, [k]: e.target.value })}
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+            </label>
+          ))}
+          <label className="block text-sm">
+            <span className="text-muted-foreground">Maandprijs (€)</span>
+            <input
+              type="number" step="0.01"
+              value={(f.monthly_price_cents / 100).toFixed(2)}
+              onChange={(e) => setForm({ ...f, monthly_price_cents: Math.round(parseFloat(e.target.value || "0") * 100) })}
+              className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            />
+          </label>
         </div>
-        <div className="rounded-lg border border-border bg-card p-4 space-y-2">
-          <h3 className="font-semibold text-sm">Bedrijfsgegevens</h3>
-          <dl className="text-sm space-y-1">
-            <div className="flex justify-between"><dt className="text-muted-foreground">Bedrijf</dt><dd>{profile.company || "—"}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">KvK</dt><dd>{profile.kvk || "—"}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">BTW</dt><dd>{profile.btw || "—"}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">Factuuradres</dt><dd className="text-right max-w-[60%]">{profile.billing_address || "—"}</dd></div>
-          </dl>
+        <button
+          onClick={() => updateM.mutate({ user_id: accountId, ...f })}
+          disabled={updateM.isPending}
+          className="btn-primary text-sm"
+        >
+          {updateM.isPending ? "Bezig…" : "Opslaan"}
+        </button>
+        {updateM.error && <p className="text-sm text-destructive">{(updateM.error as Error).message}</p>}
+      </div>
+
+      <ProjectsCard projects={projects} />
+    </div>
+  );
+}
+
+// ---------------- Financieel ----------------
+
+function FinancieelTab({ accountId, onChanged }: { accountId: string; onChanged: () => void }) {
+  const get = useServerFn(adminGetCustomer);
+  const setQuota = useServerFn(adminSetFreeQuota);
+  const grant = useServerFn(adminGrantCredits);
+  const addCost = useServerFn(adminAddCost);
+  const delCost = useServerFn(adminDeleteCost);
+  const qc = useQueryClient();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-customer", accountId],
+    queryFn: () => get({ data: { user_id: accountId } }),
+  });
+
+  const inv = () => { qc.invalidateQueries({ queryKey: ["admin-customer", accountId] }); onChanged(); };
+
+  const setQuotaM = useMutation({
+    mutationFn: (i: any) => setQuota({ data: i }),
+    onSuccess: () => { inv(); toast.success("Quotum opgeslagen."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const grantM = useMutation({
+    mutationFn: (i: any) => grant({ data: i }),
+    onSuccess: () => { inv(); toast.success("Credits toegekend."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const addCostM = useMutation({
+    mutationFn: (i: any) => addCost({ data: i }),
+    onSuccess: () => inv(),
+    onError: (e: any) => toast.error(e.message),
+  });
+  const delCostM = useMutation({
+    mutationFn: (id: string) => delCost({ data: { id } }),
+    onSuccess: () => inv(),
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const [costForm, setCostForm] = useState({ description: "", amount: "" });
+
+  if (isLoading || !data || !data.profile) return <Skeleton className="h-48 w-full rounded-lg" />;
+  const p = data.profile;
+
+  return (
+    <div className="space-y-4 mt-2 max-w-2xl">
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Gratis change-quotum</h3>
+        <p className="text-xs text-muted-foreground">Standaard 3 per maand. Leeg = standaard.</p>
+        <div className="flex items-center gap-2">
+          <input
+            type="number" min={0} max={100}
+            defaultValue={p.free_quota_override ?? ""}
+            placeholder="3"
+            onBlur={(e) => {
+              const v = e.target.value === "" ? null : parseInt(e.target.value, 10);
+              setQuotaM.mutate({ user_id: accountId, free_quota_override: v });
+            }}
+            className="w-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+          <span className="text-xs text-muted-foreground">gratis changes / maand</span>
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-card p-4 space-y-2">
-        <h3 className="font-semibold text-sm">Abonnement / pakket</h3>
-        <dl className="text-sm space-y-1">
-          <div className="flex justify-between"><dt className="text-muted-foreground">Pakket</dt><dd>{profile.package || "—"}</dd></div>
-          <div className="flex justify-between"><dt className="text-muted-foreground">Maandprijs</dt><dd>{profile.monthly_price_cents != null ? `€${(profile.monthly_price_cents / 100).toFixed(2)}` : "—"}</dd></div>
-        </dl>
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Credits toekennen</h3>
+        <button
+          onClick={() => {
+            const n = parseInt(prompt("Extra credits toekennen?", "1") || "0", 10);
+            if (n > 0) grantM.mutate({ user_id: accountId, amount: n, reason: "Handmatig" });
+          }}
+          disabled={grantM.isPending}
+          className="inline-flex items-center gap-2 text-sm rounded-md border border-border px-3 py-2 hover:border-primary hover:text-primary transition-colors"
+        >
+          + Credits toekennen
+        </button>
       </div>
 
-      <div className="rounded-lg border border-border bg-card p-4 space-y-2">
-        <h3 className="font-semibold text-sm flex items-center gap-1.5"><FolderKanban className="w-4 h-4" />Gekoppelde projecten ({projects.length})</h3>
-        {projects.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Geen projecten gekoppeld.</p>
-        ) : (
-          <ul className="space-y-1.5">
-            {projects.map((p: any) => (
-              <li key={p.id} className="text-sm flex items-center justify-between">
-                <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="hover:text-primary">{p.name}</Link>
-                <span className="text-xs text-muted-foreground">{p.status}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Kosten / facturen</h3>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            addCostM.mutate({
+              user_id: accountId,
+              description: costForm.description,
+              amount_cents: Math.round(parseFloat(costForm.amount) * 100),
+            }, { onSuccess: () => setCostForm({ description: "", amount: "" }) });
+          }}
+          className="flex gap-2"
+        >
+          <input required placeholder="Omschrijving" value={costForm.description}
+            onChange={(e) => setCostForm({ ...costForm, description: e.target.value })}
+            className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <input required type="number" step="0.01" placeholder="€" value={costForm.amount}
+            onChange={(e) => setCostForm({ ...costForm, amount: e.target.value })}
+            className="w-28 rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <button className="btn-primary text-sm px-4">+</button>
+        </form>
+        <div className="space-y-1">
+          {data.costs.map((c: any) => (
+            <div key={c.id} className="flex justify-between border-b border-border py-1 text-sm">
+              <span>{c.cost_date} · {c.description}</span>
+              <span>
+                €{(c.amount_cents / 100).toFixed(2)}
+                <button onClick={() => delCostM.mutate(c.id)} className="ml-2 text-destructive">×</button>
+              </span>
+            </div>
+          ))}
+          {data.costs.length === 0 && <p className="text-muted-foreground text-xs">Geen kosten geregistreerd.</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------- Onboarding ----------------
+
+function OnboardingTab({ accountId, onChanged }: { accountId: string; onChanged: () => void }) {
+  const get = useServerFn(adminGetCustomer);
+  const addOnb = useServerFn(adminAddOnboardingItem);
+  const togOnb = useServerFn(adminToggleOnboardingItem);
+  const delOnb = useServerFn(adminDeleteOnboardingItem);
+  const qc = useQueryClient();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-customer", accountId],
+    queryFn: () => get({ data: { user_id: accountId } }),
+  });
+
+  const inv = () => { qc.invalidateQueries({ queryKey: ["admin-customer", accountId] }); onChanged(); };
+
+  const addOnbM = useMutation({ mutationFn: (i: any) => addOnb({ data: i }), onSuccess: () => inv(), onError: (e: any) => toast.error(e.message) });
+  const togOnbM = useMutation({ mutationFn: (i: any) => togOnb({ data: i }), onSuccess: () => inv(), onError: (e: any) => toast.error(e.message) });
+  const delOnbM = useMutation({ mutationFn: (id: string) => delOnb({ data: { id } }), onSuccess: () => inv(), onError: (e: any) => toast.error(e.message) });
+
+  const [onbLabel, setOnbLabel] = useState("");
+
+  if (isLoading || !data) return <Skeleton className="h-48 w-full rounded-lg" />;
+
+  return (
+    <div className="space-y-4 mt-2 max-w-2xl">
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Onboarding checklist</h3>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!onbLabel.trim()) return;
+            addOnbM.mutate({ user_id: accountId, label: onbLabel }, { onSuccess: () => setOnbLabel("") });
+          }}
+          className="flex gap-2"
+        >
+          <input value={onbLabel} onChange={(e) => setOnbLabel(e.target.value)}
+            placeholder="Stap (bv. Domein gekoppeld)"
+            className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <button className="btn-primary text-sm px-4">+</button>
+        </form>
+        <ul className="space-y-1.5">
+          {data.onboarding.map((o: any) => (
+            <li key={o.id} className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={o.done}
+                onChange={() => togOnbM.mutate({ id: o.id, done: !o.done })} />
+              <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
+              <button onClick={() => delOnbM.mutate(o.id)} className="ml-auto text-destructive text-xs">×</button>
+            </li>
+          ))}
+          {data.onboarding.length === 0 && <p className="text-muted-foreground text-xs">Nog geen stappen toegevoegd.</p>}
+        </ul>
       </div>
     </div>
   );
@@ -428,7 +753,22 @@ function InstellingenTab({ accountId, profile, isSuperAdmin, onChanged }: {
   const setBlocked = useServerFn(adminSetBlocked);
   const setExpiry = useServerFn(adminSetAccessExpiry);
   const sendReset = useServerFn(adminSendPasswordReset);
+  const setPw = useServerFn(adminSetPassword);
+  const notify = useServerFn(adminSendNotification);
   const hardDel = useServerFn(adminHardDeleteAccount);
+
+  const [notifyForm, setNotifyForm] = useState({ title: "", message: "" });
+
+  const setPwM = useMutation({
+    mutationFn: (password: string) => setPw({ data: { user_id: accountId, password } }),
+    onSuccess: () => toast.success("Wachtwoord aangepast."),
+    onError: (e: any) => toast.error(e.message),
+  });
+  const notifyM = useMutation({
+    mutationFn: (i: any) => notify({ data: i }),
+    onSuccess: () => { setNotifyForm({ title: "", message: "" }); toast.success("Notificatie verstuurd."); },
+    onError: (e: any) => toast.error(e.message),
+  });
 
   const blockM = useMutation({
     mutationFn: (is_blocked: boolean) => setBlocked({ data: { user_id: accountId, is_blocked } }),
@@ -485,10 +825,44 @@ function InstellingenTab({ accountId, profile, isSuperAdmin, onChanged }: {
 
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="font-semibold text-sm">Wachtwoord</h3>
-        <button onClick={() => resetM.mutate()} disabled={resetM.isPending} className="inline-flex items-center gap-2 text-sm rounded-md border border-border px-3 py-2 hover:border-primary hover:text-primary transition-colors">
-          <KeyRound className="w-4 h-4" />
-          {resetM.isPending ? "Bezig…" : "Wachtwoord-reset e-mail versturen"}
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={() => resetM.mutate()} disabled={resetM.isPending} className="inline-flex items-center gap-2 text-sm rounded-md border border-border px-3 py-2 hover:border-primary hover:text-primary transition-colors">
+            <KeyRound className="w-4 h-4" />
+            {resetM.isPending ? "Bezig…" : "Wachtwoord-reset e-mail versturen"}
+          </button>
+          <button
+            onClick={() => {
+              const pw = prompt(`Nieuw wachtwoord voor ${profile.email} (min 8 tekens):`);
+              if (pw && pw.length >= 8) setPwM.mutate(pw);
+            }}
+            disabled={setPwM.isPending}
+            className="inline-flex items-center gap-2 text-sm rounded-md border border-border px-3 py-2 hover:border-primary hover:text-primary transition-colors"
+          >
+            <KeyRound className="w-4 h-4" />
+            Wachtwoord direct instellen
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+        <h3 className="font-semibold text-sm flex items-center gap-1.5"><Bell className="w-4 h-4" />Notificatie versturen</h3>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            notifyM.mutate({ user_id: accountId, title: notifyForm.title, message: notifyForm.message });
+          }}
+          className="space-y-2"
+        >
+          <input required placeholder="Titel" value={notifyForm.title}
+            onChange={(e) => setNotifyForm({ ...notifyForm, title: e.target.value })}
+            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <textarea required placeholder="Bericht" rows={3} value={notifyForm.message}
+            onChange={(e) => setNotifyForm({ ...notifyForm, message: e.target.value })}
+            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+          <button type="submit" disabled={notifyM.isPending} className="btn-primary text-sm">
+            {notifyM.isPending ? "Bezig…" : "Verstuur"}
+          </button>
+        </form>
       </div>
 
       {!isSuperAdmin && (

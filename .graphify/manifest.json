@@ -1,0 +1,3914 @@
+{
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/eslint.config.js": {
+    "mtime": 1779559624709.6921,
+    "hash": "20097f0c1a669549b3a8d3a194c3c25d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/A11yBar.tsx": {
+    "mtime": 1782556743644.493,
+    "hash": "92a1773a6d3abc1e0c30b763e178d5d9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/About.tsx": {
+    "mtime": 1783583128237.7192,
+    "hash": "e087202590d84c7726f9bee4aa55aa80"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/AdminChatPanel.tsx": {
+    "mtime": 1782573546732.7827,
+    "hash": "047a1c6138913c07c095fb84c743ae22"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/BerichtenTab.tsx": {
+    "mtime": 1782556743647.4497,
+    "hash": "1366ffeb17e0c1a9596b5c42d8f14ebd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ChatWidget.tsx": {
+    "mtime": 1782556743648.437,
+    "hash": "194b3e9f5f0bfcb9d6a9f871e992dc51"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Contact.tsx": {
+    "mtime": 1782564262551.9834,
+    "hash": "f322622a0a8f1bcd3d07aa4c08cb0c5a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/CookieBanner.tsx": {
+    "mtime": 1783583128240.2178,
+    "hash": "f1121bbac577201cf50a318d0fafd7dd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/DeletedChangesTab.tsx": {
+    "mtime": 1782556743650.4387,
+    "hash": "e63a552c9ec23670338ce79f76f4dd60"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/FAQ.tsx": {
+    "mtime": 1783583264654.8584,
+    "hash": "828697f550a04274c2f826b419247e80"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Footer.tsx": {
+    "mtime": 1783583128243.223,
+    "hash": "c2fbc86dc383b78c454a54598fe3a266"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Hero.tsx": {
+    "mtime": 1783713126563.1753,
+    "hash": "109cdba464ef359f9f2c77eb57c32c34"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/LeadsPanel.tsx": {
+    "mtime": 1783665824334.094,
+    "hash": "b047a95d0c6c16d0dcb4dec708ac7707"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Nav.tsx": {
+    "mtime": 1783583128245.7412,
+    "hash": "e2f5fec6296ea11f32508c33e1301af1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Pricing.tsx": {
+    "mtime": 1783686544961.1072,
+    "hash": "9ed788892291296c63f3a3c36c74c5e4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ProcessTimeline.tsx": {
+    "mtime": 1783583466261.229,
+    "hash": "41592592369571a0596d2f004a320a8a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Services.tsx": {
+    "mtime": 1783583128248.7178,
+    "hash": "3361ed1f7921e025fe4c45f391b659cb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/TeamTab.tsx": {
+    "mtime": 1783686093740.6216,
+    "hash": "22fac7c604645d2ad55c9cd60f38b6a0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Work.tsx": {
+    "mtime": 1783583128250.2244,
+    "hash": "915c38fefbea5fd0d26f8ed8567ab339"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/accordion.tsx": {
+    "mtime": 1779559624728.1921,
+    "hash": "8ecf0fa176c31be17b45a60ee2e758b6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/alert-dialog.tsx": {
+    "mtime": 1779559624729.1924,
+    "hash": "d93a897b2af34657fc5ba1d1db303095"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/alert.tsx": {
+    "mtime": 1779559624730.1902,
+    "hash": "5a6d7c9719435e87ba5605fb5e7b0dc9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/aspect-ratio.tsx": {
+    "mtime": 1779559624732.6907,
+    "hash": "14c12661aad8c80328c86a18b506c088"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/avatar.tsx": {
+    "mtime": 1779559624735.1929,
+    "hash": "1c3bd25e3806bbc82f9513b789b14a30"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/badge.tsx": {
+    "mtime": 1779559624736.1934,
+    "hash": "f712eba47d4263bea5f224eacc090cb0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/breadcrumb.tsx": {
+    "mtime": 1779559624739.6917,
+    "hash": "53f1ec4c38907530050142e3afa85cc7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/button.tsx": {
+    "mtime": 1779559624741.6929,
+    "hash": "b45e483db7e5f192b347a86e486e5335"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/calendar.tsx": {
+    "mtime": 1779559624743.69,
+    "hash": "96e6b176a517edb8b0facbb922a8c78c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/card.tsx": {
+    "mtime": 1779559624746.6963,
+    "hash": "053803f00d677727a20ac1af41ee599c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/carousel.tsx": {
+    "mtime": 1779559624748.1914,
+    "hash": "36dd085e09dbc3fe793c1708a6821204"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/chart.tsx": {
+    "mtime": 1779559624750.194,
+    "hash": "e5bff896623339713c67d40cd8b8a74a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/checkbox.tsx": {
+    "mtime": 1779559624751.1902,
+    "hash": "f365b7eb8243d81cb5eab455675212ac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/collapsible.tsx": {
+    "mtime": 1779559624752.6924,
+    "hash": "eda123bd06c97202f8cf1483e62d1580"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/command.tsx": {
+    "mtime": 1779559624753.6917,
+    "hash": "9eba05d7f5d3fcfd642d9affb10b75c7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/context-menu.tsx": {
+    "mtime": 1779559624756.6929,
+    "hash": "69270233091977e4dc575681b1ba3e87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/dialog.tsx": {
+    "mtime": 1779559624759.6912,
+    "hash": "79b74d5876df6c4d696734273de5390a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/drawer.tsx": {
+    "mtime": 1779559624761.693,
+    "hash": "ec99714627829d4a2ce0b03f3e2b3335"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1779559624763.6929,
+    "hash": "1ae2005dbe29a013829fea9a6f1c67a6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/form.tsx": {
+    "mtime": 1779559624764.6936,
+    "hash": "5a003832fca7d213e5b805ec214d819c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/hover-card.tsx": {
+    "mtime": 1779559624766.1897,
+    "hash": "82b2422c27dad853935c901f46966914"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/input-otp.tsx": {
+    "mtime": 1779559624768.1926,
+    "hash": "d2323e8455e70b784db91ae646529481"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/input.tsx": {
+    "mtime": 1779559624769.6914,
+    "hash": "bc58ae801e789ef86349bf93809c3534"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/label.tsx": {
+    "mtime": 1779559624771.1907,
+    "hash": "919969cdd3255dc8aaed6ea15dc75166"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/menubar.tsx": {
+    "mtime": 1779559624772.6936,
+    "hash": "ac230528a1a992f476ed8f5706a10763"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/navigation-menu.tsx": {
+    "mtime": 1779559624774.193,
+    "hash": "c2b62d8c6898c6c5a15f50ce2c29b995"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/pagination.tsx": {
+    "mtime": 1779559624776.1946,
+    "hash": "0e8f9422cf3b259d1cfa8ff36bf8363c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/popover.tsx": {
+    "mtime": 1779559624777.193,
+    "hash": "4db76837576da0621b5810d9bea6767f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/progress.tsx": {
+    "mtime": 1779559624778.2004,
+    "hash": "77b2feba9a66fc89497a042b982bf7a1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/radio-group.tsx": {
+    "mtime": 1779559624779.203,
+    "hash": "b568877d2661e29b775d52222ed7e121"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/resizable.tsx": {
+    "mtime": 1779559624781.2158,
+    "hash": "1f93a1a9c4b1e770e17a34dcf67e939b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/scroll-area.tsx": {
+    "mtime": 1779559624782.7056,
+    "hash": "004b51b8d40b7518596df3be92da6a17"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/select.tsx": {
+    "mtime": 1779559624784.2007,
+    "hash": "030580ae0c255538eca1667d9987703d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/separator.tsx": {
+    "mtime": 1779559624785.2024,
+    "hash": "81c2922b4be835b7455accbff8ec0ecd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/sheet.tsx": {
+    "mtime": 1779559624786.2026,
+    "hash": "a9760583b48b4192927e8f26bb2ef318"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/sidebar.tsx": {
+    "mtime": 1779559624787.704,
+    "hash": "c7d7b7b0d8159cf245eb67638a4b0a29"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/skeleton.tsx": {
+    "mtime": 1783940214108.8894,
+    "hash": "6433d7c535e132083b2c1bcb57373fff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/slider.tsx": {
+    "mtime": 1779559624792.2,
+    "hash": "f51437b9ee04349e8af16e6366c28fee"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/sonner.tsx": {
+    "mtime": 1779559624793.7224,
+    "hash": "bdd1b9b20e6cd7b6977d371849d4c1e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/switch.tsx": {
+    "mtime": 1779559624795.2212,
+    "hash": "e36f4816956e06b38f81a563297acb8f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/table.tsx": {
+    "mtime": 1779559624796.2202,
+    "hash": "51562ced5e90e7352ed2694c903bd0d3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/tabs.tsx": {
+    "mtime": 1779559624797.7212,
+    "hash": "4175d0116efa9e701513e864bbdfae85"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/textarea.tsx": {
+    "mtime": 1779559624798.221,
+    "hash": "1b230007443ef12f365fbd94d443ea5c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/toggle-group.tsx": {
+    "mtime": 1779559624799.2227,
+    "hash": "e1a2ed5eafef66716f034692f9ad46f4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/toggle.tsx": {
+    "mtime": 1779559624800.7212,
+    "hash": "b411abadaeca033bc272e0f2c2e84238"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ui/tooltip.tsx": {
+    "mtime": 1779559624801.722,
+    "hash": "6dd894a539d5f97a0615c049be79a355"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/hooks/use-auth.tsx": {
+    "mtime": 1782556743657.4373,
+    "hash": "1603d034e1e392ebef508ad5b4951557"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/hooks/use-mobile.tsx": {
+    "mtime": 1779559624803.2231,
+    "hash": "1bb3ebac7752b497a78d34e341975bbd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/hooks/use-permissions.tsx": {
+    "mtime": 1784016056104.459,
+    "hash": "675dbeb919c6b8eef302aa064d74c351"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/integrations/supabase/auth-attacher.ts": {
+    "mtime": 1782556743659.4395,
+    "hash": "c229b19c0b170ba70e2fe39a5b6e192f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/integrations/supabase/auth-middleware.ts": {
+    "mtime": 1782556743660.445,
+    "hash": "5e33344f54a6b6880cf9281c62c9fe4f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/integrations/supabase/client.server.ts": {
+    "mtime": 1782556743660.936,
+    "hash": "41e7fa94eb60cf2faed0dd47c86af90a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/integrations/supabase/client.ts": {
+    "mtime": 1782556743662.366,
+    "hash": "08e3aa30d5ad892ea214152849404282"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/integrations/supabase/types.ts": {
+    "mtime": 1784016056106.4585,
+    "hash": "75bcc91076c2976d9422c5d599c055d0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/accounts.functions.ts": {
+    "mtime": 1784016056109.4587,
+    "hash": "ba9e7d8291ba89f4fb1000d567da6377"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/accounts.server.ts": {
+    "mtime": 1784016056110.9575,
+    "hash": "6ca4688fd979974dfbf0d7fabf763c1c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/admin.functions.ts": {
+    "mtime": 1784044006425.489,
+    "hash": "643f72c4a46b09819fc2fba2ab97b2f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/admin.server.ts": {
+    "mtime": 1783664892477.8535,
+    "hash": "6e34b10058f41ac116d42f4fefad8bb3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/contact.functions.ts": {
+    "mtime": 1782556743669.453,
+    "hash": "e89bb2f42e3f0c155e88b4f6c5438aa7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/csv.ts": {
+    "mtime": 1783664626293.7917,
+    "hash": "e669a6f3ce9c4425cdc05c9838e4f32c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/email.server.ts": {
+    "mtime": 1782575998030.3762,
+    "hash": "e678cda83e6291b1ab3860e11fad84c9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/error-capture.ts": {
+    "mtime": 1779559624805.7205,
+    "hash": "1d158c2d639c781546da5f816c39f48d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/error-page.ts": {
+    "mtime": 1779559624807.223,
+    "hash": "cc10be665a4bf6be668d0c29c207b92d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/monitoring.functions.ts": {
+    "mtime": 1783803635459.394,
+    "hash": "b729534f4e72145290e5554e0f696d43"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/monitoring.shared.ts": {
+    "mtime": 1783935004999.2056,
+    "hash": "d09edbd7492362bc605ddda9194c10d1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/portal.functions.ts": {
+    "mtime": 1784044016047.3975,
+    "hash": "c27143cbd15be34b0f3ae664105efbf7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/project-status.ts": {
+    "mtime": 1783953394471.1514,
+    "hash": "b965366b487a9e0a6032bfc8e14b0a9e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/rate-limit.ts": {
+    "mtime": 1783936349799.975,
+    "hash": "4b392137351eb4a5d9d9c1e83c3058e1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/rbac.ts": {
+    "mtime": 1784016056117.4587,
+    "hash": "5b825fb9d564ef341df9f794838abd9f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/status.ts": {
+    "mtime": 1782556743672.374,
+    "hash": "55f47664c39d22a2522ac7212d6cb5ce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/utils.ts": {
+    "mtime": 1779559624807.7297,
+    "hash": "e3f848f1b39f863e6164cf58b5a8e752"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routeTree.gen.ts": {
+    "mtime": 1784016498035.968,
+    "hash": "320d1459b5435b0127d968b23408014e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/router.tsx": {
+    "mtime": 1779559624812.223,
+    "hash": "1399708ae830799467737d473ea53a30"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/__root.tsx": {
+    "mtime": 1783582773452.7578,
+    "hash": "1c7c9abbe74df866a39deb6f1bccf6f9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated.tsx": {
+    "mtime": 1783718057136.2163,
+    "hash": "879920f600de21880b29f51195b91f0a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/account.tsx": {
+    "mtime": 1782556743676.8716,
+    "hash": "eb79f12a305248cf380b3a3374722cf5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.accounts.$accountId.tsx": {
+    "mtime": 1784044031013.9575,
+    "hash": "6cd927165f1a031f05157f6984fc9605"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.accounts.tsx": {
+    "mtime": 1784039307015.046,
+    "hash": "3460359162044c077a172fbf953bd26e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.changes.$changeId.tsx": {
+    "mtime": 1784015582176.9573,
+    "hash": "8176ea8a8adc5cf60f0e2ff04adcefcb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.changes.tsx": {
+    "mtime": 1784016540876.8467,
+    "hash": "30088585c51606c1ecb490c6f4975637"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.projecten.$projectId.tsx": {
+    "mtime": 1784019866489.0432,
+    "hash": "bab32489c8e0d5fc3777f16915578575"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.projecten.tsx": {
+    "mtime": 1784019947295.0752,
+    "hash": "03029bbb88a00a8a093f55224d4973b8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.rollen.$roleId.tsx": {
+    "mtime": 1784016496884.459,
+    "hash": "712bb6d2c7807451c6e6d8fc905b3251"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.rollen.tsx": {
+    "mtime": 1784016461235.1465,
+    "hash": "9c43da9ad5a395e124e570752378de01"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/admin.tsx": {
+    "mtime": 1784039763197.9146,
+    "hash": "5a058b6f2479f8e07b55436cc8299449"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/portal.projecten.$projectId.tsx": {
+    "mtime": 1784037498619.7993,
+    "hash": "d25980cd4ec4d7e997e6db010bbd1bdc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/portal.tsx": {
+    "mtime": 1784044104383.2007,
+    "hash": "b6d5fd7871d3c01d16b967c3c95d9a6e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated/server.tsx": {
+    "mtime": 1783940274203.0022,
+    "hash": "298d7df79ee1ee2680bafb8eda2587b6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/algemene-voorwaarden.tsx": {
+    "mtime": 1783583128263.7192,
+    "hash": "db2e4ff3fdaeb5f0be251bee5b1e9289"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/api/public/hooks/expire-accounts.ts": {
+    "mtime": 1783934900502.5483,
+    "hash": "ed53762e919ee23f51348e75c43e1dd7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/api/public/site-error.ts": {
+    "mtime": 1783934919916.97,
+    "hash": "e43f7a63368403810eaf70fd23b88239"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/api/public/site-ping.ts": {
+    "mtime": 1783934930285.4038,
+    "hash": "4f8031da5bd3deab7d353ec0b61aeadf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/index.tsx": {
+    "mtime": 1783583132890.4265,
+    "hash": "a5a0b6a0232d42ce5c3deb4cdd40ad4e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/login.tsx": {
+    "mtime": 1782556743685.3738,
+    "hash": "0109672fa660490d4f38e54ff8468161"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/privacybeleid.tsx": {
+    "mtime": 1783583128264.7175,
+    "hash": "a6b7c9e148c2a4b83876d6e313b15087"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/sitemap[.]xml.tsx": {
+    "mtime": 1779559624816.2197,
+    "hash": "51be573e93f43b66b6e12c867a56e7c8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/track[.]js.tsx": {
+    "mtime": 1782556743686.8716,
+    "hash": "ca2b4124de7d3d8a0c4585033ddbe4f3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/server.ts": {
+    "mtime": 1783936546907.7837,
+    "hash": "96fc9b86880760694a340a1a2fc4857d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/start.ts": {
+    "mtime": 1782556743687.8728,
+    "hash": "036f608b60edfd0ad6b95244dac36fce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase-leads-migration.sql": {
+    "mtime": 1783664533050.9368,
+    "hash": "4bd118fcb7e7a387645ba9fd2c91799f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase-migration.sql": {
+    "mtime": 1783804667433.972,
+    "hash": "5b668a21e76bca99d7cf75796369ac3b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql": {
+    "mtime": 1782556743691.3743,
+    "hash": "8b3f6e482e019f9f37df4d5f58abcaa8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql": {
+    "mtime": 1782556743693.3787,
+    "hash": "aea36ebac9641e434327908b43886610"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql": {
+    "mtime": 1782556743693.8777,
+    "hash": "22cd2ceb806af900f4e10a98271c1148"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523192559_036cdcd0-b4f9-4d34-8244-5b307069818e.sql": {
+    "mtime": 1782556743694.375,
+    "hash": "1cee86c1b15617bf63b34a33dc2097c9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523211523_78239514-1a0c-4fc7-8d4a-5886dda4b322.sql": {
+    "mtime": 1782556743694.874,
+    "hash": "be7e7a9f030ccb1619528e6665dcfb8f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql": {
+    "mtime": 1782556743695.8853,
+    "hash": "0fb1317a1358a3c71a1bca99bf6c7908"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql": {
+    "mtime": 1782556743696.384,
+    "hash": "999eab8e1d4a0d80b4cf106211ade9ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql": {
+    "mtime": 1782556743697.3892,
+    "hash": "18fdbf076413d18231f07b5417c54e49"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql": {
+    "mtime": 1782556743697.8738,
+    "hash": "0dcd744fa4cd84a60e741d23c950d675"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523221809_68010212-e7a6-4d77-92dc-e3309d2c6d55.sql": {
+    "mtime": 1782556743698.8838,
+    "hash": "f0ba672f4f01d914427b4ef4398c97e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523222514_76072c48-00ff-4a61-8b80-8230f2a74134.sql": {
+    "mtime": 1782556743699.396,
+    "hash": "c64b5923c41cd775bb10a440e6a3de94"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql": {
+    "mtime": 1782556743700.3774,
+    "hash": "c5e5ded35931fc9f5d0832d860944500"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql": {
+    "mtime": 1782556743700.8748,
+    "hash": "4e5edcbe904e4a8355f1ed666b548c30"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql": {
+    "mtime": 1782556743702.298,
+    "hash": "0645dcd58a70d4825c9f60d5decf09d3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql": {
+    "mtime": 1782556743703.427,
+    "hash": "7e7b83d10e26b02797919bc2a33662be"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql": {
+    "mtime": 1782556743703.906,
+    "hash": "ceefd756cca748badcb2aa13e120d036"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523231640_f0c31578-aa3c-4810-a448-68d00ea8bb26.sql": {
+    "mtime": 1782556743704.4062,
+    "hash": "302702f0691c5bc3af69b02a0877c795"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260523231942_fb4587f4-15b7-4604-9d1a-186964acb3fc.sql": {
+    "mtime": 1782556743705.4114,
+    "hash": "f28b6211b7696c153b2f20da889af312"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql": {
+    "mtime": 1782556743705.9065,
+    "hash": "e150b3b841e89515617e82f20e076abe"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql": {
+    "mtime": 1782556743706.4055,
+    "hash": "6861d38066eb7772b53fd4dccf7203ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql": {
+    "mtime": 1782556743707.458,
+    "hash": "98f56b308ca832c812587293e1e826ca"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260610172053_c69c4c4e-eb62-440d-a0ce-08cd19608a27.sql": {
+    "mtime": 1782556743708.9363,
+    "hash": "dc0593fdfaca400c01a44b3121c43479"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260713120000_project_detail_expansion.sql": {
+    "mtime": 1783953348829.458,
+    "hash": "ce253dc02f084b1c78c801eb2d0cce29"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260713130000_project_expansion_phase2.sql": {
+    "mtime": 1783961421509.6514,
+    "hash": "c6624735821ef9627c31cf0085b353d0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260714090000_roles_permissions_module.sql": {
+    "mtime": 1784015827810.2397,
+    "hash": "18956c0e2aa6e767d3ba94f67d28a11b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/supabase/migrations/20260714100000_role_permissions_seed.sql": {
+    "mtime": 1784017481961.0764,
+    "hash": "7099f72df58767ce59ae41497feb1cbc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/vite.config.ts": {
+    "mtime": 1782576003120.5276,
+    "hash": "df4c9b3ee17d7f8d36c07972b7e7a78b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.claude/2026-06-28.md": {
+    "mtime": 1782663644269.0266,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.lovable/plan.md": {
+    "mtime": 1782556743638.4343,
+    "hash": "f0eb4ce5494eda695f79757dfe85a378"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/CLAUDE.md": {
+    "mtime": 1782664978203.4543,
+    "hash": "82efb97a359f5c7290bf2513d14686be"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/GRAPH_REPORT.md": {
+    "mtime": 1782664459882.9768,
+    "hash": "eb8fe471c352da46b0a35e2a03d5ffdb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/graph.html": {
+    "mtime": 1782663948631.0913,
+    "hash": "d37eeb3ca57f7a3f6fc24cdeee1adb40"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/$schema.md": {
+    "mtime": 1782669334404.693,
+    "hash": "7f084f0234b0fab5fbaace2c9b6a537a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@cloudflarevite-plugin.md": {
+    "mtime": 1782669334446.6946,
+    "hash": "73ee2e2806b38609e95a532468696ca4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@eslintjs.md": {
+    "mtime": 1782669334520.693,
+    "hash": "9c07492408d5a687e6354bdda1fae618"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@hookformresolvers.md": {
+    "mtime": 1782669334448.1936,
+    "hash": "753bfb96666a4cbababb5c15f772f247"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@lovable.devvite-tanstack-config.md": {
+    "mtime": 1782669334522.1917,
+    "hash": "751e7614a3045d903fbbd828ce0001ce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-accordion.md": {
+    "mtime": 1782669334449.193,
+    "hash": "40a770f62d5913dee606994b814c95f9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-alert-dialog.md": {
+    "mtime": 1782669334450.693,
+    "hash": "4a3a175d7741c759a42846c0595cd392"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-aspect-ratio.md": {
+    "mtime": 1782669334451.6946,
+    "hash": "eb0f5f5e2dba60f79c0553ee84f3e195"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-avatar.md": {
+    "mtime": 1782669334452.693,
+    "hash": "a8d40866c88e8244e699c50e2ffb5a58"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-checkbox.md": {
+    "mtime": 1782669334454.1902,
+    "hash": "89d7375f6c2275d34025919b6bec7fcd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-collapsible.md": {
+    "mtime": 1782669334455.1914,
+    "hash": "c21b5559cf4f05d3cd8f662283901159"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-context-menu.md": {
+    "mtime": 1782669334456.6929,
+    "hash": "85a18a6a0ffaa694a135912a89cef16b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-dialog.md": {
+    "mtime": 1782669334457.6968,
+    "hash": "e83e7f3307606a67f129f7f92ac36a5f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-dropdown-menu.md": {
+    "mtime": 1782669334459.1995,
+    "hash": "dd946c989b5f01eedfaec2921b71ba5f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-hover-card.md": {
+    "mtime": 1782669334460.196,
+    "hash": "2d39296d7615bf944e7c25f3f83011dc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-label.md": {
+    "mtime": 1782669334461.6929,
+    "hash": "39c61092909fc6e3a4f378652d4aa405"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-menubar.md": {
+    "mtime": 1782669334462.6924,
+    "hash": "706dbe56bdc417c9a88d3e518bf0db5f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-navigation-menu.md": {
+    "mtime": 1782669334464.2063,
+    "hash": "4cfbb2c65ba793f5b7fe3dcbc7e46168"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-popover.md": {
+    "mtime": 1782669334465.6929,
+    "hash": "67fdf3dbb2c1c324d36eda376a65d11e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-progress.md": {
+    "mtime": 1782669334466.6917,
+    "hash": "5859e006d6369216eacfb13ae7f0efa4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-radio-group.md": {
+    "mtime": 1782669334468.192,
+    "hash": "93487f894098b0012fdb089ab9ed8f10"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-scroll-area.md": {
+    "mtime": 1782669334469.1978,
+    "hash": "8b313f9076c9952f051f1a936c879978"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-select.md": {
+    "mtime": 1782669334470.6943,
+    "hash": "4064bafe8b500494454f68ea1128e853"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-separator.md": {
+    "mtime": 1782669334472.1912,
+    "hash": "1cc0d3d1ec6ae85299690b6690b71007"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-slider.md": {
+    "mtime": 1782669334473.1946,
+    "hash": "9c5a366be4cbcaf5216aa814cc421fa8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-slot.md": {
+    "mtime": 1782669334474.1958,
+    "hash": "2d3506018360979d08e8a2e0e72dfdc0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-switch.md": {
+    "mtime": 1782669334475.6953,
+    "hash": "d729bfc23e2724ab5a74cbb487e83780"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-tabs.md": {
+    "mtime": 1782669334477.1924,
+    "hash": "0ff8915bde9acd0417fdd055720faa01"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-toggle-group.md": {
+    "mtime": 1782669334479.6965,
+    "hash": "56f0425c29bdfa21e1746b5dc75d8ebd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-toggle.md": {
+    "mtime": 1782669334478.1924,
+    "hash": "2fa83706f2354f1651619e41642eab81"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@radix-uireact-tooltip.md": {
+    "mtime": 1782669334481.1938,
+    "hash": "d558bf0789ccd3299664f8981b968cdf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@supabasesupabase-js.md": {
+    "mtime": 1782669334482.193,
+    "hash": "a5939acdbf011e01e5f3c50c343fe943"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@tailwindcssvite.md": {
+    "mtime": 1782669334483.193,
+    "hash": "1ecc0fede672a93196efcb927731eeee"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@tanstackreact-query.md": {
+    "mtime": 1782669334484.6917,
+    "hash": "6e85d1e880ba72d1f8c174764fa2f7c0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@tanstackreact-router.md": {
+    "mtime": 1782669334486.1938,
+    "hash": "6b623e98bdb0695d3f914aa5095eed93"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@tanstackreact-start.md": {
+    "mtime": 1782669334487.1936,
+    "hash": "3bcaa8777d79c1465058af53a646cb23"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@tanstackrouter-plugin.md": {
+    "mtime": 1782669334488.6929,
+    "hash": "0268032253954cd0d0a69216d16ab3af"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@typesnode.md": {
+    "mtime": 1782669334523.1924,
+    "hash": "d7c3da2836f326cf185c177ab34ea3e8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@typesnodemailer.md": {
+    "mtime": 1782669334489.6924,
+    "hash": "9bd8a927e1eea94de10a315facd46893"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@typesreact-dom.md": {
+    "mtime": 1782669334525.692,
+    "hash": "50f5e857efa0ceb7dd5f7fb3f2f42915"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@typesreact.md": {
+    "mtime": 1782669334524.6926,
+    "hash": "cd19b575f966b3fc8f28584719cbba26"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/@vitejsplugin-react.md": {
+    "mtime": 1782669334526.1924,
+    "hash": "9439fd8458499789d5bca0a1b4024589"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/A11yBar().md": {
+    "mtime": 1782669334539.6914,
+    "hash": "5dc5d7f4aa369facdf3b65f1489347ad"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/A11yBar.tsx.md": {
+    "mtime": 1782669334538.6924,
+    "hash": "35476913426b66c1a728107ea3644d2a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ADMIN_LIKE.md": {
+    "mtime": 1782669334987.202,
+    "hash": "5f4ade06177abefa2b0a13162818a870"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ADMIN_LIKE_1.md": {
+    "mtime": 1782669335154.9236,
+    "hash": "19eb319b98d4a45e0c1f19ebb069a05d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ADMIN_LIKE_ROLES.md": {
+    "mtime": 1782669335032.7004,
+    "hash": "5a9a9885eb87226333df7b998126b953"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AIMI agency description (llms.txt).md": {
+    "mtime": 1782669335472.4265,
+    "hash": "116e9209c1ec3dc03dd21d1513fe905d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AanvragenTab().md": {
+    "mtime": 1782669335312.9246,
+    "hash": "b4b7fe090da13ebc2d2076cbc73e3d42"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/About().md": {
+    "mtime": 1782669334542.1929,
+    "hash": "1021544026c5610c00d77eabbf6bbef0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/About.tsx.md": {
+    "mtime": 1782669334540.6924,
+    "hash": "6e60ab5f3b356ad9fd7bd9fb354875ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccordionContent.md": {
+    "mtime": 1782669334596.1917,
+    "hash": "41e9e1284f8c053eef1b964d6bde3e43"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccordionItem.md": {
+    "mtime": 1782669334594.1936,
+    "hash": "a2483de31002aefaa652780f36183127"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccordionTrigger.md": {
+    "mtime": 1782669334595.1914,
+    "hash": "fea791800d3f8cc7f99086be0a80f650"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccountMenu().md": {
+    "mtime": 1782669335287.423,
+    "hash": "8408f82afd2be68fadea88434f293d96"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccountPage().md": {
+    "mtime": 1782669335291.9248,
+    "hash": "1c17f0d3a585200dc2e17802b15e9494"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AccountsPanel().md": {
+    "mtime": 1782669335318.922,
+    "hash": "65c592921041bc1726669447181327d9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AdminChatPanel().md": {
+    "mtime": 1782669334547.1929,
+    "hash": "9ae48cebfea8732052e6d75a6112dd04"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AdminChatPanel.tsx.md": {
+    "mtime": 1782669334543.198,
+    "hash": "9719d01e80e56303e17e9ef04d77a755"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AdminPage().md": {
+    "mtime": 1782669335297.9238,
+    "hash": "78a21201dd73f54122c713764793f8d0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AdminSidebar().md": {
+    "mtime": 1782669335303.4238,
+    "hash": "39e9e5874f1f1a50196fdf025775c92e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AfsprakenTab().md": {
+    "mtime": 1782669335314.423,
+    "hash": "fbc7abd17c187a889b0f0b593dc0d398"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Alert.md": {
+    "mtime": 1782669334611.1934,
+    "hash": "49e1635b43f71b3432aed79ff528bf64"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDescription.md": {
+    "mtime": 1782669334613.1926,
+    "hash": "bbf9b1d7e344cccf52ec977e9ab20a4f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogAction.md": {
+    "mtime": 1782669334606.1929,
+    "hash": "64bb8b08bd04914d02a4e3c675d69b6b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogCancel.md": {
+    "mtime": 1782669334607.193,
+    "hash": "7f0eaa15f7ed061ba772e52f2a5bb36e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogContent.md": {
+    "mtime": 1782669334599.191,
+    "hash": "f3b22e436babfea64d614c78f63009e5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogDescription.md": {
+    "mtime": 1782669334604.6929,
+    "hash": "0c74fd00d3456496c9c0df1e2acf7743"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogFooter().md": {
+    "mtime": 1782669334601.6914,
+    "hash": "46fb6b1fe17a692204204236fa9440e6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogHeader().md": {
+    "mtime": 1782669334600.1958,
+    "hash": "fe4037d243698275d98508134b11cf83"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogOverlay.md": {
+    "mtime": 1782669334598.198,
+    "hash": "f84f81c4fcc08116ec0a71299286b14d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertDialogTitle.md": {
+    "mtime": 1782669334603.1953,
+    "hash": "2f5a545b445fb536f2324534afb243ec"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlertTitle.md": {
+    "mtime": 1782669334612.1938,
+    "hash": "dd748959b7c066045d4a0b2a49f2143a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AlgemeneVoorwaardenRoute.md": {
+    "mtime": 1782669335241.423,
+    "hash": "a693d999982551ce96a76167bbfb7829"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ApiPublicHooksExpireAccountsRoute.md": {
+    "mtime": 1782669335252.4243,
+    "hash": "71ceb6f498d30f55386bb765e65a0854"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ApiPublicSiteErrorRoute.md": {
+    "mtime": 1782669335250.924,
+    "hash": "7ed9240a680a9468955616d9fc175586"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ApiPublicSitePingRoute.md": {
+    "mtime": 1782669335249.4233,
+    "hash": "3b66125dfcd3e90e57fedbcffef0a724"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AppRole.md": {
+    "mtime": 1782669335199.4226,
+    "hash": "cbf9f5c9cb6487d349195cf193cc5830"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ArchivedChangesPanel().md": {
+    "mtime": 1782669335322.428,
+    "hash": "6b0eec54db1180db5c71a2c7c6d4e081"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthCtx.md": {
+    "mtime": 1782669334942.1982,
+    "hash": "214cd5a515fdbc56ab03ff707396b19a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthLayout().md": {
+    "mtime": 1782669335283.9229,
+    "hash": "a019a143186f9ac58dceafa265bc71f9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthProvider().md": {
+    "mtime": 1782669334944.6992,
+    "hash": "50150e58048008d2377181d5203b4500"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedAccountRoute.md": {
+    "mtime": 1782669335247.9246,
+    "hash": "4b0c57353051b15bf4d4c0d6483ddb29"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedAdminRoute.md": {
+    "mtime": 1782669335246.4229,
+    "hash": "bcd1425847ea241966b5570c07713b38"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedPortalRoute.md": {
+    "mtime": 1782669335245.4238,
+    "hash": "e94f970484970d1f2f7739826a084776"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedRoute.md": {
+    "mtime": 1782669335242.423,
+    "hash": "1177501373b99458a8554e6ddfdd0fb5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedRouteChildren.md": {
+    "mtime": 1782669335261.9263,
+    "hash": "1ae240ae7e3138d03b55db0d9414925a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AuthenticatedRouteWithChildren.md": {
+    "mtime": 1782669335263.4224,
+    "hash": "0994898a46e77d5d917c13c5c568f4ea"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Avatar.md": {
+    "mtime": 1782669334616.198,
+    "hash": "af0138f8ab8fe105c35751e93de61867"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AvatarFallback.md": {
+    "mtime": 1782669334618.6946,
+    "hash": "ef2337509de47324058a840e7b5d0703"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/AvatarImage.md": {
+    "mtime": 1782669334617.1924,
+    "hash": "bd8ef47596bea4c1c2a054d22620001f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Badge().md": {
+    "mtime": 1782669334623.1975,
+    "hash": "c302c9be5b4f1bb08ca11ebbf0d154ac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BadgeProps.md": {
+    "mtime": 1782669334622.1929,
+    "hash": "1757adf7fb72a7780da7a82855bd5a07"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BerichtenTab().md": {
+    "mtime": 1782669334550.1943,
+    "hash": "9aff431dd62341bbde09e67db9ea6f3a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BerichtenTab.tsx.md": {
+    "mtime": 1782669334548.711,
+    "hash": "bd80708103a029f764ece74b007c24fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Body.md": {
+    "mtime": 1782669335362.423,
+    "hash": "71fa6720ce4c48892390c6f365391205"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Body_1.md": {
+    "mtime": 1782669335369.425,
+    "hash": "da140777fc4f671c20e2b40dc9f39bf4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Breadcrumb.md": {
+    "mtime": 1782669334625.6946,
+    "hash": "cb16a01a3ff634313a6d69be5ee75bbf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbEllipsis().md": {
+    "mtime": 1782669334633.1914,
+    "hash": "9922b85eef1b4e4eb2df92b7f085a6c9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbItem.md": {
+    "mtime": 1782669334628.2004,
+    "hash": "69d0cb1211bfa8c1ec34169a82c2e68f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbLink.md": {
+    "mtime": 1782669334629.6924,
+    "hash": "d9f5e01f59d59a04e499432151eaae87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbList.md": {
+    "mtime": 1782669334626.6938,
+    "hash": "3b89576434cc7b3688bb05517b4e74bd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbPage.md": {
+    "mtime": 1782669334630.694,
+    "hash": "b612d5e042f499df57bba50e44d52816"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/BreadcrumbSeparator().md": {
+    "mtime": 1782669334632.192,
+    "hash": "a8048232383cd31b45d8b5b2bcd3bb6c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Button.md": {
+    "mtime": 1782669334638.1917,
+    "hash": "6aa337ac190f22d6db7427c22764091f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ButtonProps.md": {
+    "mtime": 1782669334637.1934,
+    "hash": "8f9b811d555f3de03e5133161eb915e2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CATEGORY_KEYS.md": {
+    "mtime": 1782669335221.9226,
+    "hash": "ea2c3aafa1fc3c3e28fae309cc022dad"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CATEGORY_LABEL.md": {
+    "mtime": 1782669335220.4236,
+    "hash": "56a87e4cf349cdbcb1451ab611157333"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CHANGE_TEMPLATES.md": {
+    "mtime": 1782669335227.924,
+    "hash": "92381feed23e16b8aa833f759a3e02da"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CLAUDE.md graphify usage instructions.md": {
+    "mtime": 1782669335470.9236,
+    "hash": "16075727f3fb11dccbccd1b2de8ef5f2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Calendar().md": {
+    "mtime": 1782669334640.699,
+    "hash": "1f1f1072b3afb62fb6c7cd3339b3d68c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CalendarDayButton().md": {
+    "mtime": 1782669334641.6924,
+    "hash": "0ff6b512016b3ae82dfe96eb5a1bcb1d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Card().md": {
+    "mtime": 1782669335301.9292,
+    "hash": "642842906f30251e7d4034d5683f2682"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Card.md": {
+    "mtime": 1782669334644.6936,
+    "hash": "1a25e9bda70338ceb5487acaed15821c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CardContent.md": {
+    "mtime": 1782669334649.1917,
+    "hash": "6abccaedb37a6eb54a8f484d1a2b56f7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CardDescription.md": {
+    "mtime": 1782669334648.1917,
+    "hash": "1e9f494c35600aae210ada154ce5bd6e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CardFooter.md": {
+    "mtime": 1782669334649.692,
+    "hash": "5c069f989196259f68d751f35d98f307"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CardHeader.md": {
+    "mtime": 1782669334645.6936,
+    "hash": "f06e0ebb6c646171bee050bea5965032"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CardTitle.md": {
+    "mtime": 1782669334646.694,
+    "hash": "476dab84ee8d1bc90527f1e1154f37a4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Carousel.md": {
+    "mtime": 1782669334664.1985,
+    "hash": "c13184bca058144164fd286754f107a5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselApi.md": {
+    "mtime": 1782669334652.6958,
+    "hash": "3d742353ec24f47520f0a763541271f8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselContent.md": {
+    "mtime": 1782669334665.191,
+    "hash": "d99f6866d8493f01bc9ad80a3d613612"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselContext.md": {
+    "mtime": 1782669334661.194,
+    "hash": "57cc3b33bae387c7208cbdaf3d2a4b6d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselContextProps.md": {
+    "mtime": 1782669334659.1995,
+    "hash": "210185adda80bdec4bfc327d5bccc11e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselItem.md": {
+    "mtime": 1782669334666.697,
+    "hash": "541dbf0e6024d79c4b40589aff45941b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselNext.md": {
+    "mtime": 1782669334669.1921,
+    "hash": "c5bc67cc8810b7a91d62668ead8ca7d1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselOptions.md": {
+    "mtime": 1782669334655.1968,
+    "hash": "5ccefa385e1bb60001debd1ca3ab301f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselPlugin.md": {
+    "mtime": 1782669334656.1914,
+    "hash": "590249d7eeab66e06ec303f3c49fe616"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselPrevious.md": {
+    "mtime": 1782669334667.6924,
+    "hash": "c5b0ba15a67e78a645df98650286675b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CarouselProps.md": {
+    "mtime": 1782669334657.7024,
+    "hash": "be789228a3ea8727df9f3680acb6505a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChangeCard().md": {
+    "mtime": 1782669335347.9246,
+    "hash": "9000e1c8f75d28fcd6b6c6200aea4502"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChangesTab().md": {
+    "mtime": 1782669335310.4238,
+    "hash": "36f40d127ba9781578849b1d695b2be1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartConfig.md": {
+    "mtime": 1782669334673.1924,
+    "hash": "35a4bbc2fb5a932c41fad7b4cb8ece0d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartContainer.md": {
+    "mtime": 1782669334678.6929,
+    "hash": "ea1270120612057ec9ebe5c886a8cfa5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartContext.md": {
+    "mtime": 1782669334675.6926,
+    "hash": "2fdd127e93ffff86728693304ad3a57b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartContextProps.md": {
+    "mtime": 1782669334674.198,
+    "hash": "0739a5a3ea13adfc559d8ec993bbcee1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartLegendContent.md": {
+    "mtime": 1782669334682.201,
+    "hash": "0de94ffe499c7fd34c1fe003f1cdcbeb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartStyle().md": {
+    "mtime": 1782669334679.6921,
+    "hash": "a3ff9f00f0bd5dd792023b795cd39c03"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChartTooltipContent.md": {
+    "mtime": 1782669334681.1946,
+    "hash": "17b1934c5e6b54d6f56b66013788e5c1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChatRow.md": {
+    "mtime": 1782669334545.693,
+    "hash": "86ef16504be9e35552d8ca1368103705"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChatWidget().md": {
+    "mtime": 1782669334554.2102,
+    "hash": "dd878adaaa73d858a480f6a7b819166c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ChatWidget.tsx.md": {
+    "mtime": 1782669334551.6997,
+    "hash": "120c366922ccbd42ecdc28d68529fac8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Checkbox.md": {
+    "mtime": 1782669334687.2004,
+    "hash": "f1700f66b058a25804791479babcaf84"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Claude session log 2026-06-28.md": {
+    "mtime": 1782669335449.9229,
+    "hash": "c2b70bb11b6baf84d2a8e7b4e0cf0aaf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Command.md": {
+    "mtime": 1782669334691.1921,
+    "hash": "fbe1d512afc5a93e532a97ff1dbd4622"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandDialog().md": {
+    "mtime": 1782669334692.693,
+    "hash": "7a9510a2beb2f4000817b6d80f85dbcc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandEmpty.md": {
+    "mtime": 1782669334696.6943,
+    "hash": "1b90754e6dfc443b1379659cb3b09eb5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandGroup.md": {
+    "mtime": 1782669334698.1936,
+    "hash": "a1285095f956f6b78ca69945e572a179"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandInput.md": {
+    "mtime": 1782669334694.1921,
+    "hash": "97fc151476e335d30c8c9fd33bb76237"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandItem.md": {
+    "mtime": 1782669334701.6924,
+    "hash": "91972e8805e6ae11370b18eab9ec4368"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandList.md": {
+    "mtime": 1782669334695.694,
+    "hash": "0e744b532a6b0f2f87441f7adfa4d7d8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandSeparator.md": {
+    "mtime": 1782669334699.6948,
+    "hash": "101d2951173febbef35f754a13a701d4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CommandShortcut().md": {
+    "mtime": 1782669334702.6929,
+    "hash": "f687e0e7acb2bc7a1cf4c72ed91175ef"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CompositeTypes.md": {
+    "mtime": 1782669334983.1985,
+    "hash": "91e8e8b72cf85140f3254faa827d06ae"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Constants.md": {
+    "mtime": 1782669334984.1995,
+    "hash": "d18b4eff572d9fd0622682257cb24d81"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Contact().md": {
+    "mtime": 1782669334558.1938,
+    "hash": "b1b4af365272a5ff77357bdcde563eaf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Contact.tsx.md": {
+    "mtime": 1782669334555.198,
+    "hash": "6f0ab2d7109cb859f26f9d1f0acdc413"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuCheckboxItem.md": {
+    "mtime": 1782669334709.6917,
+    "hash": "ff93edb10984aeba2d6c12cfb9509d13"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuContent.md": {
+    "mtime": 1782669334707.1926,
+    "hash": "e74e3e7c58592e857192f32b84244c54"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuItem.md": {
+    "mtime": 1782669334708.193,
+    "hash": "9b7a35a5b82276fefe08ea5fc2bfa235"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuLabel.md": {
+    "mtime": 1782669334712.193,
+    "hash": "91047f8a7e77c2fa5773f9c64fe287ea"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuRadioItem.md": {
+    "mtime": 1782669334710.6926,
+    "hash": "64a2c7d4a6e2bbb76636fc3af8c44080"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuSeparator.md": {
+    "mtime": 1782669334713.194,
+    "hash": "e1a16344ccfd5cabfca2537ee4df46b2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuShortcut().md": {
+    "mtime": 1782669334714.1917,
+    "hash": "f9d7b9df2758d2de89ce72ef3c5c1b75"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuSubContent.md": {
+    "mtime": 1782669334706.192,
+    "hash": "4a3ff515f397a7a1f9393018299c1a4f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ContextMenuSubTrigger.md": {
+    "mtime": 1782669334705.1926,
+    "hash": "cd48c47f788842ab2fae7a6585b7a0dc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CookieBanner().md": {
+    "mtime": 1782669334565.6926,
+    "hash": "26090d5a1263c657b1f03bf0f81669ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CookieBanner.tsx.md": {
+    "mtime": 1782669334560.696,
+    "hash": "80324b343c3c927aca791742611f8908"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CookiePrefs.md": {
+    "mtime": 1782669334562.193,
+    "hash": "e72a7aa49cfeec698cb82c55fb44e08d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Cron edge function (dagelijks 0200 UTC, verlopen accounts).md": {
+    "mtime": 1782669335468.4268,
+    "hash": "504a5b47e5b82781fbc92c2f8ba4e15e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Ctx.md": {
+    "mtime": 1782669334943.6973,
+    "hash": "129ad7c565a95fa7e05fd82d911793b4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/CustomerDetailModal().md": {
+    "mtime": 1782669335309.4236,
+    "hash": "e1ed8a4656e9cf8a7b298f07edc9396e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Dashboard().md": {
+    "mtime": 1782669335298.9243,
+    "hash": "9da7227566138f63bb11da51bc0c2f8b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Database.md": {
+    "mtime": 1782669334970.699,
+    "hash": "87b8e25a0703beace5a1efd94042ec70"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DatabaseWithoutInternals.md": {
+    "mtime": 1782669334972.1995,
+    "hash": "01ca5f1499a485467b7e7b1ea708ebb6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DefaultSchema.md": {
+    "mtime": 1782669334973.6973,
+    "hash": "9ed389e443c8f6c2de73744fbce70056"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DeletedChangesTab().md": {
+    "mtime": 1782669334568.1943,
+    "hash": "f6ccea96247fc896dd7cffef4d18b06e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DeletedChangesTab.tsx.md": {
+    "mtime": 1782669334566.6924,
+    "hash": "c9a34caba0dcfd5e356683b32123c979"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogContent.md": {
+    "mtime": 1782669334718.1917,
+    "hash": "3f8f29ad3ba5ff81e5ed1da0acc44a23"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogDescription.md": {
+    "mtime": 1782669334722.6934,
+    "hash": "76b8567575efaa5b3ae194ad8ff73880"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogFooter().md": {
+    "mtime": 1782669334720.1924,
+    "hash": "4f9b800ff138c448a4446bdbb2309087"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogHeader().md": {
+    "mtime": 1782669334719.1985,
+    "hash": "4bfd6ea3ca219b15998989d1d8cf7ff3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogOverlay.md": {
+    "mtime": 1782669334717.1924,
+    "hash": "03c3a082d4a613141846d4d3e05e547e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DialogTitle.md": {
+    "mtime": 1782669334721.692,
+    "hash": "8b3d3985f926753a0d9aac6a15153d7c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Drawer().md": {
+    "mtime": 1782669334727.6926,
+    "hash": "05c9863de325ab76762a92fcf1c738bb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerContent.md": {
+    "mtime": 1782669334731.195,
+    "hash": "9a17b807de502831fd7bfdf7081c5755"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerDescription.md": {
+    "mtime": 1782669334736.692,
+    "hash": "73a07997d93c787dddd6665a71cec88a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerFooter().md": {
+    "mtime": 1782669334734.193,
+    "hash": "f5bbf4dbd78f84ce116e54a42e6eb08f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerHeader().md": {
+    "mtime": 1782669334732.6929,
+    "hash": "4b4d9df05551dfe72f36aa0c4a74e7b6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerOverlay.md": {
+    "mtime": 1782669334729.1938,
+    "hash": "8ab3b34f9d71078a290210f2c2d4364c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DrawerTitle.md": {
+    "mtime": 1782669334735.6912,
+    "hash": "3ccafd2521b25b75bc26b06c770e6702"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuCheckboxItem.md": {
+    "mtime": 1782669334744.6924,
+    "hash": "07b2ad4d53f2ecc28d3386d5820dcb71"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuContent.md": {
+    "mtime": 1782669334741.6914,
+    "hash": "7ed419dd41f5894e1948a8c4948dbf58"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuItem.md": {
+    "mtime": 1782669334743.1921,
+    "hash": "986f447db83ad0ca3ec1962806849d87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuLabel.md": {
+    "mtime": 1782669334747.6926,
+    "hash": "7311cd4328ac94f919236b480f80a32c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuRadioItem.md": {
+    "mtime": 1782669334745.697,
+    "hash": "a8084768dd63748d282f957da63dd64a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuSeparator.md": {
+    "mtime": 1782669334749.191,
+    "hash": "726f30a0c9e45765a13a78ff6ebf0334"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuShortcut().md": {
+    "mtime": 1782669334750.694,
+    "hash": "c3ae597d4d13a5c18fc6f269729d882a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuSubContent.md": {
+    "mtime": 1782669334740.6958,
+    "hash": "59b75d16ff9fe005323c57dd3e9611cb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/DropdownMenuSubTrigger.md": {
+    "mtime": 1782669334739.1992,
+    "hash": "b8d2795b9c305aba836434d034741281"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/EmptyChanges().md": {
+    "mtime": 1782669335342.9265,
+    "hash": "98e628ea1e5cb57eed3563eb4e3eb4e8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Enums.md": {
+    "mtime": 1782669334980.6987,
+    "hash": "a25af78a64e684377918eb38ef07b90a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ErrorComponent().md": {
+    "mtime": 1782669335274.425,
+    "hash": "249882c3b59dd6d41d1b08d31a146839"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ExtraChangesPanel().md": {
+    "mtime": 1782669335305.4243,
+    "hash": "3a980ad7852c3ae5af7e016e9a54938c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FAQ().md": {
+    "mtime": 1782669334571.6936,
+    "hash": "c5d94b41b013ac25ed9e95f21c4f7c6d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FAQ.tsx.md": {
+    "mtime": 1782669334569.1924,
+    "hash": "49ccc41b45ee088542f71d0d56e26f47"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FILTER_LABEL.md": {
+    "mtime": 1782669335336.4236,
+    "hash": "311999f305de8a426f8e82bd011efbec"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Field().md": {
+    "mtime": 1782669334559.6924,
+    "hash": "3bd41280a3aa00a8076882c347164fac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Field()_1.md": {
+    "mtime": 1782669335317.4229,
+    "hash": "0f03af348fc3704b90330119411ad468"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Field()_2.md": {
+    "mtime": 1782669335392.427,
+    "hash": "8a017dcfc1a0004b79908075432e4b5b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FileRouteTypes.md": {
+    "mtime": 1782669335257.923,
+    "hash": "c7adcfafcf1140110d37f48f81de885e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FileRoutesByFullPath.md": {
+    "mtime": 1782669335253.9246,
+    "hash": "eb4db655dcf8af167763976c0b9ae3be"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FileRoutesById.md": {
+    "mtime": 1782669335256.4292,
+    "hash": "23e75658eca1cc3ffe311f1242176527"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FileRoutesByPath.md": {
+    "mtime": 1782669335260.923,
+    "hash": "31c25d552cb1331a4e73f74b86e387f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FileRoutesByTo.md": {
+    "mtime": 1782669335255.4226,
+    "hash": "b19a6c22643c0084b3f4ee0893c20c2d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FilterKey.md": {
+    "mtime": 1782669335334.924,
+    "hash": "d16e14a12d75070452e20521466b9745"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Footer().md": {
+    "mtime": 1782669334574.1921,
+    "hash": "d58a13ab127520b40a4159a375cef6bf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Footer.tsx.md": {
+    "mtime": 1782669334573.1926,
+    "hash": "26a982f8a2917f32aaaf00e89b07be16"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormControl.md": {
+    "mtime": 1782669334764.194,
+    "hash": "aa14ed0d10b0ff005b6da7ebcb6ad71a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormDescription.md": {
+    "mtime": 1782669334765.1912,
+    "hash": "0f6dc2e0ace3966adc0fee484a4a069f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormField().md": {
+    "mtime": 1782669334755.6953,
+    "hash": "caf832c85c893699333a0c8297690fc6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormFieldContext.md": {
+    "mtime": 1782669334754.6929,
+    "hash": "2570a40b1b7fd45df1e3353020fb629e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormFieldContextValue.md": {
+    "mtime": 1782669334753.1917,
+    "hash": "5a9564f3f1452713468b632841380f77"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormItem.md": {
+    "mtime": 1782669334760.6929,
+    "hash": "864c38bff621db564b2bc46c46c01bf6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormItemContext.md": {
+    "mtime": 1782669334759.692,
+    "hash": "8952cd9d94a73323946abc4adccb8fb9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormItemContextValue.md": {
+    "mtime": 1782669334758.6926,
+    "hash": "93bcfb18fc2a7249644ce5411effc99e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormLabel.md": {
+    "mtime": 1782669334762.1934,
+    "hash": "d21cbe913ba9cd9b3da8e7339dcb55c5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/FormMessage.md": {
+    "mtime": 1782669334766.6929,
+    "hash": "a0ffec9677032b73efe64a0a2597b6d4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Hero().md": {
+    "mtime": 1782669334576.6926,
+    "hash": "9776e8b154e17e4dcf77a7761c0cb6c7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Hero.tsx.md": {
+    "mtime": 1782669334575.6921,
+    "hash": "56b488fb4c8cc0e4f7b5920ea4c4e041"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/HoverCardContent.md": {
+    "mtime": 1782669334769.1926,
+    "hash": "e6dd9714ed11341e0cadd1e97a931949"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Index().md": {
+    "mtime": 1782669335376.9275,
+    "hash": "d4bc574a62adb9a5ee899ca84f6111b6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/IndexRoute.md": {
+    "mtime": 1782669335243.9275,
+    "hash": "8b2bf54d66ba1d97749279ab11619000"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Inner().md": {
+    "mtime": 1782669335285.9253,
+    "hash": "097d4219f21eac4210301e8d8f40732e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Input.md": {
+    "mtime": 1782669334778.6934,
+    "hash": "cc37962060e35aafec26f625d1b268bb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/InputOTP.md": {
+    "mtime": 1782669334772.1921,
+    "hash": "4314f5df2c143a068833ab94930312a4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/InputOTPGroup.md": {
+    "mtime": 1782669334773.6934,
+    "hash": "2631f16d4690149528addb4cfe9f310d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/InputOTPSeparator.md": {
+    "mtime": 1782669334776.193,
+    "hash": "44dab511e14f6fd8ce4020cc7d95b9bd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/InputOTPSlot.md": {
+    "mtime": 1782669334774.6924,
+    "hash": "a8ca474ab0b23f22c79e6fadf3885bb1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Json.md": {
+    "mtime": 1782669334968.6992,
+    "hash": "4b0fc7023d0f7569ddd338563acd0056"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/KlantenTab().md": {
+    "mtime": 1782669335307.9243,
+    "hash": "2d1f8f085d83cce4b678f6fb1feee287"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Label.md": {
+    "mtime": 1782669334783.6953,
+    "hash": "5d1b93fc3a8709d5a60deaa704d7a7fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/LoginPage().md": {
+    "mtime": 1782669335381.4243,
+    "hash": "85b80ad3504eb49a79dbd44a3ae0ec03"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/LoginRoute.md": {
+    "mtime": 1782669335240.4287,
+    "hash": "7edbe8e67c68ebb10041624af7cf6b04"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Lovable implementation plan (8 feature phases).md": {
+    "mtime": 1782669335451.9219,
+    "hash": "f2a7e2b2757eeddb2c1867e663040905"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Menubar.md": {
+    "mtime": 1782669334793.216,
+    "hash": "f68fdc1fc22baaea3a0e3b750ac7b41d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarCheckboxItem.md": {
+    "mtime": 1782669334799.8757,
+    "hash": "e5fef9be755c2d317546f5c329ee93e7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarContent.md": {
+    "mtime": 1782669334797.8318,
+    "hash": "369ecaa718bc85ddb0c2544ea2d0fd10"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarGroup().md": {
+    "mtime": 1782669334788.047,
+    "hash": "a6170887911506191152a59737215751"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarItem.md": {
+    "mtime": 1782669334798.8462,
+    "hash": "81c7433f5d7e55918335886ed07bc8e7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarLabel.md": {
+    "mtime": 1782669334802.9817,
+    "hash": "38841a99045c2caa367e857d54f87ff5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarMenu().md": {
+    "mtime": 1782669334787.0293,
+    "hash": "c4832cafb19747a3f230852b0abb8600"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarPortal().md": {
+    "mtime": 1782669334789.0833,
+    "hash": "0117707091c88fddaa7e60cbcc8e6e87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarRadioGroup().md": {
+    "mtime": 1782669334791.1394,
+    "hash": "2807c73e66280a9276599377979f97d7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarRadioItem.md": {
+    "mtime": 1782669334801.9507,
+    "hash": "f05e00ade84622cf1059f29f2dcc8520"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarSeparator.md": {
+    "mtime": 1782669334804.0159,
+    "hash": "be01f19701e8059137a4b78c3e49774e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarShortcut().md": {
+    "mtime": 1782669334805.0503,
+    "hash": "0825268218eebc1931201ee12c9a3f6b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarSub().md": {
+    "mtime": 1782669334792.1812,
+    "hash": "e94e3bbd0d9f1db1b28ba06cc13c0b99"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarSubContent.md": {
+    "mtime": 1782669334796.3035,
+    "hash": "46f8c47f55250458a77292ac8e3df21f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarSubTrigger.md": {
+    "mtime": 1782669334795.2766,
+    "hash": "e300620b4a174d91d10737ddbbbb9edd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MenubarTrigger.md": {
+    "mtime": 1782669334794.2537,
+    "hash": "1aafbc9321f327c76edfc073d8567198"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Message.md": {
+    "mtime": 1782669334544.6995,
+    "hash": "edbe17940cf94357124096a2f3c93579"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Message_1.md": {
+    "mtime": 1782669334552.6963,
+    "hash": "682d413649aa8434ae6d7e0d4e3e70b1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/MetricCard().md": {
+    "mtime": 1782669335300.424,
+    "hash": "4358767a26bc989609b72b898eb05d61"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Modal().md": {
+    "mtime": 1782669335315.4236,
+    "hash": "4d3a4420b408d55d8ebbe87d98c578bf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Mode.md": {
+    "mtime": 1782669334556.6914,
+    "hash": "4f46af316b39c1d721837a712767c7ef"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Nav().md": {
+    "mtime": 1782669334580.1929,
+    "hash": "47c8221e952e5c307482324d242f8548"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Nav.tsx.md": {
+    "mtime": 1782669334577.6926,
+    "hash": "913d1227aaae8f8d3d47c4236121143e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenu.md": {
+    "mtime": 1782669334807.0945,
+    "hash": "49467f6a12c236f1c8fc90715574c4e4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenuContent.md": {
+    "mtime": 1782669334812.699,
+    "hash": "e5b3961963e49b170bee373002d65e45"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenuIndicator.md": {
+    "mtime": 1782669334815.1987,
+    "hash": "1c3aeb199a372158da06dea08bd010f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenuList.md": {
+    "mtime": 1782669334808.1174,
+    "hash": "41f0c64234871c0673704d56916828c1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenuTrigger.md": {
+    "mtime": 1782669334811.189,
+    "hash": "57e124a4908e6b4b349b456de3649390"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NavigationMenuViewport.md": {
+    "mtime": 1782669334813.7036,
+    "hash": "6d0ace8c2cfba388e6ec394b26232a8b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NotFoundComponent().md": {
+    "mtime": 1782669335272.9248,
+    "hash": "962c8625db835c7d8f6da08f7818f4ec"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NotificationsBell().md": {
+    "mtime": 1782669335319.925,
+    "hash": "6e66aa68062e8b919142cc7459d5e6b0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/NotificationsPanel().md": {
+    "mtime": 1782669335321.423,
+    "hash": "0d6e69fc8c1ca664e653436d996fef6f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/OverviewSection().md": {
+    "mtime": 1782669335351.4282,
+    "hash": "bced02c90124dafb0adb297d3a7a207d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PRIORITY_COLOR.md": {
+    "mtime": 1782669335218.9243,
+    "hash": "3af1e99746298d64ad31c48de61c0f44"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PRIORITY_LABEL.md": {
+    "mtime": 1782669335216.4238,
+    "hash": "a3397776b2852aa149149fb49a5f580e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PRIORITY_WEIGHT.md": {
+    "mtime": 1782669335217.4314,
+    "hash": "35ecc1a6a4ebdabc12b672df63825737"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Pagination().md": {
+    "mtime": 1782669334817.2026,
+    "hash": "b14ad16e290143645401e69e8eeb21aa"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationContent.md": {
+    "mtime": 1782669334818.698,
+    "hash": "79fb2380210db78ff218361064f27d01"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationEllipsis().md": {
+    "mtime": 1782669334825.6978,
+    "hash": "88c2f4a5a6ac5f58831570772f77ef9b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationItem.md": {
+    "mtime": 1782669334819.6975,
+    "hash": "2553eee521bd5dcae4892533a9449756"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationLink().md": {
+    "mtime": 1782669334822.1987,
+    "hash": "858d519acc01350032bb13f34bfde730"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationLinkProps.md": {
+    "mtime": 1782669334821.1992,
+    "hash": "ded654269adb6f4a3c26b8738e79867a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationNext().md": {
+    "mtime": 1782669334824.698,
+    "hash": "443959ed6ad03299096de215eda383e1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PaginationPrevious().md": {
+    "mtime": 1782669334823.6997,
+    "hash": "6702aeb9ec33c483d71d7dc127ff1bc1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PermissionAction.md": {
+    "mtime": 1782669335205.9233,
+    "hash": "6fbf4e0c3bac4a428b0927ec4d940662"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PopoverContent.md": {
+    "mtime": 1782669334828.2036,
+    "hash": "9eab06a06ee3db1a803d5742d0750cae"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PortalPage().md": {
+    "mtime": 1782669335339.9248,
+    "hash": "05882a7c35e1cc07546f175534f3a629"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Pricing().md": {
+    "mtime": 1782669334583.6987,
+    "hash": "235e7ce0d0d718337af336fac9dbe3e7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Pricing.tsx.md": {
+    "mtime": 1782669334581.693,
+    "hash": "bca9cba092317190070bde290b274181"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PrivacyPage().md": {
+    "mtime": 1782669335385.9243,
+    "hash": "445d293e967351eed9cf909c041cf659"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/PrivacybeleidRoute.md": {
+    "mtime": 1782669335239.4226,
+    "hash": "ce86d78ee103911722696d5ed790f029"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Progress.md": {
+    "mtime": 1782669334830.6975,
+    "hash": "8bcbdcdbbdbaf2d5d8b2c33d5bac4e89"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ROLE_LABEL.md": {
+    "mtime": 1782669335200.424,
+    "hash": "d59bc958e8a8f8c0f4a6f043eb51fb43"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RadioGroup.md": {
+    "mtime": 1782669334832.6978,
+    "hash": "94df5939024520fd9f201e7b64904235"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RadioGroupItem.md": {
+    "mtime": 1782669334833.697,
+    "hash": "f2dbee44f46e39ce933166703257b7e0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Register.md": {
+    "mtime": 1782669335266.4243,
+    "hash": "1ea7a8b8ac86aabc41c5b67c6d82200c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RequestDetail().md": {
+    "mtime": 1782669335311.423,
+    "hash": "2053dfb3c0dc84f32a2e673a4779bca6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Resend welkomstmail integration.md": {
+    "mtime": 1782669335469.924,
+    "hash": "47eb01f2742c6102db1c32667ffdf853"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ResizableHandle().md": {
+    "mtime": 1782669334837.6978,
+    "hash": "a7a95a2813d097e69dd20d4c60e8d4d6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ResizablePanelGroup().md": {
+    "mtime": 1782669334836.1985,
+    "hash": "a3f2f99b77e81a403669daca75ce2613"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RootComponent().md": {
+    "mtime": 1782669335278.4238,
+    "hash": "8136565989fb895495575928d3dd112e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RootRouteChildren.md": {
+    "mtime": 1782669335259.423,
+    "hash": "acbc74b80bf23e5490b57e4c5e7af550"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/RootShell().md": {
+    "mtime": 1782669335276.925,
+    "hash": "5dfc54ea26bbcced25ced71d38584ae7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route.md": {
+    "mtime": 1782669335275.9246,
+    "hash": "38fb85ab048569fa4deec93ecffe37c4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_1.md": {
+    "mtime": 1782669335281.4246,
+    "hash": "e3b37baab14e0d701e65596cfbefacf9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_10.md": {
+    "mtime": 1782669335379.922,
+    "hash": "d3f748cbfc492624489479afc6d2be73"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_11.md": {
+    "mtime": 1782669335383.9224,
+    "hash": "0ab8891fe59d7744ee3e4af52b7d6f1b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_12.md": {
+    "mtime": 1782669335388.924,
+    "hash": "589a8b20ef1e14947e90636263236592"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_13.md": {
+    "mtime": 1782669335398.4255,
+    "hash": "0b803fc6d831e9b66cb8e61cb343ac08"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_14.md": {
+    "mtime": 1782669335403.4253,
+    "hash": "3bbe7a451afcbd88abc425e0778d36dd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_2.md": {
+    "mtime": 1782669335290.4238,
+    "hash": "a9144f7b0efa11ef5d8269a0717086f7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_3.md": {
+    "mtime": 1782669335294.9248,
+    "hash": "a19fb02a04326a02d33df7fb706cd1b5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_4.md": {
+    "mtime": 1782669335325.9238,
+    "hash": "f654c37eb2410ca527d6c719e818a553"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_5.md": {
+    "mtime": 1782669335354.4246,
+    "hash": "2f9330fd596117f22832b370f27b550d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_6.md": {
+    "mtime": 1782669335358.9248,
+    "hash": "3ebcbf3b09814211c43f4ba393ba1029"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_7.md": {
+    "mtime": 1782669335366.425,
+    "hash": "4fa16c2062315dac10aa7481853d28e2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_8.md": {
+    "mtime": 1782669335372.4236,
+    "hash": "70877bac80887721b24c597b4a6cabbf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Route_9.md": {
+    "mtime": 1782669335375.927,
+    "hash": "51f1bf69b953defb92d4086a5dc2897e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SIMPLE_CATEGORIES.md": {
+    "mtime": 1782669335223.4238,
+    "hash": "ee6dfedf10d5a051a7d3ef1d47c24861"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SIMPLE_CATEGORIES_SERVER.md": {
+    "mtime": 1782669335183.928,
+    "hash": "16793a87e2553e39324a4cbad1921f16"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STAFF.md": {
+    "mtime": 1782669335142.9233,
+    "hash": "e25abf1562c3df9ce4a6025d49028209"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STAFF_ROLES.md": {
+    "mtime": 1782669335153.9238,
+    "hash": "db4964b53727aa354ae52882eb566a17"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STAFF_ROLES_1.md": {
+    "mtime": 1782669335201.9253,
+    "hash": "afbd624760872a314c795acba97d8f03"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STAFF_ROLES_SRV.md": {
+    "mtime": 1782669335034.199,
+    "hash": "ccfb3bf2ea3907d38bcd474f4c0b6f8f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STATUS_COLOR.md": {
+    "mtime": 1782669335214.9263,
+    "hash": "53934d8722b3c76b56f10ef6b4a99631"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STATUS_FLOW.md": {
+    "mtime": 1782669335213.9236,
+    "hash": "3b969931cdc3182d2b7d790417fdfd90"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STATUS_LABEL.md": {
+    "mtime": 1782669335212.4248,
+    "hash": "aff555fcfdc60a4daebad74088e478a1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STATUS_STYLE.md": {
+    "mtime": 1782669335329.423,
+    "hash": "a900c2a4239d536489795e1b1a44ae34"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/STEPS.md": {
+    "mtime": 1782669335331.424,
+    "hash": "73ed139344718e126fa3e4ecf6adf75d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SUPER.md": {
+    "mtime": 1782669334988.6997,
+    "hash": "0d7495c752ae054c5eb7d07dc9bd9337"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ScrollArea.md": {
+    "mtime": 1782669334839.7031,
+    "hash": "2e72252a4ec31f6150a2fec4b09efe40"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ScrollBar.md": {
+    "mtime": 1782669334840.7021,
+    "hash": "af81833fcb4df11c15755c4dd645218c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectContent.md": {
+    "mtime": 1782669334846.6965,
+    "hash": "947aa11557629b042ed1d5bffec7cfc1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectItem.md": {
+    "mtime": 1782669334848.7043,
+    "hash": "40e0ed2fb95768ffb197b6288937061a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectLabel.md": {
+    "mtime": 1782669334847.7034,
+    "hash": "f01dec37ac7cad4baf96be3071bf4d79"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectScrollDownButton.md": {
+    "mtime": 1782669334845.7031,
+    "hash": "b210d0af37742f74180017d1709e2eb1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectScrollUpButton.md": {
+    "mtime": 1782669334844.1985,
+    "hash": "d07a6ca2867057e1a6e08ee65e27b49d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectSeparator.md": {
+    "mtime": 1782669334850.199,
+    "hash": "7449818f79d3be457cddcfbb7454d4ef"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SelectTrigger.md": {
+    "mtime": 1782669334842.698,
+    "hash": "5ade3572acebabdcc749cb768aea1c89"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Separator.md": {
+    "mtime": 1782669334852.6975,
+    "hash": "ed84f56812d459efafc4ab391044494c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ServerEntry.md": {
+    "mtime": 1782669335406.4253,
+    "hash": "0b79b134a25ee9cba82e037b378dc847"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Services.tsx.md": {
+    "mtime": 1782669334585.1929,
+    "hash": "8b7d8b9c80c49b95d00278e61c153459"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SetupAdminRoute.md": {
+    "mtime": 1782669335237.9226,
+    "hash": "8e694e5212b9e34c4444919fff308796"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SetupPage().md": {
+    "mtime": 1782669335390.9297,
+    "hash": "66189cc94a4095f7ff8ed8b1e02442e8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetContent.md": {
+    "mtime": 1782669334858.698,
+    "hash": "b16130a665189cbed5645461a9a2f49e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetContentProps.md": {
+    "mtime": 1782669334857.198,
+    "hash": "34af3a7928e6acaa309a5cfeae641ad1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetDescription.md": {
+    "mtime": 1782669334863.1985,
+    "hash": "13e476af764b7641924de160d578f13c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetFooter().md": {
+    "mtime": 1782669334860.698,
+    "hash": "82ffce7bf7906f2c3e837028e9e56bd7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetHeader().md": {
+    "mtime": 1782669334859.6982,
+    "hash": "8cddeb314e3f198a0d0bd24bfb0b14fc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetOverlay.md": {
+    "mtime": 1782669334854.7039,
+    "hash": "2f3fe90d63344824fa240df0226cd9fa"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SheetTitle.md": {
+    "mtime": 1782669334862.1973,
+    "hash": "b12885256d92b787c99fb3c6110124a1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Sidebar.md": {
+    "mtime": 1782669334870.1973,
+    "hash": "08e86d6f4ec7047cac54dd47309a8014"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarContent.md": {
+    "mtime": 1782669334880.1992,
+    "hash": "4e06093c4608d83a2215740195e41615"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarContext.md": {
+    "mtime": 1782669334866.6985,
+    "hash": "a13a16506d4dc25be9e63dc24180c899"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarContextProps.md": {
+    "mtime": 1782669334865.6985,
+    "hash": "3c1ecf816b155753472a74ebd55fe272"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarFooter.md": {
+    "mtime": 1782669334877.7012,
+    "hash": "759a5d2260012c9c022684fcd8c5d7f8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarGroup.md": {
+    "mtime": 1782669334881.699,
+    "hash": "4d8d82da8d3e41cea02a88fe4cfccfa6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarGroupAction.md": {
+    "mtime": 1782669334884.2087,
+    "hash": "26199c605c16ceef84e035c065bf548d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarGroupContent.md": {
+    "mtime": 1782669334886.2,
+    "hash": "5bd6792e000f318c80145e36240b2ee1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarGroupLabel.md": {
+    "mtime": 1782669334883.2004,
+    "hash": "8cbd5367fd1688927b1d144a26f0d9d4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarHeader.md": {
+    "mtime": 1782669334876.6982,
+    "hash": "e98960edb72fa1b59fd3903229960b72"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarInput.md": {
+    "mtime": 1782669334875.2036,
+    "hash": "7b6b003f996448eb464f9da170565c77"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarInset.md": {
+    "mtime": 1782669334873.7002,
+    "hash": "599e85f58c88d51ff47a5c6f1d4720d4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenu.md": {
+    "mtime": 1782669334887.1975,
+    "hash": "03599003fb534f80be70de60547ab285"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuAction.md": {
+    "mtime": 1782669334891.6992,
+    "hash": "9654a0216e9f0fba4343078a34925fa6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuBadge.md": {
+    "mtime": 1782669334892.6982,
+    "hash": "21f963412a59b56673463566c6e37f93"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuButton.md": {
+    "mtime": 1782669334890.198,
+    "hash": "e725ea7294cc54d48add2a8d05e5b09f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuItem.md": {
+    "mtime": 1782669334888.199,
+    "hash": "298ef9f9b1a79f04fbbc471060fbbe74"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuSkeleton.md": {
+    "mtime": 1782669334894.198,
+    "hash": "b9cb612085bdbf10641fc104ec960f33"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuSub.md": {
+    "mtime": 1782669334895.6975,
+    "hash": "5694114c7e805c78a135aafb798efe00"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuSubButton.md": {
+    "mtime": 1782669334898.204,
+    "hash": "135e3dc54861a84631243740535a7a7c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarMenuSubItem.md": {
+    "mtime": 1782669334897.1985,
+    "hash": "dbd972fdd1b493ed534d9bfdfc5f5087"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarProvider.md": {
+    "mtime": 1782669334869.1987,
+    "hash": "7d9d68080fb6f8fd17c1dc97b86bfff2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarRail.md": {
+    "mtime": 1782669334872.6985,
+    "hash": "8306afe133847a64146c5ac6f216437a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarSeparator.md": {
+    "mtime": 1782669334878.699,
+    "hash": "3eef291ac836b7d71b6db178b53bb615"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SidebarTrigger.md": {
+    "mtime": 1782669334871.6992,
+    "hash": "69a9b4c35a59b79afa4a2d4041d482f6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SitemapDotxmlRoute.md": {
+    "mtime": 1782669335236.9233,
+    "hash": "13d80cc857bf8b7d44cab7917e638964"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/SitemapEntry.md": {
+    "mtime": 1782669335395.431,
+    "hash": "1d3be641a83630b827dfe71e2b2fbd03"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Skeleton().md": {
+    "mtime": 1782669334901.1997,
+    "hash": "3b314a0e40500b9853adfa6b0c894b77"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Slider.md": {
+    "mtime": 1782669334904.2058,
+    "hash": "e2b2170afbe83c9e50dd13412270c164"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Stat().md": {
+    "mtime": 1782669335341.4253,
+    "hash": "92e22cf7cb767db97328cf15076318d2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/StatusBadge().md": {
+    "mtime": 1782669335344.4265,
+    "hash": "f7caf58a52fabd8de3c8f5777bd8fdfd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/StatusKey.md": {
+    "mtime": 1782669335327.4246,
+    "hash": "a66d31e75d3c619a434b803dac402912"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Stepper().md": {
+    "mtime": 1782669335346.4312,
+    "hash": "0211b9824200a30f35e4030df73a9865"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Switch.md": {
+    "mtime": 1782669334910.2002,
+    "hash": "d7d6786e1cbef0499c676967bd140baf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/THEMES.md": {
+    "mtime": 1782669334671.695,
+    "hash": "70059bc917400f33ace64909c0e77445"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Table.md": {
+    "mtime": 1782669334913.202,
+    "hash": "730af892efe5cf90d0b5fc7c638cff4f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableBody.md": {
+    "mtime": 1782669334915.702,
+    "hash": "36a0ea0608c5721b83b5965a37a91dc6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableCaption.md": {
+    "mtime": 1782669334921.6975,
+    "hash": "86fedb303dd31a5c221e90cf77ec180e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableCell.md": {
+    "mtime": 1782669334920.6982,
+    "hash": "e7a52923354f06319aa0bd6af3b2eccc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableFooter.md": {
+    "mtime": 1782669334917.198,
+    "hash": "35207a5b14c70e229ae32c281d0e7d71"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableHead.md": {
+    "mtime": 1782669334919.197,
+    "hash": "5c02d82df9c651a357561410f79eaa3d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableHeader.md": {
+    "mtime": 1782669334914.1987,
+    "hash": "08a5b9b8d928f4eb47d9fec7a6f850d2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TableRow.md": {
+    "mtime": 1782669334918.1987,
+    "hash": "3e07a59321ebe43dcc9bb6ee06d955c0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Tables.md": {
+    "mtime": 1782669334975.2031,
+    "hash": "dd086db8e3af2d53adceeb31246905f5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TablesInsert.md": {
+    "mtime": 1782669334976.7024,
+    "hash": "f228a2ebd57af8dbb2b46932ad73c3ae"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TablesUpdate.md": {
+    "mtime": 1782669334979.2002,
+    "hash": "d111f4f68f25d0d2b13c5361033b4001"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TabsContent.md": {
+    "mtime": 1782669334926.7017,
+    "hash": "fd1b849736f7617c4f53c49bb133642b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TabsList.md": {
+    "mtime": 1782679158991.187,
+    "hash": "23dd1445291303df9ec3385ef9cb39bc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TabsTrigger.md": {
+    "mtime": 1782669334925.6978,
+    "hash": "a08b3f191569028dd52d711890c9ee99"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TeamTab().md": {
+    "mtime": 1782669334588.6917,
+    "hash": "3e497d9686cdc30b87d70f42ceae705e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TeamTab.tsx.md": {
+    "mtime": 1782669334587.6921,
+    "hash": "a30139e975e9a49c6c4275b5847535dc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Textarea.md": {
+    "mtime": 1782669334929.1995,
+    "hash": "38ba7d48cb5fa35927c68c2ebbaa0d58"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Toaster().md": {
+    "mtime": 1782669334907.6992,
+    "hash": "da9f80e895fe7daecaf22980d989e2ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ToasterProps.md": {
+    "mtime": 1782669334906.7007,
+    "hash": "6a439b21710e0c635ae0a083a754f929"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Toggle.md": {
+    "mtime": 1782669334937.6975,
+    "hash": "06f730052aebe02841c20266e0ebe294"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ToggleGroup.md": {
+    "mtime": 1782669334933.1985,
+    "hash": "3b7bcc9bea2d3688777df8f56fdd302a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ToggleGroupContext.md": {
+    "mtime": 1782669334931.7007,
+    "hash": "31b1eb363e92a1c6c1b31b713e65ab84"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ToggleGroupItem.md": {
+    "mtime": 1782669334934.1982,
+    "hash": "fd2f1cf77a5f527a86d4fffd02df7257"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TooltipContent.md": {
+    "mtime": 1782669334940.1992,
+    "hash": "80c5f5f6882ade9cac9939352bea00dd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/TrackDotjsRoute.md": {
+    "mtime": 1782669335235.925,
+    "hash": "7dd42b37ec9740f4f8e447bde321199f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/UseCarouselParameters.md": {
+    "mtime": 1782669334653.6917,
+    "hash": "31c49854dc6aa30a8a930574b75c88ec"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/VoorwaardenPage().md": {
+    "mtime": 1782669335355.9243,
+    "hash": "0d08ba5ea726c5f931e41d51d1915383"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/WebsiteLinksPanel().md": {
+    "mtime": 1782669335306.4268,
+    "hash": "f9ff423a3f64a938a4a6f2720d003754"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/WebsiteTab().md": {
+    "mtime": 1782669335349.923,
+    "hash": "ab17db0518d1adc50c8a7b1051b5c084"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Work().md": {
+    "mtime": 1782669334591.6921,
+    "hash": "1fb621620f698816db307e50aef32dc8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/Work.tsx.md": {
+    "mtime": 1782669334589.6924,
+    "hash": "00a938b2d9011b7531427b91dd8c6cad"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Agent SDK Hook Tooling.md": {
+    "mtime": 1782669335597.9253,
+    "hash": "08e702db1a5cc1fc7b26a5e15432c827"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Automation Recommender UI.md": {
+    "mtime": 1782669335567.4248,
+    "hash": "76e03c9065eb4353d057d17b735bf6b7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Benchmark Aggregation.md": {
+    "mtime": 1782669335599.427,
+    "hash": "40944c18d0caaa061f94ce2e87c3fe7e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Business Rules Extraction.md": {
+    "mtime": 1782669335589.9243,
+    "hash": "b3d7282f46cad8ea3d6b192bcb52b5a6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Claude Code Setup Plugin.md": {
+    "mtime": 1782669335546.424,
+    "hash": "4978bb72f1db14f25ee5452e60802cc7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Code Modernization Agents.md": {
+    "mtime": 1782669335519.4238,
+    "hash": "a6b15f1fbeabbe7f4261de633c5d7d99"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Code Modernization Commands.md": {
+    "mtime": 1782669335578.4255,
+    "hash": "4553bd59f27051f9b68af8d743cdbfd6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Diff State & Git Utilities.md": {
+    "mtime": 1782679185673.2202,
+    "hash": "86844952e72bda4f00524f92b39a1f0e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Diff State Management.md": {
+    "mtime": 1782669335600.9246,
+    "hash": "ae1d5010a97511d74b7551b35cbc2f74"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Discord MCP Server.md": {
+    "mtime": 1782669335584.9236,
+    "hash": "44a9ebed7fc7f054ef90640cc1dd62ef"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Discord NPM Package.md": {
+    "mtime": 1782669335569.4248,
+    "hash": "793f46c5014da6c26ec1705139b751b3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Eval Viewer & HTTP Server.md": {
+    "mtime": 1782669335549.9253,
+    "hash": "0fc4b30b08a3776b5662b309a5de50d5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Example Plugin & Commands.md": {
+    "mtime": 1782669335540.9248,
+    "hash": "2d928bf5dbdebb75bf3293327556982b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_FakeChat NPM Package.md": {
+    "mtime": 1782669335551.9255,
+    "hash": "146fcc41b2086d1c5fd2f64381b92285"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Git Diff & LLM Review.md": {
+    "mtime": 1782669335605.9248,
+    "hash": "f8f5d7116dd9874597791a442a88d7a9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Graphify Hooks & Transcribe.md": {
+    "mtime": 1782669335564.4238,
+    "hash": "bc4d5413813a516782ac9efe5b128f4e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hook Base Rationale Nodes.md": {
+    "mtime": 1782669335552.9236,
+    "hash": "69fb04e043cba55a1d0a0d8705af5e87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hook Extensibility & Glob.md": {
+    "mtime": 1782669335560.9243,
+    "hash": "5b71e00f5b70b29b057832225c1f9669"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hook Rule Engine & Config.md": {
+    "mtime": 1782669335486.9248,
+    "hash": "f302981d66cfd84ecc7d1f92c568baf6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hook Session State.md": {
+    "mtime": 1782669335545.4248,
+    "hash": "c32492ad9e05c6d50906b8edcc205066"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hookify Commands & Examples.md": {
+    "mtime": 1782669335543.9248,
+    "hash": "301a5fbbe80552199d3b20253fb4f473"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Hooks Base & LLM Review.md": {
+    "mtime": 1782669335520.9253,
+    "hash": "82474ce3bd9741782f373cd5af681004"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_MCP Server Auth & Build.md": {
+    "mtime": 1782669335484.9233,
+    "hash": "0fe15563bd011e7c035ba9d8f30895e3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Math Olympiad Solver.md": {
+    "mtime": 1782669335576.9253,
+    "hash": "695b5971844c540985ebd65c6a393d6e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_PR Review Toolkit.md": {
+    "mtime": 1782669335593.9229,
+    "hash": "34b439bf184c57c4e546bccf4f4b42fe"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Agent Development.md": {
+    "mtime": 1782669335580.924,
+    "hash": "a84f98c1a6a53472f4fa10d9e3f7e079"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Command Development.md": {
+    "mtime": 1782669335582.9246,
+    "hash": "8d82b8373c9e253e29a9e0dc4bcfe60d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 40.md": {
+    "mtime": 1782669335557.4233,
+    "hash": "60401e2932d41e78729cbc5e92f74885"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 41.md": {
+    "mtime": 1782669335611.9246,
+    "hash": "a2539efab225e50f874f9ebfa2908aac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 42.md": {
+    "mtime": 1782669335517.9233,
+    "hash": "4e71165f3757c2892f36b63cc67b9c2f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 43.md": {
+    "mtime": 1782669335529.4233,
+    "hash": "711d7a68c5c4c0dfea28a6788b0d636e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 44.md": {
+    "mtime": 1782669335539.4248,
+    "hash": "fd2630d9545a1b169fb433605c6ad081"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 45.md": {
+    "mtime": 1782669335575.423,
+    "hash": "bfba901a02e96379e59b018574ecb404"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 46.md": {
+    "mtime": 1782669335515.4253,
+    "hash": "ae5889773cb0473eed4a66e87e4e60e0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 47.md": {
+    "mtime": 1782669335588.4243,
+    "hash": "8c28f7c0273f774e48a7889f252fce17"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 48.md": {
+    "mtime": 1782669335602.9248,
+    "hash": "81d9f320e4886ab20cc96f4acd9dae2c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 49.md": {
+    "mtime": 1782669335604.4219,
+    "hash": "95b0e5fce749263392b2b8fe4d571ad1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 50.md": {
+    "mtime": 1782669335488.4246,
+    "hash": "b4604a8687892fcc7b5380698a617bbd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 51.md": {
+    "mtime": 1782669335608.423,
+    "hash": "82f142ea9cbc2ab5cab976772e1c06c1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 52.md": {
+    "mtime": 1782669335483.4253,
+    "hash": "483aadbb5f49b50648a84ec75e5392e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 53.md": {
+    "mtime": 1782669335479.9263,
+    "hash": "c1a52b8749b06fabf1bd12e07aeb9ab3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 54.md": {
+    "mtime": 1782669335613.4243,
+    "hash": "76148efbcca498c45aff7dce4b578e1c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 55.md": {
+    "mtime": 1782669335527.923,
+    "hash": "d03e046caaee866a1da91536da2605fc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 56.md": {
+    "mtime": 1782669335547.925,
+    "hash": "f8fb0509863c4d6912ce20252d969cea"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Community 57.md": {
+    "mtime": 1782669335606.9248,
+    "hash": "73eeb200d09d12e661d269034eaeba51"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Plugin Marketplace Index.md": {
+    "mtime": 1782669335542.9248,
+    "hash": "82a59335a02c83c1d3c3d1f5b707709f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Review API & Prompts.md": {
+    "mtime": 1782669335609.9238,
+    "hash": "35ce31f47ae5584d9f33ad234b7f6490"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Security Hardening Scan.md": {
+    "mtime": 1782669335555.9238,
+    "hash": "7908d90bf7f0d73776dea33b4ae3117f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Security Reminder Hook.md": {
+    "mtime": 1782669335489.9253,
+    "hash": "38b4475fa0f9cede4d5f9817dae32dce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Session Report Analyzer.md": {
+    "mtime": 1782669335493.424,
+    "hash": "b98ccd4c1ca10b368234787726b24f87"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Skill Creator Agents.md": {
+    "mtime": 1782669335554.4243,
+    "hash": "06cc436247b9b3a8f069e1c9bacd7f25"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Skill Creator Scripts.md": {
+    "mtime": 1782669335491.925,
+    "hash": "a7e413b031b5c842d2fa0b88bc1ff9b7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Skill Packaging Scripts.md": {
+    "mtime": 1782669335562.4253,
+    "hash": "532eaf5a65bd1cebe189c0da93adeaa6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Telegram MCP Server.md": {
+    "mtime": 1782669335481.9255,
+    "hash": "0b4de7a5f2c353262659ce5e500d94f8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Telegram NPM Package.md": {
+    "mtime": 1782669335496.4287,
+    "hash": "3ea1c810a5aa0304bbb05a8145689f3e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_Uplift Deltas Workflow.md": {
+    "mtime": 1782669335586.9243,
+    "hash": "b462ddd1250b105f61bcd4878c73c61b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_iMessage MCP Server.md": {
+    "mtime": 1782669335558.9243,
+    "hash": "ea7ba6eb253f53a9eda99ab7c39da157"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_COMMUNITY_iMessage NPM Package.md": {
+    "mtime": 1782669335596.425,
+    "hash": "28844fec058670d7f1144dc3a7ab44e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/__root.tsx.md": {
+    "mtime": 1782669335271.4246,
+    "hash": "3746379d15b52ff88146152e8f4907b0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/_authenticated.tsx.md": {
+    "mtime": 1782669335279.9248,
+    "hash": "ccc6b823939afc272927496fa4044258"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/accordion.tsx.md": {
+    "mtime": 1782669334593.1921,
+    "hash": "6c981f3dd51f2c6c0a0345716d9f2904"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/account.tsx.md": {
+    "mtime": 1782669335288.923,
+    "hash": "1fc2d82c519f0914d9edcb74b425f52f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/accounts.functions.ts.md": {
+    "mtime": 1782669334985.6992,
+    "hash": "a3ff95276b5044ae130675ccea9ca316"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/accounts.server.ts.md": {
+    "mtime": 1782669335024.1992,
+    "hash": "794adbfa0d7a478dbbd02f1312eff1df"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/admin.functions.ts.md": {
+    "mtime": 1782669335030.1985,
+    "hash": "f07598d10f1e60321381f51da6d283c6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/admin.server.ts.md": {
+    "mtime": 1782669335124.9314,
+    "hash": "b0a94d9813fb899f7db8a776dfc4bc4d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/admin.tsx.md": {
+    "mtime": 1782669335293.9243,
+    "hash": "a43cb2961238df5a3912340d07d9b194"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminAddCost.md": {
+    "mtime": 1782669335065.201,
+    "hash": "b6735626cf758f76aa8299be78f49f14"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminAddOnboardingItem.md": {
+    "mtime": 1782669335068.7017,
+    "hash": "3533cd44dc7651f8dceac28c9b037728"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminApproveExtraChangeRequest.md": {
+    "mtime": 1782669335116.4229,
+    "hash": "bb570a87b7d8aab39497882f6eb92475"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminArchiveChange.md": {
+    "mtime": 1782669335016.7,
+    "hash": "fae4d1952d6529baa10ec76e8a4a37ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminAssignChange.md": {
+    "mtime": 1782669335021.2097,
+    "hash": "ca0a0f65ca08e5131b097b051218c606"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminAttachmentUrl.md": {
+    "mtime": 1782669335075.7,
+    "hash": "27bd5fe149db5287e4c94aa876984f92"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminBulkArchive.md": {
+    "mtime": 1782669335019.7004,
+    "hash": "dc80120e6f4425cab1dfaa8f122f59a1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminBulkComplete.md": {
+    "mtime": 1782669335081.7007,
+    "hash": "34943c8b5046ead6a6e2f8dfa552c3ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminBulkSoftDelete.md": {
+    "mtime": 1782669335103.0405,
+    "hash": "4c2308fe136e8ad4330ada72d6fd9fa1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminChangeAccountRole.md": {
+    "mtime": 1782669334997.6973,
+    "hash": "36842dfe0068f85f684a0d73e321b380"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminChangeRole.md": {
+    "mtime": 1782669335096.8223,
+    "hash": "8be605184bee22f5bc39f6dfec079989"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateAppointment.md": {
+    "mtime": 1782669335078.1992,
+    "hash": "7f0ae501dee0045e89eb95331ecd5874"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateChangeForCustomer.md": {
+    "mtime": 1782669335109.2236,
+    "hash": "64caca8a2924eeebc596f1c8158b5e40"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateContactMoment.md": {
+    "mtime": 1782669335085.7007,
+    "hash": "da8361d1fb7e2d7f9fad1918fbef014e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateCustomer().md": {
+    "mtime": 1782669335128.9253,
+    "hash": "0d547375e14f2a934202ed70aef8c4ba"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateCustomerFn.md": {
+    "mtime": 1782669335048.6987,
+    "hash": "87dceef000fb1c59af1f208b01a216aa"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateSnippet.md": {
+    "mtime": 1782669335072.7012,
+    "hash": "d4957c366802e13353f4ffaa28a289f8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminCreateTempAccount.md": {
+    "mtime": 1782669335007.6997,
+    "hash": "dcf89900b45c2ef8947647ab16e20b8a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteAppointment.md": {
+    "mtime": 1782669335079.6995,
+    "hash": "ca006d4e8c34db1064a4e11e8b3009e4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteContactMoment.md": {
+    "mtime": 1782669335087.2014,
+    "hash": "eeb6ad27b36956744765156e412a3c3c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteContactSubmission.md": {
+    "mtime": 1782669335162.425,
+    "hash": "953fc26c02b83483b138532653840023"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteCost.md": {
+    "mtime": 1782669335066.7014,
+    "hash": "4432d16b9f9d97518c0f88a65ae65dfe"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteOnboardingItem.md": {
+    "mtime": 1782669335071.6963,
+    "hash": "61b413cbd2fb9e8ad1669f47a98fb8ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminDeleteSnippet.md": {
+    "mtime": 1782669335074.1958,
+    "hash": "75b4a977a3e2a35a27ab544f1fd23ec4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminExists.md": {
+    "mtime": 1782669335209.4236,
+    "hash": "34016a7a2c236a858abdd1a4331537b9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGenerateRecoveryLink().md": {
+    "mtime": 1782669335134.424,
+    "hash": "c3f587ca294a3ea768f4b4f32a8cf47b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetAuditLog.md": {
+    "mtime": 1782669335100.986,
+    "hash": "a89b1ac7c48d7bf58f6808c8ff9dd0f6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetCustomer.md": {
+    "mtime": 1782669335046.7007,
+    "hash": "7fd0c2dd42705c0b567ac86f98672b98"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetCustomerDetail().md": {
+    "mtime": 1782669335140.922,
+    "hash": "0761cba4014c2b960dd76adcd493bcf4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetGrowthMetrics().md": {
+    "mtime": 1782669335139.4253,
+    "hash": "bcff1805d234c64032546e51ba0df4cb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetHealthScores.md": {
+    "mtime": 1782669335090.6719,
+    "hash": "c5d95d42cd8d1a65bce63b02c9a0baab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetMyRoles.md": {
+    "mtime": 1782669335093.739,
+    "hash": "b8f700d03844204fd03ced26e233312a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetOverview.md": {
+    "mtime": 1782669335044.7002,
+    "hash": "7f7055553a6f34692a2a169180fa603a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGetSiteStats.md": {
+    "mtime": 1782669335089.6965,
+    "hash": "c9c504b40d947610f53a28b278a8f9ea"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminGrantCredits.md": {
+    "mtime": 1782669335058.6992,
+    "hash": "81f89b7ae3092703856e920cea4da2df"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminHardDeleteAccount.md": {
+    "mtime": 1782669335006.204,
+    "hash": "e1d36d158b5900a95d733e38eef8e174"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminHardDeleteChange.md": {
+    "mtime": 1782669335106.124,
+    "hash": "74b38f540fc7022c231663797ae11345"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminHardDeleteUserImpl().md": {
+    "mtime": 1782669335026.6997,
+    "hash": "c6178103a4a9bb84b4d6bcfcdfaa85f3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminInviteStaff.md": {
+    "mtime": 1782669335095.795,
+    "hash": "9261d98e2bbec2ddedd87a42f8b508c3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminInviteStaffMember().md": {
+    "mtime": 1782669335147.9258,
+    "hash": "40d4c3aaf8a27344369d4f30458118cb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListAllAccounts.md": {
+    "mtime": 1782669334996.2007,
+    "hash": "4692806ed321d490ab985926a5ecb45d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListAllAccountsImpl().md": {
+    "mtime": 1782669335025.6982,
+    "hash": "12dc0522890d65d338352e1dbd9a7888"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListAllChanges.md": {
+    "mtime": 1782669335091.6797,
+    "hash": "dd60edb00fd2f01e89c54d5c18c67d60"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListAppointments.md": {
+    "mtime": 1782669335077.1982,
+    "hash": "2177583326962b5a1049d127e56c0a0c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListArchivedChanges.md": {
+    "mtime": 1782669335022.6987,
+    "hash": "3b9ad1e350632c097fed82fdd8998265"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListContactMoments.md": {
+    "mtime": 1782669335083.7,
+    "hash": "eaef3281f7389480d55c0eb368e7d1a7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListContactSubmissions.md": {
+    "mtime": 1782669335159.426,
+    "hash": "6f00691c6d91cfbd2515fd7e1d0e0db1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListCustomers().md": {
+    "mtime": 1782669335132.4243,
+    "hash": "897464a371a59f6e0db408a65e452060"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListDeletedChanges.md": {
+    "mtime": 1782669335108.1848,
+    "hash": "d173af6c9ca381204eb72676732ef261"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListExtraChangeRequests.md": {
+    "mtime": 1782669335114.385,
+    "hash": "f822cf257fad07acabaa5289bd3c8324"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListLoginEvents.md": {
+    "mtime": 1782669335088.6975,
+    "hash": "6c46c2ee9675dac137df03a33f547aac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListNotifications.md": {
+    "mtime": 1782669335009.198,
+    "hash": "0a225bc836568c77c73052101d957860"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListStaff.md": {
+    "mtime": 1782669335094.7617,
+    "hash": "e0321b62a4fc3bbdadf1a98a0e8142c5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListStaffMembers().md": {
+    "mtime": 1782669335145.9238,
+    "hash": "dcc0845494da9474b1a2d43896b4df96"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminListWebsiteLinks.md": {
+    "mtime": 1782669335120.9253,
+    "hash": "b80f85753708948bd1bb2d2239d58507"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminMarkAllNotificationsRead.md": {
+    "mtime": 1782669335013.2014,
+    "hash": "7f0edcea5649cf1a3978ed5909dbd3cd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminMarkNotificationRead.md": {
+    "mtime": 1782669335011.7031,
+    "hash": "e3296acd68bfa1867d8ea7e190c2465f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminPostComment.md": {
+    "mtime": 1782669335057.198,
+    "hash": "23bedbb6fea50191b2675cbbfb9c3cba"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminRejectExtraChangeRequest.md": {
+    "mtime": 1782669335118.9248,
+    "hash": "102fae321dcdfb2893383df7720cbb8e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminRemoveStaff.md": {
+    "mtime": 1782669335098.9036,
+    "hash": "31603a2212e9e118e568e7683d9bc7b9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminRemoveStaffRoles().md": {
+    "mtime": 1782669335150.4248,
+    "hash": "d6bb0502bdb8930702ee2e55e7eaec20"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminReplaceRole().md": {
+    "mtime": 1782669335149.4243,
+    "hash": "fe5853977244f56cdcc489a769916add"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminRestoreChange.md": {
+    "mtime": 1782669335105.0942,
+    "hash": "4b7f35674ca24046dd98d993a8d2ff97"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSendNotification.md": {
+    "mtime": 1782669335060.198,
+    "hash": "11e9ba509165e7eb63cf218bb846bd30"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSetAccessExpiry.md": {
+    "mtime": 1782669335004.1995,
+    "hash": "6e7b7614ce5c59aaefa811e7185ccb25"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSetAccountTags.md": {
+    "mtime": 1782669335002.6985,
+    "hash": "587aeb9a97405f85c736f0f38f2a6e2e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSetBlocked.md": {
+    "mtime": 1782669335001.2002,
+    "hash": "7c708e58f4f6eb50417012019f5dc44f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSetFreeQuota.md": {
+    "mtime": 1782669335054.1995,
+    "hash": "9f4465e99827ed55d537fd58d3a2a7ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSetRequestFields.md": {
+    "mtime": 1782669335055.6992,
+    "hash": "8668b8130d400a2fe70567cf98bc5f17"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminSoftDeleteChange.md": {
+    "mtime": 1782669335102.0154,
+    "hash": "34f4f2b4cf7904fe3688f8b4df29d3ce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminToggleContactHandled.md": {
+    "mtime": 1782669335160.9246,
+    "hash": "93a2fd599c9c835b9db12fe8820deb18"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminToggleOnboardingItem.md": {
+    "mtime": 1782669335070.6973,
+    "hash": "818fb2529662b4eb45052ba11306c685"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminToggleRequestPaid.md": {
+    "mtime": 1782669335052.6997,
+    "hash": "1a0773aee515c728047bb2b1de929ca2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminUnarchiveChange.md": {
+    "mtime": 1782669335018.1992,
+    "hash": "61500f71cbdffbb2e0b3541efdfd29c6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminUpdateCustomer.md": {
+    "mtime": 1782669335049.7053,
+    "hash": "d0a454d9e016b5ab82fd95e4dcf53bb7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminUpdateRequestStatus.md": {
+    "mtime": 1782669335051.199,
+    "hash": "ab51fdb2e0bf633a735b45efd0a6239f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminUpdateUserEmail().md": {
+    "mtime": 1782669335137.4243,
+    "hash": "a57a2056c5234d286a50bfe5f2f40151"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/adminUpdateWebsiteLink.md": {
+    "mtime": 1782669335122.4233,
+    "hash": "978d0b9e70e4d7cac2e734a08abc70d0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/admin_notifications DB table.md": {
+    "mtime": 1782669335463.4243,
+    "hash": "039d6340ea77d38c3c80ca654085907e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/alert-dialog.tsx.md": {
+    "mtime": 1782669334597.1924,
+    "hash": "3576193987fcb3999fc443147ea114e0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/alert.tsx.md": {
+    "mtime": 1782669334608.6936,
+    "hash": "0c0db408a6b31e316fb6d2f3eec5f82b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/alertVariants.md": {
+    "mtime": 1782669334609.6924,
+    "hash": "d4775d625cf1da84c4064abe09d336f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/algemene-voorwaarden.tsx.md": {
+    "mtime": 1782669335352.9224,
+    "hash": "91d1b65c4cc6e31f982742bb573265fe"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/aliases.md": {
+    "mtime": 1782669334419.1934,
+    "hash": "2702a6b9d0998ac8cf26ed4f6a5ad1e8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/allowImportingTsExtensions.md": {
+    "mtime": 1782669335431.4233,
+    "hash": "5fc8c9270de986e9319c5408a96af038"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/app.json.md": {
+    "mtime": 1782669334401.705,
+    "hash": "d2329f389e49afe20bf4c0abf6a0fbf2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/aspect-ratio.tsx.md": {
+    "mtime": 1782669334614.1929,
+    "hash": "3062acc457c312ffecf127cd43989933"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/attachSupabaseAuth.md": {
+    "mtime": 1782669334953.2048,
+    "hash": "509d2ec5caf3787e9f334f205d652608"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/auth-attacher.ts.md": {
+    "mtime": 1782669334952.1997,
+    "hash": "3e508227876874956421e7c127c93845"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/auth-middleware.ts.md": {
+    "mtime": 1782669334954.701,
+    "hash": "2d545a250f285ce5fb77fe455bb17eac"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/avatar.tsx.md": {
+    "mtime": 1782669334615.196,
+    "hash": "8b8ddf94e5f0ac7d6d59a06ab996e133"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/badge.tsx.md": {
+    "mtime": 1782669334619.6953,
+    "hash": "64efb7b0c51acabf9183c97b1a297377"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/badgeVariants.md": {
+    "mtime": 1782669334621.1924,
+    "hash": "97b9617766624940472e0d739b70f81b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/baseColor.md": {
+    "mtime": 1782669334413.1924,
+    "hash": "1fd3548c0bcc3a107608ee372131abe5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/brandedErrorResponse().md": {
+    "mtime": 1782669335408.9248,
+    "hash": "5525822d9c4ba4b67c0676f5eac2a14d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/breadcrumb.tsx.md": {
+    "mtime": 1782669334624.6907,
+    "hash": "b64478d4ffcf38e58d83a662a28fbb4b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/build.md": {
+    "mtime": 1782669334436.7058,
+    "hash": "4641830fa703ab6478f2b3652835095f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/builddev.md": {
+    "mtime": 1782669334438.1914,
+    "hash": "66dc06d731aab1e110b45a58f69dabe6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/button.tsx.md": {
+    "mtime": 1782669334634.197,
+    "hash": "730a431da8727aff741bf6443f984e38"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/buttonVariants.md": {
+    "mtime": 1782669334635.6926,
+    "hash": "fcdae03f394b16e8066ccc0687731ac3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/calendar.tsx.md": {
+    "mtime": 1782669334639.1987,
+    "hash": "71cc4ead7a12ab0b50707bf1a8b9e9f6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/can().md": {
+    "mtime": 1782669335204.4248,
+    "hash": "17fb8dc11d2f6bc5950a99aea68673d3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cancelMyChange.md": {
+    "mtime": 1782669335182.4255,
+    "hash": "bbda2f848e264aec6f8633445231daf4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/card.tsx.md": {
+    "mtime": 1782669334643.1973,
+    "hash": "9406159cc94d889ceca76e67c909be53"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/carousel.tsx.md": {
+    "mtime": 1782669334651.193,
+    "hash": "c5dc8bceb4b66e774ba7c36823b85cb5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/change_requests DB table (extended).md": {
+    "mtime": 1782669335466.4248,
+    "hash": "fc6fe604ea03c5ccc0dc240b99e410a5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/chart.tsx.md": {
+    "mtime": 1782669334670.6917,
+    "hash": "5d515abbba3a9594242d9f0e909e44fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/checkMyAccess.md": {
+    "mtime": 1782669334995.1992,
+    "hash": "5ff4229f087942cb4c2ea50d0dd78712"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/checkbox.tsx.md": {
+    "mtime": 1782669334685.7104,
+    "hash": "4e65ce375783f944a95a174fa18edae5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/class-variance-authority.md": {
+    "mtime": 1782669334491.2063,
+    "hash": "23a6c34d69df32432449d2b888492936"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/client.server.ts.md": {
+    "mtime": 1782669334957.6997,
+    "hash": "dc39a3282b9b0e41b9af490ec66eaa1a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/client.ts.md": {
+    "mtime": 1782669334962.2017,
+    "hash": "fe43575a4884f4ec7cacb643eec76070"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/clsx.md": {
+    "mtime": 1782669334492.1938,
+    "hash": "4f451e1073620dacd6472297a3e2fc6e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cmdk.md": {
+    "mtime": 1782669334493.693,
+    "hash": "0d30164e1dab0f28287740dca983daa8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cn().md": {
+    "mtime": 1782669335232.4277,
+    "hash": "e7f7635bc85d30ca2acf5ddcc39a3468"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/collapsible.tsx.md": {
+    "mtime": 1782669334688.694,
+    "hash": "cb5f0c2ed8414aeb384f1d99b0728a8d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/command.tsx.md": {
+    "mtime": 1782669334689.6926,
+    "hash": "c51bcf13fe2001ede6f23b30ba2873f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/compilerOptions.md": {
+    "mtime": 1782669335420.9224,
+    "hash": "2dcb65560cc371b4b7eee2ae1bd3a0d9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/components.json.md": {
+    "mtime": 1782669334403.1924,
+    "hash": "071b29371ae381fedb3151861f0d61c8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/components.md": {
+    "mtime": 1782669334420.1975,
+    "hash": "67d6d31b41ba093662bdb8c1d13103ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/consumeLastCapturedError().md": {
+    "mtime": 1782669335171.426,
+    "hash": "9e44bae4de043db1f4ea7f00f960e41e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/contact.functions.ts.md": {
+    "mtime": 1782669335151.9255,
+    "hash": "aba29ffa189bf5436e84923fd683b3b9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/context-menu.tsx.md": {
+    "mtime": 1782669334703.6946,
+    "hash": "6fad331bddb91d50a6ee7f730af9e1e2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cors.md": {
+    "mtime": 1782669335364.426,
+    "hash": "811abb0df9f04817c0574072d1690d12"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cors_1.md": {
+    "mtime": 1782669335370.9258,
+    "hash": "bf48823d54761e4de296af051c03071c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cors_2.md": {
+    "mtime": 1782669335401.9243,
+    "hash": "da153a253b022741ec4365e7327e9f8f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/createSupabaseAdminClient().md": {
+    "mtime": 1782669334959.1997,
+    "hash": "a6e5084e089eae7c93ca061f9f7c42ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/createSupabaseClient().md": {
+    "mtime": 1782669334964.1997,
+    "hash": "c42ec38864ee20341bdcbca85d520962"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/css.md": {
+    "mtime": 1782669334411.6948,
+    "hash": "46a83918980ecc66231e594c5c500e72"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/cssVariables.md": {
+    "mtime": 1782669334414.2112,
+    "hash": "269c7c33073f485a8fb5c29b29941468"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/date-fns.md": {
+    "mtime": 1782669334494.6934,
+    "hash": "f21be3bd3b5daedb01388dd8261d7187"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/dependencies.md": {
+    "mtime": 1782669334445.2034,
+    "hash": "c1865840b259c967625dbd782f4aaeb3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/dev.md": {
+    "mtime": 1782669334435.1975,
+    "hash": "2542b1fb0f6ff1a1077e207fdeaea7e0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/devDependencies.md": {
+    "mtime": 1782669334519.1924,
+    "hash": "0f648472730ffa511ada9a4ce9284cdb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/dialog.tsx.md": {
+    "mtime": 1782669334715.6912,
+    "hash": "c399c31fa64cd02bf62f5d8eccdc4a21"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/drawer.tsx.md": {
+    "mtime": 1782669334724.6926,
+    "hash": "c81e45550c6b83adf10d0020203f8a06"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/dropdown-menu.tsx.md": {
+    "mtime": 1782669334738.1953,
+    "hash": "c2b61f7cd15690f96b12965f8acff8d0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/email.server.ts.md": {
+    "mtime": 1782669335163.9253,
+    "hash": "4de3805f09164ea658e88518ba7388a5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/embla-carousel-react.md": {
+    "mtime": 1782669334495.6975,
+    "hash": "44461a56208e5defd69eccbc0c273184"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureAdmin().md": {
+    "mtime": 1782669334991.2036,
+    "hash": "7d56815c776b4957ae0489cea9eb2c9d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureAdmin()_1.md": {
+    "mtime": 1782669335038.6985,
+    "hash": "67b2faf315861d5c1d116b78847ae5bd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureRoles().md": {
+    "mtime": 1782669335037.199,
+    "hash": "babfd6b3852c51c15aa2e2652e62de06"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureStaff().md": {
+    "mtime": 1782669335041.7,
+    "hash": "1796b66ba2d2666a2bc62a25a63c3080"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureStaff()_1.md": {
+    "mtime": 1782669335156.425,
+    "hash": "899a0d12c5a6a3717bbdec963fc0f3b2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureSuper().md": {
+    "mtime": 1782669334992.2024,
+    "hash": "56d808d082381700b8fb82ba830cfb0c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ensureSuperAdmin().md": {
+    "mtime": 1782669335040.2,
+    "hash": "0669c675a4279bec3e3244595cac09dc"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/error-capture.ts.md": {
+    "mtime": 1782669335168.4236,
+    "hash": "b6a767a5298bd2d54916b9f586d3659a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/error-page.ts.md": {
+    "mtime": 1782669335172.423,
+    "hash": "1b64e4b6e5a6705ea3b08c0bb59a3a02"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/errorMiddleware.md": {
+    "mtime": 1782669335415.9258,
+    "hash": "fcc130c6499025e740a019da245c3005"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint-config-prettier.md": {
+    "mtime": 1782669334528.693,
+    "hash": "c70a9fe76eb6715207bab5df57043d97"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint-plugin-prettier.md": {
+    "mtime": 1782669334529.6934,
+    "hash": "aeeb5f62b13c747bcb5d1229652d53b5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint-plugin-react-hooks.md": {
+    "mtime": 1782669334530.6948,
+    "hash": "3030c65416f22835a65650e37cb6b5a0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint-plugin-react-refresh.md": {
+    "mtime": 1782669334531.6973,
+    "hash": "0ba6e986e7fad4c7b4127a16351c2e7d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint.config.js.md": {
+    "mtime": 1782669334427.2104,
+    "hash": "0bc538a5c8a5b3f04b436f2c579469a3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eslint.md": {
+    "mtime": 1782669334527.698,
+    "hash": "9fd58b02f14ac1bb0edb992bf52b1c3d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/eur().md": {
+    "mtime": 1782669335296.4226,
+    "hash": "654b2a95b4019dc82ea875b6c3930387"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/expire-accounts.ts.md": {
+    "mtime": 1782669335357.4224,
+    "hash": "48cbb03a3ae3e1c5cc1002c22211bc8c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/expireBlockedAccountsImpl().md": {
+    "mtime": 1782669335028.6992,
+    "hash": "190b4bbf0f98e65f49b0348dabacffd1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/fetch().md": {
+    "mtime": 1782669335412.9226,
+    "hash": "61419f446f97e48320dc43c0c5920016"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/form.tsx.md": {
+    "mtime": 1782669334751.6924,
+    "hash": "e5741a85982a2d2e6361256f9fe8707c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/format.md": {
+    "mtime": 1782669334443.695,
+    "hash": "a9c457a8da3e94d06ec30ab7c286d1fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/genTempPw().md": {
+    "mtime": 1782669335144.4243,
+    "hash": "6c5fa6c8a40c93a664eba4adeba6b230"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getAttachmentUrl.md": {
+    "mtime": 1782669335192.9246,
+    "hash": "40418e05d950b2bce4390334f8a6f870"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getMyDashboard.md": {
+    "mtime": 1782669335176.9238,
+    "hash": "f889e8c14424bda70012d9d35cd048c8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getPayloadConfigFromPayload().md": {
+    "mtime": 1782669334684.193,
+    "hash": "256b175aeca0d301a60808c7fd7d7188"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getRoles().md": {
+    "mtime": 1782669334990.1992,
+    "hash": "dd7392391666b9788ee5f6b3374260ff"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getRoles()_1.md": {
+    "mtime": 1782669335035.698,
+    "hash": "54ec31174a6a63ec1938b7b86b599499"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getRouter().md": {
+    "mtime": 1782669335269.925,
+    "hash": "71fdcd0710b45502110719e2322a867f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/getServerEntry().md": {
+    "mtime": 1782669335407.4248,
+    "hash": "13bdfae6479437c873a1a75ba8039b48"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/globals.md": {
+    "mtime": 1782669334532.6921,
+    "hash": "6261dd65ce90199688c7634071a5a37a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/hooks.md": {
+    "mtime": 1782669334425.1914,
+    "hash": "a2c28fca6511512b20ca80e1baf5a53e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/hover-card.tsx.md": {
+    "mtime": 1782669334767.6978,
+    "hash": "026fd7085937718683bed1916124ea80"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/iconLibrary.md": {
+    "mtime": 1782669334416.6936,
+    "hash": "784fd902e276629cb33214eb94f62fbb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/include.md": {
+    "mtime": 1782669335419.922,
+    "hash": "7d2a25ae2ade41e1fd13c8c27596e6c7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/index.tsx.md": {
+    "mtime": 1782669335373.923,
+    "hash": "692af85aed1c11c19f247b47973003f0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/input-otp.md": {
+    "mtime": 1782669334497.1914,
+    "hash": "bd43c2518454ae208ca61cdf08e46fc1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/input-otp.tsx.md": {
+    "mtime": 1782669334770.1946,
+    "hash": "19f67a1a9af1778242ba1275709eda06"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/input.tsx.md": {
+    "mtime": 1782669334777.1938,
+    "hash": "66bbc1ee5ad04e988506748fa0d3b5fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/isCatastrophicSsrErrorBody().md": {
+    "mtime": 1782669335410.4255,
+    "hash": "463e12e8e46dedbdb064986423923ec0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/isCategoryFree().md": {
+    "mtime": 1782669335224.929,
+    "hash": "2cc6a0b6ae7827f013959a9a25147e36"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/isStaffRole().md": {
+    "mtime": 1782669335203.425,
+    "hash": "95f0df67f8ed10edaa70eb6f31321499"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/items.md": {
+    "mtime": 1782669334570.694,
+    "hash": "3925bb2040c6e0adaa08cafff48715cd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/jsx.md": {
+    "mtime": 1782669335424.426,
+    "hash": "27f798ca7cd7675792e5f9484a0a0238"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/label.tsx.md": {
+    "mtime": 1782669334780.1926,
+    "hash": "a213f13100d177957bdfe73dab1761db"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/labelVariants.md": {
+    "mtime": 1782669334781.6938,
+    "hash": "5c756d560365a4ffed0b3a80a2201622"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/lib.md": {
+    "mtime": 1782669334424.1934,
+    "hash": "196fc6bb4c2ce22fde63a897c8fdd2a6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/lib_1.md": {
+    "mtime": 1782669335427.424,
+    "hash": "f283fc2f39cab15eee826e832fefd683"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/links.md": {
+    "mtime": 1782669334578.6926,
+    "hash": "dfde0bc820b69c129ca6e0326424b5cd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/lint.md": {
+    "mtime": 1782669334442.1946,
+    "hash": "0ec0d07ab1e88113025eb5ae85ec54c7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/loadPrefs().md": {
+    "mtime": 1782669334563.192,
+    "hash": "398dc14cd25c72fcd9c4d9219102d446"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/logAudit().md": {
+    "mtime": 1782669335043.201,
+    "hash": "ec67b899ac4a027c0578dc423af32719"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/logLogin.md": {
+    "mtime": 1782669335180.9253,
+    "hash": "a753e4909701d1a4618358d10639dbfb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/login.tsx.md": {
+    "mtime": 1782669335378.4248,
+    "hash": "377c4e9b9edb31022c8f1f7b1761b00c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/lucide-react.md": {
+    "mtime": 1782669334498.6978,
+    "hash": "cdaf2c88b001acd4ada50a08926ba08f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/mapStatus().md": {
+    "mtime": 1782669335328.4233,
+    "hash": "301ae46a2a096077f698748fd8ab48a8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/markAllNotificationsRead.md": {
+    "mtime": 1782669335189.925,
+    "hash": "d124ff6d468f94713696297494b60d80"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/markNotificationRead.md": {
+    "mtime": 1782669335188.9246,
+    "hash": "6fc51a2dc34d9974551f921ac55cbd5d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/matchesFilter().md": {
+    "mtime": 1782669335337.923,
+    "hash": "a2a96ad5f48ac63d6df9224a7359eca0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/menubar.tsx.md": {
+    "mtime": 1782669334785.194,
+    "hash": "22fa9f915317d5f46748563100790add"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/module.md": {
+    "mtime": 1782669335425.9238,
+    "hash": "c4bd6af96d8a7d8f87b5d8e014f16f61"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/moduleResolution.md": {
+    "mtime": 1782669335430.4236,
+    "hash": "ca239a5e9b80b1f5e1bcc9d8e90f0dce"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/motion.md": {
+    "mtime": 1782669334499.6946,
+    "hash": "beb0eacadf0c9d454331a32b009ac7d1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/name.md": {
+    "mtime": 1782669334429.1917,
+    "hash": "2d62e4a6dd18f65169db4b519748256c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/navigation-menu.tsx.md": {
+    "mtime": 1782669334806.074,
+    "hash": "edebfdbde2ec6e398ea03a224333f337"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/navigationMenuTriggerStyle.md": {
+    "mtime": 1782669334809.1396,
+    "hash": "8a97f7488080643ce2a98b66388d3939"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/nitro.md": {
+    "mtime": 1782669334501.1929,
+    "hash": "d977aa0d08031cb0da508a956572f2df"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/noEmit.md": {
+    "mtime": 1782669335434.4236,
+    "hash": "19f7af4308694d7e377cf2150790152b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/noFallthroughCasesInSwitch.md": {
+    "mtime": 1782669335442.9238,
+    "hash": "c616152dc142fc28d92cfdda9307908f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/noUncheckedSideEffectImports.md": {
+    "mtime": 1782669335443.9258,
+    "hash": "0191469c071fd0bf9f642aa89ac151f6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/noUnusedLocals.md": {
+    "mtime": 1782669335439.9233,
+    "hash": "58fc0e8723c1e1dec9a6ba9335946678"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/noUnusedParameters.md": {
+    "mtime": 1782669335441.4236,
+    "hash": "965cf69d183c7e39ad798cba9a73b3bb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/nodemailer.md": {
+    "mtime": 1782669334502.1929,
+    "hash": "9b62b46967a3b545e41f17b63b008f5f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/normalizeCatastrophicSsrResponse().md": {
+    "mtime": 1782669335411.4265,
+    "hash": "c69baa8bbfdd7ae8a662a46ee34ab66f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/package.json.md": {
+    "mtime": 1782669334428.1921,
+    "hash": "9e97fd66f4a7c041fd509767db81f7e3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/pagination.tsx.md": {
+    "mtime": 1782669334816.2017,
+    "hash": "2f24dd3cad77ac077cadfe29ae9b130f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/paths.md": {
+    "mtime": 1782669335445.4265,
+    "hash": "57c04fda5e423ae58cb21fb790ce5561"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/pingLastSeen.md": {
+    "mtime": 1782669334993.6982,
+    "hash": "04be3eb09ef845540e8158748f1b5fc6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/popover.tsx.md": {
+    "mtime": 1782669334827.2012,
+    "hash": "3420266abf68e2f051f039dd178749f8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/portal.functions.ts.md": {
+    "mtime": 1782669335175.424,
+    "hash": "c6da9d3290aedded898c68bbb9709c9b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/portal.tsx.md": {
+    "mtime": 1782669335324.424,
+    "hash": "f5e4e96b5c048fb63871d5a2f7fc9cda"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/postCustomerComment.md": {
+    "mtime": 1782669335191.4236,
+    "hash": "ccaafe9347c23ff1d6c66d0d84307e62"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/prefix.md": {
+    "mtime": 1782669334415.6936,
+    "hash": "11b864c0d78c621d02fe3938589a05f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/prettier.md": {
+    "mtime": 1782669334533.6921,
+    "hash": "23adcde3f5ccb834faba3f8b0641a209"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/preview.md": {
+    "mtime": 1782669334440.6943,
+    "hash": "3505cc214501e5c0cfb145d859a9736b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/priceForChange().md": {
+    "mtime": 1782669335226.4229,
+    "hash": "fc30aab94ccac19e7cf648d116e8d181"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/privacybeleid.tsx.md": {
+    "mtime": 1782669335382.424,
+    "hash": "12e68e8a05652eb48aed9897e3ab9371"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/private.md": {
+    "mtime": 1782669334430.1926,
+    "hash": "ac13e2d7063e65cf7483ffa7650a3b12"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/profiles DB table (extended).md": {
+    "mtime": 1782669335464.925,
+    "hash": "d225f78b36434686d9c009d715647e5c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/progress.tsx.md": {
+    "mtime": 1782669334829.204,
+    "hash": "66e410c2d1fcaa43011ddb9cfe87ef0f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/projects.md": {
+    "mtime": 1782669334590.6953,
+    "hash": "40e16ccddc71e3159df4b9dd90bb9aa7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/radio-group.tsx.md": {
+    "mtime": 1782669334831.6968,
+    "hash": "4bf0a39dcecdfd5ba9a711c36a42dec3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/rbac.ts.md": {
+    "mtime": 1782669335197.9265,
+    "hash": "94fd0f5db10f4d94dd9daa4829852606"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/react-day-picker.md": {
+    "mtime": 1782669334504.6924,
+    "hash": "0a38d2d35be124cecca46df85a27148a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/react-dom.md": {
+    "mtime": 1782669334505.694,
+    "hash": "3f386967cad0a8bf301767a057b80c7e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/react-hook-form.md": {
+    "mtime": 1782669334507.191,
+    "hash": "473e1b1547918d6d01762222c72cc293"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/react-resizable-panels.md": {
+    "mtime": 1782669334508.6897,
+    "hash": "ba6814635b3494e7d3f68eb5f961397d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/react.md": {
+    "mtime": 1782669334503.197,
+    "hash": "a365d191e36a814cad9c32fd655e13bd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/recharts.md": {
+    "mtime": 1782669334509.6929,
+    "hash": "dbef21b5a8138fcbd2244d7d9a472df4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/record().md": {
+    "mtime": 1782669335169.9248,
+    "hash": "c201747fcd355be252583d7616470538"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/registries.md": {
+    "mtime": 1782669334426.192,
+    "hash": "208e313dc0561e05daa8809a91b98a6e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/renderErrorPage().md": {
+    "mtime": 1782669335173.9233,
+    "hash": "ed1a281a5c253009f0778a76986bf423"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/requestExtraChanges.md": {
+    "mtime": 1782669335196.4253,
+    "hash": "cb5853c4fb02089a4b13595ee36b0abf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/requestExtraCredits.md": {
+    "mtime": 1782669335187.4248,
+    "hash": "dda3547d6e71d4495c92db99fa6ebd6f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/requireSupabaseAuth.md": {
+    "mtime": 1782669334956.1963,
+    "hash": "320a2d4bd7c1d1711a325d800c474086"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/resizable.tsx.md": {
+    "mtime": 1782669334835.1978,
+    "hash": "3b9055d03d743490d6c3c2ffd3b7b2e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/robots.txt crawl policy.md": {
+    "mtime": 1782669335473.926,
+    "hash": "e51a7ec182634c94bb171de695abf98d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/routeTree.gen.ts.md": {
+    "mtime": 1782669335234.4243,
+    "hash": "6561ffd1531c6a401ca4aa6b0b91c80c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/routeTree.md": {
+    "mtime": 1782669335264.9243,
+    "hash": "9ca38406474bafe275e8538a7fe0de5b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/router.tsx.md": {
+    "mtime": 1782669335267.9233,
+    "hash": "fd169b4e1e3b033f91de6add507eda1e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/rsc.md": {
+    "mtime": 1782669334407.6926,
+    "hash": "47a0e260906c96ceedc845c109f4d948"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/rtl.md": {
+    "mtime": 1782669334417.693,
+    "hash": "69c24b61fff66e176d248f71ea9aa81f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/savePrefs().md": {
+    "mtime": 1782669334564.1953,
+    "hash": "662ce47bcc45fadf686eb0dfabb85717"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/scripts.md": {
+    "mtime": 1782669334434.1929,
+    "hash": "fc0ea6996ceed04717ed4277d1962e59"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/scroll-area.tsx.md": {
+    "mtime": 1782669334838.698,
+    "hash": "8f9e70cfa3915c13385c19404331cc88"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/select.tsx.md": {
+    "mtime": 1782669334841.6992,
+    "hash": "7b392b6161e8f72e829e32a8808cc2b8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sendWelcomeEmail().md": {
+    "mtime": 1782669335166.9253,
+    "hash": "fd8260b9e5cf4698e0e267bc7076a6b3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/separator.tsx.md": {
+    "mtime": 1782669334851.1975,
+    "hash": "4f118698edb47291556d79f1ab223ea5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/server.ts.md": {
+    "mtime": 1782669335404.925,
+    "hash": "83a759304dd150e3c1d33a9d00691eb6"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/services.md": {
+    "mtime": 1782669334586.1973,
+    "hash": "c501563b74b6afae79d4ce8f737d6654"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/setup-admin.tsx.md": {
+    "mtime": 1782669335387.9248,
+    "hash": "d44b5c0543c3011aa846e3bc9a9da4c7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/setup.functions.ts.md": {
+    "mtime": 1782669335206.924,
+    "hash": "cbd722d7ab31fec8e14b866357ac6581"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/setupFirstAdmin.md": {
+    "mtime": 1782669335208.4258,
+    "hash": "78a89f25ae8fa42a436750054c78774e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sheet.tsx.md": {
+    "mtime": 1782669334853.698,
+    "hash": "273d390dd5a8e934df29c391db5ba450"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sheetVariants.md": {
+    "mtime": 1782669334856.198,
+    "hash": "014aaeaba1394a6c95c67c6b25b20a38"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sideEffects.md": {
+    "mtime": 1782669334431.692,
+    "hash": "571173f8399045f29dcb719fd708e68f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sidebar.tsx.md": {
+    "mtime": 1782669334864.6985,
+    "hash": "f67334ab84c4640e8e24f22738dd650b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sidebarMenuButtonVariants.md": {
+    "mtime": 1782669334889.198,
+    "hash": "286b2bf6ba38759156e483d349dc59c0"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/site-error.ts.md": {
+    "mtime": 1782669335360.4243,
+    "hash": "e6f19c970f18157c132e7c3b82420f3f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/site-ping.ts.md": {
+    "mtime": 1782669335367.924,
+    "hash": "4f51d347d41e9497bcaa8a4cbe7a1d5e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sitemap.xml.tsx.md": {
+    "mtime": 1782669335393.9263,
+    "hash": "35df5f6a2e399cae94a4584a519e6cea"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/skeleton.tsx.md": {
+    "mtime": 1782669334899.712,
+    "hash": "9ff45b3bf615d2fdb2bfa90ee0ff5a18"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/skipLibCheck.md": {
+    "mtime": 1782669335436.4233,
+    "hash": "fd469396fb70375484f9f106266cdf3e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/slider.tsx.md": {
+    "mtime": 1782669334903.1973,
+    "hash": "ea142fb7eeab4267bafcf10e8c86be29"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sonner.md": {
+    "mtime": 1782669334511.1926,
+    "hash": "c93ca4aee2bcb6ec451ead277ce183a2"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/sonner.tsx.md": {
+    "mtime": 1782669334905.2007,
+    "hash": "d43e0931951072cbe7780a3ce58945a8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/start.md": {
+    "mtime": 1782669334439.1926,
+    "hash": "44b98bbc23576e6c5daef34355df46f1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/start.ts.md": {
+    "mtime": 1782669335414.4248,
+    "hash": "57ad7e78acb4538f7f0aec23a0414572"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/startInstance.md": {
+    "mtime": 1782669335417.4226,
+    "hash": "ff8c0b219f07a9bc3202862b9bcca034"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/status.ts.md": {
+    "mtime": 1782669335211.4238,
+    "hash": "3490d99ed9fa5bfa1c79e5b1b4bba739"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/stepIndex().md": {
+    "mtime": 1782669335332.9248,
+    "hash": "48bd6366e8e50fb395ba5744b09ebf11"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/strict.md": {
+    "mtime": 1782669335438.424,
+    "hash": "a25e4099f7885ead91ad4448f32d446e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/style.md": {
+    "mtime": 1782669334405.694,
+    "hash": "3c313f8c955b8289ba119d36d81b74ee"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/submitChangeRequest.md": {
+    "mtime": 1782669335185.4243,
+    "hash": "0f71e4ca22140e1eb11a566131dc51c4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/submitContactForm.md": {
+    "mtime": 1782669335157.9243,
+    "hash": "cfdc88b3340ca950c1702fe5e5571e03"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/supabase.md": {
+    "mtime": 1782669334965.7,
+    "hash": "9a18d1590c55a99fd7d759ac19344fa1"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/supabaseAdmin.md": {
+    "mtime": 1782669334960.698,
+    "hash": "d5f6fd953a01940403cb799bb7e11ee4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/switch.tsx.md": {
+    "mtime": 1782669334909.1997,
+    "hash": "48fbc6758cb51311f29ae1a6bd590f3f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/table.tsx.md": {
+    "mtime": 1782669334911.6997,
+    "hash": "a9899f05e7cf3e963a5832db2bd31909"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tabs.tsx.md": {
+    "mtime": 1782669334923.1997,
+    "hash": "5bb6132082201da39535ef55edb6765f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tailwind-merge.md": {
+    "mtime": 1782669334512.1912,
+    "hash": "64856aac5c8d42a975fd91bc0a914e29"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tailwind.md": {
+    "mtime": 1782669334410.694,
+    "hash": "d167155e0d8504ba2dd03e433da927b3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tailwindcss.md": {
+    "mtime": 1782669334513.191,
+    "hash": "c99528a3646512794b6da6a8e617270e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/target.md": {
+    "mtime": 1782669335422.9246,
+    "hash": "6c1219b904f2b3695959db476a8cdaf5"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/textarea.tsx.md": {
+    "mtime": 1782669334928.1973,
+    "hash": "9a51b1e73d7e87be2ccc6d104a4e42af"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tiers.md": {
+    "mtime": 1782669334582.6978,
+    "hash": "4b310f31745790487bc909bf6f1ff5e9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/toggle-group.tsx.md": {
+    "mtime": 1782669334930.2004,
+    "hash": "670e63916b37d5e88755db271a09b76c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/toggle.tsx.md": {
+    "mtime": 1782669334935.199,
+    "hash": "c4e48f14663ccb9722d60e926e5fde56"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/toggleVariants.md": {
+    "mtime": 1782669334936.7,
+    "hash": "4c61686ad1a8581aeeaafce4ab4d1bcb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tooltip.tsx.md": {
+    "mtime": 1782669334939.1995,
+    "hash": "c369b42ca986efe012cd962968a5256e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/track.js.tsx.md": {
+    "mtime": 1782669335399.9248,
+    "hash": "b735b9614b2cc9df59ccb5812e094e9e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/transporter.md": {
+    "mtime": 1782669335165.425,
+    "hash": "e2a80a283cb8d7ffc352fd5db3a5b402"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tsconfig.json.md": {
+    "mtime": 1782669335418.4233,
+    "hash": "229deae708eda4cf5ea3d738356f8bf8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tsx.md": {
+    "mtime": 1782669334409.1924,
+    "hash": "85ca08bcf24f7ec13c22f597cbd640bd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/tw-animate-css.md": {
+    "mtime": 1782669334514.6924,
+    "hash": "072e36262b8715eb8eb1941297b413f4"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/type.md": {
+    "mtime": 1782669334432.6958,
+    "hash": "afe09775204b776c3d3ad5a3afa7e1fb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/types.md": {
+    "mtime": 1782669335428.9275,
+    "hash": "6179d0cce624388bdacabea296651578"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/types.ts.md": {
+    "mtime": 1782669334967.204,
+    "hash": "e77533d52050007a5f5836e4b7d28f54"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/typescript-eslint.md": {
+    "mtime": 1782669334536.1926,
+    "hash": "22260810ac58c035c87bb88e38cda28f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/typescript.md": {
+    "mtime": 1782669334534.697,
+    "hash": "cc81954714c602d00a972bd4264a3994"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/ui.md": {
+    "mtime": 1782669334422.6938,
+    "hash": "d32b66216cd6e39f5b2f66914e697c31"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/unnamed.md": {
+    "mtime": 1782669335446.923,
+    "hash": "c625dc747f91f576d93209668d7d3da9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/updateMyProfile.md": {
+    "mtime": 1782669335178.9246,
+    "hash": "1ccd5136738d5aaa3f4295c2ce9b167a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/use-auth.tsx.md": {
+    "mtime": 1782669334941.198,
+    "hash": "9a6faba99eacce6fb5f9ad6ce4f04f4b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/use-mobile.tsx.md": {
+    "mtime": 1782669334946.7014,
+    "hash": "e673246c938c4b6176a73625c021fc80"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/use-permissions.tsx.md": {
+    "mtime": 1782669334949.6992,
+    "hash": "f4f3ee0be817d2dd8fc779ee5366775b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useAuth().md": {
+    "mtime": 1782669334945.698,
+    "hash": "6c52dd29194812f22210ec1164f4b200"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useCarousel().md": {
+    "mtime": 1782669334662.6924,
+    "hash": "bce83a06ad521b040e9f9dc9d341d047"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useChart().md": {
+    "mtime": 1782669334677.1921,
+    "hash": "c0a564d25bb20b3f6f3e20ed19c33e67"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useFormField().md": {
+    "mtime": 1782669334757.1926,
+    "hash": "da2e97680f6d3e2f3c71acba514a9996"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useIsMobile().md": {
+    "mtime": 1782669334948.2,
+    "hash": "9d9b9e07ba51661d2ef95512d8a0946a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/usePermissions().md": {
+    "mtime": 1782669334950.6985,
+    "hash": "8febc9d5a304b61d1e574f300dc2c8b9"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/useSidebar().md": {
+    "mtime": 1782669334868.1987,
+    "hash": "04b8b41c121ea5a4dd58b3dfb5dddd56"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/utils.md": {
+    "mtime": 1782669334421.6992,
+    "hash": "9a63f8d31d4c71f1e76e464758062395"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/utils.ts.md": {
+    "mtime": 1782669335229.9236,
+    "hash": "21dc2ea72873f72e77112557ee9d9e4b"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/vaul.md": {
+    "mtime": 1782669334515.692,
+    "hash": "269b3b19cd3c0bde13203736463981ad"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/verbatimModuleSyntax.md": {
+    "mtime": 1782669335432.9243,
+    "hash": "029b59b5db4321a5fac745b1ebe729f7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/vite-tsconfig-paths.md": {
+    "mtime": 1782669334517.1946,
+    "hash": "276acfa0181c82815ea88d2a634bc64c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/vite.config.ts.md": {
+    "mtime": 1782669335448.4243,
+    "hash": "fbb5649552d5badf202832072b23fc7f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/vite.md": {
+    "mtime": 1782669334537.1929,
+    "hash": "5f8fd5545f8ef98b92b4ba1bedea697f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/graphify-out/obsidian/zod.md": {
+    "mtime": 1782669334518.1924,
+    "hash": "92a7c23eb2cdabe787b4721b88a071aa"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/portal-verbeterideeen.md": {
+    "mtime": 1784017942674.4988,
+    "hash": "bed6c35c85d42e7bc6398440ecdce9ab"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/llms.txt": {
+    "mtime": 1779559624712.1921,
+    "hash": "75ee58c5070f589eee9946d766a2d50e"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/robots.txt": {
+    "mtime": 1782556743642.4397,
+    "hash": "07bf3bd8660311f32201ac19f9cc8d68"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/favicon.svg": {
+    "mtime": 1782572015721.5288,
+    "hash": "46ef7fa3ec127a8dc442d0f61739388c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/hero-forest.jpg": {
+    "mtime": 1782564262549.4807,
+    "hash": "c7587021270f0366b9e90189ffcb5020"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/og-image.svg": {
+    "mtime": 1782572103392.7144,
+    "hash": "67285cbbea95ffc852487cf8004a93f7"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/assets/hero-forest.jpg": {
+    "mtime": 1782564481877.192,
+    "hash": "c7587021270f0366b9e90189ffcb5020"
+  }
+}

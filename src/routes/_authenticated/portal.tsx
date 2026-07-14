@@ -7,8 +7,6 @@ import {
   CheckCircle2,
   Circle,
   ArrowRight,
-  Minus,
-  Plus,
   Globe,
   Check,
   Star,
@@ -17,7 +15,6 @@ import {
 import {
   getMyDashboard,
   submitChangeRequest,
-  requestExtraChanges,
   markNotificationRead,
   markAllNotificationsRead,
   postCustomerComment,
@@ -25,19 +22,12 @@ import {
   cancelMyChange,
   portalListMyProjects,
   portalListMyProjectsForChangeForm,
+  portalGetOnboardingState,
 } from "@/lib/portal.functions";
 import { PROJECT_STATUS_LABEL, PROJECT_STATUS_COLOR, isProjectOverdue } from "@/lib/project-status";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ChatWidget } from "@/components/ChatWidget";
+import { PortalOnboardingTour } from "@/components/PortalOnboardingTour";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -131,8 +121,8 @@ function PortalPage() {
 
   const fetchDash = useServerFn(getMyDashboard);
   const listProjectsForChangeForm = useServerFn(portalListMyProjectsForChangeForm);
+  const fetchOnboardingState = useServerFn(portalGetOnboardingState);
   const submit = useServerFn(submitChangeRequest);
-  const buy = useServerFn(requestExtraChanges);
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
   const postComment = useServerFn(postCustomerComment);
@@ -154,18 +144,15 @@ function PortalPage() {
     queryFn: () => listProjectsForChangeForm({}),
   });
   const changeFormProjects = (projectsForChangeFormQ.data?.items ?? []) as any[];
+  const onboardingStateQ = useQuery({
+    queryKey: ["portal-onboarding-state"],
+    queryFn: () => fetchOnboardingState({}),
+  });
+  const [onboardingDismissed, setOnboardingDismissed] = useState(false);
 
   const submitM = useMutation({
     mutationFn: (input: any) => submit({ data: input }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["dashboard"] }),
-  });
-  const buyM = useMutation({
-    mutationFn: (n: number) => buy({ data: { amount: n } }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["dashboard"] });
-      toast.success("Aanvraag ontvangen, wij verwerken dit binnen 1 werkdag.");
-    },
-    onError: (e: any) => toast.error(e.message ?? "Er ging iets mis."),
   });
   const readM = useMutation({
     mutationFn: (id: string) => markRead({ data: { id } }),
@@ -183,8 +170,6 @@ function PortalPage() {
   const [rush, setRush] = useState(false);
   const [changeProjectId, setChangeProjectId] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
-  const [purchaseQty, setPurchaseQty] = useState(1);
-  const [purchaseConfirm, setPurchaseConfirm] = useState(false);
   const [showNotifs, setShowNotifs] = useState(false);
   const [openThread, setOpenThread] = useState<string | null>(null);
   const [comment, setComment] = useState("");
@@ -387,7 +372,7 @@ function PortalPage() {
         {([
           ["overview", "Overzicht"],
           ["changes", "Jouw changes"],
-          ["website", "Mijn website"],
+          ["website", "Mijn projecten"],
         ] as const).map(([key, label]) => (
           <button
             key={key}
@@ -408,10 +393,6 @@ function PortalPage() {
           data={data}
           openChanges={openChanges}
           onGoToChanges={() => setTab("changes")}
-          purchaseQty={purchaseQty}
-          setPurchaseQty={setPurchaseQty}
-          onBuy={() => setPurchaseConfirm(true)}
-          buying={buyM.isPending}
         />
       )}
 
@@ -679,6 +660,16 @@ function PortalPage() {
 
       <ChatWidget />
 
+      {onboardingStateQ.data?.profile &&
+        (onboardingStateQ.data.profile as any).onboarding_self_enabled &&
+        (onboardingStateQ.data.profile as any).onboarding_status !== "completed" &&
+        !onboardingDismissed && (
+          <PortalOnboardingTour
+            profile={onboardingStateQ.data.profile as any}
+            onClose={() => setOnboardingDismissed(true)}
+          />
+        )}
+
       <style>{`
         @keyframes pulse-dot {
           0%, 100% { transform: scale(1); opacity: 1; }
@@ -692,48 +683,6 @@ function PortalPage() {
         .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
       `}</style>
 
-      <Dialog open={purchaseConfirm} onOpenChange={(open) => !buyM.isPending && setPurchaseConfirm(open)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Bevestig je aanvraag</DialogTitle>
-            <DialogDescription className="pt-2 space-y-3 text-sm">
-              <span className="block">
-                Je staat op het punt <strong>{purchaseQty} extra change{purchaseQty === 1 ? "" : "s"}</strong> aan te vragen.
-              </span>
-              <span className="block">
-                Kosten: <strong>€{purchaseQty * 20} excl. BTW</strong>
-              </span>
-              <span className="block">
-                Er wordt een factuur verzonden naar:{" "}
-                <strong>{data?.profile?.email ?? "je geregistreerde e-mailadres"}</strong>
-              </span>
-              <span className="block text-xs opacity-70 pt-1">
-                Betaling dient te geschieden binnen 14 dagen na ontvangst van de factuur.
-              </span>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={() => setPurchaseConfirm(false)}
-              disabled={buyM.isPending}
-            >
-              Annuleer
-            </Button>
-            <Button
-              onClick={() => {
-                buyM.mutate(purchaseQty, {
-                  onSuccess: () => setPurchaseConfirm(false),
-                });
-              }}
-              disabled={buyM.isPending}
-              className="btn-primary"
-            >
-              {buyM.isPending ? "Bezig…" : "Ja, aanvragen en factuur ontvangen"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
@@ -1163,17 +1112,23 @@ function UptimeChart({ dailyUptime }: { dailyUptime: any[] }) {
   );
 }
 
-function MyProjectsSection() {
+function WebsiteTab({ data }: { data: any }) {
   const list = useServerFn(portalListMyProjects);
-  const { data, isLoading } = useQuery({ queryKey: ["portal-my-projects"], queryFn: () => list({}) });
-  const items = data?.items ?? [];
+  const { data: projectsData, isLoading } = useQuery({ queryKey: ["portal-my-projects"], queryFn: () => list({}) });
+  const items = projectsData?.items ?? [];
 
   if (isLoading) return <Skeleton className="h-24 w-full rounded-lg" />;
-  if (items.length === 0) return null;
+
+  // Klanten zonder gekoppeld project (nog niet gemigreerd naar het projectensysteem)
+  // vallen terug op de oude accountgebonden monitoring-weergave.
+  if (items.length === 0) {
+    return <LegacyWebsiteMonitoring data={data} />;
+  }
 
   return (
     <section className="rounded-lg border border-border bg-card p-6">
-      <h2 className="font-display text-2xl font-semibold mb-4">Mijn projecten</h2>
+      <h2 className="font-display text-2xl font-semibold mb-1">Mijn projecten</h2>
+      <p className="text-sm text-muted-foreground mb-4">Klik op een project voor alle informatie: monitoring, notities en gekoppelde changes.</p>
       <ul className="space-y-2">
         {items.map((p: any) => {
           const overdue = isProjectOverdue(p.deadline, p.status);
@@ -1204,7 +1159,7 @@ function MyProjectsSection() {
   );
 }
 
-function WebsiteTab({ data }: { data: any }) {
+function LegacyWebsiteMonitoring({ data }: { data: any }) {
   const uptime = data.uptimePct as number | null;
   const avgMs: number | null = data.avg ?? null;
   const dailyUptime: any[] = data.dailyUptime ?? [];
@@ -1225,7 +1180,6 @@ function WebsiteTab({ data }: { data: any }) {
 
   return (
     <div className="space-y-6">
-      <MyProjectsSection />
       <section className="rounded-lg border border-border bg-card p-6">
         <h2 className="font-display text-2xl font-semibold mb-2 flex items-center gap-2">
           <Globe className="w-5 h-5 text-primary" /> Mijn website
@@ -1301,16 +1255,18 @@ function WebsiteTab({ data }: { data: any }) {
 // ---------- Overview section ----------
 
 function OverviewSection({
-  data, openChanges, onGoToChanges, purchaseQty, setPurchaseQty, onBuy, buying,
+  data, openChanges, onGoToChanges,
 }: {
   data: any;
   openChanges: number;
   onGoToChanges: () => void;
-  purchaseQty: number;
-  setPurchaseQty: (n: number) => void;
-  onBuy: () => void;
-  buying: boolean;
 }) {
+  const listProjects = useServerFn(portalListMyProjects);
+  const { data: projectsData } = useQuery({ queryKey: ["portal-my-projects"], queryFn: () => listProjects({}) });
+  const myProjects = (projectsData?.items ?? []) as any[];
+  // websites zitten sinds het projectensysteem op het project, niet meer per se op profiles.website_url
+  const websiteUrl: string | null = data.profile?.website_url || myProjects.find((p: any) => p.website_url)?.website_url || null;
+
   const totalQuota = (data.profile?.free_quota_override ?? 3) + (data.extraTotal ?? 0);
   const used = data.usedThisMonth ?? 0;
   const pct = totalQuota > 0 ? Math.min(100, (used / totalQuota) * 100) : 100;
@@ -1377,9 +1333,9 @@ function OverviewSection({
               {siteOk ? "Je site is online" : "Controleer je site"}
             </span>
           </div>
-          {data.profile?.website_url ? (
-            <a href={data.profile.website_url} target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs text-primary hover:underline break-all">
-              {data.profile.website_url}
+          {websiteUrl ? (
+            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs text-primary hover:underline break-all">
+              {websiteUrl}
             </a>
           ) : (
             <p className="mt-3 text-xs text-muted-foreground">Nog geen website gekoppeld.</p>
@@ -1429,42 +1385,6 @@ function OverviewSection({
         </section>
       )}
 
-      {/* Extra changes banner */}
-      <section className="rounded-lg border border-border bg-card p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-        <div>
-          <h3 className="font-display text-xl font-semibold text-foreground">Meer changes nodig?</h3>
-          <p className="text-sm text-muted-foreground mt-1">€20 per extra change, direct verwerkt door ons team.</p>
-        </div>
-        <div className="flex flex-col items-start sm:items-end gap-2">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setPurchaseQty(Math.max(1, purchaseQty - 1))}
-              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
-              aria-label="Minder"
-            >
-              <Minus className="w-3.5 h-3.5" />
-            </button>
-            <span className="w-8 text-center text-sm font-medium text-foreground">{purchaseQty}</span>
-            <button
-              type="button"
-              onClick={() => setPurchaseQty(Math.min(50, purchaseQty + 1))}
-              className="w-8 h-8 rounded-md border border-border flex items-center justify-center hover:bg-muted text-foreground"
-              aria-label="Meer"
-            >
-              <Plus className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={onBuy}
-              disabled={buying}
-              className="btn-primary ml-2 text-sm !py-2 !px-4 disabled:opacity-50"
-            >
-              {buying ? "Bezig…" : "Aanvragen"}
-            </button>
-          </div>
-          <p className="text-xs text-muted-foreground">Totaal: €{purchaseQty * 20}</p>
-        </div>
-      </section>
     </div>
   );
 }

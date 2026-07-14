@@ -4,12 +4,13 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
-  ChevronLeft, ChevronDown, UserCheck, UserX, Clock3, PlusCircle, LayoutGrid,
+  ChevronLeft, ChevronDown, UserCheck, UserX, Clock3, PlusCircle, LayoutGrid, UserPlus,
 } from "lucide-react";
 import {
   adminListAllAccounts,
   adminCreateTempAccount,
 } from "@/lib/accounts.functions";
+import { adminCreateCustomerFn } from "@/lib/admin.functions";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -52,7 +53,7 @@ export const ACCOUNT_STATUS_COLOR: Record<string, string> = {
   pending: "bg-amber-500/15 text-amber-600",
 };
 
-type Section = "alle" | "nieuw";
+type Section = "alle" | "nieuw" | "nieuwe_klant";
 
 function AdminAccountsPage() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -80,6 +81,8 @@ function AdminAccountsPage() {
         <div className="flex-1 min-w-0">
           {section === "nieuw" ? (
             <NewAccountSection onCreated={() => goSection("alle")} />
+          ) : section === "nieuwe_klant" ? (
+            <NewCustomerSection onCreated={() => goSection("alle")} />
           ) : (
             <AccountsListSection statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
           )}
@@ -112,6 +115,7 @@ function AccountsSidebar({ section, statusFilter, onSection, onStatus }: {
     {
       label: "Beheer",
       items: [
+        { key: "nieuwe_klant", label: "Nieuwe klant", icon: UserPlus, active: section === "nieuwe_klant", onClick: () => onSection("nieuwe_klant") },
         { key: "nieuw", label: "Nieuw tijdelijk account", icon: PlusCircle, active: section === "nieuw", onClick: () => onSection("nieuw") },
       ],
     },
@@ -205,6 +209,54 @@ function NewAccountSection({ onCreated }: { onCreated: () => void }) {
           {createM.isPending ? "Bezig…" : "Account aanmaken"}
         </button>
       </div>
+    </div>
+  );
+}
+
+function NewCustomerSection({ onCreated }: { onCreated: () => void }) {
+  const create = useServerFn(adminCreateCustomerFn);
+  const qc = useQueryClient();
+  const [form, setForm] = useState({ email: "", full_name: "", company: "" });
+
+  const createM = useMutation({
+    mutationFn: () => create({ data: form }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+      qc.invalidateQueries({ queryKey: ["admin-overview"] });
+      setForm({ email: "", full_name: "", company: "" });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  return (
+    <div className="space-y-4 max-w-xl">
+      <h2 className="text-lg font-semibold">Nieuwe klant</h2>
+      <div className="rounded-lg border border-border p-4 space-y-3">
+        <label className="block text-sm">
+          <span className="text-muted-foreground">Volledige naam</span>
+          <input required value={form.full_name} onChange={(e) => setForm({ ...form, full_name: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+        </label>
+        <label className="block text-sm">
+          <span className="text-muted-foreground">E-mail</span>
+          <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+        </label>
+        <label className="block text-sm">
+          <span className="text-muted-foreground">Bedrijf (optioneel)</span>
+          <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+        </label>
+        <button onClick={() => createM.mutate()} disabled={!form.email || !form.full_name || createM.isPending} className="btn-primary text-sm">
+          {createM.isPending ? "Bezig…" : "Klant aanmaken"}
+        </button>
+        {createM.data && (
+          <div className="rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm">
+            <p className="font-semibold">Account aangemaakt voor {createM.data.email}</p>
+            <p className="mt-2">Tijdelijk wachtwoord:</p>
+            <code className="block mt-1 rounded bg-background px-2 py-1 font-mono">{createM.data.tempPassword}</code>
+          </div>
+        )}
+        {createM.error && <p className="text-sm text-destructive">{(createM.error as Error).message}</p>}
+      </div>
+      <button onClick={onCreated} className="text-xs text-muted-foreground hover:text-foreground">← Terug naar alle accounts</button>
     </div>
   );
 }
