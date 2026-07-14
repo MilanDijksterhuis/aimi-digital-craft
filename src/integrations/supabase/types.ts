@@ -207,6 +207,7 @@ export type Database = {
           internal_note: string | null
           is_paid: boolean
           priority: string
+          project_id: string | null
           request_number: number | null
           restored_at: string | null
           restored_by: string | null
@@ -234,6 +235,7 @@ export type Database = {
           internal_note?: string | null
           is_paid?: boolean
           priority?: string
+          project_id?: string | null
           request_number?: number | null
           restored_at?: string | null
           restored_by?: string | null
@@ -261,6 +263,7 @@ export type Database = {
           internal_note?: string | null
           is_paid?: boolean
           priority?: string
+          project_id?: string | null
           request_number?: number | null
           restored_at?: string | null
           restored_by?: string | null
@@ -271,7 +274,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "change_requests_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       chat_messages: {
         Row: {
@@ -910,6 +921,218 @@ export type Database = {
           },
         ]
       }
+      project_tasks: {
+        Row: {
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          project_id: string
+          recurrence: string | null
+          recurrence_parent_id: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          project_id: string
+          recurrence?: string | null
+          recurrence_parent_id?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          project_id?: string
+          recurrence?: string | null
+          recurrence_parent_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_tasks_recurrence_parent_id_fkey"
+            columns: ["recurrence_parent_id"]
+            isOneToOne: false
+            referencedRelation: "project_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_task_time_entries: {
+        Row: {
+          billable: boolean
+          created_at: string
+          description: string | null
+          entry_date: string
+          id: string
+          minutes: number
+          project_id: string
+          task_id: string | null
+          user_id: string
+        }
+        Insert: {
+          billable?: boolean
+          created_at?: string
+          description?: string | null
+          entry_date?: string
+          id?: string
+          minutes: number
+          project_id: string
+          task_id?: string | null
+          user_id: string
+        }
+        Update: {
+          billable?: boolean
+          created_at?: string
+          description?: string | null
+          entry_date?: string
+          id?: string
+          minutes?: number
+          project_id?: string
+          task_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_task_time_entries_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_task_time_entries_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "project_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_milestone_dependencies: {
+        Row: {
+          created_at: string
+          depends_on_milestone_id: string
+          id: string
+          milestone_id: string
+        }
+        Insert: {
+          created_at?: string
+          depends_on_milestone_id: string
+          id?: string
+          milestone_id: string
+        }
+        Update: {
+          created_at?: string
+          depends_on_milestone_id?: string
+          id?: string
+          milestone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestone_dependencies_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "project_milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_milestone_dependencies_depends_on_milestone_id_fkey"
+            columns: ["depends_on_milestone_id"]
+            isOneToOne: false
+            referencedRelation: "project_milestones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_templates: {
+        Row: {
+          created_at: string
+          default_category: string | null
+          default_hours_estimated: number | null
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          default_category?: string | null
+          default_hours_estimated?: number | null
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          default_category?: string | null
+          default_hours_estimated?: number | null
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      project_template_milestones: {
+        Row: {
+          days_offset: number
+          description: string | null
+          id: string
+          sort_order: number
+          template_id: string
+          title: string
+        }
+        Insert: {
+          days_offset?: number
+          description?: string | null
+          id?: string
+          sort_order?: number
+          template_id: string
+          title: string
+        }
+        Update: {
+          days_offset?: number
+          description?: string | null
+          id?: string
+          sort_order?: number
+          template_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_template_milestones_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "project_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       purchase_requests: {
         Row: {
           amount: number
@@ -955,6 +1178,57 @@ export type Database = {
           created_by?: string | null
           id?: string
           title?: string
+        }
+        Relationships: []
+      }
+      role_permissions: {
+        Row: {
+          allowed: boolean
+          permission: string
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          allowed?: boolean
+          permission: string
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          allowed?: boolean
+          permission?: string
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      roles: {
+        Row: {
+          base_role: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_system: boolean
+          key: string
+          name: string
+        }
+        Insert: {
+          base_role?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_system?: boolean
+          key: string
+          name: string
+        }
+        Update: {
+          base_role?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_system?: boolean
+          key?: string
+          name?: string
         }
         Relationships: []
       }
@@ -1011,6 +1285,38 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_custom_roles: {
+        Row: {
+          assigned_by: string | null
+          created_at: string
+          id: string
+          role_id: string
+          user_id: string
+        }
+        Insert: {
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          role_id: string
+          user_id: string
+        }
+        Update: {
+          assigned_by?: string | null
+          created_at?: string
+          id?: string
+          role_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_custom_roles_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_presence: {
         Row: {

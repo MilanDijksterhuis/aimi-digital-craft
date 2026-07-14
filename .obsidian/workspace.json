@@ -178,17 +178,18 @@
   },
   "active": "72c051647c9c8cb3",
   "lastOpenFiles": [
-    "src/routes/_authenticated/server.tsx.tmp.19900.4c1e28b76031",
-    "src/routes/_authenticated/server.tsx.tmp.19900.7b42beb5bde4",
-    "src/routes/_authenticated/server.tsx.tmp.19900.3d78c9b0b398",
-    "src/routes/_authenticated/admin.tsx.tmp.19900.71c9cee49595",
-    "src/routes/_authenticated/admin.tsx.tmp.19900.3eb724874149",
-    "src/routes/_authenticated/admin.tsx.tmp.19900.16f6a0dfed2a",
-    "src/routes/_authenticated/admin.tsx.tmp.19900.02990a4c6170",
-    "src/routes/_authenticated.tsx.tmp.19900.94a0a3022e85",
-    "src/routes/_authenticated.tsx.tmp.19900.2821f987a318",
-    "src/routes/_authenticated/server.tsx",
-    "src/lib/monitoring.functions.ts",
+    "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.ad80d2b7dbef",
+    "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.632be5809dcd",
+    "src/routes/_authenticated/admin.projecten.tsx.tmp.7232.3920aff78cc9",
+    "src/routes/_authenticated/portal.projecten.$projectId.tsx.tmp.7232.419ea24a5f12",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.32df0a5b0215",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.9f521c0ac012",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.21ef62c8d9e8",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.32a4840e2051",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.6d38b5a117a3",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.aeb9aec0c6f4",
+    "src/routes/_authenticated/admin.projecten.$projectId.tsx.tmp.7232.8497aeb5ff1a",
+    "portal-verbeterideeen.md",
     "node_modules/date-fns/SECURITY.md",
     "node_modules/h3-v2/dist/docs/3.migration/0.index/index.md",
     "node_modules/h3-v2/dist/docs/README.md",
@@ -213,7 +214,6 @@
     "graphify-out/obsidian/errorMiddleware.md",
     "graphify-out/obsidian/start.ts.md",
     "graphify-out/obsidian/fetch().md",
-    "graphify-out/obsidian/normalizeCatastrophicSsrResponse().md",
-    "graphify-out/obsidian/isCatastrophicSsrErrorBody().md"
+    "graphify-out/obsidian/normalizeCatastrophicSsrResponse().md"
   ]
 }

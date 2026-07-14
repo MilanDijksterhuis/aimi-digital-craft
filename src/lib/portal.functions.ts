@@ -256,6 +256,7 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
           .default("other"),
         rush: z.boolean().default(false),
         ticket_type: z.enum(["question", "bug", "feature", "complaint"]).default("question"),
+        project_id: z.string().uuid().optional(),
         attachments: z
           .array(
             z.object({
@@ -306,6 +307,12 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
       .maybeSingle();
     const websitePrefix = prof?.website_url ? `🌐 Website: ${prof.website_url}\n\n` : "";
 
+    // Als er een project_id is meegegeven, valideer dat de klant daadwerkelijk
+    // aan dat project gekoppeld is (primary_user_id of project_members).
+    if (data.project_id) {
+      await assertOwnProject(supabase, userId, data.project_id);
+    }
+
     const { data: row, error } = await supabase
       .from("change_requests")
       .insert({
@@ -317,6 +324,7 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
         is_paid: isPaid,
         rush: data.rush,
         ticket_type: data.ticket_type,
+        project_id: data.project_id ?? null,
       })
       .select()
       .single();
@@ -500,13 +508,36 @@ export const portalListMyProjects = createServerFn({ method: "GET" })
     return { items: data ?? [] };
   });
 
+// Alias van portalListMyProjects, specifiek voor het change-aanvraagformulier:
+// 0 projecten -> geen veld nodig, 1 project -> vast gekoppeld (niet
+// selecteerbaar), >1 project -> dropdown. De data is identiek aan
+// portalListMyProjects, alleen de naam maakt het intent in de UI duidelijk.
+export const portalListMyProjectsForChangeForm = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase } = context;
+    const { data, error } = await supabase
+      .from("projects" as any)
+      .select("id, name")
+      .is("deleted_at", null)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: data ?? [] };
+  });
+
 export const portalGetProject = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     const project = await assertOwnProject(supabase, userId, data.project_id);
-    return { project };
+    const { data: changeRequests } = await supabase
+      .from("change_requests")
+      .select("*")
+      .eq("project_id", data.project_id)
+      .is("deleted_at", null)
+      .order("created_at", { ascending: false });
+    return { project, changeRequests: changeRequests ?? [] };
   });
 
 export const portalListProjectMilestones = createServerFn({ method: "POST" })
@@ -520,6 +551,27 @@ export const portalListProjectMilestones = createServerFn({ method: "POST" })
       .select("*")
       .eq("project_id", data.project_id)
       .order("order", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const portalListMilestoneDependencies = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await assertOwnProject(supabase, userId, data.project_id);
+    const { data: milestones, error: mErr } = await supabase
+      .from("project_milestones" as any)
+      .select("id")
+      .eq("project_id", data.project_id);
+    if (mErr) throw new Error(mErr.message);
+    const milestoneIds = (milestones ?? []).map((m: any) => m.id);
+    if (milestoneIds.length === 0) return { items: [] };
+    const { data: items, error } = await supabaseAdmin
+      .from("project_milestone_dependencies" as any)
+      .select("*")
+      .in("milestone_id", milestoneIds);
     if (error) throw new Error(error.message);
     return { items: items ?? [] };
   });

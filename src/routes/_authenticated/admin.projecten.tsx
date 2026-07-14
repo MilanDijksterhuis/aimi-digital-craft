@@ -5,17 +5,25 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
   ChevronLeft, ChevronDown, RefreshCw, Shield, Activity, Clock, AlertTriangle,
-  CheckCircle, XCircle, LayoutGrid, PlusCircle, Archive, BarChart3,
+  CheckCircle, XCircle, LayoutGrid, PlusCircle, Archive, BarChart3, Columns3,
+  FileStack, GripVertical,
 } from "lucide-react";
+import { DndContext, useDraggable, useDroppable, type DragEndEvent } from "@dnd-kit/core";
 import {
   adminListProjects,
   adminCreateProject,
   adminDeleteProject,
+  adminUpdateProject,
   adminListWebsiteLinks,
   adminGetCustomerMonitoring,
   adminSyncCustomerMonitoring,
   adminRunSSLCheck,
   adminRunDNSCheck,
+  adminListProjectTemplates,
+  adminCreateProjectTemplate,
+  adminDeleteProjectTemplate,
+  adminCreateProjectFromTemplate,
+  adminGetProjectsDashboardWidgets,
 } from "@/lib/admin.functions";
 import {
   PROJECT_STATUS_VALUES,
@@ -57,7 +65,7 @@ function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: number })
 
 // ---------- Pagina met sidebar-navigatie (zelfde patroon als AdminSidebar) ----------
 
-type Section = "alle" | "archief" | "statistieken" | "nieuw";
+type Section = "alle" | "archief" | "statistieken" | "nieuw" | "kanban" | "sjablonen" | "dashboard";
 
 function AdminProjectenPage() {
   // Kind-route (/admin/projecten/$projectId) deelt deze route als parent
@@ -97,6 +105,12 @@ function AdminProjectenPage() {
             <NewProjectSection onCreated={() => goSection("alle")} />
           ) : section === "statistieken" ? (
             <StatsSection />
+          ) : section === "kanban" ? (
+            <KanbanSection />
+          ) : section === "sjablonen" ? (
+            <TemplatesSection onCreated={() => goSection("alle")} />
+          ) : section === "dashboard" ? (
+            <DashboardWidgetsSection />
           ) : (
             <ProjectsListSection
               archivedOnly={section === "archief"}
@@ -122,7 +136,9 @@ function ProjectenSidebar({ section, statusFilter, onSection, onStatus, showingD
       label: "Overzicht",
       items: [
         { key: "alle", label: "Alle projecten", icon: LayoutGrid, active: !showingDetail && section === "alle" && !statusFilter, onClick: () => onSection("alle") },
+        { key: "kanban", label: "Kanban", icon: Columns3, active: !showingDetail && section === "kanban", onClick: () => onSection("kanban") },
         { key: "statistieken", label: "Statistieken", icon: BarChart3, active: !showingDetail && section === "statistieken", onClick: () => onSection("statistieken") },
+        { key: "dashboard", label: "Dashboard", icon: Activity, active: !showingDetail && section === "dashboard", onClick: () => onSection("dashboard") },
       ],
     },
     {
@@ -139,6 +155,7 @@ function ProjectenSidebar({ section, statusFilter, onSection, onStatus, showingD
       label: "Beheer",
       items: [
         { key: "nieuw", label: "Nieuw project", icon: PlusCircle, active: !showingDetail && section === "nieuw", onClick: () => onSection("nieuw") },
+        { key: "sjablonen", label: "Sjablonen", icon: FileStack, active: !showingDetail && section === "sjablonen", onClick: () => onSection("sjablonen") },
         { key: "archief", label: "Archief", icon: Archive, active: !showingDetail && section === "archief", onClick: () => onSection("archief") },
       ],
     },
@@ -693,6 +710,275 @@ function WebsiteLinkDetail({ userId, onBack }: { userId: string; onBack: () => v
           </p>
         </>
       )}
+    </div>
+  );
+}
+
+// ---------- Kanban ----------
+
+function KanbanCard({ project }: { project: any }) {
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: project.id });
+  const style = transform
+    ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`, zIndex: 50 }
+    : undefined;
+  const overdue = isProjectOverdue(project.deadline, project.status);
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className={`rounded-lg border border-border bg-card p-3 space-y-1.5 cursor-grab active:cursor-grabbing touch-none ${isDragging ? "opacity-50 shadow-lg" : "hover:border-primary/40"}`}
+    >
+      <div className="flex items-start gap-1.5">
+        <GripVertical className="w-3.5 h-3.5 text-muted-foreground shrink-0 mt-0.5" />
+        <p className="text-sm font-medium truncate">{project.name}</p>
+      </div>
+      <div className="flex items-center gap-2 flex-wrap pl-5">
+        <span className={`text-xs font-medium ${PROJECT_PRIORITY_COLOR[project.priority] ?? ""}`}>{PROJECT_PRIORITY_LABEL[project.priority] ?? project.priority}</span>
+        {project.deadline && (
+          <span className={`text-xs ${overdue ? "text-destructive font-semibold" : "text-muted-foreground"}`}>
+            {new Date(project.deadline).toLocaleDateString("nl-NL")}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function KanbanColumn({ status, projects }: { status: string; projects: any[] }) {
+  const { setNodeRef, isOver } = useDroppable({ id: status });
+  return (
+    <div
+      ref={setNodeRef}
+      className={`rounded-lg border p-3 min-w-[260px] w-[260px] shrink-0 space-y-2 min-h-[200px] transition-colors ${isOver ? "border-primary bg-primary/5" : "border-border bg-muted/20"}`}
+    >
+      <div className="flex items-center justify-between px-1">
+        <h3 className="text-sm font-semibold">{PROJECT_STATUS_LABEL[status]}</h3>
+        <span className="text-xs text-muted-foreground">{projects.length}</span>
+      </div>
+      <div className="space-y-2">
+        {projects.map((p) => <KanbanCard key={p.id} project={p} />)}
+        {projects.length === 0 && <p className="text-xs text-muted-foreground px-1 py-4 text-center">Geen projecten</p>}
+      </div>
+    </div>
+  );
+}
+
+function KanbanSection() {
+  const list = useServerFn(adminListProjects);
+  const update = useServerFn(adminUpdateProject);
+  const qc = useQueryClient();
+
+  const { data, isLoading } = useQuery({ queryKey: ["admin-projects"], queryFn: () => list({}) });
+  const updateM = useMutation({
+    mutationFn: (i: any) => update({ data: i }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-projects"] }),
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  if (isLoading) return <TableSkeleton cols={6} />;
+  const items = (data?.items ?? []).filter((p: any) => !p.archived);
+
+  const handleDragEnd = (e: DragEndEvent) => {
+    const { active, over } = e;
+    if (!over) return;
+    const newStatus = String(over.id);
+    const project = items.find((p: any) => p.id === active.id);
+    if (!project || project.status === newStatus) return;
+    updateM.mutate({ project_id: project.id, status: newStatus });
+  };
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-lg font-semibold">Kanban</h2>
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className="flex gap-4 overflow-x-auto pb-2">
+          {PROJECT_STATUS_VALUES.map((s) => (
+            <KanbanColumn key={s} status={s} projects={items.filter((p: any) => p.status === s)} />
+          ))}
+        </div>
+      </DndContext>
+    </div>
+  );
+}
+
+// ---------- Sjablonen ----------
+
+function TemplatesSection({ onCreated }: { onCreated: () => void }) {
+  const listTemplates = useServerFn(adminListProjectTemplates);
+  const createTemplate = useServerFn(adminCreateProjectTemplate);
+  const delTemplate = useServerFn(adminDeleteProjectTemplate);
+  const createFromTemplate = useServerFn(adminCreateProjectFromTemplate);
+  const listCustomers = useServerFn(adminListWebsiteLinks);
+  const qc = useQueryClient();
+
+  const { data: templatesData, isLoading } = useQuery({ queryKey: ["admin-project-templates"], queryFn: () => listTemplates({}) });
+  const { data: customersData } = useQuery({ queryKey: ["admin-website-links"], queryFn: () => listCustomers({}) });
+  const templates = templatesData?.items ?? [];
+  const customers = customersData?.items ?? [];
+
+  const invalidateTemplates = () => qc.invalidateQueries({ queryKey: ["admin-project-templates"] });
+  const delM = useMutation({ mutationFn: (i: any) => delTemplate({ data: i }), onSuccess: () => { invalidateTemplates(); toast.success("Sjabloon verwijderd."); }, onError: (e: any) => toast.error(e.message) });
+  const createFromM = useMutation({
+    mutationFn: (i: any) => createFromTemplate({ data: i }),
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-projects"] }); toast.success("Project aangemaakt vanuit sjabloon."); onCreated(); },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const createTemplateM = useMutation({
+    mutationFn: (i: any) => createTemplate({ data: i }),
+    onSuccess: () => {
+      invalidateTemplates();
+      toast.success("Sjabloon aangemaakt.");
+      setNewTemplate({ name: "", description: "" });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string>("");
+  const [projectForm, setProjectForm] = useState({ name: "", primary_user_id: "", start_date: "" });
+  const [newTemplate, setNewTemplate] = useState<{ name: string; description: string }>({ name: "", description: "" });
+
+  return (
+    <div className="space-y-6 max-w-2xl">
+      <h2 className="text-lg font-semibold">Sjablonen</h2>
+
+      <div className="rounded-lg border border-border p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Nieuw project vanuit sjabloon</h3>
+        {isLoading ? (
+          <p className="text-sm text-muted-foreground">Laden…</p>
+        ) : templates.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Nog geen sjablonen. Maak er hieronder een aan.</p>
+        ) : (
+          <>
+            <div className="space-y-2">
+              {templates.map((t: any) => (
+                <label key={t.id} className={`flex items-start gap-2 rounded-md border p-2.5 cursor-pointer ${selectedTemplateId === t.id ? "border-primary bg-primary/5" : "border-border"}`}>
+                  <input type="radio" name="template" checked={selectedTemplateId === t.id} onChange={() => setSelectedTemplateId(t.id)} className="mt-1" />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{t.name}</p>
+                    {t.description && <p className="text-xs text-muted-foreground">{t.description}</p>}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); if (confirm(`Sjabloon "${t.name}" verwijderen?`)) delM.mutate({ id: t.id }); }}
+                    className="ml-auto text-xs text-destructive hover:underline shrink-0"
+                  >Verwijder</button>
+                </label>
+              ))}
+            </div>
+
+            {selectedTemplateId && (
+              <div className="space-y-3 pt-2 border-t border-border">
+                <label className="block text-sm">
+                  <span className="text-muted-foreground">Projectnaam</span>
+                  <input value={projectForm.name} onChange={(e) => setProjectForm({ ...projectForm, name: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                </label>
+                <label className="block text-sm">
+                  <span className="text-muted-foreground">Hoofdklant</span>
+                  <select value={projectForm.primary_user_id} onChange={(e) => setProjectForm({ ...projectForm, primary_user_id: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                    <option value="">Kies klant…</option>
+                    {customers.map((c: any) => <option key={c.id} value={c.id}>{c.full_name || c.email}</option>)}
+                  </select>
+                </label>
+                <label className="block text-sm">
+                  <span className="text-muted-foreground">Startdatum</span>
+                  <input type="date" value={projectForm.start_date} onChange={(e) => setProjectForm({ ...projectForm, start_date: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                </label>
+                <button
+                  onClick={() => createFromM.mutate({
+                    template_id: selectedTemplateId,
+                    name: projectForm.name,
+                    primary_user_id: projectForm.primary_user_id,
+                    start_date: projectForm.start_date || null,
+                  })}
+                  disabled={!projectForm.name || !projectForm.primary_user_id || createFromM.isPending}
+                  className="btn-primary text-sm"
+                >
+                  {createFromM.isPending ? "Bezig…" : "Project aanmaken vanuit sjabloon"}
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      <div className="rounded-lg border border-border p-4 space-y-3">
+        <h3 className="font-semibold text-sm">Nieuw sjabloon aanmaken</h3>
+        <label className="block text-sm">
+          <span className="text-muted-foreground">Naam</span>
+          <input value={newTemplate.name} onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+        </label>
+        <label className="block text-sm">
+          <span className="text-muted-foreground">Beschrijving</span>
+          <textarea rows={2} value={newTemplate.description} onChange={(e) => setNewTemplate({ ...newTemplate, description: e.target.value })} className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+        </label>
+        <button
+          onClick={() => createTemplateM.mutate({ name: newTemplate.name, description: newTemplate.description || null, milestones: [] })}
+          disabled={!newTemplate.name || createTemplateM.isPending}
+          className="btn-primary text-sm"
+        >
+          {createTemplateM.isPending ? "Bezig…" : "Sjabloon opslaan"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ---------- Dashboard widgets ----------
+
+function DashboardWidgetsSection() {
+  const getWidgets = useServerFn(adminGetProjectsDashboardWidgets);
+  const { data, isLoading } = useQuery({ queryKey: ["admin-projects-dashboard-widgets"], queryFn: () => getWidgets({}) });
+
+  if (isLoading) return <TableSkeleton cols={3} />;
+  const upcoming = data?.upcomingDeadlines ?? [];
+  const stale = data?.stale ?? [];
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-lg font-semibold">Dashboard</h2>
+
+      <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+        <h3 className="font-semibold text-sm flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> Naderende deadlines</h3>
+        {upcoming.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Geen deadlines binnen 14 dagen.</p>
+        ) : (
+          <ul className="space-y-1.5">
+            {upcoming.map((p: any) => {
+              const overdue = isProjectOverdue(p.deadline, p.status);
+              const days = Math.ceil((new Date(p.deadline).getTime() - Date.now()) / 86400000);
+              return (
+                <li key={p.id} className="flex items-center justify-between text-sm">
+                  <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="hover:text-primary truncate">{p.name}</Link>
+                  <span className={overdue ? "text-destructive font-semibold text-xs" : "text-muted-foreground text-xs"}>
+                    {overdue ? `${Math.abs(days)}d verlopen` : `${days}d resterend`}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+
+      <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+        <h3 className="font-semibold text-sm flex items-center gap-2"><Clock className="w-4 h-4" /> Stilgevallen projecten</h3>
+        {stale.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Geen stilgevallen projecten.</p>
+        ) : (
+          <ul className="space-y-1.5">
+            {stale.map((p: any) => {
+              const days = Math.floor((Date.now() - new Date(p.created_at).getTime()) / 86400000);
+              return (
+                <li key={p.id} className="flex items-center justify-between text-sm">
+                  <Link to="/admin/projecten/$projectId" params={{ projectId: p.id }} className="hover:text-primary truncate">{p.name}</Link>
+                  <span className="text-muted-foreground text-xs">geen activiteit &gt;14d</span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

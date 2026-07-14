@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
@@ -15,9 +15,6 @@ import {
   adminGetCustomer,
   adminCreateCustomerFn,
   adminUpdateCustomer,
-  adminUpdateRequestStatus,
-  adminSetRequestFields,
-  adminPostComment,
   adminGrantCredits,
   adminSendNotification,
   adminSendPasswordReset,
@@ -27,7 +24,6 @@ import {
   adminAddOnboardingItem,
   adminToggleOnboardingItem,
   adminDeleteOnboardingItem,
-  adminAttachmentUrl,
   adminListAppointments,
   adminCreateAppointment,
   adminDeleteAppointment,
@@ -40,16 +36,8 @@ import {
   adminGetAllAlerts,
   adminSnoozeAlert,
   adminMarkAlertSeen,
-  adminGetRolePermissions,
-  adminSetRolePermission,
 } from "@/lib/admin.functions";
 import {
-  adminListAllAccounts,
-  adminChangeAccountRole,
-  adminSetBlocked,
-  adminSetAccessExpiry,
-  adminHardDeleteAccount,
-  adminCreateTempAccount,
   adminListNotifications,
   adminMarkNotificationRead,
   adminMarkAllNotificationsRead,
@@ -59,23 +47,12 @@ import {
   adminListArchivedChanges,
 } from "@/lib/accounts.functions";
 import {
-  STATUS_LABEL,
-  PRIORITY_LABEL,
-  PRIORITY_WEIGHT,
-  PRIORITY_COLOR,
-  CATEGORY_LABEL,
-  CATEGORY_KEYS,
-  PAID_CHANGE_PRICE_EUR,
-} from "@/lib/status";
-import {
-  adminToggleRequestPaid,
   adminSetFreeQuota,
 } from "@/lib/admin.functions";
 import { AdminChatPanel } from "@/components/AdminChatPanel";
 import { TeamTab } from "@/components/TeamTab";
 import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
-import { adminSoftDeleteChange } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
 import { LeadsPanel } from "@/components/LeadsPanel";
 import { supabase } from "@/integrations/supabase/client";
@@ -103,16 +80,16 @@ function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: number })
 }
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin â€” AIMI" }, { name: "robots", content: "noindex" }] }),
   component: AdminPage,
 });
 
-const eur = (cents: number) => `€${(cents / 100).toFixed(2)}`;
+const eur = (cents: number) => `â‚¬${(cents / 100).toFixed(2)}`;
 
 function AdminPage() {
   // Kind-routes (bv. /admin/projecten) delen deze route als parent
   // (TanStack Router file-based routing) en moeten via Outlet gerenderd worden
-  // in plaats van het dashboard hieronder. Deze check staat ná alle hooks
+  // in plaats van het dashboard hieronder. Deze check staat nÃ¡ alle hooks
   // (verderop) om de Rules of Hooks niet te schenden.
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -130,7 +107,6 @@ function AdminPage() {
     | "chat" | "deleted" | "leads";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const [openCustomer, setOpenCustomer] = useState<string | null>(null);
-  const [openRequest, setOpenRequest] = useState<string | null>(null);
   const perms = usePermissions();
 
   // Pending counts for sidebar badges
@@ -178,7 +154,7 @@ function AdminPage() {
   if (error) {
     const msg = (error as Error).message;
     if (msg.includes("Forbidden")) {
-      if (perms.isLoading) return <p className="text-muted-foreground">Laden…</p>;
+      if (perms.isLoading) return <p className="text-muted-foreground">Ladenâ€¦</p>;
       // Sales-rol: geen toegang tot de admin-overzichtsdata, wel tot Leads.
       if (perms.can("leads_view")) {
         return (
@@ -228,17 +204,17 @@ function AdminPage() {
       { key: "extra_changes", label: "Extra change aanvragen", icon: ShoppingCart, badge: pendingExtras },
     ]},
     { label: "Werk", items: [
-      { key: "changes", label: `Changes (${data.requests.length})`, icon: GitPullRequest, alert: newChanges > 0, badge: newChanges || undefined },
+      { key: "changes" as TabKey, label: `Changes (${data.requests.length})`, icon: GitPullRequest, alert: newChanges > 0, badge: newChanges || undefined, href: "/admin/changes" },
       { key: "archived", label: "Gearchiveerd", icon: Archive },
       { key: "berichten", label: "Berichten", icon: MessageSquare, alert: newBerichten > 0, badge: newBerichten || undefined },
       { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox, badge: data.pendingPurchases.length || undefined },
     ]},
     { label: "Beheer", items: [
-      { key: "accounts", label: "Accounts", icon: Users2 },
+      { key: "accounts" as TabKey, label: "Accounts", icon: Users2, href: "/admin/accounts" },
       { key: "notifications", label: "Notificaties", icon: Bell },
       { key: "projecten" as TabKey, label: "Projecten", icon: Link2, href: "/admin/projecten" },
       { key: "alerts", label: "Alerts", icon: AlertTriangle },
-      ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield }] : []),
+      ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield, href: "/admin/rollen" }] : []),
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
       { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
@@ -268,11 +244,9 @@ function AdminPage() {
         <div className="flex-1 min-w-0">
           {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets + pendingExtras} onGoChanges={() => { setTab("changes"); markAdminTabSeen("changes"); }} onGoPending={() => setTab("password_resets")} recentRequests={data.requests.filter((r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000))} recentComments={data.requests.flatMap((r: any) => (r.change_comments ?? []).filter((c: any) => customerIds.has(c.author_id) && new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).map((c: any) => ({ ...c, requestTitle: r.title })))} onGoBerichten={() => { setTab("berichten"); markAdminTabSeen("berichten"); }} />}
           {tab === "klanten" && (<KlantenTab data={data} qc={qc} openCustomer={openCustomer} setOpenCustomer={setOpenCustomer} />)}
-          {tab === "accounts" && <AccountsPanel />}
           {tab === "notifications" && <NotificationsPanel />}
           {tab === "password_resets" && <PasswordResetsPanel />}
           {tab === "extra_changes" && <ExtraChangesPanel />}
-          {tab === "changes" && (<ChangesTab data={data} qc={qc} openRequest={openRequest} setOpenRequest={setOpenRequest} />)}
           {tab === "archived" && <ArchivedChangesPanel />}
           {tab === "aanvragen" && <AanvragenTab data={data} qc={qc} />}
           {tab === "berichten" && <BerichtenTab />}
@@ -281,7 +255,6 @@ function AdminPage() {
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
           {tab === "alerts" && <AlertsPanel />}
-          {tab === "role_permissions" && perms.isSuperAdmin && <RollenPermissiesPanel />}
           {tab === "leads" && perms.can("leads_view") && <LeadsPanel />}
         </div>
 
@@ -336,11 +309,11 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
         <MetricCard icon={Users} label="Klanten" value={metrics.totalCustomers} sub="Totaal aantal accounts" trend={0} />
         <MetricCard icon={UserCheck} label="Actief (30d)" value={metrics.activeCount} sub="Inlog in afgelopen 30 dagen" trend={0} />
         <MetricCard icon={GitPullRequest} label="Totaal changes" value={metrics.totalRequests} sub="Sinds start" trend={0} />
-        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "—"} sub="Uren tot afronding" trend={0} />
+        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "â€”"} sub="Uren tot afronding" trend={0} />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <button onClick={onGoChanges} className="text-left">
-          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes →" trend={0} />
+          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes â†’" trend={0} />
         </button>
         <button onClick={onGoPending} className="text-left">
           <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Reset + extra changes" trend={0} highlight={pendingTotal > 0} />
@@ -492,7 +465,7 @@ function PasswordResetsPanel() {
           <tbody>
             {items.map((r: any) => (
               <tr key={r.id} className="border-t border-border">
-                <td className="p-3">{r.user_name || "—"}</td>
+                <td className="p-3">{r.user_name || "â€”"}</td>
                 <td className="p-3">{r.user_email}</td>
                 <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
                 <td className="p-3">{r.status}</td>
@@ -531,10 +504,10 @@ function ExtraChangesPanel() {
         <tbody>
           {items.map((r: any) => (
             <tr key={r.id} className="border-t border-border">
-              <td className="p-3">{r.user_name || "—"}</td>
+              <td className="p-3">{r.user_name || "â€”"}</td>
               <td className="p-3">{r.user_email}</td>
               <td className="p-3">{r.amount}</td>
-              <td className="p-3">€{r.total_eur}</td>
+              <td className="p-3">â‚¬{r.total_eur}</td>
               <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
               <td className="p-3">{r.status}</td>
               <td className="p-3 text-right space-x-2 whitespace-nowrap">
@@ -609,7 +582,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
             disabled={createM.isPending}
             className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
           >
-            {createM.isPending ? "Bezig…" : "Aanmaken"}
+            {createM.isPending ? "Bezigâ€¦" : "Aanmaken"}
           </button>
         </form>
         {createM.data && (
@@ -628,7 +601,7 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
 
       {/* Filter */}
       <input
-        placeholder="Zoeken (naam, email, tag)…"
+        placeholder="Zoeken (naam, email, tag)â€¦"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-sm"
@@ -651,11 +624,11 @@ function KlantenTab({ data, qc, openCustomer, setOpenCustomer }: any) {
               <tr key={c.id} className="border-t border-border hover:bg-muted/20">
                 <td className="p-3">
                   <button onClick={() => setOpenCustomer(c.id)} className="text-primary hover:underline">
-                    {c.full_name || "—"}
+                    {c.full_name || "â€”"}
                   </button>
                 </td>
                 <td className="p-3">{c.email}</td>
-                <td className="p-3">{c.package || "—"} {c.monthly_price_cents ? `(${eur(c.monthly_price_cents)})` : ""}</td>
+                <td className="p-3">{c.package || "â€”"} {c.monthly_price_cents ? `(${eur(c.monthly_price_cents)})` : ""}</td>
                 <td className="p-3">{c.usedThisMonth}/{3 + c.extraCredits}</td>
                 <td className="p-3 space-x-2 whitespace-nowrap">
                   <button onClick={() => setOpenCustomer(c.id)} className="text-xs text-primary hover:underline">bewerk</button>
@@ -763,7 +736,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
 
   if (isLoading || !data || !data.profile) {
     return (
-      <Modal onClose={onClose} title="Laden…">
+      <Modal onClose={onClose} title="Ladenâ€¦">
         <div className="space-y-3">
           <Skeleton className="h-5 w-1/2" />
           <Skeleton className="h-4 w-full" />
@@ -802,7 +775,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
               <Field key={k} label={label} value={f[k] ?? ""} onChange={(v: string) => setForm({ ...f, [k]: v })} />
             ))}
             <label className="block text-sm">
-              <span className="text-muted-foreground">Maandprijs (€)</span>
+              <span className="text-muted-foreground">Maandprijs (â‚¬)</span>
               <input
                 type="number" step="0.01"
                 value={(f.monthly_price_cents / 100).toFixed(2)}
@@ -822,7 +795,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
             disabled={updateM.isPending}
             className="mt-4 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground"
           >
-            {updateM.isPending ? "Bezig…" : "Opslaan"}
+            {updateM.isPending ? "Bezigâ€¦" : "Opslaan"}
           </button>
           {updateM.error && <p className="mt-2 text-destructive">{(updateM.error as Error).message}</p>}
         </section>
@@ -862,7 +835,7 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
             <input required placeholder="Omschrijving" value={costForm.description}
               onChange={(e) => setCostForm({ ...costForm, description: e.target.value })}
               className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <input required type="number" step="0.01" placeholder="€" value={costForm.amount}
+            <input required type="number" step="0.01" placeholder="â‚¬" value={costForm.amount}
               onChange={(e) => setCostForm({ ...costForm, amount: e.target.value })}
               className="w-28 rounded-md border border-input bg-background px-3 py-2 text-sm" />
             <button className="rounded-full bg-primary px-4 text-sm text-primary-foreground">+</button>
@@ -870,10 +843,10 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
           <div className="space-y-1">
             {data.costs.map((c: any) => (
               <div key={c.id} className="flex justify-between border-b border-border py-1">
-                <span>{c.cost_date} · {c.description}</span>
+                <span>{c.cost_date} Â· {c.description}</span>
                 <span>
                   {eur(c.amount_cents)}
-                  <button onClick={() => delCostM.mutate(c.id)} className="ml-2 text-destructive">×</button>
+                  <button onClick={() => delCostM.mutate(c.id)} className="ml-2 text-destructive">Ã—</button>
                 </span>
               </div>
             ))}
@@ -902,364 +875,13 @@ function CustomerDetailModal({ userId, onClose, qc }: any) {
                 <input type="checkbox" checked={o.done}
                   onChange={() => togOnbM.mutate({ id: o.id, done: !o.done })} />
                 <span className={o.done ? "line-through text-muted-foreground" : ""}>{o.label}</span>
-                <button onClick={() => delOnbM.mutate(o.id)} className="ml-auto text-destructive text-xs">×</button>
+                <button onClick={() => delOnbM.mutate(o.id)} className="ml-auto text-destructive text-xs">Ã—</button>
               </li>
             ))}
           </ul>
         </section>
       </div>
     </Modal>
-  );
-}
-
-function ChangesTab({ data, qc, openRequest, setOpenRequest }: any) {
-  const [sortBy, setSortBy] = useState<"date" | "priority">("priority");
-  const [statusFilter, setStatusFilter] = useState<string>("");
-  const [categoryFilter, setCategoryFilter] = useState<string>("");
-  const [paidFilter, setPaidFilter] = useState<string>("");
-  const [customerFilter, setCustomerFilter] = useState<string>("");
-  const [search, setSearch] = useState<string>("");
-
-  const togglePaid = useServerFn(adminToggleRequestPaid);
-  const softDelete = useServerFn(adminSoftDeleteChange);
-
-  const inv = () => qc.invalidateQueries({ queryKey: ["admin-overview"] });
-
-  const togglePaidM = useMutation({
-    mutationFn: (i: any) => togglePaid({ data: i }),
-    onSuccess: inv,
-  });
-  const deleteM = useMutation({
-    mutationFn: (id: string) => softDelete({ data: { id } }),
-    onSuccess: () => { inv(); toast.success("Change verwijderd."); },
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  const sorted = useMemo(() => {
-    let arr = [...data.requests];
-    if (statusFilter) arr = arr.filter((r: any) => r.status === statusFilter);
-    if (categoryFilter) arr = arr.filter((r: any) => (r.category ?? "other") === categoryFilter);
-    if (paidFilter) arr = arr.filter((r: any) => (paidFilter === "paid" ? r.is_paid : !r.is_paid));
-    if (customerFilter) arr = arr.filter((r: any) => r.user_id === customerFilter);
-    if (search.trim()) {
-      const q = search.trim().toLowerCase();
-      arr = arr.filter((r: any) => {
-        const c = data.customers.find((c: any) => c.id === r.user_id);
-        const num = r.request_number ? `#${r.request_number}` : "";
-        return (
-          (r.title ?? "").toLowerCase().includes(q) ||
-          (r.description ?? "").toLowerCase().includes(q) ||
-          (c?.full_name ?? "").toLowerCase().includes(q) ||
-          (c?.email ?? "").toLowerCase().includes(q) ||
-          num.includes(q)
-        );
-      });
-    }
-    arr.sort((a: any, b: any) => {
-      if (sortBy === "priority") {
-        return (PRIORITY_WEIGHT[b.priority] ?? 0) - (PRIORITY_WEIGHT[a.priority] ?? 0);
-      }
-      return b.created_at.localeCompare(a.created_at);
-    });
-    return arr;
-  }, [data.requests, sortBy, statusFilter, categoryFilter, paidFilter, customerFilter]);
-
-  const insights = useMemo(() => {
-    const counts: Record<string, number> = {};
-    let totalHours = 0;
-    let doneCount = 0;
-    for (const r of data.requests as any[]) {
-      counts[r.user_id] = (counts[r.user_id] ?? 0) + 1;
-      if (r.status === "done" || r.status === "invoiced") {
-        const h = (new Date(r.updated_at).getTime() - new Date(r.created_at).getTime()) / 36e5;
-        if (h > 0) { totalHours += h; doneCount++; }
-      }
-    }
-    const top = Object.entries(counts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([uid, n]) => {
-        const c = data.customers.find((c: any) => c.id === uid);
-        return { name: c?.full_name || c?.email || uid, count: n };
-      });
-    return { top, avgHours: doneCount ? Math.round(totalHours / doneCount) : null };
-  }, [data.requests, data.customers]);
-
-  const exportCsv = () => {
-    const rows = (data.requests as any[]).filter((r) => r.is_paid && (r.status === "done" || r.status === "invoiced"));
-    const header = ["datum", "klant", "email", "titel", "categorie", "spoed", "bedrag_eur", "status"];
-    const lines = [header.join(";")];
-    for (const r of rows) {
-      const c = data.customers.find((c: any) => c.id === r.user_id) ?? {};
-      const bedrag = PAID_CHANGE_PRICE_EUR + (r.rush ? 15 : 0);
-      lines.push([
-        new Date(r.created_at).toISOString().slice(0, 10),
-        (c.full_name || "").replace(/;/g, ","),
-        c.email ?? "",
-        r.title.replace(/;/g, ","),
-        CATEGORY_LABEL[r.category ?? "other"] ?? r.category ?? "",
-        r.rush ? "ja" : "nee",
-        bedrag.toFixed(2),
-        STATUS_LABEL[r.status] ?? r.status,
-      ].join(";"));
-    }
-    const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `betaalde-changes-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  return (
-    <div className="space-y-4">
-      {/* Statistieken */}
-      <div className="grid sm:grid-cols-3 gap-3">
-        <div className="rounded-lg border border-border bg-card p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">Gem. doorlooptijd</p>
-          <p className="mt-1 text-2xl font-bold">{insights.avgHours !== null ? `${insights.avgHours} uur` : "—"}</p>
-        </div>
-        <div className="sm:col-span-2 rounded-lg border border-border bg-card p-4">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Top 5 klanten</p>
-          <ol className="text-sm space-y-0.5">
-            {insights.top.map((t, i) => (
-              <li key={i} className="flex justify-between">
-                <span>{i + 1}. {t.name}</span>
-                <span className="font-semibold">{t.count}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-        <div className="flex items-center gap-2">
-          <input
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Zoek op titel, klant, omschrijving of #nummer…"
-            className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm"
-          />
-          <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">
-            {sorted.length} van {data.requests.length}
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-2 items-center">
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-            <option value="priority">Prioriteit</option>
-            <option value="date">Nieuwste eerst</option>
-          </select>
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-            <option value="">Alle statussen</option>
-            {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-          </select>
-          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-            <option value="">Alle categorieën</option>
-            {CATEGORY_KEYS.map((k) => <option key={k} value={k}>{CATEGORY_LABEL[k]}</option>)}
-          </select>
-          <select value={paidFilter} onChange={(e) => setPaidFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-            <option value="">Gratis + betaald</option>
-            <option value="free">Gratis</option>
-            <option value="paid">Betaald</option>
-          </select>
-          <select value={customerFilter} onChange={(e) => setCustomerFilter(e.target.value)} className="rounded-md border border-input bg-background px-2 py-1.5 text-sm">
-            <option value="">Alle klanten</option>
-            {data.customers.map((c: any) => (
-              <option key={c.id} value={c.id}>{c.full_name || c.email}</option>
-            ))}
-          </select>
-          <button onClick={exportCsv} className="ml-auto rounded-full border border-border px-3 py-1.5 text-xs hover:bg-muted">
-            Export CSV
-          </button>
-        </div>
-      </div>
-
-      {/* Change lijst */}
-      <div className="space-y-2">
-        {sorted.map((r: any) => {
-          const c = data.customers.find((c: any) => c.id === r.user_id);
-          const isOpen = openRequest === r.id;
-          return (
-            <div key={r.id} className="rounded-xl border border-border bg-card overflow-hidden">
-              {/* Kaart header */}
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-4">
-                  {/* Links: klant + titel */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold truncate">{c?.full_name || c?.email || r.user_id}</span>
-                      {r.request_number && (
-                        <span className="text-xs text-muted-foreground">#{r.request_number}</span>
-                      )}
-                      <span className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString("nl-NL")}</span>
-                      {r.due_date && (
-                        <span className="text-xs text-amber-600">oplever {new Date(r.due_date).toLocaleDateString("nl-NL")}</span>
-                      )}
-                    </div>
-                    <p className="font-semibold text-base leading-snug">{r.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{r.description}</p>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        {CATEGORY_LABEL[r.category ?? "other"] ?? "Anders"}
-                      </span>
-                      <span className={`text-[11px] px-2 py-0.5 rounded-full bg-muted ${PRIORITY_COLOR[r.priority]}`}>
-                        {PRIORITY_LABEL[r.priority]}
-                      </span>
-                      {r.rush && (
-                        <span className="text-[11px] px-2 py-0.5 rounded-full bg-destructive/15 text-destructive">Spoed</span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Rechts: status + betaald + verwijder */}
-                  <div className="flex flex-col items-end gap-2 shrink-0">
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted">
-                      {STATUS_LABEL[r.status]}
-                    </span>
-                    <button
-                      onClick={() => togglePaidM.mutate({ id: r.id, is_paid: !r.is_paid })}
-                      className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors ${
-                        r.is_paid
-                          ? "border-amber-400/40 bg-amber-500/10 text-amber-600 hover:bg-amber-500/20"
-                          : "border-primary/30 bg-primary/10 text-primary hover:bg-primary/20"
-                      }`}
-                    >
-                      {r.is_paid ? `Betaald €${PAID_CHANGE_PRICE_EUR}` : "Gratis"}
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (confirm(`Change "${r.title}" verwijderen? Deze wordt verplaatst naar de prullenbak en kan worden teruggeplaatst.`)) {
-                          deleteM.mutate(r.id);
-                        }
-                      }}
-                      className="text-xs text-destructive hover:underline"
-                    >
-                      Verwijder
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Details toggle */}
-              <div className="border-t border-border px-4 py-2 flex items-center justify-between bg-muted/20">
-                <span className="text-xs text-muted-foreground">
-                  {(r.change_comments?.length ?? 0)} berichten · {(r.change_attachments?.length ?? 0)} bijlagen
-                </span>
-                <button
-                  onClick={() => setOpenRequest(isOpen ? null : r.id)}
-                  className="text-xs text-primary hover:underline"
-                >
-                  {isOpen ? "Inklappen" : "Details & thread"}
-                </button>
-              </div>
-
-              {isOpen && (
-                <div className="border-t border-border">
-                  <div className="p-4">
-                    <RequestDetail request={r} qc={qc} />
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-        {sorted.length === 0 && (
-          <div className="rounded-xl border border-border bg-card p-8 text-center text-sm text-muted-foreground">
-            Geen changes gevonden.
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function RequestDetail({ request, qc }: any) {
-  const updateStatus = useServerFn(adminUpdateRequestStatus);
-  const setFields = useServerFn(adminSetRequestFields);
-  const postComment = useServerFn(adminPostComment);
-  const attUrl = useServerFn(adminAttachmentUrl);
-
-  const inv = () => qc.invalidateQueries({ queryKey: ["admin-overview"] });
-  const statusM = useMutation({ mutationFn: (i: any) => updateStatus({ data: i }), onSuccess: inv });
-  const fieldsM = useMutation({ mutationFn: (i: any) => setFields({ data: i }), onSuccess: inv });
-  const commentM = useMutation({ mutationFn: (i: any) => postComment({ data: i }), onSuccess: inv });
-
-  const [internalNote, setInternalNote] = useState(request.internal_note ?? "");
-  const [dueDate, setDueDate] = useState(request.due_date ?? "");
-  const [adminNotes, setAdminNotes] = useState(request.admin_notes ?? "");
-  const [comment, setComment] = useState("");
-
-  const openAtt = async (file_path: string) => {
-    const { url } = await attUrl({ data: { file_path } });
-    window.open(url, "_blank");
-  };
-
-  return (
-    <div className="mt-4 space-y-4 border-t border-border pt-4 text-sm">
-      <div className="grid sm:grid-cols-3 gap-2">
-        <select value={request.status}
-          onChange={(e) => statusM.mutate({ id: request.id, status: e.target.value as any })}
-          className="rounded-md border border-input bg-background px-2 py-1">
-          {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-        </select>
-        <input type="date" value={dueDate ?? ""}
-          onChange={(e) => setDueDate(e.target.value)}
-          onBlur={() => fieldsM.mutate({ id: request.id, due_date: dueDate || null })}
-          className="rounded-md border border-input bg-background px-2 py-1" />
-      </div>
-
-      <label className="block">
-        <span className="text-xs text-muted-foreground">Bericht voor klant (admin_notes)</span>
-        <textarea rows={2} value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)}
-          onBlur={() => fieldsM.mutate({ id: request.id, admin_notes: adminNotes || null })}
-          className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2" />
-      </label>
-
-      <label className="block">
-        <span className="text-xs text-muted-foreground">Interne notitie (alleen admin)</span>
-        <textarea rows={2} value={internalNote} onChange={(e) => setInternalNote(e.target.value)}
-          onBlur={() => fieldsM.mutate({ id: request.id, internal_note: internalNote || null })}
-          className="mt-1 w-full rounded-md border border-amber-500/40 bg-amber-500/5 px-3 py-2" />
-      </label>
-
-      {request.change_attachments?.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {request.change_attachments.map((a: any) => (
-            <button key={a.id} onClick={() => openAtt(a.file_path)}
-              className="text-xs rounded-md border border-border bg-muted/40 px-2 py-1 hover:bg-accent">
-              {a.file_name}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className="space-y-2">
-        <p className="font-semibold text-xs">Thread</p>
-        {(request.change_comments ?? [])
-          .sort((a: any, b: any) => a.created_at.localeCompare(b.created_at))
-          .map((c: any) => (
-            <div key={c.id} className="rounded-lg bg-muted/40 p-2">
-              <p className="text-xs text-muted-foreground">
-                {new Date(c.created_at).toLocaleString("nl-NL")}
-              </p>
-              <p className="whitespace-pre-wrap">{c.body}</p>
-            </div>
-          ))}
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          if (!comment.trim()) return;
-          commentM.mutate({ request_id: request.id, body: comment }, { onSuccess: () => setComment("") });
-        }} className="flex gap-2">
-          <input value={comment} onChange={(e) => setComment(e.target.value)}
-            placeholder="Antwoord aan klant…"
-            className="flex-1 rounded-md border border-input bg-background px-3 py-2" />
-          <button className="rounded-full bg-primary px-4 py-2 text-primary-foreground">Verstuur</button>
-        </form>
-      </div>
-    </div>
   );
 }
 
@@ -1290,7 +912,7 @@ function AanvragenTab({ data, qc }: any) {
           <div key={p.id} className="rounded-xl border border-border bg-card p-4">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div className="text-sm space-y-1">
-                <p className="font-semibold text-base">{c.full_name || "—"}</p>
+                <p className="font-semibold text-base">{c.full_name || "â€”"}</p>
                 <p className="text-muted-foreground">{c.email}</p>
                 {c.company && <p className="text-muted-foreground">Bedrijf: {c.company}</p>}
                 {c.phone && <p className="text-muted-foreground">Tel: {c.phone}</p>}
@@ -1302,7 +924,7 @@ function AanvragenTab({ data, qc }: any) {
                 {c.kvk && <p className="text-muted-foreground">KVK: {c.kvk}</p>}
                 {c.btw && <p className="text-muted-foreground">BTW: {c.btw}</p>}
                 <p className="mt-2 font-medium text-foreground">
-                  Aangevraagd: <strong>{p.amount}</strong> extra change(s) — €{p.amount * 20}
+                  Aangevraagd: <strong>{p.amount}</strong> extra change(s) â€” â‚¬{p.amount * 20}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {new Date(p.created_at).toLocaleString("nl-NL")}
@@ -1313,7 +935,7 @@ function AanvragenTab({ data, qc }: any) {
                   grantM.mutate({
                     user_id: p.user_id,
                     amount: p.amount,
-                    reason: `Aankoop ${p.amount}× change`,
+                    reason: `Aankoop ${p.amount}Ã— change`,
                     purchase_id: p.id,
                   })
                 }
@@ -1381,7 +1003,7 @@ function AfsprakenTab({ customers, qc }: any) {
             onChange={(e) => setForm({ ...form, user_id: e.target.value })}
             className="rounded-md border border-input bg-background px-3 py-2 text-sm"
           >
-            <option value="">Kies klant…</option>
+            <option value="">Kies klantâ€¦</option>
             {customers.map((c: any) => (
               <option key={c.id} value={c.id}>
                 {c.full_name || c.email}
@@ -1429,7 +1051,7 @@ function AfsprakenTab({ customers, qc }: any) {
           disabled={createM.isPending}
           className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
         >
-          {createM.isPending ? "Bezig…" : "Inplannen"}
+          {createM.isPending ? "Bezigâ€¦" : "Inplannen"}
         </button>
         {createM.error && (
           <p className="text-sm text-destructive">{(createM.error as Error).message}</p>
@@ -1460,7 +1082,7 @@ function AfsprakenTab({ customers, qc }: any) {
                     <span className="text-xs uppercase tracking-[0.08em] text-muted-foreground mr-2">{kindIcon}</span>{a.title}
                   </p>
                   <p className="text-muted-foreground">
-                    {c?.full_name || c?.email || a.user_id} ·{" "}
+                    {c?.full_name || c?.email || a.user_id} Â·{" "}
                     {new Date(a.scheduled_at).toLocaleString("nl-NL")}
                   </p>
                   {a.location && (
@@ -1491,7 +1113,7 @@ function Modal({ children, onClose, title, wide }: any) {
       <div className={`w-full ${wide ? "max-w-3xl" : "max-w-md"} max-h-[90vh] overflow-auto rounded-2xl border border-border bg-card p-6`}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-display text-xl font-semibold">{title}</h3>
-          <button onClick={onClose} className="text-muted-foreground hover:text-foreground">×</button>
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground">Ã—</button>
         </div>
         {children}
       </div>
@@ -1507,181 +1129,6 @@ function Field({ label, value, onChange, type = "text", required }: any) {
         onChange={(e) => onChange(e.target.value)}
         className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
     </label>
-  );
-}
-
-// ============================================================
-// =================== ACCOUNTS PANEL =========================
-// ============================================================
-function AccountsPanel() {
-  const list = useServerFn(adminListAllAccounts);
-  const changeRole = useServerFn(adminChangeAccountRole);
-  const setBlocked = useServerFn(adminSetBlocked);
-  const setExpiry = useServerFn(adminSetAccessExpiry);
-  const hardDel = useServerFn(adminHardDeleteAccount);
-  const createTemp = useServerFn(adminCreateTempAccount);
-  const qc = useQueryClient();
-  const { data, isLoading } = useQuery({ queryKey: ["admin-accounts"], queryFn: () => list({}) });
-
-  const [filter, setFilter] = useState("");
-  const [roleFilter, setRoleFilter] = useState<string>("all");
-
-  // Realtime ping on profiles last_seen_at
-  useEffect(() => {
-    const ch = supabase
-      .channel("admin-accounts-presence")
-      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, () => {
-        qc.invalidateQueries({ queryKey: ["admin-accounts"] });
-      })
-      .subscribe();
-    return () => { supabase.removeChannel(ch); };
-  }, [qc]);
-
-  const [showTemp, setShowTemp] = useState(false);
-  const [tempForm, setTempForm] = useState({ email: "", full_name: "", company: "", days_valid: 14 });
-
-  const inv = () => qc.invalidateQueries({ queryKey: ["admin-accounts"] });
-  const roleM = useMutation({ mutationFn: (i: any) => changeRole({ data: i }), onSuccess: () => { inv(); toast.success("Rol gewijzigd."); }, onError: (e: any) => toast.error(e.message) });
-  const blockM = useMutation({ mutationFn: (i: any) => setBlocked({ data: i }), onSuccess: () => { inv(); toast.success("Bijgewerkt."); }, onError: (e: any) => toast.error(e.message) });
-  const expM = useMutation({ mutationFn: (i: any) => setExpiry({ data: i }), onSuccess: () => { inv(); toast.success("Verloopdatum opgeslagen."); }, onError: (e: any) => toast.error(e.message) });
-  const delM = useMutation({
-    mutationFn: (id: string) => hardDel({ data: { user_id: id } }),
-    onSuccess: () => { inv(); toast.success("Account verwijderd."); },
-    onError: (e: any) => toast.error(e.message),
-  });
-  const tempM = useMutation({
-    mutationFn: (i: any) => createTemp({ data: i }),
-    onSuccess: (r: any) => {
-      inv();
-      setShowTemp(false);
-      setTempForm({ email: "", full_name: "", company: "", days_valid: 14 });
-      navigator.clipboard?.writeText(`Email: ${r.email}\nWachtwoord: ${r.tempPassword}`).catch(() => {});
-      toast.success(`Aangemaakt. Wachtwoord (gekopieerd): ${r.tempPassword}`);
-    },
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  if (isLoading) return <TableSkeleton cols={5} />;
-  const accounts = data?.accounts ?? [];
-  const filtered = accounts.filter((a: any) => {
-    const q = filter.toLowerCase();
-    const matchQ = !q || a.email?.toLowerCase().includes(q) || a.full_name?.toLowerCase().includes(q);
-    const matchRole =
-      roleFilter === "all" ? true :
-      roleFilter === "staff" ? (a.roles ?? []).some((r: string) => ["super_admin", "co_admin", "support_agent", "viewer", "admin"].includes(r)) :
-      (a.roles ?? []).includes(roleFilter);
-    return matchQ && matchRole;
-  });
-
-  const isOnline = (a: any) => a.last_seen_at && Date.now() - new Date(a.last_seen_at).getTime() < 3 * 60_000;
-
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="font-display text-xl font-semibold">Accounts ({accounts.length})</h2>
-      </div>
-      <div className="flex flex-wrap items-center gap-2 justify-between">
-        <div className="flex flex-wrap gap-2">
-          <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Zoek naam / email / tag…" className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
-          <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} className="rounded-md border border-input bg-background px-3 py-2 text-sm">
-            <option value="all">Alle rollen</option>
-            <option value="customer">Klanten</option>
-            <option value="staff">Staff</option>
-            <option value="super_admin">Super admin</option>
-            <option value="co_admin">Co-admin</option>
-            <option value="support_agent">Support</option>
-            <option value="viewer">Viewer</option>
-            <option value="sales">Sales</option>
-          </select>
-        </div>
-        <button onClick={() => setShowTemp((v) => !v)} className="rounded-md bg-foreground text-background px-3 py-2 text-sm">+ Nieuw tijdelijk account</button>
-      </div>
-
-      {showTemp && (
-        <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="font-semibold mb-3">Tijdelijk account aanmaken</h3>
-          <div className="grid sm:grid-cols-4 gap-3">
-            <input placeholder="E-mail" value={tempForm.email} onChange={(e) => setTempForm({ ...tempForm, email: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <input placeholder="Volledige naam" value={tempForm.full_name} onChange={(e) => setTempForm({ ...tempForm, full_name: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <input placeholder="Bedrijf (optioneel)" value={tempForm.company} onChange={(e) => setTempForm({ ...tempForm, company: e.target.value })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" />
-            <input type="number" min={1} max={365} value={tempForm.days_valid} onChange={(e) => setTempForm({ ...tempForm, days_valid: Number(e.target.value) })} className="rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Geldig (dagen)" />
-          </div>
-          <div className="mt-3 flex gap-2">
-            <button disabled={tempM.isPending || !tempForm.email || !tempForm.full_name} onClick={() => tempM.mutate(tempForm)} className="rounded-md bg-foreground text-background px-3 py-2 text-sm disabled:opacity-50">{tempM.isPending ? "Bezig…" : "Aanmaken"}</button>
-            <button onClick={() => setShowTemp(false)} className="rounded-md border border-border px-3 py-2 text-sm">Annuleer</button>
-          </div>
-        </div>
-      )}
-
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/30 text-muted-foreground">
-            <tr>
-              <th className="text-left p-3">Naam</th>
-              <th className="text-left p-3">E-mail</th>
-              <th className="text-left p-3">Rol</th>
-              <th className="text-left p-3">Verloopt</th>
-              <th className="text-left p-3">Status</th>
-              <th className="p-3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((a: any) => {
-              const primaryRole = (a.roles ?? [])[0] ?? "customer";
-              const online = isOnline(a);
-              const isSuperAdmin = (a.roles ?? []).includes("super_admin");
-              return (
-                <tr key={a.id} className="border-t border-border align-top">
-                  <td className="p-3">
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${online ? "bg-emerald-500" : "bg-muted"}`} title={online ? "Online" : "Offline"} />
-                      <span>{a.full_name || "—"}</span>
-                    </div>
-                    {a.last_seen_at && <p className="text-xs text-muted-foreground ml-4">{online ? "Online nu" : new Date(a.last_seen_at).toLocaleString("nl-NL")}</p>}
-                  </td>
-                  <td className="p-3">{a.email}</td>
-                  <td className="p-3">
-                    {isSuperAdmin ? (
-                      <span className="text-xs rounded-full bg-primary/20 text-primary px-2 py-1 font-medium">Super Admin</span>
-                    ) : (
-                      <select value={primaryRole} onChange={(e) => roleM.mutate({ target_user_id: a.id, role: e.target.value as any })} className="rounded-md border border-input bg-background px-2 py-1 text-xs">
-                        <option value="customer">Klant</option>
-                        <option value="support_agent">Support</option>
-                        <option value="viewer">Viewer</option>
-                        <option value="co_admin">Co-admin</option>
-                        <option value="sales">Sales</option>
-                      </select>
-                    )}
-                  </td>
-                  <td className="p-3">
-                    {isSuperAdmin ? (
-                      <span className="text-xs text-muted-foreground">—</span>
-                    ) : (
-                      <input type="date" defaultValue={a.access_expires_at ? a.access_expires_at.slice(0, 10) : ""} onBlur={(e) => {
-                        const v = e.target.value ? new Date(e.target.value + "T23:59:59Z").toISOString() : null;
-                        if (v !== a.access_expires_at) expM.mutate({ user_id: a.id, access_expires_at: v });
-                      }} className="rounded-md border border-input bg-background px-2 py-1 text-xs" />
-                    )}
-                  </td>
-                  <td className="p-3">
-                    {a.is_blocked ? <span className="text-xs text-destructive">Geblokkeerd</span> : <span className="text-xs text-emerald-600">Actief</span>}
-                  </td>
-                  <td className="p-3 text-right space-x-2 whitespace-nowrap">
-                    {!isSuperAdmin && (
-                      <>
-                        <button onClick={() => blockM.mutate({ user_id: a.id, is_blocked: !a.is_blocked })} className="text-xs text-primary hover:underline">{a.is_blocked ? "Deblokkeer" : "Blokkeer"}</button>
-                        <button onClick={() => { if (confirm(`Account ${a.email} permanent verwijderen?`)) delM.mutate(a.id); }} className="text-xs text-destructive hover:underline">Verwijder</button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-            {filtered.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-muted-foreground">Geen accounts.</td></tr>}
-          </tbody>
-        </table>
-      </div>
-    </div>
   );
 }
 
@@ -1770,9 +1217,9 @@ function ArchivedChangesPanel() {
         <tbody>
           {items.map((r: any) => (
             <tr key={r.id} className="border-t border-border">
-              <td className="p-3">{r.request_number ?? "—"}</td>
+              <td className="p-3">{r.request_number ?? "â€”"}</td>
               <td className="p-3">{r.title}</td>
-              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "—"}</td>
+              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "â€”"}</td>
               <td className="p-3 text-right">
                 <button onClick={() => unM.mutate(r.id)} className="text-xs text-primary hover:underline">Herstel</button>
               </td>
@@ -1853,7 +1300,7 @@ function AlertsPanel() {
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{a.message}</p>
                     <p className="text-xs opacity-70 mt-0.5">
-                      {a.customer_name || a.customer_email || a.user_id} · {new Date(a.created_at).toLocaleString("nl-NL")}
+                      {a.customer_name || a.customer_email || a.user_id} Â· {new Date(a.created_at).toLocaleString("nl-NL")}
                     </p>
                     {a.snoozed_until && new Date(a.snoozed_until) > new Date() && (
                       <p className="text-xs opacity-60 mt-0.5 flex items-center gap-1">
@@ -1890,95 +1337,3 @@ function AlertsPanel() {
   );
 }
 
-// ============================================================
-// ================== ROLLEN & PERMISSIES =====================
-// ============================================================
-const ALL_PERMISSIONS = [
-  { key: "view_all_changes", label: "Changes bekijken" },
-  { key: "edit_change_status", label: "Change status wijzigen" },
-  { key: "edit_change_fields", label: "Change velden bewerken" },
-  { key: "delete_change_soft", label: "Change verwijderen (soft)" },
-  { key: "force_paid", label: "Betaald forceren" },
-  { key: "create_change_for_customer", label: "Change aanmaken voor klant" },
-  { key: "manage_customers", label: "Klanten beheren" },
-  { key: "generate_invoice", label: "Factuur genereren" },
-  { key: "export_csv", label: "CSV exporteren" },
-  { key: "chat_with_customers", label: "Chat met klanten" },
-  { key: "website_links_view", label: "Website koppelingen bekijken" },
-  { key: "website_links_manage", label: "Website koppelingen beheren" },
-  { key: "appointments_manage", label: "Afspraken beheren" },
-  { key: "alerts_view", label: "Alerts bekijken" },
-  { key: "leads_view", label: "Leads bekijken" },
-  { key: "leads_manage", label: "Leads beheren" },
-];
-
-const ROLES = ["co_admin", "support_agent", "viewer", "sales"] as const;
-
-function RollenPermissiesPanel() {
-  const getPerms = useServerFn(adminGetRolePermissions);
-  const setPermFn = useServerFn(adminSetRolePermission);
-  const qc = useQueryClient();
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["admin-role-permissions"],
-    queryFn: () => getPerms({}),
-  });
-
-  const setM = useMutation({
-    mutationFn: (v: { role: string; permission: string; allowed: boolean }) => setPermFn({ data: v }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-role-permissions"] }),
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  if (isLoading) return <TableSkeleton cols={3} />;
-
-  const rows: any[] = (data as any)?.items ?? [];
-  const lookup: Record<string, boolean> = {};
-  rows.forEach((r: any) => { lookup[`${r.role}:${r.permission}`] = r.allowed; });
-
-  const isAllowed = (role: string, perm: string) => lookup[`${role}:${perm}`] ?? false;
-
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <Shield className="w-4 h-4 text-primary" />
-        <h3 className="font-semibold">Rollen & Permissies</h3>
-      </div>
-      <p className="text-sm text-muted-foreground">Stel in welke acties elke rol mag uitvoeren. Super admin heeft altijd alle rechten.</p>
-
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/30">
-            <tr>
-              <th className="text-left p-3 text-muted-foreground font-medium">Permissie</th>
-              {ROLES.map(role => (
-                <th key={role} className="p-3 text-center text-muted-foreground font-medium capitalize whitespace-nowrap">
-                  {role.replace("_", " ")}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {ALL_PERMISSIONS.map((perm) => (
-              <tr key={perm.key} className="border-t border-border hover:bg-muted/20 transition-colors">
-                <td className="p-3">{perm.label}</td>
-                {ROLES.map(role => (
-                  <td key={role} className="p-3 text-center">
-                    <input
-                      type="checkbox"
-                      checked={isAllowed(role, perm.key)}
-                      onChange={(e) => setM.mutate({ role, permission: perm.key, allowed: e.target.checked })}
-                      disabled={setM.isPending}
-                      className="w-4 h-4 accent-primary cursor-pointer"
-                    />
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p className="text-xs text-muted-foreground">Wijzigingen worden direct opgeslagen.</p>
-    </div>
-  );
-}

@@ -21,6 +21,44 @@ export async function adminListAllAccountsImpl() {
   };
 }
 
+export async function adminGetAccountDetailImpl(userId: string) {
+  const [
+    { data: profile },
+    { data: roles },
+    { data: projectsPrimary },
+    { data: memberRows },
+    { data: loginEvents },
+    { data: auditLog },
+    { data: contactMoments },
+  ] = await Promise.all([
+    supabaseAdmin.from("profiles").select("*").eq("id", userId).maybeSingle(),
+    supabaseAdmin.from("user_roles").select("role").eq("user_id", userId),
+    supabaseAdmin.from("projects").select("*").eq("primary_user_id", userId).is("deleted_at", null),
+    supabaseAdmin.from("project_members").select("project_id, projects(*)").eq("user_id", userId),
+    supabaseAdmin.from("login_events").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(50),
+    supabaseAdmin.from("audit_log").select("*").eq("target_id", userId).order("created_at", { ascending: false }).limit(100),
+    supabaseAdmin.from("client_contacts").select("*").eq("user_id", userId).order("occurred_at", { ascending: false }),
+  ]);
+
+  if (!profile) throw new Error("Account niet gevonden.");
+
+  const projectMap = new Map<string, any>();
+  for (const p of projectsPrimary ?? []) projectMap.set(p.id, p);
+  for (const m of memberRows ?? []) {
+    const p = (m as any).projects;
+    if (p && !p.deleted_at) projectMap.set(p.id, p);
+  }
+
+  return {
+    profile,
+    roles: (roles ?? []).map((r: any) => r.role),
+    projects: Array.from(projectMap.values()),
+    loginEvents: loginEvents ?? [],
+    auditLog: auditLog ?? [],
+    contactMoments: contactMoments ?? [],
+  };
+}
+
 export async function adminHardDeleteUserImpl(userId: string) {
   // Cascade-style cleanup of related rows (avoid FK orphans)
   await supabaseAdmin.from("change_comments").delete().eq("author_id", userId);

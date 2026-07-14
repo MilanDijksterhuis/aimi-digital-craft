@@ -24,6 +24,7 @@ import {
   getAttachmentUrl,
   cancelMyChange,
   portalListMyProjects,
+  portalListMyProjectsForChangeForm,
 } from "@/lib/portal.functions";
 import { PROJECT_STATUS_LABEL, PROJECT_STATUS_COLOR, isProjectOverdue } from "@/lib/project-status";
 import {
@@ -129,6 +130,7 @@ function PortalPage() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const fetchDash = useServerFn(getMyDashboard);
+  const listProjectsForChangeForm = useServerFn(portalListMyProjectsForChangeForm);
   const submit = useServerFn(submitChangeRequest);
   const buy = useServerFn(requestExtraChanges);
   const markRead = useServerFn(markNotificationRead);
@@ -147,6 +149,11 @@ function PortalPage() {
     queryKey: ["dashboard"],
     queryFn: () => fetchDash({}),
   });
+  const projectsForChangeFormQ = useQuery({
+    queryKey: ["portal-my-projects-change-form"],
+    queryFn: () => listProjectsForChangeForm({}),
+  });
+  const changeFormProjects = (projectsForChangeFormQ.data?.items ?? []) as any[];
 
   const submitM = useMutation({
     mutationFn: (input: any) => submit({ data: input }),
@@ -174,6 +181,7 @@ function PortalPage() {
   const [priority, setPriority] = useState<"low" | "normal" | "high" | "urgent">("normal");
   const [category, setCategory] = useState<string>("text");
   const [rush, setRush] = useState(false);
+  const [changeProjectId, setChangeProjectId] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [purchaseQty, setPurchaseQty] = useState(1);
   const [purchaseConfirm, setPurchaseConfirm] = useState(false);
@@ -293,11 +301,13 @@ function PortalPage() {
           });
         }
       }
+      const project_id =
+        changeFormProjects.length === 1 ? changeFormProjects[0].id : changeProjectId || undefined;
       await submitM.mutateAsync({
-        title, description, priority, category, rush, attachments: uploaded,
+        title, description, priority, category, rush, attachments: uploaded, project_id,
       });
       setTitle(""); setDescription(""); setPriority("normal");
-      setCategory("text"); setRush(false); setFiles([]);
+      setCategory("text"); setRush(false); setFiles([]); setChangeProjectId("");
       setShowNewChange(false);
     } finally {
       setUploading(false);
@@ -488,6 +498,28 @@ function PortalPage() {
                     className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
                   />
                 </div>
+
+                {/* Project */}
+                {changeFormProjects.length === 1 && (
+                  <p className="text-xs text-muted-foreground">
+                    Dit verzoek wordt gekoppeld aan project: <span className="font-medium text-foreground">{changeFormProjects[0].name}</span>
+                  </p>
+                )}
+                {changeFormProjects.length > 1 && (
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Project</label>
+                    <select
+                      value={changeProjectId}
+                      onChange={(e) => setChangeProjectId(e.target.value)}
+                      className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm"
+                    >
+                      <option value="">Geen specifiek project</option>
+                      {changeFormProjects.map((p: any) => (
+                        <option key={p.id} value={p.id}>{p.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
                 {/* Categorie + Prioriteit */}
                 <div className="grid sm:grid-cols-2 gap-4">

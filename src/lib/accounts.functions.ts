@@ -52,6 +52,16 @@ export const adminListAllAccounts = createServerFn({ method: "GET" })
     return adminListAllAccountsImpl();
   });
 
+export const adminGetAccountDetail = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { adminGetAccountDetailImpl } = await import("./accounts.server");
+    return adminGetAccountDetailImpl(data.user_id);
+  });
+
 export const adminChangeAccountRole = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>

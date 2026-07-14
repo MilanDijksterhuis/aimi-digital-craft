@@ -22,10 +22,16 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
+import { Route as AuthenticatedAdminRollenRouteImport } from './routes/_authenticated/admin.rollen'
 import { Route as AuthenticatedAdminProjectenRouteImport } from './routes/_authenticated/admin.projecten'
+import { Route as AuthenticatedAdminChangesRouteImport } from './routes/_authenticated/admin.changes'
+import { Route as AuthenticatedAdminAccountsRouteImport } from './routes/_authenticated/admin.accounts'
 import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
 import { Route as AuthenticatedPortalProjectenProjectIdRouteImport } from './routes/_authenticated/portal.projecten.$projectId'
+import { Route as AuthenticatedAdminRollenRoleIdRouteImport } from './routes/_authenticated/admin.rollen.$roleId'
 import { Route as AuthenticatedAdminProjectenProjectIdRouteImport } from './routes/_authenticated/admin.projecten.$projectId'
+import { Route as AuthenticatedAdminChangesChangeIdRouteImport } from './routes/_authenticated/admin.changes.$changeId'
+import { Route as AuthenticatedAdminAccountsAccountIdRouteImport } from './routes/_authenticated/admin.accounts.$accountId'
 
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
   id: '/track.js',
@@ -91,10 +97,28 @@ const ApiPublicSiteErrorRoute = ApiPublicSiteErrorRouteImport.update({
   path: '/api/public/site-error',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRollenRoute =
+  AuthenticatedAdminRollenRouteImport.update({
+    id: '/rollen',
+    path: '/rollen',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminProjectenRoute =
   AuthenticatedAdminProjectenRouteImport.update({
     id: '/projecten',
     path: '/projecten',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminChangesRoute =
+  AuthenticatedAdminChangesRouteImport.update({
+    id: '/changes',
+    path: '/changes',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminAccountsRoute =
+  AuthenticatedAdminAccountsRouteImport.update({
+    id: '/accounts',
+    path: '/accounts',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
 const ApiPublicHooksExpireAccountsRoute =
@@ -109,11 +133,29 @@ const AuthenticatedPortalProjectenProjectIdRoute =
     path: '/projecten/$projectId',
     getParentRoute: () => AuthenticatedPortalRoute,
   } as any)
+const AuthenticatedAdminRollenRoleIdRoute =
+  AuthenticatedAdminRollenRoleIdRouteImport.update({
+    id: '/$roleId',
+    path: '/$roleId',
+    getParentRoute: () => AuthenticatedAdminRollenRoute,
+  } as any)
 const AuthenticatedAdminProjectenProjectIdRoute =
   AuthenticatedAdminProjectenProjectIdRouteImport.update({
     id: '/$projectId',
     path: '/$projectId',
     getParentRoute: () => AuthenticatedAdminProjectenRoute,
+  } as any)
+const AuthenticatedAdminChangesChangeIdRoute =
+  AuthenticatedAdminChangesChangeIdRouteImport.update({
+    id: '/$changeId',
+    path: '/$changeId',
+    getParentRoute: () => AuthenticatedAdminChangesRoute,
+  } as any)
+const AuthenticatedAdminAccountsAccountIdRoute =
+  AuthenticatedAdminAccountsAccountIdRouteImport.update({
+    id: '/$accountId',
+    path: '/$accountId',
+    getParentRoute: () => AuthenticatedAdminAccountsRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -127,10 +169,16 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/server': typeof AuthenticatedServerRoute
+  '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
+  '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
+  '/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
   '/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
@@ -145,10 +193,16 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/server': typeof AuthenticatedServerRoute
+  '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
+  '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
+  '/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
   '/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
@@ -165,10 +219,16 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
   '/_authenticated/server': typeof AuthenticatedServerRoute
+  '/_authenticated/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/_authenticated/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/_authenticated/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
+  '/_authenticated/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/_authenticated/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/_authenticated/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/_authenticated/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
+  '/_authenticated/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
   '/_authenticated/portal/projecten/$projectId': typeof AuthenticatedPortalProjectenProjectIdRoute
   '/api/public/hooks/expire-accounts': typeof ApiPublicHooksExpireAccountsRoute
 }
@@ -185,10 +245,16 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/server'
+    | '/admin/accounts'
+    | '/admin/changes'
     | '/admin/projecten'
+    | '/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/admin/accounts/$accountId'
+    | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
+    | '/admin/rollen/$roleId'
     | '/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   fileRoutesByTo: FileRoutesByTo
@@ -203,10 +269,16 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/server'
+    | '/admin/accounts'
+    | '/admin/changes'
     | '/admin/projecten'
+    | '/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/admin/accounts/$accountId'
+    | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
+    | '/admin/rollen/$roleId'
     | '/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   id:
@@ -222,10 +294,16 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/_authenticated/server'
+    | '/_authenticated/admin/accounts'
+    | '/_authenticated/admin/changes'
     | '/_authenticated/admin/projecten'
+    | '/_authenticated/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/_authenticated/admin/accounts/$accountId'
+    | '/_authenticated/admin/changes/$changeId'
     | '/_authenticated/admin/projecten/$projectId'
+    | '/_authenticated/admin/rollen/$roleId'
     | '/_authenticated/portal/projecten/$projectId'
     | '/api/public/hooks/expire-accounts'
   fileRoutesById: FileRoutesById
@@ -336,11 +414,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSiteErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/rollen': {
+      id: '/_authenticated/admin/rollen'
+      path: '/rollen'
+      fullPath: '/admin/rollen'
+      preLoaderRoute: typeof AuthenticatedAdminRollenRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/projecten': {
       id: '/_authenticated/admin/projecten'
       path: '/projecten'
       fullPath: '/admin/projecten'
       preLoaderRoute: typeof AuthenticatedAdminProjectenRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/changes': {
+      id: '/_authenticated/admin/changes'
+      path: '/changes'
+      fullPath: '/admin/changes'
+      preLoaderRoute: typeof AuthenticatedAdminChangesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/accounts': {
+      id: '/_authenticated/admin/accounts'
+      path: '/accounts'
+      fullPath: '/admin/accounts'
+      preLoaderRoute: typeof AuthenticatedAdminAccountsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/api/public/hooks/expire-accounts': {
@@ -357,6 +456,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalProjectenProjectIdRouteImport
       parentRoute: typeof AuthenticatedPortalRoute
     }
+    '/_authenticated/admin/rollen/$roleId': {
+      id: '/_authenticated/admin/rollen/$roleId'
+      path: '/$roleId'
+      fullPath: '/admin/rollen/$roleId'
+      preLoaderRoute: typeof AuthenticatedAdminRollenRoleIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRollenRoute
+    }
     '/_authenticated/admin/projecten/$projectId': {
       id: '/_authenticated/admin/projecten/$projectId'
       path: '/$projectId'
@@ -364,8 +470,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProjectenProjectIdRouteImport
       parentRoute: typeof AuthenticatedAdminProjectenRoute
     }
+    '/_authenticated/admin/changes/$changeId': {
+      id: '/_authenticated/admin/changes/$changeId'
+      path: '/$changeId'
+      fullPath: '/admin/changes/$changeId'
+      preLoaderRoute: typeof AuthenticatedAdminChangesChangeIdRouteImport
+      parentRoute: typeof AuthenticatedAdminChangesRoute
+    }
+    '/_authenticated/admin/accounts/$accountId': {
+      id: '/_authenticated/admin/accounts/$accountId'
+      path: '/$accountId'
+      fullPath: '/admin/accounts/$accountId'
+      preLoaderRoute: typeof AuthenticatedAdminAccountsAccountIdRouteImport
+      parentRoute: typeof AuthenticatedAdminAccountsRoute
+    }
   }
 }
+
+interface AuthenticatedAdminAccountsRouteChildren {
+  AuthenticatedAdminAccountsAccountIdRoute: typeof AuthenticatedAdminAccountsAccountIdRoute
+}
+
+const AuthenticatedAdminAccountsRouteChildren: AuthenticatedAdminAccountsRouteChildren =
+  {
+    AuthenticatedAdminAccountsAccountIdRoute:
+      AuthenticatedAdminAccountsAccountIdRoute,
+  }
+
+const AuthenticatedAdminAccountsRouteWithChildren =
+  AuthenticatedAdminAccountsRoute._addFileChildren(
+    AuthenticatedAdminAccountsRouteChildren,
+  )
+
+interface AuthenticatedAdminChangesRouteChildren {
+  AuthenticatedAdminChangesChangeIdRoute: typeof AuthenticatedAdminChangesChangeIdRoute
+}
+
+const AuthenticatedAdminChangesRouteChildren: AuthenticatedAdminChangesRouteChildren =
+  {
+    AuthenticatedAdminChangesChangeIdRoute:
+      AuthenticatedAdminChangesChangeIdRoute,
+  }
+
+const AuthenticatedAdminChangesRouteWithChildren =
+  AuthenticatedAdminChangesRoute._addFileChildren(
+    AuthenticatedAdminChangesRouteChildren,
+  )
 
 interface AuthenticatedAdminProjectenRouteChildren {
   AuthenticatedAdminProjectenProjectIdRoute: typeof AuthenticatedAdminProjectenProjectIdRoute
@@ -382,13 +532,33 @@ const AuthenticatedAdminProjectenRouteWithChildren =
     AuthenticatedAdminProjectenRouteChildren,
   )
 
+interface AuthenticatedAdminRollenRouteChildren {
+  AuthenticatedAdminRollenRoleIdRoute: typeof AuthenticatedAdminRollenRoleIdRoute
+}
+
+const AuthenticatedAdminRollenRouteChildren: AuthenticatedAdminRollenRouteChildren =
+  {
+    AuthenticatedAdminRollenRoleIdRoute: AuthenticatedAdminRollenRoleIdRoute,
+  }
+
+const AuthenticatedAdminRollenRouteWithChildren =
+  AuthenticatedAdminRollenRoute._addFileChildren(
+    AuthenticatedAdminRollenRouteChildren,
+  )
+
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminAccountsRoute: typeof AuthenticatedAdminAccountsRouteWithChildren
+  AuthenticatedAdminChangesRoute: typeof AuthenticatedAdminChangesRouteWithChildren
   AuthenticatedAdminProjectenRoute: typeof AuthenticatedAdminProjectenRouteWithChildren
+  AuthenticatedAdminRollenRoute: typeof AuthenticatedAdminRollenRouteWithChildren
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminAccountsRoute: AuthenticatedAdminAccountsRouteWithChildren,
+  AuthenticatedAdminChangesRoute: AuthenticatedAdminChangesRouteWithChildren,
   AuthenticatedAdminProjectenRoute:
     AuthenticatedAdminProjectenRouteWithChildren,
+  AuthenticatedAdminRollenRoute: AuthenticatedAdminRollenRouteWithChildren,
 }
 
 const AuthenticatedAdminRouteWithChildren =

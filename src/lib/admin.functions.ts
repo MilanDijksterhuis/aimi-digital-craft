@@ -3,6 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { computeMonitoringStats, measureResponseTime, assertPublicHost } from "./monitoring.shared";
+import { can, type PermissionAction } from "./rbac";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -15,6 +16,30 @@ import {
 
 const ADMIN_LIKE_ROLES = ["super_admin", "co_admin", "admin"];
 const STAFF_ROLES_SRV = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
+const STAFF_BASE_ROLES = ["super_admin", "co_admin", "support_agent", "viewer", "sales", "admin"];
+const ALL_PERMISSION_ACTIONS: PermissionAction[] = [
+  "view_admin",
+  "view_all_changes",
+  "edit_change_status",
+  "edit_change_fields",
+  "delete_change_soft",
+  "delete_change_hard",
+  "restore_change",
+  "force_paid",
+  "create_change_for_customer",
+  "manage_customers",
+  "generate_invoice",
+  "export_csv",
+  "view_audit_log",
+  "manage_team",
+  "chat_with_customers",
+  "leads_view",
+  "leads_manage",
+  "website_links_view",
+  "website_links_manage",
+  "appointments_manage",
+  "alerts_view",
+];
 
 async function getRoles(supabase: any, userId: string): Promise<string[]> {
   const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
@@ -176,6 +201,11 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
+    const { data: before } = await supabase
+      .from("change_requests")
+      .select("status")
+      .eq("id", data.id)
+      .single();
     const { data: req, error } = await supabase
       .from("change_requests")
       .update({ status: data.status })
@@ -184,12 +214,154 @@ export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
+    await logAudit(supabase, userId, "change_status_changed", "change_request", data.id, {
+      from: before?.status ?? null,
+      to: data.status,
+    });
+
     await supabase.from("notifications").insert({
       user_id: req.user_id,
       title: `Status update: ${req.title}`,
       message: `Je verzoek is nu: ${data.status}.`,
     });
     return { ok: true };
+  });
+
+export const adminGetChangeDetail = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: request, error } = await supabase
+      .from("change_requests")
+      .select("*, change_attachments(*), change_comments(*)")
+      .eq("id", data.id)
+      .single();
+    if (error) throw new Error(error.message);
+
+    const [{ data: customer }, { data: project }, { data: audit }] = await Promise.all([
+      supabase.from("profiles").select("id, email, full_name, company").eq("id", request.user_id).maybeSingle(),
+      request.project_id
+        ? supabaseAdmin.from("projects").select("id, name, status").eq("id", request.project_id).maybeSingle()
+        : Promise.resolve({ data: null }),
+      supabase
+        .from("audit_log")
+        .select("*")
+        .eq("target_type", "change_request")
+        .eq("target_id", data.id)
+        .order("created_at", { ascending: false }),
+    ]);
+
+    const actorIds = Array.from(new Set([...(audit ?? []).map((a: any) => a.user_id), request.user_id]));
+    const { data: actors } = await supabase.from("profiles").select("id, email, full_name").in("id", actorIds);
+    const actorMap = new Map((actors ?? []).map((a: any) => [a.id, a]));
+
+    return {
+      request,
+      customer,
+      project,
+      auditLog: (audit ?? []).map((a: any) => ({ ...a, actor: actorMap.get(a.user_id) ?? null })),
+      commentAuthors: actorMap,
+    };
+  });
+
+export const adminCreateChangeRequest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        user_id: z.string().uuid(),
+        title: z.string().trim().min(3).max(200),
+        description: z.string().trim().min(5).max(5000),
+        priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
+        category: z
+          .enum(["text", "styling", "functionality", "media", "data", "seo", "accessibility", "other"])
+          .default("other"),
+        rush: z.boolean().default(false),
+        is_paid: z.boolean().default(false),
+        project_id: z.string().uuid().nullable().optional(),
+        due_date: z.string().nullable().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    if (data.project_id) {
+      const { data: project } = await supabaseAdmin
+        .from("projects")
+        .select("id, primary_user_id")
+        .eq("id", data.project_id)
+        .maybeSingle();
+      if (!project) throw new Error("Project niet gevonden.");
+      const { data: member } = await supabaseAdmin
+        .from("project_members")
+        .select("user_id")
+        .eq("project_id", data.project_id)
+        .eq("user_id", data.user_id)
+        .maybeSingle();
+      if (project.primary_user_id !== data.user_id && !member) {
+        throw new Error("Geselecteerde klant is niet gekoppeld aan dit project.");
+      }
+    }
+
+    const { data: row, error } = await supabase
+      .from("change_requests")
+      .insert({
+        user_id: data.user_id,
+        title: data.title,
+        description: data.description,
+        priority: data.priority,
+        category: data.category,
+        rush: data.rush,
+        is_paid: data.is_paid,
+        project_id: data.project_id ?? null,
+        due_date: data.due_date ?? null,
+        ticket_type: "feature",
+      })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "change_created_by_admin", "change_request", row.id, {
+      title: data.title,
+      project_id: data.project_id ?? null,
+    });
+
+    return { request: row };
+  });
+
+export const adminListChanges = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const [{ data: requests, error }, { data: customers }, { data: projects }, { data: members }] = await Promise.all([
+      supabase
+        .from("change_requests")
+        .select("*, change_attachments(*), change_comments(*)")
+        .is("deleted_at", null)
+        .order("created_at", { ascending: false }),
+      supabase.from("profiles").select("id, email, full_name, company"),
+      supabaseAdmin.from("projects").select("id, name, primary_user_id").is("deleted_at", null).order("name", { ascending: true }),
+      supabaseAdmin.from("project_members").select("project_id, user_id"),
+    ]);
+    if (error) throw new Error(error.message);
+
+    const memberIdsByProject = new Map<string, string[]>();
+    for (const m of members ?? []) {
+      const arr = memberIdsByProject.get(m.project_id) ?? [];
+      arr.push(m.user_id);
+      memberIdsByProject.set(m.project_id, arr);
+    }
+    const projectsWithMembers = (projects ?? []).map((p: any) => ({
+      ...p,
+      member_ids: Array.from(new Set([p.primary_user_id, ...(memberIdsByProject.get(p.id) ?? [])].filter(Boolean))),
+    }));
+
+    return { requests: requests ?? [], customers: customers ?? [], projects: projectsWithMembers };
   });
 
 export const adminToggleRequestPaid = createServerFn({ method: "POST" })
@@ -1263,6 +1435,7 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
   .inputValidator((d) =>
     z.object({
       project_id: z.string().uuid(),
+      primary_user_id: z.string().uuid().optional(),
       name: z.string().trim().min(1).max(200).optional(),
       website_url: z.string().trim().max(500).nullable().optional(),
       snippet_active: z.boolean().optional(),
@@ -1285,6 +1458,12 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
     const { project_id, ...rest } = data;
+
+    if (rest.primary_user_id) {
+      // Nieuwe hoofdklant mag niet ook als losse "extra klant" gekoppeld blijven staan.
+      await supabaseAdmin.from("project_members" as any).delete().eq("project_id", project_id).eq("user_id", rest.primary_user_id);
+    }
+
     const { data: project, error } = await supabaseAdmin
       .from("projects" as any)
       .update(rest)
@@ -1358,7 +1537,7 @@ export const adminGetProject = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
-    const [membersRes, milestonesRes, notesRes, contactsRes, auditRes] = await Promise.all([
+    const [membersRes, milestonesRes, notesRes, contactsRes, auditRes, changeRequestsRes] = await Promise.all([
       supabaseAdmin.from("project_members" as any).select("project_id, user_id").eq("project_id", data.project_id),
       supabaseAdmin
         .from("project_milestones" as any)
@@ -1382,6 +1561,12 @@ export const adminGetProject = createServerFn({ method: "POST" })
         .eq("target_id", data.project_id)
         .order("created_at", { ascending: false })
         .limit(100),
+      supabaseAdmin
+        .from("change_requests" as any)
+        .select("id, title, status, priority, created_at, request_number")
+        .eq("project_id", data.project_id)
+        .is("deleted_at", null)
+        .order("created_at", { ascending: false }),
     ]);
 
     const memberIds = (membersRes.data ?? []).map((m: any) => m.user_id);
@@ -1400,6 +1585,7 @@ export const adminGetProject = createServerFn({ method: "POST" })
       notes: notesRes.data ?? [],
       contacts: contactsRes.data ?? [],
       activity: auditRes.data ?? [],
+      changeRequests: changeRequestsRes.data ?? [],
     };
   });
 
@@ -1488,6 +1674,28 @@ export const adminUpdateProjectMilestone = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
     const { id, project_id, ...rest } = data;
+
+    // Server-side blokkade: een milestone mag pas op 'done' als alle
+    // milestones waar hij van afhangt zelf al 'done' zijn.
+    if (rest.status === "done") {
+      const { data: deps, error: depErr } = await supabaseAdmin
+        .from("project_milestone_dependencies" as any)
+        .select("depends_on_milestone_id")
+        .eq("milestone_id", id);
+      if (depErr) throw new Error(depErr.message);
+      const dependsOnIds = (deps ?? []).map((d: any) => d.depends_on_milestone_id);
+      if (dependsOnIds.length) {
+        const { data: blockers } = await supabaseAdmin
+          .from("project_milestones" as any)
+          .select("id, title, status")
+          .in("id", dependsOnIds)
+          .neq("status", "done");
+        if (blockers && blockers.length) {
+          throw new Error(`Kan niet afronden: wacht op milestone '${(blockers[0] as any).title}'`);
+        }
+      }
+    }
+
     const updates: Record<string, any> = { ...rest, updated_at: new Date().toISOString() };
     if (rest.status !== undefined) {
       updates.completed_at = rest.status === "done" ? new Date().toISOString() : null;
@@ -1674,6 +1882,583 @@ export const adminDeleteProjectContact = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     await logAudit(supabase, userId, "contact_deleted", "project", data.project_id, { contact_id: data.id });
     return { ok: true };
+  });
+
+// ---------- Project tasks (checklist, toewijzing, terugkerende taken) ----------
+
+function nextRecurrenceDueDate(lastDueDate: string | null, recurrence: string): string {
+  const base = lastDueDate ? new Date(lastDueDate) : new Date();
+  if (recurrence === "weekly") base.setDate(base.getDate() + 7);
+  else if (recurrence === "monthly") base.setMonth(base.getMonth() + 1);
+  else if (recurrence === "quarterly") base.setMonth(base.getMonth() + 3);
+  return base.toISOString().slice(0, 10);
+}
+
+// Lazy-generatie van terugkerende taken: voor elke template-taak
+// (recurrence IS NOT NULL AND recurrence_parent_id IS NULL) wordt gekeken
+// of er een nieuwe instantie moet worden aangemaakt. Dit gebeurt synchroon
+// bij het ophalen van de takenlijst omdat er geen cron beschikbaar is.
+async function generateDueRecurringTaskInstances(projectId: string) {
+  const { data: templates } = await supabaseAdmin
+    .from("project_tasks" as any)
+    .select("*")
+    .eq("project_id", projectId)
+    .not("recurrence", "is", null)
+    .is("recurrence_parent_id", null);
+
+  for (const template of (templates ?? []) as any[]) {
+    const { data: lastInstance } = await supabaseAdmin
+      .from("project_tasks" as any)
+      .select("*")
+      .eq("recurrence_parent_id", template.id)
+      .order("due_date", { ascending: false, nullsFirst: false })
+      .limit(1)
+      .maybeSingle();
+
+    const today = new Date().toISOString().slice(0, 10);
+    const isPastDue = (d: string | null) => !!d && d < today;
+
+    const shouldGenerate =
+      !lastInstance ||
+      ((lastInstance as any).status === "done" && isPastDue((lastInstance as any).due_date));
+
+    if (!shouldGenerate) continue;
+
+    const newDueDate = lastInstance
+      ? nextRecurrenceDueDate((lastInstance as any).due_date, template.recurrence)
+      : (template.due_date ?? new Date().toISOString().slice(0, 10));
+
+    await supabaseAdmin.from("project_tasks" as any).insert({
+      project_id: projectId,
+      title: template.title,
+      description: template.description,
+      assigned_to: template.assigned_to,
+      status: "open",
+      due_date: newDueDate,
+      recurrence: null,
+      recurrence_parent_id: template.id,
+      created_by: template.created_by,
+    });
+  }
+}
+
+export const adminListProjectTasks = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+
+    await generateDueRecurringTaskInstances(data.project_id);
+
+    const { data: items, error } = await supabaseAdmin
+      .from("project_tasks" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const adminCreateProjectTask = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      title: z.string().trim().min(1).max(200),
+      description: z.string().trim().max(2000).nullable().optional(),
+      assigned_to: z.string().uuid().nullable().optional(),
+      due_date: z.string().trim().max(30).nullable().optional(),
+      recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: task, error } = await supabaseAdmin
+      .from("project_tasks" as any)
+      .insert({ ...data, created_by: userId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "task_created", "project", data.project_id, {
+      task_id: (task as any).id,
+      title: data.title,
+    });
+    return { ok: true, task };
+  });
+
+export const adminUpdateProjectTask = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      id: z.string().uuid(),
+      project_id: z.string().uuid(),
+      title: z.string().trim().min(1).max(200).optional(),
+      description: z.string().trim().max(2000).nullable().optional(),
+      assigned_to: z.string().uuid().nullable().optional(),
+      status: z.enum(["open", "done"]).optional(),
+      due_date: z.string().trim().max(30).nullable().optional(),
+      recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { id, project_id, ...rest } = data;
+    const updates: Record<string, any> = { ...rest, updated_at: new Date().toISOString() };
+    if (rest.status !== undefined) {
+      updates.completed_at = rest.status === "done" ? new Date().toISOString() : null;
+    }
+    const { data: task, error } = await supabaseAdmin
+      .from("project_tasks" as any)
+      .update(updates)
+      .eq("id", id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "task_updated", "project", project_id, {
+      task_id: id,
+      fields: Object.keys(rest),
+    });
+    return { ok: true, task };
+  });
+
+export const adminDeleteProjectTask = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_tasks" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "task_deleted", "project", data.project_id, { task_id: data.id });
+    return { ok: true };
+  });
+
+// ---------- Project time entries (tijdregistratie + CSV-export) ----------
+
+export const adminListProjectTimeEntries = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("project_task_time_entries" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("entry_date", { ascending: false });
+    if (error) throw new Error(error.message);
+
+    const userIds = Array.from(new Set((items ?? []).map((i: any) => i.user_id)));
+    const { data: profiles } = userIds.length
+      ? await supabase.from("profiles").select("id, full_name, email").in("id", userIds)
+      : { data: [] as any[] };
+    const profileMap: Record<string, any> = {};
+    for (const p of (profiles ?? []) as any[]) profileMap[p.id] = p;
+
+    const taskIds = Array.from(new Set((items ?? []).map((i: any) => i.task_id).filter(Boolean)));
+    const { data: tasks } = taskIds.length
+      ? await supabaseAdmin.from("project_tasks" as any).select("id, title").in("id", taskIds)
+      : { data: [] as any[] };
+    const taskMap: Record<string, any> = {};
+    for (const t of (tasks ?? []) as any[]) taskMap[t.id] = t;
+
+    return {
+      items: (items ?? []).map((i: any) => ({
+        ...i,
+        user: profileMap[i.user_id] ?? null,
+        task: i.task_id ? (taskMap[i.task_id] ?? null) : null,
+      })),
+    };
+  });
+
+export const adminCreateProjectTimeEntry = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      task_id: z.string().uuid().nullable().optional(),
+      user_id: z.string().uuid().optional(),
+      minutes: z.number().int().min(1).max(1440),
+      description: z.string().trim().max(2000).nullable().optional(),
+      entry_date: z.string().trim().max(30).optional(),
+      billable: z.boolean().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { user_id, ...rest } = data;
+    const { data: entry, error } = await supabaseAdmin
+      .from("project_task_time_entries" as any)
+      .insert({ ...rest, user_id: user_id ?? userId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "time_entry_created", "project", data.project_id, {
+      entry_id: (entry as any).id,
+      minutes: data.minutes,
+    });
+    return { ok: true, entry };
+  });
+
+export const adminDeleteProjectTimeEntry = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_task_time_entries" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "time_entry_deleted", "project", data.project_id, { entry_id: data.id });
+    return { ok: true };
+  });
+
+function csvEscape(value: unknown): string {
+  const s = value === null || value === undefined ? "" : String(value);
+  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+export const adminExportProjectTimeEntriesCsv = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("project_task_time_entries" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .order("entry_date", { ascending: true });
+    if (error) throw new Error(error.message);
+
+    const userIds = Array.from(new Set((items ?? []).map((i: any) => i.user_id)));
+    const { data: profiles } = userIds.length
+      ? await supabase.from("profiles").select("id, full_name, email").in("id", userIds)
+      : { data: [] as any[] };
+    const profileMap: Record<string, any> = {};
+    for (const p of (profiles ?? []) as any[]) profileMap[p.id] = p;
+
+    const taskIds = Array.from(new Set((items ?? []).map((i: any) => i.task_id).filter(Boolean)));
+    const { data: tasks } = taskIds.length
+      ? await supabaseAdmin.from("project_tasks" as any).select("id, title").in("id", taskIds)
+      : { data: [] as any[] };
+    const taskMap: Record<string, any> = {};
+    for (const t of (tasks ?? []) as any[]) taskMap[t.id] = t;
+
+    const header = ["datum", "teamlid", "taak", "omschrijving", "minuten", "facturabel"];
+    const rows = (items ?? []).map((i: any) => [
+      i.entry_date,
+      profileMap[i.user_id]?.full_name ?? profileMap[i.user_id]?.email ?? i.user_id,
+      i.task_id ? (taskMap[i.task_id]?.title ?? "") : "",
+      i.description ?? "",
+      i.minutes,
+      i.billable ? "ja" : "nee",
+    ]);
+    const csv = [header, ...rows].map((row) => row.map(csvEscape).join(",")).join("\n");
+    return { csv };
+  });
+
+// ---------- Milestone dependencies ----------
+
+export const adminListMilestoneDependencies = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: milestones, error: mErr } = await supabaseAdmin
+      .from("project_milestones" as any)
+      .select("id")
+      .eq("project_id", data.project_id);
+    if (mErr) throw new Error(mErr.message);
+    const milestoneIds = (milestones ?? []).map((m: any) => m.id);
+    if (milestoneIds.length === 0) return { items: [] };
+    const { data: items, error } = await supabaseAdmin
+      .from("project_milestone_dependencies" as any)
+      .select("*")
+      .in("milestone_id", milestoneIds);
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
+  });
+
+export const adminAddMilestoneDependency = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      project_id: z.string().uuid(),
+      milestone_id: z.string().uuid(),
+      depends_on_milestone_id: z.string().uuid(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { data: dep, error } = await supabaseAdmin
+      .from("project_milestone_dependencies" as any)
+      .insert({ milestone_id: data.milestone_id, depends_on_milestone_id: data.depends_on_milestone_id })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "milestone_dependency_added", "project", data.project_id, {
+      milestone_id: data.milestone_id,
+      depends_on_milestone_id: data.depends_on_milestone_id,
+    });
+    return { ok: true, dependency: dep };
+  });
+
+export const adminDeleteMilestoneDependency = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_milestone_dependencies" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "milestone_dependency_removed", "project", data.project_id, { dependency_id: data.id });
+    return { ok: true };
+  });
+
+// ---------- Project templates ----------
+
+export const adminListProjectTemplates = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: templates, error } = await supabaseAdmin
+      .from("project_templates" as any)
+      .select("*")
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    const templateIds = (templates ?? []).map((t: any) => t.id);
+    const { data: milestones } = templateIds.length
+      ? await supabaseAdmin
+          .from("project_template_milestones" as any)
+          .select("*")
+          .in("template_id", templateIds)
+          .order("sort_order", { ascending: true })
+      : { data: [] as any[] };
+    const milestonesByTemplate: Record<string, any[]> = {};
+    for (const m of (milestones ?? []) as any[]) {
+      (milestonesByTemplate[m.template_id] ??= []).push(m);
+    }
+    return {
+      items: (templates ?? []).map((t: any) => ({
+        ...t,
+        milestones: milestonesByTemplate[t.id] ?? [],
+      })),
+    };
+  });
+
+export const adminCreateProjectTemplate = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      name: z.string().trim().min(1).max(200),
+      description: z.string().trim().max(2000).nullable().optional(),
+      default_category: z.string().trim().max(100).nullable().optional(),
+      default_hours_estimated: z.number().nonnegative().nullable().optional(),
+      milestones: z.array(
+        z.object({
+          title: z.string().trim().min(1).max(200),
+          description: z.string().trim().max(2000).nullable().optional(),
+          days_offset: z.number().int().default(0),
+        }),
+      ).max(50).optional().default([]),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { milestones, ...rest } = data;
+    const { data: template, error } = await supabaseAdmin
+      .from("project_templates" as any)
+      .insert(rest)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    if (milestones.length) {
+      const rows = milestones.map((m, idx) => ({
+        template_id: (template as any).id,
+        title: m.title,
+        description: m.description ?? null,
+        days_offset: m.days_offset ?? 0,
+        sort_order: idx,
+      }));
+      const { error: mErr } = await supabaseAdmin.from("project_template_milestones" as any).insert(rows);
+      if (mErr) throw new Error(mErr.message);
+    }
+
+    await logAudit(supabase, userId, "project_template_created", "project", null, {
+      template_id: (template as any).id,
+      name: data.name,
+    });
+    return { ok: true, template };
+  });
+
+export const adminDeleteProjectTemplate = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const { error } = await supabaseAdmin.from("project_templates" as any).delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    await logAudit(supabase, userId, "project_template_deleted", "project", null, { template_id: data.id });
+    return { ok: true };
+  });
+
+export const adminCreateProjectFromTemplate = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({
+      template_id: z.string().uuid(),
+      name: z.string().trim().min(1).max(200),
+      website_url: z.string().trim().max(500).nullable().optional(),
+      snippet_active: z.boolean().optional(),
+      primary_user_id: z.string().uuid(),
+      member_ids: z.array(z.string().uuid()).optional(),
+      start_date: z.string().trim().max(30).nullable().optional(),
+      category: z.string().trim().max(100).nullable().optional(),
+      hours_estimated: z.number().nonnegative().nullable().optional(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { data: template, error: tErr } = await supabaseAdmin
+      .from("project_templates" as any)
+      .select("*")
+      .eq("id", data.template_id)
+      .single();
+    if (tErr) throw new Error(tErr.message);
+
+    const { data: templateMilestones, error: tmErr } = await supabaseAdmin
+      .from("project_template_milestones" as any)
+      .select("*")
+      .eq("template_id", data.template_id)
+      .order("sort_order", { ascending: true });
+    if (tmErr) throw new Error(tmErr.message);
+
+    const { template_id, member_ids, category, hours_estimated, ...rest } = data;
+    const projectInsert: Record<string, any> = {
+      ...rest,
+      category: category ?? (template as any).default_category ?? null,
+      hours_estimated: hours_estimated ?? (template as any).default_hours_estimated ?? null,
+    };
+
+    const { data: project, error } = await supabaseAdmin
+      .from("projects" as any)
+      .insert(projectInsert)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+
+    await supabase.from("profiles").update({
+      website_url: projectInsert.website_url ?? null,
+      snippet_active: projectInsert.snippet_active ?? false,
+    }).eq("id", projectInsert.primary_user_id);
+
+    const memberSet = new Set([projectInsert.primary_user_id, ...(member_ids ?? [])]);
+    const memberRows = Array.from(memberSet).map((uid) => ({ project_id: (project as any).id, user_id: uid }));
+    if (memberRows.length) {
+      const { error: memErr } = await supabaseAdmin.from("project_members" as any).insert(memberRows);
+      if (memErr) throw new Error(memErr.message);
+    }
+
+    const baseDate = data.start_date ? new Date(data.start_date) : new Date();
+    const milestoneRows = (templateMilestones ?? []).map((tm: any) => {
+      const due = new Date(baseDate);
+      due.setDate(due.getDate() + (tm.days_offset ?? 0));
+      return {
+        project_id: (project as any).id,
+        title: tm.title,
+        description: tm.description,
+        due_date: due.toISOString().slice(0, 10),
+        order: tm.sort_order,
+      };
+    });
+    if (milestoneRows.length) {
+      const { error: mErr } = await supabaseAdmin.from("project_milestones" as any).insert(milestoneRows);
+      if (mErr) throw new Error(mErr.message);
+    }
+
+    await logAudit(supabase, userId, "project_created_from_template", "project", (project as any).id, {
+      template_id: data.template_id,
+      name: data.name,
+    });
+    return { ok: true, project };
+  });
+
+// ---------- Dashboard widgets ----------
+
+export const adminGetProjectsDashboardWidgets = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+
+    const { data: projects, error } = await supabaseAdmin
+      .from("projects" as any)
+      .select("*")
+      .eq("archived", false)
+      .is("deleted_at", null)
+      .not("status", "in", "(afgerond,geannuleerd)");
+    if (error) throw new Error(error.message);
+
+    const now = new Date();
+    const in14Days = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+    const upcomingDeadlines = (projects ?? [])
+      .filter((p: any) => p.deadline && new Date(p.deadline) <= in14Days)
+      .sort((a: any, b: any) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
+
+    const projectIds = (projects ?? []).map((p: any) => p.id);
+    const { data: activity } = projectIds.length
+      ? await supabaseAdmin
+          .from("audit_log" as any)
+          .select("target_id, created_at")
+          .eq("target_type", "project")
+          .in("target_id", projectIds)
+          .order("created_at", { ascending: false })
+      : { data: [] as any[] };
+
+    const lastActivityByProject: Record<string, string> = {};
+    for (const a of (activity ?? []) as any[]) {
+      if (!lastActivityByProject[a.target_id]) lastActivityByProject[a.target_id] = a.created_at;
+    }
+
+    const cutoff = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+    const stale = (projects ?? []).filter((p: any) => {
+      const lastActivity = lastActivityByProject[p.id] ?? p.created_at;
+      return new Date(lastActivity) < cutoff;
+    });
+
+    return { upcomingDeadlines, stale };
+  });
+
+// ---------- Change requests gekoppeld aan een project ----------
+
+export const adminListProjectChangeRequests = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ project_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+    const { data: items, error } = await supabaseAdmin
+      .from("change_requests" as any)
+      .select("*")
+      .eq("project_id", data.project_id)
+      .is("deleted_at", null)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    return { items: items ?? [] };
   });
 
 // ============================================================
@@ -1923,7 +2708,260 @@ export const adminSetRolePermission = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
     await supabaseAdmin.from("role_permissions" as any).upsert({ role: data.role, permission: data.permission, allowed: data.allowed, updated_at: new Date().toISOString() }, { onConflict: "role,permission" });
+    await logAudit(supabase, userId, "set_role_permission", "role", data.role, { permission: data.permission, allowed: data.allowed });
     return { ok: true };
+  });
+
+export const adminGetMyEffectivePermissions = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const systemRoles = await getRoles(supabase, userId);
+
+    const { data: customRoleRows } = await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .select("role_id, roles:role_id(key)")
+      .eq("user_id", userId);
+    const customRoleKeys: string[] = ((customRoleRows as any) ?? [])
+      .map((r: any) => r.roles?.key)
+      .filter((k: any): k is string => !!k);
+
+    const allRoleKeys = Array.from(new Set([...systemRoles, ...customRoleKeys]));
+
+    const { data: overrideRows } = await supabaseAdmin
+      .from("role_permissions" as any)
+      .select("role, permission, allowed")
+      .in("role", allRoleKeys.length > 0 ? allRoleKeys : ["__none__"]);
+
+    const permissions = {} as Record<PermissionAction, boolean>;
+    for (const action of ALL_PERMISSION_ACTIONS) {
+      permissions[action] = can(systemRoles, action);
+    }
+
+    // Group explicit overrides per permission so an "allowed: true" from any
+    // held role always wins over an "allowed: false" from another held role.
+    const overridesByAction = new Map<string, boolean[]>();
+    for (const row of (overrideRows as any) ?? []) {
+      const list = overridesByAction.get(row.permission) ?? [];
+      list.push(row.allowed);
+      overridesByAction.set(row.permission, list);
+    }
+    for (const [permission, values] of overridesByAction) {
+      const action = permission as PermissionAction;
+      if (!ALL_PERMISSION_ACTIONS.includes(action)) continue;
+      permissions[action] = values.some((v) => v === true);
+    }
+
+    return { permissions };
+  });
+
+export const adminListRoles = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    const { data: roles } = await supabaseAdmin.from("roles" as any).select("*").order("is_system", { ascending: false }).order("name");
+    const { data: userRoleCounts } = await supabaseAdmin.from("user_roles").select("role");
+    const { data: customRoleCounts } = await supabaseAdmin.from("user_custom_roles" as any).select("role_id");
+
+    const systemCounts = new Map<string, number>();
+    for (const r of (userRoleCounts as any) ?? []) {
+      systemCounts.set(r.role, (systemCounts.get(r.role) ?? 0) + 1);
+    }
+    const customCounts = new Map<string, number>();
+    for (const r of (customRoleCounts as any) ?? []) {
+      customCounts.set(r.role_id, (customCounts.get(r.role_id) ?? 0) + 1);
+    }
+
+    const items = ((roles as any) ?? []).map((r: any) => ({
+      ...r,
+      account_count: r.is_system ? (systemCounts.get(r.key) ?? 0) : (customCounts.get(r.id) ?? 0),
+    }));
+
+    return { items };
+  });
+
+export const adminGetRole = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ role_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    const { data: role } = await supabaseAdmin.from("roles" as any).select("*").eq("id", data.role_id).maybeSingle();
+    if (!role) throw new Error("Rol niet gevonden");
+    const roleRow = role as any;
+
+    let accountUserIds: string[] = [];
+    if (roleRow.is_system) {
+      const { data: rows } = await supabaseAdmin.from("user_roles").select("user_id").eq("role", roleRow.key);
+      accountUserIds = ((rows as any) ?? []).map((r: any) => r.user_id);
+    } else {
+      const { data: rows } = await supabaseAdmin.from("user_custom_roles" as any).select("user_id").eq("role_id", roleRow.id);
+      accountUserIds = ((rows as any) ?? []).map((r: any) => r.user_id);
+    }
+
+    let accounts: any[] = [];
+    if (accountUserIds.length > 0) {
+      const { data: profileRows } = await supabaseAdmin.from("profiles").select("id, full_name, email").in("id", accountUserIds);
+      accounts = (profileRows as any) ?? [];
+    }
+
+    const { data: permissionRows } = await supabaseAdmin.from("role_permissions" as any).select("*").eq("role", roleRow.key);
+
+    const { data: activityRows } = await supabaseAdmin
+      .from("audit_log")
+      .select("*")
+      .eq("target_type", "role")
+      .eq("target_id", roleRow.key)
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    return {
+      role: roleRow,
+      accounts,
+      permissions: (permissionRows as any) ?? [],
+      activity: (activityRows as any) ?? [],
+    };
+  });
+
+export const adminCreateCustomRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        name: z.string().min(1),
+        description: z.string().optional().nullable(),
+        base_role: z.string(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    if (!STAFF_BASE_ROLES.includes(data.base_role)) {
+      throw new Error("Ongeldige basisrol");
+    }
+
+    const slugBase = data.name
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "") || "rol";
+
+    let key = slugBase;
+    let suffix = 1;
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const { data: existing } = await supabaseAdmin.from("roles" as any).select("id").eq("key", key).maybeSingle();
+      if (!existing) break;
+      suffix += 1;
+      key = `${slugBase}_${suffix}`;
+    }
+
+    const { data: created, error } = await supabaseAdmin
+      .from("roles" as any)
+      .insert({
+        key,
+        name: data.name,
+        description: data.description ?? null,
+        is_system: false,
+        base_role: data.base_role,
+      })
+      .select("*")
+      .single();
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "create_custom_role", "role", key, { name: data.name, base_role: data.base_role });
+
+    return { role: created };
+  });
+
+export const adminDeleteRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ role_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    const { data: role } = await supabaseAdmin.from("roles" as any).select("*").eq("id", data.role_id).maybeSingle();
+    if (!role) throw new Error("Rol niet gevonden");
+    const roleRow = role as any;
+
+    if (roleRow.is_system) {
+      throw new Error("Systeemrollen kunnen niet verwijderd worden");
+    }
+
+    const { count } = await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .select("id", { count: "exact", head: true })
+      .eq("role_id", roleRow.id);
+
+    await supabaseAdmin.from("role_permissions" as any).delete().eq("role", roleRow.key);
+    await supabaseAdmin.from("roles" as any).delete().eq("id", roleRow.id);
+
+    await logAudit(supabase, userId, "delete_custom_role", "role", roleRow.key, { name: roleRow.name });
+
+    return { ok: true, account_count: count ?? 0 };
+  });
+
+export const adminAssignCustomRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    const { data: existingStaffRole } = await supabaseAdmin
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", data.user_id)
+      .in("role", STAFF_BASE_ROLES as any)
+      .maybeSingle();
+    if (!existingStaffRole) {
+      throw new Error("Gebruiker moet eerst een teamrol hebben voor je een custom rol kunt toewijzen");
+    }
+
+    await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .upsert({ user_id: data.user_id, role_id: data.role_id, assigned_by: userId }, { onConflict: "user_id,role_id", ignoreDuplicates: true });
+
+    await logAudit(supabase, userId, "assign_custom_role", "role", data.role_id, { user_id: data.user_id });
+
+    return { ok: true };
+  });
+
+export const adminRemoveCustomRole = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureSuperAdmin(supabase, userId);
+
+    await supabaseAdmin.from("user_custom_roles" as any).delete().eq("user_id", data.user_id).eq("role_id", data.role_id);
+
+    await logAudit(supabase, userId, "remove_custom_role", "role", data.role_id, { user_id: data.user_id });
+
+    return { ok: true };
+  });
+
+export const adminListUserCustomRoles = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ user_id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureStaff(supabase, userId);
+
+    const { data: rows } = await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .select("*, roles:role_id(*)")
+      .eq("user_id", data.user_id);
+
+    return { items: (rows as any) ?? [] };
   });
 
 // ============================================================

@@ -76,6 +76,14 @@ export function can(roles: string[], action: PermissionAction): boolean {
       return isSuper;
     case "chat_with_customers":
       return isSuper || isCo || isSupport;
+    case "website_links_view":
+      return isSuper || isCo || isSupport || isViewer;
+    case "website_links_manage":
+      return adminLike;
+    case "appointments_manage":
+      return isSuper || isCo || isSupport;
+    case "alerts_view":
+      return isSuper || isCo || isSupport || isViewer;
     default:
       return false;
   }
@@ -98,4 +106,8 @@ export type PermissionAction =
   | "manage_team"
   | "chat_with_customers"
   | "leads_view"
-  | "leads_manage";
+  | "leads_manage"
+  | "website_links_view"
+  | "website_links_manage"
+  | "appointments_manage"
+  | "alerts_view";

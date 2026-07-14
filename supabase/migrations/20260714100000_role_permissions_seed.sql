@@ -1,0 +1,123 @@
+-- Zet role_permissions expliciet op de standaardwaarden die de hardcoded
+-- can()-logica in src/lib/rbac.ts altijd al gebruikte, zodat de checkboxes
+-- in de nieuwe permissiematrix-UI (die alleen expliciete rijen toont) meteen
+-- kloppen in plaats van leeg/uitgevinkt te lijken.
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'view_all_changes', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'edit_change_status', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'edit_change_fields', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'delete_change_soft', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'force_paid', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'create_change_for_customer', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'manage_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'generate_invoice', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'export_csv', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'chat_with_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'website_links_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'website_links_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'appointments_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'alerts_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'leads_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('super_admin', 'leads_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'view_all_changes', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'edit_change_status', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'edit_change_fields', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'delete_change_soft', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'force_paid', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'create_change_for_customer', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'manage_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'generate_invoice', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'export_csv', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'chat_with_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'website_links_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'website_links_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'appointments_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'alerts_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'leads_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('admin', 'leads_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'view_all_changes', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'edit_change_status', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'edit_change_fields', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'delete_change_soft', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'force_paid', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'create_change_for_customer', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'manage_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'generate_invoice', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'export_csv', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'chat_with_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'website_links_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'website_links_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'appointments_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'alerts_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'leads_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('co_admin', 'leads_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'view_all_changes', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'edit_change_status', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'edit_change_fields', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'delete_change_soft', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'force_paid', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'create_change_for_customer', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'manage_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'generate_invoice', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'export_csv', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'chat_with_customers', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'website_links_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'website_links_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'appointments_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'alerts_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'leads_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('support_agent', 'leads_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'view_all_changes', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'edit_change_status', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'edit_change_fields', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'delete_change_soft', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'force_paid', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'create_change_for_customer', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'manage_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'generate_invoice', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'export_csv', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'chat_with_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'website_links_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'website_links_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'appointments_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'alerts_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'leads_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('viewer', 'leads_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'view_all_changes', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'edit_change_status', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'edit_change_fields', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'delete_change_soft', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'force_paid', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'create_change_for_customer', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'manage_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'generate_invoice', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'export_csv', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'chat_with_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'website_links_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'website_links_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'appointments_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'alerts_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'leads_view', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('sales', 'leads_manage', true) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'view_all_changes', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'edit_change_status', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'edit_change_fields', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'delete_change_soft', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'force_paid', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'create_change_for_customer', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'manage_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'generate_invoice', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'export_csv', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'chat_with_customers', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'website_links_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'website_links_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'appointments_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'alerts_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'leads_view', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
+INSERT INTO public.role_permissions (role, permission, allowed) VALUES ('customer', 'leads_manage', false) ON CONFLICT (role, permission) DO UPDATE SET allowed = excluded.allowed, updated_at = now();
