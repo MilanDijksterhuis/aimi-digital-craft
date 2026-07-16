@@ -11,8 +11,19 @@ import { pingLastSeen, checkMyAccess } from "@/lib/accounts.functions";
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async () => {
     if (typeof window === "undefined") return;
-    const { data } = await supabase.auth.getSession();
-    if (!data.session) {
+    // getSession() kan een netwerkfout gooien (bv. flaky mobiele verbinding)
+    // ipv gewoon { session: null } terug te geven. Zonder try/catch belandde
+    // die exception ongevangen in de root error boundary ("This page didn't
+    // load") vlak na het inloggen, in plaats van gewoon terug naar /login te
+    // sturen zoals bij een ontbrekende sessie.
+    let session;
+    try {
+      const { data } = await supabase.auth.getSession();
+      session = data.session;
+    } catch {
+      session = null;
+    }
+    if (!session) {
       throw redirect({ to: "/login" });
     }
   },
