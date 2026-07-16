@@ -687,13 +687,18 @@ function NotificationsBell({ onOpen }: { onOpen: () => void }) {
   const qc = useQueryClient();
   const { data } = useQuery({ queryKey: ["admin-notifs"], queryFn: () => list({}), refetchInterval: 30_000 });
   useEffect(() => {
-    const ch = supabase
-      .channel("admin-notifs-realtime")
-      .on("postgres_changes", { event: "*", schema: "public", table: "admin_notifications" }, () => {
-        qc.invalidateQueries({ queryKey: ["admin-notifs"] });
-      })
-      .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    let ch: ReturnType<typeof supabase.channel> | null = null;
+    try {
+      ch = supabase
+        .channel("admin-notifs-realtime")
+        .on("postgres_changes", { event: "*", schema: "public", table: "admin_notifications" }, () => {
+          qc.invalidateQueries({ queryKey: ["admin-notifs"] });
+        })
+        .subscribe();
+    } catch (e) {
+      console.warn("Realtime niet beschikbaar:", e);
+    }
+    return () => { if (ch) supabase.removeChannel(ch); };
   }, [qc]);
   const unread = (data?.items ?? []).filter((n: any) => !n.is_read).length;
   return (

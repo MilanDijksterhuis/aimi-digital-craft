@@ -268,13 +268,18 @@ function AccountsListSection({ statusFilter, setStatusFilter }: { statusFilter: 
   const { data, isLoading } = useQuery({ queryKey: ["admin-accounts"], queryFn: () => list({}) });
 
   useEffect(() => {
-    const ch = supabase
-      .channel("admin-accounts-presence")
-      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, () => {
-        qc.invalidateQueries({ queryKey: ["admin-accounts"] });
-      })
-      .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    let ch: ReturnType<typeof supabase.channel> | null = null;
+    try {
+      ch = supabase
+        .channel("admin-accounts-presence")
+        .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, () => {
+          qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+        })
+        .subscribe();
+    } catch (e) {
+      console.warn("Realtime niet beschikbaar:", e);
+    }
+    return () => { if (ch) supabase.removeChannel(ch); };
   }, [qc]);
 
   const [roleFilter, setRoleFilter] = useState("");

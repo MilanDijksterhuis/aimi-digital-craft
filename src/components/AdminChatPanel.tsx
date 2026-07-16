@@ -88,12 +88,21 @@ export function AdminChatPanel() {
 
   useEffect(() => {
     loadChats();
-    const channel = supabase
-      .channel("admin-chats")
-      .on("postgres_changes", { event: "*", schema: "public", table: "chat_messages" }, () => loadChats())
-      .on("postgres_changes", { event: "*", schema: "public", table: "chats" }, () => loadChats())
-      .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    // .subscribe() opent direct een WebSocket, wat op sommige mobiele
+    // browsers synchroon een SecurityError kan gooien ipv netjes te falen —
+    // zonder try/catch crasht dat de hele pagina. Realtime is hier alleen
+    // een live-refresh, dus bij falen degraderen we stil.
+    let channel: ReturnType<typeof supabase.channel> | null = null;
+    try {
+      channel = supabase
+        .channel("admin-chats")
+        .on("postgres_changes", { event: "*", schema: "public", table: "chat_messages" }, () => loadChats())
+        .on("postgres_changes", { event: "*", schema: "public", table: "chats" }, () => loadChats())
+        .subscribe();
+    } catch (e) {
+      console.warn("Chat realtime niet beschikbaar:", e);
+    }
+    return () => { if (channel) supabase.removeChannel(channel); };
   }, []);
 
   useEffect(() => {
@@ -112,15 +121,20 @@ export function AdminChatPanel() {
         .eq("sender_type", "client")
         .eq("is_read", false);
     })();
-    const ch = supabase
-      .channel(`admin-chat-${selected}`)
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages", filter: `chat_id=eq.${selected}` },
-        (payload) => {
-          const m = payload.new as Message;
-          setMessages((prev) => (prev.find((x) => x.id === m.id) ? prev : [...prev, m]));
-        })
-      .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    let ch: ReturnType<typeof supabase.channel> | null = null;
+    try {
+      ch = supabase
+        .channel(`admin-chat-${selected}`)
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_messages", filter: `chat_id=eq.${selected}` },
+          (payload) => {
+            const m = payload.new as Message;
+            setMessages((prev) => (prev.find((x) => x.id === m.id) ? prev : [...prev, m]));
+          })
+        .subscribe();
+    } catch (e) {
+      console.warn("Chat realtime niet beschikbaar:", e);
+    }
+    return () => { if (ch) supabase.removeChannel(ch); };
   }, [selected]);
 
   useEffect(() => {

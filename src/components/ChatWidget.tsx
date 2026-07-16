@@ -62,20 +62,31 @@ export function ChatWidget() {
         .order("created_at", { ascending: true });
       setMessages((data as Message[]) || []);
     })();
-    const channel = supabase
-      .channel(`chat-${chatId}`)
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "chat_messages", filter: `chat_id=eq.${chatId}` },
-        (payload) => {
-          const m = payload.new as Message;
-          setMessages((prev) => (prev.find((x) => x.id === m.id) ? prev : [...prev, m]));
-          if (m.sender_type === "admin" && !open) setUnread((u) => u + 1);
-        },
-      )
-      .subscribe();
+    // .subscribe() opent direct een WebSocket. Op sommige mobiele browsers
+    // (met name Safari/iOS) gooit dat soms synchroon een SecurityError
+    // ("WebSocket not available: The operation is insecure") ipv netjes te
+    // falen — zonder try/catch crashte dat de hele pagina naar de root error
+    // boundary vlak na inloggen. Realtime is hier een nice-to-have (live
+    // chatberichten), dus bij een falende verbinding degraderen we stil.
+    let channel: ReturnType<typeof supabase.channel> | null = null;
+    try {
+      channel = supabase
+        .channel(`chat-${chatId}`)
+        .on(
+          "postgres_changes",
+          { event: "INSERT", schema: "public", table: "chat_messages", filter: `chat_id=eq.${chatId}` },
+          (payload) => {
+            const m = payload.new as Message;
+            setMessages((prev) => (prev.find((x) => x.id === m.id) ? prev : [...prev, m]));
+            if (m.sender_type === "admin" && !open) setUnread((u) => u + 1);
+          },
+        )
+        .subscribe();
+    } catch (e) {
+      console.warn("Chat realtime niet beschikbaar:", e);
+    }
     return () => {
-      supabase.removeChannel(channel);
+      if (channel) supabase.removeChannel(channel);
     };
   }, [chatId, open]);
 
