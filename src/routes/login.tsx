@@ -24,13 +24,22 @@ function LoginPage() {
     e.preventDefault();
     setErr(null);
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      setErr(error.message);
-      return;
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        setErr(error.message);
+        return;
+      }
+      nav({ to: "/portal" });
+    } catch {
+      // Netwerkfout (bv. fetch mislukt op mobiel) gooit een exception ipv een
+      // { error } result — zonder try/catch belandde dit ongevangen in de
+      // root error boundary ("This page didn't load") in plaats van een
+      // nette inline foutmelding op het inlogformulier zelf.
+      setErr("Inloggen is mislukt. Controleer je internetverbinding en probeer het opnieuw.");
+    } finally {
+      setLoading(false);
     }
-    nav({ to: "/portal" });
   }
 
   return (
