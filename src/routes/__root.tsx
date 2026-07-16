@@ -8,8 +8,11 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+import { useEffect } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
+
+const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 
 function NotFoundComponent() {
   return (
@@ -36,6 +39,25 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+
+  // De root error boundary vangt de fout intern af (TanStack Router), dus
+  // die bereikt window.onerror nooit — en dus ook nooit de site_errors-tabel
+  // die track.js daarop baseert. Log hem hier expliciet zodat crashes
+  // (bv. het "This page didn't load"-scherm na inloggen op mobiel) zichtbaar
+  // worden in het Alerts-scherm ipv onzichtbaar te blijven.
+  useEffect(() => {
+    try {
+      fetch(`/api/public/site-error`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: SITE_TRACK_UID,
+          message: `RootErrorBoundary: ${error?.message ?? String(error)}`.slice(0, 1900),
+          url: typeof location !== "undefined" ? location.href : undefined,
+        }),
+      }).catch(() => {});
+    } catch {}
+  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
