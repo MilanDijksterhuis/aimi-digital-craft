@@ -130,16 +130,20 @@ function applySecurityHeaders(response: Response, request: Request): Response {
 }
 
 function applyRateLimit(request: Request): Response | null {
+  if (request.method !== "POST" && request.method !== "PUT") return null;
+
   const ip = getClientIp(request);
 
-  // Geblokkeerde IP's worden direct geweigerd, ongeacht methode
+  // Geblokkeerde IP's worden geweigerd voor state-changing requests. We
+  // beperken dit tot POST/PUT (ipv alle methodes): mobiele providers delen
+  // vaak één publiek IP over veel klanten (CGNAT), dus een ban op GET
+  // blokkeerde daarmee de hele pagina (incl. inloggen) voor onschuldige
+  // mobiele gebruikers op hetzelfde IP als een eerdere misbruiker.
   const ban = isIpBanned(ip);
   if (ban.banned) {
     console.warn(`[security] geweigerd (ban actief) ip=${ip} retryAfter=${ban.retryAfter}s path=${new URL(request.url).pathname}`);
     return rateLimitedResponse(ban.retryAfter);
   }
-
-  if (request.method !== "POST" && request.method !== "PUT") return null;
 
   const url = new URL(request.url);
   const path = url.pathname;
