@@ -63,7 +63,7 @@ function TableSkeleton({ rows = 5, cols = 4 }: { rows?: number; cols?: number })
 }
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Admin â€” AIMI" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin — AIMI" }, { name: "robots", content: "noindex" }] }),
   component: AdminPage,
 });
 
@@ -131,7 +131,7 @@ function AdminPage() {
   if (error) {
     const msg = (error as Error).message;
     if (msg.includes("Forbidden")) {
-      if (perms.isLoading) return <p className="text-muted-foreground">Ladenâ€¦</p>;
+      if (perms.isLoading) return <p className="text-muted-foreground">Laden…</p>;
       // Sales-rol: geen toegang tot de admin-overzichtsdata, wel tot Leads.
       if (perms.can("leads_view")) {
         return (
@@ -282,11 +282,11 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
         <MetricCard icon={Users} label="Klanten" value={metrics.totalCustomers} sub="Totaal aantal accounts" trend={0} />
         <MetricCard icon={UserCheck} label="Actief (30d)" value={metrics.activeCount} sub="Inlog in afgelopen 30 dagen" trend={0} />
         <MetricCard icon={GitPullRequest} label="Totaal changes" value={metrics.totalRequests} sub="Sinds start" trend={0} />
-        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "â€”"} sub="Uren tot afronding" trend={0} />
+        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "—"} sub="Uren tot afronding" trend={0} />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <button onClick={onGoChanges} className="text-left">
-          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes â†’" trend={0} />
+          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes →" trend={0} />
         </button>
         <button onClick={onGoPending} className="text-left">
           <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Wachtwoord reset-verzoeken" trend={0} highlight={pendingTotal > 0} />
@@ -438,7 +438,7 @@ function PasswordResetsPanel() {
           <tbody>
             {items.map((r: any) => (
               <tr key={r.id} className="border-t border-border">
-                <td className="p-3">{r.user_name || "â€”"}</td>
+                <td className="p-3">{r.user_name || "—"}</td>
                 <td className="p-3">{r.user_email}</td>
                 <td className="p-3">{new Date(r.requested_at).toLocaleString("nl-NL")}</td>
                 <td className="p-3">{r.status}</td>
@@ -484,7 +484,7 @@ function AanvragenTab({ data, qc }: any) {
           <div key={p.id} className="rounded-xl border border-border bg-card p-4">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div className="text-sm space-y-1">
-                <p className="font-semibold text-base">{c.full_name || "â€”"}</p>
+                <p className="font-semibold text-base">{c.full_name || "—"}</p>
                 <p className="text-muted-foreground">{c.email}</p>
                 {c.company && <p className="text-muted-foreground">Bedrijf: {c.company}</p>}
                 {c.phone && <p className="text-muted-foreground">Tel: {c.phone}</p>}
@@ -496,7 +496,7 @@ function AanvragenTab({ data, qc }: any) {
                 {c.kvk && <p className="text-muted-foreground">KVK: {c.kvk}</p>}
                 {c.btw && <p className="text-muted-foreground">BTW: {c.btw}</p>}
                 <p className="mt-2 font-medium text-foreground">
-                  Aangevraagd: <strong>{p.amount}</strong> extra change(s) â€” â‚¬{p.amount * 20}
+                  Aangevraagd: <strong>{p.amount}</strong> extra change(s) — €{p.amount * 20}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {new Date(p.created_at).toLocaleString("nl-NL")}
@@ -575,7 +575,7 @@ function AfsprakenTab({ customers, qc }: any) {
             onChange={(e) => setForm({ ...form, user_id: e.target.value })}
             className="rounded-md border border-input bg-background px-3 py-2 text-sm"
           >
-            <option value="">Kies klantâ€¦</option>
+            <option value="">Kies klant…</option>
             {customers.map((c: any) => (
               <option key={c.id} value={c.id}>
                 {c.full_name || c.email}
@@ -623,7 +623,7 @@ function AfsprakenTab({ customers, qc }: any) {
           disabled={createM.isPending}
           className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
         >
-          {createM.isPending ? "Bezigâ€¦" : "Inplannen"}
+          {createM.isPending ? "Bezig…" : "Inplannen"}
         </button>
         {createM.error && (
           <p className="text-sm text-destructive">{(createM.error as Error).message}</p>
@@ -764,9 +764,9 @@ function ArchivedChangesPanel() {
         <tbody>
           {items.map((r: any) => (
             <tr key={r.id} className="border-t border-border">
-              <td className="p-3">{r.request_number ?? "â€”"}</td>
+              <td className="p-3">{r.request_number ?? "—"}</td>
               <td className="p-3">{r.title}</td>
-              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "â€”"}</td>
+              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "—"}</td>
               <td className="p-3 text-right">
                 <button onClick={() => unM.mutate(r.id)} className="text-xs text-primary hover:underline">Herstel</button>
               </td>
