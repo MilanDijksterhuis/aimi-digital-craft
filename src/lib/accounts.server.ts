@@ -30,6 +30,7 @@ export async function adminGetAccountDetailImpl(userId: string) {
     { data: loginEvents },
     { data: auditLog },
     { data: contactMoments },
+    { data: siteErrors },
   ] = await Promise.all([
     supabaseAdmin.from("profiles").select("*").eq("id", userId).maybeSingle(),
     supabaseAdmin.from("user_roles").select("role").eq("user_id", userId),
@@ -38,6 +39,7 @@ export async function adminGetAccountDetailImpl(userId: string) {
     supabaseAdmin.from("login_events").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(50),
     supabaseAdmin.from("audit_log").select("*").eq("target_id", userId).order("created_at", { ascending: false }).limit(100),
     supabaseAdmin.from("client_contacts").select("*").eq("user_id", userId).order("occurred_at", { ascending: false }),
+    supabaseAdmin.from("site_errors").select("*").eq("user_id", userId).order("created_at", { ascending: false }).limit(20),
   ]);
 
   if (!profile) throw new Error("Account niet gevonden.");
@@ -56,6 +58,7 @@ export async function adminGetAccountDetailImpl(userId: string) {
     loginEvents: loginEvents ?? [],
     auditLog: auditLog ?? [],
     contactMoments: contactMoments ?? [],
+    siteErrors: siteErrors ?? [],
   };
 }
 

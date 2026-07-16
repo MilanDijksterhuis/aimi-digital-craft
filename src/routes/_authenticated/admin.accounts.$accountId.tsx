@@ -201,7 +201,7 @@ function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
           <ToegangTab accountId={accountId} profile={profile} roles={roles} projects={data.projects ?? []} isSuperAdmin={isSuperAdmin} onChanged={invalidate} />
         </TabsContent>
         <TabsContent value="activiteit">
-          <ActiviteitTab loginEvents={data.loginEvents ?? []} auditLog={data.auditLog ?? []} />
+          <ActiviteitTab loginEvents={data.loginEvents ?? []} auditLog={data.auditLog ?? []} siteErrors={(data as any).siteErrors ?? []} />
         </TabsContent>
         {isCustomer && (
           <TabsContent value="financieel">
@@ -679,7 +679,7 @@ function CustomRolesSection({ accountId, roles }: { accountId: string; roles: st
 
 // ---------------- Activiteit ----------------
 
-function ActiviteitTab({ loginEvents, auditLog }: { loginEvents: any[]; auditLog: any[] }) {
+function ActiviteitTab({ loginEvents, auditLog, siteErrors = [] }: { loginEvents: any[]; auditLog: any[]; siteErrors?: any[] }) {
   const [actionFilter, setActionFilter] = useState("");
   const actions = Array.from(new Set(auditLog.map((a: any) => a.action))).sort();
   const filteredAudit = actionFilter ? auditLog.filter((a: any) => a.action === actionFilter) : auditLog;
@@ -696,6 +696,25 @@ function ActiviteitTab({ loginEvents, auditLog }: { loginEvents: any[]; auditLog
               <li key={l.id} className="text-sm flex items-center justify-between border-t border-border first:border-t-0 pt-1.5 first:pt-0">
                 <span className="text-muted-foreground">{l.ip || "onbekend IP"}</span>
                 <span className="text-xs text-muted-foreground">{new Date(l.created_at).toLocaleString("nl-NL")}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+        <h3 className="font-semibold text-sm">Site errors (client-side + server-side)</h3>
+        {siteErrors.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Geen gelogde fouten.</p>
+        ) : (
+          <ul className="space-y-1.5">
+            {siteErrors.map((e: any) => (
+              <li key={e.id} className="text-sm border-t border-border first:border-t-0 pt-1.5 first:pt-0">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">{new Date(e.created_at).toLocaleString("nl-NL")}</span>
+                  <span className="text-xs text-muted-foreground truncate max-w-[50%]">{e.url}</span>
+                </div>
+                <pre className="text-xs text-destructive mt-1 whitespace-pre-wrap break-all">{e.message}</pre>
               </li>
             ))}
           </ul>
