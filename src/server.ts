@@ -4,6 +4,25 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { checkRateLimit, getClientIp, isIpBanned, recordStrike } from "./lib/rate-limit";
 
+// Zelfde UID als track.js gebruikt (zie __root.tsx) — zo komen server-side
+// crashes (bv. deze catastrophale SSR-fouten) ook in het Alerts-scherm
+// terecht, ipv alleen in server-logs die niemand live inziet.
+const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
+
+async function logServerCrash(error: unknown, request: Request): Promise<void> {
+  try {
+    const { supabaseAdmin } = await import("./integrations/supabase/client.server");
+    const message = error instanceof Error ? `${error.message}\n${error.stack ?? ""}` : String(error);
+    await supabaseAdmin.from("site_errors").insert({
+      user_id: SITE_TRACK_UID,
+      message: `ServerCrash [${request.method} ${new URL(request.url).pathname}]: ${message}`.slice(0, 1900),
+      url: request.url,
+    });
+  } catch {
+    /* logging mag nooit de eigenlijke error-response blokkeren */
+  }
+}
+
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
@@ -53,7 +72,7 @@ function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boole
 
 // h3 swallows in-handler throws into a normal 500 Response with body
 // {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
-async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
+async function normalizeCatastrophicSsrResponse(response: Response, request: Request): Promise<Response> {
   if (response.status < 500) return response;
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.includes("application/json")) return response;
@@ -63,7 +82,9 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     return response;
   }
 
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
+  const captured = consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`);
+  console.error(captured);
+  await logServerCrash(captured, request);
   return brandedErrorResponse();
 }
 
@@ -176,10 +197,11 @@ export default {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      const normalized = await normalizeCatastrophicSsrResponse(response);
+      const normalized = await normalizeCatastrophicSsrResponse(response, request);
       return applySecurityHeaders(normalized, request);
     } catch (error) {
       console.error(error);
+      await logServerCrash(error, request);
       return applySecurityHeaders(brandedErrorResponse(), request);
     }
   },
