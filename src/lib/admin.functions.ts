@@ -306,6 +306,25 @@ export const adminSetSelfOnboarding = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const adminSetTutorialEnabled = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ tutorial_enabled: data.enabled } as any)
+      .eq("id", data.user_id);
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, data.enabled ? "tutorial_enabled" : "tutorial_disabled", "customer_tutorial", data.user_id);
+    return { ok: true };
+  });
+
 export const adminUpdateRequestStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>

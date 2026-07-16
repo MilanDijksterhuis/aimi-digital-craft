@@ -220,6 +220,31 @@ export const portalCompleteOnboarding = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const portalGetTutorialState = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("tutorial_enabled, tutorial_completed_at" as any)
+      .eq("id", userId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    return { profile: data };
+  });
+
+export const portalCompleteTutorial = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabase, userId } = context;
+    const { error } = await supabase
+      .from("profiles")
+      .update({ tutorial_completed_at: new Date().toISOString() } as any)
+      .eq("id", userId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 export const logLogin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ user_agent: z.string().max(500).optional() }).parse(d))

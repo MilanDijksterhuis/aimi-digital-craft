@@ -33,6 +33,7 @@ import {
   adminAssignCustomRole,
   adminRemoveCustomRole,
   adminSetSelfOnboarding,
+  adminSetTutorialEnabled,
 } from "@/lib/admin.functions";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -119,6 +120,13 @@ function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
     onError: (e: any) => toast.error(e.message),
   });
 
+  const setTutorialEnabled = useServerFn(adminSetTutorialEnabled);
+  const tutorialEnabledM = useMutation({
+    mutationFn: (enabled: boolean) => setTutorialEnabled({ data: { user_id: accountId, enabled } }),
+    onSuccess: () => { invalidate(); toast.success("Bijgewerkt."); },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-2 text-sm">
@@ -138,6 +146,18 @@ function AccountDetail({ data, accountId }: { data: any; accountId: string }) {
             >
               <UserCog className="w-3.5 h-3.5" />
               Klant onboardt zelf: {profile.onboarding_self_enabled ? "Aan" : "Uit"}
+            </button>
+            <button
+              onClick={() => tutorialEnabledM.mutate(!profile.tutorial_enabled)}
+              disabled={tutorialEnabledM.isPending}
+              className={`text-sm inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 transition-colors ${
+                profile.tutorial_enabled
+                  ? "border-emerald-500/40 text-emerald-600 hover:bg-emerald-500/10"
+                  : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Portaal tutorial: {profile.tutorial_enabled ? "Aan" : "Uit"}
             </button>
             <button onClick={() => setWizardOpen(true)} className="btn-secondary text-sm inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" /> Onboarding

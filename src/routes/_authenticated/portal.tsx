@@ -23,11 +23,13 @@ import {
   portalListMyProjects,
   portalListMyProjectsForChangeForm,
   portalGetOnboardingState,
+  portalGetTutorialState,
 } from "@/lib/portal.functions";
 import { PROJECT_STATUS_LABEL, PROJECT_STATUS_COLOR, isProjectOverdue } from "@/lib/project-status";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ChatWidget } from "@/components/ChatWidget";
 import { PortalOnboardingTour } from "@/components/PortalOnboardingTour";
+import { PortalTutorial } from "@/components/PortalTutorial";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -122,6 +124,7 @@ function PortalPage() {
   const fetchDash = useServerFn(getMyDashboard);
   const listProjectsForChangeForm = useServerFn(portalListMyProjectsForChangeForm);
   const fetchOnboardingState = useServerFn(portalGetOnboardingState);
+  const fetchTutorialState = useServerFn(portalGetTutorialState);
   const submit = useServerFn(submitChangeRequest);
   const markRead = useServerFn(markNotificationRead);
   const markAll = useServerFn(markAllNotificationsRead);
@@ -149,6 +152,11 @@ function PortalPage() {
     queryFn: () => fetchOnboardingState({}),
   });
   const [onboardingDismissed, setOnboardingDismissed] = useState(false);
+  const tutorialStateQ = useQuery({
+    queryKey: ["portal-tutorial-state"],
+    queryFn: () => fetchTutorialState({}),
+  });
+  const [tutorialDismissed, setTutorialDismissed] = useState(false);
 
   const submitM = useMutation({
     mutationFn: (input: any) => submit({ data: input }),
@@ -660,15 +668,34 @@ function PortalPage() {
 
       <ChatWidget />
 
-      {onboardingStateQ.data?.profile &&
-        (onboardingStateQ.data.profile as any).onboarding_self_enabled &&
-        (onboardingStateQ.data.profile as any).onboarding_status !== "completed" &&
-        !onboardingDismissed && (
-          <PortalOnboardingTour
-            profile={onboardingStateQ.data.profile as any}
-            onClose={() => setOnboardingDismissed(true)}
-          />
-        )}
+      {(() => {
+        const showOnboardingTour =
+          !!onboardingStateQ.data?.profile &&
+          (onboardingStateQ.data.profile as any).onboarding_self_enabled &&
+          (onboardingStateQ.data.profile as any).onboarding_status !== "completed" &&
+          !onboardingDismissed;
+
+        if (showOnboardingTour) {
+          return (
+            <PortalOnboardingTour
+              profile={onboardingStateQ.data!.profile as any}
+              onClose={() => setOnboardingDismissed(true)}
+            />
+          );
+        }
+
+        const showTutorial =
+          !!tutorialStateQ.data?.profile &&
+          (tutorialStateQ.data.profile as any).tutorial_enabled === true &&
+          !(tutorialStateQ.data.profile as any).tutorial_completed_at &&
+          !tutorialDismissed;
+
+        if (showTutorial) {
+          return <PortalTutorial onClose={() => setTutorialDismissed(true)} />;
+        }
+
+        return null;
+      })()}
 
       <style>{`
         @keyframes pulse-dot {
