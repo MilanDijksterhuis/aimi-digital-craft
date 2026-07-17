@@ -9,7 +9,7 @@ export default defineConfig({
     },
   },
   // PERF-8: splits zware libraries in aparte client-chunks zodat ze los
-  // gecachet en parallel geladen worden, en niet in de hoofd-bundle belanden..
+  // gecachet en parallel geladen worden, en niet in de hoofd-bundle belanden.
   vite: {
     build: {
       rollupOptions: {
