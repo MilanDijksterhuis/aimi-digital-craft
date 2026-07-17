@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 import { toast } from "sonner";
+import { useConfirm } from "@/components/ConfirmDialog";
 import {
   ChevronLeft, Plus, Trash2, Pencil, Check, X,
   Archive, ArchiveRestore, AlertTriangle, Calendar, FileText,
@@ -377,6 +378,7 @@ function ActivityTab({ activity }: { activity: any[] }) {
 }
 
 function NotesTab({ projectId, notes, onChanged, readOnly }: { projectId: string; notes: any[]; onChanged: () => void; readOnly: boolean }) {
+  const { confirm } = useConfirm();
   const create = useServerFn(adminCreateProjectNote);
   const update = useServerFn(adminUpdateProjectNote);
   const del = useServerFn(adminDeleteProjectNote);
@@ -427,7 +429,7 @@ function NotesTab({ projectId, notes, onChanged, readOnly }: { projectId: string
                     >
                       {n.is_client_visible ? "Klant-zichtbaar" : "Intern"}
                     </button>
-                    <button onClick={() => { if (confirm("Notitie verwijderen?")) delM.mutate({ id: n.id, project_id: projectId }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                    <button onClick={async () => { if (await confirm({ description: "Notitie verwijderen?", destructive: true })) delM.mutate({ id: n.id, project_id: projectId }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
                   </div>
                 )}
                 {readOnly && <span className="text-xs text-primary">Klant-zichtbaar</span>}
@@ -441,6 +443,7 @@ function NotesTab({ projectId, notes, onChanged, readOnly }: { projectId: string
 }
 
 function ContactsTab({ projectId, contacts, onChanged }: { projectId: string; contacts: any[]; onChanged: () => void }) {
+  const { confirm } = useConfirm();
   const create = useServerFn(adminCreateProjectContact);
   const update = useServerFn(adminUpdateProjectContact);
   const del = useServerFn(adminDeleteProjectContact);
@@ -503,7 +506,7 @@ function ContactsTab({ projectId, contacts, onChanged }: { projectId: string; co
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
                     <button onClick={() => { setEditId(c.id); setEditForm({ name: c.name, role: c.role ?? "", email: c.email ?? "", phone: c.phone ?? "" }); }} className="p-1 rounded hover:bg-muted"><Pencil className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => { if (confirm("Contact verwijderen?")) delM.mutate({ id: c.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive"><Trash2 className="w-3.5 h-3.5" /></button>
+                    <button onClick={async () => { if (await confirm({ description: "Contact verwijderen?", destructive: true })) delM.mutate({ id: c.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive"><Trash2 className="w-3.5 h-3.5" /></button>
                   </div>
                 </div>
               )}
@@ -711,6 +714,7 @@ function SettingsTab({ project, members, onChanged }: { project: any; members: a
 const RECURRENCE_LABEL: Record<string, string> = { weekly: "Wekelijks", monthly: "Maandelijks", quarterly: "Per kwartaal" };
 
 function TasksTab({ projectId }: { projectId: string }) {
+  const { confirm } = useConfirm();
   const list = useServerFn(adminListProjectTasks);
   const create = useServerFn(adminCreateProjectTask);
   const update = useServerFn(adminUpdateProjectTask);
@@ -789,7 +793,7 @@ function TasksTab({ projectId }: { projectId: string }) {
           </div>
           <div className="flex items-center gap-1 shrink-0">
             <button onClick={() => { setEditId(t.id); setEditForm({ title: t.title, description: t.description ?? "", assigned_to: t.assigned_to ?? "", due_date: t.due_date ?? "" }); }} className="p-1 rounded hover:bg-muted"><Pencil className="w-3.5 h-3.5" /></button>
-            <button onClick={() => { if (confirm("Taak verwijderen?")) delM.mutate({ id: t.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive"><Trash2 className="w-3.5 h-3.5" /></button>
+            <button onClick={async () => { if (await confirm({ description: "Taak verwijderen?", destructive: true })) delM.mutate({ id: t.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive"><Trash2 className="w-3.5 h-3.5" /></button>
           </div>
         </div>
       )}
@@ -851,6 +855,7 @@ function TasksTab({ projectId }: { projectId: string }) {
 // ---------- Tijd ----------
 
 function TimeTab({ projectId }: { projectId: string }) {
+  const { confirm } = useConfirm();
   const list = useServerFn(adminListProjectTimeEntries);
   const create = useServerFn(adminCreateProjectTimeEntry);
   const del = useServerFn(adminDeleteProjectTimeEntry);
@@ -957,7 +962,7 @@ function TimeTab({ projectId }: { projectId: string }) {
                 {e.task && <p className="text-xs text-muted-foreground mt-0.5">Taak: {e.task.title}</p>}
                 {e.description && <p className="text-xs text-muted-foreground mt-0.5">{e.description}</p>}
               </div>
-              <button onClick={() => { if (confirm("Registratie verwijderen?")) delM.mutate({ id: e.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive shrink-0"><Trash2 className="w-3.5 h-3.5" /></button>
+              <button onClick={async () => { if (await confirm({ description: "Registratie verwijderen?", destructive: true })) delM.mutate({ id: e.id, project_id: projectId }); }} className="p-1 rounded hover:bg-muted text-destructive shrink-0"><Trash2 className="w-3.5 h-3.5" /></button>
             </li>
           ))}
         </ul>

@@ -67,7 +67,7 @@ export function Pricing() {
         >
           Vaste prijzen.
         </motion.h2>
-        <p className="text-center text-sm mb-16" style={{ color: "#8a8f98" }}>
+        <p className="text-center text-sm mb-16" style={{ color: "#a4a9b2" }}>
           Je weet vooraf wat het kost. Geen uurtje-factuurtje.
         </p>
 
@@ -119,11 +119,11 @@ export function Pricing() {
               >
                 {t.price}
               </div>
-              <p className="text-sm mb-8" style={{ color: "#8a8f98" }}>{t.desc}</p>
+              <p className="text-sm mb-8" style={{ color: "#a4a9b2" }}>{t.desc}</p>
 
               <ul className="space-y-3 flex-1 mb-8">
                 {t.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm" style={{ color: "#8a8f98" }}>
+                  <li key={f} className="flex items-start gap-3 text-sm" style={{ color: "#a4a9b2" }}>
                     <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "#49de80" }} />
                     <span>{f}</span>
                   </li>
@@ -158,7 +158,7 @@ export function Pricing() {
         >
           Ook los af te nemen.
         </motion.h3>
-        <p className="text-center text-sm mb-16" style={{ color: "#8a8f98" }}>
+        <p className="text-center text-sm mb-16" style={{ color: "#a4a9b2" }}>
           Voor wie al een site heeft en alleen hosting, performance of SEO nodig heeft.
         </p>
 
@@ -195,10 +195,10 @@ export function Pricing() {
               >
                 <span>{a.price}</span>
                 {a.period && (
-                  <span style={{ fontSize: "13px", color: "#8a8f98", fontWeight: 400 }}>{a.period}</span>
+                  <span style={{ fontSize: "13px", color: "#a4a9b2", fontWeight: 400 }}>{a.period}</span>
                 )}
               </div>
-              <p className="text-sm mb-8 flex-1" style={{ color: "#8a8f98" }}>{a.desc}</p>
+              <p className="text-sm mb-8 flex-1" style={{ color: "#a4a9b2" }}>{a.desc}</p>
 
               <a
                 href="#contact"

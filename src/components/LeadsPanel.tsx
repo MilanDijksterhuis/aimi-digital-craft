@@ -19,6 +19,7 @@ import {
   adminBulkDeleteLeads,
 } from "@/lib/admin.functions";
 import { parseLeadsCsv } from "@/lib/csv";
+import { useConfirm } from "@/components/ConfirmDialog";
 
 const STATUSES = ["nieuw", "gebeld", "gemaild", "interesse", "geen_interesse", "klant"] as const;
 type Status = (typeof STATUSES)[number];
@@ -123,6 +124,7 @@ function downloadCsv(rows: any[]) {
 
 export function LeadsPanel() {
   const qc = useQueryClient();
+  const { confirm } = useConfirm();
   const listFn = useServerFn(adminListLeads);
   const importFn = useServerFn(adminImportLeads);
   const createFn = useServerFn(adminCreateLead);
@@ -436,8 +438,8 @@ export function LeadsPanel() {
             ))}
           </select>
           <button
-            onClick={() => {
-              if (confirm(`${selected.size} lead(s) definitief verwijderen?`)) bulkDeleteM.mutate([...selected]);
+            onClick={async () => {
+              if (await confirm({ description: `${selected.size} lead(s) definitief verwijderen?`, destructive: true })) bulkDeleteM.mutate([...selected]);
             }}
             className="flex items-center gap-1.5 rounded-md border border-destructive/40 px-2.5 py-1 text-destructive hover:bg-destructive/10"
           >
@@ -598,8 +600,8 @@ export function LeadsPanel() {
                           </button>
                           <button
                             title="Verwijderen"
-                            onClick={() => {
-                              if (confirm(`Lead "${l.company_name}" definitief verwijderen?`)) deleteM.mutate(l.id);
+                            onClick={async () => {
+                              if (await confirm({ description: `Lead "${l.company_name}" definitief verwijderen?`, destructive: true })) deleteM.mutate(l.id);
                             }}
                             className="p-1.5 rounded-md hover:bg-muted text-destructive"
                           >

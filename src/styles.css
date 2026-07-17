@@ -48,11 +48,15 @@
 
 /* Verberg de scrollbar visueel (scrollen blijft mogelijk) — voor tab-balken e.d. */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
+  /* Chrome/Safari */
 }
 
 /* ── Portal/Admin: gebruik gewone sans-serif voor koppen ── */
@@ -219,15 +223,34 @@
   background-color: #f9f9f9 !important;
 }
 
-.portal-theme .text-foreground { color: #111111 !important; }
-.portal-theme .text-muted-foreground { color: #6b7280 !important; }
-.portal-theme .text-white { color: #ffffff !important; }
-.portal-theme .border-border { border-color: #e5e7eb !important; }
-.portal-theme .bg-muted { background-color: #f3f4f6 !important; }
-.portal-theme .bg-accent { background-color: #eeeeee !important; }
+.portal-theme .text-foreground {
+  color: #111111 !important;
+}
+
+.portal-theme .text-muted-foreground {
+  color: #6b7280 !important;
+}
+
+.portal-theme .text-white {
+  color: #ffffff !important;
+}
+
+.portal-theme .border-border {
+  border-color: #e5e7eb !important;
+}
+
+.portal-theme .bg-muted {
+  background-color: #f3f4f6 !important;
+}
+
+.portal-theme .bg-accent {
+  background-color: #eeeeee !important;
+}
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
 
   html {
     scroll-behavior: smooth;
@@ -243,7 +266,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 600;
     color: var(--color-foreground);
@@ -251,25 +279,50 @@
     line-height: 1.1;
   }
 
-  h1 { font-size: clamp(2.8rem, 6vw, 4rem); }
-  h2 { font-size: clamp(2rem, 4vw, 3rem); }
-  h3 { font-size: 1.5rem; font-weight: 400; }
-  h4 { font-size: 1.125rem; font-weight: 500; font-family: var(--font-sans); }
-
-  @media (max-width: 768px) {
-    h2 { font-size: 1.875rem; }
-    h3 { font-size: 1.25rem; }
+  h1 {
+    font-size: clamp(2.8rem, 6vw, 4rem);
   }
 
-  ::selection { background: #fe2c02; color: #ffffff; }
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
 
-  input, textarea, select {
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    font-family: var(--font-sans);
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.875rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+
+  ::selection {
+    background: #fe2c02;
+    color: #ffffff;
+  }
+
+  input,
+  textarea,
+  select {
     background-color: #1e1f1f;
     border-radius: 6px;
     border-color: #2a2b2b;
     color: #ffffff;
     font-size: 14px;
   }
+
   .portal-theme input,
   .portal-theme textarea,
   .portal-theme select {
@@ -277,44 +330,70 @@
     border-color: #e5e7eb;
     color: #111111;
   }
-  input:focus-visible, textarea:focus-visible, select:focus-visible {
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
     outline: none;
     border-color: #fe2c02 !important;
     box-shadow: none;
   }
+
   .portal-theme input:focus-visible,
   .portal-theme textarea:focus-visible {
     border-color: #111111 !important;
   }
-  input::placeholder, textarea::placeholder { color: #4a4b4b; }
-  .portal-theme input::placeholder,
-  .portal-theme textarea::placeholder { color: #9ca3af; }
 
-  * { scrollbar-width: thin; scrollbar-color: #2a2b2b #0f0e0d; }
-  *::-webkit-scrollbar { width: 6px; height: 6px; }
-  *::-webkit-scrollbar-track { background: #0f0e0d; }
-  *::-webkit-scrollbar-thumb { background: #2a2b2b; border-radius: 3px; }
+  input::placeholder,
+  textarea::placeholder {
+    color: #4a4b4b;
+  }
+
+  .portal-theme input::placeholder,
+  .portal-theme textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2b2b #0f0e0d;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #0f0e0d;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #2a2b2b;
+    border-radius: 3px;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-html.font-sm { font-size: 14px; }
-html.font-md { font-size: 16px; }
-html.font-lg { font-size: 18px; }
-
-html.high-contrast {
-  --background: #000000;
-  --foreground: #ffffff;
-  --border: #555555;
-  --primary: #ff4422;
-  --primary-foreground: #ffffff;
+@utility grid-bg {
+  background: none;
 }
 
-@utility grid-bg { background: none; }
-@utility text-gradient { color: var(--color-foreground); background: none; -webkit-text-fill-color: currentColor; }
-@utility glow-primary { box-shadow: none; }
+@utility text-gradient {
+  color: var(--color-foreground);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+@utility glow-primary {
+  box-shadow: none;
+}
 
 /* Eyebrow — minimal mono */
 .section-label {
@@ -343,9 +422,18 @@ html.high-contrast {
   border: none;
   transition: opacity 150ms ease;
 }
-.btn-primary:hover { opacity: 0.88; }
-.btn-primary .arrow { transition: transform 180ms ease; }
-.btn-primary:hover .arrow { transform: translateX(3px); }
+
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+.btn-primary .arrow {
+  transition: transform 180ms ease;
+}
+
+.btn-primary:hover .arrow {
+  transform: translateX(3px);
+}
 
 /* Outline pill button */
 .btn-secondary {
@@ -355,7 +443,7 @@ html.high-contrast {
   gap: 0.5rem;
   background: transparent;
   color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 9999px;
   padding: 8px 16px;
   font-weight: 500;
@@ -363,17 +451,28 @@ html.high-contrast {
   font-family: var(--font-sans);
   transition: border-color 150ms ease, background 150ms ease;
 }
-.btn-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+}
 
 /* Portal-theme button overrides */
 .portal-theme .btn-primary {
   background: #111111;
   color: #ffffff;
 }
+
 .portal-theme .btn-secondary {
   color: #111111;
   border-color: #d1d5db;
 }
-.portal-theme .btn-secondary:hover { border-color: #111111; background: #f3f4f6; }
 
-* { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.portal-theme .btn-secondary:hover {
+  border-color: #111111;
+  background: #f3f4f6;
+}
+
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

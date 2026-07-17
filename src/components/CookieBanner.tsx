@@ -32,6 +32,12 @@ export function CookieBanner() {
     if (!loadPrefs()) setVisible(true);
   }, []);
 
+  // UX-0.2: meld zichtbaarheid zodat andere fixed-elementen (ChatWidget) op
+  // mobiel kunnen uitwijken en niet overlappen.
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("aimi-cookiebanner", { detail: visible }));
+  }, [visible]);
+
   const accept = () => {
     savePrefs({ necessary: true, analytics: true, marketing: true });
     setVisible(false);
@@ -69,7 +75,7 @@ export function CookieBanner() {
             <p className="text-white text-sm font-medium mb-1">
               Wij gebruiken cookies
             </p>
-            <p className="text-sm mb-4" style={{ color: "#8a8f98" }}>
+            <p className="text-sm mb-4" style={{ color: "#a4a9b2" }}>
               We gebruiken cookies om de site goed te laten werken en om te begrijpen hoe bezoekers de site gebruiken. Jij bepaalt wat je toestaat.
             </p>
 
@@ -87,7 +93,7 @@ export function CookieBanner() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-white text-xs font-medium">Noodzakelijk</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#8a8f98" }}>
+                        <p className="text-xs mt-0.5" style={{ color: "#a4a9b2" }}>
                           Vereist voor de werking van de site. Kan niet worden uitgeschakeld.
                         </p>
                       </div>
@@ -103,7 +109,7 @@ export function CookieBanner() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-white text-xs font-medium">Analytisch</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#8a8f98" }}>
+                        <p className="text-xs mt-0.5" style={{ color: "#a4a9b2" }}>
                           Helpt ons begrijpen hoe bezoekers de site gebruiken.
                         </p>
                       </div>
@@ -125,7 +131,7 @@ export function CookieBanner() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-white text-xs font-medium">Marketing</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#8a8f98" }}>
+                        <p className="text-xs mt-0.5" style={{ color: "#a4a9b2" }}>
                           Wordt gebruikt voor gepersonaliseerde advertenties.
                         </p>
                       </div>
@@ -166,7 +172,7 @@ export function CookieBanner() {
                 <button
                   onClick={saveCustom}
                   className="text-xs underline underline-offset-2 transition-colors"
-                  style={{ color: "#8a8f98" }}
+                  style={{ color: "#a4a9b2" }}
                 >
                   Opslaan
                 </button>
@@ -174,7 +180,7 @@ export function CookieBanner() {
                 <button
                   onClick={() => setExpanded(true)}
                   className="text-xs underline underline-offset-2 transition-colors"
-                  style={{ color: "#8a8f98" }}
+                  style={{ color: "#a4a9b2" }}
                 >
                   Aanpassen
                 </button>

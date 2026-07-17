@@ -72,7 +72,7 @@ export function FAQ() {
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
                     className="shrink-0"
-                    style={{ color: isOpen ? "#fe2c02" : "#8a8f98" }}
+                    style={{ color: isOpen ? "#fe2c02" : "#a4a9b2" }}
                   >
                     <Plus className="w-5 h-5" strokeWidth={1.5} />
                   </motion.div>
@@ -86,7 +86,7 @@ export function FAQ() {
                       transition={{ duration: 0.22, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-base leading-relaxed" style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
+                      <p className="pb-6 text-base leading-relaxed" style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
                         {item.a}
                       </p>
                     </motion.div>

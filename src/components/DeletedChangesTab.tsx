@@ -6,10 +6,12 @@ import {
   adminHardDeleteChange,
 } from "@/lib/admin.functions";
 import { usePermissions } from "@/hooks/use-permissions";
+import { useConfirm } from "@/components/ConfirmDialog";
 import { STATUS_LABEL } from "@/lib/status";
 
 export function DeletedChangesTab() {
   const perms = usePermissions();
+  const { confirm } = useConfirm();
   const qc = useQueryClient();
   const listFn = useServerFn(adminListDeletedChanges);
   const restoreFn = useServerFn(adminRestoreChange);
@@ -61,8 +63,8 @@ export function DeletedChangesTab() {
                   ↩ Herstel
                 </button>
                 <button
-                  onClick={() => {
-                    if (confirm(`Definitief verwijderen van "${r.title}"? Dit kan NIET ongedaan worden gemaakt.`)) {
+                  onClick={async () => {
+                    if (await confirm({ title: "Permanent wissen", description: `Definitief verwijderen van "${r.title}"? Dit kan NIET ongedaan worden gemaakt.`, destructive: true, confirmLabel: "Permanent wissen" })) {
                       hardM.mutate(r.id);
                     }
                   }}

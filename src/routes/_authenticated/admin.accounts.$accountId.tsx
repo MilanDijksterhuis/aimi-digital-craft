@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useConfirm } from "@/components/ConfirmDialog";
 import {
   ChevronLeft, FileText, Shield, Activity, StickyNote, Settings, Trash2, Mail, Building2, Phone,
   FolderKanban, KeyRound, Ban, CheckCircle2, Wallet, ListChecks, Bell, Sparkles, UserCog,
@@ -379,6 +380,7 @@ function OverzichtTab({ accountId, profile, projects, isCustomer, onChanged }: {
 // ---------------- Financieel ----------------
 
 function FinancieelTab({ accountId, onChanged }: { accountId: string; onChanged: () => void }) {
+  const { promptText } = useConfirm();
   const get = useServerFn(adminGetCustomer);
   const setQuota = useServerFn(adminSetFreeQuota);
   const grant = useServerFn(adminGrantCredits);
@@ -442,8 +444,9 @@ function FinancieelTab({ accountId, onChanged }: { accountId: string; onChanged:
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="font-semibold text-sm">Credits toekennen</h3>
         <button
-          onClick={() => {
-            const n = parseInt(prompt("Extra credits toekennen?", "1") || "0", 10);
+          onClick={async () => {
+            const raw = await promptText({ title: "Credits toekennen", label: "Aantal extra credits", defaultValue: "1", inputType: "number", confirmLabel: "Toekennen" });
+            const n = parseInt(raw || "0", 10);
             if (n > 0) grantM.mutate({ user_id: accountId, amount: n, reason: "Handmatig" });
           }}
           disabled={grantM.isPending}
@@ -789,6 +792,7 @@ function NotitiesTab({ accountId, profile, onChanged }: { accountId: string; pro
 function InstellingenTab({ accountId, profile, isSuperAdmin, onChanged }: {
   accountId: string; profile: any; isSuperAdmin: boolean; onChanged: () => void;
 }) {
+  const { promptText } = useConfirm();
   const setBlocked = useServerFn(adminSetBlocked);
   const setExpiry = useServerFn(adminSetAccessExpiry);
   const sendReset = useServerFn(adminSendPasswordReset);
@@ -870,9 +874,10 @@ function InstellingenTab({ accountId, profile, isSuperAdmin, onChanged }: {
             {resetM.isPending ? "Bezig…" : "Wachtwoord-reset e-mail versturen"}
           </button>
           <button
-            onClick={() => {
-              const pw = prompt(`Nieuw wachtwoord voor ${profile.email} (min 8 tekens):`);
+            onClick={async () => {
+              const pw = await promptText({ title: "Wachtwoord direct instellen", description: `Nieuw wachtwoord voor ${profile.email} (min 8 tekens).`, label: "Nieuw wachtwoord", inputType: "password", confirmLabel: "Instellen" });
               if (pw && pw.length >= 8) setPwM.mutate(pw);
+              else if (pw !== null) toast.error("Wachtwoord moet minstens 8 tekens zijn.");
             }}
             disabled={setPwM.isPending}
             className="inline-flex items-center gap-2 text-sm rounded-md border border-border px-3 py-2 hover:border-primary hover:text-primary transition-colors"

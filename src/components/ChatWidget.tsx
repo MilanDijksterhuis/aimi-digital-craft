@@ -20,7 +20,19 @@ export function ChatWidget() {
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const [unread, setUnread] = useState(0);
+  // UX-0.2: op mobiel omhoog schuiven zolang de cookiebanner onderaan staat,
+  // zodat knop/paneel niet overlappen met de banner.
+  const [cookieBannerOpen, setCookieBannerOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      setCookieBannerOpen(!localStorage.getItem("aimi_cookie_consent"));
+    } catch { /* localStorage niet beschikbaar */ }
+    const onBanner = (e: Event) => setCookieBannerOpen(!!(e as CustomEvent).detail);
+    window.addEventListener("aimi-cookiebanner", onBanner);
+    return () => window.removeEventListener("aimi-cookiebanner", onBanner);
+  }, []);
 
   // Get user + ensure chat
   useEffect(() => {
@@ -141,7 +153,7 @@ export function ChatWidget() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Sluit chat" : "Open chat"}
-        className="fixed bottom-4 right-4 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:opacity-90"
+        className={`fixed right-4 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:opacity-90 md:bottom-4 ${cookieBannerOpen ? "bottom-48" : "bottom-4"}`}
       >
         <span className="text-xs font-medium tracking-wide" aria-hidden>Chat</span>
         {unread > 0 && (
@@ -154,7 +166,7 @@ export function ChatWidget() {
         <div
           role="dialog"
           aria-label="Chat met support"
-          className="fixed bottom-20 right-4 z-50 w-[min(380px,calc(100vw-2rem))] h-[min(560px,calc(100vh-6rem))] bg-card border border-border rounded-xl shadow-2xl flex flex-col"
+          className={`fixed right-4 z-50 w-[min(380px,calc(100vw-2rem))] h-[min(560px,calc(100vh-6rem))] bg-card border border-border rounded-xl shadow-2xl flex flex-col md:bottom-20 ${cookieBannerOpen ? "bottom-64" : "bottom-20"}`}
         >
           <header className="px-4 py-3 border-b border-border flex items-center justify-between">
             <div>

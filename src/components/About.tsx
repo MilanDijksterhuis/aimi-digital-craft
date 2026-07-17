@@ -23,7 +23,7 @@ export function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mt-6 text-sm leading-relaxed"
-              style={{ color: "#8a8f98" }}
+              style={{ color: "#a4a9b2" }}
             >
               We bouwen websites voor kleine bedrijven, zelfstandigen en
               verenigingen. Geen trage processen, geen accountmanagers. Je hebt
@@ -57,7 +57,7 @@ export function About() {
                 >
                   {n}
                 </div>
-                <div className="text-xs mt-3 leading-snug" style={{ color: "#8a8f98" }}>{l}</div>
+                <div className="text-xs mt-3 leading-snug" style={{ color: "#a4a9b2" }}>{l}</div>
               </div>
             ))}
           </motion.div>

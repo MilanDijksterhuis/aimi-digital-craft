@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useConfirm } from "@/components/ConfirmDialog";
 import {
   ChevronLeft, ChevronDown, RefreshCw, Shield, Activity, Clock, AlertTriangle,
   CheckCircle, XCircle, LayoutGrid, PlusCircle, Archive, BarChart3, Columns3,
@@ -348,6 +349,7 @@ function ProjectsListSection({ archivedOnly, statusFilter, setStatusFilter, onOp
   archivedOnly: boolean; statusFilter: string; setStatusFilter: (s: string) => void; onOpenDetail: (id: string) => void;
 }) {
   const nav = useNavigate();
+  const { confirm } = useConfirm();
   const list = useServerFn(adminListProjects);
   const del = useServerFn(adminDeleteProject);
   const qc = useQueryClient();
@@ -473,7 +475,7 @@ function ProjectsListSection({ archivedOnly, statusFilter, setStatusFilter, onOp
                   <td className="p-3 text-muted-foreground text-xs">{(p.members ?? []).map((m: any) => m.full_name || m.email).join(", ") || "—"}</td>
                   <td className="p-3 text-right space-x-3" onClick={(e) => e.stopPropagation()}>
                     <button onClick={() => onOpenDetail(p.primary_user_id)} className="text-xs text-primary hover:underline">Monitoring</button>
-                    <button onClick={() => { if (confirm(`Project "${p.name}" verwijderen?`)) delM.mutate({ project_id: p.id }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
+                    <button onClick={async () => { if (await confirm({ description: `Project "${p.name}" verwijderen?`, destructive: true })) delM.mutate({ project_id: p.id }); }} className="text-xs text-destructive hover:underline">Verwijder</button>
                   </td>
                 </tr>
               );
@@ -806,6 +808,7 @@ function KanbanSection() {
 // ---------- Sjablonen ----------
 
 function TemplatesSection({ onCreated }: { onCreated: () => void }) {
+  const { confirm } = useConfirm();
   const listTemplates = useServerFn(adminListProjectTemplates);
   const createTemplate = useServerFn(adminCreateProjectTemplate);
   const delTemplate = useServerFn(adminDeleteProjectTemplate);
@@ -861,7 +864,7 @@ function TemplatesSection({ onCreated }: { onCreated: () => void }) {
                   </div>
                   <button
                     type="button"
-                    onClick={(e) => { e.preventDefault(); if (confirm(`Sjabloon "${t.name}" verwijderen?`)) delM.mutate({ id: t.id }); }}
+                    onClick={async (e) => { e.preventDefault(); if (await confirm({ description: `Sjabloon "${t.name}" verwijderen?`, destructive: true })) delM.mutate({ id: t.id }); }}
                     className="ml-auto text-xs text-destructive hover:underline shrink-0"
                   >Verwijder</button>
                 </label>

@@ -77,7 +77,7 @@ export function Contact() {
         >
           Stel je vraag of plan een gesprek.
         </motion.h2>
-        <p className="mt-4 text-center text-sm" style={{ color: "#8a8f98" }}>
+        <p className="mt-4 text-center text-sm" style={{ color: "#a4a9b2" }}>
           Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag.
         </p>
 

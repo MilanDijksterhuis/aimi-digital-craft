@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="py-10" style={{ background: "#161717", borderTop: "1px solid #2a2b2b" }}>
       <div
         className="mx-auto max-w-7xl px-6 flex flex-wrap items-center justify-between gap-4 text-xs"
-        style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+        style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
       >
         <span className="text-white font-medium">
           AIMI<span style={{ color: "#fe2c02" }}>.</span>

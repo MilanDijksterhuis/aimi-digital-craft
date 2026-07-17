@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
+import { useFormDraft } from "@/hooks/use-form-draft";
 import {
   CheckCircle2,
   Circle,
@@ -176,6 +177,18 @@ function PortalPage() {
   const [priority, setPriority] = useState<"low" | "normal" | "high" | "urgent">("normal");
   const [category, setCategory] = useState<string>("text");
   const [rush, setRush] = useState(false);
+  // UX-0.5: bewaar het nieuwe-change-formulier als draft tegen dataverlies.
+  const clearChangeDraft = useFormDraft(
+    "aimi_change_draft",
+    { title, description, category, priority, rush },
+    (d) => {
+      if (typeof d.title === "string") setTitle(d.title);
+      if (typeof d.description === "string") setDescription(d.description);
+      if (typeof d.category === "string") setCategory(d.category);
+      if (d.priority) setPriority(d.priority);
+      if (typeof d.rush === "boolean") setRush(d.rush);
+    },
+  );
   const [changeProjectId, setChangeProjectId] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [showNotifs, setShowNotifs] = useState(false);
@@ -302,6 +315,7 @@ function PortalPage() {
       setTitle(""); setDescription(""); setPriority("normal");
       setCategory("text"); setRush(false); setFiles([]); setChangeProjectId("");
       setShowNewChange(false);
+      clearChangeDraft();
     } finally {
       setUploading(false);
     }
@@ -974,7 +988,7 @@ function ChangeCard({
             <>
               <button
                 className="btn-primary text-sm !py-1.5 !px-4"
-                onClick={() => alert("Neem contact op met AIMI om goed te keuren.")}
+                onClick={() => toast.info("Neem contact op met AIMI om deze wijziging goed te keuren.")}
               >
                 Goedkeuren
               </button>

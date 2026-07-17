@@ -6,6 +6,7 @@ import {
   adminDeleteContactSubmission,
 } from "@/lib/contact.functions";
 import { usePermissions } from "@/hooks/use-permissions";
+import { useConfirm } from "@/components/ConfirmDialog";
 
 export function BerichtenTab() {
   const list = useServerFn(adminListContactSubmissions);
@@ -13,6 +14,7 @@ export function BerichtenTab() {
   const del = useServerFn(adminDeleteContactSubmission);
   const qc = useQueryClient();
   const perms = usePermissions();
+  const { confirm } = useConfirm();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin-contact-submissions"],
@@ -72,8 +74,8 @@ export function BerichtenTab() {
                   </button>
                   {perms.can("delete_change_hard") && (
                     <button
-                      onClick={() => {
-                        if (window.confirm("Bericht definitief verwijderen?")) {
+                      onClick={async () => {
+                        if (await confirm({ description: "Bericht definitief verwijderen?", destructive: true })) {
                           delM.mutate(s.id);
                         }
                       }}

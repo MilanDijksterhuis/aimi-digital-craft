@@ -94,7 +94,7 @@ export function Services() {
                         className="text-sm font-medium transition-colors duration-200"
                         style={{
                           fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                          color: isActive ? "#ffffff" : "#8a8f98",
+                          color: isActive ? "#ffffff" : "#a4a9b2",
                         }}
                       >
                         {s.title}
@@ -117,7 +117,7 @@ export function Services() {
                     <p
                       className="text-xs mt-1 transition-colors duration-200"
                       style={{
-                        color: isActive ? "#8a8f98" : "#3a3b3b",
+                        color: isActive ? "#a4a9b2" : "#3a3b3b",
                         fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                       }}
                     >
@@ -170,7 +170,7 @@ export function Services() {
 
                 <p
                   className="text-sm leading-relaxed mb-6"
-                  style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                  style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                 >
                   {current.desc}
                 </p>

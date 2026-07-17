@@ -70,7 +70,7 @@ export function ProcessTimeline() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-sm mb-10"
-          style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
         >
           Transparant proces, geen verrassingen.
         </motion.p>
@@ -119,7 +119,7 @@ export function ProcessTimeline() {
                       className="block text-sm font-medium transition-colors duration-200"
                       style={{
                         fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                        color: isActive ? "#ffffff" : isDone ? "#8a8f98" : "#8a8f98",
+                        color: isActive ? "#ffffff" : isDone ? "#a4a9b2" : "#a4a9b2",
                       }}
                     >
                       {phase.name}
@@ -180,7 +180,7 @@ export function ProcessTimeline() {
                   </h3>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                    style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                   >
                     {current.description}
                   </p>
@@ -199,7 +199,7 @@ export function ProcessTimeline() {
                   </p>
                   <p
                     className="text-sm"
-                    style={{ color: "#8a8f98", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                    style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
                   >
                     {current.clientAction}
                   </p>
