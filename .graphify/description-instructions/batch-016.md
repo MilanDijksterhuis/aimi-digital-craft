@@ -1,4 +1,4 @@
-# Node Description Batch 17 of 34
+# Node Description Batch 17 of 35
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_projecten_newprojectsection": "NewProjectSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L278 | neighbors=[admin.projecten.tsx]
+- "authenticated_admin_projecten_projectensidebar": "ProjectenSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L128 | neighbors=[admin.projecten.tsx]
+- "authenticated_admin_projecten_projectid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L345 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_adminprojectdetailpage": "AdminProjectDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L63 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_changestab": "ChangesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L971 | neighbors=[admin.projecten.$projectId.tsx]
 - "authenticated_admin_projecten_projectid_contactstab": "ContactsTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L443 | neighbors=[admin.projecten.$projectId.tsx]
 - "authenticated_admin_projecten_projectid_notestab": "NotesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L379 | neighbors=[admin.projecten.$projectId.tsx]
 - "authenticated_admin_projecten_projectid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L259 | neighbors=[admin.projecten.$projectId.tsx]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_rollen_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L25 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L44 | neighbors=[admin.tsx]
 - "authenticated_portal_allowed_attachment_mime": "ALLOWED_ATTACHMENT_MIME" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L36 | neighbors=[portal.tsx]
-- "authenticated_portal_emptychanges": "EmptyChanges()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L728 | neighbors=[portal.tsx]
-- "authenticated_portal_filter_label": "FILTER_LABEL" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L97 | neighbors=[portal.tsx]
-- "authenticated_portal_filterkey": "FilterKey" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L96 | neighbors=[portal.tsx]
-- "authenticated_portal_legacywebsitemonitoring": "LegacyWebsiteMonitoring()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1189 | neighbors=[portal.tsx]
-- "authenticated_portal_overviewsection": "OverviewSection()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1284 | neighbors=[portal.tsx]
 
 ## Instructions
 

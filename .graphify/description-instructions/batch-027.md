@@ -1,4 +1,4 @@
-# Node Description Batch 28 of 34
+# Node Description Batch 28 of 35
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_authenticated_inner": "Inner()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L41 | neighbors=[_authenticated.tsx]
+- "routes_index_index": "Index()" | kind=code-symbol | source=src/routes/index.tsx:L75 | neighbors=[index.tsx]
+- "routes_login_loginpage": "LoginPage()" | kind=code-symbol | source=src/routes/login.tsx:L16 | neighbors=[login.tsx]
+- "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L15 | neighbors=[privacybeleid.tsx]
+- "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L39 | neighbors=[__root.tsx]
+- "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L17 | neighbors=[__root.tsx]
+- "routes_root_rootcomponent": "RootComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L162 | neighbors=[__root.tsx]
+- "routes_root_rootshell": "RootShell()" | kind=code-symbol | source=src/routes/__root.tsx:L148 | neighbors=[__root.tsx]
 - "routes_sitemap_xml_route": "Route" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L12 | neighbors=[sitemap[.]xml.tsx]
 - "routes_sitemap_xml_sitemapentry": "SitemapEntry" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L6 | neighbors=[sitemap[.]xml.tsx]
 - "routes_track_js_cors": "cors" | kind=code-symbol | source=src/routes/track[.]js.tsx:L3 | neighbors=[track[.]js.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "src_routetree_gen_authenticatedportalroute": "AuthenticatedPortalRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L75 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedportalroutechildren": "AuthenticatedPortalRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L567 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedportalroutewithchildren": "AuthenticatedPortalRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L576 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedroute": "AuthenticatedRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L61 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedroutechildren": "AuthenticatedRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L579 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedroutewithchildren": "AuthenticatedRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L593 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedserverroute": "AuthenticatedServerRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L70 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_fileroutesbyfullpath": "FileRoutesByFullPath" | kind=code-symbol | source=src/routeTree.gen.ts:L161 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_fileroutesbyid": "FileRoutesById" | kind=code-symbol | source=src/routeTree.gen.ts:L209 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_fileroutesbypath": "FileRoutesByPath" | kind=code-symbol | source=src/routeTree.gen.ts:L325 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_fileroutesbyto": "FileRoutesByTo" | kind=code-symbol | source=src/routeTree.gen.ts:L185 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

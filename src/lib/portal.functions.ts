@@ -499,12 +499,16 @@ export const postCustomerComment = createServerFn({ method: "POST" })
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
-    // Verify request belongs to user
-    const { data: req } = await supabase
-      .from("change_requests")
-      .select("user_id")
-      .eq("id", data.request_id)
-      .single();
+    // PERF-10: ownership-check én titel (voor de notificatie) in één query, en
+    // de admin-rollen-lookup parallel met de comment-insert.
+    // SEC-9: rollen staan in user_roles, niet op profiles; notificeer via
+    // supabaseAdmin (klant-JWT mag onder RLS de admin-rollen niet lezen en geen
+    // notifications voor anderen inserten).
+    const [reqRes, adminRolesRes] = await Promise.all([
+      supabase.from("change_requests").select("user_id, title").eq("id", data.request_id).single(),
+      supabaseAdmin.from("user_roles").select("user_id").in("role", ["super_admin", "co_admin", "admin"]),
+    ]);
+    const req = reqRes.data as any;
     if (!req || req.user_id !== userId) throw new Error("Niet gevonden.");
 
     const { error } = await supabase
@@ -513,25 +517,12 @@ export const postCustomerComment = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
 
     // Notify all admins
-    const { data: changeReq } = await supabase
-      .from("change_requests")
-      .select("title")
-      .eq("id", data.request_id)
-      .single();
-    // SEC-9: rollen staan in user_roles, niet op profiles (er is geen
-    // profiles.role kolom en "superadmin" bestaat niet als rol). Lees de echte
-    // staff-rollen en notificeer via supabaseAdmin — de klant-JWT mag onder RLS
-    // de admin-rollen niet lezen en geen notifications voor anderen inserten.
-    const { data: adminRoles } = await supabaseAdmin
-      .from("user_roles")
-      .select("user_id")
-      .in("role", ["super_admin", "co_admin", "admin"]);
-    const adminIds = Array.from(new Set((adminRoles ?? []).map((r: any) => r.user_id)));
-    if (changeReq && adminIds.length > 0) {
+    const adminIds = Array.from(new Set((adminRolesRes.data ?? []).map((r: any) => r.user_id)));
+    if (adminIds.length > 0) {
       await supabaseAdmin.from("notifications").insert(
         adminIds.map((id) => ({
           user_id: id,
-          title: `Klant reageerde: ${changeReq.title}`,
+          title: `Klant reageerde: ${req.title}`,
           message: data.body.slice(0, 140),
         })),
       );

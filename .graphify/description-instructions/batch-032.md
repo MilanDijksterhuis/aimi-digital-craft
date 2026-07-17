@@ -1,4 +1,4 @@
-# Node Description Batch 33 of 34
+# Node Description Batch 33 of 35
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_navigation_menu_navigationmenu": "NavigationMenu" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L8 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenucontent": "NavigationMenuContent" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L59 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenuindicator": "NavigationMenuIndicator" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L93 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenulist": "NavigationMenuList" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L23 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenutrigger": "NavigationMenuTrigger" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L41 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenutriggerstyle": "navigationMenuTriggerStyle" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L37 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenuviewport": "NavigationMenuViewport" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L76 | neighbors=[navigation-menu.tsx]
+- "ui_pagination_pagination": "Pagination()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L7 | neighbors=[pagination.tsx]
 - "ui_pagination_paginationcontent": "PaginationContent" | kind=code-symbol | source=src/components/ui/pagination.tsx:L17 | neighbors=[pagination.tsx]
 - "ui_pagination_paginationellipsis": "PaginationEllipsis()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L78 | neighbors=[pagination.tsx]
 - "ui_pagination_paginationitem": "PaginationItem" | kind=code-symbol | source=src/components/ui/pagination.tsx:L24 | neighbors=[pagination.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_sidebar_sidebarcontextprops": "SidebarContextProps" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L28 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebarfooter": "SidebarFooter" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L363 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebargroup": "SidebarGroup" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L409 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebargroupaction": "SidebarGroupAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L444 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebargroupcontent": "SidebarGroupContent" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L467 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebargrouplabel": "SidebarGroupLabel" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L423 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarheader": "SidebarHeader" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L349 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarinput": "SidebarInput" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L331 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarinset": "SidebarInset" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L314 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenu": "SidebarMenu" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L479 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenuaction": "SidebarMenuAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L584 | neighbors=[sidebar.tsx]
 
 ## Instructions
 
