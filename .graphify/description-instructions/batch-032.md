@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_menubar_menubarseparator": "MenubarSeparator" | kind=code-symbol | source=src/components/ui/menubar.tsx:L190 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarshortcut": "MenubarShortcut()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L202 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsub": "MenubarSub()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L23 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsubcontent": "MenubarSubContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L78 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsubtrigger": "MenubarSubTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L57 | neighbors=[menubar.tsx]
+- "ui_menubar_menubartrigger": "MenubarTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L42 | neighbors=[menubar.tsx]
 - "ui_navigation_menu_navigationmenu": "NavigationMenu" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L8 | neighbors=[navigation-menu.tsx]
 - "ui_navigation_menu_navigationmenucontent": "NavigationMenuContent" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L59 | neighbors=[navigation-menu.tsx]
 - "ui_navigation_menu_navigationmenuindicator": "NavigationMenuIndicator" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L93 | neighbors=[navigation-menu.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_sheet_sheetfooter": "SheetFooter()" | kind=code-symbol | source=src/components/ui/sheet.tsx:L79 | neighbors=[sheet.tsx]
 - "ui_sheet_sheetoverlay": "SheetOverlay" | kind=code-symbol | source=src/components/ui/sheet.tsx:L18 | neighbors=[sheet.tsx]
 - "ui_sheet_sheetvariants": "sheetVariants" | kind=code-symbol | source=src/components/ui/sheet.tsx:L33 | neighbors=[sheet.tsx]
-- "ui_sidebar_sidebar": "Sidebar" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L153 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarcontent": "SidebarContent" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L392 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarcontext": "SidebarContext" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L38 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarcontextprops": "SidebarContextProps" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L28 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarfooter": "SidebarFooter" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L363 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebargroup": "SidebarGroup" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L409 | neighbors=[sidebar.tsx]
 
 ## Instructions
 

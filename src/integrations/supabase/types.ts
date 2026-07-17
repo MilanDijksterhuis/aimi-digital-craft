@@ -1,3 +1,7 @@
+// GENERATED FILE — DO NOT EDIT.
+// Gegenereerd met `supabase gen types typescript`. Handmatige wijzigingen gaan
+// verloren bij de volgende regeneratie. Verouderd t.o.v. de live DB? Regenereer
+// (zie CODE-4) i.p.v. hier te editen.
 export type Json =
   | string
   | number

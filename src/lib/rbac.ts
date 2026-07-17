@@ -31,6 +31,14 @@ export function isStaffRole(r: string) {
   return STAFF_ROLES.includes(r as AppRole);
 }
 
+// ---- Server-side guard rol-sets (single source of truth voor auth-guards.server.ts) ----
+// Bewust gescheiden van STAFF_ROLES (client "is dit teamlid", incl. sales). De
+// server-staff-guard sluit sales uit — dat is het bestaande gedrag; hier
+// gecentraliseerd zodat de sets niet meer per bestand kunnen driften.
+export const ADMIN_LIKE_ROLES: AppRole[] = ["super_admin", "co_admin", "admin"];
+export const SUPER_ADMIN_ROLES: AppRole[] = ["super_admin", "admin"];
+export const STAFF_GUARD_ROLES: AppRole[] = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
+
 // Canonical list of every permission action. Single source of truth for both
 // the client UI (usePermissions) and the server-side effective-permission
 // computation (permissions.server.ts).

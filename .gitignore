@@ -31,3 +31,8 @@ dist-ssr
 *.sln
 *.sw?
 *.env
+
+# Expliciet: nooit .env committen (CODE-11)
+.env
+.env.*
+!.env.example

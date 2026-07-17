@@ -200,6 +200,7 @@
       ".graphify/description-instructions/batch-031.md",
       ".graphify/description-instructions/batch-032.md",
       ".graphify/description-instructions/batch-033.md",
+      ".graphify/description-instructions/batch-034.md",
       ".graphify/label-instructions/communities.md",
       ".lovable/plan.md",
       "CLAUDE.md",
@@ -1025,8 +1026,6 @@
       "graphify-out/obsidian/vite.config.ts.md",
       "graphify-out/obsidian/vite.md",
       "graphify-out/obsidian/zod.md",
-      "portal-verbeteridee-en.md",
-      "portal-verbeterideeen.md",
       "public/llms.txt",
       "public/robots.txt"
     ],
@@ -1038,10 +1037,10 @@
     ],
     "video": []
   },
-  "total_files": 1029,
-  "total_words": 278617,
+  "total_files": 1028,
+  "total_words": 276445,
   "needs_graph": true,
-  "warning": "Large corpus: 1029 files · ~278.617 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
+  "warning": "Large corpus: 1028 files · ~276.445 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
   "skipped_sensitive": [
     "graphify-out/obsidian/PasswordResetsPanel().md",
     "graphify-out/obsidian/adminListPasswordResets.md",
@@ -1052,10 +1051,10 @@
     "graphify-out/obsidian/generateTempPassword().md",
     "graphify-out/obsidian/requestPasswordReset.md"
   ],
-  "graphifyignore_patterns": 27,
+  "graphifyignore_patterns": 30,
   "git": {
     "source_owner": "git",
-    "source_hash": "4510b3f526a22eb7d3175788d11ea38ccee4bfee",
+    "source_hash": "9c1fa0674c96765d2d6ee5f3d42b0024f5e29034",
     "branches": [
       "main",
       "tmp-main-merge",
@@ -1074,13 +1073,13 @@
     "source": "default-auto",
     "root": ".",
     "git_root": ".",
-    "head": "4510b3f526a22eb7d3175788d11ea38ccee4bfee",
-    "candidate_count": 1336,
-    "included_count": 1029,
-    "excluded_untracked_count": 0,
-    "excluded_ignored_count": 35598,
+    "head": "9c1fa0674c96765d2d6ee5f3d42b0024f5e29034",
+    "candidate_count": 1344,
+    "included_count": 1028,
+    "excluded_untracked_count": 1,
+    "excluded_ignored_count": 35600,
     "excluded_sensitive_count": 8,
-    "missing_committed_count": 14,
+    "missing_committed_count": 18,
     "warnings": [],
     "recommendation": "Use --scope all or graphify.yaml inputs.corpus for a knowledge-base folder."
   }

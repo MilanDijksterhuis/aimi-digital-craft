@@ -54,6 +54,8 @@ one-sentence description — no prose, no markdown fences.
 - "ui_badge": "badge.tsx" | kind=code-symbol | source=src/components/ui/badge.tsx:L1 | neighbors=[utils.ts, cn(), Badge(), BadgeProps, badgeVariants] | lang=en
 - "ui_label": "label.tsx" | kind=code-symbol | source=src/components/ui/label.tsx:L1 | neighbors=[form.tsx, utils.ts, cn(), Label, labelVariants] | lang=en
 - "ui_toggle": "toggle.tsx" | kind=code-symbol | source=src/components/ui/toggle.tsx:L1 | neighbors=[utils.ts, cn(), Toggle, toggleVariants, toggle-group.tsx] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3417a43ff60181e153b471af78493fc6a41d84b2": "3417a43 fixes" | kind=Commit | source=git | neighbors=[main, 9c1fa06 perf fixes, portal.functions.ts, 4510b3f perf fixes] | lang=pt
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@4510b3f526a22eb7d3175788d11ea38ccee4bfee": "4510b3f perf fixes" | kind=Commit | source=git | neighbors=[main, 3417a43 fixes, vite.config.ts, 9d0b477 perf fixes] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@4b4ebd9957a147bb39dbbbc6eb428552b7a1bb71": "4b4ebd9 Catch getSession() network errors in the auth route guard" | kind=Commit | source=git | neighbors=[worktree-replicated-fluttering-whisper, 6da1e20 Log root error boundary crashes…, _authenticated.tsx, 7f807c8 Catch login network errors inst…] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@5d1e827778ae2a151181acfb4bdb2b189e5ce0e8": "5d1e827 Log server-side (SSR) crashes to site_errors too" | kind=Commit | source=git | neighbors=[main, 2189780 fixes, server.ts, b75b00d fixes] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6b2136292b72d0c82416f5451ffc903f601b5761": "6b21362 Catch login network errors instead of crashing to the error boundary" | kind=Commit | source=git | neighbors=[main, 1713634 fixes, login.tsx, f7b9fd5 Merge branch 'main' of https://…] | lang=en
@@ -64,8 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@cf5e1212ec15a8789acaa64d5e380fe76b95c72e": "cf5e121 Catch getSession() network errors in the auth route guard" | kind=Commit | source=git | neighbors=[1713634 fixes, main, 8e663f1 fixes, _authenticated.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d2da4c97008ae99fb598665045fea1b89db39a76": "d2da4c9 Log root error boundary crashes to site_errors for visibility" | kind=Commit | source=git | neighbors=[8e663f1 fixes, main, b75b00d fixes, __root.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@dbd0657ea193395ad36e71a78cfe0b953fc87956": "dbd0657 Log server-side (SSR) crashes to site_errors too" | kind=Commit | source=git | neighbors=[6da1e20 Log root error boundary crashes…, worktree-replicated-fluttering-whisper, 99bd8ac Surface site_errors in the acco…, server.ts] | lang=en
-- "components_berichtentab": "BerichtenTab.tsx" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L1 | neighbors=[admin.tsx, BerichtenTab(), use-permissions.tsx, usePermissions()] | lang=en
-- "components_footer_footer": "Footer()" | kind=code-symbol | source=src/components/Footer.tsx:L3 | neighbors=[Footer.tsx, algemene-voorwaarden.tsx, index.tsx, privacybeleid.tsx] | lang=en
 
 ## Instructions
 

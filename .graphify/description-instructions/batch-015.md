@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L261 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L51 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L46 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L603 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_toegangtab": "ToegangTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L553 | neighbors=[admin.accounts.$accountId.tsx]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_projecten_adminprojectenpage": "AdminProjectenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L70 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_dashboardwidgetssection": "DashboardWidgetsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L930 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_kanbancard": "KanbanCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L719 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_kanbancolumn": "KanbanColumn()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L749 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_kanbansection": "KanbanSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L768 | neighbors=[admin.projecten.tsx]
 
 ## Instructions
 

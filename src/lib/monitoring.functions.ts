@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { ensureAdmin } from "./auth-guards.server";
 
 // SEC-10: valideer/clamp alle parameters die in de upstream query-string
 // belanden, zodat er geen ongevalideerde pass-through is.
@@ -9,15 +10,8 @@ const HOURS = z.number().int().min(1).max(720); // max 30 dagen
 const MONTHS = z.number().int().min(1).max(60);
 const LIMIT = z.number().int().min(1).max(1000);
 
-const ADMIN_LIKE = ["super_admin", "co_admin", "admin"];
 const BASE = "https://aimi-development.nl/monitoring-api/api";
 const TIMEOUT_MS = 5_000;
-
-async function ensureAdmin(supabase: any, userId: string) {
-  const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
-  const roles: string[] = (data ?? []).map((r: any) => r.role);
-  if (!roles.some((r) => ADMIN_LIKE.includes(r))) throw new Error("Forbidden");
-}
 
 async function monitoringFetch(path: string, method: "GET" | "POST" = "GET"): Promise<any> {
   const key = process.env.MONITORING_ADMIN_KEY;

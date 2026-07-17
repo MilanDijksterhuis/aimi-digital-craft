@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_chatwidget_message": "Message" | kind=code-symbol | source=src/components/ChatWidget.tsx:L4 | neighbors=[ChatWidget.tsx]
+- "components_contact_field": "Field()" | kind=code-symbol | source=src/components/Contact.tsx:L238 | neighbors=[Contact.tsx]
 - "components_contact_mode": "Mode" | kind=code-symbol | source=src/components/Contact.tsx:L8 | neighbors=[Contact.tsx]
 - "components_cookiebanner_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/CookieBanner.tsx:L4 | neighbors=[CookieBanner.tsx]
 - "components_cookiebanner_loadprefs": "loadPrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L12 | neighbors=[CookieBanner.tsx]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_onboardingwizard_stepproject": "StepProject()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L343 | neighbors=[OnboardingWizard.tsx]
 - "components_onboardingwizard_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L378 | neighbors=[OnboardingWizard.tsx]
 - "components_onboardingwizard_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L223 | neighbors=[OnboardingWizard.tsx]
-- "components_portalonboardingtour_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L12 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_contacts": "Contacts" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L13 | neighbors=[PortalOnboardingTour.tsx]
 
 ## Instructions
 

@@ -122,3 +122,34 @@ export function computeMonitoringStats(rows: { status_ok: boolean; response_ms: 
     lastSync: rows[0]?.created_at ?? null,
   };
 }
+
+// CODE-6: gedeelde ping-fetch met fallback (site_response_times -> site_pings).
+// Voorheen byte-voor-byte gedupliceerd in portal.functions.ts (getMyDashboard
+// en portalGetProjectMonitoring) met een `throw new Error("leeg")` om in de
+// catch te springen; hier vervangen door een expliciete conditie.
+// `client` is een Supabase-client (user-authed of admin); de aanroeper kiest.
+export async function fetchPingRows(
+  client: any,
+  userId: string,
+  since: string,
+  limit = 2016,
+): Promise<any[]> {
+  const rt = await client
+    .from("site_response_times")
+    .select("status_ok, response_ms, created_at")
+    .eq("user_id", userId)
+    .gte("created_at", since)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (!rt.error && rt.data && rt.data.length > 0) {
+    return rt.data as any[];
+  }
+  const fallback = await client
+    .from("site_pings")
+    .select("status_ok, response_ms, created_at")
+    .eq("user_id", userId)
+    .gte("created_at", since)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  return (fallback.data ?? []) as any[];
+}

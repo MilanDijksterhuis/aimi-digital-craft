@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_authenticatedadminroutechildren": "AuthenticatedAdminRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L549 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedadminroutewithchildren": "AuthenticatedAdminRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L564 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalprojectenprojectidroute": "AuthenticatedPortalProjectenProjectIdRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L130 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalroute": "AuthenticatedPortalRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L75 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalroutechildren": "AuthenticatedPortalRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L567 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalroutewithchildren": "AuthenticatedPortalRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L576 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedroute": "AuthenticatedRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L61 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedroutechildren": "AuthenticatedRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L579 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedroutewithchildren": "AuthenticatedRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L593 | neighbors=[routeTree.gen.ts]
@@ -45,18 +51,12 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_migration_role_permissions": "role_permissions" | kind=code-symbol | source=supabase-migration.sql:L59 | neighbors=[supabase-migration.sql]
 - "supabase_migration_site_response_times": "site_response_times" | kind=code-symbol | source=supabase-migration.sql:L7 | neighbors=[supabase-migration.sql]
 - "supabase_migration_ssl_checks": "ssl_checks" | kind=code-symbol | source=supabase-migration.sql:L19 | neighbors=[supabase-migration.sql]
-- "supabase_types_compositetypes": "CompositeTypes" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1521 | neighbors=[types.ts]
-- "supabase_types_constants": "Constants" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1538 | neighbors=[types.ts]
-- "supabase_types_databasewithoutinternals": "DatabaseWithoutInternals" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1421 | neighbors=[types.ts]
-- "supabase_types_defaultschema": "DefaultSchema" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1423 | neighbors=[types.ts]
-- "supabase_types_enums": "Enums" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1504 | neighbors=[types.ts]
-- "supabase_types_json": "Json" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1 | neighbors=[types.ts]
-- "supabase_types_tables": "Tables" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1425 | neighbors=[types.ts]
-- "supabase_types_tablesinsert": "TablesInsert" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1454 | neighbors=[types.ts]
-- "supabase_types_tablesupdate": "TablesUpdate" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1479 | neighbors=[types.ts]
-- "ui_accordion_accordioncontent": "AccordionContent" | kind=code-symbol | source=src/components/ui/accordion.tsx:L37 | neighbors=[accordion.tsx]
-- "ui_accordion_accordionitem": "AccordionItem" | kind=code-symbol | source=src/components/ui/accordion.tsx:L9 | neighbors=[accordion.tsx]
-- "ui_accordion_accordiontrigger": "AccordionTrigger" | kind=code-symbol | source=src/components/ui/accordion.tsx:L17 | neighbors=[accordion.tsx]
+- "supabase_types_compositetypes": "CompositeTypes" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1525 | neighbors=[types.ts]
+- "supabase_types_constants": "Constants" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1542 | neighbors=[types.ts]
+- "supabase_types_databasewithoutinternals": "DatabaseWithoutInternals" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1425 | neighbors=[types.ts]
+- "supabase_types_defaultschema": "DefaultSchema" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1427 | neighbors=[types.ts]
+- "supabase_types_enums": "Enums" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1508 | neighbors=[types.ts]
+- "supabase_types_json": "Json" | kind=code-symbol | source=src/integrations/supabase/types.ts:L5 | neighbors=[types.ts]
 
 ## Instructions
 

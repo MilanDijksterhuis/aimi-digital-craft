@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_drawer_drawerfooter": "DrawerFooter()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L58 | neighbors=[drawer.tsx]
+- "ui_drawer_drawerheader": "DrawerHeader()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L53 | neighbors=[drawer.tsx]
+- "ui_drawer_draweroverlay": "DrawerOverlay" | kind=code-symbol | source=src/components/ui/drawer.tsx:L20 | neighbors=[drawer.tsx]
+- "ui_drawer_drawertitle": "DrawerTitle" | kind=code-symbol | source=src/components/ui/drawer.tsx:L63 | neighbors=[drawer.tsx]
+- "ui_dropdown_menu_dropdownmenucheckboxitem": "DropdownMenuCheckboxItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L94 | neighbors=[dropdown-menu.tsx]
+- "ui_dropdown_menu_dropdownmenucontent": "DropdownMenuContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L57 | neighbors=[dropdown-menu.tsx]
 - "ui_dropdown_menu_dropdownmenuitem": "DropdownMenuItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L76 | neighbors=[dropdown-menu.tsx]
 - "ui_dropdown_menu_dropdownmenulabel": "DropdownMenuLabel" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L139 | neighbors=[dropdown-menu.tsx]
 - "ui_dropdown_menu_dropdownmenuradioitem": "DropdownMenuRadioItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L117 | neighbors=[dropdown-menu.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_menubar_menubarportal": "MenubarPortal()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L15 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarradiogroup": "MenubarRadioGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L19 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarradioitem": "MenubarRadioItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L154 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarseparator": "MenubarSeparator" | kind=code-symbol | source=src/components/ui/menubar.tsx:L190 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarshortcut": "MenubarShortcut()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L202 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarsub": "MenubarSub()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L23 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarsubcontent": "MenubarSubContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L78 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarsubtrigger": "MenubarSubTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L57 | neighbors=[menubar.tsx]
-- "ui_menubar_menubartrigger": "MenubarTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L42 | neighbors=[menubar.tsx]
 
 ## Instructions
 

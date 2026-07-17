@@ -22,8 +22,15 @@ function detectDelimiter(headerLine: string): string {
   return best;
 }
 
+// CODE-12: guard tegen te grote input — de parser loopt char-voor-char, dus
+// zonder limiet kan een enorme upload de server-thread laten blokkeren.
+const MAX_CSV_BYTES = 5 * 1024 * 1024; // 5 MB
+
 /** Parseert CSV-tekst naar een array van rijen (array van cellen). */
 export function parseCsv(text: string): string[][] {
+  if (text.length > MAX_CSV_BYTES) {
+    throw new Error(`CSV te groot (max ${Math.round(MAX_CSV_BYTES / (1024 * 1024))} MB).`);
+  }
   // BOM strippen
   const src = text.replace(/^﻿/, "");
   const firstLineEnd = src.search(/\r?\n/);

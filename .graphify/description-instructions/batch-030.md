@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_carousel_carouselprops": "CarouselProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L13 | neighbors=[carousel.tsx]
+- "ui_carousel_usecarousel": "useCarousel()" | kind=code-symbol | source=src/components/ui/carousel.tsx:L31 | neighbors=[carousel.tsx]
+- "ui_carousel_usecarouselparameters": "UseCarouselParameters" | kind=code-symbol | source=src/components/ui/carousel.tsx:L9 | neighbors=[carousel.tsx]
+- "ui_chart_chartconfig": "ChartConfig" | kind=code-symbol | source=src/components/ui/chart.tsx:L9 | neighbors=[chart.tsx]
+- "ui_chart_chartcontainer": "ChartContainer" | kind=code-symbol | source=src/components/ui/chart.tsx:L35 | neighbors=[chart.tsx]
+- "ui_chart_chartcontext": "ChartContext" | kind=code-symbol | source=src/components/ui/chart.tsx:L23 | neighbors=[chart.tsx]
 - "ui_chart_chartcontextprops": "ChartContextProps" | kind=code-symbol | source=src/components/ui/chart.tsx:L19 | neighbors=[chart.tsx]
 - "ui_chart_chartlegendcontent": "ChartLegendContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L243 | neighbors=[chart.tsx]
 - "ui_chart_chartstyle": "ChartStyle()" | kind=code-symbol | source=src/components/ui/chart.tsx:L64 | neighbors=[chart.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_drawer_drawer": "Drawer()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L6 | neighbors=[drawer.tsx]
 - "ui_drawer_drawercontent": "DrawerContent" | kind=code-symbol | source=src/components/ui/drawer.tsx:L32 | neighbors=[drawer.tsx]
 - "ui_drawer_drawerdescription": "DrawerDescription" | kind=code-symbol | source=src/components/ui/drawer.tsx:L75 | neighbors=[drawer.tsx]
-- "ui_drawer_drawerfooter": "DrawerFooter()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L58 | neighbors=[drawer.tsx]
-- "ui_drawer_drawerheader": "DrawerHeader()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L53 | neighbors=[drawer.tsx]
-- "ui_drawer_draweroverlay": "DrawerOverlay" | kind=code-symbol | source=src/components/ui/drawer.tsx:L20 | neighbors=[drawer.tsx]
-- "ui_drawer_drawertitle": "DrawerTitle" | kind=code-symbol | source=src/components/ui/drawer.tsx:L63 | neighbors=[drawer.tsx]
-- "ui_dropdown_menu_dropdownmenucheckboxitem": "DropdownMenuCheckboxItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L94 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenucontent": "DropdownMenuContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L57 | neighbors=[dropdown-menu.tsx]
 
 ## Instructions
 

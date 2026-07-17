@@ -2,22 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { ensurePermission } from "./permissions.server";
-
-const ADMIN_LIKE = ["super_admin", "co_admin", "admin"];
-const SUPER = ["super_admin", "admin"];
-
-async function getRoles(supabase: any, userId: string): Promise<string[]> {
-  const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
-  return (data ?? []).map((r: any) => r.role);
-}
-async function ensureAdmin(supabase: any, userId: string) {
-  const roles = await getRoles(supabase, userId);
-  if (!roles.some((r) => ADMIN_LIKE.includes(r))) throw new Error("Forbidden: admin only");
-}
-async function ensureSuper(supabase: any, userId: string) {
-  const roles = await getRoles(supabase, userId);
-  if (!roles.some((r) => SUPER.includes(r))) throw new Error("Forbidden: super admin only");
-}
+import { ensureAdmin, ensureSuperAdmin as ensureSuper } from "./auth-guards.server";
 
 // ---------------- Account ping ----------------
 export const pingLastSeen = createServerFn({ method: "POST" })

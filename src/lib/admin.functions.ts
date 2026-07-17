@@ -4,6 +4,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { computeMonitoringStats, measureResponseTime, assertPublicHost } from "./monitoring.shared";
 import { getEffectivePermissions, ensurePermission } from "./permissions.server";
+import { getRoles, ensureRoles, ensureAdmin, ensureSuperAdmin, ensureStaff } from "./auth-guards.server";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -14,34 +15,9 @@ import {
   adminGetCustomerDetail,
 } from "./admin.server";
 
-const ADMIN_LIKE_ROLES = ["super_admin", "co_admin", "admin"];
-const STAFF_ROLES_SRV = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
+// Team-rollen incl. sales (eligibility voor het toewijzen van custom rollen —
+// géén auth-guard). Gelijk aan rbac.STAFF_ROLES.
 const STAFF_BASE_ROLES = ["super_admin", "co_admin", "support_agent", "viewer", "sales", "admin"];
-
-async function getRoles(supabase: any, userId: string): Promise<string[]> {
-  const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
-  return (data ?? []).map((r: any) => r.role);
-}
-
-async function ensureRoles(supabase: any, userId: string, allowed: string[], label = "this action") {
-  const roles = await getRoles(supabase, userId);
-  if (!roles.some((r) => allowed.includes(r))) {
-    throw new Error(`Forbidden: ${label}`);
-  }
-  return roles;
-}
-
-async function ensureAdmin(supabase: any, userId: string) {
-  await ensureRoles(supabase, userId, ADMIN_LIKE_ROLES, "admin only");
-}
-
-async function ensureSuperAdmin(supabase: any, userId: string) {
-  await ensureRoles(supabase, userId, ["super_admin", "admin"], "super admin only");
-}
-
-async function ensureStaff(supabase: any, userId: string) {
-  await ensureRoles(supabase, userId, STAFF_ROLES_SRV, "staff only");
-}
 
 async function logAudit(
   supabase: any,

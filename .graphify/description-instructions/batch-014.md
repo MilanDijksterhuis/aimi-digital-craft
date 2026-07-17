@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_router": "router.tsx" | kind=code-symbol | source=src/router.tsx:L1 | neighbors=[getRouter(), routeTree.gen.ts]
+- "src_router_getrouter": "getRouter()" | kind=code-symbol | source=src/router.tsx:L5 | neighbors=[router.tsx, routeTree.gen.ts]
 - "src_server_getserverentry": "getServerEntry()" | kind=code-symbol | source=src/server.ts:L32 | neighbors=[server.ts, fetch()]
 - "src_server_iscatastrophicssrerrorbody": "isCatastrophicSsrErrorBody()" | kind=code-symbol | source=src/server.ts:L48 | neighbors=[server.ts, normalizeCatastrophicSsrResponse()]
 - "src_server_ishttps": "isHttps()" | kind=code-symbol | source=src/server.ts:L127 | neighbors=[server.ts, applySecurityHeaders()]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_accounts_accountid_onboarding_status_label": "ONBOARDING_STATUS_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L92 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_onboardingtab": "OnboardingTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L496 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L281 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L261 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L51 | neighbors=[admin.accounts.$accountId.tsx]
 
 ## Instructions
 

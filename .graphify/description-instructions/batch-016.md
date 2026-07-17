@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_projecten_kanbancolumn": "KanbanColumn()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L749 | neighbors=[admin.projecten.tsx]
+- "authenticated_admin_projecten_kanbansection": "KanbanSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L768 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_newprojectsection": "NewProjectSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L278 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_projectensidebar": "ProjectenSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L128 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_projectid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L345 | neighbors=[admin.projecten.$projectId.tsx]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_rollen_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L46 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L10 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L25 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L44 | neighbors=[admin.tsx]
-- "authenticated_portal_allowed_attachment_mime": "ALLOWED_ATTACHMENT_MIME" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L36 | neighbors=[portal.tsx]
 
 ## Instructions
 

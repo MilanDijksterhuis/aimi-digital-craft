@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "supabase_types_tables": "Tables" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1429 | neighbors=[types.ts]
+- "supabase_types_tablesinsert": "TablesInsert" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1458 | neighbors=[types.ts]
+- "supabase_types_tablesupdate": "TablesUpdate" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1483 | neighbors=[types.ts]
+- "ui_accordion_accordioncontent": "AccordionContent" | kind=code-symbol | source=src/components/ui/accordion.tsx:L37 | neighbors=[accordion.tsx]
+- "ui_accordion_accordionitem": "AccordionItem" | kind=code-symbol | source=src/components/ui/accordion.tsx:L9 | neighbors=[accordion.tsx]
+- "ui_accordion_accordiontrigger": "AccordionTrigger" | kind=code-symbol | source=src/components/ui/accordion.tsx:L17 | neighbors=[accordion.tsx]
 - "ui_alert_alert": "Alert" | kind=code-symbol | source=src/components/ui/alert.tsx:L22 | neighbors=[alert.tsx]
 - "ui_alert_alertdescription": "AlertDescription" | kind=code-symbol | source=src/components/ui/alert.tsx:L41 | neighbors=[alert.tsx]
 - "ui_alert_alerttitle": "AlertTitle" | kind=code-symbol | source=src/components/ui/alert.tsx:L30 | neighbors=[alert.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_carousel_carouseloptions": "CarouselOptions" | kind=code-symbol | source=src/components/ui/carousel.tsx:L10 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselplugin": "CarouselPlugin" | kind=code-symbol | source=src/components/ui/carousel.tsx:L11 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselprevious": "CarouselPrevious" | kind=code-symbol | source=src/components/ui/carousel.tsx:L177 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselprops": "CarouselProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L13 | neighbors=[carousel.tsx]
-- "ui_carousel_usecarousel": "useCarousel()" | kind=code-symbol | source=src/components/ui/carousel.tsx:L31 | neighbors=[carousel.tsx]
-- "ui_carousel_usecarouselparameters": "UseCarouselParameters" | kind=code-symbol | source=src/components/ui/carousel.tsx:L9 | neighbors=[carousel.tsx]
-- "ui_chart_chartconfig": "ChartConfig" | kind=code-symbol | source=src/components/ui/chart.tsx:L9 | neighbors=[chart.tsx]
-- "ui_chart_chartcontainer": "ChartContainer" | kind=code-symbol | source=src/components/ui/chart.tsx:L35 | neighbors=[chart.tsx]
-- "ui_chart_chartcontext": "ChartContext" | kind=code-symbol | source=src/components/ui/chart.tsx:L23 | neighbors=[chart.tsx]
 
 ## Instructions
 

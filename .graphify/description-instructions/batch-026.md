@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260523211523_78239514_1a0c_4fc7_8d4a_5886dda4b322": "20260523211523_78239514-1a0c-4fc7-8d4a-5886dda4b322.sql" | kind=code-symbol | source=supabase/migrations/20260523211523_78239514-1a0c-4fc7-8d4a-5886dda4b322.sql:L1 | neighbors=[public.available_credits()]
+- "migrations_20260523211523_78239514_1a0c_4fc7_8d4a_5886dda4b322_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523211523_78239514-1a0c-4fc7-8d4a-5886dda4b322.sql:L10 | neighbors=[20260523211523_78239514-1a0c-4fc7-8d4a-…]
+- "migrations_20260523213826_e88fd443_0f7e_4ead_ab91_f3d19f723017_public_client_contacts": "public.client_contacts" | kind=code-symbol | source=supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql:L22 | neighbors=[20260523213826_e88fd443-0f7e-4ead-ab91-…]
+- "migrations_20260523213826_e88fd443_0f7e_4ead_ab91_f3d19f723017_public_login_events": "public.login_events" | kind=code-symbol | source=supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql:L36 | neighbors=[20260523213826_e88fd443-0f7e-4ead-ab91-…]
+- "migrations_20260523213826_e88fd443_0f7e_4ead_ab91_f3d19f723017_public_site_errors": "public.site_errors" | kind=code-symbol | source=supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql:L62 | neighbors=[20260523213826_e88fd443-0f7e-4ead-ab91-…]
+- "migrations_20260523213826_e88fd443_0f7e_4ead_ab91_f3d19f723017_public_site_pings": "public.site_pings" | kind=code-symbol | source=supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql:L49 | neighbors=[20260523213826_e88fd443-0f7e-4ead-ab91-…]
 - "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_user_presence": "public.user_presence" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L25 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…]
 - "migrations_20260523221809_68010212_e7a6_4d77_92dc_e3309d2c6d55": "20260523221809_68010212-e7a6-4d77-92dc-e3309d2c6d55.sql" | kind=code-symbol | source=supabase/migrations/20260523221809_68010212-e7a6-4d77-92dc-e3309d2c6d55.sql:L1 | neighbors=[public.available_credits()]
 - "migrations_20260523221809_68010212_e7a6_4d77_92dc_e3309d2c6d55_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523221809_68010212-e7a6-4d77-92dc-e3309d2c6d55.sql:L2 | neighbors=[20260523221809_68010212-e7a6-4d77-92dc-…]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260717170000_perf2_site_ping_counts_public_site_ping_counts": "public.site_ping_counts()" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L14 | neighbors=[20260717170000_perf2_site_ping_counts.s…]
 - "migrations_20260717180000_perf3_project_last_activity_public_project_last_activity": "public.project_last_activity()" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L9 | neighbors=[20260717180000_perf3_project_last_activ…]
 - "public_site_error_body": "Body" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L6 | neighbors=[site-error.ts]
-- "public_site_error_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L12 | neighbors=[site-error.ts]
-- "public_site_ping_body": "Body" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L6 | neighbors=[site-ping.ts]
-- "public_site_ping_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L12 | neighbors=[site-ping.ts]
-- "routes_algemene_voorwaarden_voorwaardenpage": "VoorwaardenPage()" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L15 | neighbors=[algemene-voorwaarden.tsx]
-- "routes_authenticated_accountmenu": "AccountMenu()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L144 | neighbors=[_authenticated.tsx]
-- "routes_authenticated_authlayout": "AuthLayout()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L33 | neighbors=[_authenticated.tsx]
 
 ## Instructions
 

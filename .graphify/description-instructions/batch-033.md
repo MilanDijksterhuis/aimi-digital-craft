@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_sidebar_sidebar": "Sidebar" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L153 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarcontent": "SidebarContent" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L392 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarcontext": "SidebarContext" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L38 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarcontextprops": "SidebarContextProps" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L28 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarfooter": "SidebarFooter" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L363 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebargroup": "SidebarGroup" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L409 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebargroupaction": "SidebarGroupAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L444 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebargroupcontent": "SidebarGroupContent" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L467 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebargrouplabel": "SidebarGroupLabel" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L423 | neighbors=[sidebar.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_table_tablerow": "TableRow" | kind=code-symbol | source=src/components/ui/table.tsx:L42 | neighbors=[table.tsx]
 - "ui_textarea_textarea": "Textarea" | kind=code-symbol | source=src/components/ui/textarea.tsx:L5 | neighbors=[textarea.tsx]
 - "ui_toggle_group_togglegroup": "ToggleGroup" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L15 | neighbors=[toggle-group.tsx]
-- "ui_toggle_group_togglegroupcontext": "ToggleGroupContext" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L10 | neighbors=[toggle-group.tsx]
-- "ui_toggle_group_togglegroupitem": "ToggleGroupItem" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L31 | neighbors=[toggle-group.tsx]
-- "ui_toggle_toggle": "Toggle" | kind=code-symbol | source=src/components/ui/toggle.tsx:L29 | neighbors=[toggle.tsx]
-- "vite_config_manualchunks": "manualChunks()" | kind=code-symbol | source=vite.config.ts:L17 | neighbors=[vite.config.ts]
-- "eslint_config": "eslint.config.js" | kind=code-symbol | source=eslint.config.js:L1
-- "migrations_20260523183958_4e926af8_8fa7_4dc2_9067_5b7dd7cd2ec1": "20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql" | kind=code-symbol | source=supabase/migrations/20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql:L1
 
 ## Instructions
 

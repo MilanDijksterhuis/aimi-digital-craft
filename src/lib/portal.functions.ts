@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { computeMonitoringStats, measureResponseTime } from "./monitoring.shared";
+import { computeMonitoringStats, measureResponseTime, fetchPingRows } from "./monitoring.shared";
+import { isCategoryFree } from "./status";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export const getMyDashboard = createServerFn({ method: "GET" })
@@ -47,32 +48,9 @@ export const getMyDashboard = createServerFn({ method: "GET" })
           .limit(5),
       ]);
 
-    // Haal response times op (7 dagen) — probeer nieuwe tabel, fallback naar site_pings
+    // Haal response times op (7 dagen) — nieuwe tabel met fallback naar site_pings.
     const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    let pingRows: any[] = [];
-    try {
-      const rtResult = await supabase
-        .from("site_response_times" as any)
-        .select("status_ok, response_ms, created_at")
-        .eq("user_id", userId)
-        .gte("created_at", since7d)
-        .order("created_at", { ascending: false })
-        .limit(2016);
-      if (!rtResult.error && rtResult.data && rtResult.data.length > 0) {
-        pingRows = rtResult.data as any[];
-      } else {
-        throw new Error("leeg");
-      }
-    } catch {
-      const fallback = await supabase
-        .from("site_pings")
-        .select("status_ok, response_ms, created_at")
-        .eq("user_id", userId)
-        .gte("created_at", since7d)
-        .order("created_at", { ascending: false })
-        .limit(2016);
-      pingRows = (fallback.data ?? []) as any[];
-    }
+    const pingRows = await fetchPingRows(supabase, userId, since7d);
 
     const usedThisMonth =
       requestsRes.data?.filter((r: any) => {
@@ -335,7 +313,6 @@ export const cancelMyChange = createServerFn({ method: "POST" })
 
 
 
-const SIMPLE_CATEGORIES_SERVER = new Set(["text", "styling", "media", "accessibility"]);
 
 export const submitChangeRequest = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -379,7 +356,8 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
 
     // Bepaal of dit een gratis (simple) of betaalde (uitgebreide) change is.
-    const isFreeCategory = SIMPLE_CATEGORIES_SERVER.has(data.category);
+    // CODE-9: gedeelde billing-bron i.p.v. een tweede lokale categorieënset.
+    const isFreeCategory = isCategoryFree(data.category);
     const isPaid = !isFreeCategory;
 
     // Voor gratis changes: check credits.
@@ -648,30 +626,7 @@ export const portalGetProjectMonitoring = createServerFn({ method: "POST" })
     const targetUserId = (project as any).primary_user_id as string;
 
     const since7d = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    let pingRows: any[] = [];
-    try {
-      const rtResult = await supabaseAdmin
-        .from("site_response_times" as any)
-        .select("status_ok, response_ms, created_at")
-        .eq("user_id", targetUserId)
-        .gte("created_at", since7d)
-        .order("created_at", { ascending: false })
-        .limit(2016);
-      if (!rtResult.error && rtResult.data && rtResult.data.length > 0) {
-        pingRows = rtResult.data as any[];
-      } else {
-        throw new Error("leeg");
-      }
-    } catch {
-      const fallback = await supabaseAdmin
-        .from("site_pings")
-        .select("status_ok, response_ms, created_at")
-        .eq("user_id", targetUserId)
-        .gte("created_at", since7d)
-        .order("created_at", { ascending: false })
-        .limit(2016);
-      pingRows = (fallback.data ?? []) as any[];
-    }
+    const pingRows = await fetchPingRows(supabaseAdmin, targetUserId, since7d);
 
     const { data: siteErrors } = await supabaseAdmin
       .from("site_errors")
