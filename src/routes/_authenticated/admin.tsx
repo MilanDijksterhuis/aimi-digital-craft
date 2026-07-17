@@ -685,7 +685,14 @@ function AfsprakenTab({ customers, qc }: any) {
 function NotificationsBell({ onOpen }: { onOpen: () => void }) {
   const list = useServerFn(adminListNotifications);
   const qc = useQueryClient();
-  const { data } = useQuery({ queryKey: ["admin-notifs"], queryFn: () => list({}), refetchInterval: 30_000 });
+  // PERF-5/6: realtime is de primaire live-bron; de poll is enkel een trage
+  // fallback als realtime stil faalt (bv. mobiel Safari). Niet op de achtergrond.
+  const { data } = useQuery({
+    queryKey: ["admin-notifs"],
+    queryFn: () => list({}),
+    refetchInterval: 120_000,
+    refetchIntervalInBackground: false,
+  });
   useEffect(() => {
     let ch: ReturnType<typeof supabase.channel> | null = null;
     try {

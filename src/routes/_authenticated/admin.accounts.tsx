@@ -269,17 +269,37 @@ function AccountsListSection({ statusFilter, setStatusFilter }: { statusFilter: 
 
   useEffect(() => {
     let ch: ReturnType<typeof supabase.channel> | null = null;
+    // PERF-5: elke profiles-UPDATE (o.a. de 60s presence-ping van élke gebruiker)
+    // vuurde een volledige account-lijst-refetch. Throttle naar max 1x/60s zodat
+    // een burst pings collapse't; presence hoeft niet instant te verversen.
+    let lastInvalidate = 0;
+    let pending: ReturnType<typeof setTimeout> | null = null;
+    const throttledInvalidate = () => {
+      const now = Date.now();
+      const elapsed = now - lastInvalidate;
+      if (elapsed >= 60_000) {
+        lastInvalidate = now;
+        qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+      } else if (!pending) {
+        pending = setTimeout(() => {
+          pending = null;
+          lastInvalidate = Date.now();
+          qc.invalidateQueries({ queryKey: ["admin-accounts"] });
+        }, 60_000 - elapsed);
+      }
+    };
     try {
       ch = supabase
         .channel("admin-accounts-presence")
-        .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, () => {
-          qc.invalidateQueries({ queryKey: ["admin-accounts"] });
-        })
+        .on("postgres_changes", { event: "UPDATE", schema: "public", table: "profiles" }, throttledInvalidate)
         .subscribe();
     } catch (e) {
       console.warn("Realtime niet beschikbaar:", e);
     }
-    return () => { if (ch) supabase.removeChannel(ch); };
+    return () => {
+      if (pending) clearTimeout(pending);
+      if (ch) supabase.removeChannel(ch);
+    };
   }, [qc]);
 
   const [roleFilter, setRoleFilter] = useState("");

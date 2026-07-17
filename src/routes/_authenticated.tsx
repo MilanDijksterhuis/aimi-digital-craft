@@ -84,8 +84,9 @@ function Inner() {
     doCheck();
     doSessionCheck();
 
-    const pingI = setInterval(doPing, 60_000);
-    const checkI = setInterval(doCheck, 5 * 60_000);
+    // PERF-6: geen ping/access-poll op de achtergrond; hervat bij zichtbaar worden.
+    const pingI = setInterval(() => { if (!document.hidden) doPing(); }, 60_000);
+    const checkI = setInterval(() => { if (!document.hidden) doCheck(); }, 5 * 60_000);
     const sessionI = setInterval(doSessionCheck, 5 * 60_000); // check elke 5 min
 
     return () => {

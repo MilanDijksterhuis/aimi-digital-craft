@@ -93,16 +93,27 @@ export function AdminChatPanel() {
     // zonder try/catch crasht dat de hele pagina. Realtime is hier alleen
     // een live-refresh, dus bij falen degraderen we stil.
     let channel: ReturnType<typeof supabase.channel> | null = null;
+    // PERF-5: het admin-chats kanaal luistert op álle chat_messages/chats-events
+    // en deed per event een volledige loadChats(). Debounce zodat een burst
+    // (bv. meerdere berichten kort na elkaar) in één refetch collapse't.
+    let debounce: ReturnType<typeof setTimeout> | null = null;
+    const debouncedLoad = () => {
+      if (debounce) clearTimeout(debounce);
+      debounce = setTimeout(() => loadChats(), 500);
+    };
     try {
       channel = supabase
         .channel("admin-chats")
-        .on("postgres_changes", { event: "*", schema: "public", table: "chat_messages" }, () => loadChats())
-        .on("postgres_changes", { event: "*", schema: "public", table: "chats" }, () => loadChats())
+        .on("postgres_changes", { event: "*", schema: "public", table: "chat_messages" }, debouncedLoad)
+        .on("postgres_changes", { event: "*", schema: "public", table: "chats" }, debouncedLoad)
         .subscribe();
     } catch (e) {
       console.warn("Chat realtime niet beschikbaar:", e);
     }
-    return () => { if (channel) supabase.removeChannel(channel); };
+    return () => {
+      if (debounce) clearTimeout(debounce);
+      if (channel) supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {

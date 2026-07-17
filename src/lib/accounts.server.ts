@@ -96,13 +96,14 @@ export async function expireBlockedAccountsImpl() {
 
   await supabaseAdmin.from("profiles").update({ is_blocked: true }).in("id", ids);
 
-  for (const p of profilesToBlock ?? []) {
-    await supabaseAdmin.from("admin_notifications").insert({
+  // PERF-4: alle notificaties in één insert i.p.v. één-voor-één.
+  await supabaseAdmin.from("admin_notifications").insert(
+    (profilesToBlock ?? []).map((p: any) => ({
       type: "account_expired",
       title: "Tijdelijk account verlopen",
       message: `Account ${p.email} is verlopen en automatisch geblokkeerd.`,
       link: `/admin`,
-    });
-  }
+    })),
+  );
   return { blocked: ids.length };
 }

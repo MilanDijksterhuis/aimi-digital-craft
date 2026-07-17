@@ -17,6 +17,19 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_leadspanel_activity_label": "ACTIVITY_LABEL" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L54 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_downloadcsv": "downloadCsv()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L96 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_fmtdate": "fmtDate()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L73 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_lastcontacttime": "lastContactTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L93 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_leaddetailmodal": "LeadDetailModal()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L764 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_needsaction": "needsAction()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L86 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_newleadmodal": "NewLeadModal()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L876 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_pipelinetab": "PipelineTab()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L662 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_reltime": "relTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L76 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_segmented": "Segmented()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L693 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_sortkey": "SortKey" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L66 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_sorts": "SORTS" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L60 | neighbors=[LeadsPanel.tsx]
+- "components_leadspanel_statcard": "StatCard()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L724 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_status": "Status" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L24 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_status_color": "STATUS_COLOR" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L35 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_status_dot": "STATUS_DOT" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L45 | neighbors=[LeadsPanel.tsx]
@@ -44,19 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_portalonboardingtour_field": "Field()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L285 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_formstate": "FormState" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L15 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_profile": "Profile" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L25 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_progressbar": "ProgressBar()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L265 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_step_titles": "STEP_TITLES" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L38 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepcompany": "StepCompany()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L300 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepcontact": "StepContact()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L315 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepcontacts": "StepContacts()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L346 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepproject": "StepProject()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L336 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L370 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L207 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portaltutorial_fadevariants": "fadeVariants" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L45 | neighbors=[PortalTutorial.tsx]
-- "components_portaltutorial_progressdots": "ProgressDots()" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L151 | neighbors=[PortalTutorial.tsx]
-- "components_portaltutorial_slide": "Slide" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L11 | neighbors=[PortalTutorial.tsx]
-- "components_portaltutorial_slides": "SLIDES" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L17 | neighbors=[PortalTutorial.tsx]
-- "components_pricing_addons": "addons" | kind=code-symbol | source=src/components/Pricing.tsx:L4 | neighbors=[Pricing.tsx]
 
 ## Instructions
 

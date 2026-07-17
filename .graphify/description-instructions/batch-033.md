@@ -17,6 +17,23 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_sidebar_sidebarmenubadge": "SidebarMenuBadge" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L615 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubutton": "SidebarMenuButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L525 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubuttonvariants": "sidebarMenuButtonVariants" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L503 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuitem": "SidebarMenuItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L491 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuskeleton": "SidebarMenuSkeleton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L635 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusub": "SidebarMenuSub" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L668 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubbutton": "SidebarMenuSubButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L689 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubitem": "SidebarMenuSubItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L684 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarprovider": "SidebarProvider" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L49 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarrail": "SidebarRail" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L286 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarseparator": "SidebarSeparator" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L377 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebartrigger": "SidebarTrigger" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L260 | neighbors=[sidebar.tsx]
+- "ui_sidebar_usesidebar": "useSidebar()" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L40 | neighbors=[sidebar.tsx]
+- "ui_slider_slider": "Slider" | kind=code-symbol | source=src/components/ui/slider.tsx:L6 | neighbors=[slider.tsx]
+- "ui_sonner_toasterprops": "ToasterProps" | kind=code-symbol | source=src/components/ui/sonner.tsx:L3 | neighbors=[sonner.tsx]
+- "ui_switch_switch": "Switch" | kind=code-symbol | source=src/components/ui/switch.tsx:L6 | neighbors=[switch.tsx]
+- "ui_table_table": "Table" | kind=code-symbol | source=src/components/ui/table.tsx:L5 | neighbors=[table.tsx]
 - "ui_table_tablebody": "TableBody" | kind=code-symbol | source=src/components/ui/table.tsx:L22 | neighbors=[table.tsx]
 - "ui_table_tablecaption": "TableCaption" | kind=code-symbol | source=src/components/ui/table.tsx:L86 | neighbors=[table.tsx]
 - "ui_table_tablecell": "TableCell" | kind=code-symbol | source=src/components/ui/table.tsx:L71 | neighbors=[table.tsx]

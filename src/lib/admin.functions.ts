@@ -1377,12 +1377,12 @@ export const adminListWebsiteLinks = createServerFn({ method: "GET" })
       .select("id, full_name, email, company, website_url, snippet_active");
     if (error) throw new Error(error.message);
     const ids = (profiles ?? []).map((p: any) => p.id);
-    const { data: pings } = await supabase
-      .from("site_pings")
-      .select("user_id")
-      .in("user_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]);
+    // PERF-2: tel via SQL-aggregatie i.p.v. alle site_pings-rijen op te halen.
+    const { data: pings } = await supabaseAdmin.rpc("site_ping_counts" as any, {
+      p_user_ids: ids.length ? ids : [],
+    });
     const pingCounts: Record<string, number> = {};
-    for (const p of pings ?? []) pingCounts[(p as any).user_id] = (pingCounts[(p as any).user_id] ?? 0) + 1;
+    for (const r of (pings ?? []) as any[]) pingCounts[r.user_id] = Number(r.count);
     return {
       items: (profiles ?? []).map((p: any) => ({ ...p, ping_count: pingCounts[p.id] ?? 0 })),
     };
@@ -1423,16 +1423,18 @@ export const adminListProjects = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
 
     const ids = (projects ?? []).map((p: any) => p.id);
+    const primaryIds = Array.from(new Set((projects ?? []).map((p: any) => p.primary_user_id).filter(Boolean)));
     const [membersRes, profilesRes, pingsRes] = await Promise.all([
       supabaseAdmin.from("project_members" as any).select("project_id, user_id").in("project_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]),
       supabase.from("profiles").select("id, full_name, email"),
-      supabaseAdmin.from("site_pings").select("user_id"),
+      // PERF-2: tel alleen de pings van de betrokken primary-users, via SQL-aggregatie.
+      supabaseAdmin.rpc("site_ping_counts" as any, { p_user_ids: primaryIds.length ? primaryIds : [] }),
     ]);
 
     const profileMap: Record<string, any> = {};
     for (const p of (profilesRes.data ?? []) as any[]) profileMap[p.id] = p;
     const pingCounts: Record<string, number> = {};
-    for (const p of (pingsRes.data ?? []) as any[]) pingCounts[p.user_id] = (pingCounts[p.user_id] ?? 0) + 1;
+    for (const r of (pingsRes.data ?? []) as any[]) pingCounts[r.user_id] = Number(r.count);
 
     const membersByProject: Record<string, any[]> = {};
     for (const m of (membersRes.data ?? []) as any[]) {
@@ -1977,29 +1979,42 @@ async function generateDueRecurringTaskInstances(projectId: string) {
     .not("recurrence", "is", null)
     .is("recurrence_parent_id", null);
 
-  for (const template of (templates ?? []) as any[]) {
-    const { data: lastInstance } = await supabaseAdmin
-      .from("project_tasks" as any)
-      .select("*")
-      .eq("recurrence_parent_id", template.id)
-      .order("due_date", { ascending: false, nullsFirst: false })
-      .limit(1)
-      .maybeSingle();
+  const tmpls = (templates ?? []) as any[];
+  if (tmpls.length === 0) return;
 
-    const today = new Date().toISOString().slice(0, 10);
-    const isPastDue = (d: string | null) => !!d && d < today;
+  // PERF-4: haal alle laatste instances in één query op i.p.v. per template.
+  const templateIds = tmpls.map((t) => t.id);
+  const { data: instances } = await supabaseAdmin
+    .from("project_tasks" as any)
+    .select("recurrence_parent_id, due_date, status")
+    .in("recurrence_parent_id", templateIds);
 
+  // Laatste instance per parent bepalen (hoogste due_date, nulls achteraan —
+  // gelijk aan de oude order(due_date desc, nullsFirst:false).limit(1)).
+  const latestByParent = new Map<string, any>();
+  for (const inst of (instances ?? []) as any[]) {
+    const cur = latestByParent.get(inst.recurrence_parent_id);
+    if (!cur || (inst.due_date ?? "") > (cur.due_date ?? "")) {
+      latestByParent.set(inst.recurrence_parent_id, inst);
+    }
+  }
+
+  const today = new Date().toISOString().slice(0, 10);
+  const isPastDue = (d: string | null) => !!d && d < today;
+
+  const toInsert: any[] = [];
+  for (const template of tmpls) {
+    const lastInstance = latestByParent.get(template.id) ?? null;
     const shouldGenerate =
       !lastInstance ||
-      ((lastInstance as any).status === "done" && isPastDue((lastInstance as any).due_date));
-
+      (lastInstance.status === "done" && isPastDue(lastInstance.due_date));
     if (!shouldGenerate) continue;
 
     const newDueDate = lastInstance
-      ? nextRecurrenceDueDate((lastInstance as any).due_date, template.recurrence)
-      : (template.due_date ?? new Date().toISOString().slice(0, 10));
+      ? nextRecurrenceDueDate(lastInstance.due_date, template.recurrence)
+      : (template.due_date ?? today);
 
-    await supabaseAdmin.from("project_tasks" as any).insert({
+    toInsert.push({
       project_id: projectId,
       title: template.title,
       description: template.description,
@@ -2010,6 +2025,11 @@ async function generateDueRecurringTaskInstances(projectId: string) {
       recurrence_parent_id: template.id,
       created_by: template.created_by,
     });
+  }
+
+  // PERF-4: bulk-insert i.p.v. per template.
+  if (toInsert.length > 0) {
+    await supabaseAdmin.from("project_tasks" as any).insert(toInsert);
   }
 }
 
@@ -2491,18 +2511,14 @@ export const adminGetProjectsDashboardWidgets = createServerFn({ method: "GET" }
       .sort((a: any, b: any) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
 
     const projectIds = (projects ?? []).map((p: any) => p.id);
+    // PERF-3: één rij per project via DISTINCT ON i.p.v. alle audit_log-rijen ophalen.
     const { data: activity } = projectIds.length
-      ? await supabaseAdmin
-          .from("audit_log" as any)
-          .select("target_id, created_at")
-          .eq("target_type", "project")
-          .in("target_id", projectIds)
-          .order("created_at", { ascending: false })
+      ? await supabaseAdmin.rpc("project_last_activity" as any, { p_project_ids: projectIds })
       : { data: [] as any[] };
 
     const lastActivityByProject: Record<string, string> = {};
     for (const a of (activity ?? []) as any[]) {
-      if (!lastActivityByProject[a.target_id]) lastActivityByProject[a.target_id] = a.created_at;
+      if (!lastActivityByProject[a.project_id]) lastActivityByProject[a.project_id] = a.last_activity;
     }
 
     const cutoff = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);

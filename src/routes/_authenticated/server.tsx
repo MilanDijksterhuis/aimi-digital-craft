@@ -353,6 +353,7 @@ function ServerPage() {
     queryKey: ["monitoring-latest"],
     queryFn: () => latestFn({}),
     refetchInterval: 30_000,
+    refetchIntervalInBackground: false,
     retry: 1,
   });
 
@@ -360,6 +361,7 @@ function ServerPage() {
     queryKey: ["daily-check-latest"],
     queryFn: () => dailyCheckFn({}),
     refetchInterval: 5 * 60_000,
+    refetchIntervalInBackground: false,
     retry: 1,
   });
 
@@ -391,6 +393,7 @@ function ServerPage() {
     queryKey: ["monitoring-alerts"],
     queryFn: () => alertsFn({ data: { resolved: false, limit: 50 } }),
     refetchInterval: 30_000,
+    refetchIntervalInBackground: false,
     retry: 1,
   });
 

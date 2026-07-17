@@ -17,10 +17,22 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_portal_functions_portallistprojectnotes": "portalListProjectNotes" | kind=code-symbol | source=src/lib/portal.functions.ts:L740 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalsaveonboardingstep": "portalSaveOnboardingStep" | kind=code-symbol | source=src/lib/portal.functions.ts:L160 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_postcustomercomment": "postCustomerComment" | kind=code-symbol | source=src/lib/portal.functions.ts:L490 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_requestextracredits": "requestExtraCredits" | kind=code-symbol | source=src/lib/portal.functions.ts:L452 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_requestpasswordreset": "requestPasswordReset" | kind=code-symbol | source=src/lib/portal.functions.ts:L563 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_simple_categories_server": "SIMPLE_CATEGORIES_SERVER" | kind=code-symbol | source=src/lib/portal.functions.ts:L338 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_submitchangerequest": "submitChangeRequest" | kind=code-symbol | source=src/lib/portal.functions.ts:L340 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_updatemyprofile": "updateMyProfile" | kind=code-symbol | source=src/lib/portal.functions.ts:L114 | neighbors=[portal.functions.ts]
+- "lib_project_status_projectpriority": "ProjectPriority" | kind=code-symbol | source=src/lib/project-status.ts:L36 | neighbors=[project-status.ts]
+- "lib_project_status_projectprogress": "projectProgress()" | kind=code-symbol | source=src/lib/project-status.ts:L71 | neighbors=[project-status.ts]
+- "lib_project_status_projectstatus": "ProjectStatus" | kind=code-symbol | source=src/lib/project-status.ts:L14 | neighbors=[project-status.ts]
+- "lib_rate_limit_ban_durations_ms": "BAN_DURATIONS_MS" | kind=code-symbol | source=src/lib/rate-limit.ts:L8 | neighbors=[rate-limit.ts]
+- "lib_rate_limit_banentry": "BanEntry" | kind=code-symbol | source=src/lib/rate-limit.ts:L2 | neighbors=[rate-limit.ts]
 - "lib_rate_limit_bans": "bans" | kind=code-symbol | source=src/lib/rate-limit.ts:L5 | neighbors=[rate-limit.ts]
 - "lib_rate_limit_entry": "Entry" | kind=code-symbol | source=src/lib/rate-limit.ts:L1 | neighbors=[rate-limit.ts]
 - "lib_rate_limit_store": "store" | kind=code-symbol | source=src/lib/rate-limit.ts:L4 | neighbors=[rate-limit.ts]
-- "lib_rbac_all_permission_actions": "ALL_PERMISSION_ACTIONS" | kind=code-symbol | source=src/lib/rbac.ts:L37 | neighbors=[rbac.ts]
 - "lib_rbac_approle": "AppRole" | kind=code-symbol | source=src/lib/rbac.ts:L2 | neighbors=[rbac.ts]
 - "lib_rbac_isstaffrole": "isStaffRole()" | kind=code-symbol | source=src/lib/rbac.ts:L30 | neighbors=[rbac.ts]
 - "lib_rbac_staff_roles": "STAFF_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L21 | neighbors=[rbac.ts]
@@ -45,18 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260523221809_68010212_e7a6_4d77_92dc_e3309d2c6d55_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523221809_68010212-e7a6-4d77-92dc-e3309d2c6d55.sql:L2 | neighbors=[20260523221809_68010212-e7a6-4d77-92dc-…]
 - "migrations_20260523222514_76072c48_00ff_4a61_8b80_8230f2a74134": "20260523222514_76072c48-00ff-4a61-8b80-8230f2a74134.sql" | kind=code-symbol | source=supabase/migrations/20260523222514_76072c48-00ff-4a61-8b80-8230f2a74134.sql:L1 | neighbors=[public.has_role()]
 - "migrations_20260523222514_76072c48_00ff_4a61_8b80_8230f2a74134_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523222514_76072c48-00ff-4a61-8b80-8230f2a74134.sql:L1 | neighbors=[20260523222514_76072c48-00ff-4a61-8b80-…]
-- "migrations_20260523222548_37e6cf4c_26dd_416f_ae8a_1a9bf3ce42ed": "20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql" | kind=code-symbol | source=supabase/migrations/20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql:L1 | neighbors=[public.has_role()]
-- "migrations_20260523222548_37e6cf4c_26dd_416f_ae8a_1a9bf3ce42ed_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql:L1 | neighbors=[20260523222548_37e6cf4c-26dd-416f-ae8a-…]
-- "migrations_20260523222619_97b0ab7e_0852_46af_8704_4acb849c348d": "20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql" | kind=code-symbol | source=supabase/migrations/20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql:L1 | neighbors=[public.available_credits()]
-- "migrations_20260523222619_97b0ab7e_0852_46af_8704_4acb849c348d_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql:L1 | neighbors=[20260523222619_97b0ab7e-0852-46af-8704-…]
-- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_audit_log": "public.audit_log" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L74 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
-- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_has_any_role": "public.has_any_role()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L36 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
-- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L10 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
-- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_is_staff": "public.is_staff()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L52 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
-- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_is_super_admin": "public.is_super_admin()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L58 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
-- "migrations_20260523230242_fc262cc7_dc2e_4ff3_bd1e_ce9dd2286b61": "20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql" | kind=code-symbol | source=supabase/migrations/20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql:L1 | neighbors=[public.contact_submissions]
-- "migrations_20260523230242_fc262cc7_dc2e_4ff3_bd1e_ce9dd2286b61_public_contact_submissions": "public.contact_submissions" | kind=code-symbol | source=supabase/migrations/20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql:L2 | neighbors=[20260523230242_fc262cc7-dc2e-4ff3-bd1e-…]
-- "migrations_20260524095411_23164716_fa8a_4889_832b_f72b78c962ad_public_extra_change_requests": "public.extra_change_requests" | kind=code-symbol | source=supabase/migrations/20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql:L37 | neighbors=[20260524095411_23164716-fa8a-4889-832b-…]
 
 ## Instructions
 

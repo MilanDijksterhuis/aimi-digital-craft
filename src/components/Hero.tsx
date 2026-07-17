@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import heroImg from "../assets/hero-forest.jpg";
+import heroImg from "../assets/hero-forest.webp";
 
 export function Hero() {
   return (
@@ -12,6 +12,9 @@ export function Hero() {
         backgroundPosition: "center 30%",
       }}
     >
+      {/* PERF-7: hero is de LCP-afbeelding (CSS background). React 19 hoist deze
+          preload-hint naar de head zodat de browser 'm met hoge prioriteit laadt. */}
+      <link rel="preload" as="image" href={heroImg} fetchPriority="high" />
       {/* Dark gradient overlay — top for nav legibility */}
       <div
         className="absolute inset-0"

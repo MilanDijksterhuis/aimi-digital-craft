@@ -88,6 +88,7 @@
       "src/lib/error-page.ts",
       "src/lib/monitoring.functions.ts",
       "src/lib/monitoring.shared.ts",
+      "src/lib/permissions.server.ts",
       "src/lib/portal.functions.ts",
       "src/lib/project-status.ts",
       "src/lib/rate-limit.ts",
@@ -153,6 +154,10 @@
       "supabase/migrations/20260714110000_customer_onboarding_flow.sql",
       "supabase/migrations/20260714120000_customer_self_onboarding_toggle.sql",
       "supabase/migrations/20260716090000_customer_portal_tutorial_toggle.sql",
+      "supabase/migrations/20260717120000_sec1_pin_block_expiry_columns.sql",
+      "supabase/migrations/20260717130000_project_rls_baseline.sql",
+      "supabase/migrations/20260717140000_sec4_own_projects_primary_user.sql",
+      "supabase/migrations/20260717150000_sec5_durable_rate_limit.sql",
       "vite.config.ts"
     ],
     "document": [
@@ -190,9 +195,12 @@
       ".graphify/description-instructions/batch-029.md",
       ".graphify/description-instructions/batch-030.md",
       ".graphify/description-instructions/batch-031.md",
+      ".graphify/description-instructions/batch-032.md",
+      ".graphify/description-instructions/batch-033.md",
       ".graphify/label-instructions/communities.md",
       ".lovable/plan.md",
       "CLAUDE.md",
+      "docs/review-2026-07-16.md",
       "graphify-out/GRAPH_REPORT.md",
       "graphify-out/graph.html",
       "graphify-out/obsidian/$schema.md",
@@ -1022,16 +1030,14 @@
     "paper": [],
     "image": [
       "public/favicon.svg",
-      "public/hero-forest.jpg",
-      "public/og-image.svg",
-      "src/assets/hero-forest.jpg"
+      "public/og-image.svg"
     ],
     "video": []
   },
-  "total_files": 1019,
-  "total_words": 374294,
+  "total_files": 1025,
+  "total_words": 264044,
   "needs_graph": true,
-  "warning": "Large corpus: 1019 files · ~374.294 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
+  "warning": "Large corpus: 1025 files · ~264.044 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
   "skipped_sensitive": [
     "graphify-out/obsidian/PasswordResetsPanel().md",
     "graphify-out/obsidian/adminListPasswordResets.md",
@@ -1045,7 +1051,7 @@
   "graphifyignore_patterns": 27,
   "git": {
     "source_owner": "git",
-    "source_hash": "c27ffd9d2912cb3ef331a0a5e858cd6ea4c0c764",
+    "source_hash": "a3773ee34a596fb2964b7b639fc365984e0098aa",
     "branches": [
       "main",
       "tmp-main-merge",
@@ -1064,13 +1070,13 @@
     "source": "default-auto",
     "root": ".",
     "git_root": ".",
-    "head": "c27ffd9d2912cb3ef331a0a5e858cd6ea4c0c764",
-    "candidate_count": 1281,
-    "included_count": 1019,
-    "excluded_untracked_count": 35,
+    "head": "a3773ee34a596fb2964b7b639fc365984e0098aa",
+    "candidate_count": 1319,
+    "included_count": 1025,
+    "excluded_untracked_count": 18,
     "excluded_ignored_count": 35596,
     "excluded_sensitive_count": 8,
-    "missing_committed_count": 14,
+    "missing_committed_count": 16,
     "warnings": [],
     "recommendation": "Use --scope all or graphify.yaml inputs.corpus for a knowledge-base folder."
   }
