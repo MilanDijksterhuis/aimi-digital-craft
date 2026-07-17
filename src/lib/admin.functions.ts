@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { computeMonitoringStats, measureResponseTime, assertPublicHost } from "./monitoring.shared";
-import { can, type PermissionAction } from "./rbac";
+import { getEffectivePermissions, ensurePermission } from "./permissions.server";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -17,29 +17,6 @@ import {
 const ADMIN_LIKE_ROLES = ["super_admin", "co_admin", "admin"];
 const STAFF_ROLES_SRV = ["super_admin", "co_admin", "support_agent", "viewer", "admin"];
 const STAFF_BASE_ROLES = ["super_admin", "co_admin", "support_agent", "viewer", "sales", "admin"];
-const ALL_PERMISSION_ACTIONS: PermissionAction[] = [
-  "view_admin",
-  "view_all_changes",
-  "edit_change_status",
-  "edit_change_fields",
-  "delete_change_soft",
-  "delete_change_hard",
-  "restore_change",
-  "force_paid",
-  "create_change_for_customer",
-  "manage_customers",
-  "generate_invoice",
-  "export_csv",
-  "view_audit_log",
-  "manage_team",
-  "chat_with_customers",
-  "leads_view",
-  "leads_manage",
-  "website_links_view",
-  "website_links_manage",
-  "appointments_manage",
-  "alerts_view",
-];
 
 async function getRoles(supabase: any, userId: string): Promise<string[]> {
   const { data } = await supabase.from("user_roles").select("role").eq("user_id", userId);
@@ -1216,6 +1193,7 @@ export const adminSoftDeleteChange = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "delete_change_soft");
     const { error } = await supabase
       .from("change_requests")
       .update({ deleted_at: new Date().toISOString(), deleted_by: userId })
@@ -1233,6 +1211,7 @@ export const adminBulkSoftDelete = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "delete_change_soft");
     const { error } = await supabase
       .from("change_requests")
       .update({ deleted_at: new Date().toISOString(), deleted_by: userId })
@@ -1250,6 +1229,7 @@ export const adminRestoreChange = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "restore_change");
     const { error } = await supabase
       .from("change_requests")
       .update({
@@ -1271,6 +1251,7 @@ export const adminHardDeleteChange = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "delete_change_hard");
     const { error } = await supabase.from("change_requests").delete().eq("id", data.id);
     if (error) throw new Error(error.message);
     await logAudit(supabase, userId, "change_hard_deleted", "change_request", data.id);
@@ -2806,42 +2787,9 @@ export const adminGetMyEffectivePermissions = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
-    const systemRoles = await getRoles(supabase, userId);
-
-    const { data: customRoleRows } = await supabaseAdmin
-      .from("user_custom_roles" as any)
-      .select("role_id, roles:role_id(key)")
-      .eq("user_id", userId);
-    const customRoleKeys: string[] = ((customRoleRows as any) ?? [])
-      .map((r: any) => r.roles?.key)
-      .filter((k: any): k is string => !!k);
-
-    const allRoleKeys = Array.from(new Set([...systemRoles, ...customRoleKeys]));
-
-    const { data: overrideRows } = await supabaseAdmin
-      .from("role_permissions" as any)
-      .select("role, permission, allowed")
-      .in("role", allRoleKeys.length > 0 ? allRoleKeys : ["__none__"]);
-
-    const permissions = {} as Record<PermissionAction, boolean>;
-    for (const action of ALL_PERMISSION_ACTIONS) {
-      permissions[action] = can(systemRoles, action);
-    }
-
-    // Group explicit overrides per permission so an "allowed: true" from any
-    // held role always wins over an "allowed: false" from another held role.
-    const overridesByAction = new Map<string, boolean[]>();
-    for (const row of (overrideRows as any) ?? []) {
-      const list = overridesByAction.get(row.permission) ?? [];
-      list.push(row.allowed);
-      overridesByAction.set(row.permission, list);
-    }
-    for (const [permission, values] of overridesByAction) {
-      const action = permission as PermissionAction;
-      if (!ALL_PERMISSION_ACTIONS.includes(action)) continue;
-      permissions[action] = values.some((v) => v === true);
-    }
-
+    // Shared with server-side enforcement (ensurePermission) so the UI and the
+    // server agree on the effective permission set — single source of truth.
+    const permissions = await getEffectivePermissions(supabase, userId);
     return { permissions };
   });
 
@@ -3005,6 +2953,7 @@ export const adminAssignCustomRole = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "manage_team");
 
     const { data: existingStaffRole } = await supabaseAdmin
       .from("user_roles")
@@ -3031,6 +2980,7 @@ export const adminRemoveCustomRole = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
+    await ensurePermission(supabase, userId, "manage_team");
 
     await supabaseAdmin.from("user_custom_roles" as any).delete().eq("user_id", data.user_id).eq("role_id", data.role_id);
 

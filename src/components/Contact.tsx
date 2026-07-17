@@ -14,6 +14,8 @@ export function Contact() {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  // SEC-6 honeypot: onzichtbaar voor mensen, bots vullen het vaak in.
+  const [companyWebsite, setCompanyWebsite] = useState("");
 
   const calendlyRef = useRef<HTMLDivElement | null>(null);
 
@@ -47,8 +49,9 @@ export function Contact() {
     setError(null);
     setPending(true);
     try {
-      await submit({ data: form });
+      await submit({ data: { ...form, company_website: companyWebsite } });
       setForm({ name: "", email: "", message: "" });
+      setCompanyWebsite("");
       setSent(true);
       toast.success("Bericht verzonden", {
         description: "We nemen zo snel mogelijk contact met je op.",
@@ -201,6 +204,20 @@ export function Contact() {
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3 resize-none"
                 />
+              </div>
+              {/* SEC-6 honeypot: buiten beeld, weg van screenreaders en tab-volgorde. */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+                <label>
+                  Bedrijfswebsite (niet invullen)
+                  <input
+                    type="text"
+                    name="company_website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={companyWebsite}
+                    onChange={(e) => setCompanyWebsite(e.target.value)}
+                  />
+                </label>
               </div>
               {error && (
                 <p role="alert" className="text-sm text-destructive">

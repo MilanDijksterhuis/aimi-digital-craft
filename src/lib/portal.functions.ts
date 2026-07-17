@@ -518,14 +518,19 @@ export const postCustomerComment = createServerFn({ method: "POST" })
       .select("title")
       .eq("id", data.request_id)
       .single();
-    const { data: admins } = await supabase
-      .from("profiles")
-      .select("id")
-      .in("role", ["admin", "superadmin"]);
-    if (changeReq && admins && admins.length > 0) {
-      await supabase.from("notifications").insert(
-        admins.map((a: any) => ({
-          user_id: a.id,
+    // SEC-9: rollen staan in user_roles, niet op profiles (er is geen
+    // profiles.role kolom en "superadmin" bestaat niet als rol). Lees de echte
+    // staff-rollen en notificeer via supabaseAdmin — de klant-JWT mag onder RLS
+    // de admin-rollen niet lezen en geen notifications voor anderen inserten.
+    const { data: adminRoles } = await supabaseAdmin
+      .from("user_roles")
+      .select("user_id")
+      .in("role", ["super_admin", "co_admin", "admin"]);
+    const adminIds = Array.from(new Set((adminRoles ?? []).map((r: any) => r.user_id)));
+    if (changeReq && adminIds.length > 0) {
+      await supabaseAdmin.from("notifications").insert(
+        adminIds.map((id) => ({
+          user_id: id,
           title: `Klant reageerde: ${changeReq.title}`,
           message: data.body.slice(0, 140),
         })),

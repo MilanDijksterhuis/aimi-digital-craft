@@ -1,58 +1,56 @@
-type Entry = { count: number; resetAt: number };
-type BanEntry = { until: number; strikes: number };
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
-const store = new Map<string, Entry>();
-const bans = new Map<string, BanEntry>();
+// SEC-5: rate limiting en IP-bans worden in een duurzame, gedeelde Postgres-
+// store bijgehouden (tabellen rate_limit_hits/rate_limit_bans + de functies
+// check_rate_limit/is_ip_banned/record_strike, zie migratie 20260717150000).
+// Zo blijven limieten gelden over meerdere PM2-instances en overleven ze een
+// deploy. Alle functies zijn fail-open: als de DB (of de nog niet toegepaste
+// migratie) onbereikbaar is, wordt het request toegestaan — rate limiting mag
+// nooit een single point of failure worden dat de hele site plat legt.
 
-// Ban durations per strike: 5min → 1h → 24h → 7d
-const BAN_DURATIONS_MS = [
-  5 * 60 * 1000,
-  60 * 60 * 1000,
-  24 * 60 * 60 * 1000,
-  7 * 24 * 60 * 60 * 1000,
-];
-
-export function checkRateLimit(
+export async function checkRateLimit(
   key: string,
   limit: number,
   windowMs: number,
-): { allowed: boolean; retryAfter: number } {
-  const now = Date.now();
-  const entry = store.get(key);
-
-  if (!entry || now >= entry.resetAt) {
-    store.set(key, { count: 1, resetAt: now + windowMs });
+): Promise<{ allowed: boolean; retryAfter: number }> {
+  try {
+    const { data, error } = await supabaseAdmin.rpc("check_rate_limit" as any, {
+      p_key: key,
+      p_limit: limit,
+      p_window_seconds: Math.ceil(windowMs / 1000),
+    });
+    const row = Array.isArray(data) ? data[0] : data;
+    if (error || !row) return { allowed: true, retryAfter: 0 };
+    return { allowed: !!row.allowed, retryAfter: row.retry_after ?? 0 };
+  } catch {
     return { allowed: true, retryAfter: 0 };
   }
+}
 
-  if (entry.count >= limit) {
-    return { allowed: false, retryAfter: Math.ceil((entry.resetAt - now) / 1000) };
+export async function isIpBanned(ip: string): Promise<{ banned: boolean; retryAfter: number }> {
+  try {
+    const { data, error } = await supabaseAdmin.rpc("is_ip_banned" as any, { p_ip: ip });
+    const row = Array.isArray(data) ? data[0] : data;
+    if (error || !row) return { banned: false, retryAfter: 0 };
+    return { banned: !!row.banned, retryAfter: row.retry_after ?? 0 };
+  } catch {
+    return { banned: false, retryAfter: 0 };
   }
-
-  entry.count++;
-  return { allowed: true, retryAfter: 0 };
 }
 
-export function isIpBanned(ip: string): { banned: boolean; retryAfter: number } {
-  const ban = bans.get(ip);
-  if (!ban) return { banned: false, retryAfter: 0 };
-  if (Date.now() >= ban.until) return { banned: false, retryAfter: 0 };
-  return { banned: true, retryAfter: Math.ceil((ban.until - Date.now()) / 1000) };
+export async function recordStrike(ip: string): Promise<void> {
+  try {
+    await supabaseAdmin.rpc("record_strike" as any, { p_ip: ip });
+  } catch {
+    /* fail-open: een niet-geregistreerde strike is acceptabel */
+  }
 }
 
-export function recordStrike(ip: string): void {
-  const existing = bans.get(ip);
-  const strikes = (existing?.strikes ?? 0) + 1;
-  const durationMs = BAN_DURATIONS_MS[Math.min(strikes - 1, BAN_DURATIONS_MS.length - 1)];
-  bans.set(ip, { until: Date.now() + durationMs, strikes });
-}
-
-// Dit project draait op Cloudflare Workers: cf-connecting-ip wordt door
-// Cloudflare zelf gezet en is niet door de client te overschrijven. De
-// x-forwarded-for fallback is dat wél — een client kan die header vrij
-// spoofen om rate limits en IP-bans te omzeilen. Gebruik x-forwarded-for
-// daarom alleen als cf-connecting-ip echt ontbreekt (buiten Cloudflare, bv.
-// lokale dev), nooit als primaire bron in productie.
+// Op de VPS (Nitro node-server achter Nginx, met Cloudflare ervoor) zet
+// Cloudflare cf-connecting-ip; die is niet door de client te overschrijven.
+// x-forwarded-for is dat wél — een client kan die header spoofen om limieten
+// en bans te omzeilen. Gebruik x-forwarded-for daarom alleen als fallback als
+// cf-connecting-ip echt ontbreekt (bv. lokale dev), nooit als primaire bron.
 export function getClientIp(request: Request): string {
   const cfIp = request.headers.get("cf-connecting-ip");
   if (cfIp) return cfIp;

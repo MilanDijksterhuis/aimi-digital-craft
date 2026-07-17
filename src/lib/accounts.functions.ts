@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { ensurePermission } from "./permissions.server";
 
 const ADMIN_LIKE = ["super_admin", "co_admin", "admin"];
 const SUPER = ["super_admin", "admin"];
@@ -75,6 +76,7 @@ export const adminChangeAccountRole = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuper(supabase, userId);
+    await ensurePermission(supabase, userId, "manage_team");
     if (data.target_user_id === userId) throw new Error("Je kunt je eigen rol niet wijzigen.");
     const { adminReplaceRole } = await import("./admin.server");
     await adminReplaceRole(data.target_user_id, data.role);

@@ -1,0 +1,1 @@
+{"nodes":[{"id":"migrations_20260714120000_customer_self_onboarding_toggle","label":"20260714120000_customer_self_onboarding_toggle.sql","file_type":"code","source_file":"supabase/migrations/20260714120000_customer_self_onboarding_toggle.sql","source_location":"L1"}],"edges":[]}

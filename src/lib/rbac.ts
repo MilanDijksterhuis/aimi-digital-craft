@@ -31,6 +31,33 @@ export function isStaffRole(r: string) {
   return STAFF_ROLES.includes(r as AppRole);
 }
 
+// Canonical list of every permission action. Single source of truth for both
+// the client UI (usePermissions) and the server-side effective-permission
+// computation (permissions.server.ts).
+export const ALL_PERMISSION_ACTIONS: PermissionAction[] = [
+  "view_admin",
+  "view_all_changes",
+  "edit_change_status",
+  "edit_change_fields",
+  "delete_change_soft",
+  "delete_change_hard",
+  "restore_change",
+  "force_paid",
+  "create_change_for_customer",
+  "manage_customers",
+  "generate_invoice",
+  "export_csv",
+  "view_audit_log",
+  "manage_team",
+  "chat_with_customers",
+  "leads_view",
+  "leads_manage",
+  "website_links_view",
+  "website_links_manage",
+  "appointments_manage",
+  "alerts_view",
+];
+
 // Permission helpers — single source of truth for UI gating
 export function can(roles: string[], action: PermissionAction): boolean {
   const set = new Set(roles);

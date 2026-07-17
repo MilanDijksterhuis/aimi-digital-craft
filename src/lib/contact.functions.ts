@@ -20,10 +20,20 @@ export const submitContactForm = createServerFn({ method: "POST" })
         name: z.string().trim().min(1).max(200),
         email: z.string().trim().email().max(200),
         message: z.string().trim().min(1).max(5000),
+        // SEC-6 honeypot: onzichtbaar veld dat mensen leeg laten en bots vaak
+        // invullen. Optioneel zodat legitieme submits zonder het veld blijven
+        // werken.
+        company_website: z.string().max(200).optional(),
       })
       .parse(d),
   )
   .handler(async ({ data }) => {
+    // Honeypot ingevuld → vrijwel zeker een bot. Doe alsof het slaagt (geen
+    // signaal terug dat de val bestaat), maar sla niets op. IP-rate-limiting
+    // gebeurt daarnaast al in de globale middleware (SEC-5, duurzaam).
+    if (data.company_website && data.company_website.trim() !== "") {
+      return { ok: true };
+    }
     const { error } = await supabaseAdmin.from("contact_submissions").insert({
       name: data.name,
       email: data.email,

@@ -150,7 +150,7 @@ function applySecurityHeaders(response: Response, request: Request): Response {
   return response;
 }
 
-function applyRateLimit(request: Request): Response | null {
+async function applyRateLimit(request: Request): Promise<Response | null> {
   if (request.method !== "POST" && request.method !== "PUT") return null;
 
   const ip = getClientIp(request);
@@ -160,7 +160,7 @@ function applyRateLimit(request: Request): Response | null {
   // vaak één publiek IP over veel klanten (CGNAT), dus een ban op GET
   // blokkeerde daarmee de hele pagina (incl. inloggen) voor onschuldige
   // mobiele gebruikers op hetzelfde IP als een eerdere misbruiker.
-  const ban = isIpBanned(ip);
+  const ban = await isIpBanned(ip);
   if (ban.banned) {
     console.warn(`[security] geweigerd (ban actief) ip=${ip} retryAfter=${ban.retryAfter}s path=${new URL(request.url).pathname}`);
     return rateLimitedResponse(ban.retryAfter);
@@ -171,9 +171,9 @@ function applyRateLimit(request: Request): Response | null {
 
   // Contact form server function and site-error: strict limit
   if (path.includes("submitContactForm") || path === "/api/public/site-error") {
-    const { allowed, retryAfter } = checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
+    const { allowed, retryAfter } = await checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
     if (!allowed) {
-      recordStrike(ip);
+      await recordStrike(ip);
       console.warn(`[security] rate limit overschreden ip=${ip} path=${new URL(request.url).pathname}`);
       return rateLimitedResponse(retryAfter);
     }
@@ -181,9 +181,9 @@ function applyRateLimit(request: Request): Response | null {
   }
 
   // All other POST/PUT endpoints: moderate limit
-  const { allowed, retryAfter } = checkRateLimit(`general:${ip}`, 30, 60 * 1000);
+  const { allowed, retryAfter } = await checkRateLimit(`general:${ip}`, 30, 60 * 1000);
   if (!allowed) {
-    recordStrike(ip);
+    await recordStrike(ip);
     return rateLimitedResponse(retryAfter);
   }
   return null;
@@ -191,7 +191,7 @@ function applyRateLimit(request: Request): Response | null {
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
-    const limited = applyRateLimit(request);
+    const limited = await applyRateLimit(request);
     if (limited) return applySecurityHeaders(limited, request);
 
     try {

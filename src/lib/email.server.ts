@@ -1,5 +1,17 @@
 import nodemailer from "nodemailer";
 
+// SEC-8: escape waarden voordat ze in de HTML-body worden geïnterpoleerd.
+// full_name is admin-gecontroleerde vrije tekst; zonder escaping zou HTML in
+// een naam in de mailclient renderen.
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT ?? 587),
@@ -41,7 +53,7 @@ export async function sendWelcomeEmail(to: string, fullName: string, tempPasswor
           <tr>
             <td style="padding:32px 40px;">
               <h1 style="margin:0 0 12px;font-size:24px;font-weight:600;color:#ffffff;letter-spacing:-0.02em;">
-                Welkom, ${fullName}!
+                Welkom, ${escapeHtml(fullName)}!
               </h1>
               <p style="margin:0 0 24px;font-size:15px;color:#9ca3af;line-height:1.6;">
                 Je AIMI-account is aangemaakt. Hieronder vind je jouw tijdelijke inloggegevens.
@@ -55,13 +67,13 @@ export async function sendWelcomeEmail(to: string, fullName: string, tempPasswor
                       <tr>
                         <td style="padding-bottom:12px;">
                           <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#8a8f98;">E-mailadres</span><br/>
-                          <span style="font-size:15px;color:#ffffff;font-weight:500;">${to}</span>
+                          <span style="font-size:15px;color:#ffffff;font-weight:500;">${escapeHtml(to)}</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#8a8f98;">Tijdelijk wachtwoord</span><br/>
-                          <span style="font-size:15px;color:#ffffff;font-weight:500;font-family:monospace;letter-spacing:0.05em;">${tempPassword}</span>
+                          <span style="font-size:15px;color:#ffffff;font-weight:500;font-family:monospace;letter-spacing:0.05em;">${escapeHtml(tempPassword)}</span>
                         </td>
                       </tr>
                     </table>
