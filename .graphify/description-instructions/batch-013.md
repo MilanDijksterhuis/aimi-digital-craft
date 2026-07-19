@@ -1,4 +1,4 @@
-# Node Description Batch 14 of 35
+# Node Description Batch 14 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_auth_guards_server_getroles": "getRoles()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L11 | neighbors=[auth-guards.server.ts, ensureRoles()]
+- "lib_csv_detectdelimiter": "detectDelimiter()" | kind=code-symbol | source=src/lib/csv.ts:L4 | neighbors=[csv.ts, parseCsv()]
+- "lib_email_server_escapehtml": "escapeHtml()" | kind=code-symbol | source=src/lib/email.server.ts:L6 | neighbors=[email.server.ts, sendWelcomeEmail()]
+- "lib_email_server_sendwelcomeemail": "sendWelcomeEmail()" | kind=code-symbol | source=src/lib/email.server.ts:L25 | neighbors=[email.server.ts, escapeHtml()]
+- "lib_error_capture_consumelastcapturederror": "consumeLastCapturedError()" | kind=code-symbol | source=src/lib/error-capture.ts:L18 | neighbors=[error-capture.ts, server.ts]
+- "lib_monitoring_shared_isprivateorreservedip": "isPrivateOrReservedIp()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L28 | neighbors=[monitoring.shared.ts, assertPublicHost()]
+- "lib_monitoring_shared_measureresponsetime": "measureResponseTime()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L40 | neighbors=[monitoring.shared.ts, assertPublicHost()]
+- "lib_permissions_server_ensurepermission": "ensurePermission()" | kind=code-symbol | source=src/lib/permissions.server.ts:L78 | neighbors=[permissions.server.ts, getEffectivePermissions()]
 - "lib_permissions_server_geteffectivepermissions": "getEffectivePermissions()" | kind=code-symbol | source=src/lib/permissions.server.ts:L31 | neighbors=[permissions.server.ts, ensurePermission()]
 - "lib_project_status_project_priority_order": "PROJECT_PRIORITY_ORDER" | kind=code-symbol | source=src/lib/project-status.ts:L45 | neighbors=[admin.projecten.tsx, project-status.ts]
 - "lib_rate_limit_getclientip": "getClientIp()" | kind=code-symbol | source=src/lib/rate-limit.ts:L54 | neighbors=[rate-limit.ts, server.ts]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260713130000_project_expansion_phase2_public_project_milestones": "public.project_milestones" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L69 | neighbors=[20260713130000_project_expansion_phase2…, public.project_milestone_dependencies]
 - "migrations_20260713130000_project_expansion_phase2_public_project_template_milestones": "public.project_template_milestones" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L114 | neighbors=[20260713130000_project_expansion_phase2…, public.project_templates]
 - "migrations_20260713130000_project_expansion_phase2_public_project_templates": "public.project_templates" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L105 | neighbors=[20260713130000_project_expansion_phase2…, public.project_template_milestones]
-- "migrations_20260714090000_roles_permissions_module_auth_users": "auth.users" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L41 | neighbors=[20260714090000_roles_permissions_module…, public.user_custom_roles]
-- "migrations_20260714090000_roles_permissions_module_public_roles": "public.roles" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L9 | neighbors=[20260714090000_roles_permissions_module…, public.user_custom_roles]
-- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_bans": "public.rate_limit_bans" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L20 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
-- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_hits": "public.rate_limit_hits" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L13 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
-- "migrations_20260717150000_sec5_durable_rate_limit_v_count": "v_count" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L57 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
-- "migrations_20260717150000_sec5_durable_rate_limit_v_strikes": "v_strikes" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L103 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
-- "migrations_20260717170000_perf2_site_ping_counts": "20260717170000_perf2_site_ping_counts.sql" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L1 | neighbors=[7dbbf18 perf fixes, public.site_ping_counts()]
-- "migrations_20260717180000_perf3_project_last_activity": "20260717180000_perf3_project_last_activity.sql" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L1 | neighbors=[7dbbf18 perf fixes, public.project_last_activity()]
 
 ## Instructions
 

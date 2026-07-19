@@ -1,4 +1,4 @@
-# Node Description Batch 16 of 35
+# Node Description Batch 16 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_toggle_togglevariants": "toggleVariants" | kind=code-symbol | source=src/components/ui/toggle.tsx:L7 | neighbors=[toggle.tsx, toggle-group.tsx]
+- "ui_tooltip_tooltipcontent": "TooltipContent" | kind=code-symbol | source=src/components/ui/tooltip.tsx:L14 | neighbors=[sidebar.tsx, tooltip.tsx]
+- "authenticated_account_accountpage": "AccountPage()" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L12 | neighbors=[account.tsx]
+- "authenticated_admin_aanvragentab": "AanvragenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L453 | neighbors=[admin.tsx]
+- "authenticated_admin_accounts_account_status_color": "ACCOUNT_STATUS_COLOR" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L50 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_account_status_label": "ACCOUNT_STATUS_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L45 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_accountid_accountdetail": "AccountDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L105 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_accountheader": "AccountHeader()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L228 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_activiteittab": "ActiviteitTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L685 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_adminaccountdetailpage": "AdminAccountDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L57 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_customrolessection": "CustomRolesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L608 | neighbors=[admin.accounts.$accountId.tsx]
@@ -38,25 +46,17 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_accounts_newcustomersection": "NewCustomerSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L216 | neighbors=[admin.accounts.tsx]
 - "authenticated_admin_accounts_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L56 | neighbors=[admin.accounts.tsx]
 - "authenticated_admin_accounts_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L22 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_adminpage": "AdminPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L70 | neighbors=[admin.tsx]
-- "authenticated_admin_adminsidebar": "AdminSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L338 | neighbors=[admin.tsx]
-- "authenticated_admin_afsprakentab": "AfsprakenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L527 | neighbors=[admin.tsx]
-- "authenticated_admin_alertspanel": "AlertsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L797 | neighbors=[admin.tsx]
-- "authenticated_admin_archivedchangespanel": "ArchivedChangesPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L761 | neighbors=[admin.tsx]
-- "authenticated_admin_card": "Card()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L329 | neighbors=[admin.tsx]
+- "authenticated_admin_adminpage": "AdminPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L69 | neighbors=[admin.tsx]
+- "authenticated_admin_adminsidebar": "AdminSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L331 | neighbors=[admin.tsx]
+- "authenticated_admin_afsprakentab": "AfsprakenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L520 | neighbors=[admin.tsx]
+- "authenticated_admin_alertspanel": "AlertsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L790 | neighbors=[admin.tsx]
+- "authenticated_admin_archivedchangespanel": "ArchivedChangesPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L754 | neighbors=[admin.tsx]
+- "authenticated_admin_card": "Card()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L322 | neighbors=[admin.tsx]
 - "authenticated_admin_changes_adminchangespage": "AdminChangesPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L36 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_changeid_adminchangedetailpage": "AdminChangeDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L23 | neighbors=[admin.changes.$changeId.tsx]
 - "authenticated_admin_changes_changeid_attachmentlist": "AttachmentList()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L197 | neighbors=[admin.changes.$changeId.tsx]
 - "authenticated_admin_changes_changeid_changedetail": "ChangeDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L59 | neighbors=[admin.changes.$changeId.tsx]
 - "authenticated_admin_changes_changeid_changeheader": "ChangeHeader()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L98 | neighbors=[admin.changes.$changeId.tsx]
-- "authenticated_admin_changes_changeid_communicatietab": "CommunicatieTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L216 | neighbors=[admin.changes.$changeId.tsx]
-- "authenticated_admin_changes_changeid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L150 | neighbors=[admin.changes.$changeId.tsx]
-- "authenticated_admin_changes_changeid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L18 | neighbors=[admin.changes.$changeId.tsx]
-- "authenticated_admin_changes_changeid_tijdlijntab": "TijdlijnTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L269 | neighbors=[admin.changes.$changeId.tsx]
-- "authenticated_admin_changes_changeslistsection": "ChangesListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L166 | neighbors=[admin.changes.tsx]
-- "authenticated_admin_changes_changessidebar": "ChangesSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L87 | neighbors=[admin.changes.tsx]
-- "authenticated_admin_changes_formfield": "FormField()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L332 | neighbors=[admin.changes.tsx]
-- "authenticated_admin_changes_newchangesection": "NewChangeSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L344 | neighbors=[admin.changes.tsx]
 
 ## Instructions
 

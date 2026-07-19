@@ -1,4 +1,4 @@
-﻿import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
+﻿import { createFileRoute, Link, Navigate, Outlet, useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
@@ -37,7 +37,6 @@ import { TeamTab } from "@/components/TeamTab";
 import { DeletedChangesTab } from "@/components/DeletedChangesTab";
 import { BerichtenTab } from "@/components/BerichtenTab";
 import { usePermissions } from "@/hooks/use-permissions";
-import { LeadsPanel } from "@/components/LeadsPanel";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -85,7 +84,7 @@ function AdminPage() {
     | "dashboard" | "accounts" | "password_resets"
     | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
     | "website_links" | "alerts" | "role_permissions" | "team" | "afspraken"
-    | "chat" | "deleted" | "leads";
+    | "chat" | "deleted";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const perms = usePermissions();
 
@@ -133,16 +132,9 @@ function AdminPage() {
     if (msg.includes("Forbidden")) {
       if (perms.isLoading) return <p className="text-muted-foreground">Laden…</p>;
       // Sales-rol: geen toegang tot de admin-overzichtsdata, wel tot Leads.
+      // Stuur door naar de Leads-pagina.
       if (perms.can("leads_view")) {
-        return (
-          <div className="space-y-6">
-            <div>
-              <h1 className="font-display text-4xl font-bold">Sales</h1>
-              <p className="text-muted-foreground">Beheer je leads en houd contact bij.</p>
-            </div>
-            <LeadsPanel />
-          </div>
-        );
+        return <Navigate to="/admin/leads" />;
       }
       return (
         <div className="rounded-xl border border-destructive/40 bg-destructive/10 p-6">
@@ -195,7 +187,9 @@ function AdminPage() {
       { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
     ]},
     ...(perms.can("leads_view")
-      ? [{ label: "Sales", items: [{ key: "leads" as TabKey, label: "Leads", icon: Target }] }]
+      ? [{ label: "Sales", items: [
+          { key: "leads" as TabKey, label: "Leads", icon: Target, href: "/admin/leads" },
+        ] }]
       : []),
     { label: "Overig", items: [
       { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
@@ -228,7 +222,6 @@ function AdminPage() {
           {tab === "team" && <TeamTab />}
           {tab === "deleted" && <DeletedChangesTab />}
           {tab === "alerts" && <AlertsPanel />}
-          {tab === "leads" && perms.can("leads_view") && <LeadsPanel />}
         </div>
 
       </div>

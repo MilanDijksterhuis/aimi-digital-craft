@@ -1,4 +1,4 @@
-# Node Description Batch 33 of 35
+# Node Description Batch 33 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,32 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_dropdown_menu_dropdownmenuradioitem": "DropdownMenuRadioItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L117 | neighbors=[dropdown-menu.tsx]
+- "ui_dropdown_menu_dropdownmenuseparator": "DropdownMenuSeparator" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L153 | neighbors=[dropdown-menu.tsx]
+- "ui_dropdown_menu_dropdownmenushortcut": "DropdownMenuShortcut()" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L165 | neighbors=[dropdown-menu.tsx]
+- "ui_dropdown_menu_dropdownmenusubcontent": "DropdownMenuSubContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L42 | neighbors=[dropdown-menu.tsx]
+- "ui_dropdown_menu_dropdownmenusubtrigger": "DropdownMenuSubTrigger" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L21 | neighbors=[dropdown-menu.tsx]
+- "ui_form_formcontrol": "FormControl" | kind=code-symbol | source=src/components/ui/form.tsx:L103 | neighbors=[form.tsx]
+- "ui_form_formdescription": "FormDescription" | kind=code-symbol | source=src/components/ui/form.tsx:L121 | neighbors=[form.tsx]
+- "ui_form_formfield": "FormField()" | kind=code-symbol | source=src/components/ui/form.tsx:L27 | neighbors=[form.tsx]
+- "ui_form_formfieldcontext": "FormFieldContext" | kind=code-symbol | source=src/components/ui/form.tsx:L25 | neighbors=[form.tsx]
+- "ui_form_formfieldcontextvalue": "FormFieldContextValue" | kind=code-symbol | source=src/components/ui/form.tsx:L18 | neighbors=[form.tsx]
+- "ui_form_formitem": "FormItem" | kind=code-symbol | source=src/components/ui/form.tsx:L73 | neighbors=[form.tsx]
+- "ui_form_formitemcontext": "FormItemContext" | kind=code-symbol | source=src/components/ui/form.tsx:L71 | neighbors=[form.tsx]
+- "ui_form_formitemcontextvalue": "FormItemContextValue" | kind=code-symbol | source=src/components/ui/form.tsx:L67 | neighbors=[form.tsx]
+- "ui_form_formlabel": "FormLabel" | kind=code-symbol | source=src/components/ui/form.tsx:L86 | neighbors=[form.tsx]
+- "ui_form_formmessage": "FormMessage" | kind=code-symbol | source=src/components/ui/form.tsx:L138 | neighbors=[form.tsx]
+- "ui_form_useformfield": "useFormField()" | kind=code-symbol | source=src/components/ui/form.tsx:L40 | neighbors=[form.tsx]
+- "ui_hover_card_hovercardcontent": "HoverCardContent" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L10 | neighbors=[hover-card.tsx]
+- "ui_input_otp_inputotp": "InputOTP" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L7 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpgroup": "InputOTPGroup" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L23 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpseparator": "InputOTPSeparator" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L59 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpslot": "InputOTPSlot" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L31 | neighbors=[input-otp.tsx]
+- "ui_label_labelvariants": "labelVariants" | kind=code-symbol | source=src/components/ui/label.tsx:L9 | neighbors=[label.tsx]
+- "ui_menubar_menubar": "Menubar" | kind=code-symbol | source=src/components/ui/menubar.tsx:L27 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcheckboxitem": "MenubarCheckboxItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L131 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcontent": "MenubarContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L93 | neighbors=[menubar.tsx]
+- "ui_menubar_menubargroup": "MenubarGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L11 | neighbors=[menubar.tsx]
 - "ui_menubar_menubaritem": "MenubarItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L113 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarlabel": "MenubarLabel" | kind=code-symbol | source=src/components/ui/menubar.tsx:L176 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarmenu": "MenubarMenu()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L7 | neighbors=[menubar.tsx]
@@ -31,32 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_menubar_menubartrigger": "MenubarTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L42 | neighbors=[menubar.tsx]
 - "ui_navigation_menu_navigationmenu": "NavigationMenu" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L8 | neighbors=[navigation-menu.tsx]
 - "ui_navigation_menu_navigationmenucontent": "NavigationMenuContent" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L59 | neighbors=[navigation-menu.tsx]
-- "ui_navigation_menu_navigationmenuindicator": "NavigationMenuIndicator" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L93 | neighbors=[navigation-menu.tsx]
-- "ui_navigation_menu_navigationmenulist": "NavigationMenuList" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L23 | neighbors=[navigation-menu.tsx]
-- "ui_navigation_menu_navigationmenutrigger": "NavigationMenuTrigger" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L41 | neighbors=[navigation-menu.tsx]
-- "ui_navigation_menu_navigationmenutriggerstyle": "navigationMenuTriggerStyle" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L37 | neighbors=[navigation-menu.tsx]
-- "ui_navigation_menu_navigationmenuviewport": "NavigationMenuViewport" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L76 | neighbors=[navigation-menu.tsx]
-- "ui_pagination_pagination": "Pagination()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L7 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationcontent": "PaginationContent" | kind=code-symbol | source=src/components/ui/pagination.tsx:L17 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationellipsis": "PaginationEllipsis()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L78 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationitem": "PaginationItem" | kind=code-symbol | source=src/components/ui/pagination.tsx:L24 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationlink": "PaginationLink()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L34 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationlinkprops": "PaginationLinkProps" | kind=code-symbol | source=src/components/ui/pagination.tsx:L29 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationnext": "PaginationNext()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L65 | neighbors=[pagination.tsx]
-- "ui_pagination_paginationprevious": "PaginationPrevious()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L49 | neighbors=[pagination.tsx]
-- "ui_popover_popovercontent": "PopoverContent" | kind=code-symbol | source=src/components/ui/popover.tsx:L12 | neighbors=[popover.tsx]
-- "ui_progress_progress": "Progress" | kind=code-symbol | source=src/components/ui/progress.tsx:L8 | neighbors=[progress.tsx]
-- "ui_radio_group_radiogroup": "RadioGroup" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L7 | neighbors=[radio-group.tsx]
-- "ui_radio_group_radiogroupitem": "RadioGroupItem" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L15 | neighbors=[radio-group.tsx]
-- "ui_resizable_resizablehandle": "ResizableHandle()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L15 | neighbors=[resizable.tsx]
-- "ui_resizable_resizablepanelgroup": "ResizablePanelGroup()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L6 | neighbors=[resizable.tsx]
-- "ui_scroll_area_scrollarea": "ScrollArea" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L6 | neighbors=[scroll-area.tsx]
-- "ui_scroll_area_scrollbar": "ScrollBar" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L24 | neighbors=[scroll-area.tsx]
-- "ui_select_selectcontent": "SelectContent" | kind=code-symbol | source=src/components/ui/select.tsx:L63 | neighbors=[select.tsx]
-- "ui_select_selectitem": "SelectItem" | kind=code-symbol | source=src/components/ui/select.tsx:L107 | neighbors=[select.tsx]
-- "ui_select_selectlabel": "SelectLabel" | kind=code-symbol | source=src/components/ui/select.tsx:L95 | neighbors=[select.tsx]
-- "ui_select_selectscrolldownbutton": "SelectScrollDownButton" | kind=code-symbol | source=src/components/ui/select.tsx:L49 | neighbors=[select.tsx]
-- "ui_select_selectscrollupbutton": "SelectScrollUpButton" | kind=code-symbol | source=src/components/ui/select.tsx:L35 | neighbors=[select.tsx]
 
 ## Instructions
 

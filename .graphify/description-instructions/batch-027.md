@@ -1,4 +1,4 @@
-# Node Description Batch 28 of 35
+# Node Description Batch 28 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,30 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260523222514_76072c48_00ff_4a61_8b80_8230f2a74134_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523222514_76072c48-00ff-4a61-8b80-8230f2a74134.sql:L1 | neighbors=[20260523222514_76072c48-00ff-4a61-8b80-…]
+- "migrations_20260523222548_37e6cf4c_26dd_416f_ae8a_1a9bf3ce42ed": "20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql" | kind=code-symbol | source=supabase/migrations/20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql:L1 | neighbors=[public.has_role()]
+- "migrations_20260523222548_37e6cf4c_26dd_416f_ae8a_1a9bf3ce42ed_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523222548_37e6cf4c-26dd-416f-ae8a-1a9bf3ce42ed.sql:L1 | neighbors=[20260523222548_37e6cf4c-26dd-416f-ae8a-…]
+- "migrations_20260523222619_97b0ab7e_0852_46af_8704_4acb849c348d": "20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql" | kind=code-symbol | source=supabase/migrations/20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql:L1 | neighbors=[public.available_credits()]
+- "migrations_20260523222619_97b0ab7e_0852_46af_8704_4acb849c348d_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523222619_97b0ab7e-0852-46af-8704-4acb849c348d.sql:L1 | neighbors=[20260523222619_97b0ab7e-0852-46af-8704-…]
+- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_audit_log": "public.audit_log" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L74 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
+- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_has_any_role": "public.has_any_role()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L36 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
+- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L10 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
+- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_is_staff": "public.is_staff()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L52 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
+- "migrations_20260523223743_d2a22147_7462_4990_8bbd_2393474e6c17_public_is_super_admin": "public.is_super_admin()" | kind=code-symbol | source=supabase/migrations/20260523223743_d2a22147-7462-4990-8bbd-2393474e6c17.sql:L58 | neighbors=[20260523223743_d2a22147-7462-4990-8bbd-…]
+- "migrations_20260523230242_fc262cc7_dc2e_4ff3_bd1e_ce9dd2286b61": "20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql" | kind=code-symbol | source=supabase/migrations/20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql:L1 | neighbors=[public.contact_submissions]
+- "migrations_20260523230242_fc262cc7_dc2e_4ff3_bd1e_ce9dd2286b61_public_contact_submissions": "public.contact_submissions" | kind=code-symbol | source=supabase/migrations/20260523230242_fc262cc7-dc2e-4ff3-bd1e-ce9dd2286b61.sql:L2 | neighbors=[20260523230242_fc262cc7-dc2e-4ff3-bd1e-…]
+- "migrations_20260524095411_23164716_fa8a_4889_832b_f72b78c962ad_public_extra_change_requests": "public.extra_change_requests" | kind=code-symbol | source=supabase/migrations/20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql:L37 | neighbors=[20260524095411_23164716-fa8a-4889-832b-…]
+- "migrations_20260524095411_23164716_fa8a_4889_832b_f72b78c962ad_public_password_reset_requests": "public.password_reset_requests" | kind=code-symbol | source=supabase/migrations/20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql:L6 | neighbors=[20260524095411_23164716-fa8a-4889-832b-…]
+- "migrations_20260524100732_01aa016d_d09a_439e_a7a9_6f5f2c3138e0_public_is_super_admin": "public.is_super_admin()" | kind=code-symbol | source=supabase/migrations/20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql:L14 | neighbors=[20260524100732_01aa016d-d09a-439e-a7a9-…]
+- "migrations_20260524104213_c69cd657_d923_41b6_a4eb_02eef1c9606c_public_admin_notifications": "public.admin_notifications" | kind=code-symbol | source=supabase/migrations/20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql:L41 | neighbors=[20260524104213_c69cd657-d923-41b6-a4eb-…]
+- "migrations_20260713120000_project_detail_expansion": "20260713120000_project_detail_expansion.sql" | kind=code-symbol | source=supabase/migrations/20260713120000_project_detail_expansion.sql:L1 | neighbors=[7f7208a new]
+- "migrations_20260714100000_role_permissions_seed": "20260714100000_role_permissions_seed.sql" | kind=code-symbol | source=supabase/migrations/20260714100000_role_permissions_seed.sql:L1 | neighbors=[81a87ed commit]
+- "migrations_20260714110000_customer_onboarding_flow": "20260714110000_customer_onboarding_flow.sql" | kind=code-symbol | source=supabase/migrations/20260714110000_customer_onboarding_flow.sql:L1 | neighbors=[2fcc9a3 fixes]
+- "migrations_20260714120000_customer_self_onboarding_toggle": "20260714120000_customer_self_onboarding_toggle.sql" | kind=code-symbol | source=supabase/migrations/20260714120000_customer_self_onboarding_toggle.sql:L1 | neighbors=[2fcc9a3 fixes]
+- "migrations_20260716090000_customer_portal_tutorial_toggle": "20260716090000_customer_portal_tutorial_toggle.sql" | kind=code-symbol | source=supabase/migrations/20260716090000_customer_portal_tutorial_toggle.sql:L1 | neighbors=[ee6f2e6 fixes]
+- "migrations_20260717120000_sec1_pin_block_expiry_columns": "20260717120000_sec1_pin_block_expiry_columns.sql" | kind=code-symbol | source=supabase/migrations/20260717120000_sec1_pin_block_expiry_columns.sql:L1 | neighbors=[a3773ee sec fixes]
+- "migrations_20260717130000_project_rls_baseline_public_is_project_member": "public.is_project_member()" | kind=code-symbol | source=supabase/migrations/20260717130000_project_rls_baseline.sql:L39 | neighbors=[20260717130000_project_rls_baseline.sql]
+- "migrations_20260717130000_project_rls_baseline_public_is_staff_user": "public.is_staff_user()" | kind=code-symbol | source=supabase/migrations/20260717130000_project_rls_baseline.sql:L27 | neighbors=[20260717130000_project_rls_baseline.sql]
 - "migrations_20260717140000_sec4_own_projects_primary_user": "20260717140000_sec4_own_projects_primary_user.sql" | kind=code-symbol | source=supabase/migrations/20260717140000_sec4_own_projects_primary_user.sql:L1 | neighbors=[a3773ee sec fixes]
 - "migrations_20260717150000_sec5_durable_rate_limit_public_is_ip_banned": "public.is_ip_banned()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L68 | neighbors=[20260717150000_sec5_durable_rate_limit.…]
 - "migrations_20260717160000_perf1_indexes": "20260717160000_perf1_indexes.sql" | kind=code-symbol | source=supabase/migrations/20260717160000_perf1_indexes.sql:L1 | neighbors=[7dbbf18 perf fixes]
@@ -33,30 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_index_index": "Index()" | kind=code-symbol | source=src/routes/index.tsx:L75 | neighbors=[index.tsx]
 - "routes_login_loginpage": "LoginPage()" | kind=code-symbol | source=src/routes/login.tsx:L16 | neighbors=[login.tsx]
 - "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L15 | neighbors=[privacybeleid.tsx]
-- "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L40 | neighbors=[__root.tsx]
-- "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L18 | neighbors=[__root.tsx]
-- "routes_root_rootcomponent": "RootComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L163 | neighbors=[__root.tsx]
-- "routes_root_rootshell": "RootShell()" | kind=code-symbol | source=src/routes/__root.tsx:L149 | neighbors=[__root.tsx]
-- "routes_sitemap_xml_route": "Route" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L12 | neighbors=[sitemap[.]xml.tsx]
-- "routes_sitemap_xml_sitemapentry": "SitemapEntry" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L6 | neighbors=[sitemap[.]xml.tsx]
-- "routes_track_js_cors": "cors" | kind=code-symbol | source=src/routes/track[.]js.tsx:L3 | neighbors=[track[.]js.tsx]
-- "routes_track_js_route": "Route" | kind=code-symbol | source=src/routes/track[.]js.tsx:L11 | neighbors=[track[.]js.tsx]
-- "src_routetree_gen_algemenevoorwaardenroute": "AlgemeneVoorwaardenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L56 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublichooksexpireaccountsroute": "ApiPublicHooksExpireAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L124 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublicsiteerrorroute": "ApiPublicSiteErrorRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L95 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublicsitepingroute": "ApiPublicSitePingRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L90 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedaccountroute": "AuthenticatedAccountRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L85 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsaccountidroute": "AuthenticatedAdminAccountsAccountIdRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L154 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsroute": "AuthenticatedAdminAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L118 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsroutechildren": "AuthenticatedAdminAccountsRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L490 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsroutewithchildren": "AuthenticatedAdminAccountsRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L500 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminchangeschangeidroute": "AuthenticatedAdminChangesChangeIdRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L148 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminchangesroute": "AuthenticatedAdminChangesRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L112 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminchangesroutechildren": "AuthenticatedAdminChangesRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L505 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminchangesroutewithchildren": "AuthenticatedAdminChangesRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L515 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminprojectenprojectidroute": "AuthenticatedAdminProjectenProjectIdRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L142 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminprojectenroute": "AuthenticatedAdminProjectenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L106 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminprojectenroutechildren": "AuthenticatedAdminProjectenRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L520 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

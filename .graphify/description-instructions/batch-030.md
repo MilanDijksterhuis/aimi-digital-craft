@@ -1,4 +1,4 @@
-# Node Description Batch 31 of 35
+# Node Description Batch 31 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,32 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_alert_alerttitle": "AlertTitle" | kind=code-symbol | source=src/components/ui/alert.tsx:L30 | neighbors=[alert.tsx]
+- "ui_alert_alertvariants": "alertVariants" | kind=code-symbol | source=src/components/ui/alert.tsx:L6 | neighbors=[alert.tsx]
+- "ui_alert_dialog_alertdialogoverlay": "AlertDialogOverlay" | kind=code-symbol | source=src/components/ui/alert-dialog.tsx:L13 | neighbors=[alert-dialog.tsx]
+- "ui_avatar_avatar": "Avatar" | kind=code-symbol | source=src/components/ui/avatar.tsx:L8 | neighbors=[avatar.tsx]
+- "ui_avatar_avatarfallback": "AvatarFallback" | kind=code-symbol | source=src/components/ui/avatar.tsx:L32 | neighbors=[avatar.tsx]
+- "ui_avatar_avatarimage": "AvatarImage" | kind=code-symbol | source=src/components/ui/avatar.tsx:L20 | neighbors=[avatar.tsx]
+- "ui_badge_badgeprops": "BadgeProps" | kind=code-symbol | source=src/components/ui/badge.tsx:L25 | neighbors=[badge.tsx]
+- "ui_breadcrumb_breadcrumb": "Breadcrumb" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L7 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumbellipsis": "BreadcrumbEllipsis()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L80 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumbitem": "BreadcrumbItem" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L29 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumblink": "BreadcrumbLink" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L36 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumblist": "BreadcrumbList" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L15 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumbpage": "BreadcrumbPage" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L54 | neighbors=[breadcrumb.tsx]
+- "ui_breadcrumb_breadcrumbseparator": "BreadcrumbSeparator()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L68 | neighbors=[breadcrumb.tsx]
+- "ui_calendar_calendar": "Calendar()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L10 | neighbors=[calendar.tsx]
+- "ui_calendar_calendardaybutton": "CalendarDayButton()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L139 | neighbors=[calendar.tsx]
+- "ui_card_card": "Card" | kind=code-symbol | source=src/components/ui/card.tsx:L5 | neighbors=[card.tsx]
+- "ui_card_cardcontent": "CardContent" | kind=code-symbol | source=src/components/ui/card.tsx:L41 | neighbors=[card.tsx]
+- "ui_card_carddescription": "CardDescription" | kind=code-symbol | source=src/components/ui/card.tsx:L34 | neighbors=[card.tsx]
+- "ui_card_cardfooter": "CardFooter" | kind=code-symbol | source=src/components/ui/card.tsx:L48 | neighbors=[card.tsx]
+- "ui_card_cardheader": "CardHeader" | kind=code-symbol | source=src/components/ui/card.tsx:L16 | neighbors=[card.tsx]
+- "ui_card_cardtitle": "CardTitle" | kind=code-symbol | source=src/components/ui/card.tsx:L23 | neighbors=[card.tsx]
+- "ui_carousel_carousel": "Carousel" | kind=code-symbol | source=src/components/ui/carousel.tsx:L41 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselapi": "CarouselApi" | kind=code-symbol | source=src/components/ui/carousel.tsx:L8 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontent": "CarouselContent" | kind=code-symbol | source=src/components/ui/carousel.tsx:L135 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontext": "CarouselContext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L29 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselcontextprops": "CarouselContextProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L20 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselitem": "CarouselItem" | kind=code-symbol | source=src/components/ui/carousel.tsx:L156 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselnext": "CarouselNext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L205 | neighbors=[carousel.tsx]
@@ -31,32 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_chart_chartcontext": "ChartContext" | kind=code-symbol | source=src/components/ui/chart.tsx:L23 | neighbors=[chart.tsx]
 - "ui_chart_chartcontextprops": "ChartContextProps" | kind=code-symbol | source=src/components/ui/chart.tsx:L19 | neighbors=[chart.tsx]
 - "ui_chart_chartlegendcontent": "ChartLegendContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L243 | neighbors=[chart.tsx]
-- "ui_chart_chartstyle": "ChartStyle()" | kind=code-symbol | source=src/components/ui/chart.tsx:L64 | neighbors=[chart.tsx]
-- "ui_chart_charttooltipcontent": "ChartTooltipContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L95 | neighbors=[chart.tsx]
-- "ui_chart_getpayloadconfigfrompayload": "getPayloadConfigFromPayload()" | kind=code-symbol | source=src/components/ui/chart.tsx:L299 | neighbors=[chart.tsx]
-- "ui_chart_themes": "THEMES" | kind=code-symbol | source=src/components/ui/chart.tsx:L7 | neighbors=[chart.tsx]
-- "ui_chart_usechart": "useChart()" | kind=code-symbol | source=src/components/ui/chart.tsx:L25 | neighbors=[chart.tsx]
-- "ui_checkbox_checkbox": "Checkbox" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L7 | neighbors=[checkbox.tsx]
-- "ui_command_command": "Command" | kind=code-symbol | source=src/components/ui/command.tsx:L11 | neighbors=[command.tsx]
-- "ui_command_commanddialog": "CommandDialog()" | kind=code-symbol | source=src/components/ui/command.tsx:L26 | neighbors=[command.tsx]
-- "ui_command_commandempty": "CommandEmpty" | kind=code-symbol | source=src/components/ui/command.tsx:L70 | neighbors=[command.tsx]
-- "ui_command_commandgroup": "CommandGroup" | kind=code-symbol | source=src/components/ui/command.tsx:L79 | neighbors=[command.tsx]
-- "ui_command_commandinput": "CommandInput" | kind=code-symbol | source=src/components/ui/command.tsx:L38 | neighbors=[command.tsx]
-- "ui_command_commanditem": "CommandItem" | kind=code-symbol | source=src/components/ui/command.tsx:L107 | neighbors=[command.tsx]
-- "ui_command_commandlist": "CommandList" | kind=code-symbol | source=src/components/ui/command.tsx:L57 | neighbors=[command.tsx]
-- "ui_command_commandseparator": "CommandSeparator" | kind=code-symbol | source=src/components/ui/command.tsx:L95 | neighbors=[command.tsx]
-- "ui_command_commandshortcut": "CommandShortcut()" | kind=code-symbol | source=src/components/ui/command.tsx:L123 | neighbors=[command.tsx]
-- "ui_context_menu_contextmenucheckboxitem": "ContextMenuCheckboxItem" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L90 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenucontent": "ContextMenuContent" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L55 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenuitem": "ContextMenuItem" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L72 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenulabel": "ContextMenuLabel" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L135 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenuradioitem": "ContextMenuRadioItem" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L113 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenuseparator": "ContextMenuSeparator" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L149 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenushortcut": "ContextMenuShortcut()" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L161 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenusubcontent": "ContextMenuSubContent" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L40 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenusubtrigger": "ContextMenuSubTrigger" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L19 | neighbors=[context-menu.tsx]
-- "ui_dialog_dialogdescription": "DialogDescription" | kind=code-symbol | source=src/components/ui/dialog.tsx:L81 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogfooter": "DialogFooter()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L61 | neighbors=[dialog.tsx]
 
 ## Instructions
 

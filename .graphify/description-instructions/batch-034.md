@@ -1,4 +1,4 @@
-# Node Description Batch 35 of 35
+# Node Description Batch 35 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,32 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_sidebar_sidebargrouplabel": "SidebarGroupLabel" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L423 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarheader": "SidebarHeader" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L349 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarinput": "SidebarInput" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L331 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarinset": "SidebarInset" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L314 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenu": "SidebarMenu" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L479 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuaction": "SidebarMenuAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L584 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubadge": "SidebarMenuBadge" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L615 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubutton": "SidebarMenuButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L525 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubuttonvariants": "sidebarMenuButtonVariants" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L503 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuitem": "SidebarMenuItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L491 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuskeleton": "SidebarMenuSkeleton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L635 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusub": "SidebarMenuSub" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L668 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubbutton": "SidebarMenuSubButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L689 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubitem": "SidebarMenuSubItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L684 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarprovider": "SidebarProvider" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L49 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarrail": "SidebarRail" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L286 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarseparator": "SidebarSeparator" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L377 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebartrigger": "SidebarTrigger" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L260 | neighbors=[sidebar.tsx]
+- "ui_sidebar_usesidebar": "useSidebar()" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L40 | neighbors=[sidebar.tsx]
+- "ui_slider_slider": "Slider" | kind=code-symbol | source=src/components/ui/slider.tsx:L6 | neighbors=[slider.tsx]
+- "ui_sonner_toasterprops": "ToasterProps" | kind=code-symbol | source=src/components/ui/sonner.tsx:L3 | neighbors=[sonner.tsx]
+- "ui_switch_switch": "Switch" | kind=code-symbol | source=src/components/ui/switch.tsx:L6 | neighbors=[switch.tsx]
+- "ui_table_table": "Table" | kind=code-symbol | source=src/components/ui/table.tsx:L5 | neighbors=[table.tsx]
+- "ui_table_tablebody": "TableBody" | kind=code-symbol | source=src/components/ui/table.tsx:L22 | neighbors=[table.tsx]
+- "ui_table_tablecaption": "TableCaption" | kind=code-symbol | source=src/components/ui/table.tsx:L86 | neighbors=[table.tsx]
+- "ui_table_tablecell": "TableCell" | kind=code-symbol | source=src/components/ui/table.tsx:L71 | neighbors=[table.tsx]
 - "ui_table_tablefooter": "TableFooter" | kind=code-symbol | source=src/components/ui/table.tsx:L30 | neighbors=[table.tsx]
 - "ui_table_tablehead": "TableHead" | kind=code-symbol | source=src/components/ui/table.tsx:L56 | neighbors=[table.tsx]
 - "ui_table_tableheader": "TableHeader" | kind=code-symbol | source=src/components/ui/table.tsx:L14 | neighbors=[table.tsx]
@@ -31,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260523211545_420d64f5_a49b_4927_acc4_a86c972115a1": "20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql" | kind=code-symbol | source=supabase/migrations/20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql:L1
 - "migrations_20260523221752_c080e1a1_411c_4668_a60e_b2cc7a356a1d": "20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql" | kind=code-symbol | source=supabase/migrations/20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql:L1
 - "migrations_20260523223714_ac0e82da_3a19_4ef9_a41e_91e875e01193": "20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql" | kind=code-symbol | source=supabase/migrations/20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql:L1
-- "ui_aspect_ratio": "aspect-ratio.tsx" | kind=code-symbol | source=src/components/ui/aspect-ratio.tsx:L1
-- "ui_collapsible": "collapsible.tsx" | kind=code-symbol | source=src/components/ui/collapsible.tsx:L1
 
 ## Instructions
 

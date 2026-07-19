@@ -1,4 +1,4 @@
-# Node Description Batch 30 of 35
+# Node Description Batch 30 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,32 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_authenticatedroutewithchildren": "AuthenticatedRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L614 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedserverroute": "AuthenticatedServerRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L71 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbyfullpath": "FileRoutesByFullPath" | kind=code-symbol | source=src/routeTree.gen.ts:L167 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbyid": "FileRoutesById" | kind=code-symbol | source=src/routeTree.gen.ts:L217 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbypath": "FileRoutesByPath" | kind=code-symbol | source=src/routeTree.gen.ts:L337 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbyto": "FileRoutesByTo" | kind=code-symbol | source=src/routeTree.gen.ts:L192 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutetypes": "FileRouteTypes" | kind=code-symbol | source=src/routeTree.gen.ts:L244 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_indexroute": "IndexRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L66 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_loginroute": "LoginRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L52 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_privacybeleidroute": "PrivacybeleidRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L47 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_register": "Register" | kind=code-symbol | source=src/routeTree.gen.ts:L637 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_rootroutechildren": "RootRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L323 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_routetree": "routeTree" | kind=code-symbol | source=src/routeTree.gen.ts:L630 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_sitemapdotxmlroute": "SitemapDotxmlRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L42 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_trackdotjsroute": "TrackDotjsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L37 | neighbors=[routeTree.gen.ts]
+- "src_server_security_headers": "SECURITY_HEADERS" | kind=code-symbol | source=src/server.ts:L103 | neighbors=[server.ts]
+- "src_server_serverentry": "ServerEntry" | kind=code-symbol | source=src/server.ts:L26 | neighbors=[server.ts]
+- "src_start_errormiddleware": "errorMiddleware" | kind=code-symbol | source=src/start.ts:L6 | neighbors=[start.ts]
+- "supabase_client_createsupabaseclient": "createSupabaseClient()" | kind=code-symbol | source=src/integrations/supabase/client.ts:L5 | neighbors=[client.ts]
+- "supabase_client_server_createsupabaseadminclient": "createSupabaseAdminClient()" | kind=code-symbol | source=src/integrations/supabase/client.server.ts:L8 | neighbors=[client.server.ts]
+- "supabase_client_server_supabaseadmin": "supabaseAdmin" | kind=code-symbol | source=src/integrations/supabase/client.server.ts:L36 | neighbors=[client.server.ts]
+- "supabase_migration_dns_checks": "dns_checks" | kind=code-symbol | source=supabase-migration.sql:L32 | neighbors=[supabase-migration.sql]
+- "supabase_migration_monitoring_alerts": "monitoring_alerts" | kind=code-symbol | source=supabase-migration.sql:L42 | neighbors=[supabase-migration.sql]
+- "supabase_migration_role_permissions": "role_permissions" | kind=code-symbol | source=supabase-migration.sql:L59 | neighbors=[supabase-migration.sql]
+- "supabase_migration_site_response_times": "site_response_times" | kind=code-symbol | source=supabase-migration.sql:L7 | neighbors=[supabase-migration.sql]
+- "supabase_migration_ssl_checks": "ssl_checks" | kind=code-symbol | source=supabase-migration.sql:L19 | neighbors=[supabase-migration.sql]
 - "supabase_types_compositetypes": "CompositeTypes" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1525 | neighbors=[types.ts]
 - "supabase_types_constants": "Constants" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1542 | neighbors=[types.ts]
 - "supabase_types_databasewithoutinternals": "DatabaseWithoutInternals" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1425 | neighbors=[types.ts]
@@ -31,32 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_accordion_accordiontrigger": "AccordionTrigger" | kind=code-symbol | source=src/components/ui/accordion.tsx:L17 | neighbors=[accordion.tsx]
 - "ui_alert_alert": "Alert" | kind=code-symbol | source=src/components/ui/alert.tsx:L22 | neighbors=[alert.tsx]
 - "ui_alert_alertdescription": "AlertDescription" | kind=code-symbol | source=src/components/ui/alert.tsx:L41 | neighbors=[alert.tsx]
-- "ui_alert_alerttitle": "AlertTitle" | kind=code-symbol | source=src/components/ui/alert.tsx:L30 | neighbors=[alert.tsx]
-- "ui_alert_alertvariants": "alertVariants" | kind=code-symbol | source=src/components/ui/alert.tsx:L6 | neighbors=[alert.tsx]
-- "ui_alert_dialog_alertdialogoverlay": "AlertDialogOverlay" | kind=code-symbol | source=src/components/ui/alert-dialog.tsx:L13 | neighbors=[alert-dialog.tsx]
-- "ui_avatar_avatar": "Avatar" | kind=code-symbol | source=src/components/ui/avatar.tsx:L8 | neighbors=[avatar.tsx]
-- "ui_avatar_avatarfallback": "AvatarFallback" | kind=code-symbol | source=src/components/ui/avatar.tsx:L32 | neighbors=[avatar.tsx]
-- "ui_avatar_avatarimage": "AvatarImage" | kind=code-symbol | source=src/components/ui/avatar.tsx:L20 | neighbors=[avatar.tsx]
-- "ui_badge_badgeprops": "BadgeProps" | kind=code-symbol | source=src/components/ui/badge.tsx:L25 | neighbors=[badge.tsx]
-- "ui_breadcrumb_breadcrumb": "Breadcrumb" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L7 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbellipsis": "BreadcrumbEllipsis()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L80 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbitem": "BreadcrumbItem" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L29 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumblink": "BreadcrumbLink" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L36 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumblist": "BreadcrumbList" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L15 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbpage": "BreadcrumbPage" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L54 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbseparator": "BreadcrumbSeparator()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L68 | neighbors=[breadcrumb.tsx]
-- "ui_calendar_calendar": "Calendar()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L10 | neighbors=[calendar.tsx]
-- "ui_calendar_calendardaybutton": "CalendarDayButton()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L139 | neighbors=[calendar.tsx]
-- "ui_card_card": "Card" | kind=code-symbol | source=src/components/ui/card.tsx:L5 | neighbors=[card.tsx]
-- "ui_card_cardcontent": "CardContent" | kind=code-symbol | source=src/components/ui/card.tsx:L41 | neighbors=[card.tsx]
-- "ui_card_carddescription": "CardDescription" | kind=code-symbol | source=src/components/ui/card.tsx:L34 | neighbors=[card.tsx]
-- "ui_card_cardfooter": "CardFooter" | kind=code-symbol | source=src/components/ui/card.tsx:L48 | neighbors=[card.tsx]
-- "ui_card_cardheader": "CardHeader" | kind=code-symbol | source=src/components/ui/card.tsx:L16 | neighbors=[card.tsx]
-- "ui_card_cardtitle": "CardTitle" | kind=code-symbol | source=src/components/ui/card.tsx:L23 | neighbors=[card.tsx]
-- "ui_carousel_carousel": "Carousel" | kind=code-symbol | source=src/components/ui/carousel.tsx:L41 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselapi": "CarouselApi" | kind=code-symbol | source=src/components/ui/carousel.tsx:L8 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselcontent": "CarouselContent" | kind=code-symbol | source=src/components/ui/carousel.tsx:L135 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselcontext": "CarouselContext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L29 | neighbors=[carousel.tsx]
 
 ## Instructions
 

@@ -24,6 +24,7 @@ import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 import { Route as AuthenticatedAdminRollenRouteImport } from './routes/_authenticated/admin.rollen'
 import { Route as AuthenticatedAdminProjectenRouteImport } from './routes/_authenticated/admin.projecten'
+import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminChangesRouteImport } from './routes/_authenticated/admin.changes'
 import { Route as AuthenticatedAdminAccountsRouteImport } from './routes/_authenticated/admin.accounts'
 import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
@@ -109,6 +110,11 @@ const AuthenticatedAdminProjectenRoute =
     path: '/projecten',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminChangesRoute =
   AuthenticatedAdminChangesRouteImport.update({
     id: '/changes',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/server': typeof AuthenticatedServerRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/server': typeof AuthenticatedServerRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -221,6 +229,7 @@ export interface FileRoutesById {
   '/_authenticated/server': typeof AuthenticatedServerRoute
   '/_authenticated/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/_authenticated/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/_authenticated/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/server'
     | '/admin/accounts'
     | '/admin/changes'
+    | '/admin/leads'
     | '/admin/projecten'
     | '/admin/rollen'
     | '/api/public/site-error'
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/server'
     | '/admin/accounts'
     | '/admin/changes'
+    | '/admin/leads'
     | '/admin/projecten'
     | '/admin/rollen'
     | '/api/public/site-error'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/_authenticated/server'
     | '/_authenticated/admin/accounts'
     | '/_authenticated/admin/changes'
+    | '/_authenticated/admin/leads'
     | '/_authenticated/admin/projecten'
     | '/_authenticated/admin/rollen'
     | '/api/public/site-error'
@@ -428,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProjectenRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/leads': {
+      id: '/_authenticated/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/changes': {
       id: '/_authenticated/admin/changes'
       path: '/changes'
@@ -549,6 +568,7 @@ const AuthenticatedAdminRollenRouteWithChildren =
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAccountsRoute: typeof AuthenticatedAdminAccountsRouteWithChildren
   AuthenticatedAdminChangesRoute: typeof AuthenticatedAdminChangesRouteWithChildren
+  AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminProjectenRoute: typeof AuthenticatedAdminProjectenRouteWithChildren
   AuthenticatedAdminRollenRoute: typeof AuthenticatedAdminRollenRouteWithChildren
 }
@@ -556,6 +576,7 @@ interface AuthenticatedAdminRouteChildren {
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAccountsRoute: AuthenticatedAdminAccountsRouteWithChildren,
   AuthenticatedAdminChangesRoute: AuthenticatedAdminChangesRouteWithChildren,
+  AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminProjectenRoute:
     AuthenticatedAdminProjectenRouteWithChildren,
   AuthenticatedAdminRollenRoute: AuthenticatedAdminRollenRouteWithChildren,

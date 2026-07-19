@@ -4,7 +4,13 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { computeMonitoringStats, measureResponseTime, assertPublicHost } from "./monitoring.shared";
 import { getEffectivePermissions, ensurePermission } from "./permissions.server";
-import { getRoles, ensureRoles, ensureAdmin, ensureSuperAdmin, ensureStaff } from "./auth-guards.server";
+import {
+  getRoles,
+  ensureRoles,
+  ensureAdmin,
+  ensureSuperAdmin,
+  ensureStaff,
+} from "./auth-guards.server";
 import {
   adminCreateCustomer,
   adminListCustomers,
@@ -115,9 +121,30 @@ export const adminUpdateCustomer = createServerFn({ method: "POST" })
         billing_address: z.string().trim().max(500).optional().nullable(),
         contacts: z
           .object({
-            financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
-            technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
-            general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+            financial: z
+              .object({
+                name: z.string().max(200),
+                email: z.string().max(200),
+                phone: z.string().max(50),
+              })
+              .partial()
+              .optional(),
+            technical: z
+              .object({
+                name: z.string().max(200),
+                email: z.string().max(200),
+                phone: z.string().max(50),
+              })
+              .partial()
+              .optional(),
+            general: z
+              .object({
+                name: z.string().max(200),
+                email: z.string().max(200),
+                phone: z.string().max(50),
+              })
+              .partial()
+              .optional(),
           })
           .partial()
           .optional(),
@@ -163,9 +190,30 @@ export const adminSaveOnboardingStep = createServerFn({ method: "POST" })
             billing_address: z.string().trim().max(500).optional().nullable(),
             contacts: z
               .object({
-                financial: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
-                technical: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
-                general: z.object({ name: z.string().max(200), email: z.string().max(200), phone: z.string().max(50) }).partial().optional(),
+                financial: z
+                  .object({
+                    name: z.string().max(200),
+                    email: z.string().max(200),
+                    phone: z.string().max(50),
+                  })
+                  .partial()
+                  .optional(),
+                technical: z
+                  .object({
+                    name: z.string().max(200),
+                    email: z.string().max(200),
+                    phone: z.string().max(50),
+                  })
+                  .partial()
+                  .optional(),
+                general: z
+                  .object({
+                    name: z.string().max(200),
+                    email: z.string().max(200),
+                    phone: z.string().max(50),
+                  })
+                  .partial()
+                  .optional(),
               })
               .partial()
               .optional(),
@@ -194,10 +242,15 @@ export const adminSaveOnboardingStep = createServerFn({ method: "POST" })
       update.onboarding_started_at = new Date().toISOString();
     }
 
-    const { error } = await supabase.from("profiles").update(update as any).eq("id", data.user_id);
+    const { error } = await supabase
+      .from("profiles")
+      .update(update as any)
+      .eq("id", data.user_id);
     if (error) throw new Error(error.message);
 
-    await logAudit(supabase, userId, "onboarding_step_saved", "customer_onboarding", data.user_id, { step: data.step });
+    await logAudit(supabase, userId, "onboarding_step_saved", "customer_onboarding", data.user_id, {
+      step: data.step,
+    });
     return { ok: true };
   });
 
@@ -210,7 +263,10 @@ export const adminCompleteOnboarding = createServerFn({ method: "POST" })
 
     const { error } = await supabase
       .from("profiles")
-      .update({ onboarding_status: "completed", onboarding_completed_at: new Date().toISOString() } as any)
+      .update({
+        onboarding_status: "completed",
+        onboarding_completed_at: new Date().toISOString(),
+      } as any)
       .eq("id", data.user_id);
     if (error) throw new Error(error.message);
 
@@ -242,9 +298,7 @@ export const adminResetOnboarding = createServerFn({ method: "POST" })
 
 export const adminSetSelfOnboarding = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d),
-  )
+  .inputValidator((d) => z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
@@ -255,15 +309,19 @@ export const adminSetSelfOnboarding = createServerFn({ method: "POST" })
       .eq("id", data.user_id);
     if (error) throw new Error(error.message);
 
-    await logAudit(supabase, userId, data.enabled ? "self_onboarding_enabled" : "self_onboarding_disabled", "customer_onboarding", data.user_id);
+    await logAudit(
+      supabase,
+      userId,
+      data.enabled ? "self_onboarding_enabled" : "self_onboarding_disabled",
+      "customer_onboarding",
+      data.user_id,
+    );
     return { ok: true };
   });
 
 export const adminSetTutorialEnabled = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d),
-  )
+  .inputValidator((d) => z.object({ user_id: z.string().uuid(), enabled: z.boolean() }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
@@ -274,7 +332,13 @@ export const adminSetTutorialEnabled = createServerFn({ method: "POST" })
       .eq("id", data.user_id);
     if (error) throw new Error(error.message);
 
-    await logAudit(supabase, userId, data.enabled ? "tutorial_enabled" : "tutorial_disabled", "customer_tutorial", data.user_id);
+    await logAudit(
+      supabase,
+      userId,
+      data.enabled ? "tutorial_enabled" : "tutorial_disabled",
+      "customer_tutorial",
+      data.user_id,
+    );
     return { ok: true };
   });
 
@@ -341,9 +405,17 @@ export const adminGetChangeDetail = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
 
     const [{ data: customer }, { data: project }, { data: audit }] = await Promise.all([
-      supabase.from("profiles").select("id, email, full_name, company").eq("id", request.user_id).maybeSingle(),
+      supabase
+        .from("profiles")
+        .select("id, email, full_name, company")
+        .eq("id", request.user_id)
+        .maybeSingle(),
       request.project_id
-        ? supabaseAdmin.from("projects").select("id, name, status").eq("id", request.project_id).maybeSingle()
+        ? supabaseAdmin
+            .from("projects")
+            .select("id, name, status")
+            .eq("id", request.project_id)
+            .maybeSingle()
         : Promise.resolve({ data: null }),
       supabase
         .from("audit_log")
@@ -353,8 +425,13 @@ export const adminGetChangeDetail = createServerFn({ method: "POST" })
         .order("created_at", { ascending: false }),
     ]);
 
-    const actorIds = Array.from(new Set([...(audit ?? []).map((a: any) => a.user_id), request.user_id]));
-    const { data: actors } = await supabase.from("profiles").select("id, email, full_name").in("id", actorIds);
+    const actorIds = Array.from(
+      new Set([...(audit ?? []).map((a: any) => a.user_id), request.user_id]),
+    );
+    const { data: actors } = await supabase
+      .from("profiles")
+      .select("id, email, full_name")
+      .in("id", actorIds);
     const actorMap = new Map((actors ?? []).map((a: any) => [a.id, a]));
 
     return {
@@ -376,7 +453,16 @@ export const adminCreateChangeRequest = createServerFn({ method: "POST" })
         description: z.string().trim().min(5).max(5000),
         priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
         category: z
-          .enum(["text", "styling", "functionality", "media", "data", "seo", "accessibility", "other"])
+          .enum([
+            "text",
+            "styling",
+            "functionality",
+            "media",
+            "data",
+            "seo",
+            "accessibility",
+            "other",
+          ])
           .default("other"),
         rush: z.boolean().default(false),
         is_paid: z.boolean().default(false),
@@ -438,16 +524,21 @@ export const adminListChanges = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const [{ data: requests, error }, { data: customers }, { data: projects }, { data: members }] = await Promise.all([
-      supabase
-        .from("change_requests")
-        .select("*, change_attachments(*), change_comments(*)")
-        .is("deleted_at", null)
-        .order("created_at", { ascending: false }),
-      supabase.from("profiles").select("id, email, full_name, company"),
-      supabaseAdmin.from("projects").select("id, name, primary_user_id").is("deleted_at", null).order("name", { ascending: true }),
-      supabaseAdmin.from("project_members").select("project_id, user_id"),
-    ]);
+    const [{ data: requests, error }, { data: customers }, { data: projects }, { data: members }] =
+      await Promise.all([
+        supabase
+          .from("change_requests")
+          .select("*, change_attachments(*), change_comments(*)")
+          .is("deleted_at", null)
+          .order("created_at", { ascending: false }),
+        supabase.from("profiles").select("id, email, full_name, company"),
+        supabaseAdmin
+          .from("projects")
+          .select("id, name, primary_user_id")
+          .is("deleted_at", null)
+          .order("name", { ascending: true }),
+        supabaseAdmin.from("project_members").select("project_id, user_id"),
+      ]);
     if (error) throw new Error(error.message);
 
     const memberIdsByProject = new Map<string, string[]>();
@@ -458,7 +549,9 @@ export const adminListChanges = createServerFn({ method: "GET" })
     }
     const projectsWithMembers = (projects ?? []).map((p: any) => ({
       ...p,
-      member_ids: Array.from(new Set([p.primary_user_id, ...(memberIdsByProject.get(p.id) ?? [])].filter(Boolean))),
+      member_ids: Array.from(
+        new Set([p.primary_user_id, ...(memberIdsByProject.get(p.id) ?? [])].filter(Boolean)),
+      ),
     }));
 
     return { requests: requests ?? [], customers: customers ?? [], projects: projectsWithMembers };
@@ -466,9 +559,7 @@ export const adminListChanges = createServerFn({ method: "GET" })
 
 export const adminToggleRequestPaid = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    z.object({ id: z.string().uuid(), is_paid: z.boolean() }).parse(d),
-  )
+  .inputValidator((d) => z.object({ id: z.string().uuid(), is_paid: z.boolean() }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
@@ -613,11 +704,7 @@ export const adminSendNotification = createServerFn({ method: "POST" })
 
 // Password reset / set
 const ALLOWED_REDIRECT_HOSTS = new Set(
-  [
-    process.env.VITE_APP_URL,
-    "https://aimi-development.nl",
-    "https://portal.aimi-development.nl",
-  ]
+  [process.env.VITE_APP_URL, "https://aimi-development.nl", "https://portal.aimi-development.nl"]
     .filter((v): v is string => !!v)
     .map((v) => {
       try {
@@ -635,10 +722,13 @@ export const adminSendPasswordReset = createServerFn({ method: "POST" })
     z
       .object({
         email: z.string().email(),
-        redirectTo: z.string().url().refine(
-          (u) => ALLOWED_REDIRECT_HOSTS.has(new URL(u).hostname),
-          "redirectTo host niet toegestaan",
-        ),
+        redirectTo: z
+          .string()
+          .url()
+          .refine(
+            (u) => ALLOWED_REDIRECT_HOSTS.has(new URL(u).hostname),
+            "redirectTo host niet toegestaan",
+          ),
       })
       .parse(d),
   )
@@ -651,9 +741,7 @@ export const adminSendPasswordReset = createServerFn({ method: "POST" })
 export const adminSetPassword = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z
-      .object({ user_id: z.string().uuid(), password: z.string().min(8).max(72) })
-      .parse(d),
+    z.object({ user_id: z.string().uuid(), password: z.string().min(8).max(72) }).parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -727,9 +815,7 @@ export const adminAddOnboardingItem = createServerFn({ method: "POST" })
 
 export const adminToggleOnboardingItem = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    z.object({ id: z.string().uuid(), done: z.boolean() }).parse(d),
-  )
+  .inputValidator((d) => z.object({ id: z.string().uuid(), done: z.boolean() }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
@@ -881,10 +967,7 @@ export const adminBulkComplete = createServerFn({ method: "POST" })
     await ensureAdmin(supabase, userId);
     const update: any = { status: "done" };
     if (data.mark_paid) update.status = "invoiced";
-    const { error } = await supabase
-      .from("change_requests")
-      .update(update)
-      .in("id", data.ids);
+    const { error } = await supabase.from("change_requests").update(update).in("id", data.ids);
     if (error) throw new Error(error.message);
     return { ok: true, count: data.ids.length };
   });
@@ -967,8 +1050,17 @@ export const adminGetSiteStats = createServerFn({ method: "POST" })
     await ensureAdmin(supabase, userId);
     const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const [pingsRes, errorsRes] = await Promise.all([
-      supabase.from("site_pings").select("status_ok").eq("user_id", data.user_id).gte("created_at", since),
-      supabase.from("site_errors").select("*").eq("user_id", data.user_id).order("created_at", { ascending: false }).limit(5),
+      supabase
+        .from("site_pings")
+        .select("status_ok")
+        .eq("user_id", data.user_id)
+        .gte("created_at", since),
+      supabase
+        .from("site_errors")
+        .select("*")
+        .eq("user_id", data.user_id)
+        .order("created_at", { ascending: false })
+        .limit(5),
     ]);
     const pings = pingsRes.data ?? [];
     const okPings = pings.filter((p: any) => p.status_ok).length;
@@ -984,8 +1076,14 @@ export const adminGetHealthScores = createServerFn({ method: "GET" })
     await ensureAdmin(supabase, userId);
     const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     const [reqsRes, commentsRes] = await Promise.all([
-      supabase.from("change_requests").select("user_id, status, is_paid, created_at").gte("created_at", cutoff),
-      supabase.from("change_comments").select("request_id, author_id, created_at").gte("created_at", cutoff),
+      supabase
+        .from("change_requests")
+        .select("user_id, status, is_paid, created_at")
+        .gte("created_at", cutoff),
+      supabase
+        .from("change_comments")
+        .select("request_id, author_id, created_at")
+        .gte("created_at", cutoff),
     ]);
     const reqs = reqsRes.data ?? [];
     const scores: Record<string, "green" | "orange" | "red"> = {};
@@ -998,7 +1096,9 @@ export const adminGetHealthScores = createServerFn({ method: "GET" })
     byUser.forEach((items, uid) => {
       const paid = items.filter((i) => i.is_paid).length;
       const total = items.length;
-      const cancelled = items.filter((i) => i.status === "cancelled" || i.status === "rejected").length;
+      const cancelled = items.filter(
+        (i) => i.status === "cancelled" || i.status === "rejected",
+      ).length;
       // simple scoring: many cancellations = red, very active = green, otherwise orange
       let score: "green" | "orange" | "red" = "orange";
       if (cancelled > 2) score = "red";
@@ -1106,8 +1206,7 @@ export const adminChangeRole = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
-    if (data.target_user_id === userId)
-      throw new Error("Je kunt je eigen rol niet wijzigen.");
+    if (data.target_user_id === userId) throw new Error("Je kunt je eigen rol niet wijzigen.");
 
     const { adminReplaceRole } = await import("./admin.server");
     await adminReplaceRole(data.target_user_id, data.role);
@@ -1123,8 +1222,7 @@ export const adminRemoveStaff = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
-    if (data.target_user_id === userId)
-      throw new Error("Je kunt jezelf niet verwijderen.");
+    if (data.target_user_id === userId) throw new Error("Je kunt jezelf niet verwijderen.");
     const { adminRemoveStaffRoles } = await import("./admin.server");
     await adminRemoveStaffRoles(data.target_user_id);
     await logAudit(supabase, userId, "staff_removed", "user", data.target_user_id, {});
@@ -1146,10 +1244,7 @@ export const adminGetAuditLog = createServerFn({ method: "GET" })
     const { data: profiles } = await supabase
       .from("profiles")
       .select("id, email, full_name")
-      .in(
-        "id",
-        Array.from(new Set([...(data ?? []).map((e: any) => e.user_id)])),
-      );
+      .in("id", Array.from(new Set([...(data ?? []).map((e: any) => e.user_id)])));
     const pmap = new Map((profiles ?? []).map((p: any) => [p.id, p]));
     return {
       items: (data ?? []).map((e: any) => ({
@@ -1181,9 +1276,7 @@ export const adminSoftDeleteChange = createServerFn({ method: "POST" })
 
 export const adminBulkSoftDelete = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    z.object({ ids: z.array(z.string().uuid()).min(1).max(100) }).parse(d),
-  )
+  .inputValidator((d) => z.object({ ids: z.array(z.string().uuid()).min(1).max(100) }).parse(d))
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
@@ -1220,7 +1313,6 @@ export const adminRestoreChange = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-
 export const adminHardDeleteChange = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
@@ -1249,10 +1341,7 @@ export const adminListDeletedChanges = createServerFn({ method: "GET" })
     const { data: profiles } = await supabase
       .from("profiles")
       .select("id, email, full_name")
-      .in(
-        "id",
-        Array.from(new Set((data ?? []).map((r: any) => r.user_id))),
-      );
+      .in("id", Array.from(new Set((data ?? []).map((r: any) => r.user_id))));
     const pmap = new Map((profiles ?? []).map((p: any) => [p.id, p]));
     return {
       items: (data ?? []).map((r: any) => ({
@@ -1367,11 +1456,13 @@ export const adminListWebsiteLinks = createServerFn({ method: "GET" })
 export const adminUpdateWebsiteLink = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      user_id: z.string().uuid(),
-      website_url: z.string().trim().max(500).nullable().optional(),
-      snippet_active: z.boolean().optional(),
-    }).parse(d),
+    z
+      .object({
+        user_id: z.string().uuid(),
+        website_url: z.string().trim().max(500).nullable().optional(),
+        snippet_active: z.boolean().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1399,12 +1490,19 @@ export const adminListProjects = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
 
     const ids = (projects ?? []).map((p: any) => p.id);
-    const primaryIds = Array.from(new Set((projects ?? []).map((p: any) => p.primary_user_id).filter(Boolean)));
+    const primaryIds = Array.from(
+      new Set((projects ?? []).map((p: any) => p.primary_user_id).filter(Boolean)),
+    );
     const [membersRes, profilesRes, pingsRes] = await Promise.all([
-      supabaseAdmin.from("project_members" as any).select("project_id, user_id").in("project_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]),
+      supabaseAdmin
+        .from("project_members" as any)
+        .select("project_id, user_id")
+        .in("project_id", ids.length ? ids : ["00000000-0000-0000-0000-000000000000"]),
       supabase.from("profiles").select("id, full_name, email"),
       // PERF-2: tel alleen de pings van de betrokken primary-users, via SQL-aggregatie.
-      supabaseAdmin.rpc("site_ping_counts" as any, { p_user_ids: primaryIds.length ? primaryIds : [] }),
+      supabaseAdmin.rpc("site_ping_counts" as any, {
+        p_user_ids: primaryIds.length ? primaryIds : [],
+      }),
     ]);
 
     const profileMap: Record<string, any> = {};
@@ -1427,28 +1525,37 @@ export const adminListProjects = createServerFn({ method: "GET" })
     };
   });
 
-const PROJECT_STATUS_VALUES = ["concept", "in_uitvoering", "review", "afgerond", "on_hold", "geannuleerd"] as const;
+const PROJECT_STATUS_VALUES = [
+  "concept",
+  "in_uitvoering",
+  "review",
+  "afgerond",
+  "on_hold",
+  "geannuleerd",
+] as const;
 const PROJECT_PRIORITY_VALUES = ["laag", "normaal", "hoog", "urgent"] as const;
 
 export const adminCreateProject = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      name: z.string().trim().min(1).max(200),
-      website_url: z.string().trim().max(500).nullable().optional(),
-      snippet_active: z.boolean().optional(),
-      primary_user_id: z.string().uuid(),
-      member_ids: z.array(z.string().uuid()).optional(),
-      status: z.enum(PROJECT_STATUS_VALUES).optional(),
-      priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
-      description: z.string().trim().max(5000).nullable().optional(),
-      start_date: z.string().trim().max(30).nullable().optional(),
-      deadline: z.string().trim().max(30).nullable().optional(),
-      budget: z.number().nonnegative().nullable().optional(),
-      hours_estimated: z.number().nonnegative().nullable().optional(),
-      category: z.string().trim().max(100).nullable().optional(),
-      tags: z.array(z.string().trim().max(50)).optional(),
-    }).parse(d),
+    z
+      .object({
+        name: z.string().trim().min(1).max(200),
+        website_url: z.string().trim().max(500).nullable().optional(),
+        snippet_active: z.boolean().optional(),
+        primary_user_id: z.string().uuid(),
+        member_ids: z.array(z.string().uuid()).optional(),
+        status: z.enum(PROJECT_STATUS_VALUES).optional(),
+        priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
+        description: z.string().trim().max(5000).nullable().optional(),
+        start_date: z.string().trim().max(30).nullable().optional(),
+        deadline: z.string().trim().max(30).nullable().optional(),
+        budget: z.number().nonnegative().nullable().optional(),
+        hours_estimated: z.number().nonnegative().nullable().optional(),
+        category: z.string().trim().max(100).nullable().optional(),
+        tags: z.array(z.string().trim().max(50)).optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1463,45 +1570,55 @@ export const adminCreateProject = createServerFn({ method: "POST" })
 
     // Zelfde website/snippet ook op het profiel zetten, zodat monitoring
     // (die op profiles.website_url draait) meteen werkt.
-    await supabase.from("profiles").update({
-      website_url: rest.website_url ?? null,
-      snippet_active: rest.snippet_active ?? false,
-    }).eq("id", rest.primary_user_id);
+    await supabase
+      .from("profiles")
+      .update({
+        website_url: rest.website_url ?? null,
+        snippet_active: rest.snippet_active ?? false,
+      })
+      .eq("id", rest.primary_user_id);
 
     const memberSet = new Set([rest.primary_user_id, ...(member_ids ?? [])]);
-    const rows = Array.from(memberSet).map((uid) => ({ project_id: (project as any).id, user_id: uid }));
+    const rows = Array.from(memberSet).map((uid) => ({
+      project_id: (project as any).id,
+      user_id: uid,
+    }));
     if (rows.length) {
       const { error: memErr } = await supabaseAdmin.from("project_members" as any).insert(rows);
       if (memErr) throw new Error(memErr.message);
     }
 
-    await logAudit(supabase, userId, "project_created", "project", (project as any).id, { name: rest.name });
+    await logAudit(supabase, userId, "project_created", "project", (project as any).id, {
+      name: rest.name,
+    });
     return { ok: true, project };
   });
 
 export const adminUpdateProject = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      primary_user_id: z.string().uuid().optional(),
-      name: z.string().trim().min(1).max(200).optional(),
-      website_url: z.string().trim().max(500).nullable().optional(),
-      snippet_active: z.boolean().optional(),
-      status: z.enum(PROJECT_STATUS_VALUES).optional(),
-      priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
-      description: z.string().trim().max(5000).nullable().optional(),
-      start_date: z.string().trim().max(30).nullable().optional(),
-      deadline: z.string().trim().max(30).nullable().optional(),
-      budget: z.number().nonnegative().nullable().optional(),
-      hours_estimated: z.number().nonnegative().nullable().optional(),
-      hours_spent: z.number().nonnegative().optional(),
-      progress_percentage: z.number().int().min(0).max(100).optional(),
-      category: z.string().trim().max(100).nullable().optional(),
-      tags: z.array(z.string().trim().max(50)).optional(),
-      client_visible_notes: z.string().trim().max(5000).nullable().optional(),
-      internal_notes: z.string().trim().max(5000).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        primary_user_id: z.string().uuid().optional(),
+        name: z.string().trim().min(1).max(200).optional(),
+        website_url: z.string().trim().max(500).nullable().optional(),
+        snippet_active: z.boolean().optional(),
+        status: z.enum(PROJECT_STATUS_VALUES).optional(),
+        priority: z.enum(PROJECT_PRIORITY_VALUES).optional(),
+        description: z.string().trim().max(5000).nullable().optional(),
+        start_date: z.string().trim().max(30).nullable().optional(),
+        deadline: z.string().trim().max(30).nullable().optional(),
+        budget: z.number().nonnegative().nullable().optional(),
+        hours_estimated: z.number().nonnegative().nullable().optional(),
+        hours_spent: z.number().nonnegative().optional(),
+        progress_percentage: z.number().int().min(0).max(100).optional(),
+        category: z.string().trim().max(100).nullable().optional(),
+        tags: z.array(z.string().trim().max(50)).optional(),
+        client_visible_notes: z.string().trim().max(5000).nullable().optional(),
+        internal_notes: z.string().trim().max(5000).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1510,7 +1627,11 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
 
     if (rest.primary_user_id) {
       // Nieuwe hoofdklant mag niet ook als losse "extra klant" gekoppeld blijven staan.
-      await supabaseAdmin.from("project_members" as any).delete().eq("project_id", project_id).eq("user_id", rest.primary_user_id);
+      await supabaseAdmin
+        .from("project_members" as any)
+        .delete()
+        .eq("project_id", project_id)
+        .eq("user_id", rest.primary_user_id);
     }
 
     const { data: project, error } = await supabaseAdmin
@@ -1525,10 +1646,15 @@ export const adminUpdateProject = createServerFn({ method: "POST" })
       const updates: Record<string, any> = {};
       if (rest.website_url !== undefined) updates.website_url = rest.website_url;
       if (rest.snippet_active !== undefined) updates.snippet_active = rest.snippet_active;
-      await supabase.from("profiles").update(updates as any).eq("id", (project as any).primary_user_id);
+      await supabase
+        .from("profiles")
+        .update(updates as any)
+        .eq("id", (project as any).primary_user_id);
     }
 
-    await logAudit(supabase, userId, "project_updated", "project", project_id, { fields: Object.keys(rest) });
+    await logAudit(supabase, userId, "project_updated", "project", project_id, {
+      fields: Object.keys(rest),
+    });
     return { ok: true, project };
   });
 
@@ -1538,7 +1664,10 @@ export const adminDeleteProject = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("projects" as any).delete().eq("id", data.project_id);
+    const { error } = await supabaseAdmin
+      .from("projects" as any)
+      .delete()
+      .eq("id", data.project_id);
     if (error) throw new Error(error.message);
     await logAudit(supabase, userId, "project_deleted", "project", data.project_id);
     return { ok: true };
@@ -1586,40 +1715,46 @@ export const adminGetProject = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
-    const [membersRes, milestonesRes, notesRes, contactsRes, auditRes, changeRequestsRes] = await Promise.all([
-      supabaseAdmin.from("project_members" as any).select("project_id, user_id").eq("project_id", data.project_id),
-      supabaseAdmin
-        .from("project_milestones" as any)
-        .select("*")
-        .eq("project_id", data.project_id)
-        .order("order", { ascending: true }),
-      supabaseAdmin
-        .from("project_notes" as any)
-        .select("*")
-        .eq("project_id", data.project_id)
-        .order("created_at", { ascending: false }),
-      supabaseAdmin
-        .from("project_contacts" as any)
-        .select("*")
-        .eq("project_id", data.project_id)
-        .order("created_at", { ascending: false }),
-      supabaseAdmin
-        .from("audit_log" as any)
-        .select("*")
-        .eq("target_type", "project")
-        .eq("target_id", data.project_id)
-        .order("created_at", { ascending: false })
-        .limit(100),
-      supabaseAdmin
-        .from("change_requests" as any)
-        .select("id, title, status, priority, created_at, request_number")
-        .eq("project_id", data.project_id)
-        .is("deleted_at", null)
-        .order("created_at", { ascending: false }),
-    ]);
+    const [membersRes, milestonesRes, notesRes, contactsRes, auditRes, changeRequestsRes] =
+      await Promise.all([
+        supabaseAdmin
+          .from("project_members" as any)
+          .select("project_id, user_id")
+          .eq("project_id", data.project_id),
+        supabaseAdmin
+          .from("project_milestones" as any)
+          .select("*")
+          .eq("project_id", data.project_id)
+          .order("order", { ascending: true }),
+        supabaseAdmin
+          .from("project_notes" as any)
+          .select("*")
+          .eq("project_id", data.project_id)
+          .order("created_at", { ascending: false }),
+        supabaseAdmin
+          .from("project_contacts" as any)
+          .select("*")
+          .eq("project_id", data.project_id)
+          .order("created_at", { ascending: false }),
+        supabaseAdmin
+          .from("audit_log" as any)
+          .select("*")
+          .eq("target_type", "project")
+          .eq("target_id", data.project_id)
+          .order("created_at", { ascending: false })
+          .limit(100),
+        supabaseAdmin
+          .from("change_requests" as any)
+          .select("id, title, status, priority, created_at, request_number")
+          .eq("project_id", data.project_id)
+          .is("deleted_at", null)
+          .order("created_at", { ascending: false }),
+      ]);
 
     const memberIds = (membersRes.data ?? []).map((m: any) => m.user_id);
-    const idsToFetch = Array.from(new Set([...memberIds, (project as any).primary_user_id].filter(Boolean)));
+    const idsToFetch = Array.from(
+      new Set([...memberIds, (project as any).primary_user_id].filter(Boolean)),
+    );
     const { data: profiles } = idsToFetch.length
       ? await supabase.from("profiles").select("id, full_name, email, company").in("id", idsToFetch)
       : { data: [] as any[] };
@@ -1641,20 +1776,32 @@ export const adminGetProject = createServerFn({ method: "POST" })
 export const adminSetProjectMembers = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      member_ids: z.array(z.string().uuid()),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        member_ids: z.array(z.string().uuid()),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { data: project } = await supabaseAdmin.from("projects" as any).select("primary_user_id").eq("id", data.project_id).maybeSingle();
+    const { data: project } = await supabaseAdmin
+      .from("projects" as any)
+      .select("primary_user_id")
+      .eq("id", data.project_id)
+      .maybeSingle();
     if (!project) throw new Error("Project niet gevonden");
     const memberSet = new Set([(project as any).primary_user_id, ...data.member_ids]);
 
-    await supabaseAdmin.from("project_members" as any).delete().eq("project_id", data.project_id);
-    const rows = Array.from(memberSet).map((uid) => ({ project_id: data.project_id, user_id: uid }));
+    await supabaseAdmin
+      .from("project_members" as any)
+      .delete()
+      .eq("project_id", data.project_id);
+    const rows = Array.from(memberSet).map((uid) => ({
+      project_id: data.project_id,
+      user_id: uid,
+    }));
     const { error } = await supabaseAdmin.from("project_members" as any).insert(rows);
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -1680,13 +1827,15 @@ export const adminListProjectMilestones = createServerFn({ method: "POST" })
 export const adminCreateProjectMilestone = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      title: z.string().trim().min(1).max(200),
-      description: z.string().trim().max(2000).nullable().optional(),
-      due_date: z.string().trim().max(30).nullable().optional(),
-      order: z.number().int().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200),
+        description: z.string().trim().max(2000).nullable().optional(),
+        due_date: z.string().trim().max(30).nullable().optional(),
+        order: z.number().int().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1709,15 +1858,17 @@ export const adminCreateProjectMilestone = createServerFn({ method: "POST" })
 export const adminUpdateProjectMilestone = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      id: z.string().uuid(),
-      project_id: z.string().uuid(),
-      title: z.string().trim().min(1).max(200).optional(),
-      description: z.string().trim().max(2000).nullable().optional(),
-      due_date: z.string().trim().max(30).nullable().optional(),
-      status: z.enum(["open", "done"]).optional(),
-      order: z.number().int().optional(),
-    }).parse(d),
+    z
+      .object({
+        id: z.string().uuid(),
+        project_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200).optional(),
+        description: z.string().trim().max(2000).nullable().optional(),
+        due_date: z.string().trim().max(30).nullable().optional(),
+        status: z.enum(["open", "done"]).optional(),
+        order: z.number().int().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1765,13 +1916,20 @@ export const adminUpdateProjectMilestone = createServerFn({ method: "POST" })
 
 export const adminDeleteProjectMilestone = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_milestones" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_milestones" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "milestone_deleted", "project", data.project_id, { milestone_id: data.id });
+    await logAudit(supabase, userId, "milestone_deleted", "project", data.project_id, {
+      milestone_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -1795,11 +1953,13 @@ export const adminListProjectNotes = createServerFn({ method: "POST" })
 export const adminCreateProjectNote = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      content: z.string().trim().min(1).max(4000),
-      is_client_visible: z.boolean().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        content: z.string().trim().min(1).max(4000),
+        is_client_visible: z.boolean().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1810,7 +1970,9 @@ export const adminCreateProjectNote = createServerFn({ method: "POST" })
       .select()
       .single();
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "note_created", "project", data.project_id, { note_id: (note as any).id });
+    await logAudit(supabase, userId, "note_created", "project", data.project_id, {
+      note_id: (note as any).id,
+    });
     return { ok: true, note };
   });
 
@@ -1820,11 +1982,13 @@ export const adminCreateProjectNote = createServerFn({ method: "POST" })
 export const adminUpdateProjectNote = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      id: z.string().uuid(),
-      project_id: z.string().uuid(),
-      is_client_visible: z.boolean().optional(),
-    }).parse(d),
+    z
+      .object({
+        id: z.string().uuid(),
+        project_id: z.string().uuid(),
+        is_client_visible: z.boolean().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1837,19 +2001,29 @@ export const adminUpdateProjectNote = createServerFn({ method: "POST" })
       .select()
       .single();
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "note_updated", "project", project_id, { note_id: id, fields: Object.keys(rest) });
+    await logAudit(supabase, userId, "note_updated", "project", project_id, {
+      note_id: id,
+      fields: Object.keys(rest),
+    });
     return { ok: true, note };
   });
 
 export const adminDeleteProjectNote = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_notes" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_notes" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "note_deleted", "project", data.project_id, { note_id: data.id });
+    await logAudit(supabase, userId, "note_deleted", "project", data.project_id, {
+      note_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -1873,13 +2047,15 @@ export const adminListProjectContacts = createServerFn({ method: "POST" })
 export const adminCreateProjectContact = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      name: z.string().trim().min(1).max(200),
-      role: z.string().trim().max(100).nullable().optional(),
-      email: z.string().trim().max(200).nullable().optional(),
-      phone: z.string().trim().max(50).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        name: z.string().trim().min(1).max(200),
+        role: z.string().trim().max(100).nullable().optional(),
+        email: z.string().trim().max(200).nullable().optional(),
+        phone: z.string().trim().max(50).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1890,21 +2066,25 @@ export const adminCreateProjectContact = createServerFn({ method: "POST" })
       .select()
       .single();
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "contact_created", "project", data.project_id, { contact_id: (contact as any).id });
+    await logAudit(supabase, userId, "contact_created", "project", data.project_id, {
+      contact_id: (contact as any).id,
+    });
     return { ok: true, contact };
   });
 
 export const adminUpdateProjectContact = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      id: z.string().uuid(),
-      project_id: z.string().uuid(),
-      name: z.string().trim().min(1).max(200).optional(),
-      role: z.string().trim().max(100).nullable().optional(),
-      email: z.string().trim().max(200).nullable().optional(),
-      phone: z.string().trim().max(50).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        id: z.string().uuid(),
+        project_id: z.string().uuid(),
+        name: z.string().trim().min(1).max(200).optional(),
+        role: z.string().trim().max(100).nullable().optional(),
+        email: z.string().trim().max(200).nullable().optional(),
+        phone: z.string().trim().max(50).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -1917,19 +2097,29 @@ export const adminUpdateProjectContact = createServerFn({ method: "POST" })
       .select()
       .single();
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "contact_updated", "project", project_id, { contact_id: id, fields: Object.keys(rest) });
+    await logAudit(supabase, userId, "contact_updated", "project", project_id, {
+      contact_id: id,
+      fields: Object.keys(rest),
+    });
     return { ok: true, contact };
   });
 
 export const adminDeleteProjectContact = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_contacts" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_contacts" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "contact_deleted", "project", data.project_id, { contact_id: data.id });
+    await logAudit(supabase, userId, "contact_deleted", "project", data.project_id, {
+      contact_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -1982,8 +2172,7 @@ async function generateDueRecurringTaskInstances(projectId: string) {
   for (const template of tmpls) {
     const lastInstance = latestByParent.get(template.id) ?? null;
     const shouldGenerate =
-      !lastInstance ||
-      (lastInstance.status === "done" && isPastDue(lastInstance.due_date));
+      !lastInstance || (lastInstance.status === "done" && isPastDue(lastInstance.due_date));
     if (!shouldGenerate) continue;
 
     const newDueDate = lastInstance
@@ -2030,14 +2219,16 @@ export const adminListProjectTasks = createServerFn({ method: "POST" })
 export const adminCreateProjectTask = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      title: z.string().trim().min(1).max(200),
-      description: z.string().trim().max(2000).nullable().optional(),
-      assigned_to: z.string().uuid().nullable().optional(),
-      due_date: z.string().trim().max(30).nullable().optional(),
-      recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200),
+        description: z.string().trim().max(2000).nullable().optional(),
+        assigned_to: z.string().uuid().nullable().optional(),
+        due_date: z.string().trim().max(30).nullable().optional(),
+        recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -2058,16 +2249,18 @@ export const adminCreateProjectTask = createServerFn({ method: "POST" })
 export const adminUpdateProjectTask = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      id: z.string().uuid(),
-      project_id: z.string().uuid(),
-      title: z.string().trim().min(1).max(200).optional(),
-      description: z.string().trim().max(2000).nullable().optional(),
-      assigned_to: z.string().uuid().nullable().optional(),
-      status: z.enum(["open", "done"]).optional(),
-      due_date: z.string().trim().max(30).nullable().optional(),
-      recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        id: z.string().uuid(),
+        project_id: z.string().uuid(),
+        title: z.string().trim().min(1).max(200).optional(),
+        description: z.string().trim().max(2000).nullable().optional(),
+        assigned_to: z.string().uuid().nullable().optional(),
+        status: z.enum(["open", "done"]).optional(),
+        due_date: z.string().trim().max(30).nullable().optional(),
+        recurrence: z.enum(["weekly", "monthly", "quarterly"]).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -2093,13 +2286,20 @@ export const adminUpdateProjectTask = createServerFn({ method: "POST" })
 
 export const adminDeleteProjectTask = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_tasks" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_tasks" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "task_deleted", "project", data.project_id, { task_id: data.id });
+    await logAudit(supabase, userId, "task_deleted", "project", data.project_id, {
+      task_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -2127,7 +2327,10 @@ export const adminListProjectTimeEntries = createServerFn({ method: "POST" })
 
     const taskIds = Array.from(new Set((items ?? []).map((i: any) => i.task_id).filter(Boolean)));
     const { data: tasks } = taskIds.length
-      ? await supabaseAdmin.from("project_tasks" as any).select("id, title").in("id", taskIds)
+      ? await supabaseAdmin
+          .from("project_tasks" as any)
+          .select("id, title")
+          .in("id", taskIds)
       : { data: [] as any[] };
     const taskMap: Record<string, any> = {};
     for (const t of (tasks ?? []) as any[]) taskMap[t.id] = t;
@@ -2144,15 +2347,17 @@ export const adminListProjectTimeEntries = createServerFn({ method: "POST" })
 export const adminCreateProjectTimeEntry = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      task_id: z.string().uuid().nullable().optional(),
-      user_id: z.string().uuid().optional(),
-      minutes: z.number().int().min(1).max(1440),
-      description: z.string().trim().max(2000).nullable().optional(),
-      entry_date: z.string().trim().max(30).optional(),
-      billable: z.boolean().optional(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        task_id: z.string().uuid().nullable().optional(),
+        user_id: z.string().uuid().optional(),
+        minutes: z.number().int().min(1).max(1440),
+        description: z.string().trim().max(2000).nullable().optional(),
+        entry_date: z.string().trim().max(30).optional(),
+        billable: z.boolean().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -2173,13 +2378,20 @@ export const adminCreateProjectTimeEntry = createServerFn({ method: "POST" })
 
 export const adminDeleteProjectTimeEntry = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_task_time_entries" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_task_time_entries" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "time_entry_deleted", "project", data.project_id, { entry_id: data.id });
+    await logAudit(supabase, userId, "time_entry_deleted", "project", data.project_id, {
+      entry_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -2211,7 +2423,10 @@ export const adminExportProjectTimeEntriesCsv = createServerFn({ method: "POST" 
 
     const taskIds = Array.from(new Set((items ?? []).map((i: any) => i.task_id).filter(Boolean)));
     const { data: tasks } = taskIds.length
-      ? await supabaseAdmin.from("project_tasks" as any).select("id, title").in("id", taskIds)
+      ? await supabaseAdmin
+          .from("project_tasks" as any)
+          .select("id, title")
+          .in("id", taskIds)
       : { data: [] as any[] };
     const taskMap: Record<string, any> = {};
     for (const t of (tasks ?? []) as any[]) taskMap[t.id] = t;
@@ -2255,18 +2470,23 @@ export const adminListMilestoneDependencies = createServerFn({ method: "POST" })
 export const adminAddMilestoneDependency = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      project_id: z.string().uuid(),
-      milestone_id: z.string().uuid(),
-      depends_on_milestone_id: z.string().uuid(),
-    }).parse(d),
+    z
+      .object({
+        project_id: z.string().uuid(),
+        milestone_id: z.string().uuid(),
+        depends_on_milestone_id: z.string().uuid(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
     const { data: dep, error } = await supabaseAdmin
       .from("project_milestone_dependencies" as any)
-      .insert({ milestone_id: data.milestone_id, depends_on_milestone_id: data.depends_on_milestone_id })
+      .insert({
+        milestone_id: data.milestone_id,
+        depends_on_milestone_id: data.depends_on_milestone_id,
+      })
       .select()
       .single();
     if (error) throw new Error(error.message);
@@ -2279,13 +2499,20 @@ export const adminAddMilestoneDependency = createServerFn({ method: "POST" })
 
 export const adminDeleteMilestoneDependency = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), project_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_milestone_dependencies" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_milestone_dependencies" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "milestone_dependency_removed", "project", data.project_id, { dependency_id: data.id });
+    await logAudit(supabase, userId, "milestone_dependency_removed", "project", data.project_id, {
+      dependency_id: data.id,
+    });
     return { ok: true };
   });
 
@@ -2324,19 +2551,25 @@ export const adminListProjectTemplates = createServerFn({ method: "GET" })
 export const adminCreateProjectTemplate = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      name: z.string().trim().min(1).max(200),
-      description: z.string().trim().max(2000).nullable().optional(),
-      default_category: z.string().trim().max(100).nullable().optional(),
-      default_hours_estimated: z.number().nonnegative().nullable().optional(),
-      milestones: z.array(
-        z.object({
-          title: z.string().trim().min(1).max(200),
-          description: z.string().trim().max(2000).nullable().optional(),
-          days_offset: z.number().int().default(0),
-        }),
-      ).max(50).optional().default([]),
-    }).parse(d),
+    z
+      .object({
+        name: z.string().trim().min(1).max(200),
+        description: z.string().trim().max(2000).nullable().optional(),
+        default_category: z.string().trim().max(100).nullable().optional(),
+        default_hours_estimated: z.number().nonnegative().nullable().optional(),
+        milestones: z
+          .array(
+            z.object({
+              title: z.string().trim().min(1).max(200),
+              description: z.string().trim().max(2000).nullable().optional(),
+              days_offset: z.number().int().default(0),
+            }),
+          )
+          .max(50)
+          .optional()
+          .default([]),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -2357,7 +2590,9 @@ export const adminCreateProjectTemplate = createServerFn({ method: "POST" })
         days_offset: m.days_offset ?? 0,
         sort_order: idx,
       }));
-      const { error: mErr } = await supabaseAdmin.from("project_template_milestones" as any).insert(rows);
+      const { error: mErr } = await supabaseAdmin
+        .from("project_template_milestones" as any)
+        .insert(rows);
       if (mErr) throw new Error(mErr.message);
     }
 
@@ -2374,26 +2609,33 @@ export const adminDeleteProjectTemplate = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { error } = await supabaseAdmin.from("project_templates" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("project_templates" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "project_template_deleted", "project", null, { template_id: data.id });
+    await logAudit(supabase, userId, "project_template_deleted", "project", null, {
+      template_id: data.id,
+    });
     return { ok: true };
   });
 
 export const adminCreateProjectFromTemplate = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      template_id: z.string().uuid(),
-      name: z.string().trim().min(1).max(200),
-      website_url: z.string().trim().max(500).nullable().optional(),
-      snippet_active: z.boolean().optional(),
-      primary_user_id: z.string().uuid(),
-      member_ids: z.array(z.string().uuid()).optional(),
-      start_date: z.string().trim().max(30).nullable().optional(),
-      category: z.string().trim().max(100).nullable().optional(),
-      hours_estimated: z.number().nonnegative().nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        template_id: z.string().uuid(),
+        name: z.string().trim().min(1).max(200),
+        website_url: z.string().trim().max(500).nullable().optional(),
+        snippet_active: z.boolean().optional(),
+        primary_user_id: z.string().uuid(),
+        member_ids: z.array(z.string().uuid()).optional(),
+        start_date: z.string().trim().max(30).nullable().optional(),
+        category: z.string().trim().max(100).nullable().optional(),
+        hours_estimated: z.number().nonnegative().nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -2427,15 +2669,23 @@ export const adminCreateProjectFromTemplate = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
-    await supabase.from("profiles").update({
-      website_url: projectInsert.website_url ?? null,
-      snippet_active: projectInsert.snippet_active ?? false,
-    }).eq("id", projectInsert.primary_user_id);
+    await supabase
+      .from("profiles")
+      .update({
+        website_url: projectInsert.website_url ?? null,
+        snippet_active: projectInsert.snippet_active ?? false,
+      })
+      .eq("id", projectInsert.primary_user_id);
 
     const memberSet = new Set([projectInsert.primary_user_id, ...(member_ids ?? [])]);
-    const memberRows = Array.from(memberSet).map((uid) => ({ project_id: (project as any).id, user_id: uid }));
+    const memberRows = Array.from(memberSet).map((uid) => ({
+      project_id: (project as any).id,
+      user_id: uid,
+    }));
     if (memberRows.length) {
-      const { error: memErr } = await supabaseAdmin.from("project_members" as any).insert(memberRows);
+      const { error: memErr } = await supabaseAdmin
+        .from("project_members" as any)
+        .insert(memberRows);
       if (memErr) throw new Error(memErr.message);
     }
 
@@ -2452,14 +2702,23 @@ export const adminCreateProjectFromTemplate = createServerFn({ method: "POST" })
       };
     });
     if (milestoneRows.length) {
-      const { error: mErr } = await supabaseAdmin.from("project_milestones" as any).insert(milestoneRows);
+      const { error: mErr } = await supabaseAdmin
+        .from("project_milestones" as any)
+        .insert(milestoneRows);
       if (mErr) throw new Error(mErr.message);
     }
 
-    await logAudit(supabase, userId, "project_created_from_template", "project", (project as any).id, {
-      template_id: data.template_id,
-      name: data.name,
-    });
+    await logAudit(
+      supabase,
+      userId,
+      "project_created_from_template",
+      "project",
+      (project as any).id,
+      {
+        template_id: data.template_id,
+        name: data.name,
+      },
+    );
     return { ok: true, project };
   });
 
@@ -2494,7 +2753,8 @@ export const adminGetProjectsDashboardWidgets = createServerFn({ method: "GET" }
 
     const lastActivityByProject: Record<string, string> = {};
     for (const a of (activity ?? []) as any[]) {
-      if (!lastActivityByProject[a.project_id]) lastActivityByProject[a.project_id] = a.last_activity;
+      if (!lastActivityByProject[a.project_id])
+        lastActivityByProject[a.project_id] = a.last_activity;
     }
 
     const cutoff = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
@@ -2528,9 +2788,23 @@ export const adminListProjectChangeRequests = createServerFn({ method: "POST" })
 // ==================== MONITORING ============================
 // ============================================================
 
-async function checkSSLCert(url: string): Promise<{ valid: boolean; expires_at: string | null; days_remaining: number | null; issuer: string | null; error: string | null }> {
+async function checkSSLCert(
+  url: string,
+): Promise<{
+  valid: boolean;
+  expires_at: string | null;
+  days_remaining: number | null;
+  issuer: string | null;
+  error: string | null;
+}> {
   const tls = await import("tls");
-  const fail = (error: string) => ({ valid: false, expires_at: null as string | null, days_remaining: null as number | null, issuer: null as string | null, error });
+  const fail = (error: string) => ({
+    valid: false,
+    expires_at: null as string | null,
+    days_remaining: null as number | null,
+    issuer: null as string | null,
+    error,
+  });
 
   let hostname: string;
   try {
@@ -2550,14 +2824,24 @@ async function checkSSLCert(url: string): Promise<{ valid: boolean; expires_at: 
     const done = (result: Awaited<ReturnType<typeof checkSSLCert>>) => {
       if (settled) return;
       settled = true;
-      try { socket.destroy(); } catch { /* noop */ }
+      try {
+        socket.destroy();
+      } catch {
+        /* noop */
+      }
       resolve(result);
     };
 
     // Directe TLS-handshake met expliciete SNI en zonder sessie-hergebruik,
     // zodat het volledige certificaat gegarandeerd over de lijn komt.
     const socket = (tls as any).connect(
-      { host: hostname, port: 443, servername: hostname, rejectUnauthorized: false, session: undefined },
+      {
+        host: hostname,
+        port: 443,
+        servername: hostname,
+        rejectUnauthorized: false,
+        session: undefined,
+      },
       () => {
         try {
           const cert = socket.getPeerCertificate?.();
@@ -2593,7 +2877,11 @@ async function checkDNSHealth(url: string): Promise<{ healthy: boolean; issues: 
     const hostname = new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
     await assertPublicHost(hostname);
     const issues: string[] = [];
-    try { await resolve4(hostname); } catch { issues.push(`Geen A-record voor ${hostname}`); }
+    try {
+      await resolve4(hostname);
+    } catch {
+      issues.push(`Geen A-record voor ${hostname}`);
+    }
     return { healthy: issues.length === 0, issues };
   } catch (e: any) {
     return { healthy: false, issues: [`DNS check mislukt: ${e.message}`] };
@@ -2606,7 +2894,11 @@ export const adminSyncCustomerMonitoring = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureStaff(supabase, userId);
-    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("website_url")
+      .eq("id", data.user_id)
+      .maybeSingle();
     if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
 
     const measured = await measureResponseTime(profile.website_url);
@@ -2618,7 +2910,9 @@ export const adminSyncCustomerMonitoring = createServerFn({ method: "POST" })
         response_ms: measured.response_ms,
         status_ok: measured.status_ok,
       });
-    } catch { /* tabel bestaat nog niet */ }
+    } catch {
+      /* tabel bestaat nog niet */
+    }
 
     // Altijd ook site_pings (backward compat)
     await supabaseAdmin.from("site_pings").insert({
@@ -2631,11 +2925,28 @@ export const adminSyncCustomerMonitoring = createServerFn({ method: "POST" })
     if (measured.response_ms > 3000) {
       const since1h = new Date(Date.now() - 3600000).toISOString();
       try {
-        const { data: existing } = await supabaseAdmin.from("monitoring_alerts" as any).select("id").eq("user_id", data.user_id).eq("type", "response_time").is("archived_at", null).gte("created_at", since1h).limit(1).maybeSingle();
+        const { data: existing } = await supabaseAdmin
+          .from("monitoring_alerts" as any)
+          .select("id")
+          .eq("user_id", data.user_id)
+          .eq("type", "response_time")
+          .is("archived_at", null)
+          .gte("created_at", since1h)
+          .limit(1)
+          .maybeSingle();
         if (!existing) {
-          await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "response_time", severity: "warning", message: `Hoge response time: ${measured.response_ms}ms (limiet: 3000ms)` });
+          await supabaseAdmin
+            .from("monitoring_alerts" as any)
+            .insert({
+              user_id: data.user_id,
+              type: "response_time",
+              severity: "warning",
+              message: `Hoge response time: ${measured.response_ms}ms (limiet: 3000ms)`,
+            });
         }
-      } catch { /* tabel bestaat nog niet */ }
+      } catch {
+        /* tabel bestaat nog niet */
+      }
     }
 
     return { ok: true, ...measured };
@@ -2656,16 +2967,42 @@ export const adminGetCustomerMonitoring = createServerFn({ method: "POST" })
 
     try {
       const [rtRes, sslRes, dnsRes, alertsRes] = await Promise.all([
-        supabaseAdmin.from("site_response_times" as any).select("response_ms,status_ok,created_at").eq("user_id", data.user_id).gte("created_at", since7d).order("created_at", { ascending: false }).limit(2016),
-        supabaseAdmin.from("ssl_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
-        supabaseAdmin.from("dns_checks" as any).select("*").eq("user_id", data.user_id).order("checked_at", { ascending: false }).limit(1).maybeSingle(),
-        supabaseAdmin.from("monitoring_alerts" as any).select("*").eq("user_id", data.user_id).is("archived_at", null).order("created_at", { ascending: false }).limit(20),
+        supabaseAdmin
+          .from("site_response_times" as any)
+          .select("response_ms,status_ok,created_at")
+          .eq("user_id", data.user_id)
+          .gte("created_at", since7d)
+          .order("created_at", { ascending: false })
+          .limit(2016),
+        supabaseAdmin
+          .from("ssl_checks" as any)
+          .select("*")
+          .eq("user_id", data.user_id)
+          .order("checked_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+        supabaseAdmin
+          .from("dns_checks" as any)
+          .select("*")
+          .eq("user_id", data.user_id)
+          .order("checked_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+        supabaseAdmin
+          .from("monitoring_alerts" as any)
+          .select("*")
+          .eq("user_id", data.user_id)
+          .is("archived_at", null)
+          .order("created_at", { ascending: false })
+          .limit(20),
       ]);
       rows = (rtRes.data as any[]) ?? [];
       ssl = (sslRes.data as any) ?? null;
       dns = (dnsRes.data as any) ?? null;
       alerts = (alertsRes.data as any[]) ?? [];
-    } catch { /* nieuwe tabellen bestaan nog niet */ }
+    } catch {
+      /* nieuwe tabellen bestaan nog niet */
+    }
 
     // Fallback naar site_pings als site_response_times leeg is
     if (rows.length === 0) {
@@ -2689,14 +3026,24 @@ export const adminRunSSLCheck = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("website_url")
+      .eq("id", data.user_id)
+      .maybeSingle();
     if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
     const result = await checkSSLCert(profile.website_url);
-    await supabaseAdmin.from("ssl_checks" as any).insert({ user_id: data.user_id, ...result, checked_at: new Date().toISOString() });
+    await supabaseAdmin
+      .from("ssl_checks" as any)
+      .insert({ user_id: data.user_id, ...result, checked_at: new Date().toISOString() });
     if (!result.valid || (result.days_remaining !== null && result.days_remaining < 30)) {
       const severity = !result.valid || result.days_remaining! < 7 ? "critical" : "warning";
-      const message = !result.valid ? `SSL certificaat ongeldig: ${result.error}` : `SSL verloopt over ${result.days_remaining} dagen`;
-      await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "ssl", severity, message });
+      const message = !result.valid
+        ? `SSL certificaat ongeldig: ${result.error}`
+        : `SSL verloopt over ${result.days_remaining} dagen`;
+      await supabaseAdmin
+        .from("monitoring_alerts" as any)
+        .insert({ user_id: data.user_id, type: "ssl", severity, message });
     }
     return { ok: true, result };
   });
@@ -2707,12 +3054,30 @@ export const adminRunDNSCheck = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureAdmin(supabase, userId);
-    const { data: profile } = await supabase.from("profiles").select("website_url").eq("id", data.user_id).maybeSingle();
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("website_url")
+      .eq("id", data.user_id)
+      .maybeSingle();
     if (!profile?.website_url) throw new Error("Geen website URL ingesteld voor deze klant.");
     const result = await checkDNSHealth(profile.website_url);
-    await supabaseAdmin.from("dns_checks" as any).insert({ user_id: data.user_id, healthy: result.healthy, issues: result.issues, checked_at: new Date().toISOString() });
+    await supabaseAdmin
+      .from("dns_checks" as any)
+      .insert({
+        user_id: data.user_id,
+        healthy: result.healthy,
+        issues: result.issues,
+        checked_at: new Date().toISOString(),
+      });
     if (!result.healthy) {
-      await supabaseAdmin.from("monitoring_alerts" as any).insert({ user_id: data.user_id, type: "dns", severity: "critical", message: result.issues.join("; ") });
+      await supabaseAdmin
+        .from("monitoring_alerts" as any)
+        .insert({
+          user_id: data.user_id,
+          type: "dns",
+          severity: "critical",
+          message: result.issues.join("; "),
+        });
     }
     return { ok: true, result };
   });
@@ -2723,24 +3088,41 @@ export const adminGetAllAlerts = createServerFn({ method: "GET" })
     const { supabase, userId } = context;
     await ensureStaff(supabase, userId);
     const [activeRes, archivedRes, profilesRes] = await Promise.all([
-      supabaseAdmin.from("monitoring_alerts" as any).select("*").is("archived_at", null).order("created_at", { ascending: false }),
-      supabaseAdmin.from("monitoring_alerts" as any).select("*").not("archived_at", "is", null).gte("archived_at", new Date(Date.now() - 30 * 86400000).toISOString()).order("archived_at", { ascending: false }),
+      supabaseAdmin
+        .from("monitoring_alerts" as any)
+        .select("*")
+        .is("archived_at", null)
+        .order("created_at", { ascending: false }),
+      supabaseAdmin
+        .from("monitoring_alerts" as any)
+        .select("*")
+        .not("archived_at", "is", null)
+        .gte("archived_at", new Date(Date.now() - 30 * 86400000).toISOString())
+        .order("archived_at", { ascending: false }),
       supabaseAdmin.from("profiles").select("id,full_name,email"),
     ]);
     const profileMap: Record<string, any> = {};
     for (const p of (profilesRes.data ?? []) as any[]) profileMap[p.id] = p;
     const enrich = (a: any) => ({ ...a, customer: profileMap[a.user_id] ?? null });
-    return { active: ((activeRes.data as any) ?? []).map(enrich), archived: ((archivedRes.data as any) ?? []).map(enrich) };
+    return {
+      active: ((activeRes.data as any) ?? []).map(enrich),
+      archived: ((archivedRes.data as any) ?? []).map(enrich),
+    };
   });
 
 export const adminSnoozeAlert = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ id: z.string().uuid(), hours: z.number().int().min(1).max(168) }).parse(d))
+  .inputValidator((d) =>
+    z.object({ id: z.string().uuid(), hours: z.number().int().min(1).max(168) }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureStaff(supabase, userId);
     const snoozedUntil = new Date(Date.now() + data.hours * 3600000).toISOString();
-    await supabaseAdmin.from("monitoring_alerts" as any).update({ snoozed_until: snoozedUntil }).eq("id", data.id);
+    await supabaseAdmin
+      .from("monitoring_alerts" as any)
+      .update({ snoozed_until: snoozedUntil })
+      .eq("id", data.id);
     return { ok: true };
   });
 
@@ -2751,7 +3133,10 @@ export const adminMarkAlertSeen = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     await ensureStaff(supabase, userId);
     const now = new Date().toISOString();
-    await supabaseAdmin.from("monitoring_alerts" as any).update({ seen_at: now, archived_at: now }).eq("id", data.id);
+    await supabaseAdmin
+      .from("monitoring_alerts" as any)
+      .update({ seen_at: now, archived_at: now })
+      .eq("id", data.id);
     return { ok: true };
   });
 
@@ -2766,12 +3151,27 @@ export const adminGetRolePermissions = createServerFn({ method: "GET" })
 
 export const adminSetRolePermission = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ role: z.string(), permission: z.string(), allowed: z.boolean() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ role: z.string(), permission: z.string(), allowed: z.boolean() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
-    await supabaseAdmin.from("role_permissions" as any).upsert({ role: data.role, permission: data.permission, allowed: data.allowed, updated_at: new Date().toISOString() }, { onConflict: "role,permission" });
-    await logAudit(supabase, userId, "set_role_permission", "role", data.role, { permission: data.permission, allowed: data.allowed });
+    await supabaseAdmin
+      .from("role_permissions" as any)
+      .upsert(
+        {
+          role: data.role,
+          permission: data.permission,
+          allowed: data.allowed,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "role,permission" },
+      );
+    await logAudit(supabase, userId, "set_role_permission", "role", data.role, {
+      permission: data.permission,
+      allowed: data.allowed,
+    });
     return { ok: true };
   });
 
@@ -2791,9 +3191,15 @@ export const adminListRoles = createServerFn({ method: "GET" })
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
 
-    const { data: roles } = await supabaseAdmin.from("roles" as any).select("*").order("is_system", { ascending: false }).order("name");
+    const { data: roles } = await supabaseAdmin
+      .from("roles" as any)
+      .select("*")
+      .order("is_system", { ascending: false })
+      .order("name");
     const { data: userRoleCounts } = await supabaseAdmin.from("user_roles").select("role");
-    const { data: customRoleCounts } = await supabaseAdmin.from("user_custom_roles" as any).select("role_id");
+    const { data: customRoleCounts } = await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .select("role_id");
 
     const systemCounts = new Map<string, number>();
     for (const r of (userRoleCounts as any) ?? []) {
@@ -2819,26 +3225,42 @@ export const adminGetRole = createServerFn({ method: "GET" })
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
 
-    const { data: role } = await supabaseAdmin.from("roles" as any).select("*").eq("id", data.role_id).maybeSingle();
+    const { data: role } = await supabaseAdmin
+      .from("roles" as any)
+      .select("*")
+      .eq("id", data.role_id)
+      .maybeSingle();
     if (!role) throw new Error("Rol niet gevonden");
     const roleRow = role as any;
 
     let accountUserIds: string[] = [];
     if (roleRow.is_system) {
-      const { data: rows } = await supabaseAdmin.from("user_roles").select("user_id").eq("role", roleRow.key);
+      const { data: rows } = await supabaseAdmin
+        .from("user_roles")
+        .select("user_id")
+        .eq("role", roleRow.key);
       accountUserIds = ((rows as any) ?? []).map((r: any) => r.user_id);
     } else {
-      const { data: rows } = await supabaseAdmin.from("user_custom_roles" as any).select("user_id").eq("role_id", roleRow.id);
+      const { data: rows } = await supabaseAdmin
+        .from("user_custom_roles" as any)
+        .select("user_id")
+        .eq("role_id", roleRow.id);
       accountUserIds = ((rows as any) ?? []).map((r: any) => r.user_id);
     }
 
     let accounts: any[] = [];
     if (accountUserIds.length > 0) {
-      const { data: profileRows } = await supabaseAdmin.from("profiles").select("id, full_name, email").in("id", accountUserIds);
+      const { data: profileRows } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name, email")
+        .in("id", accountUserIds);
       accounts = (profileRows as any) ?? [];
     }
 
-    const { data: permissionRows } = await supabaseAdmin.from("role_permissions" as any).select("*").eq("role", roleRow.key);
+    const { data: permissionRows } = await supabaseAdmin
+      .from("role_permissions" as any)
+      .select("*")
+      .eq("role", roleRow.key);
 
     const { data: activityRows } = await supabaseAdmin
       .from("audit_log")
@@ -2875,19 +3297,24 @@ export const adminCreateCustomRole = createServerFn({ method: "POST" })
       throw new Error("Ongeldige basisrol");
     }
 
-    const slugBase = data.name
-      .trim()
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/\p{Diacritic}/gu, "")
-      .replace(/[^a-z0-9]+/g, "_")
-      .replace(/^_+|_+$/g, "") || "rol";
+    const slugBase =
+      data.name
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "") || "rol";
 
     let key = slugBase;
     let suffix = 1;
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      const { data: existing } = await supabaseAdmin.from("roles" as any).select("id").eq("key", key).maybeSingle();
+      const { data: existing } = await supabaseAdmin
+        .from("roles" as any)
+        .select("id")
+        .eq("key", key)
+        .maybeSingle();
       if (!existing) break;
       suffix += 1;
       key = `${slugBase}_${suffix}`;
@@ -2906,7 +3333,10 @@ export const adminCreateCustomRole = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
-    await logAudit(supabase, userId, "create_custom_role", "role", key, { name: data.name, base_role: data.base_role });
+    await logAudit(supabase, userId, "create_custom_role", "role", key, {
+      name: data.name,
+      base_role: data.base_role,
+    });
 
     return { role: created };
   });
@@ -2918,7 +3348,11 @@ export const adminDeleteRole = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
 
-    const { data: role } = await supabaseAdmin.from("roles" as any).select("*").eq("id", data.role_id).maybeSingle();
+    const { data: role } = await supabaseAdmin
+      .from("roles" as any)
+      .select("*")
+      .eq("id", data.role_id)
+      .maybeSingle();
     if (!role) throw new Error("Rol niet gevonden");
     const roleRow = role as any;
 
@@ -2931,17 +3365,27 @@ export const adminDeleteRole = createServerFn({ method: "POST" })
       .select("id", { count: "exact", head: true })
       .eq("role_id", roleRow.id);
 
-    await supabaseAdmin.from("role_permissions" as any).delete().eq("role", roleRow.key);
-    await supabaseAdmin.from("roles" as any).delete().eq("id", roleRow.id);
+    await supabaseAdmin
+      .from("role_permissions" as any)
+      .delete()
+      .eq("role", roleRow.key);
+    await supabaseAdmin
+      .from("roles" as any)
+      .delete()
+      .eq("id", roleRow.id);
 
-    await logAudit(supabase, userId, "delete_custom_role", "role", roleRow.key, { name: roleRow.name });
+    await logAudit(supabase, userId, "delete_custom_role", "role", roleRow.key, {
+      name: roleRow.name,
+    });
 
     return { ok: true, account_count: count ?? 0 };
   });
 
 export const adminAssignCustomRole = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
@@ -2954,29 +3398,44 @@ export const adminAssignCustomRole = createServerFn({ method: "POST" })
       .in("role", STAFF_BASE_ROLES as any)
       .maybeSingle();
     if (!existingStaffRole) {
-      throw new Error("Gebruiker moet eerst een teamrol hebben voor je een custom rol kunt toewijzen");
+      throw new Error(
+        "Gebruiker moet eerst een teamrol hebben voor je een custom rol kunt toewijzen",
+      );
     }
 
     await supabaseAdmin
       .from("user_custom_roles" as any)
-      .upsert({ user_id: data.user_id, role_id: data.role_id, assigned_by: userId }, { onConflict: "user_id,role_id", ignoreDuplicates: true });
+      .upsert(
+        { user_id: data.user_id, role_id: data.role_id, assigned_by: userId },
+        { onConflict: "user_id,role_id", ignoreDuplicates: true },
+      );
 
-    await logAudit(supabase, userId, "assign_custom_role", "role", data.role_id, { user_id: data.user_id });
+    await logAudit(supabase, userId, "assign_custom_role", "role", data.role_id, {
+      user_id: data.user_id,
+    });
 
     return { ok: true };
   });
 
 export const adminRemoveCustomRole = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d))
+  .inputValidator((d) =>
+    z.object({ user_id: z.string().uuid(), role_id: z.string().uuid() }).parse(d),
+  )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureSuperAdmin(supabase, userId);
     await ensurePermission(supabase, userId, "manage_team");
 
-    await supabaseAdmin.from("user_custom_roles" as any).delete().eq("user_id", data.user_id).eq("role_id", data.role_id);
+    await supabaseAdmin
+      .from("user_custom_roles" as any)
+      .delete()
+      .eq("user_id", data.user_id)
+      .eq("role_id", data.role_id);
 
-    await logAudit(supabase, userId, "remove_custom_role", "role", data.role_id, { user_id: data.user_id });
+    await logAudit(supabase, userId, "remove_custom_role", "role", data.role_id, {
+      user_id: data.user_id,
+    });
 
     return { ok: true };
   });
@@ -3006,7 +3465,14 @@ async function ensureLeadsAccess(supabase: any, userId: string) {
   await ensureRoles(supabase, userId, LEADS_ROLES, "sales only");
 }
 
-export const LEAD_STATUSES = ["nieuw", "gebeld", "gemaild", "interesse", "geen_interesse", "klant"] as const;
+export const LEAD_STATUSES = [
+  "nieuw",
+  "gebeld",
+  "gemaild",
+  "interesse",
+  "geen_interesse",
+  "klant",
+] as const;
 const LeadStatus = z.enum(LEAD_STATUSES);
 
 const normPhone = (v: string | null | undefined) => {
@@ -3064,13 +3530,15 @@ export const adminGetLeadActivities = createServerFn({ method: "POST" })
 export const adminCreateLead = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      company_name: z.string().trim().min(1).max(200),
-      has_website: z.boolean().default(false),
-      phone: z.string().trim().max(50).nullable().optional(),
-      email: z.string().trim().max(200).nullable().optional(),
-      notes: z.string().trim().max(2000).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        company_name: z.string().trim().min(1).max(200),
+        has_website: z.boolean().default(false),
+        phone: z.string().trim().max(50).nullable().optional(),
+        email: z.string().trim().max(200).nullable().optional(),
+        notes: z.string().trim().max(2000).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -3084,7 +3552,8 @@ export const adminCreateLead = createServerFn({ method: "POST" })
       created_by: userId,
     });
     if (error) {
-      if (error.code === "23505") throw new Error("Deze lead bestaat al (zelfde bedrijfsnaam + telefoonnummer).");
+      if (error.code === "23505")
+        throw new Error("Deze lead bestaat al (zelfde bedrijfsnaam + telefoonnummer).");
       throw new Error(error.message);
     }
     return { ok: true };
@@ -3093,16 +3562,21 @@ export const adminCreateLead = createServerFn({ method: "POST" })
 export const adminImportLeads = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      rows: z.array(
-        z.object({
-          company_name: z.string().trim().min(1).max(200),
-          has_website: z.boolean(),
-          phone: z.string().trim().max(50).nullable(),
-          email: z.string().trim().max(200).nullable(),
-        }),
-      ).min(1).max(5000),
-    }).parse(d),
+    z
+      .object({
+        rows: z
+          .array(
+            z.object({
+              company_name: z.string().trim().min(1).max(200),
+              has_website: z.boolean(),
+              phone: z.string().trim().max(50).nullable(),
+              email: z.string().trim().max(200).nullable(),
+            }),
+          )
+          .min(1)
+          .max(5000),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -3145,22 +3619,27 @@ export const adminImportLeads = createServerFn({ method: "POST" })
     );
     if (error) throw new Error(error.message);
 
-    await logAudit(supabase, userId, "leads_imported", "lead", null, { imported: toInsert.length, skipped });
+    await logAudit(supabase, userId, "leads_imported", "lead", null, {
+      imported: toInsert.length,
+      skipped,
+    });
     return { ok: true, imported: toInsert.length, skipped };
   });
 
 export const adminUpdateLead = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      id: z.string().uuid(),
-      company_name: z.string().trim().min(1).max(200).optional(),
-      has_website: z.boolean().optional(),
-      phone: z.string().trim().max(50).nullable().optional(),
-      email: z.string().trim().max(200).nullable().optional(),
-      status: LeadStatus.optional(),
-      notes: z.string().trim().max(2000).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        id: z.string().uuid(),
+        company_name: z.string().trim().min(1).max(200).optional(),
+        has_website: z.boolean().optional(),
+        phone: z.string().trim().max(50).nullable().optional(),
+        email: z.string().trim().max(200).nullable().optional(),
+        status: LeadStatus.optional(),
+        notes: z.string().trim().max(2000).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -3170,7 +3649,10 @@ export const adminUpdateLead = createServerFn({ method: "POST" })
     if ("phone" in rest) patch.phone = normPhone(rest.phone);
     if ("email" in rest) patch.email = normPhone(rest.email);
 
-    const { error } = await supabaseAdmin.from("leads" as any).update(patch).eq("id", id);
+    const { error } = await supabaseAdmin
+      .from("leads" as any)
+      .update(patch)
+      .eq("id", id);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -3178,11 +3660,13 @@ export const adminUpdateLead = createServerFn({ method: "POST" })
 export const adminAddLeadActivity = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) =>
-    z.object({
-      lead_id: z.string().uuid(),
-      type: z.enum(["call", "email", "note"]),
-      note: z.string().trim().max(2000).nullable().optional(),
-    }).parse(d),
+    z
+      .object({
+        lead_id: z.string().uuid(),
+        type: z.enum(["call", "email", "note"]),
+        note: z.string().trim().max(2000).nullable().optional(),
+      })
+      .parse(d),
   )
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
@@ -3207,7 +3691,10 @@ export const adminAddLeadActivity = createServerFn({ method: "POST" })
       if (current === "nieuw") {
         await supabaseAdmin
           .from("leads" as any)
-          .update({ status: data.type === "call" ? "gebeld" : "gemaild", updated_at: new Date().toISOString() })
+          .update({
+            status: data.type === "call" ? "gebeld" : "gemaild",
+            updated_at: new Date().toISOString(),
+          })
           .eq("id", data.lead_id);
       }
     }
@@ -3220,7 +3707,10 @@ export const adminDeleteLead = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureLeadsAccess(supabase, userId);
-    const { error } = await supabaseAdmin.from("leads" as any).delete().eq("id", data.id);
+    const { error } = await supabaseAdmin
+      .from("leads" as any)
+      .delete()
+      .eq("id", data.id);
     if (error) throw new Error(error.message);
     await logAudit(supabase, userId, "lead_deleted", "lead", data.id);
     return { ok: true };
@@ -3248,8 +3738,239 @@ export const adminBulkDeleteLeads = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
     await ensureLeadsAccess(supabase, userId);
-    const { error } = await supabaseAdmin.from("leads" as any).delete().in("id", data.ids);
+    const { error } = await supabaseAdmin
+      .from("leads" as any)
+      .delete()
+      .in("id", data.ids);
     if (error) throw new Error(error.message);
-    await logAudit(supabase, userId, "leads_bulk_deleted", "lead", null, { count: data.ids.length });
+    await logAudit(supabase, userId, "leads_bulk_deleted", "lead", null, {
+      count: data.ids.length,
+    });
     return { ok: true, deleted: data.ids.length };
+  });
+
+// ============================================================
+// ================= TERUGBEL-AGENDA (CALLBACKS) ==============
+// ============================================================
+
+const CallbackStatus = z.enum(["open", "done", "no_answer", "appointment", "cancelled"]);
+const CallbackOutcome = z.enum(["done", "no_answer", "appointment"]);
+
+/**
+ * Terugbelafspraken van de agenda. Levert per callback ook wat lead-context
+ * (bedrijfsnaam, contact, status) én het aantal keer "geen gehoor" op die lead,
+ * zodat de agenda kleurcodering en doorklikken naar de lead kan tonen zonder
+ * een tweede fetch. Optioneel te filteren op een datumbereik (dag/week-view).
+ */
+export const adminListCallbacks = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        from: z.string().datetime().optional(),
+        to: z.string().datetime().optional(),
+        include_done: z.boolean().default(true),
+      })
+      .parse(d ?? {}),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    let q = supabaseAdmin
+      .from("lead_callbacks" as any)
+      .select("*")
+      .order("scheduled_at", { ascending: true })
+      .limit(3000);
+    if (data.from) q = q.gte("scheduled_at", data.from);
+    if (data.to) q = q.lte("scheduled_at", data.to);
+    if (!data.include_done) q = q.eq("status", "open");
+
+    const { data: callbacks, error } = await q;
+    if (error) throw new Error(error.message);
+
+    const rows = (callbacks as any[]) ?? [];
+    const leadIds = [...new Set(rows.map((c) => c.lead_id))];
+
+    // Lead-context ophalen voor de betrokken leads.
+    const leadById = new Map<string, any>();
+    if (leadIds.length > 0) {
+      const { data: leads } = await supabaseAdmin
+        .from("leads" as any)
+        .select("id,company_name,phone,email,status,has_website")
+        .in("id", leadIds);
+      for (const l of (leads as any[]) ?? []) leadById.set(l.id, l);
+    }
+
+    // Aantal "geen gehoor" per lead (voor de rood-codering).
+    const noAnswerByLead = new Map<string, number>();
+    for (const c of rows) {
+      if (c.status === "no_answer") {
+        noAnswerByLead.set(c.lead_id, (noAnswerByLead.get(c.lead_id) ?? 0) + 1);
+      }
+    }
+
+    return {
+      items: rows.map((c) => {
+        const lead = leadById.get(c.lead_id) ?? null;
+        return {
+          ...c,
+          lead_company: lead?.company_name ?? "Onbekende lead",
+          lead_phone: lead?.phone ?? null,
+          lead_email: lead?.email ?? null,
+          lead_status: lead?.status ?? "nieuw",
+          lead_has_website: lead?.has_website ?? false,
+          no_answer_count: noAnswerByLead.get(c.lead_id) ?? 0,
+        };
+      }),
+    };
+  });
+
+export const adminCreateCallback = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        lead_id: z.string().uuid(),
+        reason: z.string().trim().min(1).max(120),
+        note: z.string().trim().max(2000).nullable().optional(),
+        scheduled_at: z.string().datetime(),
+        auto_scheduled: z.boolean().default(false),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    const { data: row, error } = await supabaseAdmin
+      .from("lead_callbacks" as any)
+      .insert({
+        lead_id: data.lead_id,
+        reason: data.reason,
+        note: data.note ?? null,
+        scheduled_at: data.scheduled_at,
+        auto_scheduled: data.auto_scheduled,
+        created_by: userId,
+      })
+      .select("id")
+      .single();
+    if (error) throw new Error(error.message);
+
+    await logAudit(supabase, userId, "callback_scheduled", "lead", data.lead_id, {
+      reason: data.reason,
+      scheduled_at: data.scheduled_at,
+    });
+    return { ok: true, id: (row as any)?.id };
+  });
+
+export const adminUpdateCallback = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        reason: z.string().trim().min(1).max(120).optional(),
+        note: z.string().trim().max(2000).nullable().optional(),
+        scheduled_at: z.string().datetime().optional(),
+        status: CallbackStatus.optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { id, ...rest } = data;
+    const { error } = await supabaseAdmin
+      .from("lead_callbacks" as any)
+      .update({ ...rest, updated_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+/**
+ * Uitkomst van een terugbelmoment vastleggen. Sluit de callback af en houdt
+ * — waar zinvol — de lead-status gelijk (geen gehoor → gebeld, afspraak → interesse).
+ */
+export const adminCompleteCallback = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        outcome: CallbackOutcome,
+        outcome_note: z.string().trim().max(2000).nullable().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+
+    const { data: cb, error: cbErr } = await supabaseAdmin
+      .from("lead_callbacks" as any)
+      .update({
+        status: data.outcome,
+        outcome_note: data.outcome_note ?? null,
+        completed_by: userId,
+        completed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", data.id)
+      .select("lead_id")
+      .single();
+    if (cbErr) throw new Error(cbErr.message);
+    const leadId = (cb as any)?.lead_id;
+
+    // Belactie loggen op de lead-tijdlijn zodat "laatste contact" klopt.
+    if (leadId) {
+      await supabaseAdmin.from("lead_activities" as any).insert({
+        lead_id: leadId,
+        user_id: userId,
+        type: "call",
+        note: `Terugbelmoment: ${CALLBACK_OUTCOME_NOTE[data.outcome]}${data.outcome_note ? ` — ${data.outcome_note}` : ""}`,
+      });
+
+      // Lead-status meebewegen met de uitkomst (alleen omhoog, nooit terug).
+      const { data: lead } = await supabaseAdmin
+        .from("leads" as any)
+        .select("status")
+        .eq("id", leadId)
+        .maybeSingle();
+      const current = (lead as any)?.status;
+      const next =
+        data.outcome === "appointment"
+          ? "interesse"
+          : data.outcome === "done" && current === "nieuw"
+            ? "gebeld"
+            : null;
+      if (next && next !== current) {
+        await supabaseAdmin
+          .from("leads" as any)
+          .update({ status: next, updated_at: new Date().toISOString() })
+          .eq("id", leadId);
+      }
+    }
+    return { ok: true };
+  });
+
+const CALLBACK_OUTCOME_NOTE: Record<string, string> = {
+  done: "gebeld",
+  no_answer: "geen gehoor",
+  appointment: "afspraak gemaakt",
+};
+
+export const adminDeleteCallback = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureLeadsAccess(supabase, userId);
+    const { error } = await supabaseAdmin
+      .from("lead_callbacks" as any)
+      .delete()
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });

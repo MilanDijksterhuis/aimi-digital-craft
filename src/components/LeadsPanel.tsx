@@ -3,9 +3,24 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
-  Target, Upload, Phone, Mail, Plus, StickyNote, Trash2, X, Clock,
-  Globe, AlertCircle, TrendingUp, Users, CheckCircle2, Download,
-  ChevronLeft, ChevronRight,
+  Target,
+  Upload,
+  Phone,
+  Mail,
+  Plus,
+  StickyNote,
+  Trash2,
+  X,
+  Clock,
+  Globe,
+  AlertCircle,
+  TrendingUp,
+  Users,
+  CheckCircle2,
+  Download,
+  ChevronLeft,
+  ChevronRight,
+  CalendarClock,
 } from "lucide-react";
 import {
   adminListLeads,
@@ -17,9 +32,11 @@ import {
   adminGetLeadActivities,
   adminBulkUpdateLeadStatus,
   adminBulkDeleteLeads,
+  adminCreateCallback,
 } from "@/lib/admin.functions";
 import { parseLeadsCsv } from "@/lib/csv";
 import { useConfirm } from "@/components/ConfirmDialog";
+import { CallbackScheduleForm } from "@/components/CallbackScheduleModal";
 
 const STATUSES = ["nieuw", "gebeld", "gemaild", "interesse", "geen_interesse", "klant"] as const;
 type Status = (typeof STATUSES)[number];
@@ -72,7 +89,12 @@ const FOLLOW_UP_DAYS = 7;
 const PAGE_SIZE = 50;
 
 const fmtDate = (s: string) =>
-  new Date(s).toLocaleDateString("nl-NL", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+  new Date(s).toLocaleDateString("nl-NL", {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
 function relTime(iso: string): string {
   const days = Math.floor((Date.now() - new Date(iso).getTime()) / DAY);
@@ -95,7 +117,14 @@ const lastContactTime = (l: any) =>
   l.last_activity ? new Date(l.last_activity.created_at).getTime() : 0;
 
 function downloadCsv(rows: any[]) {
-  const head = ["bedrijfsnaam", "website aanwezig", "telefoonnummer", "mail", "status", "laatste contact"];
+  const head = [
+    "bedrijfsnaam",
+    "website aanwezig",
+    "telefoonnummer",
+    "mail",
+    "status",
+    "laatste contact",
+  ];
   const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = [
     head.join(";"),
@@ -171,7 +200,10 @@ export function LeadsPanel() {
 
   const deleteM = useMutation({
     mutationFn: (id: string) => deleteFn({ data: { id } }),
-    onSuccess: () => { invalidate(); toast.success("Lead verwijderd."); },
+    onSuccess: () => {
+      invalidate();
+      toast.success("Lead verwijderd.");
+    },
     onError: (e: any) => toast.error(e.message),
   });
 
@@ -188,19 +220,31 @@ export function LeadsPanel() {
 
   const createM = useMutation({
     mutationFn: (v: any) => createFn({ data: v }),
-    onSuccess: () => { invalidate(); setShowNew(false); toast.success("Lead toegevoegd."); },
+    onSuccess: () => {
+      invalidate();
+      setShowNew(false);
+      toast.success("Lead toegevoegd.");
+    },
     onError: (e: any) => toast.error(e.message),
   });
 
   const bulkStatusM = useMutation({
     mutationFn: (v: { ids: string[]; status: Status }) => bulkStatusFn({ data: v }),
-    onSuccess: (res: any) => { invalidate(); clearSelection(); toast.success(`${res.updated} lead(s) bijgewerkt.`); },
+    onSuccess: (res: any) => {
+      invalidate();
+      clearSelection();
+      toast.success(`${res.updated} lead(s) bijgewerkt.`);
+    },
     onError: (e: any) => toast.error(e.message),
   });
 
   const bulkDeleteM = useMutation({
     mutationFn: (ids: string[]) => bulkDeleteFn({ data: { ids } }),
-    onSuccess: (res: any) => { invalidate(); clearSelection(); toast.success(`${res.deleted} lead(s) verwijderd.`); },
+    onSuccess: (res: any) => {
+      invalidate();
+      clearSelection();
+      toast.success(`${res.deleted} lead(s) verwijderd.`);
+    },
     onError: (e: any) => toast.error(e.message),
   });
 
@@ -211,7 +255,9 @@ export function LeadsPanel() {
     reader.onload = () => {
       const { leads, errors, missingColumns } = parseLeadsCsv(String(reader.result ?? ""));
       if (missingColumns.length > 0) {
-        toast.error(`Verplichte kolom ontbreekt: ${missingColumns.join(", ")}. Verwachte kolommen: bedrijfsnaam, website aanwezig, telefoonnummer, mail.`);
+        toast.error(
+          `Verplichte kolom ontbreekt: ${missingColumns.join(", ")}. Verwachte kolommen: bedrijfsnaam, website aanwezig, telefoonnummer, mail.`,
+        );
         return;
       }
       if (leads.length === 0) {
@@ -304,14 +350,20 @@ export function LeadsPanel() {
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Target className="w-5 h-5 text-primary" />
           <h2 className="font-display text-xl font-semibold">Leads</h2>
         </div>
         <div className="flex items-center gap-2">
-          <input ref={fileRef} type="file" accept=".csv,text/csv" onChange={handleFile} className="hidden" />
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".csv,text/csv"
+            onChange={handleFile}
+            className="hidden"
+          />
           <button
             onClick={() => fileRef.current?.click()}
             disabled={importM.isPending}
@@ -329,19 +381,39 @@ export function LeadsPanel() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={AlertCircle}
           label="Actie vereist"
           value={stats.actie}
           hint={stats.actie > 0 ? `Nieuw of > ${FOLLOW_UP_DAYS} dagen stil` : "Alles opgevolgd"}
           tone={stats.actie > 0 ? "warn" : "ok"}
-          onClick={() => { setOnlyAction(true); setStatusFilter("all"); }}
+          onClick={() => {
+            setOnlyAction(true);
+            setStatusFilter("all");
+          }}
           active={onlyAction}
         />
-        <StatCard icon={Users} label="Totaal leads" value={stats.totaal} hint={`${stats.nieuw} nog niet benaderd`} />
-        <StatCard icon={TrendingUp} label="Interesse" value={stats.interesse} hint="Warme leads" tone="amber" />
-        <StatCard icon={CheckCircle2} label="Klant geworden" value={stats.klanten} hint={`${stats.conversie}% conversie`} tone="ok" />
+        <StatCard
+          icon={Users}
+          label="Totaal leads"
+          value={stats.totaal}
+          hint={`${stats.nieuw} nog niet benaderd`}
+        />
+        <StatCard
+          icon={TrendingUp}
+          label="Interesse"
+          value={stats.interesse}
+          hint="Warme leads"
+          tone="amber"
+        />
+        <StatCard
+          icon={CheckCircle2}
+          label="Klant geworden"
+          value={stats.klanten}
+          hint={`${stats.conversie}% conversie`}
+          tone="ok"
+        />
       </div>
 
       {/* ── Primair filter: de pipeline ── */}
@@ -404,7 +476,9 @@ export function LeadsPanel() {
           aria-label="Sorteren"
         >
           {Object.entries(SORTS).map(([k, label]) => (
-            <option key={k} value={k}>Sorteer: {label}</option>
+            <option key={k} value={k}>
+              Sorteer: {label}
+            </option>
           ))}
         </select>
 
@@ -434,18 +508,29 @@ export function LeadsPanel() {
           >
             <option value="">Status wijzigen naar…</option>
             {STATUSES.map((s) => (
-              <option key={s} value={s}>{STATUS_LABEL[s]}</option>
+              <option key={s} value={s}>
+                {STATUS_LABEL[s]}
+              </option>
             ))}
           </select>
           <button
             onClick={async () => {
-              if (await confirm({ description: `${selected.size} lead(s) definitief verwijderen?`, destructive: true })) bulkDeleteM.mutate([...selected]);
+              if (
+                await confirm({
+                  description: `${selected.size} lead(s) definitief verwijderen?`,
+                  destructive: true,
+                })
+              )
+                bulkDeleteM.mutate([...selected]);
             }}
             className="flex items-center gap-1.5 rounded-md border border-destructive/40 px-2.5 py-1 text-destructive hover:bg-destructive/10"
           >
             <Trash2 className="w-3.5 h-3.5" /> Verwijderen
           </button>
-          <button onClick={clearSelection} className="ml-auto text-muted-foreground hover:text-foreground">
+          <button
+            onClick={clearSelection}
+            className="ml-auto text-muted-foreground hover:text-foreground"
+          >
             Deselecteren
           </button>
         </div>
@@ -458,8 +543,9 @@ export function LeadsPanel() {
               <Target className="w-8 h-8 mx-auto text-muted-foreground mb-3" />
               <p className="font-medium">Nog geen leads</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Importeer een CSV met de kolommen <strong>bedrijfsnaam</strong>, <strong>website aanwezig</strong>,{" "}
-                <strong>telefoonnummer</strong> en <strong>mail</strong>.
+                Importeer een CSV met de kolommen <strong>bedrijfsnaam</strong>,{" "}
+                <strong>website aanwezig</strong>, <strong>telefoonnummer</strong> en{" "}
+                <strong>mail</strong>.
               </p>
               <button
                 onClick={() => fileRef.current?.click()}
@@ -490,8 +576,9 @@ export function LeadsPanel() {
                   <th className="text-left p-3 font-medium text-muted-foreground">Bedrijf</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">Contact</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">Status</th>
-                  <th className="text-left p-3 font-medium text-muted-foreground">Laatste contact</th>
-                  <th className="text-right p-3 font-medium text-muted-foreground">Acties</th>
+                  <th className="text-left p-3 font-medium text-muted-foreground">
+                    Laatste contact
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -500,11 +587,12 @@ export function LeadsPanel() {
                   return (
                     <tr
                       key={l.id}
-                      className={`border-t border-border transition-colors hover:bg-muted/20 ${
+                      onClick={() => setOpenLead(l.id)}
+                      className={`cursor-pointer border-t border-border transition-colors hover:bg-muted/20 ${
                         selected.has(l.id) ? "bg-primary/5" : actie ? "bg-amber-500/[0.04]" : ""
                       }`}
                     >
-                      <td className="p-3">
+                      <td className="p-3" onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={selected.has(l.id)}
@@ -516,12 +604,21 @@ export function LeadsPanel() {
 
                       <td className="p-3">
                         <div className="flex items-center gap-2">
-                          {actie && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" title="Actie vereist" />}
+                          {actie && (
+                            <span
+                              className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"
+                              title="Actie vereist"
+                            />
+                          )}
                           <span className="font-medium">{l.company_name}</span>
                         </div>
                         <div className="mt-1 flex items-center gap-1.5 text-xs">
-                          <Globe className={`w-3 h-3 ${l.has_website ? "text-emerald-400" : "text-muted-foreground"}`} />
-                          <span className={l.has_website ? "text-emerald-400" : "text-muted-foreground"}>
+                          <Globe
+                            className={`w-3 h-3 ${l.has_website ? "text-emerald-400" : "text-muted-foreground"}`}
+                          />
+                          <span
+                            className={l.has_website ? "text-emerald-400" : "text-muted-foreground"}
+                          >
                             {l.has_website ? "Heeft website" : "Geen website"}
                           </span>
                         </div>
@@ -530,7 +627,11 @@ export function LeadsPanel() {
                       <td className="p-3">
                         <div className="space-y-1">
                           {l.phone ? (
-                            <a href={`tel:${l.phone}`} className="flex items-center gap-1.5 hover:text-primary">
+                            <a
+                              href={`tel:${l.phone}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5 hover:text-primary"
+                            >
                               <Phone className="w-3 h-3 text-muted-foreground" /> {l.phone}
                             </a>
                           ) : (
@@ -539,7 +640,11 @@ export function LeadsPanel() {
                             </span>
                           )}
                           {l.email ? (
-                            <a href={`mailto:${l.email}`} className="flex items-center gap-1.5 hover:text-primary">
+                            <a
+                              href={`mailto:${l.email}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5 hover:text-primary"
+                            >
                               <Mail className="w-3 h-3 text-muted-foreground" /> {l.email}
                             </a>
                           ) : (
@@ -550,7 +655,7 @@ export function LeadsPanel() {
                         </div>
                       </td>
 
-                      <td className="p-3">
+                      <td className="p-3" onClick={(e) => e.stopPropagation()}>
                         <select
                           value={l.status}
                           onChange={(e) => updateM.mutate({ id: l.id, status: e.target.value })}
@@ -567,47 +672,16 @@ export function LeadsPanel() {
                       <td className="p-3">
                         {l.last_activity ? (
                           <div>
-                            <p className={actie ? "text-amber-400" : ""}>{relTime(l.last_activity.created_at)}</p>
-                            <p className="text-xs text-muted-foreground">{ACTIVITY_LABEL[l.last_activity.type]}</p>
+                            <p className={actie ? "text-amber-400" : ""}>
+                              {relTime(l.last_activity.created_at)}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {ACTIVITY_LABEL[l.last_activity.type]}
+                            </p>
                           </div>
                         ) : (
                           <span className="text-amber-400">Nooit benaderd</span>
                         )}
-                      </td>
-
-                      <td className="p-3">
-                        <div className="flex items-center justify-end gap-1">
-                          <button
-                            title="Registreer belactie"
-                            onClick={() => activityM.mutate({ lead_id: l.id, type: "call" })}
-                            className="p-1.5 rounded-md hover:bg-muted text-blue-400"
-                          >
-                            <Phone className="w-4 h-4" />
-                          </button>
-                          <button
-                            title="Registreer mailactie"
-                            onClick={() => activityM.mutate({ lead_id: l.id, type: "email" })}
-                            className="p-1.5 rounded-md hover:bg-muted text-violet-400"
-                          >
-                            <Mail className="w-4 h-4" />
-                          </button>
-                          <button
-                            title="Contactlog & notities"
-                            onClick={() => setOpenLead(l.id)}
-                            className="p-1.5 rounded-md hover:bg-muted text-muted-foreground"
-                          >
-                            <StickyNote className="w-4 h-4" />
-                          </button>
-                          <button
-                            title="Verwijderen"
-                            onClick={async () => {
-                              if (await confirm({ description: `Lead "${l.company_name}" definitief verwijderen?`, destructive: true })) deleteM.mutate(l.id);
-                            }}
-                            className="p-1.5 rounded-md hover:bg-muted text-destructive"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
                       </td>
                     </tr>
                   );
@@ -618,7 +692,8 @@ export function LeadsPanel() {
 
           <div className="flex items-center justify-between text-sm">
             <p className="text-muted-foreground">
-              Toont {safePage * PAGE_SIZE + 1}–{Math.min((safePage + 1) * PAGE_SIZE, filtered.length)} van {filtered.length}
+              Toont {safePage * PAGE_SIZE + 1}–
+              {Math.min((safePage + 1) * PAGE_SIZE, filtered.length)} van {filtered.length}
             </p>
             {pageCount > 1 && (
               <div className="flex items-center gap-1">
@@ -653,10 +728,29 @@ export function LeadsPanel() {
           onClose={() => setOpenLead(null)}
           onActivity={(type, note) => activityM.mutate({ lead_id: openLead, type, note })}
           onUpdate={(patch) => updateM.mutate({ id: openLead, ...patch })}
+          onDelete={async () => {
+            const l = leads.find((x) => x.id === openLead);
+            if (!l) return;
+            if (
+              await confirm({
+                description: `Lead "${l.company_name}" definitief verwijderen?`,
+                destructive: true,
+              })
+            ) {
+              deleteM.mutate(l.id);
+              setOpenLead(null);
+            }
+          }}
         />
       )}
 
-      {showNew && <NewLeadModal onClose={() => setShowNew(false)} onCreate={(v) => createM.mutate(v)} pending={createM.isPending} />}
+      {showNew && (
+        <NewLeadModal
+          onClose={() => setShowNew(false)}
+          onCreate={(v) => createM.mutate(v)}
+          pending={createM.isPending}
+        />
+      )}
     </div>
   );
 }
@@ -685,7 +779,9 @@ function PipelineTab({
     >
       {dot && <span className={`w-2 h-2 rounded-full ${dot}`} />}
       <span className={active ? "font-medium" : ""}>{label}</span>
-      <span className={`rounded-full px-1.5 py-0.5 text-xs ${active ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}>
+      <span
+        className={`rounded-full px-1.5 py-0.5 text-xs ${active ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}
+      >
         {count}
       </span>
     </button>
@@ -712,7 +808,9 @@ function Segmented({
             key={o.value}
             onClick={() => onChange(o.value)}
             className={`rounded px-2.5 py-1 text-xs transition-colors ${
-              value === o.value ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              value === o.value
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {o.label}
@@ -741,7 +839,13 @@ function StatCard({
   active?: boolean;
 }) {
   const toneColor =
-    tone === "warn" ? "text-amber-400" : tone === "ok" ? "text-emerald-400" : tone === "amber" ? "text-amber-400" : "text-primary";
+    tone === "warn"
+      ? "text-amber-400"
+      : tone === "ok"
+        ? "text-emerald-400"
+        : tone === "amber"
+          ? "text-amber-400"
+          : "text-primary";
 
   const Tag: any = onClick ? "button" : "div";
   return (
@@ -755,7 +859,9 @@ function StatCard({
         <Icon className={`w-4 h-4 ${toneColor}`} />
         <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
       </div>
-      <p className={`mt-2 font-display text-3xl font-semibold ${tone === "warn" && value > 0 ? "text-amber-400" : ""}`}>
+      <p
+        className={`mt-2 font-display text-3xl font-semibold ${tone === "warn" && value > 0 ? "text-amber-400" : ""}`}
+      >
         {value}
       </p>
       {hint && <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>}
@@ -768,15 +874,20 @@ function LeadDetailModal({
   onClose,
   onActivity,
   onUpdate,
+  onDelete,
 }: {
   lead: any;
   onClose: () => void;
   onActivity: (type: "call" | "email" | "note", note: string | null) => void;
   onUpdate: (patch: any) => void;
+  onDelete: () => void;
 }) {
+  const qc = useQueryClient();
   const getActs = useServerFn(adminGetLeadActivities);
+  const callbackFn = useServerFn(adminCreateCallback);
   const [note, setNote] = useState("");
   const [notes, setNotes] = useState(lead?.notes ?? "");
+  const [showSchedule, setShowSchedule] = useState(false);
 
   const { data } = useQuery({
     queryKey: ["lead-activities", lead?.id],
@@ -784,11 +895,29 @@ function LeadDetailModal({
     enabled: !!lead?.id,
   });
 
+  const scheduleM = useMutation({
+    mutationFn: (v: {
+      reason: string;
+      note: string | null;
+      scheduled_at: string;
+      auto_scheduled: boolean;
+    }) => callbackFn({ data: { lead_id: lead.id, ...v } }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["lead-callbacks"] });
+      setShowSchedule(false);
+      toast.success("Terugbelactie ingepland.");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   if (!lead) return null;
   const activities: any[] = (data as any)?.items ?? [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      onClick={onClose}
+    >
       <div
         className="w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card p-6"
         onClick={(e) => e.stopPropagation()}
@@ -801,9 +930,52 @@ function LeadDetailModal({
               {lead.has_website ? "heeft website" : "geen website"}
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded-md hover:bg-muted">
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowSchedule((v) => !v)}
+              aria-expanded={showSchedule}
+              className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                showSchedule
+                  ? "border border-primary/50 bg-primary/10 text-primary"
+                  : "bg-primary text-primary-foreground hover:opacity-90"
+              }`}
+            >
+              <CalendarClock className="w-4 h-4" /> Terugbel inplannen
+            </button>
+            <button
+              onClick={onDelete}
+              title="Lead verwijderen"
+              className="flex items-center gap-2 rounded-md border border-destructive/40 px-3 py-2 text-sm text-destructive hover:bg-destructive/10"
+            >
+              <Trash2 className="w-4 h-4" /> Verwijderen
+            </button>
+            <button onClick={onClose} className="p-1 rounded-md hover:bg-muted">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Inplan-formulier klapt uit binnen de pop-up (geen tweede pop-up). */}
+        <div
+          className={`grid transition-all duration-300 ease-out ${
+            showSchedule ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <CalendarClock className="w-4 h-4 text-primary" />
+                <h4 className="text-sm font-medium">Terugbel inplannen</h4>
+              </div>
+              {showSchedule && (
+                <CallbackScheduleForm
+                  pending={scheduleM.isPending}
+                  onSchedule={(v) => scheduleM.mutate(v)}
+                  onCancel={() => setShowSchedule(false)}
+                />
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="mt-5">
@@ -811,7 +983,9 @@ function LeadDetailModal({
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            onBlur={() => { if (notes !== (lead.notes ?? "")) onUpdate({ notes: notes || null }); }}
+            onBlur={() => {
+              if (notes !== (lead.notes ?? "")) onUpdate({ notes: notes || null });
+            }}
             rows={3}
             placeholder="Vrije notities…"
             className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
@@ -822,19 +996,31 @@ function LeadDetailModal({
           <h4 className="text-sm font-medium mb-2">Contact registreren</h4>
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => { onActivity("call", note || null); setNote(""); }}
+              onClick={() => {
+                onActivity("call", note || null);
+                setNote("");
+              }}
               className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40"
             >
               <Phone className="w-4 h-4 text-blue-400" /> Gebeld
             </button>
             <button
-              onClick={() => { onActivity("email", note || null); setNote(""); }}
+              onClick={() => {
+                onActivity("email", note || null);
+                setNote("");
+              }}
               className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40"
             >
               <Mail className="w-4 h-4 text-violet-400" /> Gemaild
             </button>
             <button
-              onClick={() => { if (!note.trim()) { return; } onActivity("note", note); setNote(""); }}
+              onClick={() => {
+                if (!note.trim()) {
+                  return;
+                }
+                onActivity("note", note);
+                setNote("");
+              }}
               disabled={!note.trim()}
               className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40 disabled:opacity-40"
             >
@@ -856,14 +1042,19 @@ function LeadDetailModal({
           ) : (
             <ul className="space-y-2">
               {activities.map((a) => (
-                <li key={a.id} className="flex items-start gap-3 rounded-md border border-border p-3">
+                <li
+                  key={a.id}
+                  className="flex items-start gap-3 rounded-md border border-border p-3"
+                >
                   <Clock className="w-4 h-4 mt-0.5 text-muted-foreground shrink-0" />
                   <div className="min-w-0">
                     <p className="text-sm">
                       <span className="font-medium">{ACTIVITY_LABEL[a.type]}</span>
                       <span className="text-muted-foreground"> · {fmtDate(a.created_at)}</span>
                     </p>
-                    {a.note && <p className="text-sm text-muted-foreground mt-0.5 break-words">{a.note}</p>}
+                    {a.note && (
+                      <p className="text-sm text-muted-foreground mt-0.5 break-words">{a.note}</p>
+                    )}
                   </div>
                 </li>
               ))}
@@ -890,8 +1081,14 @@ function NewLeadModal({
   const [email, setEmail] = useState("");
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
-      <div className="w-full max-w-md rounded-xl border border-border bg-card p-6" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-md rounded-xl border border-border bg-card p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h3 className="font-display text-xl font-semibold">Nieuwe lead</h3>
         <form
           className="mt-4 space-y-3"
@@ -942,7 +1139,11 @@ function NewLeadModal({
             Website aanwezig
           </label>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40"
+            >
               Annuleren
             </button>
             <button

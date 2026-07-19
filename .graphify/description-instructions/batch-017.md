@@ -1,4 +1,4 @@
-# Node Description Batch 18 of 35
+# Node Description Batch 18 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_projecten_websitelinkdetail": "WebsiteLinkDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L491 | neighbors=[admin.projecten.tsx]
+- "authenticated_admin_rollen_adminrollenpage": "AdminRollenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L48 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_newrolesection": "NewRoleSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L202 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L11 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_roleid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L256 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_adminroledetailpage": "AdminRoleDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L48 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_all_permissions": "ALL_PERMISSIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L24 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L183 | neighbors=[admin.rollen.$roleId.tsx]
 - "authenticated_admin_rollen_roleid_permissiestab": "PermissiesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L218 | neighbors=[admin.rollen.$roleId.tsx]
 - "authenticated_admin_rollen_roleid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L15 | neighbors=[admin.rollen.$roleId.tsx]
 - "authenticated_admin_rollen_roleid_roledetail": "RoleDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L84 | neighbors=[admin.rollen.$roleId.tsx]
@@ -27,7 +35,7 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_rollen_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L46 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L10 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L25 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L44 | neighbors=[admin.tsx]
+- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L43 | neighbors=[admin.tsx]
 - "authenticated_portal_allowed_attachment_mime": "ALLOWED_ATTACHMENT_MIME" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L37 | neighbors=[portal.tsx]
 - "authenticated_portal_emptychanges": "EmptyChanges()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L742 | neighbors=[portal.tsx]
 - "authenticated_portal_filter_label": "FILTER_LABEL" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L98 | neighbors=[portal.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_server_disk_days_options": "DISK_DAYS_OPTIONS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L314 | neighbors=[server.tsx]
 - "authenticated_server_downloadcsv": "downloadCsv()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L168 | neighbors=[server.tsx]
 - "authenticated_server_errorbox": "ErrorBox()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L82 | neighbors=[server.tsx]
-- "authenticated_server_expandablemetriccard": "ExpandableMetricCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L219 | neighbors=[server.tsx]
-- "authenticated_server_exportbutton": "ExportButton()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L180 | neighbors=[server.tsx]
-- "authenticated_server_formatdateshort": "formatDateShort()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L202 | neighbors=[server.tsx]
-- "authenticated_server_formatdatetimeshort": "formatDateTimeShort()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L207 | neighbors=[server.tsx]
-- "authenticated_server_formattime": "formatTime()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L45 | neighbors=[server.tsx]
-- "authenticated_server_hours_options": "HOURS_OPTIONS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L64 | neighbors=[server.tsx]
-- "authenticated_server_log_levels": "LOG_LEVELS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L70 | neighbors=[server.tsx]
-- "authenticated_server_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L94 | neighbors=[server.tsx]
 
 ## Instructions
 

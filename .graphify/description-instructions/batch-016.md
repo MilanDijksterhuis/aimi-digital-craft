@@ -1,4 +1,4 @@
-# Node Description Batch 17 of 35
+# Node Description Batch 17 of 36
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,13 +17,21 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_changes_changeid_communicatietab": "CommunicatieTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L216 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L150 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L18 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_tijdlijntab": "TijdlijnTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L269 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeslistsection": "ChangesListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L166 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_changessidebar": "ChangesSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L87 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_formfield": "FormField()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L332 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_newchangesection": "NewChangeSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L344 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L34 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L17 | neighbors=[admin.changes.tsx]
-- "authenticated_admin_dashboard": "Dashboard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L239 | neighbors=[admin.tsx]
-- "authenticated_admin_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L311 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationsbell": "NotificationsBell()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L685 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationspanel": "NotificationsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L721 | neighbors=[admin.tsx]
-- "authenticated_admin_passwordresetspanel": "PasswordResetsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L412 | neighbors=[admin.tsx]
+- "authenticated_admin_dashboard": "Dashboard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L232 | neighbors=[admin.tsx]
+- "authenticated_admin_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L304 | neighbors=[admin.tsx]
+- "authenticated_admin_notificationsbell": "NotificationsBell()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L678 | neighbors=[admin.tsx]
+- "authenticated_admin_notificationspanel": "NotificationsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L714 | neighbors=[admin.tsx]
+- "authenticated_admin_passwordresetspanel": "PasswordResetsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L405 | neighbors=[admin.tsx]
 - "authenticated_admin_projecten_adminprojectenpage": "AdminProjectenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L71 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_dashboardwidgetssection": "DashboardWidgetsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L933 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_kanbancard": "KanbanCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L721 | neighbors=[admin.projecten.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_projecten_statssection": "StatsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L214 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L46 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_templatessection": "TemplatesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L810 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_websitelinkdetail": "WebsiteLinkDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L491 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_rollen_adminrollenpage": "AdminRollenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L48 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_rollen_newrolesection": "NewRoleSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L202 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_rollen_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L11 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_rollen_roleid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L256 | neighbors=[admin.rollen.$roleId.tsx]
-- "authenticated_admin_rollen_roleid_adminroledetailpage": "AdminRoleDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L48 | neighbors=[admin.rollen.$roleId.tsx]
-- "authenticated_admin_rollen_roleid_all_permissions": "ALL_PERMISSIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L24 | neighbors=[admin.rollen.$roleId.tsx]
-- "authenticated_admin_rollen_roleid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L183 | neighbors=[admin.rollen.$roleId.tsx]
 
 ## Instructions
 
