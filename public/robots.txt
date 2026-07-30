@@ -3,24 +3,16 @@
 User-agent: *
 Allow: /
 
-# Portaal & backend — geen SEO-waarde, wel crawl budget
+# Portaal & auth - geen SEO-waarde
 Disallow: /klantenportaal
 Disallow: /portal
+Disallow: /admin
 Disallow: /auth/
 Disallow: /login
-Disallow: /admin
 Disallow: /wachtwoord-vergeten
-Disallow: /api/
-Disallow: /_server/
 Disallow: /monitoring-api/
 
-# Tracking-parameters → duplicate content
-Disallow: /*?utm_
-Disallow: /*?ref=
-Disallow: /*?fbclid=
-Disallow: /*?gclid=
-
-# Scrapers die alleen bandbreedte kosten
+# Scrapers
 User-agent: Bytespider
 Disallow: /
 
