@@ -102,14 +102,14 @@ export function ProcessTimeline() {
                       className="text-xs transition-colors duration-200"
                       style={{
                         fontFamily: "var(--font-mono)",
-                        color: isActive ? "#fe2c02" : isDone ? "#49de80" : "#3a3b3b",
+                        color: isActive ? "#fe2c02" : isDone ? "#49de80" : "#868b94",
                       }}
                     >
                     </span>
                     <PhaseIcon
                       size={16}
                       strokeWidth={1.5}
-                      style={{ color: isActive ? "#ffffff" : isDone ? "#49de80" : "#4a4b4b" }}
+                      style={{ color: isActive ? "#ffffff" : isDone ? "#49de80" : "#868b94" }}
                       className="transition-colors duration-200"
                     />
                   </div>
@@ -128,7 +128,7 @@ export function ProcessTimeline() {
                       className="block text-xs mt-0.5"
                       style={{
                         fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                        color: isActive ? "#fe2c02" : "#3a3b3b",
+                        color: isActive ? "#fe2c02" : "#868b94",
                       }}
                     >
                       {phase.duration}
@@ -210,7 +210,7 @@ export function ProcessTimeline() {
               <div>
                 <p
                   className="text-xs uppercase tracking-widest mb-4"
-                  style={{ color: "#4a4b4b", fontFamily: "var(--font-mono)" }}
+                  style={{ color: "#868b94", fontFamily: "var(--font-mono)" }}
                 >
                   Deliverables
                 </p>

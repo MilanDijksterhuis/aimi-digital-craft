@@ -84,7 +84,7 @@ export function Services() {
                     className="text-xs pt-1 shrink-0 transition-colors duration-200"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      color: isActive ? "#fe2c02" : "#4a4b4b",
+                      color: isActive ? "#fe2c02" : "#868b94",
                     }}
                   >
                   </span>
@@ -117,7 +117,7 @@ export function Services() {
                     <p
                       className="text-xs mt-1 transition-colors duration-200"
                       style={{
-                        color: isActive ? "#a4a9b2" : "#3a3b3b",
+                        color: isActive ? "#a4a9b2" : "#868b94",
                         fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                       }}
                     >

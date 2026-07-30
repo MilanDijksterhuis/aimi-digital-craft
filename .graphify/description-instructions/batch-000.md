@@ -1,4 +1,4 @@
-# Node Description Batch 1 of 36
+# Node Description Batch 1 of 37
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -45,14 +45,15 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_server": "server.tsx" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L1 | neighbors=[DISK_DAYS_OPTIONS, downloadCsv(), ErrorBox(), ExpandableMetricCard(), ExportButton(), formatDateShort()]
 - "routes_root": "__root.tsx" | kind=code-symbol | source=src/routes/__root.tsx:L1 | neighbors=[37c0d11 Dock tokens toegevoegd & emojis…, 408d241 Changes, 422202c Made the requested updates, 538314c Contactformulier en adminfix, 5597edf Changes, 6da1e20 Log root error boundary crashes…]
 - "lib_accounts_functions": "accounts.functions.ts" | kind=code-symbol | source=src/lib/accounts.functions.ts:L1 | neighbors=[74ecdc1 code fixes, 81a87ed commit, 9e611dd Changes, a3773ee sec fixes, c480d2e leads, cf4ac91 Alle fases toegevoegd & cron re…]
+- "src_server": "server.ts" | kind=code-symbol | source=src/server.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, 3901302 Fix mojibake in admin dashboard…, 5d1e827 Log server-side (SSR) crashes t…, a3773ee sec fixes, dbd0657 Log server-side (SSR) crashes t…]
 - "authenticated_admin_projecten": "admin.projecten.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L1 | neighbors=[AdminProjectenPage(), DashboardWidgetsSection(), KanbanCard(), KanbanColumn(), KanbanSection(), NewProjectSection()]
 - "authenticated_portal_projecten_projectid": "portal.projecten.$projectId.tsx" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L1 | neighbors=[MonitoringSection(), PortalProjectDetailPage(), ProjectSwitcher(), Route, timeAgo(), UptimeChart()]
-- "src_server": "server.ts" | kind=code-symbol | source=src/server.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, 3901302 Fix mojibake in admin dashboard…, 5d1e827 Log server-side (SSR) crashes t…, a3773ee sec fixes, dbd0657 Log server-side (SSR) crashes t…]
-- "components_confirmdialog": "ConfirmDialog.tsx" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.projecten.tsx, admin.projecten.$projectId.tsx, 9a2689c code fixes, BerichtenTab.tsx, ConfirmContext]
+- "components_confirmdialog": "ConfirmDialog.tsx" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.projecten.tsx, admin.projecten.$projectId.tsx, 9a2689c code fixes, BerichtenTab.tsx, CallbackAgenda.tsx]
+- "components_leadspanel": "LeadsPanel.tsx" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L1 | neighbors=[admin.leads.tsx, 9a2689c code fixes, c480d2e leads, f958216 leads functions, CallbackScheduleModal.tsx, CallbackScheduleForm()]
 - "routes_authenticated": "_authenticated.tsx" | kind=code-symbol | source=src/routes/_authenticated.tsx:L1 | neighbors=[41d8eb5 Changes, 423b3f1 cashing, 4b4ebd9 Catch getSession() network erro…, 68ae2dd Changes, 6dc7740 Changes, 7dbbf18 perf fixes]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@81a87edaf7b9db05e33477346e1821aa12e8e485": "81a87ed commit" | kind=Commit | source=git | neighbors=[7f7208a new, admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ecdbe8e1f4e58bfc169589dc2da50a537cf32f2e": "ecdbe8e fixes" | kind=Commit | source=git | neighbors=[23bb181 sec, portal.tsx, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal]
-- "components_leadspanel": "LeadsPanel.tsx" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L1 | neighbors=[9a2689c code fixes, c480d2e leads, ConfirmDialog.tsx, useConfirm(), ACTIVITY_LABEL, downloadCsv()]
+- "components_callbackagenda": "CallbackAgenda.tsx" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L1 | neighbors=[admin.leads.tsx, f958216 leads functions, addDays(), CallbackAgenda(), CallbackDetailModal(), CallbackItem()]
 - "lib_monitoring_functions": "monitoring.functions.ts" | kind=code-symbol | source=src/lib/monitoring.functions.ts:L1 | neighbors=[0193196 monitoring, 39d363a server basic, 74ecdc1 code fixes, a3773ee sec fixes, getAlerts, getDailyCheckLatest]
 - "components_hero": "Hero.tsx" | kind=code-symbol | source=src/components/Hero.tsx:L1 | neighbors=[0193196 monitoring, 1a66af6 Verbeter layout en visueel ritme, 1dfd3b7 Code edited in Lovable Code Edi…, 36052ff Code edited in Lovable Code Edi…, 38037d9 Update Hero.tsx, 4c798fc Code edited in Lovable Code Edi…]
 - "authenticated_admin_rollen_roleid": "admin.rollen.$roleId.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L1 | neighbors=[ActivityTab(), AdminRoleDetailPage(), ALL_PERMISSIONS, OverzichtTab(), PermissiesTab(), ROLE_LABEL]
@@ -63,7 +64,6 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_types": "types.ts" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1 | neighbors=[28e88cb Changes, 74ecdc1 code fixes, 7f7208a new, 81a87ed commit, 972c222 Fases 6-7 en Fase 1 voltooid, c3627b5 Changes]
 - "authenticated_admin_accounts": "admin.accounts.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L1 | neighbors=[ACCOUNT_STATUS_COLOR, ACCOUNT_STATUS_LABEL, AccountsListSection(), AccountsSidebar(), accountStatus(), AdminAccountsPage()]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a3773ee34a596fb2964b7b639fc365984e0098aa": "a3773ee sec fixes" | kind=Commit | source=git | neighbors=[main, 7dbbf18 perf fixes, Contact.tsx, accounts.functions.ts, admin.functions.ts, contact.functions.ts]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ab14295bf0f991ae5f05ccf837cbcab6dfd984fa": "ab14295 Design overhauled, A11y-bar weg" | kind=Commit | source=git | neighbors=[538314c Contactformulier en adminfix, 90677bf Changes, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks]
 
 ## Instructions
 

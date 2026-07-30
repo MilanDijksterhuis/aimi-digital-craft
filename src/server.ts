@@ -134,9 +134,31 @@ function isHttps(request: Request): boolean {
   }
 }
 
+// Content-gehashte build-assets (Vite emit onder /assets/, /_build/) en de
+// self-hosted fonts veranderen alleen als hun inhoud verandert. Geef ze een
+// lange immutable cache zodat herhaalbezoeken ze niet opnieuw downloaden.
+// (Lighthouse markeerde de hero-image met cache-TTL "None".)
+const IMMUTABLE_ASSET_RE = /^\/(assets|_build)\/|^\/fonts\/.+\.woff2$/;
+
+function applyAssetCaching(response: Response, request: Request): void {
+  if (request.method !== "GET" && request.method !== "HEAD") return;
+  if (response.status !== 200) return;
+  if (response.headers.has("Cache-Control")) return;
+  let pathname: string;
+  try {
+    pathname = new URL(request.url).pathname;
+  } catch {
+    return;
+  }
+  if (IMMUTABLE_ASSET_RE.test(pathname)) {
+    response.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  }
+}
+
 function applySecurityHeaders(response: Response, request: Request): Response {
   try {
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) response.headers.set(k, v);
+    applyAssetCaching(response, request);
     // HSTS alleen over https, zodat lokale http-dev niet breekt.
     if (isHttps(request)) {
       response.headers.set(

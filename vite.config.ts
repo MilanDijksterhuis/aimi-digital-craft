@@ -16,6 +16,12 @@ export default defineConfig({
         output: {
           manualChunks(id: string) {
             if (!id.includes("node_modules")) return;
+            // Kleine, overal-gedeelde utils (clsx/cva/tailwind-merge) eerst in een
+            // eigen chunk. Anders plaatst Rollup ze in de eerste chunk die ze
+            // gebruikt (bv. "charts"), waardoor de app-entry via cn() de hele
+            // recharts-chunk (~383KB) statisch meelaadt op élke pagina incl. de
+            // landing. Zo blijft "charts" alleen laden waar recharts echt draait.
+            if (id.includes("/clsx/") || id.includes("class-variance-authority") || id.includes("/tailwind-merge/")) return "utils";
             if (id.includes("recharts") || id.includes("d3-") || id.includes("victory-vendor")) return "charts";
             if (id.includes("/motion/") || id.includes("framer-motion")) return "motion";
             if (id.includes("@dnd-kit")) return "dnd";

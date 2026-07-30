@@ -1,4 +1,33 @@
+# https://aimi-development.nl/robots.txt
+
 User-agent: *
 Allow: /
 
-Sitemap: https://https://aimi-development.nl/.xml
+# Portaal & backend — geen SEO-waarde, wel crawl budget
+Disallow: /klantenportaal
+Disallow: /portal
+Disallow: /auth/
+Disallow: /login
+Disallow: /admin
+Disallow: /wachtwoord-vergeten
+Disallow: /api/
+Disallow: /_server/
+Disallow: /monitoring-api/
+
+# Tracking-parameters → duplicate content
+Disallow: /*?utm_
+Disallow: /*?ref=
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+
+# Scrapers die alleen bandbreedte kosten
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+Sitemap: https://aimi-development.nl/sitemap.xml
