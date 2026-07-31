@@ -31,8 +31,43 @@ export const submitContactForm = createServerFn({ method: "POST" })
       message: data.message,
     });
     if (error) throw new Error(error.message);
+
+    // Fire-and-forget Telegram-notificatie naar alle actieve, gekoppelde
+    // ontvangers. Mag de response naar de bezoeker nooit vertragen of laten
+    // falen als Telegram tijdelijk onbereikbaar is — vandaar eigen try/catch,
+    // geen await op het eindresultaat van de flow.
+    void notifyContactSubmission(data.name, data.email, data.message);
+
     return { ok: true };
   });
+
+async function notifyContactSubmission(name: string, email: string, message: string): Promise<void> {
+  try {
+    const { data: recipients } = await supabaseAdmin
+      .from("telegram_notification_recipients" as any)
+      .select("telegram_chat_id")
+      .eq("active", true)
+      .not("telegram_chat_id", "is", null);
+    const rows = (recipients ?? []) as unknown as Array<{ telegram_chat_id: string | null }>;
+    if (rows.length === 0) return;
+
+    const { sendTelegramMessage } = await import("./telegram.server");
+    const text =
+      `📬 *Nieuw contactformulier*\n\n` +
+      `*Naam:* ${name}\n` +
+      `*E-mail:* ${email}\n\n` +
+      `${message}`;
+
+    await Promise.allSettled(
+      rows
+        .filter((r) => r.telegram_chat_id)
+        .map((r) => sendTelegramMessage(r.telegram_chat_id as string, text)),
+    );
+  } catch (err) {
+    // Notificatie is best-effort; de inzending is al opgeslagen.
+    console.error("[telegram] contact-notificatie mislukt:", err);
+  }
+}
 
 export const adminListContactSubmissions = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
