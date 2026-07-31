@@ -9,6 +9,7 @@ import {
   FolderKanban, KeyRound, Ban, CheckCircle2, Wallet, ListChecks, Bell, Sparkles, UserCog,
 } from "lucide-react";
 import { OnboardingWizard } from "@/components/OnboardingWizard";
+import { TelegramMfaCard } from "@/components/TelegramMfaCard";
 import {
   adminGetAccountDetail,
   adminChangeAccountRole,
@@ -836,6 +837,8 @@ function InstellingenTab({ accountId, profile, isSuperAdmin, onChanged }: {
 
   return (
     <div className="space-y-4 mt-2 max-w-2xl">
+      <TelegramMfaCard accountId={accountId} />
+
       <div className="rounded-lg border border-border bg-card p-4 space-y-3">
         <h3 className="font-semibold text-sm">Toegang</h3>
         {isSuperAdmin ? (

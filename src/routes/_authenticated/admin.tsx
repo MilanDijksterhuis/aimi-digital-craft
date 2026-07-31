@@ -7,7 +7,7 @@ import {
   MessagesSquare, UserCheck, Trash2, Key, Link2,
   ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
   AlertTriangle, Shield, ChevronLeft, RefreshCw, CheckCircle, XCircle,
-  Clock, Activity, Target,
+  Clock, Activity, Target, Settings,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -184,6 +184,7 @@ function AdminPage() {
       ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield, href: "/admin/rollen" }] : []),
       { key: "team", label: "Team", icon: UserCheck },
       { key: "afspraken", label: "Afspraken", icon: Calendar },
+      { key: "instellingen" as TabKey, label: "Instellingen", icon: Settings, href: "/admin/instellingen" },
       { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
     ]},
     ...(perms.can("leads_view")

@@ -20,11 +20,13 @@ import { Route as AuthenticatedServerRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as ApiTelegramWebhookRouteImport } from './routes/api/telegram/webhook'
 import { Route as ApiPublicSitePingRouteImport } from './routes/api/public/site-ping'
 import { Route as ApiPublicSiteErrorRouteImport } from './routes/api/public/site-error'
 import { Route as AuthenticatedAdminRollenRouteImport } from './routes/_authenticated/admin.rollen'
 import { Route as AuthenticatedAdminProjectenRouteImport } from './routes/_authenticated/admin.projecten'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
+import { Route as AuthenticatedAdminInstellingenRouteImport } from './routes/_authenticated/admin.instellingen'
 import { Route as AuthenticatedAdminChangesRouteImport } from './routes/_authenticated/admin.changes'
 import { Route as AuthenticatedAdminAccountsRouteImport } from './routes/_authenticated/admin.accounts'
 import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
@@ -88,6 +90,11 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const ApiTelegramWebhookRoute = ApiTelegramWebhookRouteImport.update({
+  id: '/api/telegram/webhook',
+  path: '/api/telegram/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicSitePingRoute = ApiPublicSitePingRouteImport.update({
   id: '/api/public/site-ping',
   path: '/api/public/site-ping',
@@ -115,6 +122,12 @@ const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminInstellingenRoute =
+  AuthenticatedAdminInstellingenRouteImport.update({
+    id: '/instellingen',
+    path: '/instellingen',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminChangesRoute =
   AuthenticatedAdminChangesRouteImport.update({
     id: '/changes',
@@ -177,11 +190,13 @@ export interface FileRoutesByFullPath {
   '/server': typeof AuthenticatedServerRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
   '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
@@ -202,11 +217,13 @@ export interface FileRoutesByTo {
   '/server': typeof AuthenticatedServerRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
   '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
@@ -229,11 +246,13 @@ export interface FileRoutesById {
   '/_authenticated/server': typeof AuthenticatedServerRoute
   '/_authenticated/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/_authenticated/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
+  '/_authenticated/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/admin/projecten': typeof AuthenticatedAdminProjectenRouteWithChildren
   '/_authenticated/admin/rollen': typeof AuthenticatedAdminRollenRouteWithChildren
   '/api/public/site-error': typeof ApiPublicSiteErrorRoute
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
+  '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/_authenticated/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
   '/_authenticated/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/_authenticated/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
@@ -256,11 +275,13 @@ export interface FileRouteTypes {
     | '/server'
     | '/admin/accounts'
     | '/admin/changes'
+    | '/admin/instellingen'
     | '/admin/leads'
     | '/admin/projecten'
     | '/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/telegram/webhook'
     | '/admin/accounts/$accountId'
     | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
@@ -281,11 +302,13 @@ export interface FileRouteTypes {
     | '/server'
     | '/admin/accounts'
     | '/admin/changes'
+    | '/admin/instellingen'
     | '/admin/leads'
     | '/admin/projecten'
     | '/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/telegram/webhook'
     | '/admin/accounts/$accountId'
     | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
@@ -307,11 +330,13 @@ export interface FileRouteTypes {
     | '/_authenticated/server'
     | '/_authenticated/admin/accounts'
     | '/_authenticated/admin/changes'
+    | '/_authenticated/admin/instellingen'
     | '/_authenticated/admin/leads'
     | '/_authenticated/admin/projecten'
     | '/_authenticated/admin/rollen'
     | '/api/public/site-error'
     | '/api/public/site-ping'
+    | '/api/telegram/webhook'
     | '/_authenticated/admin/accounts/$accountId'
     | '/_authenticated/admin/changes/$changeId'
     | '/_authenticated/admin/projecten/$projectId'
@@ -330,6 +355,7 @@ export interface RootRouteChildren {
   TrackDotjsRoute: typeof TrackDotjsRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
+  ApiTelegramWebhookRoute: typeof ApiTelegramWebhookRoute
   ApiPublicHooksExpireAccountsRoute: typeof ApiPublicHooksExpireAccountsRoute
 }
 
@@ -412,6 +438,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/api/telegram/webhook': {
+      id: '/api/telegram/webhook'
+      path: '/api/telegram/webhook'
+      fullPath: '/api/telegram/webhook'
+      preLoaderRoute: typeof ApiTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/site-ping': {
       id: '/api/public/site-ping'
       path: '/api/public/site-ping'
@@ -445,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/leads'
       fullPath: '/admin/leads'
       preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/instellingen': {
+      id: '/_authenticated/admin/instellingen'
+      path: '/instellingen'
+      fullPath: '/admin/instellingen'
+      preLoaderRoute: typeof AuthenticatedAdminInstellingenRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/changes': {
@@ -568,6 +608,7 @@ const AuthenticatedAdminRollenRouteWithChildren =
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAccountsRoute: typeof AuthenticatedAdminAccountsRouteWithChildren
   AuthenticatedAdminChangesRoute: typeof AuthenticatedAdminChangesRouteWithChildren
+  AuthenticatedAdminInstellingenRoute: typeof AuthenticatedAdminInstellingenRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedAdminProjectenRoute: typeof AuthenticatedAdminProjectenRouteWithChildren
   AuthenticatedAdminRollenRoute: typeof AuthenticatedAdminRollenRouteWithChildren
@@ -576,6 +617,7 @@ interface AuthenticatedAdminRouteChildren {
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAccountsRoute: AuthenticatedAdminAccountsRouteWithChildren,
   AuthenticatedAdminChangesRoute: AuthenticatedAdminChangesRouteWithChildren,
+  AuthenticatedAdminInstellingenRoute: AuthenticatedAdminInstellingenRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedAdminProjectenRoute:
     AuthenticatedAdminProjectenRouteWithChildren,
@@ -625,6 +667,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrackDotjsRoute: TrackDotjsRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
+  ApiTelegramWebhookRoute: ApiTelegramWebhookRoute,
   ApiPublicHooksExpireAccountsRoute: ApiPublicHooksExpireAccountsRoute,
 }
 export const routeTree = rootRouteImport
