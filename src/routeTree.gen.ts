@@ -12,7 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacybeleidRouteImport } from './routes/privacybeleid'
+import { Route as OverOnsRouteImport } from './routes/over-ons'
+import { Route as MeerDienstenRouteImport } from './routes/meer-diensten'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -51,9 +54,24 @@ const PrivacybeleidRoute = PrivacybeleidRouteImport.update({
   path: '/privacybeleid',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OverOnsRoute = OverOnsRouteImport.update({
+  id: '/over-ons',
+  path: '/over-ons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeerDienstenRoute = MeerDienstenRouteImport.update({
+  id: '/meer-diensten',
+  path: '/meer-diensten',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
@@ -180,7 +198,10 @@ const AuthenticatedAdminAccountsAccountIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/meer-diensten': typeof MeerDienstenRoute
+  '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -207,7 +228,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/meer-diensten': typeof MeerDienstenRoute
+  '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -236,7 +260,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
+  '/meer-diensten': typeof MeerDienstenRoute
+  '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
@@ -265,7 +292,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/algemene-voorwaarden'
+    | '/faq'
     | '/login'
+    | '/meer-diensten'
+    | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
@@ -292,7 +322,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/algemene-voorwaarden'
+    | '/faq'
     | '/login'
+    | '/meer-diensten'
+    | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
@@ -320,7 +353,10 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/algemene-voorwaarden'
+    | '/faq'
     | '/login'
+    | '/meer-diensten'
+    | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
@@ -349,7 +385,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
+  FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
+  MeerDienstenRoute: typeof MeerDienstenRoute
+  OverOnsRoute: typeof OverOnsRoute
   PrivacybeleidRoute: typeof PrivacybeleidRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrackDotjsRoute: typeof TrackDotjsRoute
@@ -382,11 +421,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacybeleidRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/over-ons': {
+      id: '/over-ons'
+      path: '/over-ons'
+      fullPath: '/over-ons'
+      preLoaderRoute: typeof OverOnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meer-diensten': {
+      id: '/meer-diensten'
+      path: '/meer-diensten'
+      fullPath: '/meer-diensten'
+      preLoaderRoute: typeof MeerDienstenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algemene-voorwaarden': {
@@ -661,7 +721,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
+  FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
+  MeerDienstenRoute: MeerDienstenRoute,
+  OverOnsRoute: OverOnsRoute,
   PrivacybeleidRoute: PrivacybeleidRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrackDotjsRoute: TrackDotjsRoute,

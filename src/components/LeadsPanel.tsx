@@ -10,9 +10,7 @@ import {
   Plus,
   StickyNote,
   Trash2,
-  X,
   Clock,
-  Globe,
   AlertCircle,
   TrendingUp,
   Users,
@@ -30,8 +28,6 @@ import {
   adminDeleteLead,
   adminAddLeadActivity,
   adminGetLeadActivities,
-  adminBulkUpdateLeadStatus,
-  adminBulkDeleteLeads,
   adminCreateCallback,
 } from "@/lib/admin.functions";
 import { parseLeadsCsv } from "@/lib/csv";
@@ -50,30 +46,37 @@ const STATUS_LABEL: Record<Status, string> = {
   klant: "Klant",
 };
 
-const STATUS_COLOR: Record<Status, string> = {
-  nieuw: "bg-slate-500/15 text-slate-300",
-  gebeld: "bg-blue-500/15 text-blue-400",
-  gemaild: "bg-violet-500/15 text-violet-400",
-  interesse: "bg-amber-500/15 text-amber-400",
-  geen_interesse: "bg-red-500/15 text-red-400",
-  klant: "bg-emerald-500/15 text-emerald-400",
-};
-
-/** Kleurstip per status, zodat de pipeline-tabs in één oogopslag leesbaar zijn. */
-const STATUS_DOT: Record<Status, string> = {
-  nieuw: "bg-slate-400",
-  gebeld: "bg-blue-400",
-  gemaild: "bg-violet-400",
-  interesse: "bg-amber-400",
-  geen_interesse: "bg-red-400",
-  klant: "bg-emerald-400",
-};
-
 const ACTIVITY_LABEL: Record<string, string> = {
   call: "Gebeld",
   email: "Gemaild",
   note: "Notitie",
 };
+
+/** Merkkleur per status (design tokens uit de Leads-redesign). */
+const STATUS_HEX: Record<Status, string> = {
+  nieuw: "#7c8cff",
+  gebeld: "#4d9fff",
+  gemaild: "#c084fc",
+  interesse: "#ffb020",
+  geen_interesse: "#ff5c5c",
+  klant: "#3ddc84",
+};
+
+/** Statuspil: "nieuw" neutraal, overige statussen getint in hun merkkleur. */
+function pillStyle(status: Status): React.CSSProperties {
+  if (status === "nieuw" || status === "gebeld" || status === "gemaild") {
+    return { background: "#1e1e22", color: "rgba(255,255,255,.7)" };
+  }
+  const hex = STATUS_HEX[status];
+  return { background: `${hex}24`, color: hex };
+}
+
+/** 1–2 letter-initialen uit de bedrijfsnaam voor de avatar-tegel. */
+function initials(name: string): string {
+  const parts = (name ?? "").trim().split(/\s+/).filter(Boolean);
+  const s = ((parts[0]?.[0] ?? "") + (parts[1]?.[0] ?? "")).toUpperCase();
+  return s || "?";
+}
 
 const SORTS = {
   urgentie: "Urgentie (actie eerst)",
@@ -160,17 +163,13 @@ export function LeadsPanel() {
   const updateFn = useServerFn(adminUpdateLead);
   const deleteFn = useServerFn(adminDeleteLead);
   const activityFn = useServerFn(adminAddLeadActivity);
-  const bulkStatusFn = useServerFn(adminBulkUpdateLeadStatus);
-  const bulkDeleteFn = useServerFn(adminBulkDeleteLeads);
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | Status>("all");
   const [onlyAction, setOnlyAction] = useState(false);
-  const [websiteFilter, setWebsiteFilter] = useState<"all" | "yes" | "no">("all");
   const [sort, setSort] = useState<SortKey>("urgentie");
   const [page, setPage] = useState(0);
-  const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [openLead, setOpenLead] = useState<string | null>(null);
+  const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
   const [showNew, setShowNew] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -180,7 +179,6 @@ export function LeadsPanel() {
   });
 
   const invalidate = () => qc.invalidateQueries({ queryKey: ["admin-leads"] });
-  const clearSelection = () => setSelected(new Set());
 
   const importM = useMutation({
     mutationFn: (rows: any[]) => importFn({ data: { rows } }),
@@ -220,30 +218,11 @@ export function LeadsPanel() {
 
   const createM = useMutation({
     mutationFn: (v: any) => createFn({ data: v }),
-    onSuccess: () => {
+    onSuccess: (res: any) => {
       invalidate();
       setShowNew(false);
+      if (res?.id) setSelectedLeadId(res.id);
       toast.success("Lead toegevoegd.");
-    },
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  const bulkStatusM = useMutation({
-    mutationFn: (v: { ids: string[]; status: Status }) => bulkStatusFn({ data: v }),
-    onSuccess: (res: any) => {
-      invalidate();
-      clearSelection();
-      toast.success(`${res.updated} lead(s) bijgewerkt.`);
-    },
-    onError: (e: any) => toast.error(e.message),
-  });
-
-  const bulkDeleteM = useMutation({
-    mutationFn: (ids: string[]) => bulkDeleteFn({ data: { ids } }),
-    onSuccess: (res: any) => {
-      invalidate();
-      clearSelection();
-      toast.success(`${res.deleted} lead(s) verwijderd.`);
     },
     onError: (e: any) => toast.error(e.message),
   });
@@ -298,8 +277,6 @@ export function LeadsPanel() {
     const rows = leads.filter((l) => {
       if (statusFilter !== "all" && l.status !== statusFilter) return false;
       if (onlyAction && !needsAction(l)) return false;
-      if (websiteFilter === "yes" && !l.has_website) return false;
-      if (websiteFilter === "no" && l.has_website) return false;
       if (!q) return true;
       return (
         l.company_name?.toLowerCase().includes(q) ||
@@ -322,41 +299,38 @@ export function LeadsPanel() {
       sorted.sort((a, b) => a.company_name.localeCompare(b.company_name, "nl"));
     }
     return sorted;
-  }, [leads, search, statusFilter, onlyAction, websiteFilter, sort]);
+  }, [leads, search, statusFilter, onlyAction, sort]);
 
-  // Terug naar pagina 1 en selectie legen zodra de filters wijzigen.
+  // Terug naar pagina 1 zodra de filters wijzigen.
   useEffect(() => {
     setPage(0);
-    clearSelection();
-  }, [search, statusFilter, onlyAction, websiteFilter, sort]);
+  }, [search, statusFilter, onlyAction, sort]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, pageCount - 1);
   const pageRows = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE);
 
-  const allOnPageSelected = pageRows.length > 0 && pageRows.every((l) => selected.has(l.id));
-  const toggleAllOnPage = () => {
-    const next = new Set(selected);
-    if (allOnPageSelected) pageRows.forEach((l) => next.delete(l.id));
-    else pageRows.forEach((l) => next.add(l.id));
-    setSelected(next);
-  };
-  const toggleOne = (id: string) => {
-    const next = new Set(selected);
-    next.has(id) ? next.delete(id) : next.add(id);
-    setSelected(next);
-  };
+  // Gekozen lead voor het detailpaneel; valt terug op de eerste zichtbare lead.
+  const selectedLead =
+    leads.find((l) => l.id === selectedLeadId) ?? pageRows[0] ?? filtered[0] ?? null;
 
   if (isLoading) return <p className="text-muted-foreground">Laden…</p>;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Target className="w-5 h-5 text-primary" />
-          <h2 className="font-display text-xl font-semibold">Leads</h2>
+    <div style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }} className="space-y-6">
+      <style>{`
+        .leads-split { display: grid; grid-template-columns: 1.6fr 1fr; }
+        @media (max-width: 900px) { .leads-split { grid-template-columns: 1fr; } .leads-list-col { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,.07); } }
+      `}</style>
+      {/* Kop + hoofdacties */}
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-white font-bold" style={{ fontSize: 32, letterSpacing: "-0.02em" }}>Leads</h2>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,.45)", marginTop: 5 }}>
+            Klik een lead om details, notities en terugbelacties te openen
+          </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <input
             ref={fileRef}
             type="file"
@@ -365,384 +339,233 @@ export function LeadsPanel() {
             className="hidden"
           />
           <button
+            onClick={() => downloadCsv(filtered)}
+            disabled={filtered.length === 0}
+            className="flex items-center gap-1.5 hover:brightness-125 transition disabled:opacity-40"
+            style={{ padding: "10px 18px", border: "1px solid rgba(255,255,255,.12)", borderRadius: 8, fontSize: 13.5, color: "rgba(255,255,255,.75)" }}
+            title="Exporteer de huidige filterselectie naar CSV"
+          >
+            <Download className="w-4 h-4" /> Export
+          </button>
+          <button
             onClick={() => fileRef.current?.click()}
             disabled={importM.isPending}
-            className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40 disabled:opacity-50"
+            className="flex items-center gap-1.5 hover:brightness-125 transition disabled:opacity-50"
+            style={{ padding: "10px 18px", border: "1px solid rgba(255,255,255,.12)", borderRadius: 8, fontSize: 13.5, color: "rgba(255,255,255,.75)" }}
           >
-            <Upload className="w-4 h-4" />
-            {importM.isPending ? "Importeren…" : "CSV importeren"}
+            <Upload className="w-4 h-4" /> {importM.isPending ? "Importeren…" : "CSV importeren"}
           </button>
           <button
             onClick={() => setShowNew(true)}
-            className="flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+            className="flex items-center gap-1.5 hover:brightness-110 transition"
+            style={{ padding: "10px 20px", background: "linear-gradient(180deg,#ff4d4d,#e01e1e)", borderRadius: 8, fontSize: 13.5, fontWeight: 600, color: "#fff", boxShadow: "0 4px 16px rgba(224,30,30,.35)" }}
           >
             <Plus className="w-4 h-4" /> Nieuwe lead
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
+      {/* KPI-rij */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <KpiCard
           icon={AlertCircle}
           label="Actie vereist"
           value={stats.actie}
           hint={stats.actie > 0 ? `Nieuw of > ${FOLLOW_UP_DAYS} dagen stil` : "Alles opgevolgd"}
-          tone={stats.actie > 0 ? "warn" : "ok"}
-          onClick={() => {
-            setOnlyAction(true);
-            setStatusFilter("all");
-          }}
+          urgent
           active={onlyAction}
+          onClick={() => { setOnlyAction((v) => !v); setStatusFilter("all"); }}
         />
-        <StatCard
-          icon={Users}
-          label="Totaal leads"
-          value={stats.totaal}
-          hint={`${stats.nieuw} nog niet benaderd`}
-        />
-        <StatCard
-          icon={TrendingUp}
-          label="Interesse"
-          value={stats.interesse}
-          hint="Warme leads"
-          tone="amber"
-        />
-        <StatCard
-          icon={CheckCircle2}
-          label="Klant geworden"
-          value={stats.klanten}
-          hint={`${stats.conversie}% conversie`}
-          tone="ok"
-        />
+        <KpiCard icon={Users} label="Totaal leads" value={stats.totaal} hint={`${stats.nieuw} nog niet benaderd`} />
+        <KpiCard icon={TrendingUp} label="Interesse" value={stats.interesse} hint="Warme leads" />
+        <KpiCard icon={CheckCircle2} label="Klant geworden" value={stats.klanten} hint={`${stats.conversie}% conversie`} />
       </div>
 
-      {/* ── Primair filter: de pipeline ── */}
-      <div className="rounded-lg border border-border bg-card">
-        <div className="flex overflow-x-auto no-scrollbar">
-          <PipelineTab
-            label="Alle"
-            count={statusCounts.all}
-            active={statusFilter === "all"}
-            onClick={() => setStatusFilter("all")}
-          />
-          {STATUSES.map((s) => (
-            <PipelineTab
-              key={s}
-              label={STATUS_LABEL[s]}
-              count={statusCounts[s]}
-              dot={STATUS_DOT[s]}
-              active={statusFilter === s}
-              onClick={() => setStatusFilter(s)}
+      {/* Hoofdpaneel: lijst (links) + detail (rechts) */}
+      <div
+        className="leads-split"
+        style={{ background: "#0e0e10", border: "1px solid rgba(255,255,255,.07)", borderRadius: 12, overflow: "hidden" }}
+      >
+        {/* Linkerkolom: filters + lijst */}
+        <div className="leads-list-col" style={{ padding: "18px 20px 20px", borderRight: "1px solid rgba(255,255,255,.07)" }}>
+          {/* Zoeken + sorteren */}
+          <div className="flex gap-2 mb-3.5">
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="🔍 Zoek op bedrijf, telefoon of e-mail…"
+              className="flex-1 min-w-0"
+              style={{ background: "#161619", border: "1px solid rgba(255,255,255,.08)", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "#fff" }}
             />
-          ))}
-        </div>
-      </div>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              aria-label="Sorteren"
+              style={{ background: "#161619", border: "1px solid rgba(255,255,255,.08)", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "rgba(255,255,255,.6)" }}
+            >
+              {Object.entries(SORTS).map(([k, label]) => (
+                <option key={k} value={k} style={{ background: "#161619", color: "#fff" }}>{label}</option>
+              ))}
+            </select>
+          </div>
 
-      {/* ── Secundair: zoeken, verfijnen, sorteren ── */}
-      <div className="flex flex-wrap items-center gap-2">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Zoek op bedrijf, telefoon of mail…"
-          className="flex-1 min-w-56 rounded-md border border-input bg-background px-3 py-2 text-sm"
-        />
+          {/* Statusfilter-chips */}
+          <div className="flex gap-1.5 mb-3.5 flex-wrap">
+            <button
+              onClick={() => { setStatusFilter("all"); setOnlyAction(false); }}
+              style={{
+                padding: "6px 12px", borderRadius: 6, fontSize: 12,
+                background: statusFilter === "all" && !onlyAction ? "#1e1e22" : "transparent",
+                color: statusFilter === "all" && !onlyAction ? "#fff" : "rgba(255,255,255,.5)",
+                fontWeight: statusFilter === "all" && !onlyAction ? 600 : 400,
+              }}
+            >
+              Alle {statusCounts.all}
+            </button>
+            {STATUSES.map((s) => {
+              const active = statusFilter === s;
+              return (
+                <button
+                  key={s}
+                  onClick={() => { setStatusFilter(s); setOnlyAction(false); }}
+                  className="flex items-center gap-1.5"
+                  style={{
+                    padding: "6px 12px", borderRadius: 6, fontSize: 12,
+                    background: active ? "#1e1e22" : "transparent",
+                    color: active ? "#fff" : "rgba(255,255,255,.5)",
+                    fontWeight: active ? 600 : 400,
+                  }}
+                >
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: STATUS_HEX[s] }} />
+                  {STATUS_LABEL[s]} {statusCounts[s]}
+                </button>
+              );
+            })}
+          </div>
 
-        <button
-          onClick={() => setOnlyAction((v) => !v)}
-          className={`flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm transition-colors ${
-            onlyAction
-              ? "border-amber-500/50 bg-amber-500/15 text-amber-400"
-              : "border-border text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <AlertCircle className="w-4 h-4" /> Actie vereist ({stats.actie})
-        </button>
-
-        <Segmented
-          label="Website"
-          value={websiteFilter}
-          onChange={(v) => setWebsiteFilter(v as any)}
-          options={[
-            { value: "all", label: "Alle" },
-            { value: "no", label: "Zonder" },
-            { value: "yes", label: "Met" },
-          ]}
-        />
-
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value as SortKey)}
-          className="rounded-md border border-input bg-background px-3 py-2 text-sm"
-          aria-label="Sorteren"
-        >
-          {Object.entries(SORTS).map(([k, label]) => (
-            <option key={k} value={k}>
-              Sorteer: {label}
-            </option>
-          ))}
-        </select>
-
-        <button
-          onClick={() => downloadCsv(filtered)}
-          disabled={filtered.length === 0}
-          className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40 disabled:opacity-40"
-          title="Exporteer de huidige selectie van filters naar CSV"
-        >
-          <Download className="w-4 h-4" /> Export
-        </button>
-      </div>
-
-      {/* ── Bulkbalk, alleen bij selectie ── */}
-      {selected.size > 0 && (
-        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-sm">
-          <span className="font-medium">{selected.size} geselecteerd</span>
-          <select
-            defaultValue=""
-            onChange={(e) => {
-              const v = e.target.value as Status;
-              if (!v) return;
-              bulkStatusM.mutate({ ids: [...selected], status: v });
-              e.target.value = "";
-            }}
-            className="rounded-md border border-input bg-background px-2 py-1 text-sm"
-          >
-            <option value="">Status wijzigen naar…</option>
-            {STATUSES.map((s) => (
-              <option key={s} value={s}>
-                {STATUS_LABEL[s]}
-              </option>
-            ))}
-          </select>
-          <button
-            onClick={async () => {
-              if (
-                await confirm({
-                  description: `${selected.size} lead(s) definitief verwijderen?`,
-                  destructive: true,
-                })
-              )
-                bulkDeleteM.mutate([...selected]);
-            }}
-            className="flex items-center gap-1.5 rounded-md border border-destructive/40 px-2.5 py-1 text-destructive hover:bg-destructive/10"
-          >
-            <Trash2 className="w-3.5 h-3.5" /> Verwijderen
-          </button>
-          <button
-            onClick={clearSelection}
-            className="ml-auto text-muted-foreground hover:text-foreground"
-          >
-            Deselecteren
-          </button>
-        </div>
-      )}
-
-      {filtered.length === 0 ? (
-        <div className="rounded-lg border border-border bg-card p-10 text-center">
-          {leads.length === 0 ? (
-            <>
-              <Target className="w-8 h-8 mx-auto text-muted-foreground mb-3" />
-              <p className="font-medium">Nog geen leads</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Importeer een CSV met de kolommen <strong>bedrijfsnaam</strong>,{" "}
-                <strong>website aanwezig</strong>, <strong>telefoonnummer</strong> en{" "}
-                <strong>mail</strong>.
-              </p>
-              <button
-                onClick={() => fileRef.current?.click()}
-                className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
-              >
-                <Upload className="w-4 h-4" /> CSV importeren
-              </button>
-            </>
+          {/* Lijst */}
+          {filtered.length === 0 ? (
+            <div className="text-center" style={{ padding: "40px 10px" }}>
+              {leads.length === 0 ? (
+                <>
+                  <Target className="w-8 h-8 mx-auto mb-3" style={{ color: "rgba(255,255,255,.3)" }} />
+                  <p className="font-medium text-white">Nog geen leads</p>
+                  <p style={{ fontSize: 13, color: "rgba(255,255,255,.4)", marginTop: 4 }}>
+                    Importeer een CSV met de kolommen <strong>bedrijfsnaam</strong>,{" "}
+                    <strong>website aanwezig</strong>, <strong>telefoonnummer</strong> en <strong>mail</strong>.
+                  </p>
+                  <button
+                    onClick={() => fileRef.current?.click()}
+                    className="mt-4 inline-flex items-center gap-2 hover:brightness-110 transition"
+                    style={{ padding: "10px 18px", background: "linear-gradient(180deg,#ff4d4d,#e01e1e)", borderRadius: 8, fontSize: 13, fontWeight: 600, color: "#fff" }}
+                  >
+                    <Upload className="w-4 h-4" /> CSV importeren
+                  </button>
+                </>
+              ) : (
+                <p style={{ color: "rgba(255,255,255,.4)", fontSize: 13 }}>Geen leads gevonden met deze filters.</p>
+              )}
+            </div>
           ) : (
-            <p className="text-muted-foreground">Geen leads gevonden met deze filters.</p>
-          )}
-        </div>
-      ) : (
-        <>
-          <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/30">
-                <tr>
-                  <th className="p-3 w-10">
-                    <input
-                      type="checkbox"
-                      checked={allOnPageSelected}
-                      onChange={toggleAllOnPage}
-                      aria-label="Selecteer alle leads op deze pagina"
-                      className="w-4 h-4 accent-primary cursor-pointer"
-                    />
-                  </th>
-                  <th className="text-left p-3 font-medium text-muted-foreground">Bedrijf</th>
-                  <th className="text-left p-3 font-medium text-muted-foreground">Contact</th>
-                  <th className="text-left p-3 font-medium text-muted-foreground">Status</th>
-                  <th className="text-left p-3 font-medium text-muted-foreground">
-                    Laatste contact
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+            <>
+              <div style={{ maxHeight: 640, overflowY: "auto" }} className="space-y-2 pr-1">
                 {pageRows.map((l) => {
-                  const actie = needsAction(l);
+                  const active = selectedLead?.id === l.id;
+                  const st = l.status as Status;
                   return (
-                    <tr
+                    <button
                       key={l.id}
-                      onClick={() => setOpenLead(l.id)}
-                      className={`cursor-pointer border-t border-border transition-colors hover:bg-muted/20 ${
-                        selected.has(l.id) ? "bg-primary/5" : actie ? "bg-amber-500/[0.04]" : ""
-                      }`}
+                      onClick={() => setSelectedLeadId(l.id)}
+                      className="w-full text-left flex items-center justify-between hover:brightness-125 transition"
+                      style={{
+                        padding: "13px 15px", borderRadius: 9,
+                        background: active ? "#1a1418" : "#111113",
+                        border: active ? "1px solid rgba(255,90,90,.35)" : "1px solid rgba(255,255,255,.05)",
+                      }}
                     >
-                      <td className="p-3" onClick={(e) => e.stopPropagation()}>
-                        <input
-                          type="checkbox"
-                          checked={selected.has(l.id)}
-                          onChange={() => toggleOne(l.id)}
-                          aria-label={`Selecteer ${l.company_name}`}
-                          className="w-4 h-4 accent-primary cursor-pointer"
-                        />
-                      </td>
-
-                      <td className="p-3">
-                        <div className="flex items-center gap-2">
-                          {actie && (
-                            <span
-                              className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"
-                              title="Actie vereist"
-                            />
-                          )}
-                          <span className="font-medium">{l.company_name}</span>
-                        </div>
-                        <div className="mt-1 flex items-center gap-1.5 text-xs">
-                          <Globe
-                            className={`w-3 h-3 ${l.has_website ? "text-emerald-400" : "text-muted-foreground"}`}
-                          />
-                          <span
-                            className={l.has_website ? "text-emerald-400" : "text-muted-foreground"}
-                          >
-                            {l.has_website ? "Heeft website" : "Geen website"}
-                          </span>
-                        </div>
-                      </td>
-
-                      <td className="p-3">
-                        <div className="space-y-1">
-                          {l.phone ? (
-                            <a
-                              href={`tel:${l.phone}`}
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex items-center gap-1.5 hover:text-primary"
-                            >
-                              <Phone className="w-3 h-3 text-muted-foreground" /> {l.phone}
-                            </a>
-                          ) : (
-                            <span className="flex items-center gap-1.5 text-muted-foreground">
-                              <Phone className="w-3 h-3" /> —
-                            </span>
-                          )}
-                          {l.email ? (
-                            <a
-                              href={`mailto:${l.email}`}
-                              onClick={(e) => e.stopPropagation()}
-                              className="flex items-center gap-1.5 hover:text-primary"
-                            >
-                              <Mail className="w-3 h-3 text-muted-foreground" /> {l.email}
-                            </a>
-                          ) : (
-                            <span className="flex items-center gap-1.5 text-muted-foreground">
-                              <Mail className="w-3 h-3" /> —
-                            </span>
-                          )}
-                        </div>
-                      </td>
-
-                      <td className="p-3" onClick={(e) => e.stopPropagation()}>
-                        <select
-                          value={l.status}
-                          onChange={(e) => updateM.mutate({ id: l.id, status: e.target.value })}
-                          className={`rounded-full px-2.5 py-1 text-xs border-0 cursor-pointer ${STATUS_COLOR[l.status as Status]}`}
+                      <span className="flex items-center gap-2.5 min-w-0">
+                        <span
+                          className="shrink-0 flex items-center justify-center font-bold"
+                          style={{
+                            width: 32, height: 32, borderRadius: 8, fontSize: 12.5,
+                            background: active ? "#241618" : "#1e1e22",
+                            color: active ? "#ff6b6b" : STATUS_HEX[st],
+                          }}
                         >
-                          {STATUSES.map((s) => (
-                            <option key={s} value={s} className="bg-card text-foreground">
-                              {STATUS_LABEL[s]}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-
-                      <td className="p-3">
-                        {l.last_activity ? (
-                          <div>
-                            <p className={actie ? "text-amber-400" : ""}>
-                              {relTime(l.last_activity.created_at)}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {ACTIVITY_LABEL[l.last_activity.type]}
-                            </p>
-                          </div>
-                        ) : (
-                          <span className="text-amber-400">Nooit benaderd</span>
-                        )}
-                      </td>
-                    </tr>
+                          {initials(l.company_name)}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block truncate" style={{ color: "#fff", fontSize: 13.5, fontWeight: 600 }}>{l.company_name}</span>
+                          <span className="block truncate" style={{ color: "rgba(255,255,255,.4)", fontSize: 12, marginTop: 2 }}>
+                            {l.phone || "geen telefoon"} · {l.has_website ? "Website" : "Geen website"}
+                          </span>
+                        </span>
+                      </span>
+                      <span className="shrink-0" style={{ ...pillStyle(st), fontSize: 12, padding: "5px 11px", borderRadius: 6 }}>
+                        {STATUS_LABEL[st]}
+                      </span>
+                    </button>
                   );
                 })}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="flex items-center justify-between text-sm">
-            <p className="text-muted-foreground">
-              Toont {safePage * PAGE_SIZE + 1}–
-              {Math.min((safePage + 1) * PAGE_SIZE, filtered.length)} van {filtered.length}
-            </p>
-            {pageCount > 1 && (
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setPage((p) => Math.max(0, p - 1))}
-                  disabled={safePage === 0}
-                  className="p-1.5 rounded-md border border-border disabled:opacity-40 hover:bg-muted/40"
-                  aria-label="Vorige pagina"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <span className="px-2 text-muted-foreground">
-                  {safePage + 1} / {pageCount}
-                </span>
-                <button
-                  onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
-                  disabled={safePage >= pageCount - 1}
-                  className="p-1.5 rounded-md border border-border disabled:opacity-40 hover:bg-muted/40"
-                  aria-label="Volgende pagina"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
               </div>
-            )}
-          </div>
-        </>
-      )}
 
-      {openLead && (
-        <LeadDetailModal
-          lead={leads.find((l) => l.id === openLead)}
-          onClose={() => setOpenLead(null)}
-          onActivity={(type, note) => activityM.mutate({ lead_id: openLead, type, note })}
-          onUpdate={(patch) => updateM.mutate({ id: openLead, ...patch })}
-          onDelete={async () => {
-            const l = leads.find((x) => x.id === openLead);
-            if (!l) return;
-            if (
-              await confirm({
-                description: `Lead "${l.company_name}" definitief verwijderen?`,
-                destructive: true,
-              })
-            ) {
-              deleteM.mutate(l.id);
-              setOpenLead(null);
-            }
-          }}
-        />
-      )}
+              <div className="flex items-center justify-between mt-3" style={{ fontSize: 12, color: "rgba(255,255,255,.4)" }}>
+                <span>
+                  {safePage * PAGE_SIZE + 1}–{Math.min((safePage + 1) * PAGE_SIZE, filtered.length)} van {filtered.length}
+                </span>
+                {pageCount > 1 && (
+                  <span className="flex items-center gap-1">
+                    <button
+                      onClick={() => setPage((p) => Math.max(0, p - 1))}
+                      disabled={safePage === 0}
+                      className="p-1.5 rounded-md disabled:opacity-40 hover:brightness-125"
+                      style={{ border: "1px solid rgba(255,255,255,.08)" }}
+                      aria-label="Vorige pagina"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <span className="px-2">{safePage + 1} / {pageCount}</span>
+                    <button
+                      onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
+                      disabled={safePage >= pageCount - 1}
+                      className="p-1.5 rounded-md disabled:opacity-40 hover:brightness-125"
+                      style={{ border: "1px solid rgba(255,255,255,.08)" }}
+                      aria-label="Volgende pagina"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </span>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Rechterkolom: detailpaneel */}
+        <div style={{ padding: "22px 26px 26px", background: "#0e0e10" }}>
+          {selectedLead ? (
+            <LeadDetail
+              key={selectedLead.id}
+              lead={selectedLead}
+              onActivity={(type, note) => activityM.mutate({ lead_id: selectedLead.id, type, note })}
+              onUpdate={(patch) => updateM.mutate({ id: selectedLead.id, ...patch })}
+              onDelete={async () => {
+                if (
+                  await confirm({
+                    description: `Lead "${selectedLead.company_name}" definitief verwijderen?`,
+                    destructive: true,
+                  })
+                ) {
+                  deleteM.mutate(selectedLead.id);
+                  setSelectedLeadId(null);
+                }
+              }}
+            />
+          ) : (
+            <p style={{ color: "rgba(255,255,255,.35)", fontSize: 13 }}>Selecteer een lead om details te bekijken.</p>
+          )}
+        </div>
+      </div>
 
       {showNew && (
         <NewLeadModal
@@ -755,129 +578,52 @@ export function LeadsPanel() {
   );
 }
 
-function PipelineTab({
-  label,
-  count,
-  dot,
-  active,
-  onClick,
-}: {
-  label: string;
-  count: number;
-  dot?: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-2 whitespace-nowrap border-b-2 px-4 py-3 text-sm transition-colors ${
-        active
-          ? "border-primary text-foreground"
-          : "border-transparent text-muted-foreground hover:text-foreground"
-      }`}
-    >
-      {dot && <span className={`w-2 h-2 rounded-full ${dot}`} />}
-      <span className={active ? "font-medium" : ""}>{label}</span>
-      <span
-        className={`rounded-full px-1.5 py-0.5 text-xs ${active ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}
-      >
-        {count}
-      </span>
-    </button>
-  );
-}
-
-function Segmented({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: { value: string; label: string }[];
-}) {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="text-xs text-muted-foreground">{label}</span>
-      <div className="flex rounded-md border border-border p-0.5">
-        {options.map((o) => (
-          <button
-            key={o.value}
-            onClick={() => onChange(o.value)}
-            className={`rounded px-2.5 py-1 text-xs transition-colors ${
-              value === o.value
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {o.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function StatCard({
+function KpiCard({
   icon: Icon,
   label,
   value,
   hint,
-  tone = "neutral",
-  onClick,
+  urgent,
   active,
+  onClick,
 }: {
   icon: any;
   label: string;
   value: number;
   hint?: string;
-  tone?: "neutral" | "warn" | "ok" | "amber";
-  onClick?: () => void;
+  urgent?: boolean;
   active?: boolean;
+  onClick?: () => void;
 }) {
-  const toneColor =
-    tone === "warn"
-      ? "text-amber-400"
-      : tone === "ok"
-        ? "text-emerald-400"
-        : tone === "amber"
-          ? "text-amber-400"
-          : "text-primary";
-
+  const flag = urgent && value > 0;
   const Tag: any = onClick ? "button" : "div";
   return (
     <Tag
       onClick={onClick}
-      className={`rounded-lg border bg-card p-4 text-left transition-colors ${
-        active ? "border-primary" : "border-border"
-      } ${onClick ? "hover:bg-muted/30 cursor-pointer" : ""}`}
+      className={`text-left ${onClick ? "hover:brightness-125 transition cursor-pointer" : ""}`}
+      style={{
+        background: "#141417",
+        border: `1px solid ${active ? "rgba(255,90,90,.5)" : flag ? "rgba(255,90,90,.28)" : "rgba(255,255,255,.07)"}`,
+        borderRadius: 12,
+        padding: "18px 20px",
+      }}
     >
-      <div className="flex items-center gap-2">
-        <Icon className={`w-4 h-4 ${toneColor}`} />
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
+      <div className="flex items-center gap-1.5" style={{ fontSize: 11.5, letterSpacing: ".06em", fontWeight: 600, color: flag ? "#ff6b6b" : "rgba(255,255,255,.4)" }}>
+        <Icon className="w-3.5 h-3.5" /> {label.toUpperCase()}
       </div>
-      <p
-        className={`mt-2 font-display text-3xl font-semibold ${tone === "warn" && value > 0 ? "text-amber-400" : ""}`}
-      >
-        {value}
-      </p>
-      {hint && <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>}
+      <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginTop: 6 }}>{value}</div>
+      {hint && <div style={{ fontSize: 12, color: "rgba(255,255,255,.4)", marginTop: 2 }}>{hint}</div>}
     </Tag>
   );
 }
 
-function LeadDetailModal({
+function LeadDetail({
   lead,
-  onClose,
   onActivity,
   onUpdate,
   onDelete,
 }: {
   lead: any;
-  onClose: () => void;
   onActivity: (type: "call" | "email" | "note", note: string | null) => void;
   onUpdate: (patch: any) => void;
   onDelete: () => void;
@@ -912,156 +658,170 @@ function LeadDetailModal({
 
   if (!lead) return null;
   const activities: any[] = (data as any)?.items ?? [];
+  const st = lead.status as Status;
+  const label = { fontSize: 11.5, letterSpacing: ".05em", color: "rgba(255,255,255,.35)", marginBottom: 8 } as const;
+  const surface = {
+    background: "#17171a",
+    border: "1px solid rgba(255,255,255,.08)",
+    borderRadius: 8,
+  } as const;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card p-6"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="font-display text-xl font-semibold">{lead.company_name}</h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              {lead.phone ?? "geen telefoon"} · {lead.email ?? "geen mail"} ·{" "}
-              {lead.has_website ? "heeft website" : "geen website"}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowSchedule((v) => !v)}
-              aria-expanded={showSchedule}
-              className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                showSchedule
-                  ? "border border-primary/50 bg-primary/10 text-primary"
-                  : "bg-primary text-primary-foreground hover:opacity-90"
-              }`}
-            >
-              <CalendarClock className="w-4 h-4" /> Terugbel inplannen
-            </button>
-            <button
-              onClick={onDelete}
-              title="Lead verwijderen"
-              className="flex items-center gap-2 rounded-md border border-destructive/40 px-3 py-2 text-sm text-destructive hover:bg-destructive/10"
-            >
-              <Trash2 className="w-4 h-4" /> Verwijderen
-            </button>
-            <button onClick={onClose} className="p-1 rounded-md hover:bg-muted">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Inplan-formulier klapt uit binnen de pop-up (geen tweede pop-up). */}
-        <div
-          className={`grid transition-all duration-300 ease-out ${
-            showSchedule ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
+    <div>
+      {/* Kop */}
+      <div className="flex items-center gap-2.5" style={{ marginBottom: 4 }}>
+        <span
+          className="shrink-0 flex items-center justify-center font-bold"
+          style={{ width: 38, height: 38, borderRadius: 10, background: "#241618", color: "#ff6b6b", fontSize: 14 }}
         >
-          <div className="overflow-hidden">
-            <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <CalendarClock className="w-4 h-4 text-primary" />
-                <h4 className="text-sm font-medium">Terugbel inplannen</h4>
-              </div>
-              {showSchedule && (
-                <CallbackScheduleForm
-                  pending={scheduleM.isPending}
-                  onSchedule={(v) => scheduleM.mutate(v)}
-                  onCancel={() => setShowSchedule(false)}
-                />
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5">
-          <label className="text-sm font-medium">Notities over deze lead</label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            onBlur={() => {
-              if (notes !== (lead.notes ?? "")) onUpdate({ notes: notes || null });
-            }}
-            rows={3}
-            placeholder="Vrije notities…"
-            className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-          />
-        </div>
-
-        <div className="mt-5">
-          <h4 className="text-sm font-medium mb-2">Contact registreren</h4>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => {
-                onActivity("call", note || null);
-                setNote("");
-              }}
-              className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40"
-            >
-              <Phone className="w-4 h-4 text-blue-400" /> Gebeld
-            </button>
-            <button
-              onClick={() => {
-                onActivity("email", note || null);
-                setNote("");
-              }}
-              className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40"
-            >
-              <Mail className="w-4 h-4 text-violet-400" /> Gemaild
-            </button>
-            <button
-              onClick={() => {
-                if (!note.trim()) {
-                  return;
-                }
-                onActivity("note", note);
-                setNote("");
-              }}
-              disabled={!note.trim()}
-              className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-muted/40 disabled:opacity-40"
-            >
-              <StickyNote className="w-4 h-4" /> Notitie
-            </button>
-          </div>
-          <input
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Optionele notitie bij deze actie…"
-            className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-          />
-        </div>
-
-        <div className="mt-6">
-          <h4 className="text-sm font-medium mb-2">Contactlog</h4>
-          {activities.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Nog geen contact geregistreerd.</p>
-          ) : (
-            <ul className="space-y-2">
-              {activities.map((a) => (
-                <li
-                  key={a.id}
-                  className="flex items-start gap-3 rounded-md border border-border p-3"
-                >
-                  <Clock className="w-4 h-4 mt-0.5 text-muted-foreground shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm">
-                      <span className="font-medium">{ACTIVITY_LABEL[a.type]}</span>
-                      <span className="text-muted-foreground"> · {fmtDate(a.created_at)}</span>
-                    </p>
-                    {a.note && (
-                      <p className="text-sm text-muted-foreground mt-0.5 break-words">{a.note}</p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+          {initials(lead.company_name)}
+        </span>
+        <span style={{ fontSize: 18, fontWeight: 700, color: "#fff" }} className="min-w-0 truncate">
+          {lead.company_name}
+        </span>
       </div>
+      <div style={{ fontSize: 12.5, color: "rgba(255,255,255,.4)", marginBottom: 20 }}>
+        {lead.has_website ? "Website" : "Geen website"} ·{" "}
+        {lead.last_activity ? `Laatst: ${relTime(lead.last_activity.created_at)}` : "Nooit benaderd"}
+      </div>
+
+      {/* Actierij */}
+      <div className="flex gap-2" style={{ marginBottom: 22 }}>
+        <a
+          href={lead.phone ? `tel:${lead.phone}` : undefined}
+          onClick={() => { if (lead.phone) onActivity("call", null); }}
+          aria-disabled={!lead.phone}
+          className="flex-1 text-center hover:brightness-125 transition"
+          style={{ padding: 10, background: "#1e1e22", borderRadius: 8, fontSize: 13, color: "#fff", opacity: lead.phone ? 1 : 0.4, pointerEvents: lead.phone ? "auto" : "none" }}
+        >
+          📞 Bellen
+        </a>
+        <a
+          href={lead.email ? `mailto:${lead.email}` : undefined}
+          onClick={() => { if (lead.email) onActivity("email", null); }}
+          aria-disabled={!lead.email}
+          className="flex-1 text-center hover:brightness-125 transition"
+          style={{ padding: 10, background: "#1e1e22", borderRadius: 8, fontSize: 13, color: "#fff", opacity: lead.email ? 1 : 0.4, pointerEvents: lead.email ? "auto" : "none" }}
+        >
+          ✉ Mailen
+        </a>
+        <button
+          onClick={() => setShowSchedule((v) => !v)}
+          aria-expanded={showSchedule}
+          className="flex-1 text-center hover:brightness-110 transition"
+          style={{ padding: 10, background: "linear-gradient(180deg,#ff4d4d,#e01e1e)", borderRadius: 8, fontSize: 13, color: "#fff", fontWeight: 600, boxShadow: "0 4px 14px rgba(224,30,30,.3)" }}
+        >
+          📅 Terugbel plannen
+        </button>
+      </div>
+
+      {/* Inplan-formulier klapt uit */}
+      {showSchedule && (
+        <div className="mb-5" style={{ ...surface, padding: 14 }}>
+          <div className="mb-3 flex items-center gap-2">
+            <CalendarClock className="w-4 h-4" style={{ color: "#ff6b6b" }} />
+            <h4 className="text-sm font-medium text-white">Terugbel inplannen</h4>
+          </div>
+          <CallbackScheduleForm
+            pending={scheduleM.isPending}
+            onSchedule={(v) => scheduleM.mutate(v)}
+            onCancel={() => setShowSchedule(false)}
+          />
+        </div>
+      )}
+
+      {/* Status */}
+      <div style={label}>STATUS</div>
+      <div className="relative mb-5">
+        <select
+          value={st}
+          onChange={(e) => onUpdate({ status: e.target.value })}
+          className="w-full cursor-pointer"
+          style={{ ...surface, padding: "10px 14px", fontSize: 13, color: "#fff", appearance: "none" }}
+        >
+          {STATUSES.map((s) => (
+            <option key={s} value={s} style={{ background: "#17171a", color: "#fff" }}>
+              {STATUS_LABEL[s]}
+            </option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "rgba(255,255,255,.5)" }}>⌄</span>
+      </div>
+
+      {/* Notities */}
+      <div style={label}>NOTITIES</div>
+      <textarea
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        onBlur={() => { if (notes !== (lead.notes ?? "")) onUpdate({ notes: notes || null }); }}
+        placeholder="Nog geen notities toegevoegd…"
+        className="w-full mb-5"
+        style={{ ...surface, padding: 14, fontSize: 13, color: "#fff", minHeight: 90, resize: "vertical" }}
+      />
+
+      {/* Contact registreren */}
+      <div style={label}>CONTACT REGISTREREN</div>
+      <div className="flex flex-wrap gap-2 mb-2">
+        <button
+          onClick={() => { onActivity("call", note || null); setNote(""); }}
+          className="flex items-center gap-2 hover:brightness-125 transition"
+          style={{ ...surface, padding: "8px 12px", fontSize: 13, color: "#fff" }}
+        >
+          <Phone className="w-4 h-4" style={{ color: "#4d9fff" }} /> Gebeld
+        </button>
+        <button
+          onClick={() => { onActivity("email", note || null); setNote(""); }}
+          className="flex items-center gap-2 hover:brightness-125 transition"
+          style={{ ...surface, padding: "8px 12px", fontSize: 13, color: "#fff" }}
+        >
+          <Mail className="w-4 h-4" style={{ color: "#c084fc" }} /> Gemaild
+        </button>
+        <button
+          onClick={() => { if (!note.trim()) return; onActivity("note", note); setNote(""); }}
+          disabled={!note.trim()}
+          className="flex items-center gap-2 hover:brightness-125 transition disabled:opacity-40"
+          style={{ ...surface, padding: "8px 12px", fontSize: 13, color: "#fff" }}
+        >
+          <StickyNote className="w-4 h-4" /> Notitie
+        </button>
+      </div>
+      <input
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+        placeholder="Optionele notitie bij deze actie…"
+        className="w-full mb-5"
+        style={{ ...surface, padding: "8px 12px", fontSize: 13, color: "#fff" }}
+      />
+
+      {/* Contactlog */}
+      <div style={label}>CONTACTLOG</div>
+      {activities.length === 0 ? (
+        <p style={{ fontSize: 13, color: "rgba(255,255,255,.35)" }}>Nog geen contact geregistreerd.</p>
+      ) : (
+        <ul className="space-y-2">
+          {activities.map((a) => (
+            <li key={a.id} className="flex items-start gap-3" style={{ ...surface, padding: 12 }}>
+              <Clock className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "rgba(255,255,255,.4)" }} />
+              <div className="min-w-0">
+                <p style={{ fontSize: 13, color: "#fff" }}>
+                  <span className="font-medium">{ACTIVITY_LABEL[a.type]}</span>
+                  <span style={{ color: "rgba(255,255,255,.4)" }}> · {fmtDate(a.created_at)}</span>
+                </p>
+                {a.note && <p style={{ fontSize: 13, color: "rgba(255,255,255,.4)", marginTop: 2 }} className="break-words">{a.note}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Verwijderen */}
+      <button
+        onClick={onDelete}
+        className="mt-6 flex items-center gap-2 hover:brightness-125 transition"
+        style={{ fontSize: 12.5, color: "#ff5c5c" }}
+      >
+        <Trash2 className="w-3.5 h-3.5" /> Lead verwijderen
+      </button>
     </div>
   );
 }

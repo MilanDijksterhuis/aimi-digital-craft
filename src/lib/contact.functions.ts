@@ -47,6 +47,7 @@ async function notifyContactSubmission(name: string, email: string, message: str
       .from("telegram_notification_recipients" as any)
       .select("telegram_chat_id")
       .eq("active", true)
+      .eq("notify_contact_form", true)
       .not("telegram_chat_id", "is", null);
     const rows = (recipients ?? []) as unknown as Array<{ telegram_chat_id: string | null }>;
     if (rows.length === 0) return;

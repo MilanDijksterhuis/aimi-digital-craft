@@ -1,11 +1,12 @@
 import { motion } from "motion/react";
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Over ons", href: "#about" },
-  { label: "Tarieven", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Over ons", href: "/#about" },
+  { label: "Tarieven", href: "/#pricing" },
+  { label: "Meer diensten", href: "/meer-diensten" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Nav() {
@@ -17,7 +18,7 @@ export function Nav() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#" aria-label="AIMI home">
+        <a href="/" aria-label="AIMI home">
           <span
             className="font-medium text-white text-3xl tracking-tight"
             style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
@@ -71,7 +72,7 @@ export function Nav() {
           <a href="/portal" className="btn-secondary !text-[15px] !py-1.5 !px-4">
             Portaal
           </a>
-          <a href="#contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
+          <a href="/#contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
             Contact
           </a>
         </div>

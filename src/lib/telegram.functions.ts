@@ -164,6 +164,32 @@ export const adminToggleRecipient = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const adminSetRecipientNotify = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        notify_contact_form: z.boolean().optional(),
+        notify_new_changes: z.boolean().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase, userId } = context;
+    await ensureAdmin(supabase, userId);
+    const patch: Record<string, boolean> = {};
+    if (data.notify_contact_form !== undefined) patch.notify_contact_form = data.notify_contact_form;
+    if (data.notify_new_changes !== undefined) patch.notify_new_changes = data.notify_new_changes;
+    if (Object.keys(patch).length === 0) return { ok: true };
+    const { error } = await supabaseAdmin
+      .from("telegram_notification_recipients" as any)
+      .update(patch)
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 export const adminDeleteRecipient = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ id: z.string().uuid() }).parse(d))

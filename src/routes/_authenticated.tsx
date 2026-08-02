@@ -96,7 +96,29 @@ function Inner() {
   }
 
   return (
-    <div className="portal-dark min-h-screen" style={{ background: "#1a1b1e", color: "#f4f4f5" }}>
+    <div className="portal-dark min-h-screen" style={{ background: "#141618", color: "#f4f4f5", position: "relative" }}>
+      {/* Geanimeerde contour-achtergrond, gedeeld door portaal en admin. */}
+      <div aria-hidden="true" className="portal-bg-layer" />
+      <style>{`
+        .portal-bg-layer {
+          position: fixed;
+          inset: -12%;
+          z-index: 0;
+          pointer-events: none;
+          background:
+            repeating-radial-gradient(circle at 85% 15%, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 2px, transparent 34px),
+            repeating-radial-gradient(circle at 5% 95%, rgba(232,68,46,0.07) 0px, rgba(232,68,46,0.07) 1px, transparent 2px, transparent 46px);
+          animation: contourDrift 22s ease-in-out infinite;
+        }
+        @keyframes contourDrift {
+          0%   { transform: translate(0,0) rotate(0deg); }
+          50%  { transform: translate(-1.5%, 1%) rotate(1.5deg); }
+          100% { transform: translate(0,0) rotate(0deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .portal-bg-layer { animation: none; }
+        }
+      `}</style>
       <header style={{ borderBottom: "1px solid #35363a", background: "rgba(30,31,35,0.97)", backdropFilter: "blur(8px)", position: "sticky", top: 0, zIndex: 40 }}>
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
           <Link to="/" className="font-medium text-white text-xl tracking-tight" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
@@ -115,7 +137,7 @@ function Inner() {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6 py-10">
+      <main className="mx-auto max-w-7xl px-6 py-10" style={{ position: "relative", zIndex: 1 }}>
         <Outlet />
       </main>
       <IdleTimeout onTimeout={handleIdleTimeout} />

@@ -49,13 +49,6 @@ function LeadsPage() {
           <ChevronLeft className="w-4 h-4" /> Terug naar menu
         </Link>
 
-        <div>
-          <h1 className="font-display text-4xl font-bold">Leads</h1>
-          <p className="text-muted-foreground">
-            Beheer je leads, plan terugbelacties en houd contact bij.
-          </p>
-        </div>
-
         <div className="flex flex-col md:flex-row gap-6">
           {/* Sectiemenu links — uitbreidbaar met toekomstige features. */}
           <nav

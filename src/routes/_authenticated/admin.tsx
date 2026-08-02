@@ -306,15 +306,15 @@ function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon:
   const TrendIcon = trend >= 0 ? ArrowUp : ArrowDown;
   const trendColor = trend > 0 ? "text-emerald-600" : trend < 0 ? "text-destructive" : "text-muted-foreground";
   return (
-    <div className={`rounded-lg border p-5 ${highlight ? "border-amber-500/60 bg-amber-500/5" : "border-border bg-card"}`}>
+    <div className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${highlight ? "border-amber-500/60 bg-amber-500/5 hover:border-amber-500" : "border-border bg-card"}`}>
       <div className="flex items-center justify-between">
-        <Icon className="w-4 h-4 text-primary" />
+        <Icon className="w-4 h-4 text-primary transition-transform duration-200 ease-out group-hover:scale-110" />
         <span className={`text-xs inline-flex items-center gap-0.5 ${trendColor}`}>
           <TrendIcon className="w-3 h-3" />{Math.abs(trend)}%
         </span>
       </div>
       <p className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className="mt-1 font-display text-2xl font-bold">{value}</p>
+      <p className="mt-1 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">{value}</p>
       <p className="mt-1 text-xs text-muted-foreground">{sub}</p>
     </div>
   );
@@ -322,9 +322,9 @@ function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon:
 
 function Card({ label, value, accent }: { label: string; value: any; accent?: boolean }) {
   return (
-    <div className={`rounded-lg border p-5 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}>
+    <div className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}>
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className="mt-2 font-display text-2xl font-bold">{value}</p>
+      <p className="mt-2 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">{value}</p>
     </div>
   );
 }

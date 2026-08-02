@@ -7,18 +7,17 @@ import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { CookieBanner } from "@/components/CookieBanner";
 
 import { Pricing } from "@/components/Pricing";
-import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIMI — Websites die werken. Design, development & hosting." },
+      { title: "AIMI Development- Websites die werken. Design & hosting." },
       {
         name: "description",
         content:
-          "AIMI is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+          "AIMI Development is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
       },
       { property: "og:title", content: "AIMI — Websites die werken." },
       {
@@ -76,9 +75,8 @@ function Index() {
         <Services />
         <ProcessTimeline />
         <About />
-        
+
         <Pricing />
-        <FAQ />
         <Contact />
       </main>
       <Footer />

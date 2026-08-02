@@ -3,14 +3,14 @@
   "branchName": "main",
   "worktreePath": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft",
   "upstream": "origin/main",
-  "mergeBase": "f958216b3ca515ca3d0d8c9e854052ef349135db",
+  "mergeBase": "2b1d78fa285d867c430c015c42dd4cf9ea6dd5dd",
   "firstSeenHead": "a2681a9e5aba53942b6b04ef7a01b7dd2aadfac9",
-  "lastSeenHead": "f958216b3ca515ca3d0d8c9e854052ef349135db",
-  "lastAnalyzedHead": "f958216b3ca515ca3d0d8c9e854052ef349135db",
+  "lastSeenHead": "2b1d78fa285d867c430c015c42dd4cf9ea6dd5dd",
+  "lastAnalyzedHead": "2b1d78fa285d867c430c015c42dd4cf9ea6dd5dd",
   "stale": false,
   "staleReason": null,
   "staleSince": null,
   "lifecycleEvent": null,
   "createdAt": "2026-07-14T15:27:19.747Z",
-  "updatedAt": "2026-07-30T14:07:20.307Z"
+  "updatedAt": "2026-08-02T20:36:08.228Z"
 }

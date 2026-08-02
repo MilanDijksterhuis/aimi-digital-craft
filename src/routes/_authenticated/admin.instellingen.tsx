@@ -9,6 +9,7 @@ import {
   adminCreateRecipient,
   adminGenerateRecipientLink,
   adminToggleRecipient,
+  adminSetRecipientNotify,
   adminDeleteRecipient,
 } from "@/lib/telegram.functions";
 
@@ -37,6 +38,7 @@ function RecipientsPanel() {
   const create = useServerFn(adminCreateRecipient);
   const genLink = useServerFn(adminGenerateRecipientLink);
   const toggle = useServerFn(adminToggleRecipient);
+  const setNotify = useServerFn(adminSetRecipientNotify);
   const del = useServerFn(adminDeleteRecipient);
   const qc = useQueryClient();
 
@@ -75,6 +77,11 @@ function RecipientsPanel() {
   });
   const toggleM = useMutation({
     mutationFn: ({ id, active }: { id: string; active: boolean }) => toggle({ data: { id, active } }),
+    onSuccess: () => inv(),
+    onError: (e: any) => toast.error(e.message),
+  });
+  const notifyM = useMutation({
+    mutationFn: (i: { id: string; notify_contact_form?: boolean; notify_new_changes?: boolean }) => setNotify({ data: i }),
     onSuccess: () => inv(),
     onError: (e: any) => toast.error(e.message),
   });
@@ -118,40 +125,61 @@ function RecipientsPanel() {
           {items.map((r) => {
             const linked = !!r.telegram_chat_id;
             return (
-              <li key={r.id} className="py-3 flex items-center justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-sm font-medium">{r.label}</p>
-                  {linked ? (
-                    <p className="text-xs text-emerald-600">Gekoppeld ✅ {r.telegram_username ? `(@${r.telegram_username})` : ""}</p>
-                  ) : waitingId === r.id ? (
-                    <p className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Loader2 className="w-3 h-3 animate-spin" /> Wachten op koppeling…
-                    </p>
-                  ) : (
-                    <p className="text-xs text-muted-foreground">Nog niet gekoppeld</p>
-                  )}
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  {!linked && (
-                    <button
-                      onClick={() => linkM.mutate(r.id)}
-                      disabled={linkM.isPending}
-                      className="inline-flex items-center gap-1.5 text-xs rounded-md border border-border px-2.5 py-1.5 hover:border-primary hover:text-primary transition-colors"
-                    >
-                      <Send className="w-3.5 h-3.5" /> Koppel
+              <li key={r.id} className="py-3 space-y-2">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{r.label}</p>
+                    {linked ? (
+                      <p className="text-xs text-emerald-600">Gekoppeld ✅ {r.telegram_username ? `(@${r.telegram_username})` : ""}</p>
+                    ) : waitingId === r.id ? (
+                      <p className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Loader2 className="w-3 h-3 animate-spin" /> Wachten op koppeling…
+                      </p>
+                    ) : (
+                      <p className="text-xs text-muted-foreground">Nog niet gekoppeld</p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {!linked && (
+                      <button
+                        onClick={() => linkM.mutate(r.id)}
+                        disabled={linkM.isPending}
+                        className="inline-flex items-center gap-1.5 text-xs rounded-md border border-border px-2.5 py-1.5 hover:border-primary hover:text-primary transition-colors"
+                      >
+                        <Send className="w-3.5 h-3.5" /> Koppel
+                      </button>
+                    )}
+                    <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <input
+                        type="checkbox"
+                        checked={r.active}
+                        onChange={(e) => toggleM.mutate({ id: r.id, active: e.target.checked })}
+                      />
+                      Actief
+                    </label>
+                    <button onClick={() => delM.mutate(r.id)} className="text-destructive hover:opacity-80" aria-label="Verwijderen">
+                      <Trash2 className="w-4 h-4" />
                     </button>
-                  )}
+                  </div>
+                </div>
+                {/* Per melding-type aan/uit — onafhankelijk van elkaar */}
+                <div className="flex flex-wrap items-center gap-4 pl-0.5">
                   <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <input
                       type="checkbox"
-                      checked={r.active}
-                      onChange={(e) => toggleM.mutate({ id: r.id, active: e.target.checked })}
+                      checked={r.notify_contact_form ?? true}
+                      onChange={(e) => notifyM.mutate({ id: r.id, notify_contact_form: e.target.checked })}
                     />
-                    Actief
+                    Melding bij contactformulier
                   </label>
-                  <button onClick={() => delM.mutate(r.id)} className="text-destructive hover:opacity-80" aria-label="Verwijderen">
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      checked={r.notify_new_changes ?? false}
+                      onChange={(e) => notifyM.mutate({ id: r.id, notify_new_changes: e.target.checked })}
+                    />
+                    Melding bij nieuwe changes
+                  </label>
                 </div>
               </li>
             );

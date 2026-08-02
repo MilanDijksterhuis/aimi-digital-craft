@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 
 export function About() {
   return (
@@ -29,6 +30,18 @@ export function About() {
               verenigingen. Geen trage processen, geen accountmanagers. Je hebt
               altijd direct contact met degene die je site bouwt.
             </motion.p>
+            <motion.a
+              href="/over-ons"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-white transition-opacity duration-150 hover:opacity-75"
+              style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+            >
+              Meer over ons
+              <ArrowRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5" />
+            </motion.a>
           </div>
 
           <motion.div

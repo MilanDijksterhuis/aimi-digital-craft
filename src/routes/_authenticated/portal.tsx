@@ -337,26 +337,48 @@ function PortalPage() {
   return (
     <div className="space-y-10 pb-24">
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="font-display text-4xl font-semibold">
-            Hoi {data.profile?.full_name || "klant"}
-          </h1>
-          <p className="text-muted-foreground">{data.profile?.company}</p>
+        <div className="flex items-center gap-4">
+          <div
+            aria-hidden="true"
+            className="shrink-0 flex items-center justify-center rounded-full text-white font-extrabold"
+            style={{ width: 52, height: 52, background: "#ea4a34", fontSize: 20 }}
+          >
+            {(data.profile?.full_name || data.profile?.company || "K").trim().charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <h1 className="font-display font-extrabold text-white" style={{ fontSize: 30, letterSpacing: "-0.01em" }}>
+              Hoi {data.profile?.full_name || "klant"}
+            </h1>
+            <p style={{ color: "#8d8d94", fontSize: 14, marginTop: 2 }}>
+              {data.profile?.company ? `${data.profile.company} · klantenportaal` : "AIMI · klantenportaal"}
+            </p>
+          </div>
         </div>
         <div className="relative">
-          <button
-            onClick={() => setShowNotifs((v) => !v)}
-            aria-label={`Meldingen openen${unread.length > 0 ? `, ${unread.length} ongelezen` : ""}`}
-            aria-expanded={showNotifs}
-            className="relative rounded-full border border-border bg-card px-3 py-2 text-sm hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span aria-hidden="true" className="text-xs font-medium tracking-wide">Inbox</span>
-            {unread.length > 0 && (
-              <span aria-hidden="true" className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
-                {unread.length}
-              </span>
-            )}
-          </button>
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => setShowNotifs((v) => !v)}
+              aria-label={`Meldingen openen${unread.length > 0 ? `, ${unread.length} ongelezen` : ""}`}
+              aria-expanded={showNotifs}
+              className="relative flex items-center justify-center rounded-full hover:brightness-125 transition focus-visible:ring-2 focus-visible:ring-ring"
+              style={{ width: 38, height: 38, background: "#1b1b1e", border: "1px solid rgba(255,255,255,0.08)", color: "#c7c7cc" }}
+            >
+              <span aria-hidden="true" style={{ fontSize: 15 }}>🔔</span>
+              {unread.length > 0 && (
+                <span aria-hidden="true" className="absolute -top-1 -right-1 rounded-full bg-destructive text-destructive-foreground text-xs px-1.5 py-0.5 min-w-[20px] text-center">
+                  {unread.length}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => setShowNotifs((v) => !v)}
+              aria-expanded={showNotifs}
+              className="hover:brightness-125 transition focus-visible:ring-2 focus-visible:ring-ring"
+              style={{ background: "#1b1b1e", border: "1px solid rgba(255,255,255,0.08)", color: "#fff", fontSize: 14, fontWeight: 600, padding: "9px 18px", borderRadius: 10 }}
+            >
+              Inbox
+            </button>
+          </div>
           {showNotifs && (
             <div className="absolute right-0 mt-2 w-80 max-h-96 overflow-auto rounded-lg border border-border bg-card shadow-lg z-50">
               <div className="flex items-center justify-between p-3 border-b border-border">
@@ -390,24 +412,38 @@ function PortalPage() {
       </div>
 
       {/* Tabs */}
-      <div role="tablist" aria-label="Portaal secties" className="flex gap-2 border-b border-border overflow-x-auto no-scrollbar">
+      <div
+        role="tablist"
+        aria-label="Portaal secties"
+        className="inline-flex w-fit max-w-full overflow-x-auto no-scrollbar"
+        style={{ background: "#141416", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: 4, gap: 4 }}
+      >
         {([
           ["overview", "Overzicht"],
           ["changes", "Jouw changes"],
           ["website", "Mijn projecten"],
-        ] as const).map(([key, label]) => (
-          <button
-            key={key}
-            role="tab"
-            aria-selected={tab === key}
-            onClick={() => setTab(key)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px whitespace-nowrap focus-visible:ring-2 focus-visible:ring-ring ${
-              tab === key ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
+        ] as const).map(([key, label]) => {
+          const active = tab === key;
+          return (
+            <button
+              key={key}
+              role="tab"
+              aria-selected={active}
+              onClick={() => setTab(key)}
+              className="whitespace-nowrap transition focus-visible:ring-2 focus-visible:ring-ring"
+              style={{
+                fontSize: 13,
+                fontWeight: active ? 700 : 600,
+                padding: "8px 16px",
+                borderRadius: 8,
+                background: active ? "#ea4a34" : "transparent",
+                color: active ? "#fff" : "#9a9aa0",
+              }}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
 
       {tab === "overview" && (
@@ -415,6 +451,9 @@ function PortalPage() {
           data={data}
           openChanges={openChanges}
           onGoToChanges={() => setTab("changes")}
+          onNewChange={() => { setTab("changes"); setShowNewChange(true); }}
+          onGoToProjects={() => setTab("website")}
+          onOpenChat={() => window.dispatchEvent(new CustomEvent("aimi-open-chat"))}
         />
       )}
 
@@ -722,6 +761,9 @@ function PortalPage() {
         }
         .change-card { animation: card-in 0.35s cubic-bezier(0.4,0,0.2,1) both; }
         .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+        .cap-label { text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; color: #8d8d94; font-weight: 600; }
+        .portal-hero-grid { display: grid; gap: 20px; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); }
+        @media (max-width: 767px) { .portal-hero-grid { grid-template-columns: 1fr; } }
       `}</style>
 
     </div>
@@ -1296,11 +1338,14 @@ function LegacyWebsiteMonitoring({ data }: { data: any }) {
 // ---------- Overview section ----------
 
 function OverviewSection({
-  data, openChanges, onGoToChanges,
+  data, openChanges, onGoToChanges, onNewChange, onGoToProjects, onOpenChat,
 }: {
   data: any;
   openChanges: number;
   onGoToChanges: () => void;
+  onNewChange: () => void;
+  onGoToProjects: () => void;
+  onOpenChat: () => void;
 }) {
   const listProjects = useServerFn(portalListMyProjects);
   const { data: projectsData } = useQuery({ queryKey: ["portal-my-projects"], queryFn: () => listProjects({}) });
@@ -1311,9 +1356,13 @@ function OverviewSection({
   const totalQuota = (data.profile?.free_quota_override ?? 3) + (data.extraTotal ?? 0);
   const used = data.usedThisMonth ?? 0;
   const pct = totalQuota > 0 ? Math.min(100, (used / totalQuota) * 100) : 100;
-  const exhausted = used >= totalQuota;
   const recent = (data.requests as any[]).slice(0, 3);
   const siteOk = !data.total24h || ((data.uptimePct ?? 100) >= 95);
+  const domain = (() => {
+    if (!websiteUrl) return null;
+    try { return new URL(websiteUrl.startsWith("http") ? websiteUrl : `https://${websiteUrl}`).hostname.replace(/^www\./, ""); }
+    catch { return websiteUrl.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/.*$/, ""); }
+  })();
 
   return (
     <div className="space-y-8">
@@ -1333,55 +1382,110 @@ function OverviewSection({
         </section>
       )}
 
-      {/* Budget + open + website grid */}
-      <div className="grid lg:grid-cols-3 gap-4">
-        {/* Budget card spanning 2 */}
-        <section className="lg:col-span-2 rounded-lg border border-border bg-card p-6">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-display text-lg font-semibold">Changes deze maand</h3>
-            <span className={`text-sm font-medium ${exhausted ? "text-destructive" : "text-foreground"}`}>
-              {used} van {totalQuota} gebruikt
+      {/* Hero grid: changes-status + website + snel starten */}
+      <div className="portal-hero-grid">
+        {/* Changes-statuskaart */}
+        <section
+          className="flex flex-col"
+          style={{ background: "#17171a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: 30, gap: 26 }}
+        >
+          <div className="flex items-center justify-between">
+            <span className="cap-label">Changes</span>
+            <span style={{ color: "#6f6f76", fontSize: 12, fontWeight: 600, background: "rgba(255,255,255,0.05)", padding: "4px 10px", borderRadius: 20 }}>
+              {used} van {totalQuota} gebruikt deze maand
             </span>
           </div>
-          <div className="h-3 w-full rounded-full overflow-hidden bg-muted">
+
+          <div className="flex items-center gap-4">
             <div
-              className="h-full transition-all"
-              style={{ width: `${pct}%`, background: exhausted ? "var(--destructive)" : "var(--primary)" }}
-            />
-          </div>
-          <p className={`mt-3 text-sm ${exhausted ? "text-destructive" : "text-muted-foreground"}`}>
-            {exhausted ? "Je gratis changes zijn op." : `Nog ${data.availableCredits} gratis change${data.availableCredits === 1 ? "" : "s"} over.`}
-          </p>
-
-          <div className="mt-6 pt-6 border-t border-border">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Open changes</p>
-            <p className="font-display text-4xl font-semibold mt-1">{openChanges}</p>
-            <button
-              onClick={onGoToChanges}
-              className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              className="shrink-0 flex items-center justify-center rounded-full"
+              style={{
+                width: 48, height: 48,
+                background: openChanges > 0 ? "rgba(234,74,52,0.12)" : "rgba(34,197,94,0.12)",
+              }}
             >
-              Bekijk je changes <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+              <span style={{ color: openChanges > 0 ? "#ea4a34" : "#22c55e", fontSize: 22, fontWeight: 800 }}>
+                {openChanges > 0 ? "!" : "✓"}
+              </span>
+            </div>
+            <div>
+              <div className="text-white font-extrabold" style={{ fontSize: 22, letterSpacing: "-0.01em" }}>
+                {openChanges > 0 ? `${openChanges} open change${openChanges === 1 ? "" : "s"}` : "Alles is bijgewerkt"}
+              </div>
+              <div style={{ color: "#8d8d94", fontSize: 13, marginTop: 2 }}>
+                {openChanges > 0 ? "In behandeling door AIMI" : "0 open changes op dit moment"}
+              </div>
+            </div>
           </div>
+
+          <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,0.07)", overflow: "hidden" }}>
+            <div style={{ width: `${pct}%`, height: "100%", background: "#ea4a34" }} />
+          </div>
+
+          <button
+            onClick={onGoToChanges}
+            className="text-left hover:brightness-110 transition w-fit"
+            style={{ color: "#ea4a34", fontSize: 13, fontWeight: 700 }}
+          >
+            Bekijk je changes →
+          </button>
         </section>
 
-        {/* Website status */}
-        <section className="rounded-lg border border-border bg-card p-6">
-          <h3 className="font-display text-lg font-semibold mb-3">Website</h3>
-          <div className="flex items-center gap-2">
-            <span className={`inline-block w-2.5 h-2.5 rounded-full ${siteOk ? "bg-emerald-500" : "bg-destructive"}`} />
-            <span className="text-sm font-medium">
-              {siteOk ? "Je site is online" : "Controleer je site"}
-            </span>
-          </div>
-          {websiteUrl ? (
-            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="mt-3 block text-xs text-primary hover:underline break-all">
-              {websiteUrl}
-            </a>
-          ) : (
-            <p className="mt-3 text-xs text-muted-foreground">Nog geen website gekoppeld.</p>
-          )}
-        </section>
+        {/* Rechterkolom: website + snel starten */}
+        <div className="flex flex-col" style={{ gap: 16 }}>
+          <section style={{ background: "#17171a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: 22, display: "flex", flexDirection: "column", gap: 14 }}>
+            <span className="cap-label">Website</span>
+            <div className="flex items-center gap-2">
+              <span
+                style={{
+                  width: 9, height: 9, borderRadius: "50%",
+                  background: siteOk ? "#22c55e" : "#ef4444",
+                  boxShadow: siteOk ? "0 0 0 4px rgba(34,197,94,0.15)" : "0 0 0 4px rgba(239,68,68,0.15)",
+                }}
+              />
+              <span className="text-white" style={{ fontSize: 15, fontWeight: 700 }}>
+                {siteOk ? "Online" : "Controleer site"}
+              </span>
+            </div>
+            {domain ? (
+              <a
+                href={websiteUrl!.startsWith("http") ? websiteUrl! : `https://${websiteUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="break-all hover:underline"
+                style={{ background: "#0f0f11", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: "12px 14px", color: "#ea4a34", fontSize: 13, fontWeight: 600 }}
+              >
+                {domain}
+              </a>
+            ) : (
+              <div style={{ background: "#0f0f11", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: "12px 14px", color: "#6f6f76", fontSize: 13 }}>
+                Nog geen website gekoppeld
+              </div>
+            )}
+          </section>
+
+          <section style={{ background: "#17171a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: 22, display: "flex", flexDirection: "column", gap: 12 }}>
+            <span className="cap-label">Snel starten</span>
+            {([
+              ["Nieuw verzoek", onNewChange],
+              ["Mijn projecten", onGoToProjects],
+              ["Chat met team", onOpenChat],
+            ] as const).map(([label, onClick], i, arr) => (
+              <button
+                key={label}
+                onClick={onClick}
+                className="flex items-center justify-between text-left hover:brightness-125 transition"
+                style={{
+                  padding: "10px 0",
+                  borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                }}
+              >
+                <span style={{ color: "#e5e5e8", fontSize: 14, fontWeight: 600 }}>{label}</span>
+                <span style={{ color: "#6f6f76", fontSize: 16 }}>→</span>
+              </button>
+            ))}
+          </section>
+        </div>
       </div>
 
       {/* Recente activiteit */}

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#060607;}
+  a{color:#ff6b6b;text-decoration:none;}
+  a:hover{color:#ff9a9a;}
+  @keyframes ember{0%{transform:translate(0,0);opacity:0;}15%{opacity:.85;}100%{transform:translate(6px,-210px);opacity:0;}}
+  @keyframes breathe{0%{opacity:.25;}50%{opacity:.7;}100%{opacity:.25;}}
+  @keyframes haloDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(2vw,-3vh) scale(1.12);}100%{transform:translate(0,0) scale(1);}}
+  @keyframes leafFall{0%{transform:translate(0,-12vh) rotate(0deg);opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{transform:translate(9vw,112vh) rotate(420deg);opacity:0;}}
+</style>
+</helmet>
+
+<div style="position:relative;background:#060607;font-family:'Sora',Helvetica,Arial,sans-serif;color:#efeff1;min-height:360vh;">
+
+  <div style="position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;">
+    <div ref="{{ haloRef }}" style="position:absolute;left:12%;top:12%;width:76vw;height:76vw;transition:opacity 1.2s ease,transform 1.6s cubic-bezier(.2,.8,.2,1);opacity:.55;">
+      <div style="width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,rgba(255,60,60,.16),transparent 66%);filter:blur(90px);animation:haloDrift 26s ease-in-out infinite;"></div>
+    </div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 95%,rgba(255,50,50,.10),transparent 55%);"></div>
+    <sc-for list="{{ leaves }}" as="lf" hint-placeholder-count="20">
+      <div style="position:absolute;top:0;left:{{ lf.left }};width:{{ lf.size }};height:{{ lf.size }};background:{{ lf.color }};border-radius:0 100% 0 100%;opacity:0;animation:leafFall {{ lf.dur }} linear infinite;animation-delay:{{ lf.delay }};"></div>
+    </sc-for>
+  </div>
+
+  <div ref="{{ svgWrapRef }}" onClick="{{ onBackdrop }}" style="position:fixed;inset:0;z-index:1;transition:transform 1.1s cubic-bezier(.2,.8,.2,1);">
+    <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;overflow:visible;">
+      <sc-for list="{{ branches }}" as="b" hint-placeholder-count="120">
+        <path ref="{{ b.ref }}" d="{{ b.d }}" fill="none" stroke="{{ b.stroke }}" stroke-width="{{ b.w }}" stroke-linecap="round" style="opacity:0;transition:opacity .8s ease;"></path>
+      </sc-for>
+      <sc-for list="{{ blooms }}" as="f" hint-placeholder-count="54">
+        <path ref="{{ f.ref }}" d="{{ f.d }}" fill="none" stroke="{{ f.stroke }}" stroke-width="{{ f.w }}" stroke-linecap="round" style="opacity:0;"></path>
+      </sc-for>
+      <sc-for list="{{ surges }}" as="s" hint-placeholder-count="3">
+        <path ref="{{ s.ref }}" d="{{ s.d }}" fill="none" stroke="rgba(255,90,90,.95)" stroke-width="2.6" stroke-linecap="round" style="opacity:0;"></path>
+      </sc-for>
+      <sc-for list="{{ emberGroups }}" as="g" hint-placeholder-count="3">
+        <g ref="{{ g.ref }}" style="opacity:0;transition:opacity .9s ease;">
+          <sc-for list="{{ g.items }}" as="e" hint-placeholder-count="14">
+            <circle cx="{{ e.x }}" cy="{{ e.y }}" r="{{ e.r }}" fill="rgba(255,90,90,.9)" style="animation:ember 7s linear infinite;animation-delay:{{ e.delay }};"></circle>
+          </sc-for>
+        </g>
+      </sc-for>
+      <sc-for list="{{ nodes }}" as="n" hint-placeholder-count="3">
+        <g ref="{{ n.ref }}" onClick="{{ n.onClick }}" style="opacity:0;cursor:pointer;pointer-events:none;">
+          <rect x="{{ n.hx }}" y="{{ n.hy }}" width="86" height="86" fill="transparent"></rect>
+          <g ref="{{ n.frameRef }}" style="transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .6s ease;transform-origin:{{ n.origin }};transform-box:view-box;">
+            <rect x="{{ n.fx }}" y="{{ n.fy }}" width="60" height="60" fill="rgba(6,6,7,.7)" stroke="{{ n.stroke }}" stroke-width="1.1" transform="{{ n.rot }}"></rect>
+            <rect x="{{ n.ox }}" y="{{ n.oy }}" width="88" height="88" fill="none" stroke="rgba(255,70,70,.3)" stroke-width=".8" transform="{{ n.rotOuter }}" style="animation:breathe 5s ease-in-out infinite;"></rect>
+          </g>
+          <g ref="{{ n.iconRef }}" style="transition:opacity .5s ease;">
+            <sc-if value="{{ n.isHosting }}" hint-placeholder-val="{{ true }}">
+              <g stroke="{{ n.icon }}" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="{{ n.monX }}" y="{{ n.monY }}" width="34" height="23" rx="2"></rect>
+                <line x1="{{ n.x }}" y1="{{ n.standY1 }}" x2="{{ n.x }}" y2="{{ n.standY2 }}"></line>
+                <line x1="{{ n.baseX1 }}" y1="{{ n.standY2 }}" x2="{{ n.baseX2 }}" y2="{{ n.standY2 }}"></line>
+              </g>
+            </sc-if>
+            <sc-if value="{{ n.isPerf }}" hint-placeholder-val="{{ true }}">
+              <polyline points="{{ n.boltPoints }}" fill="none" stroke="{{ n.icon }}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></polyline>
+            </sc-if>
+            <sc-if value="{{ n.isSeo }}" hint-placeholder-val="{{ true }}">
+              <g stroke="{{ n.icon }}" stroke-width="1.8" fill="none" stroke-linecap="round">
+                <circle cx="{{ n.lensX }}" cy="{{ n.lensY }}" r="12"></circle>
+                <line x1="{{ n.hx1 }}" y1="{{ n.hy1 }}" x2="{{ n.hx2 }}" y2="{{ n.hy2 }}"></line>
+              </g>
+            </sc-if>
+          </g>
+          <text ref="{{ n.labelRef }}" x="{{ n.labelX }}" y="{{ n.labelY }}" text-anchor="{{ n.anchor }}" fill="#efeff1" font-family="Sora,Helvetica,sans-serif" font-size="17" font-weight="500" letter-spacing="1.6"></text>
+          <text ref="{{ n.subRef }}" x="{{ n.labelX }}" y="{{ n.subY }}" text-anchor="{{ n.anchor }}" fill="#78787f" font-family="Sora,Helvetica,sans-serif" font-size="11.5" letter-spacing="1.2"></text>
+        </g>
+      </sc-for>
+    </svg>
+  </div>
+
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 40px;flex-wrap:wrap;background:linear-gradient(to bottom,rgba(6,6,7,.9),rgba(6,6,7,0));">
+    <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em;white-space:nowrap;">AIMI<span style="color:#ff4b4b;">.</span></div>
+    <div style="display:flex;gap:20px;font-size:13.5px;color:#9a9aa2;white-space:nowrap;overflow:auto;">
+      <a href="#" style="color:#9a9aa2;">Services</a>
+      <a href="#" style="color:#9a9aa2;">Over ons</a>
+      <a href="#" style="color:#9a9aa2;">Tarieven</a>
+      <a href="#" style="color:#efeff1;">Meer diensten</a>
+      <a href="#" style="color:#9a9aa2;">FAQ</a>
+      <a href="#" style="color:#9a9aa2;">Contact</a>
+    </div>
+    <div style="display:flex;gap:10px;white-space:nowrap;">
+      <div style="padding:9px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);font-size:13px;">Portaal</div>
+      <div style="padding:9px 18px;border-radius:999px;background:#efeff1;color:#060607;font-size:13px;font-weight:600;">Contact</div>
+    </div>
+  </nav>
+
+  <div ref="{{ heroRef }}" style="position:fixed;left:40px;top:24vh;z-index:5;max-width:430px;pointer-events:none;">
+    <div style="font-size:11.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#ff4b4b;">Ook los af te nemen</div>
+    <h1 style="margin:14px 0 18px;font-size:60px;font-weight:300;letter-spacing:-0.03em;line-height:1;">Alles wat<br><span style="font-weight:600;">wij kunnen</span></h1>
+    <p style="font-size:14.5px;line-height:1.75;color:#8f8f98;font-weight:300;">
+      Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen,
+      zonder dat we een nieuwe site hoeven te bouwen.
+    </p>
+    <div style="margin-top:30px;display:flex;align-items:center;gap:12px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#5e5e66;">
+      <span style="display:block;width:34px;height:1px;background:#ff4b4b;"></span>
+      <span>Scroll om te laten groeien</span>
+    </div>
+  </div>
+
+  <div ref="{{ panelRef }}" style="position:fixed;right:40px;top:50%;z-index:7;width:340px;transform:translateY(-50%) translateX(20px);opacity:0;pointer-events:none;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1);">
+    <div style="padding:26px;border-radius:2px;border:1px solid rgba(255,70,70,.25);background:rgba(9,9,11,.86);backdrop-filter:blur(16px);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="font-size:10.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#ff4b4b;">{{ openLabel }}</div>
+        <div onClick="{{ onClose }}" style="cursor:pointer;font-size:15px;color:#78787f;line-height:1;">&times;</div>
+      </div>
+      <div style="margin-top:16px;display:flex;align-items:baseline;gap:8px;">
+        <span style="font-size:30px;font-weight:300;letter-spacing:-0.01em;">{{ openPrice }}</span>
+        <span style="font-size:13px;color:#78787f;">{{ openSuffix }}</span>
+      </div>
+      <p style="margin:12px 0 0;font-size:13.5px;line-height:1.7;color:#9a9aa2;font-weight:300;">{{ openDesc }}</p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:11px;">
+        <sc-for list="{{ openPoints }}" as="pt" hint-placeholder-count="3">
+          <div style="display:flex;align-items:flex-start;gap:11px;font-size:13px;line-height:1.55;color:#b6b6bd;font-weight:300;">
+            <span style="margin-top:6px;width:4px;height:4px;background:#ff4b4b;flex:none;transform:rotate(45deg);"></span>
+            <span>{{ pt.text }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:26px;padding:13px 0;text-align:center;border:1px solid rgba(255,70,70,.35);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;">Neem contact op</div>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:5;padding:22px 40px;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#6f6f77;background:rgba(6,6,7,.75);backdrop-filter:blur(8px);">
+    <div style="font-weight:600;color:#efeff1;">AIMI<span style="color:#ff4b4b;">.</span></div>
+    <div>&copy; 2026 AIMI &mdash; Alle rechten voorbehouden</div>
+    <div style="display:flex;gap:24px;">
+      <a href="#">Privacybeleid</a>
+      <a href="#">Algemene Voorwaarden voor AIMI</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const RED = (a) => `rgba(255,70,70,${a})`;
+
+const SERVICES = [
+  {
+    key: 'hosting', label: 'HOSTING', sub: 'vanaf € 29,50',
+    price: '€ 29,50', suffix: '/maand',
+    desc: 'Snelle, veilige hosting met monitoring en updates. We nemen je bestaande site over.',
+    points: ['Dagelijkse back-ups en 24/7 monitoring', 'SSL, updates en security-patches inbegrepen', 'Nederlandse servers, geen verrassingen'],
+    node: [206, 392], ctrl: [352, 660], anchor: 'end', labelDx: -62,
+  },
+  {
+    key: 'perf', label: 'PERFORMANCE', sub: 'op aanvraag',
+    price: 'Op aanvraag', suffix: '',
+    desc: 'Snelheidsoptimalisatie voor een snellere, soepelere site — merkbaar voor bezoekers én voor Google.',
+    points: ['Core Web Vitals naar groen', 'Afbeeldingen, caching en scripts geoptimaliseerd', 'Meetrapport voor en na'],
+    node: [520, 196], ctrl: [470, 500], anchor: 'middle', labelDx: 0,
+  },
+  {
+    key: 'seo', label: 'SEO', sub: 'op aanvraag',
+    price: 'Op aanvraag', suffix: '',
+    desc: 'Vindbaarheid verbeteren met technische en content SEO, gericht op zoekwoorden die klanten opleveren.',
+    points: ['Technische audit en fixes', 'Zoekwoordonderzoek en contentplan', 'Maandelijkse rapportage'],
+    node: [826, 372], ctrl: [664, 640], anchor: 'start', labelDx: 62,
+  },
+];
+
+const ROOT = [500, 1015];
+const FORK = [500, 700];
+
+const qPoint = (p0, c, p1, t) => {
+  const u = 1 - t;
+  return [u * u * p0[0] + 2 * u * t * c[0] + t * t * p1[0], u * u * p0[1] + 2 * u * t * c[1] + t * t * p1[1]];
+};
+const qTangent = (p0, c, p1, t) => {
+  const u = 1 - t;
+  const x = 2 * u * (c[0] - p0[0]) + 2 * t * (p1[0] - c[0]);
+  const y = 2 * u * (c[1] - p0[1]) + 2 * t * (p1[1] - c[1]);
+  const m = Math.hypot(x, y) || 1;
+  return [x / m, y / m];
+};
+const rng = (seed) => () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+
+function splitQuad(p0, c, p1, t) {
+  const a = [p0[0] + (c[0] - p0[0]) * t, p0[1] + (c[1] - p0[1]) * t];
+  const b = [c[0] + (p1[0] - c[0]) * t, c[1] + (p1[1] - c[1]) * t];
+  const m = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  return [[p0, a, m], [m, b, p1]];
+}
+
+function build() {
+  const branches = [];
+  const blooms = [];
+  const surges = [];
+  const embers = [];
+
+  branches.push({ d: `M${ROOT[0]},${ROOT[1]} Q${ROOT[0] + 16},${(ROOT[1] + FORK[1]) / 2} ${FORK[0]},${FORK[1]}`, w: 6, stroke: 'rgba(236,236,240,.5)', t0: 0, t1: 0.13, s: -1 });
+  surges.push({ d: branches[0].d, s: -1 });
+
+  // baby-boompje: klein kroontje dat al staat voordat je scrolt
+  const sap = [
+    [-1, 30, 0.030, 42, -46], [1, 24, 0.038, 46, -50],
+    [-1, 8, 0.048, 30, -62], [1, 4, 0.056, 34, -66], [0, 0, 0.064, 6, -78],
+  ];
+  sap.forEach(([dir, dy, t0, dx, dyy]) => {
+    const bx = FORK[0] + dir * 3, by = FORK[1] + dy;
+    branches.push({
+      d: `M${bx},${by} Q${bx + dir * dx * 0.6},${by + dyy * 0.45} ${bx + dir * dx},${by + dyy}`,
+      w: 1.9, stroke: RED(0.42), t0, t1: t0 + 0.05, s: -1,
+    });
+  });
+
+  SERVICES.forEach((sv, si) => {
+    const rand = rng(3571 + si * 977);
+    const p0 = FORK, c = sv.ctrl, p1 = sv.node;
+    const start = 0.17 + si * 0.05;
+    const end = 0.45 + si * 0.115;
+
+    const [h1, h2] = splitQuad(p0, c, p1, 0.5);
+    [h1, h2].forEach((seg, k) => {
+      const d = `M${seg[0][0].toFixed(1)},${seg[0][1].toFixed(1)} Q${seg[1][0].toFixed(1)},${seg[1][1].toFixed(1)} ${seg[2][0].toFixed(1)},${seg[2][1].toFixed(1)}`;
+      branches.push({ d, w: 3.4 - k * 0.8, stroke: 'rgba(236,236,240,.36)', t0: start + k * (end - start) / 2, t1: start + (k + 1) * (end - start) / 2, s: si });
+      surges.push({ d, s: si });
+    });
+
+    const grow = (px, py, ang, len, depth, t0, span) => {
+      const nx = px + Math.cos(ang) * len, ny = py + Math.sin(ang) * len;
+      const cx = px + Math.cos(ang - 0.3 + rand() * 0.6) * len * 0.55;
+      const cy = py + Math.sin(ang - 0.3 + rand() * 0.6) * len * 0.55;
+      branches.push({
+        d: `M${px.toFixed(1)},${py.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${nx.toFixed(1)},${ny.toFixed(1)}`,
+        w: Math.max(0.55, depth * 0.62), stroke: RED(0.14 + depth * 0.09), t0, t1: Math.min(0.99, t0 + span), s: si,
+      });
+      if (depth <= 1) return;
+      // kinderen starten pas als de moedertak klaar is, anders lijkt een tak los te zweven
+      const childStart = Math.min(0.985, t0 + span);
+      const spread = 0.38 + rand() * 0.34;
+      grow(nx, ny, ang - spread, len * (0.62 + rand() * 0.14), depth - 1, childStart, span * 0.8);
+      grow(nx, ny, ang + spread * (0.75 + rand() * 0.6), len * (0.6 + rand() * 0.16), depth - 1, childStart, span * 0.8);
+      if (rand() > 0.55) grow(nx, ny, ang + (rand() - 0.5) * 0.5, len * 0.5, depth - 1, Math.min(0.985, childStart + span * 0.2), span * 0.75);
+    };
+
+    [0.1, 0.2, 0.3, 0.41, 0.52, 0.62, 0.72, 0.82, 0.92].forEach((t, k) => {
+      const p = qPoint(p0, c, p1, t);
+      const tan = qTangent(p0, c, p1, t);
+      const base = Math.atan2(tan[1], tan[0]);
+      const side = k % 2 === 0 ? -1 : 1;
+      const w0 = start + (end - start) * t + 0.006;
+      const deep = k % 3 === 1 ? 4 : 3;
+      grow(p[0], p[1], base + side * (0.5 + rand() * 0.4), 66 + rand() * 52, deep, w0, 0.17);
+      grow(p[0], p[1], base - side * (0.62 + rand() * 0.34), 52 + rand() * 40, deep - 1, w0 + 0.02, 0.15);
+    });
+
+    // sluimerende bloesem rond het knooppunt — groeit pas bij een klik
+    const br = rng(881 + si * 313);
+    for (let i = 0; i < 18; i++) {
+      const ang = (i / 18) * Math.PI * 2 + br() * 0.3;
+      const len = 46 + br() * 96;
+      const ex = p1[0] + Math.cos(ang) * len;
+      const ey = p1[1] + Math.sin(ang) * len;
+      const mx = p1[0] + Math.cos(ang + 0.42) * len * 0.55;
+      const my = p1[1] + Math.sin(ang + 0.42) * len * 0.55;
+      blooms.push({ d: `M${p1[0]},${p1[1]} Q${mx.toFixed(1)},${my.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}`, w: 0.9, stroke: RED(0.16 + br() * 0.5), s: si });
+    }
+
+    const er = rng(211 + si * 641);
+    embers.push({
+      s: si,
+      items: Array.from({ length: 14 }, () => ({
+        x: (p1[0] + (er() - 0.5) * 150).toFixed(1),
+        y: (p1[1] + 40 + er() * 90).toFixed(1),
+        r: (0.9 + er() * 1.7).toFixed(1),
+        delay: (er() * 7).toFixed(2) + 's',
+      })),
+    });
+  });
+
+  return { branches, blooms, surges, embers };
+}
+
+class Component extends DCLogic {
+  state = { open: null };
+
+  constructor(props) {
+    super(props);
+    const t = build();
+    this.data = t;
+    this.branchEls = []; this.branchLens = [];
+    this.bloomEls = []; this.surgeEls = []; this.surgeLens = [];
+    this.emberEls = []; this.nodeEls = []; this.frameEls = []; this.iconEls = [];
+    this.p = 0; this.pTarget = 0;
+    this.surge = null;
+  }
+
+  componentDidMount() {
+    this.branchEls.forEach((el, i) => {
+      if (!el) return;
+      const L = el.getTotalLength();
+      this.branchLens[i] = L;
+      el.style.strokeDasharray = L;
+      el.style.strokeDashoffset = L;
+      el.style.opacity = 1;
+    });
+    this.bloomEls.forEach((el) => {
+      if (!el) return;
+      const L = el.getTotalLength();
+      el.style.strokeDasharray = L;
+      el.style.strokeDashoffset = L;
+      el.style.opacity = 1;
+      el.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)';
+    });
+    this.surgeEls.forEach((el, i) => {
+      if (!el) return;
+      const L = el.getTotalLength();
+      this.surgeLens[i] = L;
+      el.style.strokeDasharray = `70 ${L}`;
+      el.style.strokeDashoffset = L;
+    });
+
+    this.onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      this.pTarget = max > 0 ? Math.min(1, (window.scrollY || window.pageYOffset || 0) / max) : 0;
+    };
+    this.onResize = () => this.applyLayout();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.onScroll();
+    this.p = this.pTarget;
+    this.applyLayout();
+    this.last = performance.now();
+    this.loop = (t) => {
+      const dt = Math.min(0.05, (t - this.last) / 1000);
+      this.last = t;
+      this.tick(dt);
+      this.raf = requestAnimationFrame(this.loop);
+    };
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this.bloomTimer);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  tick(dt) {
+    this.p += (this.pTarget - this.p) * 0.09;
+    // baby-boom: bij scroll 0 staat er al een kleine stam met eerste twijgen
+    const p = 0.12 + this.p * 0.88;
+
+    this.data.branches.forEach((b, i) => {
+      const el = this.branchEls[i];
+      if (!el) return;
+      const L = this.branchLens[i] || 0;
+      const k = Math.max(0, Math.min(1, (p - b.t0) / (b.t1 - b.t0)));
+      const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      el.style.strokeDashoffset = L * (1 - e);
+      const cap = e > 0.002 ? 'round' : 'butt';
+      if (el.__cap !== cap) { el.__cap = cap; el.setAttribute('stroke-linecap', cap); }
+    });
+
+    SERVICES.forEach((s, i) => {
+      const el = this.nodeEls[i];
+      if (!el) return;
+      const appear = 0.40 + i * 0.115;
+      const k = Math.max(0, Math.min(1, (p - appear) / 0.08));
+      el.style.opacity = (this.state.open === null || this.state.open === i ? k : k * 0.18).toFixed(3);
+      el.style.pointerEvents = k > 0.8 ? 'auto' : 'none';
+    });
+
+    if (this.heroEl) {
+      const k = Math.min(1, this.p / 0.35);
+      this.heroEl.style.opacity = (1 - k * 0.45).toFixed(3);
+      this.heroEl.style.transform = `translateY(${(-k * 90).toFixed(1)}px) scale(${(1 - k * 0.26).toFixed(3)})`;
+      this.heroEl.style.transformOrigin = 'left top';
+    }
+
+    // energie-puls van de stam naar het gekozen knooppunt
+    if (this.surge) {
+      this.surge.t += dt / this.surge.dur;
+      const chain = this.surge.chain;
+      const n = chain.length;
+      chain.forEach((idx, k) => {
+        const el = this.surgeEls[idx];
+        if (!el) return;
+        const L = this.surgeLens[idx] || 0;
+        const seg = Math.max(0, Math.min(1, this.surge.t * n - k));
+        el.style.opacity = seg > 0 && seg < 1 ? 1 : 0;
+        el.style.strokeDashoffset = L * (1 - seg) - 70 * seg;
+      });
+      if (this.surge.t >= 1) {
+        chain.forEach((idx) => { if (this.surgeEls[idx]) this.surgeEls[idx].style.opacity = 0; });
+        this.surge = null;
+      }
+    }
+  }
+
+  applyLayout() {
+    const open = this.state.open !== null;
+    const narrow = window.innerWidth < 1100;
+    const p = this.panelEl, w = this.svgWrapEl;
+    if (p) {
+      if (narrow) {
+        p.style.width = 'auto'; p.style.left = '20px'; p.style.right = '20px';
+        p.style.top = 'auto'; p.style.bottom = '70px';
+        p.style.maxHeight = '46vh'; p.style.overflowY = 'auto';
+        p.style.transform = open ? 'translateY(0)' : 'translateY(20px)';
+      } else {
+        p.style.maxHeight = 'none'; p.style.overflowY = 'visible';
+        p.style.width = '340px'; p.style.left = 'auto'; p.style.right = '40px';
+        p.style.top = '50%'; p.style.bottom = 'auto';
+        p.style.transform = open ? 'translateY(-50%) translateX(0)' : 'translateY(-50%) translateX(20px)';
+      }
+      p.style.opacity = open ? 1 : 0;
+      p.style.pointerEvents = open ? 'auto' : 'none';
+    }
+    if (!w) return;
+    if (!open) { w.style.transform = 'none'; return; }
+    if (!narrow) { w.style.transform = 'translateX(-15%) scale(.9)'; return; }
+
+    // smal scherm: schuif de boom precies in de vrije band tussen nav en paneel
+    const scale = 0.66;
+    const prev = w.style.transition;
+    w.style.transition = 'none';
+    w.style.transform = `scale(${scale})`;
+    const node = this.nodeEls[this.state.open];
+    const navBottom = 92;
+    const panelTop = p ? p.getBoundingClientRect().top : window.innerHeight - 220;
+    let dy = 0;
+    if (node) {
+      const r = node.getBoundingClientRect();
+      const bandTop = navBottom + 8;
+      const bandBottom = panelTop - 14;
+      if (r.height > bandBottom - bandTop) {
+        dy = (bandTop + 60) - r.top;
+      } else if (r.bottom > bandBottom) {
+        dy = bandBottom - r.bottom;
+      } else if (r.top < bandTop) {
+        dy = bandTop - r.top;
+      }
+    }
+    void w.offsetHeight;
+    w.style.transition = prev || 'transform 1.1s cubic-bezier(.2,.8,.2,1)';
+    w.style.transform = `translateY(${dy.toFixed(1)}px) scale(${scale})`;
+  }
+
+  open(i) {
+    if (this.state.open === i) return;
+    clearTimeout(this.bloomTimer);
+    this.resetBloom();
+
+    const chain = [0];
+    let idx = 1;
+    this.data.surges.forEach((s, k) => { if (s.s === i && k > 0) chain.push(k); });
+    void idx;
+    this.surge = { chain, t: 0, dur: 0.75 };
+
+    this.setState({ open: i }, () => {
+      this.data.branches.forEach((b, k) => {
+        const el = this.branchEls[k];
+        if (!el) return;
+        el.style.opacity = b.s === -1 || b.s === i ? 1 : 0.12;
+      });
+      this.bloomTimer = setTimeout(() => {
+        let n = 0;
+        this.data.blooms.forEach((f, k) => {
+          const el = this.bloomEls[k];
+          if (!el || f.s !== i) return;
+          el.style.transitionDelay = (n * 45) + 'ms';
+          el.style.strokeDashoffset = 0;
+          n++;
+        });
+        this.emberEls.forEach((el, k) => { if (el) el.style.opacity = k === i ? 1 : 0; });
+        const fr = this.frameEls[i];
+        if (fr) fr.style.transform = 'scale(1.35) rotate(45deg)';
+        this.applyLayout();
+      }, 720);
+    });
+  }
+
+  resetBloom() {
+    this.bloomEls.forEach((el) => { if (el) { el.style.transitionDelay = '0ms'; el.style.strokeDashoffset = el.getTotalLength(); } });
+    this.emberEls.forEach((el) => { if (el) el.style.opacity = 0; });
+    this.frameEls.forEach((el) => { if (el) el.style.transform = 'scale(1) rotate(0deg)'; });
+  }
+
+  close() {
+    clearTimeout(this.bloomTimer);
+    this.resetBloom();
+    this.branchEls.forEach((el) => { if (el) el.style.opacity = 1; });
+    this.setState({ open: null }, () => this.applyLayout());
+  }
+
+  renderVals() {
+    const branches = this.data.branches.map((b, i) => ({
+      d: b.d, w: b.w, stroke: b.stroke, ref: (el) => { this.branchEls[i] = el; },
+    }));
+    const blooms = this.data.blooms.map((f, i) => ({
+      d: f.d, w: f.w, stroke: f.stroke, ref: (el) => { this.bloomEls[i] = el; },
+    }));
+    const surges = this.data.surges.map((s, i) => ({
+      d: s.d, ref: (el) => { this.surgeEls[i] = el; },
+    }));
+    const emberGroups = this.data.embers.map((g, i) => ({
+      items: g.items, ref: (el) => { this.emberEls[i] = el; },
+    }));
+
+    const nodes = SERVICES.map((s, i) => {
+      const [x, y] = s.node;
+      return {
+        x, y, label: s.label, sub: s.sub, anchor: s.anchor,
+        stroke: RED(0.75), icon: RED(0.95),
+        origin: `${x}px ${y}px`,
+        hx: x - 52, hy: y - 52,
+        fx: x - 30, fy: y - 30, rot: `rotate(45 ${x} ${y})`,
+        ox: x - 44, oy: y - 44, rotOuter: `rotate(45 ${x} ${y})`,
+        labelX: x + s.labelDx, labelY: y + 78, subY: y + 96,
+        isHosting: i === 0, isPerf: i === 1, isSeo: i === 2,
+        monX: x - 17, monY: y - 15, standY1: y + 8, standY2: y + 14, baseX1: x - 10, baseX2: x + 10,
+        boltPoints: `${x + 7},${y - 15} ${x - 8},${y + 1} ${x + 3},${y + 1} ${x - 7},${y + 15}`,
+        lensX: x - 3, lensY: y - 4, hx1: x + 6, hy1: y + 5, hx2: x + 13, hy2: y + 13,
+        ref: (el) => { this.nodeEls[i] = el; },
+        labelRef: (el) => { if (el) el.textContent = s.label; },
+        subRef: (el) => { if (el) el.textContent = s.sub; },
+        frameRef: (el) => { this.frameEls[i] = el; },
+        iconRef: (el) => { this.iconEls[i] = el; },
+        onClick: (ev) => { ev.stopPropagation(); this.open(i); },
+      };
+    });
+
+    const o = this.state.open === null ? null : SERVICES[this.state.open];
+
+    if (!this.leaves) {
+      const lr = rng(4211);
+      this.leaves = Array.from({ length: 22 }, () => {
+        const size = 5 + lr() * 8;
+        return {
+          left: (lr() * 100).toFixed(1) + '%',
+          size: size.toFixed(1) + 'px',
+          color: `rgba(255,${50 + Math.floor(lr() * 40)},${50 + Math.floor(lr() * 30)},${(0.14 + lr() * 0.3).toFixed(2)})`,
+          dur: (22 + lr() * 26).toFixed(1) + 's',
+          delay: (-lr() * 40).toFixed(1) + 's',
+        };
+      });
+    }
+
+    return {
+      branches, blooms, surges, emberGroups, nodes, leaves: this.leaves,
+      heroRef: (el) => { this.heroEl = el; },
+      panelRef: (el) => { this.panelEl = el; },
+      haloRef: (el) => { this.haloEl = el; },
+      svgWrapRef: (el) => { this.svgWrapEl = el; },
+      onBackdrop: () => { if (this.state.open !== null) this.close(); },
+      onClose: () => this.close(),
+      openLabel: o ? o.label : '',
+      openPrice: o ? o.price : '',
+      openSuffix: o ? o.suffix : '',
+      openDesc: o ? o.desc : '',
+      openPoints: o ? o.points.map((text) => ({ text })) : [],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

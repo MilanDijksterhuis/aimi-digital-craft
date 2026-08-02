@@ -411,6 +411,11 @@ export const submitChangeRequest = createServerFn({ method: "POST" })
       .single();
     if (error) throw new Error(error.message);
 
+    // Fire-and-forget Telegram-melding naar ontvangers met notify_new_changes.
+    // Mag de opslag van de change nooit blokkeren of laten falen.
+    void import("./telegram.server")
+      .then((m) => m.notifyNewChange({ id: row.id, title: row.title, description: row.description, user_id: userId }))
+      .catch((err) => console.error("[telegram] change-notificatie kon niet starten:", err));
 
     if (data.attachments.length > 0) {
       const rows = data.attachments.map((a) => ({

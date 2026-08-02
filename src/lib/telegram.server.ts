@@ -276,3 +276,59 @@ export async function verifyMfaCode(profileId: string, code: string): Promise<bo
     .eq("id", r.id);
   return true;
 }
+
+// ---------------------------------------------------------------------------
+// Notificatie bij nieuw wijzigingsverzoek (change)
+// ---------------------------------------------------------------------------
+
+/**
+ * Stuurt een Telegram-melding naar elke actieve, gekoppelde ontvanger die
+ * `notify_new_changes = true` heeft, zodra er een nieuw wijzigingsverzoek is
+ * ingediend. Best-effort / fire-and-forget: faalt nooit hard, blokkeert de
+ * opslag van de change niet.
+ */
+export async function notifyNewChange(change: {
+  id: string;
+  title: string;
+  description?: string | null;
+  user_id: string;
+}): Promise<void> {
+  try {
+    const { data: recipients } = await supabaseAdmin
+      .from("telegram_notification_recipients" as any)
+      .select("telegram_chat_id")
+      .eq("active", true)
+      .eq("notify_new_changes", true)
+      .not("telegram_chat_id", "is", null);
+    const rows = (recipients ?? []) as unknown as Array<{ telegram_chat_id: string | null }>;
+    if (rows.length === 0) return;
+
+    // Indiener + klant/bedrijf ophalen voor een herkenbare melding.
+    const { data: prof } = await supabaseAdmin
+      .from("profiles")
+      .select("full_name, company")
+      .eq("id", change.user_id)
+      .maybeSingle();
+    const submitter = (prof as any)?.full_name || "Onbekende klant";
+    const company = (prof as any)?.company ? ` (${(prof as any).company})` : "";
+
+    const appUrl = (process.env.VITE_APP_URL || "https://aimi-development.nl").replace(/\/$/, "");
+    const link = `${appUrl}/admin/changes/${change.id}`;
+    const desc = (change.description ?? "").trim();
+    const descBlock = desc ? `\n\n${desc.slice(0, 800)}` : "";
+
+    const text =
+      `🛠️ *Nieuw wijzigingsverzoek*\n\n` +
+      `*Van:* ${submitter}${company}\n` +
+      `*Titel:* ${change.title}${descBlock}\n\n` +
+      `${link}`;
+
+    await Promise.allSettled(
+      rows
+        .filter((r) => r.telegram_chat_id)
+        .map((r) => sendTelegramMessage(r.telegram_chat_id as string, text)),
+    );
+  } catch (err) {
+    console.error("[telegram] change-notificatie mislukt:", err);
+  }
+}

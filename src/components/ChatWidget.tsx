@@ -31,7 +31,13 @@ export function ChatWidget() {
     } catch { /* localStorage niet beschikbaar */ }
     const onBanner = (e: Event) => setCookieBannerOpen(!!(e as CustomEvent).detail);
     window.addEventListener("aimi-cookiebanner", onBanner);
-    return () => window.removeEventListener("aimi-cookiebanner", onBanner);
+    // Laat andere delen van het portaal de chat openen (bv. "Chat met team").
+    const onOpenChat = () => setOpen(true);
+    window.addEventListener("aimi-open-chat", onOpenChat);
+    return () => {
+      window.removeEventListener("aimi-cookiebanner", onBanner);
+      window.removeEventListener("aimi-open-chat", onOpenChat);
+    };
   }, []);
 
   // Get user + ensure chat
