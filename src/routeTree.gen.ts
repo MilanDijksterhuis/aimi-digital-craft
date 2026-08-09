@@ -11,13 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WebsiteLatenMakenVeendamRouteImport } from './routes/website-laten-maken-veendam'
 import { Route as WebsiteLatenMakenHoogeveenRouteImport } from './routes/website-laten-maken-hoogeveen'
+import { Route as WebsiteLatenMakenRouteImport } from './routes/website-laten-maken'
+import { Route as WebshopLatenMakenRouteImport } from './routes/webshop-laten-maken'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacybeleidRouteImport } from './routes/privacybeleid'
 import { Route as OverOnsRouteImport } from './routes/over-ons'
+import { Route as OnderhoudHostingRouteImport } from './routes/onderhoud-hosting'
 import { Route as MeerDienstenRouteImport } from './routes/meer-diensten'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CasesRouteImport } from './routes/cases'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -53,6 +58,16 @@ const WebsiteLatenMakenHoogeveenRoute =
     path: '/website-laten-maken-hoogeveen',
     getParentRoute: () => rootRouteImport,
   } as any)
+const WebsiteLatenMakenRoute = WebsiteLatenMakenRouteImport.update({
+  id: '/website-laten-maken',
+  path: '/website-laten-maken',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebshopLatenMakenRoute = WebshopLatenMakenRouteImport.update({
+  id: '/webshop-laten-maken',
+  path: '/webshop-laten-maken',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
   id: '/track.js',
   path: '/track.js',
@@ -73,6 +88,11 @@ const OverOnsRoute = OverOnsRouteImport.update({
   path: '/over-ons',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnderhoudHostingRoute = OnderhoudHostingRouteImport.update({
+  id: '/onderhoud-hosting',
+  path: '/onderhoud-hosting',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeerDienstenRoute = MeerDienstenRouteImport.update({
   id: '/meer-diensten',
   path: '/meer-diensten',
@@ -86,6 +106,16 @@ const LoginRoute = LoginRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasesRoute = CasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
@@ -212,13 +242,18 @@ const AuthenticatedAdminAccountsAccountIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/cases': typeof CasesRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
+  '/onderhoud-hosting': typeof OnderhoudHostingRoute
   '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -244,13 +279,18 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/cases': typeof CasesRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
+  '/onderhoud-hosting': typeof OnderhoudHostingRoute
   '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/account': typeof AuthenticatedAccountRoute
@@ -278,13 +318,18 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/cases': typeof CasesRoute
+  '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
+  '/onderhoud-hosting': typeof OnderhoudHostingRoute
   '/over-ons': typeof OverOnsRoute
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
@@ -312,13 +357,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/algemene-voorwaarden'
+    | '/cases'
+    | '/contact'
     | '/faq'
     | '/login'
     | '/meer-diensten'
+    | '/onderhoud-hosting'
     | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webshop-laten-maken'
+    | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
     | '/account'
@@ -344,13 +394,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/algemene-voorwaarden'
+    | '/cases'
+    | '/contact'
     | '/faq'
     | '/login'
     | '/meer-diensten'
+    | '/onderhoud-hosting'
     | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webshop-laten-maken'
+    | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
     | '/account'
@@ -377,13 +432,18 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/algemene-voorwaarden'
+    | '/cases'
+    | '/contact'
     | '/faq'
     | '/login'
     | '/meer-diensten'
+    | '/onderhoud-hosting'
     | '/over-ons'
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webshop-laten-maken'
+    | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
     | '/_authenticated/account'
@@ -411,13 +471,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
+  CasesRoute: typeof CasesRoute
+  ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
   MeerDienstenRoute: typeof MeerDienstenRoute
+  OnderhoudHostingRoute: typeof OnderhoudHostingRoute
   OverOnsRoute: typeof OverOnsRoute
   PrivacybeleidRoute: typeof PrivacybeleidRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrackDotjsRoute: typeof TrackDotjsRoute
+  WebshopLatenMakenRoute: typeof WebshopLatenMakenRoute
+  WebsiteLatenMakenRoute: typeof WebsiteLatenMakenRoute
   WebsiteLatenMakenHoogeveenRoute: typeof WebsiteLatenMakenHoogeveenRoute
   WebsiteLatenMakenVeendamRoute: typeof WebsiteLatenMakenVeendamRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
@@ -440,6 +505,20 @@ declare module '@tanstack/react-router' {
       path: '/website-laten-maken-hoogeveen'
       fullPath: '/website-laten-maken-hoogeveen'
       preLoaderRoute: typeof WebsiteLatenMakenHoogeveenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken': {
+      id: '/website-laten-maken'
+      path: '/website-laten-maken'
+      fullPath: '/website-laten-maken'
+      preLoaderRoute: typeof WebsiteLatenMakenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webshop-laten-maken': {
+      id: '/webshop-laten-maken'
+      path: '/webshop-laten-maken'
+      fullPath: '/webshop-laten-maken'
+      preLoaderRoute: typeof WebshopLatenMakenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/track.js': {
@@ -470,6 +549,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OverOnsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onderhoud-hosting': {
+      id: '/onderhoud-hosting'
+      path: '/onderhoud-hosting'
+      fullPath: '/onderhoud-hosting'
+      preLoaderRoute: typeof OnderhoudHostingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/meer-diensten': {
       id: '/meer-diensten'
       path: '/meer-diensten'
@@ -489,6 +575,20 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases': {
+      id: '/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof CasesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algemene-voorwaarden': {
@@ -763,13 +863,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
+  CasesRoute: CasesRoute,
+  ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
   MeerDienstenRoute: MeerDienstenRoute,
+  OnderhoudHostingRoute: OnderhoudHostingRoute,
   OverOnsRoute: OverOnsRoute,
   PrivacybeleidRoute: PrivacybeleidRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrackDotjsRoute: TrackDotjsRoute,
+  WebshopLatenMakenRoute: WebshopLatenMakenRoute,
+  WebsiteLatenMakenRoute: WebsiteLatenMakenRoute,
   WebsiteLatenMakenHoogeveenRoute: WebsiteLatenMakenHoogeveenRoute,
   WebsiteLatenMakenVeendamRoute: WebsiteLatenMakenVeendamRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
