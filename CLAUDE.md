@@ -14,3 +14,4 @@ Rules:
 
 Werkregels:
 Werk altijd lokaal in dit VS code project maak geen nieuwe worktrees aan.
+ik push zelf naar github van mijn lokale code -> git add . -> git commit -m "" -> git push
