@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_admin_functions_admingetcustomer": "adminGetCustomer" | kind=code-symbol | source=src/lib/admin.functions.ts:L76 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admingetcustomermonitoring": "adminGetCustomerMonitoring" | kind=code-symbol | source=src/lib/admin.functions.ts:L2955 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admingethealthscores": "adminGetHealthScores" | kind=code-symbol | source=src/lib/admin.functions.ts:L1072 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admingetleadactivities": "adminGetLeadActivities" | kind=code-symbol | source=src/lib/admin.functions.ts:L3516 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admingetmyeffectivepermissions": "adminGetMyEffectivePermissions" | kind=code-symbol | source=src/lib/admin.functions.ts:L3178 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admingetmyroles": "adminGetMyRoles" | kind=code-symbol | source=src/lib/admin.functions.ts:L1156 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetoverview": "adminGetOverview" | kind=code-symbol | source=src/lib/admin.functions.ts:L45 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetproject": "adminGetProject" | kind=code-symbol | source=src/lib/admin.functions.ts:L1704 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetprojectsdashboardwidgets": "adminGetProjectsDashboardWidgets" | kind=code-symbol | source=src/lib/admin.functions.ts:L2727 | neighbors=[admin.functions.ts]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions_adminlistwebsitelinks": "adminListWebsiteLinks" | kind=code-symbol | source=src/lib/admin.functions.ts:L1435 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminmarkalertseen": "adminMarkAlertSeen" | kind=code-symbol | source=src/lib/admin.functions.ts:L3129 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminmarkpasswordresethandled": "adminMarkPasswordResetHandled" | kind=code-symbol | source=src/lib/admin.functions.ts:L1417 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminpostcomment": "adminPostComment" | kind=code-symbol | source=src/lib/admin.functions.ts:L616 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminremovecustomrole": "adminRemoveCustomRole" | kind=code-symbol | source=src/lib/admin.functions.ts:L3420 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminremovestaff": "adminRemoveStaff" | kind=code-symbol | source=src/lib/admin.functions.ts:L1219 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminresetonboarding": "adminResetOnboarding" | kind=code-symbol | source=src/lib/admin.functions.ts:L277 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminrestorechange": "adminRestoreChange" | kind=code-symbol | source=src/lib/admin.functions.ts:L1295 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminrundnscheck": "adminRunDNSCheck" | kind=code-symbol | source=src/lib/admin.functions.ts:L3051 | neighbors=[admin.functions.ts]
 
 ## Instructions
 

@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_callbacks_agenda_color_classes": "AGENDA_COLOR_CLASSES" | kind=code-symbol | source=src/lib/callbacks.ts:L47 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_agendacolor": "AgendaColor" | kind=code-symbol | source=src/lib/callbacks.ts:L38 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
 - "lib_callbacks_callback_outcomes": "CALLBACK_OUTCOMES" | kind=code-symbol | source=src/lib/callbacks.ts:L25 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
 - "lib_callbacks_callback_reasons": "CALLBACK_REASONS" | kind=code-symbol | source=src/lib/callbacks.ts:L7 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
 - "lib_callbacks_callback_status_label": "CALLBACK_STATUS_LABEL" | kind=code-symbol | source=src/lib/callbacks.ts:L16 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_on_auth_user_created": "on_auth_user_created" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L153 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, auth.users]
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_attachments": "public.change_attachments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L29 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_comments": "public.change_comments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L56 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_profiles": "public.profiles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L138 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_user_roles": "public.user_roles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L146 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
 
 ## Instructions
 

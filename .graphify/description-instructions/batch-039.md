@@ -17,6 +17,16 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_input_otp_inputotpslot": "InputOTPSlot" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L31 | neighbors=[input-otp.tsx]
+- "ui_label_labelvariants": "labelVariants" | kind=code-symbol | source=src/components/ui/label.tsx:L9 | neighbors=[label.tsx]
+- "ui_menubar_menubar": "Menubar" | kind=code-symbol | source=src/components/ui/menubar.tsx:L27 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcheckboxitem": "MenubarCheckboxItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L131 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcontent": "MenubarContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L93 | neighbors=[menubar.tsx]
+- "ui_menubar_menubargroup": "MenubarGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L11 | neighbors=[menubar.tsx]
+- "ui_menubar_menubaritem": "MenubarItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L113 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarlabel": "MenubarLabel" | kind=code-symbol | source=src/components/ui/menubar.tsx:L176 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarmenu": "MenubarMenu()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L7 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarportal": "MenubarPortal()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L15 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarradiogroup": "MenubarRadioGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L19 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarradioitem": "MenubarRadioItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L154 | neighbors=[menubar.tsx]
 - "ui_menubar_menubarseparator": "MenubarSeparator" | kind=code-symbol | source=src/components/ui/menubar.tsx:L190 | neighbors=[menubar.tsx]
@@ -47,16 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_resizable_resizablehandle": "ResizableHandle()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L15 | neighbors=[resizable.tsx]
 - "ui_resizable_resizablepanelgroup": "ResizablePanelGroup()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L6 | neighbors=[resizable.tsx]
 - "ui_scroll_area_scrollarea": "ScrollArea" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L6 | neighbors=[scroll-area.tsx]
-- "ui_scroll_area_scrollbar": "ScrollBar" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L24 | neighbors=[scroll-area.tsx]
-- "ui_select_selectcontent": "SelectContent" | kind=code-symbol | source=src/components/ui/select.tsx:L63 | neighbors=[select.tsx]
-- "ui_select_selectitem": "SelectItem" | kind=code-symbol | source=src/components/ui/select.tsx:L107 | neighbors=[select.tsx]
-- "ui_select_selectlabel": "SelectLabel" | kind=code-symbol | source=src/components/ui/select.tsx:L95 | neighbors=[select.tsx]
-- "ui_select_selectscrolldownbutton": "SelectScrollDownButton" | kind=code-symbol | source=src/components/ui/select.tsx:L49 | neighbors=[select.tsx]
-- "ui_select_selectscrollupbutton": "SelectScrollUpButton" | kind=code-symbol | source=src/components/ui/select.tsx:L35 | neighbors=[select.tsx]
-- "ui_select_selectseparator": "SelectSeparator" | kind=code-symbol | source=src/components/ui/select.tsx:L129 | neighbors=[select.tsx]
-- "ui_select_selecttrigger": "SelectTrigger" | kind=code-symbol | source=src/components/ui/select.tsx:L15 | neighbors=[select.tsx]
-- "ui_sheet_sheetcontentprops": "SheetContentProps" | kind=code-symbol | source=src/components/ui/sheet.tsx:L52 | neighbors=[sheet.tsx]
-- "ui_sheet_sheetfooter": "SheetFooter()" | kind=code-symbol | source=src/components/ui/sheet.tsx:L79 | neighbors=[sheet.tsx]
 
 ## Instructions
 

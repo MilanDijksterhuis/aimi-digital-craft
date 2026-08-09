@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_admin_functions_adminchangerole": "adminChangeRole" | kind=code-symbol | source=src/lib/admin.functions.ts:L1196 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincompletecallback": "adminCompleteCallback" | kind=code-symbol | source=src/lib/admin.functions.ts:L3896 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincompleteonboarding": "adminCompleteOnboarding" | kind=code-symbol | source=src/lib/admin.functions.ts:L257 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateappointment": "adminCreateAppointment" | kind=code-symbol | source=src/lib/admin.functions.ts:L908 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatecallback": "adminCreateCallback" | kind=code-symbol | source=src/lib/admin.functions.ts:L3829 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatechangeforcustomer": "adminCreateChangeForCustomer" | kind=code-symbol | source=src/lib/admin.functions.ts:L1357 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admincreatechangerequest": "adminCreateChangeRequest" | kind=code-symbol | source=src/lib/admin.functions.ts:L446 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admincreatecontactmoment": "adminCreateContactMoment" | kind=code-symbol | source=src/lib/admin.functions.ts:L991 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admincreatecustomerfn": "adminCreateCustomerFn" | kind=code-symbol | source=src/lib/admin.functions.ts:L85 | neighbors=[admin.functions.ts]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions_admingetallalerts": "adminGetAllAlerts" | kind=code-symbol | source=src/lib/admin.functions.ts:L3085 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetauditlog": "adminGetAuditLog" | kind=code-symbol | source=src/lib/admin.functions.ts:L1232 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetchangedetail": "adminGetChangeDetail" | kind=code-symbol | source=src/lib/admin.functions.ts:L394 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetcustomer": "adminGetCustomer" | kind=code-symbol | source=src/lib/admin.functions.ts:L76 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetcustomermonitoring": "adminGetCustomerMonitoring" | kind=code-symbol | source=src/lib/admin.functions.ts:L2955 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingethealthscores": "adminGetHealthScores" | kind=code-symbol | source=src/lib/admin.functions.ts:L1072 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetleadactivities": "adminGetLeadActivities" | kind=code-symbol | source=src/lib/admin.functions.ts:L3516 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetmyeffectivepermissions": "adminGetMyEffectivePermissions" | kind=code-symbol | source=src/lib/admin.functions.ts:L3178 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetmyroles": "adminGetMyRoles" | kind=code-symbol | source=src/lib/admin.functions.ts:L1156 | neighbors=[admin.functions.ts]
 
 ## Instructions
 

@@ -17,6 +17,16 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_context_menu_contextmenuseparator": "ContextMenuSeparator" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L149 | neighbors=[context-menu.tsx]
+- "ui_context_menu_contextmenushortcut": "ContextMenuShortcut()" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L161 | neighbors=[context-menu.tsx]
+- "ui_context_menu_contextmenusubcontent": "ContextMenuSubContent" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L40 | neighbors=[context-menu.tsx]
+- "ui_context_menu_contextmenusubtrigger": "ContextMenuSubTrigger" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L19 | neighbors=[context-menu.tsx]
+- "ui_dialog_dialogdescription": "DialogDescription" | kind=code-symbol | source=src/components/ui/dialog.tsx:L81 | neighbors=[dialog.tsx]
+- "ui_dialog_dialogfooter": "DialogFooter()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L61 | neighbors=[dialog.tsx]
+- "ui_dialog_dialogheader": "DialogHeader()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L56 | neighbors=[dialog.tsx]
+- "ui_dialog_dialogoverlay": "DialogOverlay" | kind=code-symbol | source=src/components/ui/dialog.tsx:L17 | neighbors=[dialog.tsx]
+- "ui_dialog_dialogtitle": "DialogTitle" | kind=code-symbol | source=src/components/ui/dialog.tsx:L69 | neighbors=[dialog.tsx]
+- "ui_drawer_drawer": "Drawer()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L6 | neighbors=[drawer.tsx]
 - "ui_drawer_drawercontent": "DrawerContent" | kind=code-symbol | source=src/components/ui/drawer.tsx:L32 | neighbors=[drawer.tsx]
 - "ui_drawer_drawerdescription": "DrawerDescription" | kind=code-symbol | source=src/components/ui/drawer.tsx:L75 | neighbors=[drawer.tsx]
 - "ui_drawer_drawerfooter": "DrawerFooter()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L58 | neighbors=[drawer.tsx]
@@ -47,16 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_input_otp_inputotp": "InputOTP" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L7 | neighbors=[input-otp.tsx]
 - "ui_input_otp_inputotpgroup": "InputOTPGroup" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L23 | neighbors=[input-otp.tsx]
 - "ui_input_otp_inputotpseparator": "InputOTPSeparator" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L59 | neighbors=[input-otp.tsx]
-- "ui_input_otp_inputotpslot": "InputOTPSlot" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L31 | neighbors=[input-otp.tsx]
-- "ui_label_labelvariants": "labelVariants" | kind=code-symbol | source=src/components/ui/label.tsx:L9 | neighbors=[label.tsx]
-- "ui_menubar_menubar": "Menubar" | kind=code-symbol | source=src/components/ui/menubar.tsx:L27 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarcheckboxitem": "MenubarCheckboxItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L131 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarcontent": "MenubarContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L93 | neighbors=[menubar.tsx]
-- "ui_menubar_menubargroup": "MenubarGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L11 | neighbors=[menubar.tsx]
-- "ui_menubar_menubaritem": "MenubarItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L113 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarlabel": "MenubarLabel" | kind=code-symbol | source=src/components/ui/menubar.tsx:L176 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarmenu": "MenubarMenu()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L7 | neighbors=[menubar.tsx]
-- "ui_menubar_menubarportal": "MenubarPortal()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L15 | neighbors=[menubar.tsx]
 
 ## Instructions
 

@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "design_handoff_meer_diensten_support_createstreamtracker": "createStreamTracker()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1792 | neighbors=[support.js, init()]
+- "design_handoff_meer_diensten_support_dcnamefrompath": "dcNameFromPath()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L75 | neighbors=[support.js, rootNameForDocument()]
 - "design_handoff_meer_diensten_support_encodecamelattrs": "encodeCamelAttrs()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L366 | neighbors=[support.js, encodeCase()]
 - "design_handoff_meer_diensten_support_evaldclogic": "evalDcLogic()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L842 | neighbors=[support.js, getReact()]
 - "design_handoff_meer_diensten_support_findtoplevelequality": "findTopLevelEquality()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L248 | neighbors=[support.js, resolve()]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_auth_guards_server_ensurestaff": "ensureStaff()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L37 | neighbors=[auth-guards.server.ts, ensureRoles()]
 - "lib_auth_guards_server_ensuresuperadmin": "ensureSuperAdmin()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L33 | neighbors=[auth-guards.server.ts, ensureRoles()]
 - "lib_auth_guards_server_getroles": "getRoles()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L11 | neighbors=[auth-guards.server.ts, ensureRoles()]
-- "lib_callbacks_agenda_color_classes": "AGENDA_COLOR_CLASSES" | kind=code-symbol | source=src/lib/callbacks.ts:L47 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
-- "lib_callbacks_agendacolor": "AgendaColor" | kind=code-symbol | source=src/lib/callbacks.ts:L38 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
 
 ## Instructions
 

@@ -17,6 +17,16 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_card_cardheader": "CardHeader" | kind=code-symbol | source=src/components/ui/card.tsx:L16 | neighbors=[card.tsx]
+- "ui_card_cardtitle": "CardTitle" | kind=code-symbol | source=src/components/ui/card.tsx:L23 | neighbors=[card.tsx]
+- "ui_carousel_carousel": "Carousel" | kind=code-symbol | source=src/components/ui/carousel.tsx:L41 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselapi": "CarouselApi" | kind=code-symbol | source=src/components/ui/carousel.tsx:L8 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontent": "CarouselContent" | kind=code-symbol | source=src/components/ui/carousel.tsx:L135 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontext": "CarouselContext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L29 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontextprops": "CarouselContextProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L20 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselitem": "CarouselItem" | kind=code-symbol | source=src/components/ui/carousel.tsx:L156 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselnext": "CarouselNext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L205 | neighbors=[carousel.tsx]
+- "ui_carousel_carouseloptions": "CarouselOptions" | kind=code-symbol | source=src/components/ui/carousel.tsx:L10 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselplugin": "CarouselPlugin" | kind=code-symbol | source=src/components/ui/carousel.tsx:L11 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselprevious": "CarouselPrevious" | kind=code-symbol | source=src/components/ui/carousel.tsx:L177 | neighbors=[carousel.tsx]
 - "ui_carousel_carouselprops": "CarouselProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L13 | neighbors=[carousel.tsx]
@@ -47,16 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_context_menu_contextmenuitem": "ContextMenuItem" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L72 | neighbors=[context-menu.tsx]
 - "ui_context_menu_contextmenulabel": "ContextMenuLabel" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L135 | neighbors=[context-menu.tsx]
 - "ui_context_menu_contextmenuradioitem": "ContextMenuRadioItem" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L113 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenuseparator": "ContextMenuSeparator" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L149 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenushortcut": "ContextMenuShortcut()" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L161 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenusubcontent": "ContextMenuSubContent" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L40 | neighbors=[context-menu.tsx]
-- "ui_context_menu_contextmenusubtrigger": "ContextMenuSubTrigger" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L19 | neighbors=[context-menu.tsx]
-- "ui_dialog_dialogdescription": "DialogDescription" | kind=code-symbol | source=src/components/ui/dialog.tsx:L81 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogfooter": "DialogFooter()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L61 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogheader": "DialogHeader()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L56 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogoverlay": "DialogOverlay" | kind=code-symbol | source=src/components/ui/dialog.tsx:L17 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogtitle": "DialogTitle" | kind=code-symbol | source=src/components/ui/dialog.tsx:L69 | neighbors=[dialog.tsx]
-- "ui_drawer_drawer": "Drawer()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L6 | neighbors=[drawer.tsx]
 
 ## Instructions
 

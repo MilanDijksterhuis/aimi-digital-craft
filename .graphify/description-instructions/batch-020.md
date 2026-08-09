@@ -17,6 +17,9 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_changes_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L34 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L17 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_dashboard": "Dashboard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L233 | neighbors=[admin.tsx]
 - "authenticated_admin_instellingen_admininstellingenpage": "AdminInstellingenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L21 | neighbors=[admin.instellingen.tsx]
 - "authenticated_admin_instellingen_recipientspanel": "RecipientsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L36 | neighbors=[admin.instellingen.tsx]
 - "authenticated_admin_instellingen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L16 | neighbors=[admin.instellingen.tsx]
@@ -54,9 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_projecten_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L46 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_templatessection": "TemplatesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L810 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_websitelinkdetail": "WebsiteLinkDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L491 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_rollen_adminrollenpage": "AdminRollenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L48 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_rollen_newrolesection": "NewRoleSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L202 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_rollen_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L11 | neighbors=[admin.rollen.tsx]
 
 ## Instructions
 

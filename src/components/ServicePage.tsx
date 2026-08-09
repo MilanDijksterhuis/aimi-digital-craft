@@ -34,7 +34,27 @@ export function ServicePage({ data }: { data: ServicePageData }) {
   const { kicker, h1, intro, offerings, steps, priceLabel, priceNote, faqs, related, ctaTitle, ctaText } = data;
 
   return (
-    <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
+    <div style={{ position: "relative", background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
+      {/* Sfeer-achtergrond: zachte rode gloed + heel fijne grid, in de huisstijl */}
+      <div
+        aria-hidden
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          backgroundColor: BG,
+          backgroundImage: [
+            "radial-gradient(62% 48% at 85% -5%, rgba(254,44,2,0.13), transparent 68%)",
+            "radial-gradient(48% 42% at 2% 108%, rgba(254,44,2,0.07), transparent 70%)",
+            "linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px)",
+            "linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)",
+          ].join(","),
+          backgroundSize: "auto, auto, 46px 46px, 46px 46px",
+        }}
+      />
+
+      <div style={{ position: "relative", zIndex: 1 }}>
       <Nav />
 
       <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
@@ -106,24 +126,36 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           </div>
         </section>
 
-        {/* Proces */}
+        {/* Proces — verticale tijdlijn zonder nummers */}
         <section style={{ marginTop: "88px" }}>
           <h2 style={{ fontSize: "clamp(24px, 4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Zo werkt het</h2>
-          <div style={{ marginTop: "34px", display: "flex", flexDirection: "column", gap: "4px" }}>
-            {steps.map((s, i) => (
-              <div
-                key={s.title}
-                style={{ display: "flex", gap: "20px", padding: "22px 0", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-              >
-                <div style={{ fontSize: "22px", fontWeight: 700, color: RED, minWidth: "40px" }}>
-                  {String(i + 1).padStart(2, "0")}
+          <div style={{ marginTop: "38px" }}>
+            {steps.map((s, i) => {
+              const last = i === steps.length - 1;
+              return (
+                <div key={s.title} style={{ display: "flex", gap: "22px" }}>
+                  {/* Marker + verbindingslijn */}
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: "none" }}>
+                    <div
+                      style={{
+                        width: "13px",
+                        height: "13px",
+                        marginTop: "4px",
+                        background: RED,
+                        transform: "rotate(45deg)",
+                        boxShadow: "0 0 0 5px rgba(254,44,2,0.12)",
+                      }}
+                    />
+                    {!last && <div style={{ flex: 1, width: "1px", background: "rgba(255,255,255,0.14)", marginTop: "8px" }} />}
+                  </div>
+                  {/* Inhoud */}
+                  <div style={{ paddingBottom: last ? 0 : "34px" }}>
+                    <h3 style={{ fontSize: "17.5px", fontWeight: 600, marginBottom: "7px" }}>{s.title}</h3>
+                    <p style={{ fontSize: "14.5px", lineHeight: 1.65, color: "#9a9aa2", maxWidth: "58ch" }}>{s.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "6px" }}>{s.title}</h3>
-                  <p style={{ fontSize: "14.5px", lineHeight: 1.65, color: "#9a9aa2" }}>{s.desc}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -219,6 +251,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
       <Footer />
       <CookieBanner />
+      </div>
     </div>
   );
 }

@@ -17,6 +17,16 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_scroll_area_scrollbar": "ScrollBar" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L24 | neighbors=[scroll-area.tsx]
+- "ui_select_selectcontent": "SelectContent" | kind=code-symbol | source=src/components/ui/select.tsx:L63 | neighbors=[select.tsx]
+- "ui_select_selectitem": "SelectItem" | kind=code-symbol | source=src/components/ui/select.tsx:L107 | neighbors=[select.tsx]
+- "ui_select_selectlabel": "SelectLabel" | kind=code-symbol | source=src/components/ui/select.tsx:L95 | neighbors=[select.tsx]
+- "ui_select_selectscrolldownbutton": "SelectScrollDownButton" | kind=code-symbol | source=src/components/ui/select.tsx:L49 | neighbors=[select.tsx]
+- "ui_select_selectscrollupbutton": "SelectScrollUpButton" | kind=code-symbol | source=src/components/ui/select.tsx:L35 | neighbors=[select.tsx]
+- "ui_select_selectseparator": "SelectSeparator" | kind=code-symbol | source=src/components/ui/select.tsx:L129 | neighbors=[select.tsx]
+- "ui_select_selecttrigger": "SelectTrigger" | kind=code-symbol | source=src/components/ui/select.tsx:L15 | neighbors=[select.tsx]
+- "ui_sheet_sheetcontentprops": "SheetContentProps" | kind=code-symbol | source=src/components/ui/sheet.tsx:L52 | neighbors=[sheet.tsx]
+- "ui_sheet_sheetfooter": "SheetFooter()" | kind=code-symbol | source=src/components/ui/sheet.tsx:L79 | neighbors=[sheet.tsx]
 - "ui_sheet_sheetoverlay": "SheetOverlay" | kind=code-symbol | source=src/components/ui/sheet.tsx:L18 | neighbors=[sheet.tsx]
 - "ui_sheet_sheetvariants": "sheetVariants" | kind=code-symbol | source=src/components/ui/sheet.tsx:L33 | neighbors=[sheet.tsx]
 - "ui_sidebar_sidebar": "Sidebar" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L153 | neighbors=[sidebar.tsx]
@@ -47,16 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_sidebar_sidebartrigger": "SidebarTrigger" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L260 | neighbors=[sidebar.tsx]
 - "ui_sidebar_usesidebar": "useSidebar()" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L40 | neighbors=[sidebar.tsx]
 - "ui_slider_slider": "Slider" | kind=code-symbol | source=src/components/ui/slider.tsx:L6 | neighbors=[slider.tsx]
-- "ui_sonner_toasterprops": "ToasterProps" | kind=code-symbol | source=src/components/ui/sonner.tsx:L3 | neighbors=[sonner.tsx]
-- "ui_switch_switch": "Switch" | kind=code-symbol | source=src/components/ui/switch.tsx:L6 | neighbors=[switch.tsx]
-- "ui_table_table": "Table" | kind=code-symbol | source=src/components/ui/table.tsx:L5 | neighbors=[table.tsx]
-- "ui_table_tablebody": "TableBody" | kind=code-symbol | source=src/components/ui/table.tsx:L22 | neighbors=[table.tsx]
-- "ui_table_tablecaption": "TableCaption" | kind=code-symbol | source=src/components/ui/table.tsx:L86 | neighbors=[table.tsx]
-- "ui_table_tablecell": "TableCell" | kind=code-symbol | source=src/components/ui/table.tsx:L71 | neighbors=[table.tsx]
-- "ui_table_tablefooter": "TableFooter" | kind=code-symbol | source=src/components/ui/table.tsx:L30 | neighbors=[table.tsx]
-- "ui_table_tablehead": "TableHead" | kind=code-symbol | source=src/components/ui/table.tsx:L56 | neighbors=[table.tsx]
-- "ui_table_tableheader": "TableHeader" | kind=code-symbol | source=src/components/ui/table.tsx:L14 | neighbors=[table.tsx]
-- "ui_table_tablerow": "TableRow" | kind=code-symbol | source=src/components/ui/table.tsx:L42 | neighbors=[table.tsx]
 
 ## Instructions
 
