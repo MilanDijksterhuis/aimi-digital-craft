@@ -29,6 +29,12 @@ const data: LocationData = {
       a: "Ja. We bouwen elke site technisch SEO-proof en optimaliseren voor lokale zoekwoorden zoals 'website laten maken Hoogeveen'. Zo word je gevonden door klanten uit jouw eigen regio.",
     },
   ],
+  related: [
+    { label: "Website laten maken", href: "/website-laten-maken" },
+    { label: "Webshop laten maken", href: "/webshop-laten-maken" },
+    { label: "Onze cases", href: "/cases" },
+    { label: "Website laten maken Veendam", href: "/website-laten-maken-veendam" },
+  ],
 };
 
 export const Route = createFileRoute("/website-laten-maken-hoogeveen")({

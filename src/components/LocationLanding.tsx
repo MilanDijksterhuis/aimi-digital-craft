@@ -21,6 +21,7 @@ export type LocationData = {
   nearby: string[]; // omliggende plaatsen voor de tekst
   intro: string;
   faqs: LocationFaq[];
+  related?: { label: string; href: string }[]; // contextuele interne links
 };
 
 const SERVICES = [
@@ -58,7 +59,7 @@ const REASONS = [
 ];
 
 export function LocationLanding({ data }: { data: LocationData }) {
-  const { city, region, nearby, intro, faqs } = data;
+  const { city, region, nearby, intro, faqs, related } = data;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
@@ -230,6 +231,33 @@ export function LocationLanding({ data }: { data: LocationData }) {
             ))}
           </div>
         </section>
+
+        {/* Interne links */}
+        {related && related.length > 0 && (
+          <section style={{ marginTop: "72px" }}>
+            <h2 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "18px", color: "#b6b6bd" }}>
+              Ook interessant
+            </h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+              {related.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  style={{
+                    padding: "10px 18px",
+                    border: "1px solid rgba(255,255,255,0.14)",
+                    borderRadius: "9999px",
+                    fontSize: "14px",
+                    color: "#efeff1",
+                    textDecoration: "none",
+                  }}
+                >
+                  {l.label} →
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section
