@@ -1,12 +1,12 @@
 import { motion } from "motion/react";
 
 const links = [
-  { label: "Services", href: "/#services" },
-  { label: "Over ons", href: "/#about" },
-  { label: "Tarieven", href: "/#pricing" },
-  { label: "Meer diensten", href: "/meer-diensten" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Website", href: "/website-laten-maken" },
+  { label: "Webshop", href: "/webshop-laten-maken" },
+  { label: "Hosting", href: "/onderhoud-hosting" },
+  { label: "Cases", href: "/cases" },
+  { label: "Over ons", href: "/over-ons" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Nav() {
@@ -72,7 +72,7 @@ export function Nav() {
           <a href="/portal" className="btn-secondary !text-[15px] !py-1.5 !px-4">
             Portaal
           </a>
-          <a href="/#contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
+          <a href="/contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
             Contact
           </a>
         </div>
