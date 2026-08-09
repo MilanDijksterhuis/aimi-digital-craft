@@ -1,4 +1,4 @@
-# Node Description Batch 17 of 41
+# Node Description Batch 17 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,25 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_callbacks_callback_outcomes": "CALLBACK_OUTCOMES" | kind=code-symbol | source=src/lib/callbacks.ts:L25 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_callback_reasons": "CALLBACK_REASONS" | kind=code-symbol | source=src/lib/callbacks.ts:L7 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
+- "lib_callbacks_callback_status_label": "CALLBACK_STATUS_LABEL" | kind=code-symbol | source=src/lib/callbacks.ts:L16 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_callbackstatus": "CallbackStatus" | kind=code-symbol | source=src/lib/callbacks.ts:L14 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_suggestcallbackdate": "suggestCallbackDate()" | kind=code-symbol | source=src/lib/callbacks.ts:L75 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
+- "lib_csv_detectdelimiter": "detectDelimiter()" | kind=code-symbol | source=src/lib/csv.ts:L4 | neighbors=[csv.ts, parseCsv()]
+- "lib_email_server_escapehtml": "escapeHtml()" | kind=code-symbol | source=src/lib/email.server.ts:L6 | neighbors=[email.server.ts, sendWelcomeEmail()]
+- "lib_email_server_sendwelcomeemail": "sendWelcomeEmail()" | kind=code-symbol | source=src/lib/email.server.ts:L25 | neighbors=[email.server.ts, escapeHtml()]
+- "lib_error_capture_consumelastcapturederror": "consumeLastCapturedError()" | kind=code-symbol | source=src/lib/error-capture.ts:L18 | neighbors=[error-capture.ts, server.ts]
+- "lib_monitoring_shared_isprivateorreservedip": "isPrivateOrReservedIp()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L28 | neighbors=[monitoring.shared.ts, assertPublicHost()]
+- "lib_monitoring_shared_measureresponsetime": "measureResponseTime()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L40 | neighbors=[monitoring.shared.ts, assertPublicHost()]
+- "lib_permissions_server_ensurepermission": "ensurePermission()" | kind=code-symbol | source=src/lib/permissions.server.ts:L78 | neighbors=[permissions.server.ts, getEffectivePermissions()]
+- "lib_permissions_server_geteffectivepermissions": "getEffectivePermissions()" | kind=code-symbol | source=src/lib/permissions.server.ts:L31 | neighbors=[permissions.server.ts, ensurePermission()]
+- "lib_project_status_project_priority_order": "PROJECT_PRIORITY_ORDER" | kind=code-symbol | source=src/lib/project-status.ts:L45 | neighbors=[admin.projecten.tsx, project-status.ts]
+- "lib_rate_limit_getclientip": "getClientIp()" | kind=code-symbol | source=src/lib/rate-limit.ts:L54 | neighbors=[rate-limit.ts, server.ts]
+- "lib_rate_limit_isipbanned": "isIpBanned()" | kind=code-symbol | source=src/lib/rate-limit.ts:L30 | neighbors=[rate-limit.ts, server.ts]
+- "lib_rate_limit_recordstrike": "recordStrike()" | kind=code-symbol | source=src/lib/rate-limit.ts:L41 | neighbors=[rate-limit.ts, server.ts]
+- "lib_rbac_admin_like_roles": "ADMIN_LIKE_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L38 | neighbors=[auth-guards.server.ts, rbac.ts]
+- "lib_rbac_all_permission_actions": "ALL_PERMISSION_ACTIONS" | kind=code-symbol | source=src/lib/rbac.ts:L45 | neighbors=[permissions.server.ts, rbac.ts]
 - "lib_rbac_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/lib/rbac.ts:L11 | neighbors=[TeamTab.tsx, rbac.ts]
 - "lib_rbac_staff_guard_roles": "STAFF_GUARD_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L40 | neighbors=[auth-guards.server.ts, rbac.ts]
 - "lib_rbac_super_admin_roles": "SUPER_ADMIN_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L39 | neighbors=[auth-guards.server.ts, rbac.ts]
@@ -38,25 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_comments": "public.change_comments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L56 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_profiles": "public.profiles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L138 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_user_roles": "public.user_roles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L146 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
-- "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_touch_chat_last_message": "public.touch_chat_last_message()" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L99 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chats]
-- "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_trg_touch_chat_last_message": "trg_touch_chat_last_message" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L110 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chat_messages]
-- "migrations_20260523231640_f0c31578_aa3c_4810_a448_68d00ea8bb26": "20260523231640_f0c31578-aa3c-4810-a448-68d00ea8bb26.sql" | kind=code-symbol | source=supabase/migrations/20260523231640_f0c31578-aa3c-4810-a448-68d00ea8bb26.sql:L1 | neighbors=[b29ceec Fixed weak PRNG and RLS, c4498f5 Changes]
-- "migrations_20260523231942_fb4587f4_15b7_4604_9d1a_186964acb3fc": "20260523231942_fb4587f4-15b7-4604-9d1a-186964acb3fc.sql" | kind=code-symbol | source=supabase/migrations/20260523231942_fb4587f4-15b7-4604-9d1a-186964acb3fc.sql:L1 | neighbors=[7ca6d63 Changes, 8a81dd1 Fixed security issues]
-- "migrations_20260610172053_c69c4c4e_eb62_440d_a0ce_08cd19608a27": "20260610172053_c69c4c4e-eb62-440d-a0ce-08cd19608a27.sql" | kind=code-symbol | source=supabase/migrations/20260610172053_c69c4c4e-eb62-440d-a0ce-08cd19608a27.sql:L1 | neighbors=[3e100e8 Fixed security findings, 6381715 Changes]
-- "migrations_20260713130000_project_expansion_phase2_public_project_milestone_dependencies": "public.project_milestone_dependencies" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L67 | neighbors=[20260713130000_project_expansion_phase2…, public.project_milestones]
-- "migrations_20260713130000_project_expansion_phase2_public_project_milestones": "public.project_milestones" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L69 | neighbors=[20260713130000_project_expansion_phase2…, public.project_milestone_dependencies]
-- "migrations_20260713130000_project_expansion_phase2_public_project_template_milestones": "public.project_template_milestones" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L114 | neighbors=[20260713130000_project_expansion_phase2…, public.project_templates]
-- "migrations_20260713130000_project_expansion_phase2_public_project_templates": "public.project_templates" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L105 | neighbors=[20260713130000_project_expansion_phase2…, public.project_template_milestones]
-- "migrations_20260714090000_roles_permissions_module_auth_users": "auth.users" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L41 | neighbors=[20260714090000_roles_permissions_module…, public.user_custom_roles]
-- "migrations_20260714090000_roles_permissions_module_public_roles": "public.roles" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L9 | neighbors=[20260714090000_roles_permissions_module…, public.user_custom_roles]
-- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_bans": "public.rate_limit_bans" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L20 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
-- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_hits": "public.rate_limit_hits" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L13 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
-- "migrations_20260717150000_sec5_durable_rate_limit_v_count": "v_count" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L57 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
-- "migrations_20260717150000_sec5_durable_rate_limit_v_strikes": "v_strikes" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L103 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
-- "migrations_20260717170000_perf2_site_ping_counts": "20260717170000_perf2_site_ping_counts.sql" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L1 | neighbors=[7dbbf18 perf fixes, public.site_ping_counts()]
-- "migrations_20260717180000_perf3_project_last_activity": "20260717180000_perf3_project_last_activity.sql" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L1 | neighbors=[7dbbf18 perf fixes, public.project_last_activity()]
-- "public_site_error_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L18 | neighbors=[site-error.ts, routeTree.gen.ts]
-- "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
 
 ## Instructions
 

@@ -1,4 +1,4 @@
-# Node Description Batch 19 of 41
+# Node Description Batch 19 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,29 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_router_getrouter": "getRouter()" | kind=code-symbol | source=src/router.tsx:L5 | neighbors=[router.tsx, routeTree.gen.ts]
+- "src_server_applyassetcaching": "applyAssetCaching()" | kind=code-symbol | source=src/server.ts:L143 | neighbors=[server.ts, applySecurityHeaders()]
+- "src_server_getserverentry": "getServerEntry()" | kind=code-symbol | source=src/server.ts:L32 | neighbors=[server.ts, fetch()]
+- "src_server_iscatastrophicssrerrorbody": "isCatastrophicSsrErrorBody()" | kind=code-symbol | source=src/server.ts:L48 | neighbors=[server.ts, normalizeCatastrophicSsrResponse()]
+- "src_server_ishttps": "isHttps()" | kind=code-symbol | source=src/server.ts:L127 | neighbors=[server.ts, applySecurityHeaders()]
+- "src_server_ratelimitedresponse": "rateLimitedResponse()" | kind=code-symbol | source=src/server.ts:L91 | neighbors=[server.ts, applyRateLimit()]
+- "src_start_startinstance": "startInstance" | kind=code-symbol | source=src/start.ts:L21 | neighbors=[routeTree.gen.ts, start.ts]
+- "supabase_auth_attacher_attachsupabaseauth": "attachSupabaseAuth" | kind=code-symbol | source=src/integrations/supabase/auth-attacher.ts:L7 | neighbors=[start.ts, auth-attacher.ts]
+- "supabase_callbacks_migration_lead_callbacks": "lead_callbacks" | kind=code-symbol | source=supabase-callbacks-migration.sql:L10 | neighbors=[supabase-callbacks-migration.sql, leads]
+- "supabase_callbacks_migration_leads": "leads" | kind=code-symbol | source=supabase-callbacks-migration.sql:L12 | neighbors=[supabase-callbacks-migration.sql, lead_callbacks]
+- "supabase_leads_migration_lead_activities": "lead_activities" | kind=code-symbol | source=supabase-leads-migration.sql:L38 | neighbors=[supabase-leads-migration.sql, leads]
+- "supabase_leads_migration_leads": "leads" | kind=code-symbol | source=supabase-leads-migration.sql:L17 | neighbors=[supabase-leads-migration.sql, lead_activities]
+- "supabase_telegram_migration_telegram_link_tokens": "telegram_link_tokens" | kind=code-symbol | source=supabase-telegram-migration.sql:L29 | neighbors=[supabase-telegram-migration.sql, profiles]
+- "supabase_telegram_migration_telegram_mfa_codes": "telegram_mfa_codes" | kind=code-symbol | source=supabase-telegram-migration.sql:L44 | neighbors=[supabase-telegram-migration.sql, profiles]
+- "supabase_telegram_migration_telegram_notification_recipients": "telegram_notification_recipients" | kind=code-symbol | source=supabase-telegram-migration.sql:L77 | neighbors=[supabase-telegram-migration.sql, profiles]
+- "supabase_telegram_migration_telegram_pending_logins": "telegram_pending_logins" | kind=code-symbol | source=supabase-telegram-migration.sql:L62 | neighbors=[supabase-telegram-migration.sql, profiles]
+- "telegram_webhook_route": "Route" | kind=code-symbol | source=src/routes/api/telegram/webhook.ts:L15 | neighbors=[routeTree.gen.ts, webhook.ts]
+- "ui_badge_badge": "Badge()" | kind=code-symbol | source=src/components/ui/badge.tsx:L28 | neighbors=[badge.tsx, badgeVariants]
+- "ui_badge_badgevariants": "badgeVariants" | kind=code-symbol | source=src/components/ui/badge.tsx:L6 | neighbors=[badge.tsx, Badge()]
+- "ui_button_buttonprops": "ButtonProps" | kind=code-symbol | source=src/components/ui/button.tsx:L34 | neighbors=[button.tsx, pagination.tsx]
+- "ui_dialog_dialogcontent": "DialogContent" | kind=code-symbol | source=src/components/ui/dialog.tsx:L32 | neighbors=[command.tsx, dialog.tsx]
+- "ui_input_input": "Input" | kind=code-symbol | source=src/components/ui/input.tsx:L5 | neighbors=[input.tsx, sidebar.tsx]
+- "ui_label_label": "Label" | kind=code-symbol | source=src/components/ui/label.tsx:L13 | neighbors=[form.tsx, label.tsx]
 - "ui_separator_separator": "Separator" | kind=code-symbol | source=src/components/ui/separator.tsx:L6 | neighbors=[separator.tsx, sidebar.tsx]
 - "ui_sheet_sheetcontent": "SheetContent" | kind=code-symbol | source=src/components/ui/sheet.tsx:L57 | neighbors=[sheet.tsx, sidebar.tsx]
 - "ui_sheet_sheetdescription": "SheetDescription" | kind=code-symbol | source=src/components/ui/sheet.tsx:L99 | neighbors=[sheet.tsx, sidebar.tsx]
@@ -34,29 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_accounts_accountid_activiteittab": "ActiviteitTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L686 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_adminaccountdetailpage": "AdminAccountDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L58 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_customrolessection": "CustomRolesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L609 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_financieeltab": "FinancieelTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L383 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_instellingentab": "InstellingenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L793 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_notitiestab": "NotitiesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L762 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_onboarding_status_color": "ONBOARDING_STATUS_COLOR" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L100 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_onboarding_status_label": "ONBOARDING_STATUS_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L94 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_onboardingtab": "OnboardingTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L500 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L283 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L263 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L53 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L48 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L607 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountid_toegangtab": "ToegangTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L557 | neighbors=[admin.accounts.$accountId.tsx]
-- "authenticated_admin_accounts_accountssidebar": "AccountsSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L95 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_accounts_adminaccountspage": "AdminAccountsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L58 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_accounts_newaccountsection": "NewAccountSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L171 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_accounts_newcustomersection": "NewCustomerSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L216 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_accounts_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L56 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_accounts_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L22 | neighbors=[admin.accounts.tsx]
-- "authenticated_admin_adminpage": "AdminPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L69 | neighbors=[admin.tsx]
-- "authenticated_admin_adminsidebar": "AdminSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L332 | neighbors=[admin.tsx]
-- "authenticated_admin_afsprakentab": "AfsprakenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L521 | neighbors=[admin.tsx]
-- "authenticated_admin_alertspanel": "AlertsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L791 | neighbors=[admin.tsx]
-- "authenticated_admin_archivedchangespanel": "ArchivedChangesPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L755 | neighbors=[admin.tsx]
 
 ## Instructions
 

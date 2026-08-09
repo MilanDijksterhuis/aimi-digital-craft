@@ -46,7 +46,7 @@ const data: ServicePageData = {
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Onderhoud & hosting", href: "/onderhoud-hosting" },
-    { label: "Onze werkwijze", href: "/cases" },
+    { label: "Onze werkwijze", href: "/werkwijze" },
   ],
   ctaTitle: "Klaar om online te verkopen?",
   ctaText: "Vertel ons over je producten en plannen. Je krijgt binnen één werkdag een reactie en een vrijblijvende offerte.",

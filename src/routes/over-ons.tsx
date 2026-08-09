@@ -5,10 +5,10 @@ import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 
 const stats: [string, string][] = [
-  ["12+", "Projecten opgeleverd"],
-  ["< 2w", "Doorlooptijd"],
   ["2", "Directe contactpersonen"],
+  ["< 2w", "Doorlooptijd"],
   ["100%", "In eigen beheer"],
+  ["24/7", "Monitoring & hosting"],
 ];
 
 const values: { title: string; desc: string }[] = [

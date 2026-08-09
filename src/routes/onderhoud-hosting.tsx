@@ -46,7 +46,7 @@ const data: ServicePageData = {
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Meer diensten", href: "/meer-diensten" },
-    { label: "Onze werkwijze", href: "/cases" },
+    { label: "Onze werkwijze", href: "/werkwijze" },
   ],
   ctaTitle: "Klaar voor zorgeloze hosting?",
   ctaText: "Vertel ons over je website. We nemen de hosting en het onderhoud graag van je over.",

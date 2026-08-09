@@ -1,4 +1,4 @@
-# Node Description Batch 20 of 41
+# Node Description Batch 20 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,29 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_accounts_accountid_financieeltab": "FinancieelTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L383 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_instellingentab": "InstellingenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L793 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_notitiestab": "NotitiesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L762 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_onboarding_status_color": "ONBOARDING_STATUS_COLOR" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L100 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_onboarding_status_label": "ONBOARDING_STATUS_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L94 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_onboardingtab": "OnboardingTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L500 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L283 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L263 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L53 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L48 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L607 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_toegangtab": "ToegangTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L557 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountssidebar": "AccountsSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L95 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_adminaccountspage": "AdminAccountsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L58 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_newaccountsection": "NewAccountSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L171 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_newcustomersection": "NewCustomerSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L216 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L56 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_accounts_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L22 | neighbors=[admin.accounts.tsx]
+- "authenticated_admin_adminpage": "AdminPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L69 | neighbors=[admin.tsx]
+- "authenticated_admin_adminsidebar": "AdminSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L332 | neighbors=[admin.tsx]
+- "authenticated_admin_afsprakentab": "AfsprakenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L521 | neighbors=[admin.tsx]
+- "authenticated_admin_alertspanel": "AlertsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L791 | neighbors=[admin.tsx]
+- "authenticated_admin_archivedchangespanel": "ArchivedChangesPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L755 | neighbors=[admin.tsx]
 - "authenticated_admin_card": "Card()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L323 | neighbors=[admin.tsx]
 - "authenticated_admin_changes_adminchangespage": "AdminChangesPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L36 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_changeid_adminchangedetailpage": "AdminChangeDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L23 | neighbors=[admin.changes.$changeId.tsx]
@@ -34,29 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_changes_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L34 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L17 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_dashboard": "Dashboard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L233 | neighbors=[admin.tsx]
-- "authenticated_admin_instellingen_admininstellingenpage": "AdminInstellingenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L21 | neighbors=[admin.instellingen.tsx]
-- "authenticated_admin_instellingen_recipientspanel": "RecipientsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L36 | neighbors=[admin.instellingen.tsx]
-- "authenticated_admin_instellingen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L16 | neighbors=[admin.instellingen.tsx]
-- "authenticated_admin_leads_leadspage": "LeadsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L23 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L8 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_sectionkey": "SectionKey" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L21 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_sections": "SECTIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L17 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L305 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationsbell": "NotificationsBell()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L679 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationspanel": "NotificationsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L715 | neighbors=[admin.tsx]
-- "authenticated_admin_passwordresetspanel": "PasswordResetsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L406 | neighbors=[admin.tsx]
-- "authenticated_admin_projecten_adminprojectenpage": "AdminProjectenPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L71 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_dashboardwidgetssection": "DashboardWidgetsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L933 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_kanbancard": "KanbanCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L721 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_kanbancolumn": "KanbanColumn()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L751 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_kanbansection": "KanbanSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L770 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_newprojectsection": "NewProjectSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L279 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_projectensidebar": "ProjectenSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L129 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_projectid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L346 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_adminprojectdetailpage": "AdminProjectDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L64 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_changestab": "ChangesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L976 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_contactstab": "ContactsTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L445 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_notestab": "NotesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L380 | neighbors=[admin.projecten.$projectId.tsx]
 
 ## Instructions
 

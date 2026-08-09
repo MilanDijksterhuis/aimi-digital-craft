@@ -1,4 +1,4 @@
-# Node Description Batch 14 of 41
+# Node Description Batch 14 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,25 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_chats": "public.chats" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L2 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chat_messages, public.touch_chat_last_message()]
+- "migrations_20260524100732_01aa016d_d09a_439e_a7a9_6f5f2c3138e0": "20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql" | kind=code-symbol | source=supabase/migrations/20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql:L1 | neighbors=[43d815c Changes, bf0cfa4 Fixed security scan issues, public.is_super_admin()]
+- "migrations_20260524104213_c69cd657_d923_41b6_a4eb_02eef1c9606c": "20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql" | kind=code-symbol | source=supabase/migrations/20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql:L1 | neighbors=[972c222 Fases 6-7 en Fase 1 voltooid, c3627b5 Changes, public.admin_notifications]
+- "migrations_20260713130000_project_expansion_phase2_auth_users": "auth.users" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L16 | neighbors=[20260713130000_project_expansion_phase2…, public.project_task_time_entries, public.project_tasks]
+- "migrations_20260713130000_project_expansion_phase2_public_projects": "public.projects" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L13 | neighbors=[20260713130000_project_expansion_phase2…, public.project_task_time_entries, public.project_tasks]
+- "migrations_20260714090000_roles_permissions_module_public_user_custom_roles": "public.user_custom_roles" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L39 | neighbors=[20260714090000_roles_permissions_module…, auth.users, public.roles]
+- "migrations_20260717130000_project_rls_baseline": "20260717130000_project_rls_baseline.sql" | kind=code-symbol | source=supabase/migrations/20260717130000_project_rls_baseline.sql:L1 | neighbors=[a3773ee sec fixes, public.is_project_member(), public.is_staff_user()]
+- "migrations_20260717150000_sec5_durable_rate_limit_public_check_rate_limit": "public.check_rate_limit()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L41 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.rate_limit_hits, v_count]
+- "migrations_20260717150000_sec5_durable_rate_limit_public_record_strike": "public.record_strike()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L90 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.rate_limit_bans, v_strikes]
+- "routes_meer_diensten_buildleaves": "buildLeaves()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L279 | neighbors=[meer-diensten.tsx, rng(), MeerDiensten()]
+- "src_server_applyratelimit": "applyRateLimit()" | kind=code-symbol | source=src/server.ts:L175 | neighbors=[server.ts, rateLimitedResponse(), fetch()]
+- "src_server_brandederrorresponse": "brandedErrorResponse()" | kind=code-symbol | source=src/server.ts:L41 | neighbors=[server.ts, fetch(), normalizeCatastrophicSsrResponse()]
+- "src_server_logservercrash": "logServerCrash()" | kind=code-symbol | source=src/server.ts:L12 | neighbors=[server.ts, fetch(), normalizeCatastrophicSsrResponse()]
+- "supabase_callbacks_migration": "supabase-callbacks-migration.sql" | kind=code-symbol | source=supabase-callbacks-migration.sql:L1 | neighbors=[f958216 leads functions, lead_callbacks, leads]
+- "supabase_leads_migration": "supabase-leads-migration.sql" | kind=code-symbol | source=supabase-leads-migration.sql:L1 | neighbors=[c480d2e leads, lead_activities, leads]
+- "supabase_migration_profiles": "profiles" | kind=code-symbol | source=supabase-migration.sql:L129 | neighbors=[supabase-migration.sql, project_members, projects]
+- "supabase_migration_project_members": "project_members" | kind=code-symbol | source=supabase-migration.sql:L134 | neighbors=[supabase-migration.sql, profiles, projects]
+- "supabase_migration_projects": "projects" | kind=code-symbol | source=supabase-migration.sql:L124 | neighbors=[supabase-migration.sql, project_members, profiles]
+- "telegram_webhook": "webhook.ts" | kind=code-symbol | source=src/routes/api/telegram/webhook.ts:L1 | neighbors=[2b1d78f telegram, routeTree.gen.ts, Route]
 - "ui_checkbox": "checkbox.tsx" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L1 | neighbors=[utils.ts, cn(), Checkbox]
 - "ui_hover_card": "hover-card.tsx" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L1 | neighbors=[utils.ts, cn(), HoverCardContent]
 - "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
@@ -38,25 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_portal_projecten_projectid_timeago": "timeAgo()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L27 | neighbors=[portal.projecten.$projectId.tsx, MonitoringSection()]
 - "authenticated_portal_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L58 | neighbors=[portal.tsx, routeTree.gen.ts]
 - "authenticated_portal_stepper": "Stepper()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L822 | neighbors=[portal.tsx, stepIndex()]
-- "authenticated_server_formatserverage": "formatServerAge()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L131 | neighbors=[server.tsx, ServerPage()]
-- "authenticated_server_formatssldate": "formatSslDate()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L123 | neighbors=[server.tsx, ServerPage()]
-- "authenticated_server_formatuptime": "formatUptime()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L37 | neighbors=[server.tsx, ServerPage()]
-- "authenticated_server_na": "na()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L110 | neighbors=[server.tsx, ServerPage()]
-- "authenticated_server_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L32 | neighbors=[server.tsx, routeTree.gen.ts]
-- "authenticated_server_safejsonparse": "safeJsonParse()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L114 | neighbors=[server.tsx, ServerPage()]
-- "authenticated_server_statuscolor": "statusColor()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L52 | neighbors=[server.tsx, ServerPage()]
-- "components_about_about": "About()" | kind=code-symbol | source=src/components/About.tsx:L4 | neighbors=[About.tsx, index.tsx]
-- "components_adminchatpanel_adminchatpanel": "AdminChatPanel()" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L27 | neighbors=[admin.tsx, AdminChatPanel.tsx]
-- "components_berichtentab_berichtentab": "BerichtenTab()" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L11 | neighbors=[admin.tsx, BerichtenTab.tsx]
-- "components_callbackagenda_adddays": "addDays()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L40 | neighbors=[CallbackAgenda.tsx, startOfWeek()]
-- "components_callbackagenda_callbackitem": "CallbackItem()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L275 | neighbors=[CallbackAgenda.tsx, fmtTime()]
-- "components_callbackagenda_fmtdaylabel": "fmtDayLabel()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L55 | neighbors=[CallbackAgenda.tsx, CallbackAgenda()]
-- "components_callbackagenda_fmttime": "fmtTime()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L53 | neighbors=[CallbackAgenda.tsx, CallbackItem()]
-- "components_callbackagenda_istoday": "isToday()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L51 | neighbors=[CallbackAgenda.tsx, sameDay()]
-- "components_callbackschedulemodal_callbackscheduleform": "CallbackScheduleForm()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L17 | neighbors=[CallbackScheduleModal.tsx, LeadsPanel.tsx]
-- "components_chatwidget_chatwidget": "ChatWidget()" | kind=code-symbol | source=src/components/ChatWidget.tsx:L15 | neighbors=[portal.tsx, ChatWidget.tsx]
-- "components_confirmdialog_confirmprovider": "ConfirmProvider()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L58 | neighbors=[ConfirmDialog.tsx, __root.tsx]
-- "components_contact_contact": "Contact()" | kind=code-symbol | source=src/components/Contact.tsx:L10 | neighbors=[Contact.tsx, index.tsx]
 
 ## Instructions
 

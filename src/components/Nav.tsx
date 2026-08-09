@@ -4,7 +4,7 @@ const links = [
   { label: "Website", href: "/website-laten-maken" },
   { label: "Webshop", href: "/webshop-laten-maken" },
   { label: "Hosting", href: "/onderhoud-hosting" },
-  { label: "Cases", href: "/cases" },
+  { label: "Werkwijze", href: "/werkwijze" },
   { label: "Over ons", href: "/over-ons" },
   { label: "Contact", href: "/contact" },
 ];

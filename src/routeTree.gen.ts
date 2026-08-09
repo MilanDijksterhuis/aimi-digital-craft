@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WerkwijzeRouteImport } from './routes/werkwijze'
 import { Route as WebsiteLatenMakenVeendamRouteImport } from './routes/website-laten-maken-veendam'
 import { Route as WebsiteLatenMakenHoogeveenRouteImport } from './routes/website-laten-maken-hoogeveen'
 import { Route as WebsiteLatenMakenRouteImport } from './routes/website-laten-maken'
@@ -22,7 +23,6 @@ import { Route as MeerDienstenRouteImport } from './routes/meer-diensten'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CasesRouteImport } from './routes/cases'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -46,6 +46,11 @@ import { Route as AuthenticatedAdminProjectenProjectIdRouteImport } from './rout
 import { Route as AuthenticatedAdminChangesChangeIdRouteImport } from './routes/_authenticated/admin.changes.$changeId'
 import { Route as AuthenticatedAdminAccountsAccountIdRouteImport } from './routes/_authenticated/admin.accounts.$accountId'
 
+const WerkwijzeRoute = WerkwijzeRouteImport.update({
+  id: '/werkwijze',
+  path: '/werkwijze',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WebsiteLatenMakenVeendamRoute =
   WebsiteLatenMakenVeendamRouteImport.update({
     id: '/website-laten-maken-veendam',
@@ -111,11 +116,6 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CasesRoute = CasesRouteImport.update({
-  id: '/cases',
-  path: '/cases',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
@@ -242,7 +242,6 @@ const AuthenticatedAdminAccountsAccountIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
-  '/cases': typeof CasesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -256,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/werkwijze': typeof WerkwijzeRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -279,7 +279,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
-  '/cases': typeof CasesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -293,6 +292,7 @@ export interface FileRoutesByTo {
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/werkwijze': typeof WerkwijzeRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -318,7 +318,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
-  '/cases': typeof CasesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -332,6 +331,7 @@ export interface FileRoutesById {
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/werkwijze': typeof WerkwijzeRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -357,7 +357,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/algemene-voorwaarden'
-    | '/cases'
     | '/contact'
     | '/faq'
     | '/login'
@@ -371,6 +370,7 @@ export interface FileRouteTypes {
     | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
+    | '/werkwijze'
     | '/account'
     | '/admin'
     | '/portal'
@@ -394,7 +394,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/algemene-voorwaarden'
-    | '/cases'
     | '/contact'
     | '/faq'
     | '/login'
@@ -408,6 +407,7 @@ export interface FileRouteTypes {
     | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
+    | '/werkwijze'
     | '/account'
     | '/admin'
     | '/portal'
@@ -432,7 +432,6 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/algemene-voorwaarden'
-    | '/cases'
     | '/contact'
     | '/faq'
     | '/login'
@@ -446,6 +445,7 @@ export interface FileRouteTypes {
     | '/website-laten-maken'
     | '/website-laten-maken-hoogeveen'
     | '/website-laten-maken-veendam'
+    | '/werkwijze'
     | '/_authenticated/account'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
@@ -471,7 +471,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
-  CasesRoute: typeof CasesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
@@ -485,6 +484,7 @@ export interface RootRouteChildren {
   WebsiteLatenMakenRoute: typeof WebsiteLatenMakenRoute
   WebsiteLatenMakenHoogeveenRoute: typeof WebsiteLatenMakenHoogeveenRoute
   WebsiteLatenMakenVeendamRoute: typeof WebsiteLatenMakenVeendamRoute
+  WerkwijzeRoute: typeof WerkwijzeRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
   ApiTelegramWebhookRoute: typeof ApiTelegramWebhookRoute
@@ -493,6 +493,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/werkwijze': {
+      id: '/werkwijze'
+      path: '/werkwijze'
+      fullPath: '/werkwijze'
+      preLoaderRoute: typeof WerkwijzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/website-laten-maken-veendam': {
       id: '/website-laten-maken-veendam'
       path: '/website-laten-maken-veendam'
@@ -582,13 +589,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cases': {
-      id: '/cases'
-      path: '/cases'
-      fullPath: '/cases'
-      preLoaderRoute: typeof CasesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algemene-voorwaarden': {
@@ -863,7 +863,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
-  CasesRoute: CasesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
@@ -877,6 +876,7 @@ const rootRouteChildren: RootRouteChildren = {
   WebsiteLatenMakenRoute: WebsiteLatenMakenRoute,
   WebsiteLatenMakenHoogeveenRoute: WebsiteLatenMakenHoogeveenRoute,
   WebsiteLatenMakenVeendamRoute: WebsiteLatenMakenVeendamRoute,
+  WerkwijzeRoute: WerkwijzeRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
   ApiTelegramWebhookRoute: ApiTelegramWebhookRoute,

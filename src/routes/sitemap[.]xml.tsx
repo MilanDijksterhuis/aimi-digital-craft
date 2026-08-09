@@ -31,7 +31,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/website-laten-maken-hoogeveen", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
 
           // Overige publieke pagina's
-          { path: "/cases", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
+          { path: "/werkwijze", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
           { path: "/meer-diensten", changefreq: "monthly", priority: "0.8", lastmod: LASTMOD },
           { path: "/over-ons", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
           { path: "/faq", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },

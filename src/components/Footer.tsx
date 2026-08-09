@@ -23,7 +23,7 @@ const columns: { heading: string; links: { label: string; to: string }[] }[] = [
     heading: "AIMI",
     links: [
       { label: "Over ons", to: "/over-ons" },
-      { label: "Cases", to: "/cases" },
+      { label: "Werkwijze", to: "/werkwijze" },
       { label: "FAQ", to: "/faq" },
       { label: "Contact", to: "/contact" },
     ],

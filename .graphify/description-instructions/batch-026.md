@@ -1,4 +1,4 @@
-# Node Description Batch 27 of 41
+# Node Description Batch 27 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,31 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_admin_functions_admincreatechangerequest": "adminCreateChangeRequest" | kind=code-symbol | source=src/lib/admin.functions.ts:L446 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatecontactmoment": "adminCreateContactMoment" | kind=code-symbol | source=src/lib/admin.functions.ts:L991 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatecustomerfn": "adminCreateCustomerFn" | kind=code-symbol | source=src/lib/admin.functions.ts:L85 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatecustomrole": "adminCreateCustomRole" | kind=code-symbol | source=src/lib/admin.functions.ts:L3281 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatelead": "adminCreateLead" | kind=code-symbol | source=src/lib/admin.functions.ts:L3530 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateproject": "adminCreateProject" | kind=code-symbol | source=src/lib/admin.functions.ts:L1538 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojectcontact": "adminCreateProjectContact" | kind=code-symbol | source=src/lib/admin.functions.ts:L2047 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojectfromtemplate": "adminCreateProjectFromTemplate" | kind=code-symbol | source=src/lib/admin.functions.ts:L2623 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojectmilestone": "adminCreateProjectMilestone" | kind=code-symbol | source=src/lib/admin.functions.ts:L1827 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojectnote": "adminCreateProjectNote" | kind=code-symbol | source=src/lib/admin.functions.ts:L1953 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojecttask": "adminCreateProjectTask" | kind=code-symbol | source=src/lib/admin.functions.ts:L2219 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojecttemplate": "adminCreateProjectTemplate" | kind=code-symbol | source=src/lib/admin.functions.ts:L2551 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreateprojecttimeentry": "adminCreateProjectTimeEntry" | kind=code-symbol | source=src/lib/admin.functions.ts:L2347 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admincreatesnippet": "adminCreateSnippet" | kind=code-symbol | source=src/lib/admin.functions.ts:L842 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteappointment": "adminDeleteAppointment" | kind=code-symbol | source=src/lib/admin.functions.ts:L943 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeletecallback": "adminDeleteCallback" | kind=code-symbol | source=src/lib/admin.functions.ts:L3964 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeletecontactmoment": "adminDeleteContactMoment" | kind=code-symbol | source=src/lib/admin.functions.ts:L1017 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeletecost": "adminDeleteCost" | kind=code-symbol | source=src/lib/admin.functions.ts:L780 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeletelead": "adminDeleteLead" | kind=code-symbol | source=src/lib/admin.functions.ts:L3704 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeletemilestonedependency": "adminDeleteMilestoneDependency" | kind=code-symbol | source=src/lib/admin.functions.ts:L2500 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteonboardingitem": "adminDeleteOnboardingItem" | kind=code-symbol | source=src/lib/admin.functions.ts:L830 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteproject": "adminDeleteProject" | kind=code-symbol | source=src/lib/admin.functions.ts:L1661 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteprojectcontact": "adminDeleteProjectContact" | kind=code-symbol | source=src/lib/admin.functions.ts:L2107 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteprojectmilestone": "adminDeleteProjectMilestone" | kind=code-symbol | source=src/lib/admin.functions.ts:L1917 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_admindeleteprojectnote": "adminDeleteProjectNote" | kind=code-symbol | source=src/lib/admin.functions.ts:L2011 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admindeleteprojecttask": "adminDeleteProjectTask" | kind=code-symbol | source=src/lib/admin.functions.ts:L2287 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admindeleteprojecttemplate": "adminDeleteProjectTemplate" | kind=code-symbol | source=src/lib/admin.functions.ts:L2606 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admindeleteprojecttimeentry": "adminDeleteProjectTimeEntry" | kind=code-symbol | source=src/lib/admin.functions.ts:L2379 | neighbors=[admin.functions.ts]
@@ -32,31 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions_admingetleadactivities": "adminGetLeadActivities" | kind=code-symbol | source=src/lib/admin.functions.ts:L3516 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetmyeffectivepermissions": "adminGetMyEffectivePermissions" | kind=code-symbol | source=src/lib/admin.functions.ts:L3178 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admingetmyroles": "adminGetMyRoles" | kind=code-symbol | source=src/lib/admin.functions.ts:L1156 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetoverview": "adminGetOverview" | kind=code-symbol | source=src/lib/admin.functions.ts:L45 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetproject": "adminGetProject" | kind=code-symbol | source=src/lib/admin.functions.ts:L1704 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetprojectsdashboardwidgets": "adminGetProjectsDashboardWidgets" | kind=code-symbol | source=src/lib/admin.functions.ts:L2727 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetrole": "adminGetRole" | kind=code-symbol | source=src/lib/admin.functions.ts:L3221 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetrolepermissions": "adminGetRolePermissions" | kind=code-symbol | source=src/lib/admin.functions.ts:L3143 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingetsitestats": "adminGetSiteStats" | kind=code-symbol | source=src/lib/admin.functions.ts:L1045 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admingrantcredits": "adminGrantCredits" | kind=code-symbol | source=src/lib/admin.functions.ts:L644 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminharddeletechange": "adminHardDeleteChange" | kind=code-symbol | source=src/lib/admin.functions.ts:L1316 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminimportleads": "adminImportLeads" | kind=code-symbol | source=src/lib/admin.functions.ts:L3562 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admininvitestaff": "adminInviteStaff" | kind=code-symbol | source=src/lib/admin.functions.ts:L1173 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistallchanges": "adminListAllChanges" | kind=code-symbol | source=src/lib/admin.functions.ts:L1113 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistappointments": "adminListAppointments" | kind=code-symbol | source=src/lib/admin.functions.ts:L895 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistcallbacks": "adminListCallbacks" | kind=code-symbol | source=src/lib/admin.functions.ts:L3765 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistchanges": "adminListChanges" | kind=code-symbol | source=src/lib/admin.functions.ts:L522 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistcontactmoments": "adminListContactMoments" | kind=code-symbol | source=src/lib/admin.functions.ts:L976 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistdeletedchanges": "adminListDeletedChanges" | kind=code-symbol | source=src/lib/admin.functions.ts:L1329 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistleads": "adminListLeads" | kind=code-symbol | source=src/lib/admin.functions.ts:L3483 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistloginevents": "adminListLoginEvents" | kind=code-symbol | source=src/lib/admin.functions.ts:L1029 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistmilestonedependencies": "adminListMilestoneDependencies" | kind=code-symbol | source=src/lib/admin.functions.ts:L2449 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistpasswordresets": "adminListPasswordResets" | kind=code-symbol | source=src/lib/admin.functions.ts:L1404 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistprojectchangerequests": "adminListProjectChangeRequests" | kind=code-symbol | source=src/lib/admin.functions.ts:L2771 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistprojectcontacts": "adminListProjectContacts" | kind=code-symbol | source=src/lib/admin.functions.ts:L2032 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistprojectmilestones": "adminListProjectMilestones" | kind=code-symbol | source=src/lib/admin.functions.ts:L1812 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistprojectnotes": "adminListProjectNotes" | kind=code-symbol | source=src/lib/admin.functions.ts:L1938 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminlistprojects": "adminListProjects" | kind=code-symbol | source=src/lib/admin.functions.ts:L1481 | neighbors=[admin.functions.ts]
 
 ## Instructions
 

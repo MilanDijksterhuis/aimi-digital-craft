@@ -1,4 +1,4 @@
-# Node Description Batch 1 of 41
+# Node Description Batch 1 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -24,7 +24,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "branch:repo:github.com/MilanDijksterhuis/aimi-digital-craft#main": "main" | kind=Branch | source=git | neighbors=[00d6931 Changes, 00e2564 voorwaaren en privacy, 0193196 monitoring, 020d807 Changes, 02d6137 fixes, 0332090 Changes]
+- "branch:repo:github.com/MilanDijksterhuis/aimi-digital-craft#main": "main" | kind=Branch | source=git | neighbors=[00d6931 Changes, 00e2564 voorwaaren en privacy, 0193196 monitoring, 020d807 Changes, 02d6137 fixes, 032ba88 SEO]
 - "branch:repo:github.com/MilanDijksterhuis/aimi-digital-craft#seo-verbetering": "seo-verbetering" | kind=Branch | source=git | neighbors=[00d6931 Changes, 00e2564 voorwaaren en privacy, 0193196 monitoring, 020d807 Changes, 02d6137 fixes, 0332090 Changes]
 - "branch:repo:github.com/MilanDijksterhuis/aimi-digital-craft#tmp-main-merge": "tmp-main-merge" | kind=Branch | source=git | neighbors=[00d6931 Changes, 00e2564 voorwaaren en privacy, 0193196 monitoring, 020d807 Changes, 0332090 Changes, 05a6c9e Verbeter admin changes-tab layo…]
 - "branch:repo:github.com/MilanDijksterhuis/aimi-digital-craft#tmp-revert-main": "tmp-revert-main" | kind=Branch | source=git | neighbors=[00d6931 Changes, 00e2564 voorwaaren en privacy, 0193196 monitoring, 020d807 Changes, 0332090 Changes, 05a6c9e Verbeter admin changes-tab layo…]
@@ -52,10 +52,10 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_projecten": "admin.projecten.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L1 | neighbors=[AdminProjectenPage(), DashboardWidgetsSection(), KanbanCard(), KanbanColumn(), KanbanSection(), NewProjectSection()]
 - "authenticated_portal_projecten_projectid": "portal.projecten.$projectId.tsx" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L1 | neighbors=[MonitoringSection(), PortalProjectDetailPage(), ProjectSwitcher(), Route, timeAgo(), UptimeChart()]
 - "components_confirmdialog": "ConfirmDialog.tsx" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.projecten.tsx, admin.projecten.$projectId.tsx, 9a2689c code fixes, BerichtenTab.tsx, CallbackAgenda.tsx]
+- "components_nav": "Nav.tsx" | kind=code-symbol | source=src/components/Nav.tsx:L1 | neighbors=[05a6c9e Verbeter admin changes-tab layo…, 0cfedfb Changes, 7476011 Changes, 79f7d0a Changes, 7d64543 Changes, 825b6d5 Logo teruggezet naar vorige ver…]
 - "routes_authenticated": "_authenticated.tsx" | kind=code-symbol | source=src/routes/_authenticated.tsx:L1 | neighbors=[41d8eb5 Changes, 423b3f1 cashing, 4b4ebd9 Catch getSession() network erro…, 68ae2dd Changes, 6dc7740 Changes, 7dbbf18 perf fixes]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@81a87edaf7b9db05e33477346e1821aa12e8e485": "81a87ed commit" | kind=Commit | source=git | neighbors=[7f7208a new, admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ecdbe8e1f4e58bfc169589dc2da50a537cf32f2e": "ecdbe8e fixes" | kind=Commit | source=git | neighbors=[23bb181 sec, portal.tsx, main, seo-verbetering, tmp-main-merge, tmp-revert-main]
-- "components_nav": "Nav.tsx" | kind=code-symbol | source=src/components/Nav.tsx:L1 | neighbors=[05a6c9e Verbeter admin changes-tab layo…, 0cfedfb Changes, 7476011 Changes, 79f7d0a Changes, 7d64543 Changes, 825b6d5 Logo teruggezet naar vorige ver…]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ecdbe8e1f4e58bfc169589dc2da50a537cf32f2e": "ecdbe8e fixes" | kind=Commit | source=git | neighbors=[23bb181 sec, portal.tsx, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal]
 - "routes_meer_diensten": "meer-diensten.tsx" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L1 | neighbors=[b48bbc0 chore: snapshot lokale SEO-pagi…, fc7da2d animaties en paginas, CookieBanner.tsx, CookieBanner(), Nav.tsx, Nav()]
 - "components_callbackagenda": "CallbackAgenda.tsx" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L1 | neighbors=[admin.leads.tsx, f958216 leads functions, addDays(), CallbackAgenda(), CallbackDetailModal(), CallbackItem()]
 - "lib_monitoring_functions": "monitoring.functions.ts" | kind=code-symbol | source=src/lib/monitoring.functions.ts:L1 | neighbors=[0193196 monitoring, 39d363a server basic, 74ecdc1 code fixes, a3773ee sec fixes, getAlerts, getDailyCheckLatest]

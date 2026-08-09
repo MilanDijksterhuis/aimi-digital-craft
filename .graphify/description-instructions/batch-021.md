@@ -1,4 +1,4 @@
-# Node Description Batch 22 of 41
+# Node Description Batch 22 of 42
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,29 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_rollen_roleid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L256 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_adminroledetailpage": "AdminRoleDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L48 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_all_permissions": "ALL_PERMISSIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L24 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L183 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_permissiestab": "PermissiesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L218 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L15 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_roledetail": "RoleDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L84 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_roleheader": "RoleHeader()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L121 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L43 | neighbors=[admin.rollen.$roleId.tsx]
+- "authenticated_admin_rollen_roleslistsection": "RolesListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L151 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_rollensidebar": "RollenSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L86 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L46 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L10 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_rollen_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L25 | neighbors=[admin.rollen.tsx]
+- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L43 | neighbors=[admin.tsx]
+- "authenticated_portal_allowed_attachment_mime": "ALLOWED_ATTACHMENT_MIME" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L37 | neighbors=[portal.tsx]
+- "authenticated_portal_emptychanges": "EmptyChanges()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L784 | neighbors=[portal.tsx]
+- "authenticated_portal_filter_label": "FILTER_LABEL" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L98 | neighbors=[portal.tsx]
+- "authenticated_portal_filterkey": "FilterKey" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L97 | neighbors=[portal.tsx]
+- "authenticated_portal_legacywebsitemonitoring": "LegacyWebsiteMonitoring()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1245 | neighbors=[portal.tsx]
+- "authenticated_portal_overviewsection": "OverviewSection()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1340 | neighbors=[portal.tsx]
+- "authenticated_portal_portalpage": "PortalPage()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L118 | neighbors=[portal.tsx]
+- "authenticated_portal_projecten_projectid_portalprojectdetailpage": "PortalProjectDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L148 | neighbors=[portal.projecten.$projectId.tsx]
 - "authenticated_portal_projecten_projectid_projectswitcher": "ProjectSwitcher()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L63 | neighbors=[portal.projecten.$projectId.tsx]
 - "authenticated_portal_projecten_projectid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L22 | neighbors=[portal.projecten.$projectId.tsx]
 - "authenticated_portal_projecten_projectid_uptimechart": "UptimeChart()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L36 | neighbors=[portal.projecten.$projectId.tsx]
@@ -34,29 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_server_exportbutton": "ExportButton()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L180 | neighbors=[server.tsx]
 - "authenticated_server_formatdateshort": "formatDateShort()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L202 | neighbors=[server.tsx]
 - "authenticated_server_formatdatetimeshort": "formatDateTimeShort()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L207 | neighbors=[server.tsx]
-- "authenticated_server_formattime": "formatTime()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L45 | neighbors=[server.tsx]
-- "authenticated_server_hours_options": "HOURS_OPTIONS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L64 | neighbors=[server.tsx]
-- "authenticated_server_log_levels": "LOG_LEVELS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L70 | neighbors=[server.tsx]
-- "authenticated_server_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L94 | neighbors=[server.tsx]
-- "authenticated_server_serversection": "ServerSection" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L249 | neighbors=[server.tsx]
-- "authenticated_server_serversidebar": "ServerSidebar()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L251 | neighbors=[server.tsx]
-- "authenticated_server_skeletoncard": "SkeletonCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L72 | neighbors=[server.tsx]
-- "authenticated_server_status_dot": "STATUS_DOT" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L58 | neighbors=[server.tsx]
-- "authenticated_server_statusindicator": "StatusIndicator()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L142 | neighbors=[server.tsx]
-- "authenticated_server_trendicon": "TrendIcon()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L212 | neighbors=[server.tsx]
-- "components_adminchatpanel_chatrow": "ChatRow" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L15 | neighbors=[AdminChatPanel.tsx]
-- "components_adminchatpanel_message": "Message" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L5 | neighbors=[AdminChatPanel.tsx]
-- "components_callbackagenda_callbackdetailmodal": "CallbackDetailModal()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L404 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_dayview": "DayView()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L306 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_fmtdayshort": "fmtDayShort()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L57 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_todayoverview": "TodayOverview()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L230 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_viewmode": "ViewMode" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L60 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_weekview": "WeekView()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L361 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackschedulemodal_callbackschedulemodal": "CallbackScheduleModal()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L137 | neighbors=[CallbackScheduleModal.tsx]
-- "components_callbackschedulemodal_callbackschedulevalue": "CallbackScheduleValue" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L5 | neighbors=[CallbackScheduleModal.tsx]
-- "components_chatwidget_message": "Message" | kind=code-symbol | source=src/components/ChatWidget.tsx:L4 | neighbors=[ChatWidget.tsx]
-- "components_confirmdialog_confirmcontext": "ConfirmContext" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L46 | neighbors=[ConfirmDialog.tsx]
-- "components_confirmdialog_confirmcontextvalue": "ConfirmContextValue" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L41 | neighbors=[ConfirmDialog.tsx]
 
 ## Instructions
 

@@ -32,7 +32,7 @@ const data: LocationData = {
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
-    { label: "Onze cases", href: "/cases" },
+    { label: "Onze werkwijze", href: "/werkwijze" },
     { label: "Website laten maken Hoogeveen", href: "/website-laten-maken-hoogeveen" },
   ],
 };
