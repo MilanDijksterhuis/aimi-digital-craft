@@ -1,4 +1,4 @@
-# Node Description Batch 17 of 40
+# Node Description Batch 17 of 41
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_rbac_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/lib/rbac.ts:L11 | neighbors=[TeamTab.tsx, rbac.ts]
+- "lib_rbac_staff_guard_roles": "STAFF_GUARD_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L40 | neighbors=[auth-guards.server.ts, rbac.ts]
+- "lib_rbac_super_admin_roles": "SUPER_ADMIN_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L39 | neighbors=[auth-guards.server.ts, rbac.ts]
+- "lib_status_change_templates": "CHANGE_TEMPLATES" | kind=code-symbol | source=src/lib/status.ts:L88 | neighbors=[portal.tsx, status.ts]
+- "lib_telegram_server_bottoken": "botToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L23 | neighbors=[telegram.server.ts, sendTelegramMessage()]
+- "lib_telegram_server_botusername": "botUsername()" | kind=code-symbol | source=src/lib/telegram.server.ts:L29 | neighbors=[telegram.server.ts, generateLinkToken()]
+- "lib_telegram_server_generateandsendmfacode": "generateAndSendMfaCode()" | kind=code-symbol | source=src/lib/telegram.server.ts:L200 | neighbors=[telegram.server.ts, sendTelegramMessage()]
 - "lib_telegram_server_generatelinktoken": "generateLinkToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L74 | neighbors=[telegram.server.ts, botUsername()]
 - "lib_telegram_server_handletelegramwebhook": "handleTelegramWebhook()" | kind=code-symbol | source=src/lib/telegram.server.ts:L128 | neighbors=[telegram.server.ts, safeSend()]
 - "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_change_requests_touch": "change_requests_touch" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L122 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, public.change_requests]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260717180000_perf3_project_last_activity": "20260717180000_perf3_project_last_activity.sql" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L1 | neighbors=[7dbbf18 perf fixes, public.project_last_activity()]
 - "public_site_error_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L18 | neighbors=[site-error.ts, routeTree.gen.ts]
 - "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
-- "routes_algemene_voorwaarden_route": "Route" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L4 | neighbors=[algemene-voorwaarden.tsx, routeTree.gen.ts]
-- "routes_authenticated_route": "Route" | kind=code-symbol | source=src/routes/_authenticated.tsx:L12 | neighbors=[_authenticated.tsx, routeTree.gen.ts]
-- "routes_faq_route": "Route" | kind=code-symbol | source=src/routes/faq.tsx:L7 | neighbors=[faq.tsx, routeTree.gen.ts]
-- "routes_index_route": "Route" | kind=code-symbol | source=src/routes/index.tsx:L13 | neighbors=[index.tsx, routeTree.gen.ts]
-- "routes_login_route": "Route" | kind=code-symbol | source=src/routes/login.tsx:L7 | neighbors=[login.tsx, routeTree.gen.ts]
-- "routes_meer_diensten_build": "build()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L126 | neighbors=[meer-diensten.tsx, MeerDiensten()]
-- "routes_meer_diensten_readmobile": "readMobile()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L352 | neighbors=[meer-diensten.tsx, MeerDiensten()]
 
 ## Instructions
 

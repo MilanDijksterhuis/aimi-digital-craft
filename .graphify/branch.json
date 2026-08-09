@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "branchName": "main",
+  "branchName": "seo-verbetering",
   "worktreePath": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft",
-  "upstream": "origin/main",
-  "mergeBase": "fc7da2d775fafb0a3eb95f413bddc50adb6dea13",
-  "firstSeenHead": "a2681a9e5aba53942b6b04ef7a01b7dd2aadfac9",
-  "lastSeenHead": "fc7da2d775fafb0a3eb95f413bddc50adb6dea13",
-  "lastAnalyzedHead": "fc7da2d775fafb0a3eb95f413bddc50adb6dea13",
+  "upstream": null,
+  "mergeBase": null,
+  "firstSeenHead": "b48bbc00918e7d8958db25acdcf8a5729deeea27",
+  "lastSeenHead": "b48bbc00918e7d8958db25acdcf8a5729deeea27",
+  "lastAnalyzedHead": "b48bbc00918e7d8958db25acdcf8a5729deeea27",
   "stale": false,
   "staleReason": null,
   "staleSince": null,
   "lifecycleEvent": null,
-  "createdAt": "2026-07-14T15:27:19.747Z",
-  "updatedAt": "2026-08-09T18:06:00.367Z"
+  "createdAt": "2026-08-09T18:25:40.177Z",
+  "updatedAt": "2026-08-09T18:25:40.177Z"
 }

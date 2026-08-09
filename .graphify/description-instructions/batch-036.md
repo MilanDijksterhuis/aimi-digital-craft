@@ -1,4 +1,4 @@
-# Node Description Batch 37 of 40
+# Node Description Batch 37 of 41
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,26 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_carousel_carouselcontent": "CarouselContent" | kind=code-symbol | source=src/components/ui/carousel.tsx:L135 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontext": "CarouselContext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L29 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselcontextprops": "CarouselContextProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L20 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselitem": "CarouselItem" | kind=code-symbol | source=src/components/ui/carousel.tsx:L156 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselnext": "CarouselNext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L205 | neighbors=[carousel.tsx]
+- "ui_carousel_carouseloptions": "CarouselOptions" | kind=code-symbol | source=src/components/ui/carousel.tsx:L10 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselplugin": "CarouselPlugin" | kind=code-symbol | source=src/components/ui/carousel.tsx:L11 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselprevious": "CarouselPrevious" | kind=code-symbol | source=src/components/ui/carousel.tsx:L177 | neighbors=[carousel.tsx]
+- "ui_carousel_carouselprops": "CarouselProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L13 | neighbors=[carousel.tsx]
+- "ui_carousel_usecarousel": "useCarousel()" | kind=code-symbol | source=src/components/ui/carousel.tsx:L31 | neighbors=[carousel.tsx]
+- "ui_carousel_usecarouselparameters": "UseCarouselParameters" | kind=code-symbol | source=src/components/ui/carousel.tsx:L9 | neighbors=[carousel.tsx]
+- "ui_chart_chartconfig": "ChartConfig" | kind=code-symbol | source=src/components/ui/chart.tsx:L9 | neighbors=[chart.tsx]
+- "ui_chart_chartcontainer": "ChartContainer" | kind=code-symbol | source=src/components/ui/chart.tsx:L35 | neighbors=[chart.tsx]
+- "ui_chart_chartcontext": "ChartContext" | kind=code-symbol | source=src/components/ui/chart.tsx:L23 | neighbors=[chart.tsx]
+- "ui_chart_chartcontextprops": "ChartContextProps" | kind=code-symbol | source=src/components/ui/chart.tsx:L19 | neighbors=[chart.tsx]
+- "ui_chart_chartlegendcontent": "ChartLegendContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L243 | neighbors=[chart.tsx]
+- "ui_chart_chartstyle": "ChartStyle()" | kind=code-symbol | source=src/components/ui/chart.tsx:L64 | neighbors=[chart.tsx]
+- "ui_chart_charttooltipcontent": "ChartTooltipContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L95 | neighbors=[chart.tsx]
+- "ui_chart_getpayloadconfigfrompayload": "getPayloadConfigFromPayload()" | kind=code-symbol | source=src/components/ui/chart.tsx:L299 | neighbors=[chart.tsx]
+- "ui_chart_themes": "THEMES" | kind=code-symbol | source=src/components/ui/chart.tsx:L7 | neighbors=[chart.tsx]
 - "ui_chart_usechart": "useChart()" | kind=code-symbol | source=src/components/ui/chart.tsx:L25 | neighbors=[chart.tsx]
 - "ui_checkbox_checkbox": "Checkbox" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L7 | neighbors=[checkbox.tsx]
 - "ui_command_command": "Command" | kind=code-symbol | source=src/components/ui/command.tsx:L11 | neighbors=[command.tsx]
@@ -37,26 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_context_menu_contextmenushortcut": "ContextMenuShortcut()" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L161 | neighbors=[context-menu.tsx]
 - "ui_context_menu_contextmenusubcontent": "ContextMenuSubContent" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L40 | neighbors=[context-menu.tsx]
 - "ui_context_menu_contextmenusubtrigger": "ContextMenuSubTrigger" | kind=code-symbol | source=src/components/ui/context-menu.tsx:L19 | neighbors=[context-menu.tsx]
-- "ui_dialog_dialogdescription": "DialogDescription" | kind=code-symbol | source=src/components/ui/dialog.tsx:L81 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogfooter": "DialogFooter()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L61 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogheader": "DialogHeader()" | kind=code-symbol | source=src/components/ui/dialog.tsx:L56 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogoverlay": "DialogOverlay" | kind=code-symbol | source=src/components/ui/dialog.tsx:L17 | neighbors=[dialog.tsx]
-- "ui_dialog_dialogtitle": "DialogTitle" | kind=code-symbol | source=src/components/ui/dialog.tsx:L69 | neighbors=[dialog.tsx]
-- "ui_drawer_drawer": "Drawer()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L6 | neighbors=[drawer.tsx]
-- "ui_drawer_drawercontent": "DrawerContent" | kind=code-symbol | source=src/components/ui/drawer.tsx:L32 | neighbors=[drawer.tsx]
-- "ui_drawer_drawerdescription": "DrawerDescription" | kind=code-symbol | source=src/components/ui/drawer.tsx:L75 | neighbors=[drawer.tsx]
-- "ui_drawer_drawerfooter": "DrawerFooter()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L58 | neighbors=[drawer.tsx]
-- "ui_drawer_drawerheader": "DrawerHeader()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L53 | neighbors=[drawer.tsx]
-- "ui_drawer_draweroverlay": "DrawerOverlay" | kind=code-symbol | source=src/components/ui/drawer.tsx:L20 | neighbors=[drawer.tsx]
-- "ui_drawer_drawertitle": "DrawerTitle" | kind=code-symbol | source=src/components/ui/drawer.tsx:L63 | neighbors=[drawer.tsx]
-- "ui_dropdown_menu_dropdownmenucheckboxitem": "DropdownMenuCheckboxItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L94 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenucontent": "DropdownMenuContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L57 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuitem": "DropdownMenuItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L76 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenulabel": "DropdownMenuLabel" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L139 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuradioitem": "DropdownMenuRadioItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L117 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuseparator": "DropdownMenuSeparator" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L153 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenushortcut": "DropdownMenuShortcut()" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L165 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenusubcontent": "DropdownMenuSubContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L42 | neighbors=[dropdown-menu.tsx]
 
 ## Instructions
 
