@@ -5,11 +5,16 @@
 ## Pages
 
 - [Home](/): Overzicht van AIMI's diensten, werkwijze, tarieven en contact.
+- [Website laten maken](/website-laten-maken): Professioneel webdesign op maat, vanaf € 1.250.
+- [Webshop laten maken](/webshop-laten-maken): Verkoopklare webshops op maat met veilige betaalmethodes.
+- [Onderhoud & hosting](/onderhoud-hosting): Snelle Nederlandse hosting, onderhoud en monitoring vanaf € 30 p/m.
 - [Website laten maken in Veendam](/website-laten-maken-veendam): Lokale landingspagina voor webdesign, webshops en SEO in Veendam en omgeving.
 - [Website laten maken in Hoogeveen](/website-laten-maken-hoogeveen): Lokale landingspagina voor webdesign, webshops en SEO in Hoogeveen en omgeving.
+- [Cases & werkwijze](/cases): Het soort projecten dat AIMI oplevert en hoe we werken.
 - [Meer diensten](/meer-diensten): Losse diensten — hosting, performance-optimalisatie en SEO.
 - [Over ons](/over-ons): Wie zijn Aidan & Milan en hoe werkt AIMI.
 - [FAQ](/faq): Veelgestelde vragen over websites laten maken, prijzen en werkwijze.
+- [Contact](/contact): Vraag een offerte aan of plan een gesprek.
 
 ## Diensten
 

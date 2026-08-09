@@ -21,14 +21,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           // Kernpagina's
           { path: "/", changefreq: "weekly", priority: "1.0", lastmod: LASTMOD },
 
+          // Dienstenpagina's
+          { path: "/website-laten-maken", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
+          { path: "/webshop-laten-maken", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
+          { path: "/onderhoud-hosting", changefreq: "monthly", priority: "0.8", lastmod: LASTMOD },
+
           // Lokale landingspagina's — hoofddoel voor lokale SEO (Veendam/Hoogeveen)
           { path: "/website-laten-maken-veendam", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
           { path: "/website-laten-maken-hoogeveen", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
 
           // Overige publieke pagina's
+          { path: "/cases", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
           { path: "/meer-diensten", changefreq: "monthly", priority: "0.8", lastmod: LASTMOD },
           { path: "/over-ons", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
           { path: "/faq", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
+          { path: "/contact", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
 
           // Juridisch
           { path: "/algemene-voorwaarden", changefreq: "yearly", priority: "0.3", lastmod: LASTMOD },
