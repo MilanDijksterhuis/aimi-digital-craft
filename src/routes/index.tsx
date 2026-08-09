@@ -13,14 +13,14 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIMI Development — Website laten maken | Webdesign Veendam & Hoogeveen" },
+      { title: "AIMI Development Website laten maken | Webdesign Veendam & Hoogeveen" },
       {
         name: "description",
         content:
-          "Website of webshop laten maken? AIMI ontwerpt, bouwt en host snelle, professionele websites — voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 1.250.",
+          "Website of webshop laten maken? AIMI ontwerpt, bouwt en host snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 1.250.",
       },
       { name: "keywords", content: "website laten maken, webdesign, webshop laten maken, website laten maken Veendam, website laten maken Hoogeveen, SEO Groningen, SEO Drenthe" },
-      { property: "og:title", content: "AIMI — Websites die werken." },
+      { property: "og:title", content: "AIMI Websites die werken." },
       {
         property: "og:description",
         content: "Design, development & hosting door Aidan & Milan.",

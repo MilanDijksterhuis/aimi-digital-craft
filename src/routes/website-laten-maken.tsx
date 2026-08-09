@@ -7,7 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken`;
 const faqs = [
   {
     q: "Wat kost een website laten maken?",
-    a: "Een professionele website bij AIMI start vanaf € 1.250. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs — geen uurtje-factuurtje.",
+    a: "Een professionele website bij AIMI start vanaf € 499. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs — geen uurtje-factuurtje.",
   },
   {
     q: "Hoe lang duurt het om een website te maken?",
@@ -27,9 +27,9 @@ const data: ServicePageData = {
   kicker: "Webdesign op maat",
   h1: "Website laten maken",
   intro:
-    "Een professionele website die past bij jouw bedrijf en die bezoekers omzet in klanten. AIMI ontwerpt, bouwt en host websites op maat voor kleine ondernemers en ZZP'ers — snel, mobielvriendelijk en goed vindbaar in Google. Geen templates, wel een vaste prijs en direct contact met de mensen die je site bouwen.",
+    "Een professionele website die past bij jouw bedrijf en die bezoekers omzet in klanten. AIMI ontwerpt, bouwt en host websites op maat voor kleine ondernemers en ZZP'ers. snel, mobielvriendelijk en goed vindbaar in Google. Geen templates, wel een vaste prijs en direct contact met de mensen die je site bouwen.",
   offerings: [
-    { title: "Design op maat", desc: "Een uniek ontwerp dat aansluit op je merk en doelgroep — geen standaardthema uit de kast." },
+    { title: "Design op maat", desc: "Een uniek ontwerp dat aansluit op je merk en doelgroep geen standaardthema uit de kast." },
     { title: "Razendsnel & mobiel", desc: "Gebouwd op moderne techniek met groene Core Web Vitals, perfect op elk scherm." },
     { title: "SEO-basis inbegrepen", desc: "Nette structuur, meta-tags en snelheid zodat je vanaf dag één vindbaar bent." },
     { title: "Zelf te beheren", desc: "Pas eenvoudig teksten en foto's aan, of laat het onderhoud aan ons over." },
@@ -40,7 +40,7 @@ const data: ServicePageData = {
     { title: "Bouwen & testen", desc: "We bouwen de site, vullen 'm met content en testen op alle apparaten." },
     { title: "Livegang & nazorg", desc: "We zetten de site live op onze snelle hosting en blijven bereikbaar." },
   ],
-  priceLabel: "vanaf € 1.250",
+  priceLabel: "vanaf € 499",
   priceNote: "Eenmalig, met een vaste prijs vooraf. Hosting en onderhoud kunnen los worden afgenomen.",
   faqs,
   related: [
@@ -56,21 +56,21 @@ const data: ServicePageData = {
 export const Route = createFileRoute("/website-laten-maken")({
   head: () => ({
     meta: [
-      { title: "Website laten maken | Professioneel & vanaf € 1.250 — AIMI" },
+      { title: "Website laten maken | Professioneel & vanaf € 499 AIMI" },
       {
         name: "description",
         content:
-          "Website laten maken door AIMI? Professioneel webdesign op maat voor ondernemers en ZZP'ers. Snel, mobielvriendelijk en goed vindbaar. Vaste prijs vanaf € 1.250.",
+          "Website laten maken door AIMI? Professioneel webdesign op maat voor ondernemers en ZZP'ers. Snel, mobielvriendelijk en goed vindbaar. Vaste prijs vanaf € 499.",
       },
       { name: "keywords", content: "website laten maken, professionele website, webdesign, website bouwen, website op maat, website ZZP" },
-      { property: "og:title", content: "Website laten maken — AIMI Webdesign" },
-      { property: "og:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 1.250." },
+      { property: "og:title", content: "Website laten maken AIMI Webdesign" },
+      { property: "og:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: `${SITE_URL}/og-image.svg` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken — AIMI Webdesign" },
-      { name: "twitter:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 1.250." },
+      { name: "twitter:title", content: "Website laten maken AIMI Webdesign" },
+      { name: "twitter:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
       { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
     ],
     links: [{ rel: "canonical", href: URL }],

@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
-      { title: "Algemene Voorwaarden — AIMI" },
+      { title: "Algemene Voorwaarden  AIMI—" },
       { name: "description", content: "De algemene voorwaarden van AIMI." },
       { name: "robots", content: "noindex" },
     ],

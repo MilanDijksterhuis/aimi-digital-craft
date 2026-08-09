@@ -169,7 +169,7 @@ function LoginPage() {
                 </button>
               </form>
               <p className="mt-6 text-xs text-muted-foreground">
-                Nog geen account? Neem contact op via de homepage — wij maken je account aan.
+                Nog geen account? Neem contact op via de homepage. wij maken je account aan.
               </p>
             </>
           ) : (

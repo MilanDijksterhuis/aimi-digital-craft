@@ -10,11 +10,11 @@ const data: LocationData = {
   region: REGION,
   nearby: ["Hollandscheveld", "Nieuwlande", "Pesse", "Meppel", "Beilen", "Assen"],
   intro:
-    "Op zoek naar een webdesigner in Hoogeveen? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Hoogeveen en omgeving. Van eerste schets tot livegang — persoonlijk, lokaal en gericht op meer klanten via Google.",
+    "Op zoek naar een webdesigner in Hoogeveen? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Hoogeveen en omgeving. Van eerste schets tot livegang persoonlijk, lokaal en gericht op meer klanten via Google.",
   faqs: [
     {
       q: "Wat kost een website laten maken in Hoogeveen?",
-      a: "Onze pakketten starten vanaf € 1.250 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
+      a: "Onze pakketten starten vanaf € 499 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
     },
     {
       q: "Werken jullie ook voor bedrijven buiten Hoogeveen?",
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
       {
         name: "description",
         content:
-          "Website of webshop laten maken in Hoogeveen? AIMI bouwt snelle, professionele websites die goed vindbaar zijn in Google. Lokaal, persoonlijk en vanaf € 1.250. Vraag een offerte aan.",
+          "Website of webshop laten maken in Hoogeveen? AIMI bouwt snelle, professionele websites die goed vindbaar zijn in Google. Lokaal, persoonlijk en vanaf € 499. Vraag een offerte aan.",
       },
       { name: "keywords", content: "website laten maken Hoogeveen, webdesign Hoogeveen, webshop Hoogeveen, website bouwen Hoogeveen, SEO Hoogeveen" },
       { name: "geo.region", content: "NL-DR" },
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "@id": URL,
-          name: "AIMI — Webdesign Hoogeveen",
+          name: "AIMI Webdesign Hoogeveen",
           description:
             "Webdesigner in Hoogeveen. Websites, webshops, SEO en hosting voor ondernemers in Hoogeveen en omgeving.",
           url: URL,

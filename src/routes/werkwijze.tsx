@@ -16,7 +16,7 @@ const steps = [
   },
   {
     title: "Ontwerp",
-    desc: "Je krijgt een concreet ontwerp te zien voordat er iets gebouwd wordt. Je geeft feedback en we schaven bij tot het klopt — geen verrassingen achteraf.",
+    desc: "Je krijgt een concreet ontwerp te zien voordat er iets gebouwd wordt. Je geeft feedback en we schaven bij tot het klopt, geen verrassingen achteraf.",
   },
   {
     title: "Bouwen & testen",
@@ -29,7 +29,7 @@ const steps = [
 ];
 
 const principles = [
-  { title: "Direct contact", desc: "Je werkt rechtstreeks met Aidan of Milan — geen accountmanagers, geen tussenlagen, geen wachttijden." },
+  { title: "Direct contact", desc: "Je werkt rechtstreeks met Aidan of Milan. Geen accountmanagers, geen tussenlagen, geen wachttijden." },
   { title: "Vaste prijzen", desc: "Je weet vooraf wat het kost. Geen uurtje-factuurtje en geen verrassingen op de rekening." },
   { title: "Alles in eigen beheer", desc: "Design, development én hosting doen we zelf. Zo houden we kwaliteit en snelheid volledig in eigen hand." },
   { title: "Snel en betrokken", desc: "Korte lijnen betekenen snelle beslissingen. We denken met je mee, ook na de livegang." },
@@ -44,20 +44,20 @@ const standards = [
 export const Route = createFileRoute("/werkwijze")({
   head: () => ({
     meta: [
-      { title: "Onze werkwijze | Zo bouwen wij jouw website — AIMI" },
+      { title: "Onze werkwijze | Zo bouwen wij jouw website AIMI" },
       {
         name: "description",
         content:
           "Zo werkt AIMI: van kennismaking en ontwerp tot livegang en nazorg. Vaste prijzen, direct contact met de developers en alles in eigen beheer. Ontdek onze aanpak.",
       },
       { name: "keywords", content: "werkwijze webdesign, hoe werkt een website laten maken, aanpak webdesigner, proces website bouwen" },
-      { property: "og:title", content: "Onze werkwijze — AIMI" },
+      { property: "og:title", content: "Onze werkwijze AIMI" },
       { property: "og:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: `${SITE_URL}/og-image.svg` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Onze werkwijze — AIMI" },
+      { name: "twitter:title", content: "Onze werkwijze AIMI" },
       { name: "twitter:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
       { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
     ],
@@ -83,7 +83,7 @@ function WerkwijzePage() {
         </h1>
         <p style={{ fontSize: "17px", lineHeight: 1.75, color: "#b6b6bd", maxWidth: "62ch" }}>
           Een goede website begint bij een goede aanpak. Bij AIMI werk je van begin tot eind direct
-          met de twee developers die je site bouwen — Aidan &amp; Milan. Geen bureaupolitiek, geen
+          met de twee developers die je site bouwen Aidan &amp; Milan. Geen bureaupolitiek, geen
           verrassingen, wel een helder proces en vaste prijzen. Hieronder lees je precies hoe we
           te werk gaan.
         </p>

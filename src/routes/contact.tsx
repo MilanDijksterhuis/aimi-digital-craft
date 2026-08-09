@@ -10,20 +10,20 @@ const URL = `${SITE_URL}/contact`;
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact | Vraag een offerte aan — AIMI" },
+      { title: "Contact | Vraag een offerte aan" },
       {
         name: "description",
         content:
-          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht — je krijgt binnen één werkdag antwoord. Webdevelopment uit Veendam & Hoogeveen.",
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht je krijgt binnen één werkdag antwoord. Webdevelopment uit Veendam & Hoogeveen.",
       },
       { name: "keywords", content: "contact AIMI, offerte website, webdesigner contact, website laten maken offerte" },
-      { property: "og:title", content: "Contact — AIMI" },
+      { property: "og:title", content: "Contact AIMI" },
       { property: "og:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: `${SITE_URL}/og-image.svg` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Contact — AIMI" },
+      { name: "twitter:title", content: "Contact AIMI" },
       { name: "twitter:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
     ],
@@ -78,7 +78,7 @@ function ContactPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>
               Of je nu een nieuwe website of webshop wilt, je bestaande site wilt vernieuwen of
-              alleen hosting zoekt — vertel ons kort over je plannen. Je praat direct met Aidan of
+              alleen hosting zoekt. Vertel ons kort over je plannen. Je praat direct met Aidan of
               Milan en krijgt binnen één werkdag antwoord. Ook per e-mail bereikbaar via{" "}
               <a href="mailto:sales@aimi-development.nl" style={{ color: "#fe2c02" }}>
                 sales@aimi-development.nl

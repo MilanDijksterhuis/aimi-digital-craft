@@ -33,13 +33,13 @@ const values: { title: string; desc: string }[] = [
 export const Route = createFileRoute("/over-ons")({
   head: () => ({
     meta: [
-      { title: "Over ons — AIMI" },
+      { title: "Over ons AIMI" },
       {
         name: "description",
         content:
           "AIMI is een web agency van Aidan & Milan. Twee developers die websites ontwerpen, bouwen en hosten voor kleine bedrijven, zelfstandigen en verenigingen.",
       },
-      { property: "og:title", content: "Over ons — AIMI" },
+      { property: "og:title", content: "Over ons AIMI" },
       {
         property: "og:description",
         content: "Twee developers, geen groot bureau. Maak kennis met AIMI.",
@@ -95,7 +95,7 @@ function OverOns() {
             >
               <p>
                 AIMI is opgericht door Aidan &amp; Milan. We bouwen websites voor
-                kleine bedrijven, zelfstandigen en verenigingen — mensen die een
+                kleine bedrijven, zelfstandigen en verenigingen mensen die een
                 professionele site willen zonder de trage processen en hoge kosten
                 van een groot bureau.
               </p>

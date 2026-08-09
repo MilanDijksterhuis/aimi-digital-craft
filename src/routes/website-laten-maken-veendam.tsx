@@ -10,11 +10,11 @@ const data: LocationData = {
   region: REGION,
   nearby: ["Wildervank", "Muntendam", "Zuidbroek", "Pekela", "Winschoten", "Stadskanaal"],
   intro:
-    "Op zoek naar een webdesigner in Veendam? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Veendam en omgeving. Van eerste schets tot livegang — persoonlijk, lokaal en gericht op meer klanten via Google.",
+    "Op zoek naar een webdesigner in Veendam? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Veendam en omgeving. Van eerste schets tot livegang persoonlijk, lokaal en gericht op meer klanten via Google.",
   faqs: [
     {
       q: "Wat kost een website laten maken in Veendam?",
-      a: "Onze pakketten starten vanaf € 1.250 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
+      a: "Onze pakketten starten vanaf € 499 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
     },
     {
       q: "Werken jullie ook voor bedrijven buiten Veendam?",
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
       {
         name: "description",
         content:
-          "Website of webshop laten maken in Veendam? AIMI bouwt snelle, professionele websites die goed vindbaar zijn in Google. Lokaal, persoonlijk en vanaf € 1.250. Vraag een offerte aan.",
+          "Website of webshop laten maken in Veendam? AIMI bouwt snelle, professionele websites die goed vindbaar zijn in Google. Lokaal, persoonlijk en vanaf € 499. Vraag een offerte aan.",
       },
       { name: "keywords", content: "website laten maken Veendam, webdesign Veendam, webshop Veendam, website bouwen Veendam, SEO Veendam" },
       { name: "geo.region", content: "NL-GR" },
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "@id": URL,
-          name: "AIMI — Webdesign Veendam",
+          name: "AIMI Webdesign Veendam",
           description:
             "Webdesigner in Veendam. Websites, webshops, SEO en hosting voor ondernemers in Veendam en omgeving.",
           url: URL,

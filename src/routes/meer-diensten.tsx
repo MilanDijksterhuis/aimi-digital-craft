@@ -55,7 +55,7 @@ const SERVICES: Service[] = [
     sub: "op aanvraag",
     price: "Op aanvraag",
     suffix: "",
-    desc: "Snelheidsoptimalisatie voor een snellere, soepelere site — merkbaar voor bezoekers én voor Google.",
+    desc: "Snelheidsoptimalisatie voor een snellere, soepelere site merkbaar voor bezoekers én voor Google.",
     points: [
       "Core Web Vitals naar groen",
       "Afbeeldingen, caching en scripts geoptimaliseerd",
@@ -300,16 +300,16 @@ const KEYFRAMES = `
 export const Route = createFileRoute("/meer-diensten")({
   head: () => ({
     meta: [
-      { title: "Meer diensten — AIMI" },
+      { title: "Meer diensten AIMI" },
       {
         name: "description",
         content:
           "Losse diensten van AIMI: hosting, performance-optimalisatie en SEO. Voor wie al een site heeft en alleen dat nodig heeft.",
       },
-      { property: "og:title", content: "Meer diensten — AIMI" },
+      { property: "og:title", content: "Meer diensten AIMI" },
       {
         property: "og:description",
-        content: "Hosting, performance en SEO — ook los af te nemen.",
+        content: "Hosting, performance en SEO ook los af te nemen.",
       },
       { property: "og:url", content: "https://aimi-development.nl/meer-diensten" },
     ],
@@ -986,7 +986,7 @@ function MeerDiensten() {
             <span style={{ fontWeight: 600 }}>wij kunnen</span>
           </h1>
           <p style={{ fontSize: "14.5px", lineHeight: 1.75, color: "#8f8f98", fontWeight: 300 }}>
-            Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen, zonder dat
+            Eén stam, drie takken. Hosting, snelheid en vindbaarheid. los af te nemen, zonder dat
             we een nieuwe site hoeven te bouwen.
           </p>
           <div
@@ -1054,7 +1054,7 @@ function MeerDiensten() {
               maxWidth: "34ch",
             }}
           >
-            Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen, zonder dat
+            Eén stam, drie takken. Hosting, snelheid en vindbaarheid. los af te nemen, zonder dat
             we een nieuwe site hoeven te bouwen.
           </p>
 
@@ -1126,7 +1126,7 @@ function MeerDiensten() {
             <span style={{ fontWeight: 600, color: "#efeff1" }}>
               AIMI<span style={{ color: "#ff4b4b" }}>.</span>
             </span>
-            <span>© 2026 AIMI — Alle rechten voorbehouden</span>
+            <span>© 2026 AIMI Alle rechten voorbehouden</span>
             <a href="/privacybeleid">Privacybeleid</a>
             <a href="/algemene-voorwaarden">Algemene Voorwaarden</a>
           </div>
@@ -1291,7 +1291,7 @@ function MeerDiensten() {
           <div style={{ fontWeight: 600, color: "#efeff1" }}>
             AIMI<span style={{ color: "#ff4b4b" }}>.</span>
           </div>
-          <div>© 2026 AIMI — Alle rechten voorbehouden</div>
+          <div>© 2026 AIMI Alle rechten voorbehouden</div>
           <div style={{ display: "flex", gap: "24px" }}>
             <a href="/privacybeleid">Privacybeleid</a>
             <a href="/algemene-voorwaarden">Algemene Voorwaarden voor AIMI</a>
