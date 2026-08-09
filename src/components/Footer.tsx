@@ -11,7 +11,13 @@ export function Footer() {
           AIMI<span style={{ color: "#fe2c02" }}>.</span>
         </span>
         <span>© {new Date().getFullYear()} AIMI — Alle rechten voorbehouden</span>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
+          <Link to="/website-laten-maken-veendam" className="hover:text-white transition-colors">
+            Website laten maken Veendam
+          </Link>
+          <Link to="/website-laten-maken-hoogeveen" className="hover:text-white transition-colors">
+            Website laten maken Hoogeveen
+          </Link>
           <Link to="/privacybeleid" className="hover:text-white transition-colors">
             Privacybeleid
           </Link>

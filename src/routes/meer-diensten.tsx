@@ -4,14 +4,18 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Nav } from "@/components/Nav";
 
 /* ---------------------------------------------------------------------------
- * "Meer diensten" — geanimeerde boom-achtergrond.
- * Port van het design-handoff prototype (design_handoff_meer_diensten).
- * Een lichtboom groeit mee met de scrollpositie; klikken op een dienst-knoop
- * stuurt een puls langs de takken en opent een detailpaneel.
+ * "Meer diensten" — geanimeerde boom (v2, design_handoff_meer_diensten).
+ * De lichtboom groeit automatisch bij het openen van de pagina (tijd-gestuurd,
+ * geen scroll). De boom staat rechts en wordt gemeten weggeschoven zodat de
+ * hero-tekst vrij blijft. Klik op een dienst-knoop → puls + bloei + paneel.
  * Alle per-frame updates gaan via refs + één rAF-loop — geen re-render.
+ * Onder 700px: ambient boom + gestapelde dienst-kaarten (mobiel-route).
  * ------------------------------------------------------------------------- */
 
 const RED = (a: number) => `rgba(255,70,70,${a})`;
+const BG = "#15151b";
+const NARROW_BP = 1100; // paneel wordt bottom-sheet
+const MOBILE_BP = 700; // kaart-route i.p.v. klikbare boom
 
 type Service = {
   key: string;
@@ -118,7 +122,8 @@ type Bloom = { d: string; w: number; stroke: string; s: number };
 type Surge = { d: string; s: number };
 type EmberGroup = { s: number; items: { x: string; y: string; r: string; delay: string }[] };
 
-function build() {
+// Minder twijgen/aanhechtpunten op mobiel — lichter voor oudere telefoons.
+function build(light: boolean) {
   const branches: Branch[] = [];
   const blooms: Bloom[] = [];
   const surges: Surge[] = [];
@@ -134,7 +139,7 @@ function build() {
   });
   surges.push({ d: branches[0].d, s: -1 });
 
-  // baby-boompje: klein kroontje dat al staat voordat je scrolt
+  // baby-boompje: klein kroontje dat er meteen staat
   const sap: [number, number, number, number, number][] = [
     [-1, 30, 0.03, 42, -46],
     [1, 24, 0.038, 46, -50],
@@ -154,6 +159,10 @@ function build() {
       s: -1,
     });
   });
+
+  const anchors = light
+    ? [0.14, 0.34, 0.54, 0.72, 0.9]
+    : [0.1, 0.2, 0.3, 0.41, 0.52, 0.62, 0.72, 0.82, 0.92];
 
   SERVICES.forEach((sv, si) => {
     const rand = rng(3571 + si * 977);
@@ -224,13 +233,13 @@ function build() {
         );
     };
 
-    [0.1, 0.2, 0.3, 0.41, 0.52, 0.62, 0.72, 0.82, 0.92].forEach((t, k) => {
+    anchors.forEach((t, k) => {
       const p = qPoint(p0, c, p1, t);
       const tan = qTangent(p0, c, p1, t);
       const base = Math.atan2(tan[1], tan[0]);
       const side = k % 2 === 0 ? -1 : 1;
       const w0 = start + (end - start) * t + 0.006;
-      const deep = k % 3 === 1 ? 4 : 3;
+      const deep = light ? 3 : k % 3 === 1 ? 4 : 3;
       grow(p[0], p[1], base + side * (0.5 + rand() * 0.4), 66 + rand() * 52, deep, w0, 0.17);
       grow(p[0], p[1], base - side * (0.62 + rand() * 0.34), 52 + rand() * 40, deep - 1, w0 + 0.02, 0.15);
     });
@@ -267,9 +276,9 @@ function build() {
   return { branches, blooms, surges, embers };
 }
 
-function buildLeaves() {
+function buildLeaves(count: number) {
   const lr = rng(4211);
-  return Array.from({ length: 22 }, () => {
+  return Array.from({ length: count }, () => {
     const size = 5 + lr() * 8;
     return {
       left: (lr() * 100).toFixed(1) + "%",
@@ -326,8 +335,9 @@ type Store = {
   ember: (SVGGElement | null)[];
   node: (SVGGElement | null)[];
   frame: (SVGGElement | null)[];
+  elapsed: number;
   p: number;
-  pTarget: number;
+  closedDx: number;
   surgeAnim: { chain: number[]; t: number; dur: number } | null;
   heroEl: HTMLElement | null;
   panelEl: HTMLElement | null;
@@ -335,20 +345,32 @@ type Store = {
   bloomTimer: ReturnType<typeof setTimeout> | undefined;
   raf: number;
   last: number;
-  onScroll?: () => void;
+  reduced: boolean;
   onResize?: () => void;
 };
 
+function readMobile() {
+  return typeof window !== "undefined" && window.innerWidth < MOBILE_BP;
+}
+
 function MeerDiensten() {
   const [open, setOpen] = useState<number | null>(null);
+  const [mobile, setMobile] = useState(false);
   const openRef = useRef<number | null>(null);
+  const mobileRef = useRef(false);
+
+  const reduced =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const leavesRef = useRef<ReturnType<typeof buildLeaves> | null>(null);
-  if (!leavesRef.current) leavesRef.current = buildLeaves();
+  if (!leavesRef.current) leavesRef.current = buildLeaves(reduced ? 0 : readMobile() ? 10 : 22);
 
   const R = useRef<Store | null>(null);
   if (!R.current) {
     R.current = {
-      data: build(),
+      data: build(readMobile()),
       branch: [],
       branchLen: [],
       bloom: [],
@@ -357,8 +379,9 @@ function MeerDiensten() {
       ember: [],
       node: [],
       frame: [],
+      elapsed: 0,
       p: 0,
-      pTarget: 0,
+      closedDx: 0,
       surgeAnim: null,
       heroEl: null,
       panelEl: null,
@@ -366,6 +389,7 @@ function MeerDiensten() {
       bloomTimer: undefined,
       raf: 0,
       last: 0,
+      reduced,
     };
   }
   const st = R.current;
@@ -374,9 +398,12 @@ function MeerDiensten() {
 
   const applyLayout = () => {
     const isOpen = openRef.current !== null;
-    const narrow = window.innerWidth < 1100;
-    const p = st.panelEl;
     const w = st.svgWrapEl;
+    const p = st.panelEl;
+    const narrow = window.innerWidth < NARROW_BP;
+    const mob = window.innerWidth < MOBILE_BP;
+
+    // Paneel: bottom-sheet op smal, kaartje rechts op breed.
     if (p) {
       if (narrow) {
         p.style.width = "auto";
@@ -384,7 +411,7 @@ function MeerDiensten() {
         p.style.right = "20px";
         p.style.top = "auto";
         p.style.bottom = "70px";
-        p.style.maxHeight = "46vh";
+        p.style.maxHeight = "60vh";
         p.style.overflowY = "auto";
         p.style.transform = isOpen ? "translateY(0)" : "translateY(20px)";
       } else {
@@ -402,39 +429,49 @@ function MeerDiensten() {
       p.style.opacity = isOpen ? "1" : "0";
       p.style.pointerEvents = isOpen ? "auto" : "none";
     }
-    if (!w) return;
-    if (!isOpen) {
-      w.style.transform = "none";
-      return;
-    }
-    if (!narrow) {
-      w.style.transform = "translateX(-15%) scale(.9)";
-      return;
-    }
-    // smal scherm: schuif de boom precies in de vrije band tussen nav en paneel
-    const scale = 0.66;
-    const prev = w.style.transition;
-    w.style.transition = "none";
-    w.style.transform = `scale(${scale})`;
-    const node = st.node[openRef.current!];
-    const navBottom = 92;
-    const panelTop = p ? p.getBoundingClientRect().top : window.innerHeight - 220;
-    let dy = 0;
-    if (node) {
-      const r = node.getBoundingClientRect();
-      const bandTop = navBottom + 8;
-      const bandBottom = panelTop - 14;
-      if (r.height > bandBottom - bandTop) {
-        dy = bandTop + 60 - r.top;
-      } else if (r.bottom > bandBottom) {
-        dy = bandBottom - r.bottom;
-      } else if (r.top < bandTop) {
-        dy = bandTop - r.top;
+
+    // Mobiel: boom is ambient decor — vast gecentreerd, niet gemeten.
+    if (mob) {
+      if (w) {
+        w.style.transform = "none";
+        w.style.opacity = "0.35";
       }
+      return;
     }
-    void w.offsetHeight;
-    w.style.transition = prev || "transform 1.1s cubic-bezier(.2,.8,.2,1)";
-    w.style.transform = `translateY(${dy.toFixed(1)}px) scale(${scale})`;
+
+    if (st.heroEl) {
+      st.heroEl.style.transition = "opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1)";
+      st.heroEl.style.transformOrigin = "left top";
+      st.heroEl.style.opacity = isOpen ? "0.7" : "1";
+      st.heroEl.style.transform = "none";
+    }
+    if (!w) return;
+    w.style.opacity = "1";
+
+    // gesloten: meet hoeveel de boom naar rechts moet zodat de hero-tekst vrij blijft
+    if (!isOpen) {
+      const scale0 = 0.88;
+      const prev0 = w.style.transition;
+      w.style.transition = "none";
+      w.style.transform = `scale(${scale0})`;
+      let dx = 0;
+      const hero = st.heroEl;
+      const first = st.node[0];
+      if (hero && first) {
+        const hr = hero.getBoundingClientRect();
+        const nr = first.getBoundingClientRect();
+        dx = Math.max(0, hr.right + 28 - nr.left);
+        const overflow = nr.right + dx - (window.innerWidth - 16);
+        if (overflow > 0) dx -= overflow;
+        dx = Math.max(0, dx);
+      }
+      void w.offsetHeight;
+      w.style.transition = prev0 || "transform 1.1s cubic-bezier(.2,.8,.2,1)";
+      w.style.transform = `translateX(${dx.toFixed(1)}px) scale(${scale0})`;
+      st.closedDx = dx;
+      return;
+    }
+    w.style.transform = `translateX(${(st.closedDx * 0.35).toFixed(1)}px) scale(.82)`;
   };
 
   const resetBloom = () => {
@@ -456,11 +493,13 @@ function MeerDiensten() {
     if (openRef.current === i) return;
     clearTimeout(st.bloomTimer);
     resetBloom();
-    const chain = [0];
-    data.surges.forEach((s, k) => {
-      if (s.s === i && k > 0) chain.push(k);
-    });
-    st.surgeAnim = { chain, t: 0, dur: 0.75 };
+    if (!mobileRef.current) {
+      const chain = [0];
+      data.surges.forEach((s, k) => {
+        if (s.s === i && k > 0) chain.push(k);
+      });
+      st.surgeAnim = { chain, t: 0, dur: 0.75 };
+    }
     setOpen(i);
   };
 
@@ -476,7 +515,7 @@ function MeerDiensten() {
   // Reageer op state-wissel: dim takken, plan bloei, verschuif de boom.
   useEffect(() => {
     openRef.current = open;
-    if (open !== null) {
+    if (open !== null && !mobileRef.current) {
       data.branches.forEach((b, k) => {
         const el = st.branch[k];
         if (el) el.style.opacity = b.s === -1 || b.s === open ? "1" : "0.12";
@@ -503,8 +542,12 @@ function MeerDiensten() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  // Mount: dash-lengtes, listeners en rAF-loop.
+  // Mount: dash-lengtes, resize-listener, rAF-groei-loop.
   useEffect(() => {
+    const m = readMobile();
+    mobileRef.current = m;
+    setMobile(m);
+
     st.branch.forEach((el, i) => {
       if (!el) return;
       const L = el.getTotalLength();
@@ -529,38 +572,46 @@ function MeerDiensten() {
       el.style.strokeDashoffset = String(L);
     });
 
-    st.onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      st.pTarget = max > 0 ? Math.min(1, (window.scrollY || window.pageYOffset || 0) / max) : 0;
+    st.onResize = () => {
+      const nm = readMobile();
+      if (nm !== mobileRef.current) {
+        mobileRef.current = nm;
+        setMobile(nm);
+      }
+      applyLayout();
     };
-    st.onResize = () => applyLayout();
-    window.addEventListener("scroll", st.onScroll, { passive: true });
     window.addEventListener("resize", st.onResize);
-    st.onScroll();
-    st.p = st.pTarget;
     applyLayout();
-    st.last = performance.now();
+    requestAnimationFrame(() => applyLayout());
 
-    const loop = (t: number) => {
-      const dt = Math.min(0.05, (t - st.last) / 1000);
-      st.last = t;
-      tick(dt);
+    if (st.reduced) {
+      // reduced motion: toon de boom direct volgroeid, geen loop.
+      st.elapsed = 999;
+      tick(0.05);
+    } else {
+      st.last = performance.now();
+      const loop = (t: number) => {
+        const dt = Math.min(0.05, (t - st.last) / 1000);
+        st.last = t;
+        tick(dt);
+        st.raf = requestAnimationFrame(loop);
+      };
       st.raf = requestAnimationFrame(loop);
-    };
-    st.raf = requestAnimationFrame(loop);
+    }
 
     return () => {
       cancelAnimationFrame(st.raf);
       clearTimeout(st.bloomTimer);
-      if (st.onScroll) window.removeEventListener("scroll", st.onScroll);
       if (st.onResize) window.removeEventListener("resize", st.onResize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const tick = (dt: number) => {
-    st.p += (st.pTarget - st.p) * 0.09;
-    // baby-boom: bij scroll 0 staat er al een kleine stam met eerste twijgen
+    // groeit automatisch bij het openen van de pagina (0.6s aanloop, 5.4s groei)
+    st.elapsed += dt;
+    const raw = Math.max(0, Math.min(1, (st.elapsed - 0.6) / 5.4));
+    st.p = 1 - Math.pow(1 - raw, 2.2);
     const p = 0.12 + st.p * 0.88;
 
     data.branches.forEach((b, i) => {
@@ -577,6 +628,7 @@ function MeerDiensten() {
       }
     });
 
+    const mob = mobileRef.current;
     SERVICES.forEach((_s, i) => {
       const el = st.node[i];
       if (!el) return;
@@ -585,17 +637,10 @@ function MeerDiensten() {
       el.style.opacity = (
         openRef.current === null || openRef.current === i ? k : k * 0.18
       ).toFixed(3);
-      el.style.pointerEvents = k > 0.8 ? "auto" : "none";
+      el.style.pointerEvents = !mob && k > 0.8 ? "auto" : "none";
     });
 
-    if (st.heroEl) {
-      const k = Math.min(1, st.p / 0.35);
-      st.heroEl.style.opacity = (1 - k * 0.45).toFixed(3);
-      st.heroEl.style.transform = `translateY(${(-k * 90).toFixed(1)}px) scale(${(1 - k * 0.26).toFixed(3)})`;
-      st.heroEl.style.transformOrigin = "left top";
-    }
-
-    // energie-puls van de stam naar het gekozen knooppunt
+    // energie-puls van de stam naar het gekozen knooppunt (alleen desktop)
     if (st.surgeAnim) {
       st.surgeAnim.t += dt / st.surgeAnim.dur;
       const chain = st.surgeAnim.chain;
@@ -623,15 +668,16 @@ function MeerDiensten() {
     <div
       style={{
         position: "relative",
-        background: "#060607",
+        background: BG,
         fontFamily: "'Sora',Helvetica,Arial,sans-serif",
         color: "#efeff1",
-        minHeight: "360vh",
+        minHeight: "100dvh",
+        overflow: "hidden",
       }}
     >
       <style>{KEYFRAMES}</style>
 
-      {/* Achtergrond: halo, bodemgloed, vallende blaadjes (z-0) */}
+      {/* Achtergrond: halo, bodemgloed, koele diagonaal, blaadjes (z-0) */}
       <div
         style={{
           position: "fixed",
@@ -659,7 +705,7 @@ function MeerDiensten() {
               borderRadius: "50%",
               background: "radial-gradient(circle,rgba(255,60,60,.16),transparent 66%)",
               filter: "blur(90px)",
-              animation: "md-haloDrift 26s ease-in-out infinite",
+              animation: reduced ? "none" : "md-haloDrift 26s ease-in-out infinite",
             }}
           />
         </div>
@@ -668,7 +714,14 @@ function MeerDiensten() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse at 50% 95%,rgba(255,50,50,.10),transparent 55%)",
+              "radial-gradient(ellipse at 50% 95%,rgba(255,50,50,.13),transparent 58%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(160deg,rgba(70,70,92,.22),transparent 55%)",
           }}
         />
         {leaves.map((lf, i) => (
@@ -690,19 +743,19 @@ function MeerDiensten() {
         ))}
       </div>
 
-      {/* SVG-boom (z-1) — klik naast een node = sluiten */}
+      {/* SVG-boom (z-1) — klik naast een node = sluiten (alleen desktop) */}
       <div
         ref={(el) => {
           st.svgWrapEl = el;
         }}
         onClick={() => {
-          if (openRef.current !== null) closeNode();
+          if (!mobileRef.current && openRef.current !== null) closeNode();
         }}
         style={{
           position: "fixed",
           inset: 0,
           zIndex: 1,
-          transition: "transform 1.1s cubic-bezier(.2,.8,.2,1)",
+          transition: "transform 1.1s cubic-bezier(.2,.8,.2,1),opacity 1.2s ease",
         }}
       >
         <svg
@@ -782,21 +835,21 @@ function MeerDiensten() {
                 }}
                 onClick={(ev) => {
                   ev.stopPropagation();
-                  openNode(i);
+                  if (!mobileRef.current) openNode(i);
                 }}
                 role="button"
-                tabIndex={0}
+                tabIndex={mobile ? -1 : 0}
                 aria-label={`${s.label} — ${s.sub}`}
                 onKeyDown={(ev) => {
                   if (ev.key === "Enter" || ev.key === " ") {
                     ev.preventDefault();
                     ev.stopPropagation();
-                    openNode(i);
+                    if (!mobileRef.current) openNode(i);
                   }
                 }}
                 style={{ opacity: 0, cursor: "pointer", pointerEvents: "none" }}
               >
-                <rect x={x - 52} y={y - 52} width="86" height="86" fill="transparent" />
+                <rect x={x - 52} y={y - 52} width="104" height="104" fill="transparent" />
                 <g
                   ref={(el) => {
                     st.frame[i] = el;
@@ -813,7 +866,7 @@ function MeerDiensten() {
                     y={y - 30}
                     width="60"
                     height="60"
-                    fill="rgba(6,6,7,.7)"
+                    fill="rgba(21,21,27,.7)"
                     stroke={RED(0.75)}
                     strokeWidth="1.1"
                     transform={`rotate(45 ${x} ${y})`}
@@ -827,7 +880,7 @@ function MeerDiensten() {
                     stroke="rgba(255,70,70,.3)"
                     strokeWidth=".8"
                     transform={`rotate(45 ${x} ${y})`}
-                    style={{ animation: "md-breathe 5s ease-in-out infinite" }}
+                    style={{ animation: reduced ? "none" : "md-breathe 5s ease-in-out infinite" }}
                   />
                 </g>
                 <g style={{ transition: "opacity .5s ease" }}>
@@ -893,64 +946,192 @@ function MeerDiensten() {
       {/* Nav — identiek aan de hoofdpagina */}
       <Nav />
 
-      {/* Hero (z-5) */}
-      <div
-        ref={(el) => {
-          st.heroEl = el;
-        }}
-        style={{
-          position: "fixed",
-          left: "40px",
-          top: "24vh",
-          zIndex: 5,
-          maxWidth: "430px",
-          pointerEvents: "none",
-        }}
-      >
+      {/* Hero (z-5) — desktop: vaste kolom links; mobiel: bovenaan de kaartlijst */}
+      {!mobile && (
         <div
+          ref={(el) => {
+            st.heroEl = el;
+          }}
           style={{
-            fontSize: "11.5px",
-            fontWeight: 500,
-            letterSpacing: ".22em",
-            textTransform: "uppercase",
-            color: "#ff4b4b",
+            position: "fixed",
+            left: "40px",
+            top: "24vh",
+            zIndex: 5,
+            maxWidth: "430px",
+            pointerEvents: "none",
           }}
         >
-          Ook los af te nemen
+          <div
+            style={{
+              fontSize: "11.5px",
+              fontWeight: 500,
+              letterSpacing: ".22em",
+              textTransform: "uppercase",
+              color: "#ff4b4b",
+            }}
+          >
+            Ook los af te nemen
+          </div>
+          <h1
+            style={{
+              margin: "14px 0 18px",
+              fontSize: "clamp(34px, 6vw, 60px)",
+              fontWeight: 300,
+              letterSpacing: "-0.03em",
+              lineHeight: 1,
+            }}
+          >
+            Alles wat
+            <br />
+            <span style={{ fontWeight: 600 }}>wij kunnen</span>
+          </h1>
+          <p style={{ fontSize: "14.5px", lineHeight: 1.75, color: "#8f8f98", fontWeight: 300 }}>
+            Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen, zonder dat
+            we een nieuwe site hoeven te bouwen.
+          </p>
+          <div
+            style={{
+              marginTop: "30px",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              fontSize: "10.5px",
+              letterSpacing: ".24em",
+              textTransform: "uppercase",
+              color: "#77777f",
+            }}
+          >
+            <span
+              style={{ display: "block", width: "34px", height: "1px", background: "#ff4b4b" }}
+            />
+            <span>Kies een dienst</span>
+          </div>
         </div>
-        <h1
-          style={{
-            margin: "14px 0 18px",
-            fontSize: "60px",
-            fontWeight: 300,
-            letterSpacing: "-0.03em",
-            lineHeight: 1,
-          }}
-        >
-          Alles wat
-          <br />
-          <span style={{ fontWeight: 600 }}>wij kunnen</span>
-        </h1>
-        <p style={{ fontSize: "14.5px", lineHeight: 1.75, color: "#8f8f98", fontWeight: 300 }}>
-          Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen, zonder dat
-          we een nieuwe site hoeven te bouwen.
-        </p>
+      )}
+
+      {/* Mobiel: gestapelde dienst-kaarten (leesbaar + aantikbaar zonder zoomen) */}
+      {mobile && (
         <div
           style={{
-            marginTop: "30px",
+            position: "fixed",
+            inset: 0,
+            zIndex: 5,
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
+            padding: "104px 20px 40px",
             display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            fontSize: "10.5px",
-            letterSpacing: ".24em",
-            textTransform: "uppercase",
-            color: "#5e5e66",
+            flexDirection: "column",
           }}
         >
-          <span style={{ display: "block", width: "34px", height: "1px", background: "#ff4b4b" }} />
-          <span>Scroll om te laten groeien</span>
+          <div
+            style={{
+              fontSize: "11.5px",
+              fontWeight: 500,
+              letterSpacing: ".22em",
+              textTransform: "uppercase",
+              color: "#ff4b4b",
+            }}
+          >
+            Ook los af te nemen
+          </div>
+          <h1
+            style={{
+              margin: "12px 0 14px",
+              fontSize: "clamp(34px, 11vw, 52px)",
+              fontWeight: 300,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.02,
+            }}
+          >
+            Alles wat <span style={{ fontWeight: 600 }}>wij kunnen</span>
+          </h1>
+          <p
+            style={{
+              fontSize: "14.5px",
+              lineHeight: 1.7,
+              color: "#8f8f98",
+              fontWeight: 300,
+              maxWidth: "34ch",
+            }}
+          >
+            Eén stam, drie takken. Hosting, snelheid en vindbaarheid — los af te nemen, zonder dat
+            we een nieuwe site hoeven te bouwen.
+          </p>
+
+          <div style={{ marginTop: "28px", display: "flex", flexDirection: "column", gap: "12px" }}>
+            {SERVICES.map((s, i) => (
+              <button
+                key={s.key}
+                onClick={() => openNode(i)}
+                aria-label={`${s.label} — ${s.sub}, bekijk details`}
+                style={{
+                  appearance: "none",
+                  textAlign: "left",
+                  width: "100%",
+                  minHeight: "44px",
+                  padding: "18px 20px",
+                  borderRadius: "2px",
+                  border:
+                    open === i
+                      ? "1px solid rgba(255,70,70,.55)"
+                      : "1px solid rgba(255,255,255,.1)",
+                  background: "rgba(9,9,11,.55)",
+                  color: "#efeff1",
+                  cursor: "pointer",
+                  fontFamily: "'Sora',Helvetica,Arial,sans-serif",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "12px" }}>
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: 500,
+                      letterSpacing: ".18em",
+                      textTransform: "uppercase",
+                      color: "#ff4b4b",
+                    }}
+                  >
+                    {s.label}
+                  </span>
+                  <span style={{ fontSize: "13px", color: "#78787f" }}>{s.sub}</span>
+                </div>
+                <p
+                  style={{
+                    margin: "10px 0 0",
+                    fontSize: "13.5px",
+                    lineHeight: 1.6,
+                    color: "#9a9aa2",
+                    fontWeight: 300,
+                  }}
+                >
+                  {s.desc}
+                </p>
+              </button>
+            ))}
+          </div>
+
+          <div style={{ flex: 1 }} />
+          <div
+            style={{
+              marginTop: "40px",
+              paddingTop: "22px",
+              borderTop: "1px solid rgba(255,255,255,0.07)",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px 16px",
+              fontSize: "12px",
+              color: "#6f6f77",
+            }}
+          >
+            <span style={{ fontWeight: 600, color: "#efeff1" }}>
+              AIMI<span style={{ color: "#ff4b4b" }}>.</span>
+            </span>
+            <span>© 2026 AIMI — Alle rechten voorbehouden</span>
+            <a href="/privacybeleid">Privacybeleid</a>
+            <a href="/algemene-voorwaarden">Algemene Voorwaarden</a>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Detailpaneel (z-7) */}
       <div
@@ -1005,7 +1186,14 @@ function MeerDiensten() {
               onKeyDown={(ev) => {
                 if (ev.key === "Enter" || ev.key === " ") closeNode();
               }}
-              style={{ cursor: "pointer", fontSize: "15px", color: "#78787f", lineHeight: 1 }}
+              style={{
+                cursor: "pointer",
+                fontSize: "20px",
+                color: "#78787f",
+                lineHeight: 1,
+                padding: "4px 8px",
+                margin: "-4px -8px",
+              }}
             >
               ×
             </div>
@@ -1078,36 +1266,38 @@ function MeerDiensten() {
         </div>
       </div>
 
-      {/* Footer (onderaan de 360vh, z-5) */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 5,
-          padding: "22px 40px",
-          borderTop: "1px solid rgba(255,255,255,0.07)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "16px",
-          flexWrap: "wrap",
-          fontSize: "12px",
-          color: "#6f6f77",
-          background: "rgba(6,6,7,.75)",
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <div style={{ fontWeight: 600, color: "#efeff1" }}>
-          AIMI<span style={{ color: "#ff4b4b" }}>.</span>
+      {/* Footer — desktop: vast onderaan (mobiel zit in de kaartkolom) */}
+      {!mobile && (
+        <div
+          style={{
+            position: "fixed",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 5,
+            padding: "22px 40px",
+            borderTop: "1px solid rgba(255,255,255,0.07)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "16px",
+            flexWrap: "wrap",
+            fontSize: "12px",
+            color: "#6f6f77",
+            background: "rgba(21,21,27,.75)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <div style={{ fontWeight: 600, color: "#efeff1" }}>
+            AIMI<span style={{ color: "#ff4b4b" }}>.</span>
+          </div>
+          <div>© 2026 AIMI — Alle rechten voorbehouden</div>
+          <div style={{ display: "flex", gap: "24px" }}>
+            <a href="/privacybeleid">Privacybeleid</a>
+            <a href="/algemene-voorwaarden">Algemene Voorwaarden voor AIMI</a>
+          </div>
         </div>
-        <div>© 2026 AIMI — Alle rechten voorbehouden</div>
-        <div style={{ display: "flex", gap: "24px" }}>
-          <a href="/privacybeleid">Privacybeleid</a>
-          <a href="/algemene-voorwaarden">Algemene Voorwaarden voor AIMI</a>
-        </div>
-      </div>
+      )}
 
       <CookieBanner />
     </div>

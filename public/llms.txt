@@ -1,7 +1,24 @@
 # AIMI
 
-> Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.
+> Web agency van Aidan & Milan. Wij ontwerpen, bouwen en hosten snelle, professionele websites en webshops voor ondernemers — met focus op de regio Veendam (Groningen) en Hoogeveen (Drenthe), en klanten door heel Nederland.
 
 ## Pages
 
-- [Home](/): Overview of AIMI's services, work, pricing, and contact.
+- [Home](/): Overzicht van AIMI's diensten, werkwijze, tarieven en contact.
+- [Website laten maken in Veendam](/website-laten-maken-veendam): Lokale landingspagina voor webdesign, webshops en SEO in Veendam en omgeving.
+- [Website laten maken in Hoogeveen](/website-laten-maken-hoogeveen): Lokale landingspagina voor webdesign, webshops en SEO in Hoogeveen en omgeving.
+- [Meer diensten](/meer-diensten): Losse diensten — hosting, performance-optimalisatie en SEO.
+- [Over ons](/over-ons): Wie zijn Aidan & Milan en hoe werkt AIMI.
+- [FAQ](/faq): Veelgestelde vragen over websites laten maken, prijzen en werkwijze.
+
+## Diensten
+
+- Website laten maken (vanaf € 1.250)
+- Webshop laten maken
+- SEO & vindbaarheid in Google
+- Hosting, onderhoud en beveiliging
+
+## Contact
+
+- E-mail: sales@aimi-development.nl
+- Regio: Veendam, Hoogeveen, Groningen, Drenthe en heel Nederland

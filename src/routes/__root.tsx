@@ -138,8 +138,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           alternateName: "AIMI Development",
           url: "https://aimi-development.nl",
           logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          email: "sales@aimi-development.nl",
           description:
             "AIMI is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+          areaServed: [
+            { "@type": "AdministrativeArea", name: "Groningen" },
+            { "@type": "AdministrativeArea", name: "Drenthe" },
+            { "@type": "City", name: "Veendam" },
+            { "@type": "City", name: "Hoogeveen" },
+            { "@type": "Country", name: "Nederland" },
+          ],
         }),
       },
     ],

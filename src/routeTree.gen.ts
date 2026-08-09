@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WebsiteLatenMakenVeendamRouteImport } from './routes/website-laten-maken-veendam'
+import { Route as WebsiteLatenMakenHoogeveenRouteImport } from './routes/website-laten-maken-hoogeveen'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacybeleidRouteImport } from './routes/privacybeleid'
@@ -39,6 +41,18 @@ import { Route as AuthenticatedAdminProjectenProjectIdRouteImport } from './rout
 import { Route as AuthenticatedAdminChangesChangeIdRouteImport } from './routes/_authenticated/admin.changes.$changeId'
 import { Route as AuthenticatedAdminAccountsAccountIdRouteImport } from './routes/_authenticated/admin.accounts.$accountId'
 
+const WebsiteLatenMakenVeendamRoute =
+  WebsiteLatenMakenVeendamRouteImport.update({
+    id: '/website-laten-maken-veendam',
+    path: '/website-laten-maken-veendam',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenHoogeveenRoute =
+  WebsiteLatenMakenHoogeveenRouteImport.update({
+    id: '/website-laten-maken-hoogeveen',
+    path: '/website-laten-maken-hoogeveen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
   id: '/track.js',
   path: '/track.js',
@@ -205,6 +219,8 @@ export interface FileRoutesByFullPath {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -235,6 +251,8 @@ export interface FileRoutesByTo {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -267,6 +285,8 @@ export interface FileRoutesById {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
@@ -299,6 +319,8 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-veendam'
     | '/account'
     | '/admin'
     | '/portal'
@@ -329,6 +351,8 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-veendam'
     | '/account'
     | '/admin'
     | '/portal'
@@ -360,6 +384,8 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-veendam'
     | '/_authenticated/account'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
@@ -392,6 +418,8 @@ export interface RootRouteChildren {
   PrivacybeleidRoute: typeof PrivacybeleidRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrackDotjsRoute: typeof TrackDotjsRoute
+  WebsiteLatenMakenHoogeveenRoute: typeof WebsiteLatenMakenHoogeveenRoute
+  WebsiteLatenMakenVeendamRoute: typeof WebsiteLatenMakenVeendamRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
   ApiTelegramWebhookRoute: typeof ApiTelegramWebhookRoute
@@ -400,6 +428,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/website-laten-maken-veendam': {
+      id: '/website-laten-maken-veendam'
+      path: '/website-laten-maken-veendam'
+      fullPath: '/website-laten-maken-veendam'
+      preLoaderRoute: typeof WebsiteLatenMakenVeendamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-hoogeveen': {
+      id: '/website-laten-maken-hoogeveen'
+      path: '/website-laten-maken-hoogeveen'
+      fullPath: '/website-laten-maken-hoogeveen'
+      preLoaderRoute: typeof WebsiteLatenMakenHoogeveenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/track.js': {
       id: '/track.js'
       path: '/track.js'
@@ -728,6 +770,8 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacybeleidRoute: PrivacybeleidRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrackDotjsRoute: TrackDotjsRoute,
+  WebsiteLatenMakenHoogeveenRoute: WebsiteLatenMakenHoogeveenRoute,
+  WebsiteLatenMakenVeendamRoute: WebsiteLatenMakenVeendamRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
   ApiTelegramWebhookRoute: ApiTelegramWebhookRoute,

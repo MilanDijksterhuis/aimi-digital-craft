@@ -13,12 +13,13 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIMI Development- Websites die werken. Design & hosting." },
+      { title: "AIMI Development — Website laten maken | Webdesign Veendam & Hoogeveen" },
       {
         name: "description",
         content:
-          "AIMI Development is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+          "Website of webshop laten maken? AIMI ontwerpt, bouwt en host snelle, professionele websites — voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 1.250.",
       },
+      { name: "keywords", content: "website laten maken, webdesign, webshop laten maken, website laten maken Veendam, website laten maken Hoogeveen, SEO Groningen, SEO Drenthe" },
       { property: "og:title", content: "AIMI — Websites die werken." },
       {
         property: "og:description",
@@ -45,7 +46,14 @@ export const Route = createFileRoute("/")({
           url: "https://aimi-development.nl/",
           logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
           image: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
-          areaServed: "NL",
+          email: "sales@aimi-development.nl",
+          areaServed: [
+            { "@type": "City", name: "Veendam" },
+            { "@type": "City", name: "Hoogeveen" },
+            { "@type": "AdministrativeArea", name: "Groningen" },
+            { "@type": "AdministrativeArea", name: "Drenthe" },
+            { "@type": "Country", name: "Nederland" },
+          ],
           founder: [
             { "@type": "Person", name: "Aidan" },
             { "@type": "Person", name: "Milan" },

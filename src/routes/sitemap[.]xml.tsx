@@ -7,30 +7,38 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+  lastmod?: string;
 }
+
+// Eén datum per build; Google gebruikt <lastmod> als hint voor hercrawlen.
+const LASTMOD = new Date().toISOString().slice(0, 10);
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
         const entries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
+          // Kernpagina's
+          { path: "/", changefreq: "weekly", priority: "1.0", lastmod: LASTMOD },
 
-          // Uncomment zodra de pagina daadwerkelijk live staat
-          // { path: "/website-laten-maken", changefreq: "monthly", priority: "0.9" },
-          // { path: "/webshop-laten-maken", changefreq: "monthly", priority: "0.9" },
-          // { path: "/onderhoud-hosting", changefreq: "monthly", priority: "0.8" },
-          // { path: "/cases", changefreq: "monthly", priority: "0.8" },
-          // { path: "/over-ons", changefreq: "yearly", priority: "0.6" },
-          // { path: "/contact", changefreq: "yearly", priority: "0.6" },
+          // Lokale landingspagina's — hoofddoel voor lokale SEO (Veendam/Hoogeveen)
+          { path: "/website-laten-maken-veendam", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
+          { path: "/website-laten-maken-hoogeveen", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD },
 
-          { path: "/algemene-voorwaarden", changefreq: "yearly", priority: "0.3" },
-          { path: "/privacybeleid", changefreq: "yearly", priority: "0.3" },
+          // Overige publieke pagina's
+          { path: "/meer-diensten", changefreq: "monthly", priority: "0.8", lastmod: LASTMOD },
+          { path: "/over-ons", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
+          { path: "/faq", changefreq: "monthly", priority: "0.7", lastmod: LASTMOD },
+
+          // Juridisch
+          { path: "/algemene-voorwaarden", changefreq: "yearly", priority: "0.3", lastmod: LASTMOD },
+          { path: "/privacybeleid", changefreq: "yearly", priority: "0.3", lastmod: LASTMOD },
         ];
         const urls = entries.map((e) =>
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,

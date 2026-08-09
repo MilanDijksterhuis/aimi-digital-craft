@@ -1,4 +1,4 @@
-# Node Description Batch 38 of 38
+# Node Description Batch 38 of 40
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,25 +17,46 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "ui_table_tablebody": "TableBody" | kind=code-symbol | source=src/components/ui/table.tsx:L22 | neighbors=[table.tsx]
-- "ui_table_tablecaption": "TableCaption" | kind=code-symbol | source=src/components/ui/table.tsx:L86 | neighbors=[table.tsx]
-- "ui_table_tablecell": "TableCell" | kind=code-symbol | source=src/components/ui/table.tsx:L71 | neighbors=[table.tsx]
-- "ui_table_tablefooter": "TableFooter" | kind=code-symbol | source=src/components/ui/table.tsx:L30 | neighbors=[table.tsx]
-- "ui_table_tablehead": "TableHead" | kind=code-symbol | source=src/components/ui/table.tsx:L56 | neighbors=[table.tsx]
-- "ui_table_tableheader": "TableHeader" | kind=code-symbol | source=src/components/ui/table.tsx:L14 | neighbors=[table.tsx]
-- "ui_table_tablerow": "TableRow" | kind=code-symbol | source=src/components/ui/table.tsx:L42 | neighbors=[table.tsx]
-- "ui_textarea_textarea": "Textarea" | kind=code-symbol | source=src/components/ui/textarea.tsx:L5 | neighbors=[textarea.tsx]
-- "ui_toggle_group_togglegroup": "ToggleGroup" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L15 | neighbors=[toggle-group.tsx]
-- "ui_toggle_group_togglegroupcontext": "ToggleGroupContext" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L10 | neighbors=[toggle-group.tsx]
-- "ui_toggle_group_togglegroupitem": "ToggleGroupItem" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L31 | neighbors=[toggle-group.tsx]
-- "ui_toggle_toggle": "Toggle" | kind=code-symbol | source=src/components/ui/toggle.tsx:L29 | neighbors=[toggle.tsx]
-- "vite_config_manualchunks": "manualChunks()" | kind=code-symbol | source=vite.config.ts:L17 | neighbors=[vite.config.ts]
-- "migrations_20260523183958_4e926af8_8fa7_4dc2_9067_5b7dd7cd2ec1": "20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql" | kind=code-symbol | source=supabase/migrations/20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql:L1
-- "migrations_20260523211545_420d64f5_a49b_4927_acc4_a86c972115a1": "20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql" | kind=code-symbol | source=supabase/migrations/20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql:L1
-- "migrations_20260523221752_c080e1a1_411c_4668_a60e_b2cc7a356a1d": "20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql" | kind=code-symbol | source=supabase/migrations/20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql:L1
-- "migrations_20260523223714_ac0e82da_3a19_4ef9_a41e_91e875e01193": "20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql" | kind=code-symbol | source=supabase/migrations/20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql:L1
-- "ui_aspect_ratio": "aspect-ratio.tsx" | kind=code-symbol | source=src/components/ui/aspect-ratio.tsx:L1
-- "ui_collapsible": "collapsible.tsx" | kind=code-symbol | source=src/components/ui/collapsible.tsx:L1
+- "ui_dropdown_menu_dropdownmenusubtrigger": "DropdownMenuSubTrigger" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L21 | neighbors=[dropdown-menu.tsx]
+- "ui_form_formcontrol": "FormControl" | kind=code-symbol | source=src/components/ui/form.tsx:L103 | neighbors=[form.tsx]
+- "ui_form_formdescription": "FormDescription" | kind=code-symbol | source=src/components/ui/form.tsx:L121 | neighbors=[form.tsx]
+- "ui_form_formfield": "FormField()" | kind=code-symbol | source=src/components/ui/form.tsx:L27 | neighbors=[form.tsx]
+- "ui_form_formfieldcontext": "FormFieldContext" | kind=code-symbol | source=src/components/ui/form.tsx:L25 | neighbors=[form.tsx]
+- "ui_form_formfieldcontextvalue": "FormFieldContextValue" | kind=code-symbol | source=src/components/ui/form.tsx:L18 | neighbors=[form.tsx]
+- "ui_form_formitem": "FormItem" | kind=code-symbol | source=src/components/ui/form.tsx:L73 | neighbors=[form.tsx]
+- "ui_form_formitemcontext": "FormItemContext" | kind=code-symbol | source=src/components/ui/form.tsx:L71 | neighbors=[form.tsx]
+- "ui_form_formitemcontextvalue": "FormItemContextValue" | kind=code-symbol | source=src/components/ui/form.tsx:L67 | neighbors=[form.tsx]
+- "ui_form_formlabel": "FormLabel" | kind=code-symbol | source=src/components/ui/form.tsx:L86 | neighbors=[form.tsx]
+- "ui_form_formmessage": "FormMessage" | kind=code-symbol | source=src/components/ui/form.tsx:L138 | neighbors=[form.tsx]
+- "ui_form_useformfield": "useFormField()" | kind=code-symbol | source=src/components/ui/form.tsx:L40 | neighbors=[form.tsx]
+- "ui_hover_card_hovercardcontent": "HoverCardContent" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L10 | neighbors=[hover-card.tsx]
+- "ui_input_otp_inputotp": "InputOTP" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L7 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpgroup": "InputOTPGroup" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L23 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpseparator": "InputOTPSeparator" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L59 | neighbors=[input-otp.tsx]
+- "ui_input_otp_inputotpslot": "InputOTPSlot" | kind=code-symbol | source=src/components/ui/input-otp.tsx:L31 | neighbors=[input-otp.tsx]
+- "ui_label_labelvariants": "labelVariants" | kind=code-symbol | source=src/components/ui/label.tsx:L9 | neighbors=[label.tsx]
+- "ui_menubar_menubar": "Menubar" | kind=code-symbol | source=src/components/ui/menubar.tsx:L27 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcheckboxitem": "MenubarCheckboxItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L131 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarcontent": "MenubarContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L93 | neighbors=[menubar.tsx]
+- "ui_menubar_menubargroup": "MenubarGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L11 | neighbors=[menubar.tsx]
+- "ui_menubar_menubaritem": "MenubarItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L113 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarlabel": "MenubarLabel" | kind=code-symbol | source=src/components/ui/menubar.tsx:L176 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarmenu": "MenubarMenu()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L7 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarportal": "MenubarPortal()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L15 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarradiogroup": "MenubarRadioGroup()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L19 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarradioitem": "MenubarRadioItem" | kind=code-symbol | source=src/components/ui/menubar.tsx:L154 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarseparator": "MenubarSeparator" | kind=code-symbol | source=src/components/ui/menubar.tsx:L190 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarshortcut": "MenubarShortcut()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L202 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsub": "MenubarSub()" | kind=code-symbol | source=src/components/ui/menubar.tsx:L23 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsubcontent": "MenubarSubContent" | kind=code-symbol | source=src/components/ui/menubar.tsx:L78 | neighbors=[menubar.tsx]
+- "ui_menubar_menubarsubtrigger": "MenubarSubTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L57 | neighbors=[menubar.tsx]
+- "ui_menubar_menubartrigger": "MenubarTrigger" | kind=code-symbol | source=src/components/ui/menubar.tsx:L42 | neighbors=[menubar.tsx]
+- "ui_navigation_menu_navigationmenu": "NavigationMenu" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L8 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenucontent": "NavigationMenuContent" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L59 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenuindicator": "NavigationMenuIndicator" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L93 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenulist": "NavigationMenuList" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L23 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenutrigger": "NavigationMenuTrigger" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L41 | neighbors=[navigation-menu.tsx]
+- "ui_navigation_menu_navigationmenutriggerstyle": "navigationMenuTriggerStyle" | kind=code-symbol | source=src/components/ui/navigation-menu.tsx:L37 | neighbors=[navigation-menu.tsx]
 
 ## Instructions
 
