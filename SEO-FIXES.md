@@ -16,21 +16,19 @@ stellen, vereist een check op de live server. `[OK]` = gecontroleerd en in orde,
 |---|---|---|
 | `__l5e` logo-URL | **HTTP 404** | #12 **bevestigd kapot** — alle 8 verwijzingen zijn dood |
 | `/bestaat-niet-xyz` | **HTTP 404** | #89 **opgelost** — geen soft-404, geen actie nodig |
-| `http://www.` | **301 → `https://www.`** | #90 **deels** — http→https werkt, maar landt op www i.p.v. non-www |
+| `http://` → `https://` (non-www) | **301 → 200** | correct, dit is de canonieke host |
+| `https://www.` | **TLS-fout** | #90 **bevestigd kapot** — certificaat dekt `www` niet |
+| Certificaat SAN | alleen `DNS:aimi-development.nl` | oorzaak van de www-storing |
 
 De reverse proxy is nginx/1.28.3 op Ubuntu; de redirect-config staat daar, niet in deze repo.
 De CSP- en security-headers uit `src/server.ts` komen correct door op de responses.
 
-### Nog uitvoeren om #90 af te ronden
+Gemeten keten:
 
-```bash
-# Volgt na https://www. ook een 301 naar non-www, of blijft de site op www staan?
-curl -sIL http://www.aimi-development.nl/  | grep -E "^HTTP|^Location"
-curl -sIL http://aimi-development.nl/      | grep -E "^HTTP|^Location"
 ```
-
-Gewenste eindsituatie: alle drie de varianten (`http://`, `http://www.`, `https://www.`) eindigen in
-**één** 301-keten naar `https://aimi-development.nl/`, want dat is wat alle canonicals aangeven.
+http://aimi-development.nl/      → 301 → https://aimi-development.nl/ → 200        OK
+http://www.aimi-development.nl/  → 301 → https://www.aimi-development.nl/ → TLS-FOUT
+```
 
 ---
 
@@ -373,14 +371,58 @@ waardoor Google een fractie van de content ziet.
 89. **[OK — gemeten 16-08-2026]** De 404 geeft een **echte HTTP 404**, geen soft-404. TanStack Start zet
     de status correct. Geen actie nodig. *(De losse punten #64 en #65 over de Engelstalige tekst, de
     ontbrekende `<title>`-override en de ontbrekende `noindex` op die pagina blijven wél staan.)*
-90. **[HOOG — deels gemeten 16-08-2026]** http→https werkt: `http://www.` geeft een **301** naar
-    `https://www.`. Maar de redirect landt op **www**, terwijl alle canonicals naar **non-www**
-    (`https://aimi-development.nl`) wijzen. Als `https://www.aimi-development.nl/` vervolgens een 200
-    teruggeeft in plaats van een 301 naar non-www, is de hele site op twee hostnames bereikbaar →
-    duplicate content. De canonicals dempen dat, maar het is geen schone oplossing en het splitst je
-    linkwaarde. Rond de keten af in de nginx-config op de VPS (zie de twee curls bovenaan dit document):
-    `http://`, `http://www.` en `https://www.` moeten alle drie in één 301-keten eindigen op
-    `https://aimi-development.nl/`.
+90. **[HOOG — BEVESTIGD KAPOT, gemeten 16-08-2026]** **`www.aimi-development.nl` is onbereikbaar en toont
+    een certificaatwaarschuwing.** Nginx stuurt `http://www.` met een 301 naar `https://www.`, maar het
+    SSL-certificaat dekt alleen `aimi-development.nl` (SAN bevat uitsluitend `DNS:aimi-development.nl`).
+    De TLS-handshake faalt daardoor met `SSL: no alternative certificate subject name matches target
+    hostname`.
+
+    **Gevolg:** iedereen die uit gewoonte `www.` intypt, of een oude link/visitekaartje/social-profiel
+    met `www.` volgt, krijgt een volledig browser-waarschuwingsscherm ("Je verbinding is niet privé",
+    `ERR_CERT_COMMON_NAME_INVALID`) in plaats van je site. Elke backlink naar `www.` is dood en geeft
+    geen linkwaarde door; Googlebot kan die URL's niet ophalen. Dit is géén duplicate-content-probleem —
+    www serveert helemaal niets — maar een harde storing op een hostnaam die mensen wél gebruiken.
+
+    **Fix, in deze volgorde** (het certificaat moet www dekken vóórdat nginx daar https op kan serveren):
+
+    ```bash
+    # 1. Certificaat uitbreiden met www (DNS voor www wijst al naar deze server)
+    sudo certbot --nginx -d aimi-development.nl -d www.aimi-development.nl
+
+    # 2. Controleren dat www nu in de SAN staat
+    echo | openssl s_client -connect aimi-development.nl:443 -servername aimi-development.nl 2>/dev/null \
+      | openssl x509 -noout -ext subjectAltName
+    ```
+
+    Zorg daarna in de nginx-config dat `www` over https een **301 naar non-www** doet, en laat de
+    http-redirect meteen naar de canonieke host gaan in plaats van eerst naar `https://www.` (scheelt
+    een hop):
+
+    ```nginx
+    # http (beide hosts) → direct naar canonieke https-host
+    server {
+        listen 80;
+        listen [::]:80;
+        server_name aimi-development.nl www.aimi-development.nl;
+        return 301 https://aimi-development.nl$request_uri;
+    }
+
+    # https op www → 301 naar non-www
+    server {
+        listen 443 ssl;
+        listen [::]:443 ssl;
+        server_name www.aimi-development.nl;
+        # ssl_certificate / ssl_certificate_key: door certbot ingevuld
+        return 301 https://aimi-development.nl$request_uri;
+    }
+    ```
+
+    **Verifiëren na de fix** — beide varianten moeten in één 301 op de canonieke host eindigen:
+
+    ```bash
+    curl -sSIL http://www.aimi-development.nl/  2>&1 | grep -E "^HTTP|^Location|curl:"
+    curl -sSIL https://www.aimi-development.nl/ 2>&1 | grep -E "^HTTP|^Location|curl:"
+    ```
 91. **[MIDDEN]** Geen `<main>`-landmark op `/meer-diensten`, `/algemene-voorwaarden`, `/privacybeleid`
     en `/login`.
 92. **[MIDDEN]** Geen skip-link ("Ga naar hoofdinhoud") op de hele site.
@@ -411,16 +453,21 @@ waardoor Google een fractie van de content ziet.
 
 ## Aanbevolen volgorde
 
-**Stap 0 — verifiëren.** Afgerond op 16-08-2026, op één punt na: rond #90 af met de twee curls bovenaan.
-Resultaat: #12 is bevestigd kapot (404), #89 is geen probleem, #90 is half in orde.
+**Stap 0 — verifiëren.** Afgerond op 16-08-2026. Resultaat: #12 bevestigd kapot (404), #89 geen probleem
+(echte 404-status), #90 bevestigd kapot (certificaat dekt `www` niet).
 
-**Stap 1 — quick wins, grootste impact.**
-#12 (logo-URL — nu bevestigd 404, raakt favicon + social + alle schema's in één klap) · #10 + #11 (echte
+**Stap 1 — eerst dit, buiten de codebase om.**
+**#90 (certificaat uitbreiden naar www)** — dit is de enige bevinding waarbij echte bezoekers nu een
+foutscherm zien in plaats van je site. Kost één certbot-commando plus een nginx-blok, en staat los van
+alle andere fixes.
+
+**Stap 2 — quick wins in de code, grootste impact.**
+#12 (logo-URL — bevestigd 404, repareert favicon + social + alle schema's in één klap) · #10 + #11 (echte
 OG-afbeelding) · #19 (noindex/sitemap-conflict) · #55 (ontbrekende canonicals) · #28 (title-streepjes) ·
 #6 + #7 (prijzen gelijktrekken) · #17 (Google Fonts eruit) · #59 (H1 op `/faq`) · #37 (og:image-fallback
-in de root) · #90 (www-redirect afmaken in nginx).
+in de root).
 
-**Stap 2 — structureel, meer werk.**
+**Stap 3 — structureel, meer werk.**
 #1 t/m #5 (content server-renderbaar maken — dit is verreweg de grootste structurele winst) ·
 #70 (homepage naar dienstenpagina's linken) · #16 (Calendly repareren) · #79 + #82 (LCP en
 canvas-animatie) · #44 + #94 (NAP-data) · #61 (content uitbreiden) · #99 + #100 (privacy op orde).
