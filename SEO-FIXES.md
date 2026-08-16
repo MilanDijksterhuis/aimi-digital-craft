@@ -10,20 +10,27 @@ stellen, vereist een check op de live server. `[OK]` = gecontroleerd en in orde,
 
 ---
 
-## Eerst dit: 3 checks op de server
+## Servercontroles — uitgevoerd 16-08-2026
 
-Deze bepalen of #12, #85 en #86 echte problemen zijn of niet.
+| Check | Uitkomst | Gevolg |
+|---|---|---|
+| `__l5e` logo-URL | **HTTP 404** | #12 **bevestigd kapot** — alle 8 verwijzingen zijn dood |
+| `/bestaat-niet-xyz` | **HTTP 404** | #89 **opgelost** — geen soft-404, geen actie nodig |
+| `http://www.` | **301 → `https://www.`** | #90 **deels** — http→https werkt, maar landt op www i.p.v. non-www |
+
+De reverse proxy is nginx/1.28.3 op Ubuntu; de redirect-config staat daar, niet in deze repo.
+De CSP- en security-headers uit `src/server.ts` komen correct door op de responses.
+
+### Nog uitvoeren om #90 af te ronden
 
 ```bash
-# 1. Bestaat de logo-URL nog na de verhuizing van Lovable naar de VPS?
-curl -I https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png
-
-# 2. Geeft een niet-bestaande URL echt 404, of een soft-404 (200)?
-curl -I https://aimi-development.nl/bestaat-niet-xyz
-
-# 3. Redirect www netjes naar non-www met een 301?
-curl -I http://www.aimi-development.nl/
+# Volgt na https://www. ook een 301 naar non-www, of blijft de site op www staan?
+curl -sIL http://www.aimi-development.nl/  | grep -E "^HTTP|^Location"
+curl -sIL http://aimi-development.nl/      | grep -E "^HTTP|^Location"
 ```
+
+Gewenste eindsituatie: alle drie de varianten (`http://`, `http://www.`, `https://www.`) eindigen in
+**één** 301-keten naar `https://aimi-development.nl/`, want dat is wat alle canonicals aangeven.
 
 ---
 
@@ -77,11 +84,13 @@ waardoor Google een fractie van de content ziet.
     locatiepagina's.
 11. **[HOOG]** `public/og-image.svg` is een 285-byte placeholder (zwart vlak met de letter "A."). Geen
     logo, geen tekst, geen merk. Vervangen.
-12. **[HOOG]** [VERIFIEER] De logo-URL
+12. **[HOOG]** **BEVESTIGD KAPOT (404, gemeten 16-08-2026).** De logo-URL
     `https://aimi-development.nl/__l5e/assets-v1/f039dfe4-…/aimi-logo.png` is een **Lovable-CDN-pad** dat
-    na de verhuizing naar de eigen VPS waarschijnlijk 404't (`public/__l5e/` bestaat niet; in
-    `src/assets/` staat alleen een stub `aimi-logo.png.asset.json`). Zet een echte PNG in `public/` en
-    vervang op alle 8 plekken:
+    na de verhuizing naar de eigen VPS niet meer bestaat (`public/__l5e/` ontbreekt; in `src/assets/`
+    staat alleen een stub `aimi-logo.png.asset.json`). Gevolg: gebroken favicon, gebroken
+    apple-touch-icon, gebroken `twitter:image`, en een `logo`/`image` dat Google niet kan ophalen in
+    **alle** Organization-, LocalBusiness- en Service-schema's — waardoor de logo-rich-result vervalt.
+    Zet een echte PNG in `public/` en vervang op alle 8 plekken:
     - `src/routes/__root.tsx` r. 109 (twitter:image)
     - `src/routes/__root.tsx` r. 113 (favicon)
     - `src/routes/__root.tsx` r. 114 (apple-touch-icon)
@@ -361,13 +370,17 @@ waardoor Google een fractie van de content ziet.
 
 ## N. Technische basis
 
-89. **[HOOG]** [VERIFIEER] Geeft de 404 echt HTTP 404 of een **soft-404 (200)**? `__root.tsx` r. 157 zet
-    een `notFoundComponent`, maar noch `server.ts` noch `start.ts` zet een 404-status voor
-    niet-matchende routes. Bij een 200 is elke willekeurige URL indexeerbaar met een lege pagina.
-90. **[HOOG]** [VERIFIEER] www/non-www en http→https redirects staan **niet in de repo** (deploy is
-    PM2 + node-server via `ecosystem.config.cjs`; er is geen nginx/Caddy-config in git). Controleer op de
-    server dat `http://`, `www.` en `http://www.` alle drie een **301** naar
-    `https://aimi-development.nl` geven — anders is de hele site dubbel indexeerbaar.
+89. **[OK — gemeten 16-08-2026]** De 404 geeft een **echte HTTP 404**, geen soft-404. TanStack Start zet
+    de status correct. Geen actie nodig. *(De losse punten #64 en #65 over de Engelstalige tekst, de
+    ontbrekende `<title>`-override en de ontbrekende `noindex` op die pagina blijven wél staan.)*
+90. **[HOOG — deels gemeten 16-08-2026]** http→https werkt: `http://www.` geeft een **301** naar
+    `https://www.`. Maar de redirect landt op **www**, terwijl alle canonicals naar **non-www**
+    (`https://aimi-development.nl`) wijzen. Als `https://www.aimi-development.nl/` vervolgens een 200
+    teruggeeft in plaats van een 301 naar non-www, is de hele site op twee hostnames bereikbaar →
+    duplicate content. De canonicals dempen dat, maar het is geen schone oplossing en het splitst je
+    linkwaarde. Rond de keten af in de nginx-config op de VPS (zie de twee curls bovenaan dit document):
+    `http://`, `http://www.` en `https://www.` moeten alle drie in één 301-keten eindigen op
+    `https://aimi-development.nl/`.
 91. **[MIDDEN]** Geen `<main>`-landmark op `/meer-diensten`, `/algemene-voorwaarden`, `/privacybeleid`
     en `/login`.
 92. **[MIDDEN]** Geen skip-link ("Ga naar hoofdinhoud") op de hele site.
@@ -398,12 +411,14 @@ waardoor Google een fractie van de content ziet.
 
 ## Aanbevolen volgorde
 
-**Stap 0 — verifiëren.** De 3 curls bovenaan. Die bepalen of #12, #89 en #90 echte problemen zijn.
+**Stap 0 — verifiëren.** Afgerond op 16-08-2026, op één punt na: rond #90 af met de twee curls bovenaan.
+Resultaat: #12 is bevestigd kapot (404), #89 is geen probleem, #90 is half in orde.
 
 **Stap 1 — quick wins, grootste impact.**
-#10 + #11 (echte OG-afbeelding) · #12 (logo-URL) · #19 (noindex/sitemap-conflict) · #55 (ontbrekende
-canonicals) · #28 (title-streepjes) · #6 + #7 (prijzen gelijktrekken) · #17 (Google Fonts eruit) ·
-#59 (H1 op `/faq`) · #37 (og:image-fallback in de root).
+#12 (logo-URL — nu bevestigd 404, raakt favicon + social + alle schema's in één klap) · #10 + #11 (echte
+OG-afbeelding) · #19 (noindex/sitemap-conflict) · #55 (ontbrekende canonicals) · #28 (title-streepjes) ·
+#6 + #7 (prijzen gelijktrekken) · #17 (Google Fonts eruit) · #59 (H1 op `/faq`) · #37 (og:image-fallback
+in de root) · #90 (www-redirect afmaken in nginx).
 
 **Stap 2 — structureel, meer werk.**
 #1 t/m #5 (content server-renderbaar maken — dit is verreweg de grootste structurele winst) ·
