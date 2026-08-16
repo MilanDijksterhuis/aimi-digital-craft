@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationLanding, type LocationData } from "@/components/LocationLanding";
 import { RedDiagonalBackground } from "../components/rodeachtergrond";
+import { ORG_ID, OG_IMAGE_URL } from "@/lib/seo";
 
 const CITY = "Veendam";
 const REGION = "Groningen";
@@ -45,9 +46,8 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
       {
         name: "description",
         content:
-          "Website of webshop laten maken in Veendam? AIMI bouwt snelle, professionele websites die goed vindbaar zijn in Google. Lokaal, persoonlijk en vanaf € 499. Vraag een offerte aan.",
+          "Webdesigner in Veendam nodig? AIMI bouwt snelle, professionele websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vanaf € 499.",
       },
-      { name: "keywords", content: "website laten maken Veendam, webdesign Veendam, webshop Veendam, website bouwen Veendam, SEO Veendam" },
       { name: "geo.region", content: "NL-GR" },
       { name: "geo.placename", content: "Veendam" },
       { name: "geo.position", content: "53.1042;6.8778" },
@@ -59,7 +59,14 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: "https://aimi-development.nl/og-image.svg" },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Website laten maken in Veendam | AIMI Webdesign" },
+      {
+        name: "twitter:description",
+        content: "Snelle, professionele websites en webshops voor ondernemers in Veendam en omgeving.",
+      },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
@@ -68,12 +75,12 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": URL,
-          name: "AIMI Webdesign Veendam",
+          "@id": ORG_ID,
+          name: "AIMI",
           description:
             "Webdesigner in Veendam. Websites, webshops, SEO en hosting voor ondernemers in Veendam en omgeving.",
           url: URL,
-          image: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          image: "https://aimi-development.nl/aimi-logo.png",
           email: "sales@aimi-development.nl",
           priceRange: "€€",
           areaServed: [

@@ -3,29 +3,28 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Contact } from "@/components/Contact";
-import { SITE_URL, LOGO_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, LOGO_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/contact`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact | Vraag een offerte aan" },
+      { title: "Contact | Vraag een offerte aan — AIMI" },
       {
         name: "description",
         content:
-          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht je krijgt binnen één werkdag antwoord. Webdevelopment uit Veendam & Hoogeveen.",
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht je krijgt binnen één werkdag antwoord.",
       },
-      { name: "keywords", content: "contact AIMI, offerte website, webdesigner contact, website laten maken offerte" },
       { property: "og:title", content: "Contact AIMI" },
       { property: "og:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.svg` },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Contact AIMI" },
       { name: "twitter:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
@@ -34,7 +33,7 @@ export const Route = createFileRoute("/contact")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": URL,
+          "@id": ORG_ID,
           name: "AIMI",
           description:
             "Webdevelopment bureau van Aidan & Milan. Websites, webshops, SEO en hosting voor kleine ondernemers en ZZP'ers.",
@@ -61,7 +60,7 @@ function ContactPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <main>
+      <main id="main-content">
         <section className="pt-40 pb-8" style={{ background: "#0f0e0d" }}>
           <div className="mx-auto max-w-7xl px-6">
             <p

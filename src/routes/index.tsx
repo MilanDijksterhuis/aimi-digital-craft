@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID } from "@/lib/seo";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
@@ -13,25 +14,23 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIMI Development Website laten maken | Webdesign Veendam & Hoogeveen" },
+      { title: "Website laten maken | Webdesign Veendam & Hoogeveen | AIMI" },
       {
         name: "description",
         content:
-          "Website of webshop laten maken? AIMI ontwerpt, bouwt en host snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 1.250.",
+          "Website of webshop laten maken? AIMI bouwt snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 499.",
       },
-      { name: "keywords", content: "website laten maken, webdesign, webshop laten maken, website laten maken Veendam, website laten maken Hoogeveen, SEO Groningen, SEO Drenthe" },
       { property: "og:title", content: "AIMI Websites die werken." },
       {
         property: "og:description",
         content: "Design, development & hosting door Aidan & Milan.",
       },
-      { property: "og:url", content: "https://aimi-development.nl/" },
-      { property: "og:image", content: "https://aimi-development.nl/og-image.svg" },
-      { property: "twitter:image", content: "https://aimi-development.nl/og-image.svg" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [
-      { rel: "canonical", href: "https://aimi-development.nl/" },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "canonical", href: `${SITE_URL}/` },
       // Font wordt self-hosted (zie styles.css) — geen externe Google-Fonts link meer.
     ],
     scripts: [
@@ -40,12 +39,13 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
+          "@id": ORG_ID,
           name: "AIMI",
           description:
             "Web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.",
-          url: "https://aimi-development.nl/",
-          logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
-          image: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          url: `${SITE_URL}/`,
+          logo: LOGO_URL,
+          image: LOGO_URL,
           email: "sales@aimi-development.nl",
           areaServed: [
             { "@type": "City", name: "Veendam" },
@@ -62,9 +62,8 @@ export const Route = createFileRoute("/")({
             "@type": "OfferCatalog",
             name: "Web services",
             itemListElement: [
-              { "@type": "Offer", name: "Starter", price: "1250", priceCurrency: "EUR" },
-              { "@type": "Offer", name: "Pro", price: "3500", priceCurrency: "EUR" },
-              { "@type": "Offer", name: "Custom" },
+              { "@type": "Offer", name: "Starter", price: "499", priceCurrency: "EUR" },
+              { "@type": "Offer", name: "Pro", price: "749", priceCurrency: "EUR" },
             ],
           },
         }),
@@ -78,7 +77,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
         <Services />
         <ProcessTimeline />

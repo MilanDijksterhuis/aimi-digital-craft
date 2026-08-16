@@ -4,17 +4,18 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/privacybeleid")({
   head: () => ({
     meta: [
-      { title: "Privacybeleid AIMI" },
+      { title: "Privacybeleid — AIMI" },
       { name: "description", content: "Lees hoe AIMI omgaat met jouw persoonsgegevens." },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://aimi-development.nl/privacybeleid" }],
   }),
   component: PrivacyPage,
 });
 
 function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
+    <main id="main-content" className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
       <div className="mx-auto max-w-3xl px-6 py-20">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
           ← Terug naar home
@@ -23,7 +24,7 @@ function PrivacyPage() {
         <h1 className="mt-8 text-4xl font-bold" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
           Privacybeleid
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">Laatst bijgewerkt: juni 2025</p>
+        <p className="mt-2 text-sm text-muted-foreground">Laatst bijgewerkt: augustus 2026</p>
 
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-foreground">
           <section>
@@ -94,13 +95,15 @@ function PrivacyPage() {
           <section>
             <h2 className="mb-3 text-base font-medium text-foreground">7. Cookies</h2>
             <p>
-              Wij gebruiken uitsluitend functionele cookies die noodzakelijk zijn voor het functioneren van de website.
-              Er worden geen tracking- of advertentiecookies geplaatst.
+              Wij gebruiken functionele cookies die noodzakelijk zijn voor het functioneren van de website. Daarnaast
+              plaatsen wij, alleen met jouw toestemming, analytische cookies om te begrijpen hoe bezoekers de site
+              gebruiken. Je bepaalt via de cookiebanner welke categorieën je toestaat; zonder jouw toestemming worden
+              er geen analytische of marketingcookies geplaatst.
             </p>
           </section>
         </div>
       </div>
       <Footer />
-    </div>
+    </main>
   );
 }

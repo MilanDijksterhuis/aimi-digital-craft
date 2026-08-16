@@ -11,6 +11,7 @@ export const Route = createFileRoute("/login")({
       { name: "description", content: "Log in op het AIMI klantenportaal." },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://aimi-development.nl/login" }],
   }),
   component: LoginPage,
 });
@@ -121,7 +122,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+    <main id="main-content" className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
           ← Terug naar site
@@ -230,6 +231,6 @@ function LoginPage() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

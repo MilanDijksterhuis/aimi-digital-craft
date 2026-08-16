@@ -405,6 +405,24 @@
   }
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #fe2c02;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 0 0 6px 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 @utility grid-bg {
   background: none;
 }

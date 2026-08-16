@@ -193,10 +193,11 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
+                <label htmlFor="message" className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
                   Bericht
                 </label>
                 <textarea
+                  id="message"
                   required
                   rows={5}
                   placeholder="Vertel ons over je project…"
@@ -235,13 +236,15 @@ export function Contact() {
   );
 }
 
-function Field({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({ label, name, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
+      <label htmlFor={name} className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
         {label}
       </label>
       <input
+        id={name}
+        name={name}
         required
         {...props}
         className="mt-2 w-full bg-background border border-border rounded text-foreground px-4 py-3"

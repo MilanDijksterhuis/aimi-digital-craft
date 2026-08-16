@@ -57,7 +57,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       <div style={{ position: "relative", zIndex: 1 }}>
       <Nav />
 
-      <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
         {/* Hero */}
         <section>
           <a href="/" style={{ fontSize: "13px", color: "#a4a9b2", textDecoration: "none" }}>

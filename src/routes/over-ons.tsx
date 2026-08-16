@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
 
 const stats: [string, string][] = [
   ["2", "Directe contactpersonen"],
@@ -33,7 +34,7 @@ const values: { title: string; desc: string }[] = [
 export const Route = createFileRoute("/over-ons")({
   head: () => ({
     meta: [
-      { title: "Over ons AIMI" },
+      { title: "Over ons | AIMI Web Agency Veendam & Hoogeveen" },
       {
         name: "description",
         content:
@@ -45,8 +46,15 @@ export const Route = createFileRoute("/over-ons")({
         content: "Twee developers, geen groot bureau. Maak kennis met AIMI.",
       },
       { property: "og:url", content: "https://aimi-development.nl/over-ons" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Over ons AIMI" },
+      { name: "twitter:description", content: "Twee developers, geen groot bureau. Maak kennis met AIMI." },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: "https://aimi-development.nl/over-ons" }],
+    scripts: [breadcrumbJsonLd([["Home", "/"], ["Over ons", "/over-ons"]])],
   }),
   component: OverOns,
 });
@@ -55,7 +63,7 @@ function OverOns() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <main>
+      <main id="main-content">
         <section className="pt-40 pb-24" style={{ background: "#0f0e0d" }}>
           <div className="mx-auto max-w-7xl px-6">
             <Link
@@ -170,12 +178,12 @@ function OverOns() {
                     borderRadius: "16px",
                   }}
                 >
-                  <div
+                  <h3
                     className="text-white mb-2"
                     style={{ fontSize: "1.1rem", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 500 }}
                   >
                     {v.title}
-                  </div>
+                  </h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>{v.desc}</p>
                 </motion.div>
               ))}

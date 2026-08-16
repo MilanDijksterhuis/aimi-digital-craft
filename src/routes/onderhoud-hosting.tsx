@@ -60,18 +60,17 @@ export const Route = createFileRoute("/onderhoud-hosting")({
       {
         name: "description",
         content:
-          "Website hosting en onderhoud door AIMI. Snelle Nederlandse hosting, SSL, updates, back-ups en 24/7 monitoring vanaf € 30 per maand. Wij nemen je bestaande site over.",
+          "Website hosting en onderhoud door AIMI. Snelle Nederlandse hosting, SSL, updates, back-ups en 24/7 monitoring vanaf € 30 per maand.",
       },
-      { name: "keywords", content: "website hosting, website onderhoud, hosting Nederland, website laten hosten, onderhoudsabonnement website" },
       { property: "og:title", content: "Onderhoud & hosting AIMI" },
       { property: "og:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.svg` },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Onderhoud & hosting AIMI" },
       { name: "twitter:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

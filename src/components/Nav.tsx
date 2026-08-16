@@ -1,25 +1,30 @@
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
+import { Link } from "@tanstack/react-router";
 
 const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
+const MotionLink = motion.create(Link);
 
 const services = [
   { label: "Website laten maken", href: "/website-laten-maken", desc: "Professioneel webdesign op maat" },
   { label: "Webshop laten maken", href: "/webshop-laten-maken", desc: "Verkoopklare online winkel" },
   { label: "Onderhoud & hosting", href: "/onderhoud-hosting", desc: "Snel, veilig en up-to-date" },
   { label: "Meer diensten", href: "/meer-diensten", desc: "Hosting, performance en SEO los" },
+  { label: "Website laten maken in Veendam", href: "/website-laten-maken-veendam", desc: "Webdesign voor Veendam en omgeving" },
+  { label: "Website laten maken in Hoogeveen", href: "/website-laten-maken-hoogeveen", desc: "Webdesign voor Hoogeveen en omgeving" },
 ];
 
 const links = [
   { label: "Werkwijze", href: "/werkwijze" },
   { label: "Over ons", href: "/over-ons" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
 function NavLink({ label, href }: { label: string; href: string }) {
   return (
-    <motion.a
-      href={href}
+    <MotionLink
+      to={href}
       className="relative text-[15px] py-1"
       style={{ color: "rgba(255,255,255,0.65)", fontFamily: FONT }}
       whileHover="hover"
@@ -37,7 +42,7 @@ function NavLink({ label, href }: { label: string; href: string }) {
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "1px", background: "#fe2c02", display: "block" }}
       />
-    </motion.a>
+    </MotionLink>
   );
 }
 
@@ -91,49 +96,47 @@ function ServicesMenu() {
         />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            role="menu"
-            className="absolute left-1/2 top-full -translate-x-1/2 pt-3"
-            style={{ width: "320px" }}
-          >
-            <div
-              style={{
-                background: "rgba(22,23,23,0.96)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid #2a2b2b",
-                borderRadius: "14px",
-                padding: "8px",
-                boxShadow: "0 20px 50px -12px rgba(0,0,0,0.6)",
-              }}
+      <div
+        role="menu"
+        className="absolute left-1/2 top-full -translate-x-1/2 pt-3"
+        style={{
+          width: "320px",
+          opacity: open ? 1 : 0,
+          visibility: open ? "visible" : "hidden",
+          transform: open ? "translate(-50%, 0)" : "translate(-50%, 8px)",
+          transition: "opacity 0.18s ease-out, transform 0.18s ease-out",
+        }}
+      >
+        <div
+          style={{
+            background: "rgba(22,23,23,0.96)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid #2a2b2b",
+            borderRadius: "14px",
+            padding: "8px",
+            boxShadow: "0 20px 50px -12px rgba(0,0,0,0.6)",
+          }}
+        >
+          {services.map((s) => (
+            <Link
+              key={s.href}
+              to={s.href}
+              role="menuitem"
+              className="group flex flex-col gap-0.5 rounded-[10px] px-4 py-3 transition-colors"
+              style={{ fontFamily: FONT, textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(254,44,2,0.10)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
-              {services.map((s) => (
-                <a
-                  key={s.href}
-                  href={s.href}
-                  role="menuitem"
-                  className="group flex flex-col gap-0.5 rounded-[10px] px-4 py-3 transition-colors"
-                  style={{ fontFamily: FONT, textDecoration: "none" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(254,44,2,0.10)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                >
-                  <span className="text-[14.5px] font-medium" style={{ color: "#ffffff" }}>
-                    {s.label}
-                  </span>
-                  <span className="text-[12.5px]" style={{ color: "#a4a9b2" }}>
-                    {s.desc}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <span className="text-[14.5px] font-medium" style={{ color: "#ffffff" }}>
+                {s.label}
+              </span>
+              <span className="text-[12.5px]" style={{ color: "#a4a9b2" }}>
+                {s.desc}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -147,11 +150,11 @@ export function Nav() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="/" aria-label="AIMI home">
+        <Link to="/" aria-label="AIMI home">
           <span className="font-medium text-white text-3xl tracking-tight" style={{ fontFamily: FONT }}>
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8">
           <ServicesMenu />
@@ -161,12 +164,12 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="/portal" className="btn-secondary !text-[15px] !py-1.5 !px-4">
+          <Link to="/portal" className="btn-secondary !text-[15px] !py-1.5 !px-4">
             Portaal
-          </a>
-          <a href="/contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
+          </Link>
+          <Link to="/contact" className="btn-primary !text-[15px] !py-1.5 !px-4">
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </motion.header>

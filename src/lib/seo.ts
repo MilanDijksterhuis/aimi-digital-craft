@@ -2,8 +2,12 @@
  * pagina's. Houdt de route-heads schoon en consistent. */
 
 export const SITE_URL = "https://aimi-development.nl";
-export const LOGO_URL =
-  "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png";
+export const LOGO_URL = "https://aimi-development.nl/aimi-logo.png";
+export const OG_IMAGE_URL = "https://aimi-development.nl/og-image.png";
+/** Canonieke entiteit-id: elk Organization/LocalBusiness-schema op de site
+ * verwijst hiernaar, zodat Google één bedrijf ziet in plaats van meerdere
+ * losse entiteiten per pagina. */
+export const ORG_ID = `${SITE_URL}/#organization`;
 
 type LdScript = { type: "application/ld+json"; children: string };
 
@@ -26,13 +30,7 @@ export function serviceJsonLd(opts: {
     serviceType: opts.serviceType,
     description: opts.description,
     url: opts.url,
-    provider: {
-      "@type": "Organization",
-      name: "AIMI",
-      url: SITE_URL,
-      logo: LOGO_URL,
-      email: "sales@aimi-development.nl",
-    },
+    provider: { "@id": ORG_ID },
     areaServed: [
       { "@type": "City", name: "Veendam" },
       { "@type": "City", name: "Hoogeveen" },

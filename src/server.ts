@@ -109,7 +109,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Content-Security-Policy": [
     "default-src 'self'",
     "img-src 'self' data: https://*.supabase.co",
-    "connect-src 'self' https://*.supabase.co",
+    "connect-src 'self' https://*.supabase.co https://calendly.com",
     "style-src 'self' 'unsafe-inline'",
     // 'unsafe-inline' is nodig omdat TanStack Start zijn SSR-hydration bootstrap
     // (window.$_TSR) als inline <script> injecteert — zonder deze toestemming
@@ -117,7 +117,9 @@ const SECURITY_HEADERS: Record<string, string> = {
     // dangerouslySetInnerHTML met user-content of andere plek waar user-input
     // in een <script> terechtkomt (zie security-audit), dus het reële
     // aanvalsoppervlak hiervan is beperkt tot als er ooit wél zo'n plek bijkomt.
-    "script-src 'self' 'unsafe-inline'",
+    "script-src 'self' 'unsafe-inline' https://assets.calendly.com",
+    "frame-src 'self' https://calendly.com",
+    "font-src 'self'",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'",
@@ -139,6 +141,10 @@ function isHttps(request: Request): boolean {
 // lange immutable cache zodat herhaalbezoeken ze niet opnieuw downloaden.
 // (Lighthouse markeerde de hero-image met cache-TTL "None".)
 const IMMUTABLE_ASSET_RE = /^\/(assets|_build)\/|^\/fonts\/.+\.woff2$/;
+// Statische publieke bestanden die zelden wijzigen maar niet content-gehasht
+// zijn — kortere, niet-immutable cache zodat een update niet dagenlang stale
+// blijft, maar herhaalbezoeken ze wél uit de browsercache krijgen.
+const SHORT_CACHE_ASSET_RE = /^\/(og-image\.(png|svg)|favicon\.(svg|ico)|apple-touch-icon\.png|robots\.txt|llms\.txt|manifest\.json)$/;
 
 function applyAssetCaching(response: Response, request: Request): void {
   if (request.method !== "GET" && request.method !== "HEAD") return;
@@ -152,6 +158,8 @@ function applyAssetCaching(response: Response, request: Request): void {
   }
   if (IMMUTABLE_ASSET_RE.test(pathname)) {
     response.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  } else if (SHORT_CACHE_ASSET_RE.test(pathname)) {
+    response.headers.set("Cache-Control", "public, max-age=3600");
   }
 }
 
@@ -165,6 +173,11 @@ function applySecurityHeaders(response: Response, request: Request): Response {
         "Strict-Transport-Security",
         "max-age=31536000; includeSubDomains",
       );
+    }
+    // 404's mogen niet geïndexeerd worden; via een header werkt dit ook als
+    // Googlebot de pagina niet (volledig) rendert.
+    if (response.status === 404) {
+      response.headers.set("X-Robots-Tag", "noindex");
     }
   } catch {
     /* immutable headers op sommige responses — dan overslaan */

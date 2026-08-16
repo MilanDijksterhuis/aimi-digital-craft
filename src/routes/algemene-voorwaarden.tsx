@@ -4,17 +4,18 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
-      { title: "Algemene Voorwaarden  AIMI—" },
+      { title: "Algemene Voorwaarden — AIMI" },
       { name: "description", content: "De algemene voorwaarden van AIMI." },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://aimi-development.nl/algemene-voorwaarden" }],
   }),
   component: VoorwaardenPage,
 });
 
 function VoorwaardenPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
+    <main id="main-content" className="min-h-screen bg-background text-foreground" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
       <div className="mx-auto max-w-3xl px-6 py-20">
         <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
           ← Terug naar home
@@ -23,7 +24,7 @@ function VoorwaardenPage() {
         <h1 className="mt-8 text-4xl font-bold" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
           Algemene Voorwaarden
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">Laatst bijgewerkt: juni 2025</p>
+        <p className="mt-2 text-sm text-muted-foreground">Laatst bijgewerkt: augustus 2026</p>
 
         <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-foreground">
           <section>
@@ -123,6 +124,6 @@ function VoorwaardenPage() {
         </div>
       </div>
       <Footer />
-    </div>
+    </main>
   );
 }

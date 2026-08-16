@@ -54,7 +54,7 @@ const REASONS = [
   },
   {
     title: "Vaste prijs, geen verrassingen",
-    desc: "Heldere pakketten vanaf € 1.250. Je weet vooraf wat je krijgt en wat het kost.",
+    desc: "Heldere pakketten vanaf € 499. Je weet vooraf wat je krijgt en wat het kost.",
   },
 ];
 
@@ -65,7 +65,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
       <Nav />
 
-      <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
         {/* Hero */}
         <section>
           <div
@@ -95,7 +95,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
           </p>
           <div style={{ marginTop: "34px", display: "flex", flexWrap: "wrap", gap: "14px" }}>
             <a
-              href="/#contact"
+              href="/contact"
               style={{
                 padding: "14px 26px",
                 background: RED,
@@ -277,7 +277,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
             Vertel ons kort over je plannen. Je krijgt binnen één werkdag een reactie en een vrijblijvende offerte.
           </p>
           <a
-            href="/#contact"
+            href="/contact"
             style={{
               display: "inline-block",
               padding: "15px 32px",

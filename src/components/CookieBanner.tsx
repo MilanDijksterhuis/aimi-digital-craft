@@ -20,6 +20,9 @@ function loadPrefs(): CookiePrefs | null {
 
 function savePrefs(prefs: CookiePrefs) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  // Laat AnalyticsLoader (track.js) direct reageren op de nieuwe voorkeur,
+  // zonder dat de bezoeker de pagina hoeft te verversen.
+  window.dispatchEvent(new CustomEvent<CookiePrefs>("aimi-cookie-prefs", { detail: prefs }));
 }
 
 export function CookieBanner() {
@@ -76,7 +79,11 @@ export function CookieBanner() {
               Wij gebruiken cookies
             </p>
             <p className="text-sm mb-4" style={{ color: "#a4a9b2" }}>
-              We gebruiken cookies om de site goed te laten werken en om te begrijpen hoe bezoekers de site gebruiken. Jij bepaalt wat je toestaat.
+              We gebruiken cookies om de site goed te laten werken en om te begrijpen hoe bezoekers de site gebruiken. Jij bepaalt wat je toestaat. Lees ons{" "}
+              <a href="/privacybeleid" className="underline underline-offset-2" style={{ color: "#a4a9b2" }}>
+                privacybeleid
+              </a>
+              .
             </p>
 
             <AnimatePresence>

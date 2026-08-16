@@ -60,18 +60,17 @@ export const Route = createFileRoute("/webshop-laten-maken")({
       {
         name: "description",
         content:
-          "Webshop laten maken door AIMI? Verkoopklare webshops op maat met iDEAL en eenvoudig productbeheer. Voor ondernemers en ZZP'ers. Vraag een vrijblijvende offerte aan.",
+          "Webshop laten maken door AIMI? Verkoopklare webshops op maat met iDEAL en eenvoudig productbeheer, voor ondernemers en ZZP'ers.",
       },
-      { name: "keywords", content: "webshop laten maken, webshop bouwen, online winkel beginnen, e-commerce website, webshop op maat" },
       { property: "og:title", content: "Webshop laten maken AIMI" },
       { property: "og:description", content: "Verkoopklare webshops op maat met veilige betaalmethodes en simpel productbeheer." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.svg` },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Webshop laten maken AIMI" },
       { name: "twitter:description", content: "Verkoopklare webshops op maat met veilige betaalmethodes en simpel productbeheer." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

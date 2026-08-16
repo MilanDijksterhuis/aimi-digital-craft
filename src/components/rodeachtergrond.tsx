@@ -27,6 +27,10 @@ export function RedDiagonalBackground() {
         let t: number = 0;
         let animationId: number | null = null;
 
+        const reducedMotion =
+            typeof window.matchMedia === "function" &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         function resize(): void {
             w = window.innerWidth;
             h = window.innerHeight;
@@ -34,7 +38,7 @@ export function RedDiagonalBackground() {
             canvasElement.height = h;
         }
 
-        function draw(): void {
+        function drawFrame(): void {
             // ctx en canvasElement zijn beschikbaar in deze scope
             t += 0.008;
 
@@ -75,13 +79,34 @@ export function RedDiagonalBackground() {
                 ctx.stroke();
             }
 
-            // Volgende frame aanvragen
-            animationId = requestAnimationFrame(draw);
+            // Volgende frame aanvragen, tenzij het tabblad verborgen is
+            if (!document.hidden) {
+                animationId = requestAnimationFrame(drawFrame);
+            }
+        }
+
+        function stop(): void {
+            if (animationId !== null) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+
+        function start(): void {
+            if (animationId === null && !document.hidden) {
+                animationId = requestAnimationFrame(drawFrame);
+            }
         }
 
         // Initialiseren
         resize();
-        draw();
+        if (reducedMotion) {
+            // reduced motion: teken één statisch frame, geen doorlopende loop.
+            drawFrame();
+            stop();
+        } else {
+            start();
+        }
 
         // Event listener voor resize
         const handleResize = (): void => {
@@ -89,12 +114,23 @@ export function RedDiagonalBackground() {
         };
         window.addEventListener("resize", handleResize);
 
+        // Pauzeer de rAF-loop zodra het tabblad niet zichtbaar is (bespaart
+        // CPU/batterij op de 5 belangrijkste landingspagina's).
+        const handleVisibility = (): void => {
+            if (reducedMotion) return;
+            if (document.hidden) {
+                stop();
+            } else {
+                start();
+            }
+        };
+        document.addEventListener("visibilitychange", handleVisibility);
+
         // Cleanup functie
         return (): void => {
             window.removeEventListener("resize", handleResize);
-            if (animationId !== null) {
-                cancelAnimationFrame(animationId);
-            }
+            document.removeEventListener("visibilitychange", handleVisibility);
+            stop();
         };
     }, []); // Empty dependency array
 

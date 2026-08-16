@@ -12,24 +12,33 @@ import { useEffect } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { ConfirmProvider } from "@/components/ConfirmDialog";
+import { AnalyticsLoader } from "@/components/AnalyticsLoader";
+import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID } from "@/lib/seo";
 
 const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 
 function NotFoundComponent() {
+  // De noindex voor 404's wordt server-side afgedwongen via de
+  // X-Robots-Tag-header (server.ts) — betrouwbaarder dan een client-side
+  // meta-tag, die crawlers pas na JS-executie zien.
+  useEffect(() => {
+    document.title = "Pagina niet gevonden — AIMI";
+  }, []);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina niet gevonden</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          De pagina die je zoekt bestaat niet (meer) of is verplaatst.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Naar de homepage
           </Link>
         </div>
       </div>
@@ -64,10 +73,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Deze pagina kon niet laden
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Er ging iets mis aan onze kant. Probeer de pagina te verversen of ga terug naar de homepage.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -77,13 +86,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Probeer opnieuw
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Naar de homepage
           </a>
         </div>
       </div>
@@ -103,15 +112,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "AIMI — Web Agency" },
       { property: "og:description", content: "Design, development & hosting door Aidan & Milan." },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "nl_NL" },
+      // Default og:image — dienstpagina's overschrijven dit met hun eigen tags,
+      // maar pagina's die dat vergeten (of nieuw zijn) staan hierdoor nooit zonder.
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "AIMI — Web Agency" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "AIMI — Web Agency" },
       { name: "twitter:description", content: "Design, development & hosting door Aidan & Milan." },
-      { name: "twitter:image", content: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png" },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png" },
-      { rel: "apple-touch-icon", href: "/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png" },
+      { rel: "canonical", href: SITE_URL },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/manifest.json" },
       // Plus Jakarta Sans wordt nu self-hosted via @font-face in styles.css
       // (fonts.googleapis.com werd door onze CSP geblokkeerd). Preload de
       // primaire (latin) woff2 zodat tekst sneller in het juiste font rendert.
@@ -125,19 +144,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
-        src: "https://aimi-development.nl/track.js?u=6a34e404-ba3e-42d4-965c-62d04aef0f93",
-        async: true,
-      },
-      {
         // Structured data: laat Google het AIMI-logo tonen naast de site in de zoekresultaten.
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": ORG_ID,
           name: "AIMI",
           alternateName: "AIMI Development",
-          url: "https://aimi-development.nl",
-          logo: "https://aimi-development.nl/__l5e/assets-v1/f039dfe4-daef-4864-b2b2-1abd084c3bda/aimi-logo.png",
+          url: SITE_URL,
+          logo: LOGO_URL,
+          image: LOGO_URL,
           email: "sales@aimi-development.nl",
           description:
             "AIMI is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
@@ -165,6 +182,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#main-content" className="skip-link">
+          Ga naar hoofdinhoud
+        </a>
         {children}
         <Scripts />
       </body>
@@ -181,6 +201,7 @@ function RootComponent() {
         <Outlet />
       </ConfirmProvider>
       <Toaster />
+      <AnalyticsLoader />
     </QueryClientProvider>
   );
 }

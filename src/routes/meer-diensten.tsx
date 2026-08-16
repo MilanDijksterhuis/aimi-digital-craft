@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import { OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * "Meer diensten" — geanimeerde boom (v2, design_handoff_meer_diensten).
@@ -300,7 +302,7 @@ const KEYFRAMES = `
 export const Route = createFileRoute("/meer-diensten")({
   head: () => ({
     meta: [
-      { title: "Meer diensten AIMI" },
+      { title: "Meer diensten | Hosting, performance & SEO — AIMI" },
       {
         name: "description",
         content:
@@ -312,15 +314,15 @@ export const Route = createFileRoute("/meer-diensten")({
         content: "Hosting, performance en SEO ook los af te nemen.",
       },
       { property: "og:url", content: "https://aimi-development.nl/meer-diensten" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Meer diensten AIMI" },
+      { name: "twitter:description", content: "Hosting, performance en SEO ook los af te nemen." },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [
-      { rel: "canonical", href: "https://aimi-development.nl/meer-diensten" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap",
-      },
-    ],
+    links: [{ rel: "canonical", href: "https://aimi-development.nl/meer-diensten" }],
+    scripts: [breadcrumbJsonLd([["Home", "/"], ["Meer diensten", "/meer-diensten"]])],
   }),
   component: MeerDiensten,
 });
@@ -1299,6 +1301,39 @@ function MeerDiensten() {
         </div>
       )}
 
+      {/* Altijd-zichtbare tekstversie van de diensten — de interactieve boom hierboven is decoratief/aanvullend */}
+      <main id="main-content"
+        style={{
+          position: "relative",
+          zIndex: 5,
+          background: BG,
+          padding: mobile ? "0 20px 40px" : "60px 40px 100px",
+          maxWidth: "900px",
+        }}
+      >
+        <h2 style={{ fontSize: "22px", fontWeight: 300, marginBottom: "24px" }}>
+          Onze losse diensten
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+          {SERVICES.map((s) => (
+            <div key={s.key}>
+              <h3 style={{ fontSize: "16px", fontWeight: 500, letterSpacing: "1px", color: "#ff4b4b" }}>
+                {s.label} — {s.sub}
+              </h3>
+              <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#b6b6bd", margin: "8px 0" }}>
+                {s.desc}
+              </p>
+              <ul style={{ fontSize: "13px", lineHeight: 1.7, color: "#9a9aa2", paddingLeft: "18px" }}>
+                {s.points.map((pt) => (
+                  <li key={pt}>{pt}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <Footer />
       <CookieBanner />
     </div>
   );

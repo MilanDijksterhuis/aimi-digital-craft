@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { ClipboardList, Paintbrush, Code2, Rocket, CheckCircle } from "lucide-react";
 
 const phases = [
@@ -25,7 +25,7 @@ const phases = [
   },
   {
     id: "ontwikkeling",
-    name: "ontwikkeling",
+    name: "Ontwikkeling",
     duration: "2–3 weken",
     icon: Code2,
     description:
@@ -47,8 +47,6 @@ const phases = [
 
 export function ProcessTimeline() {
   const [active, setActive] = useState(0);
-  const current = phases[active];
-  const Icon = current.icon;
 
   return (
     <section id="process" className="py-16" style={{ background: "#161717" }}>
@@ -98,14 +96,6 @@ export function ProcessTimeline() {
                 <div className="py-5 pr-6 lg:pr-8 pl-0 lg:pl-0 flex items-start gap-4">
                   {/* Number + icon */}
                   <div className="flex flex-col items-start gap-1 shrink-0 pt-0.5">
-                    <span
-                      className="text-xs transition-colors duration-200"
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        color: isActive ? "#fe2c02" : isDone ? "#49de80" : "#868b94",
-                      }}
-                    >
-                    </span>
                     <PhaseIcon
                       size={16}
                       strokeWidth={1.5}
@@ -149,114 +139,100 @@ export function ProcessTimeline() {
           className="rounded-2xl overflow-hidden"
           style={{ background: "#1e1f1f" }}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 lg:p-10 grid lg:grid-cols-3 gap-8"
-            >
-              {/* Left — description */}
-              <div className="lg:col-span-2 flex flex-col gap-6">
-                <div>
-                  <div
-                    className="text-xs mb-3 uppercase tracking-widest"
-                    style={{ color: "#fe2c02", fontFamily: "var(--font-mono)" }}
-                  >
+          {phases.map((phase, i) => {
+            const isActive = active === i;
+            return (
+              <div
+                key={phase.id}
+                style={{ display: isActive ? "grid" : "none" }}
+                className="p-6 lg:p-10 lg:grid-cols-3 gap-8"
+              >
+                {/* Left — description */}
+                <div className="lg:col-span-2 flex flex-col gap-6">
+                  <div>
+                    <h3
+                      className="text-white mb-3"
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                        fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
+                        fontWeight: 300,
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {phase.name}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                    >
+                      {phase.description}
+                    </p>
                   </div>
-                  <h3
-                    className="text-white mb-3"
+
+                  {/* Client action */}
+                  <div
+                    className="rounded-lg p-4"
+                    style={{ background: "rgba(254,44,2,0.06)", border: "1px solid rgba(254,44,2,0.15)" }}
+                  >
+                    <p
+                      className="text-xs uppercase tracking-widest mb-1"
+                      style={{ color: "#fe2c02", fontFamily: "var(--font-mono)" }}
+                    >
+                      Jouw rol
+                    </p>
+                    <p
+                      className="text-sm"
+                      style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                    >
+                      {phase.clientAction}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right — deliverables */}
+                <div>
+                  <p
+                    className="text-xs uppercase tracking-widest mb-4"
+                    style={{ color: "#868b94", fontFamily: "var(--font-mono)" }}
+                  >
+                    Deliverables
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    {phase.deliverables.map((item) => (
+                      <div key={item} className="flex items-center gap-3">
+                        <div
+                          className="w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{ background: "#49de80" }}
+                        />
+                        <span
+                          className="text-sm"
+                          style={{ color: "#ffffff", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 400 }}
+                        >
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 mt-8 text-sm font-medium"
                     style={{
+                      color: "#ffffff",
                       fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                      fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
-                      fontWeight: 300,
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1.2,
+                      background: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRadius: "9999px",
+                      padding: "10px 20px",
                     }}
                   >
-                    {current.name}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
-                  >
-                    {current.description}
-                  </p>
-                </div>
-
-                {/* Client action */}
-                <div
-                  className="rounded-lg p-4"
-                  style={{ background: "rgba(254,44,2,0.06)", border: "1px solid rgba(254,44,2,0.15)" }}
-                >
-                  <p
-                    className="text-xs uppercase tracking-widest mb-1"
-                    style={{ color: "#fe2c02", fontFamily: "var(--font-mono)" }}
-                  >
-                    Jouw rol
-                  </p>
-                  <p
-                    className="text-sm"
-                    style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
-                  >
-                    {current.clientAction}
-                  </p>
+                    Plan een gratis intake
+                  </a>
                 </div>
               </div>
-
-              {/* Right — deliverables */}
-              <div>
-                <p
-                  className="text-xs uppercase tracking-widest mb-4"
-                  style={{ color: "#868b94", fontFamily: "var(--font-mono)" }}
-                >
-                  Deliverables
-                </p>
-                <div className="flex flex-col gap-3">
-                  {current.deliverables.map((item, i) => (
-                    <motion.div
-                      key={item}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2, delay: i * 0.07 }}
-                      className="flex items-center gap-3"
-                    >
-                      <div
-                        className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{ background: "#49de80" }}
-                      />
-                      <span
-                        className="text-sm"
-                        style={{ color: "#ffffff", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 400 }}
-                      >
-                        {item}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <motion.a
-                  href="#contact"
-                  whileHover={{ scale: 1.04, backgroundColor: "rgba(255,255,255,0.13)" }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="inline-flex items-center gap-2 mt-8 text-sm font-medium"
-                  style={{
-                    color: "#ffffff",
-                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                    background: "rgba(255,255,255,0.08)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "9999px",
-                    padding: "10px 20px",
-                  }}
-                >
-                  Plan een gratis intake
-                </motion.a>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            );
+          })}
         </div>
 
       </div>

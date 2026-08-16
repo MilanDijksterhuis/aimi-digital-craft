@@ -50,16 +50,15 @@ export const Route = createFileRoute("/werkwijze")({
         content:
           "Zo werkt AIMI: van kennismaking en ontwerp tot livegang en nazorg. Vaste prijzen, direct contact met de developers en alles in eigen beheer. Ontdek onze aanpak.",
       },
-      { name: "keywords", content: "werkwijze webdesign, hoe werkt een website laten maken, aanpak webdesigner, proces website bouwen" },
       { property: "og:title", content: "Onze werkwijze AIMI" },
       { property: "og:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.svg` },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Onze werkwijze AIMI" },
       { name: "twitter:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.svg` },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [breadcrumbJsonLd([["Home", "/"], ["Werkwijze", "/werkwijze"]])],
@@ -71,7 +70,7 @@ function WerkwijzePage() {
   return (
     <div style={{ background: "#0f0e0d", color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
       <Nav />
-      <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
         <a href="/" style={{ fontSize: "13px", color: "#a4a9b2", textDecoration: "none" }}>
           ← Terug naar home
         </a>
