@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationLanding, type LocationData } from "@/components/LocationLanding";
-import { RedDiagonalBackground } from "../components/rodeachtergrond";
 import { ORG_ID, OG_IMAGE_URL } from "@/lib/seo";
 
 const CITY = "Hoogeveen";
@@ -118,10 +117,5 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
       },
     ],
   }),
-  component: () => (
-    <>
-      <RedDiagonalBackground />
-      <LocationLanding data={data} />
-    </>
-  ),
+  component: () => <LocationLanding data={data} />,
 });

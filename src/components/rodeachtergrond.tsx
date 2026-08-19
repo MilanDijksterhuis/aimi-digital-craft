@@ -146,7 +146,7 @@ export function RedDiagonalBackground() {
                 left: 0,
                 width: "100vw",
                 height: "100vh",
-                zIndex: 1,  // Verhoogd van -10 naar 1
+                zIndex: -1,
                 opacity: 1
             }}
         />

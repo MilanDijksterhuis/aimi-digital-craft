@@ -1,6 +1,8 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Services } from "@/components/Services";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare lokale landingspagina ("Website laten maken in {plaats}").
@@ -10,7 +12,7 @@ import { CookieBanner } from "@/components/CookieBanner";
  * ------------------------------------------------------------------------- */
 
 const RED = "#fe2c02";
-const BG = "#15151b";
+const BG = "#161717";
 const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 
 export type LocationFaq = { q: string; a: string };
@@ -24,39 +26,6 @@ export type LocationData = {
   related?: { label: string; href: string }[]; // contextuele interne links
 };
 
-const SERVICES = [
-  {
-    title: "Website laten maken",
-    desc: "Een snelle, professionele website op maat — ontworpen om bezoekers in klanten om te zetten.",
-  },
-  {
-    title: "Webshop laten maken",
-    desc: "Een verkoopklare webshop met betaalmethodes, voorraad en een beheeromgeving die werkt.",
-  },
-  {
-    title: "SEO & vindbaarheid",
-    desc: "Technische en content-SEO zodat je bovenaan Google komt op de zoekwoorden die klanten opleveren.",
-  },
-  {
-    title: "Hosting & onderhoud",
-    desc: "Snelle Nederlandse hosting, back-ups, updates en beveiliging — jij hebt er geen omkijken naar.",
-  },
-];
-
-const REASONS = [
-  {
-    title: "Lokaal & bereikbaar",
-    desc: "Korte lijnen, persoonlijk contact en iemand die je écht spreekt in plaats van een ticketsysteem.",
-  },
-  {
-    title: "Snel & vindbaar",
-    desc: "Sites die in het groen scoren op Core Web Vitals en gebouwd zijn om te ranken in Google.",
-  },
-  {
-    title: "Vaste prijs, geen verrassingen",
-    desc: "Heldere pakketten vanaf € 499. Je weet vooraf wat je krijgt en wat het kost.",
-  },
-];
 
 export function LocationLanding({ data }: { data: LocationData }) {
   const { city, region, nearby, intro, faqs, related } = data;
@@ -65,7 +34,8 @@ export function LocationLanding({ data }: { data: LocationData }) {
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
       <Nav />
 
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content">
+      <div className="mx-auto max-w-5xl px-6 pt-32">
         {/* Hero */}
         <section>
           <div
@@ -124,68 +94,13 @@ export function LocationLanding({ data }: { data: LocationData }) {
             </a>
           </div>
         </section>
+      </div>
 
-        {/* Diensten */}
-        <section style={{ marginTop: "88px" }}>
-          <h2 style={{ fontSize: "clamp(24px, 4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em" }}>
-            Wat wij bouwen voor ondernemers in {city}
-          </h2>
-          <div
-            style={{
-              marginTop: "34px",
-              display: "grid",
-              gap: "18px",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            }}
-          >
-            {SERVICES.map((s) => (
-              <div
-                key={s.title}
-                style={{
-                  padding: "26px",
-                  borderRadius: "6px",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(9,9,11,0.4)",
-                }}
-              >
-                <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "10px" }}>{s.title}</h3>
-                <p style={{ fontSize: "14.5px", lineHeight: 1.65, color: "#9a9aa2" }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Wat we doen & Hoe we werken — zelfde componenten als de homepage */}
+      <Services />
+      <ProcessTimeline />
 
-        {/* Waarom AIMI */}
-        <section style={{ marginTop: "88px" }}>
-          <h2 style={{ fontSize: "clamp(24px, 4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em" }}>
-            Waarom bedrijven uit {city} voor AIMI kiezen
-          </h2>
-          <div
-            style={{
-              marginTop: "34px",
-              display: "grid",
-              gap: "18px",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            }}
-          >
-            {REASONS.map((r) => (
-              <div key={r.title}>
-                <div
-                  style={{
-                    width: "10px",
-                    height: "10px",
-                    background: RED,
-                    transform: "rotate(45deg)",
-                    marginBottom: "16px",
-                  }}
-                />
-                <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "10px" }}>{r.title}</h3>
-                <p style={{ fontSize: "14.5px", lineHeight: 1.65, color: "#9a9aa2" }}>{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
+      <div className="mx-auto max-w-5xl px-6 pb-24">
         {/* Regio-tekst */}
         <section style={{ marginTop: "88px" }}>
           <h2 style={{ fontSize: "clamp(24px, 4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em" }}>
@@ -292,6 +207,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
             Neem contact op
           </a>
         </section>
+      </div>
       </main>
 
       <Footer />
