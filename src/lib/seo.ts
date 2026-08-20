@@ -8,6 +8,9 @@ export const OG_IMAGE_URL = "https://aimi-development.nl/og-image.png";
  * verwijst hiernaar, zodat Google één bedrijf ziet in plaats van meerdere
  * losse entiteiten per pagina. */
 export const ORG_ID = `${SITE_URL}/#organization`;
+/** Eigen entiteit-id per vestigingspagina, los van ORG_ID, zodat stadspagina's
+ * geen tegenstrijdig adres/geo claimen op de gedeelde organisatie-entiteit. */
+export const localBusinessId = (path: string) => `${SITE_URL}${path}#localbusiness`;
 
 type LdScript = { type: "application/ld+json"; children: string };
 
@@ -51,6 +54,40 @@ export function breadcrumbJsonLd(trail: [string, string][]): LdScript {
       position: i + 1,
       name,
       item: `${SITE_URL}${path}`,
+    })),
+  });
+}
+
+/** HowTo-schema voor een stappenplan/proces op een dienstenpagina. */
+export function howToJsonLd(opts: { name: string; description: string; steps: { title: string; desc: string }[] }): LdScript {
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    description: opts.description,
+    step: opts.steps.map((s) => ({
+      "@type": "HowToStep",
+      name: s.title,
+      text: s.desc,
+    })),
+  });
+}
+
+/** ItemList-schema voor de "Wat je krijgt"-onderdelen, incl. uitgebreide uitleg
+ * per item zodat de volledige uitklap-content ook voor zoekmachines telt. */
+export function offeringsJsonLd(opts: {
+  name: string;
+  offerings: { title: string; desc: string; details: string[] }[];
+}): LdScript {
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    itemListElement: opts.offerings.map((o, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: o.title,
+      description: [o.desc, ...o.details].join(" "),
     })),
   });
 }

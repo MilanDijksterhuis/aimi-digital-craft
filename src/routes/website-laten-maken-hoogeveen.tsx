@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationLanding, type LocationData } from "@/components/LocationLanding";
-import { ORG_ID, OG_IMAGE_URL } from "@/lib/seo";
+import { ORG_ID, OG_IMAGE_URL, LOGO_URL, localBusinessId } from "@/lib/seo";
 
 const CITY = "Hoogeveen";
 const REGION = "Drenthe";
@@ -12,24 +12,6 @@ const data: LocationData = {
   nearby: ["Hollandscheveld", "Nieuwlande", "Pesse", "Meppel", "Beilen", "Assen"],
   intro:
     "Op zoek naar een webdesigner in Hoogeveen? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Hoogeveen en omgeving. Van eerste schets tot livegang persoonlijk, lokaal en gericht op meer klanten via Google.",
-  faqs: [
-    {
-      q: "Wat kost een website laten maken in Hoogeveen?",
-      a: "Onze pakketten starten vanaf € 499 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
-    },
-    {
-      q: "Werken jullie ook voor bedrijven buiten Hoogeveen?",
-      a: "Zeker. We werken veel voor ondernemers in Hoogeveen, Meppel, Beilen en de rest van Drenthe, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
-    },
-    {
-      q: "Hoe snel staat mijn website online?",
-      a: "Een standaard website staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van de omvang en hoe snel we content en feedback ontvangen. Voor een spoedopdracht kunnen we vaak sneller schakelen.",
-    },
-    {
-      q: "Komt mijn website ook goed vindbaar in Google?",
-      a: "Ja. We bouwen elke site technisch SEO-proof en optimaliseren voor lokale zoekwoorden zoals 'website laten maken Hoogeveen'. Zo word je gevonden door klanten uit jouw eigen regio.",
-    },
-  ],
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
@@ -74,12 +56,13 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": ORG_ID,
+          "@id": localBusinessId("/website-laten-maken-hoogeveen"),
+          parentOrganization: { "@id": ORG_ID },
           name: "AIMI",
           description:
             "Webdesigner in Hoogeveen. Websites, webshops, SEO en hosting voor ondernemers in Hoogeveen en omgeving.",
           url: URL,
-          image: "https://aimi-development.nl/aimi-logo.png",
+          image: LOGO_URL,
           email: "sales@aimi-development.nl",
           priceRange: "€€",
           areaServed: [
@@ -90,18 +73,6 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
           ],
           address: { "@type": "PostalAddress", addressLocality: "Hoogeveen", addressRegion: "Drenthe", addressCountry: "NL" },
           geo: { "@type": "GeoCoordinates", latitude: 52.7225, longitude: 6.4869 },
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: data.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
         }),
       },
       {

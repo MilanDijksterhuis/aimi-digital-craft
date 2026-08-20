@@ -19,23 +19,23 @@ export const Route = createFileRoute("/sitemap.xml")({
         // Search Console "Ingediende URL gemarkeerd als noindex").
         const entries: SitemapEntry[] = [
           // Kernpagina's
-          { path: "/", lastmod: "2026-08-16" },
+          { path: "/", lastmod: "2026-08-20" },
 
           // Dienstenpagina's
-          { path: "/website-laten-maken", lastmod: "2026-08-16" },
-          { path: "/webshop-laten-maken", lastmod: "2026-08-16" },
-          { path: "/onderhoud-hosting", lastmod: "2026-08-16" },
+          { path: "/website-laten-maken", lastmod: "2026-08-20" },
+          { path: "/webshop-laten-maken", lastmod: "2026-08-20" },
+          { path: "/onderhoud-hosting", lastmod: "2026-08-20" },
 
           // Lokale landingspagina's — hoofddoel voor lokale SEO (Veendam/Hoogeveen)
-          { path: "/website-laten-maken-veendam", lastmod: "2026-08-16" },
-          { path: "/website-laten-maken-hoogeveen", lastmod: "2026-08-16" },
+          { path: "/website-laten-maken-veendam", lastmod: "2026-08-20" },
+          { path: "/website-laten-maken-hoogeveen", lastmod: "2026-08-20" },
 
           // Overige publieke pagina's
-          { path: "/werkwijze", lastmod: "2026-08-16" },
-          { path: "/meer-diensten", lastmod: "2026-08-16" },
-          { path: "/over-ons", lastmod: "2026-08-16" },
-          { path: "/faq", lastmod: "2026-08-16" },
-          { path: "/contact", lastmod: "2026-08-16" },
+          { path: "/werkwijze", lastmod: "2026-08-20" },
+          { path: "/meer-diensten", lastmod: "2026-08-20" },
+          { path: "/over-ons", lastmod: "2026-08-20" },
+          { path: "/faq", lastmod: "2026-08-20" },
+          { path: "/contact", lastmod: "2026-08-20" },
         ];
         const urls = entries.map((e) =>
           [`  <url>`, `    <loc>${BASE_URL}${e.path}</loc>`, `    <lastmod>${e.lastmod}</lastmod>`, `  </url>`].join(

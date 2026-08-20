@@ -126,7 +126,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: SITE_URL },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
@@ -145,10 +144,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         // Structured data: laat Google het AIMI-logo tonen naast de site in de zoekresultaten.
+        // Eén entiteit op ORG_ID met een type-array (i.p.v. losse Organization/
+        // ProfessionalService-blokken per pagina die hetzelfde @id claimden).
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
+          "@type": ["Organization", "ProfessionalService"],
           "@id": ORG_ID,
           name: "AIMI",
           alternateName: "AIMI Development",
@@ -165,6 +166,46 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             { "@type": "City", name: "Hoogeveen" },
             { "@type": "Country", name: "Nederland" },
           ],
+          founder: [
+            { "@type": "Person", name: "Aidan" },
+            { "@type": "Person", name: "Milan" },
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Web services",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                name: "Starter",
+                price: "499",
+                priceCurrency: "EUR",
+                availability: "https://schema.org/InStock",
+                url: `${SITE_URL}/#pricing`,
+                priceValidUntil: "2027-08-19",
+              },
+              {
+                "@type": "Offer",
+                name: "Pro",
+                price: "749",
+                priceCurrency: "EUR",
+                availability: "https://schema.org/InStock",
+                url: `${SITE_URL}/#pricing`,
+                priceValidUntil: "2027-08-19",
+              },
+            ],
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": `${SITE_URL}/#website`,
+          url: SITE_URL,
+          name: "AIMI",
+          inLanguage: "nl-NL",
+          publisher: { "@id": ORG_ID },
         }),
       },
     ],

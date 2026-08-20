@@ -3,7 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Contact } from "@/components/Contact";
-import { SITE_URL, LOGO_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/contact`;
 
@@ -16,42 +16,18 @@ export const Route = createFileRoute("/contact")({
         content:
           "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht je krijgt binnen één werkdag antwoord.",
       },
-      { property: "og:title", content: "Contact AIMI" },
+      { property: "og:title", content: "Contact — AIMI" },
       { property: "og:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Contact AIMI" },
+      { name: "twitter:title", content: "Contact — AIMI" },
       { name: "twitter:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "@id": ORG_ID,
-          name: "AIMI",
-          description:
-            "Webdevelopment bureau van Aidan & Milan. Websites, webshops, SEO en hosting voor kleine ondernemers en ZZP'ers.",
-          url: SITE_URL,
-          image: LOGO_URL,
-          email: "sales@aimi-development.nl",
-          priceRange: "€€",
-          areaServed: [
-            { "@type": "City", name: "Veendam" },
-            { "@type": "City", name: "Hoogeveen" },
-            { "@type": "AdministrativeArea", name: "Groningen" },
-            { "@type": "AdministrativeArea", name: "Drenthe" },
-            { "@type": "Country", name: "Nederland" },
-          ],
-        }),
-      },
-      breadcrumbJsonLd([["Home", "/"], ["Contact", "/contact"]]),
-    ],
+    scripts: [breadcrumbJsonLd([["Home", "/"], ["Contact", "/contact"]])],
   }),
   component: ContactPage,
 });

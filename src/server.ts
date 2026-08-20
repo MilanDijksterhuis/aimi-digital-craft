@@ -144,7 +144,7 @@ const IMMUTABLE_ASSET_RE = /^\/(assets|_build)\/|^\/fonts\/.+\.woff2$/;
 // Statische publieke bestanden die zelden wijzigen maar niet content-gehasht
 // zijn — kortere, niet-immutable cache zodat een update niet dagenlang stale
 // blijft, maar herhaalbezoeken ze wél uit de browsercache krijgen.
-const SHORT_CACHE_ASSET_RE = /^\/(og-image\.(png|svg)|favicon\.(svg|ico)|apple-touch-icon\.png|robots\.txt|llms\.txt|manifest\.json)$/;
+const SHORT_CACHE_ASSET_RE = /^\/(og-image\.(png|svg)|favicon\.(svg|ico)|apple-touch-icon\.png|aimi-logo\.png|icon-(192|512)\.png|robots\.txt|llms\.txt|manifest\.json)$/;
 
 function applyAssetCaching(response: Response, request: Request): void {
   if (request.method !== "GET" && request.method !== "HEAD") return;

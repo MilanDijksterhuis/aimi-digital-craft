@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationLanding, type LocationData } from "@/components/LocationLanding";
-import { ORG_ID, OG_IMAGE_URL } from "@/lib/seo";
+import { ORG_ID, OG_IMAGE_URL, LOGO_URL, localBusinessId } from "@/lib/seo";
 
 const CITY = "Veendam";
 const REGION = "Groningen";
@@ -12,24 +12,6 @@ const data: LocationData = {
   nearby: ["Wildervank", "Muntendam", "Zuidbroek", "Pekela", "Winschoten", "Stadskanaal"],
   intro:
     "Op zoek naar een webdesigner in Veendam? AIMI ontwerpt, bouwt en host snelle, professionele websites en webshops voor ondernemers in Veendam en omgeving. Van eerste schets tot livegang persoonlijk, lokaal en gericht op meer klanten via Google.",
-  faqs: [
-    {
-      q: "Wat kost een website laten maken in Veendam?",
-      a: "Onze pakketten starten vanaf € 499 voor een professionele website. De uiteindelijke prijs hangt af van het aantal pagina's, functionaliteiten en of je een webshop nodig hebt. Je krijgt altijd vooraf een heldere offerte zonder verrassingen.",
-    },
-    {
-      q: "Werken jullie ook voor bedrijven buiten Veendam?",
-      a: "Zeker. We werken veel voor ondernemers in Veendam, Wildervank, Muntendam en de rest van Oost-Groningen, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
-    },
-    {
-      q: "Hoe snel staat mijn website online?",
-      a: "Een standaard website staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van de omvang en hoe snel we content en feedback ontvangen. Voor een spoedopdracht kunnen we vaak sneller schakelen.",
-    },
-    {
-      q: "Komt mijn website ook goed vindbaar in Google?",
-      a: "Ja. We bouwen elke site technisch SEO-proof en optimaliseren voor lokale zoekwoorden zoals 'website laten maken Veendam'. Zo word je gevonden door klanten uit jouw eigen regio.",
-    },
-  ],
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
@@ -74,34 +56,27 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "@id": ORG_ID,
+          "@id": localBusinessId("/website-laten-maken-veendam"),
+          parentOrganization: { "@id": ORG_ID },
           name: "AIMI",
           description:
             "Webdesigner in Veendam. Websites, webshops, SEO en hosting voor ondernemers in Veendam en omgeving.",
           url: URL,
-          image: "https://aimi-development.nl/aimi-logo.png",
+          image: LOGO_URL,
           email: "sales@aimi-development.nl",
           priceRange: "€€",
           areaServed: [
             { "@type": "City", name: "Veendam" },
             { "@type": "City", name: "Wildervank" },
             { "@type": "City", name: "Muntendam" },
+            { "@type": "City", name: "Zuidbroek" },
+            { "@type": "City", name: "Pekela" },
+            { "@type": "City", name: "Winschoten" },
+            { "@type": "City", name: "Stadskanaal" },
             { "@type": "AdministrativeArea", name: "Groningen" },
           ],
           address: { "@type": "PostalAddress", addressLocality: "Veendam", addressRegion: "Groningen", addressCountry: "NL" },
           geo: { "@type": "GeoCoordinates", latitude: 53.1042, longitude: 6.8778 },
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: data.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
         }),
       },
       {

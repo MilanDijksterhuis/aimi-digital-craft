@@ -1,28 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageData } from "@/components/ServicePage";
-import { serviceJsonLd, breadcrumbJsonLd, faqJsonLd, SITE_URL } from "@/lib/seo";
+import { serviceJsonLd, breadcrumbJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
 import { RedDiagonalBackground } from "../components/rodeachtergrond";
 
 const URL = `${SITE_URL}/onderhoud-hosting`;
-
-const faqs = [
-  {
-    q: "Wat kost hosting en onderhoud?",
-    a: "Onze hosting start vanaf € 30 per maand, inclusief beveiliging, updates, back-ups en monitoring. Er zijn geen setup-kosten wanneer we een bestaande site overnemen.",
-  },
-  {
-    q: "Kunnen jullie mijn bestaande website overnemen?",
-    a: "Ja. We migreren je huidige website naar onze eigen infrastructuur en zorgen dat alles snel, veilig en up-to-date blijft zonder dat je er zelf omkijken naar hebt.",
-  },
-  {
-    q: "Waar draaien de servers?",
-    a: "We hosten op onze eigen VPS met Nederlandse servers. Zo houden we snelheid, beveiliging en beschikbaarheid volledig in eigen hand.",
-  },
-  {
-    q: "Wat gebeurt er als mijn site plat gaat?",
-    a: "We monitoren de uptime 24/7 en grijpen in bij problemen. Dagelijkse back-ups zorgen dat we je site snel kunnen herstellen als dat nodig is.",
-  },
-];
 
 const data: ServicePageData = {
   kicker: "Zorgeloos online",
@@ -43,7 +24,6 @@ const data: ServicePageData = {
   ],
   priceLabel: "vanaf € 30 / maand",
   priceNote: "Inclusief hosting, SSL, updates, back-ups en monitoring. Geen setup-kosten bij overname van een bestaande site.",
-  faqs,
   related: [
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Meer diensten", href: "/meer-diensten" },
@@ -56,21 +36,21 @@ const data: ServicePageData = {
 export const Route = createFileRoute("/onderhoud-hosting")({
   head: () => ({
     meta: [
-      { title: "Onderhoud & hosting | Vanaf € 30 p/m AIMI" },
+      { title: "Onderhoud & hosting | Vanaf € 30 p/m — AIMI" },
       {
         name: "description",
         content:
           "Website hosting en onderhoud door AIMI. Snelle Nederlandse hosting, SSL, updates, back-ups en 24/7 monitoring vanaf € 30 per maand.",
       },
-      { property: "og:title", content: "Onderhoud & hosting AIMI" },
+      { property: "og:title", content: "Onderhoud & hosting — AIMI" },
       { property: "og:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Onderhoud & hosting AIMI" },
+      { name: "twitter:title", content: "Onderhoud & hosting — AIMI" },
       { name: "twitter:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
-      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
@@ -81,7 +61,6 @@ export const Route = createFileRoute("/onderhoud-hosting")({
         url: URL,
       }),
       breadcrumbJsonLd([["Home", "/"], ["Onderhoud & hosting", "/onderhoud-hosting"]]),
-      faqJsonLd(faqs),
     ],
   }),
   component: () => (

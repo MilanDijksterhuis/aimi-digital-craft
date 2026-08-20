@@ -40,7 +40,7 @@ export const Route = createFileRoute("/over-ons")({
         content:
           "AIMI is een web agency van Aidan & Milan. Twee developers die websites ontwerpen, bouwen en hosten voor kleine bedrijven, zelfstandigen en verenigingen.",
       },
-      { property: "og:title", content: "Over ons AIMI" },
+      { property: "og:title", content: "Over ons — AIMI" },
       {
         property: "og:description",
         content: "Twee developers, geen groot bureau. Maak kennis met AIMI.",
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/over-ons")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Over ons AIMI" },
+      { name: "twitter:title", content: "Over ons — AIMI" },
       { name: "twitter:description", content: "Twee developers, geen groot bureau. Maak kennis met AIMI." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -64,7 +64,7 @@ function OverOns() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main id="main-content">
-        <section className="pt-40 pb-24" style={{ background: "#0f0e0d" }}>
+        <section className="pt-40 pb-24" style={{ background: "#1a1a1a" }}>
           <div className="mx-auto max-w-7xl px-6">
             <Link
               to="/"
@@ -148,7 +148,7 @@ function OverOns() {
           </div>
         </section>
 
-        <section className="py-24" style={{ background: "#161717" }}>
+        <section className="py-24" style={{ background: "#1a1a1a" }}>
           <div className="mx-auto max-w-7xl px-6">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
