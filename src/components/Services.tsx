@@ -57,7 +57,7 @@ export function Services() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="services" className="py-16" style={{ background: "#161717" }}>
+    <section id="services" className="py-12" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.h2
@@ -66,7 +66,7 @@ export function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-white mb-8"
-          style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+          style={{ fontSize: "clamp(1.6rem, 3vw, 2.3rem)" }}
         >
           Wat we doen
         </motion.h2>
@@ -145,7 +145,7 @@ export function Services() {
                     className="text-white mb-3"
                     style={{
                       fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                      fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
+                      fontSize: "clamp(1.4rem, 2.3vw, 1.9rem)",
                       fontWeight: 300,
                       letterSpacing: "-0.02em",
                       lineHeight: 1.15,

@@ -49,7 +49,7 @@ export function ProcessTimeline() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="process" className="py-16" style={{ background: "#161717" }}>
+    <section id="process" className="py-12" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.h2
@@ -58,7 +58,7 @@ export function ProcessTimeline() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-white mb-2"
-          style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+          style={{ fontSize: "clamp(1.6rem, 3vw, 2.3rem)" }}
         >
           Hoe we werken
         </motion.h2>
@@ -154,7 +154,7 @@ export function ProcessTimeline() {
                       className="text-white mb-3"
                       style={{
                         fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                        fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
+                        fontSize: "clamp(1.3rem, 2vw, 1.7rem)",
                         fontWeight: 300,
                         letterSpacing: "-0.02em",
                         lineHeight: 1.2,

@@ -33,7 +33,7 @@ export function Hero() {
           className="text-white max-w-3xl"
           style={{
             fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+            fontSize: "clamp(1.9rem, 4vw, 3rem)",
             fontWeight: 700,
             letterSpacing: "-0.02em",
             lineHeight: 1.1,

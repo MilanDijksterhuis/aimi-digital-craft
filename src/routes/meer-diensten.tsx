@@ -124,7 +124,7 @@ function MeerDiensten() {
     >
       <Nav />
 
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24" style={{ position: "relative", zIndex: 1 }}>
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16" style={{ position: "relative", zIndex: 1 }}>
         {/* Hero */}
         <section>
           <motion.div
@@ -143,7 +143,7 @@ function MeerDiensten() {
             {...fadeUp(0.08)}
             style={{
               margin: "14px 0 18px",
-              fontSize: "clamp(26px, 4.2vw, 42px)",
+              fontSize: "clamp(22px, 3.4vw, 34px)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
@@ -195,7 +195,7 @@ function MeerDiensten() {
         <section style={{ marginTop: "72px" }}>
           <motion.h2
             {...fadeUp()}
-            style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "26px" }}
+            style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "26px" }}
           >
             Onze losse diensten
           </motion.h2>
@@ -313,7 +313,7 @@ function MeerDiensten() {
         <section style={{ marginTop: "72px" }}>
           <motion.h2
             {...fadeUp()}
-            style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}
+            style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}
           >
             Eén stam, drie takken
           </motion.h2>

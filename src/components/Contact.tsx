@@ -66,7 +66,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-28" style={{ background: "#161717" }}>
+    <section id="contact" className="py-20" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-3xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}

@@ -35,7 +35,7 @@ const tiers = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-28" style={{ background: "#161717" }}>
+    <section id="pricing" className="py-20" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -90,7 +90,7 @@ export function Pricing() {
                 className="text-white mt-2 mb-3"
                 style={{
                   fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                  fontSize: "3rem",
+                  fontSize: "2.2rem",
                   fontWeight: 300,
                   letterSpacing: "-0.03em",
                   lineHeight: 1,

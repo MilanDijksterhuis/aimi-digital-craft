@@ -151,7 +151,7 @@ export function Nav() {
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
         <Link to="/" aria-label="AIMI home">
-          <span className="font-medium text-white text-3xl tracking-tight" style={{ fontFamily: FONT }}>
+          <span className="font-medium text-white text-2xl tracking-tight" style={{ fontFamily: FONT }}>
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </span>
         </Link>

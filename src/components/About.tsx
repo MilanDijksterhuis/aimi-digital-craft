@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export function About() {
   return (
-    <section id="about" className="py-28" style={{ background: "#0f0e0d" }}>
+    <section id="about" className="py-20" style={{ background: "#0f0e0d" }}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
@@ -62,7 +62,7 @@ export function About() {
                   className="text-white"
                   style={{
                     fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                    fontSize: "2.5rem",
+                    fontSize: "1.9rem",
                     fontWeight: 300,
                     letterSpacing: "-0.03em",
                     lineHeight: 1,

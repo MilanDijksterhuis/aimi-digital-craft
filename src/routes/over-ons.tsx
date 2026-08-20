@@ -89,7 +89,7 @@ function OverOns() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-white max-w-3xl"
-              style={{ fontSize: "3rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.05 }}
+              style={{ fontSize: "2.2rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.05 }}
             >
               Twee developers, geen groot bureau.
             </motion.h1>
@@ -133,7 +133,7 @@ function OverOns() {
                     className="text-white"
                     style={{
                       fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                      fontSize: "2.5rem",
+                      fontSize: "1.9rem",
                       fontWeight: 300,
                       letterSpacing: "-0.03em",
                       lineHeight: 1,
@@ -148,7 +148,7 @@ function OverOns() {
           </div>
         </section>
 
-        <section className="py-24" style={{ background: "#1a1a1a" }}>
+        <section className="py-12" style={{ background: "#1a1a1a" }}>
           <div className="mx-auto max-w-7xl px-6">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}

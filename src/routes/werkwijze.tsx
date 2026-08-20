@@ -77,14 +77,14 @@ function WerkwijzePage() {
   return (
     <div style={{ background: "#1a1a1a", color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
       <Nav />
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16">
         <a href="/" style={{ fontSize: "13px", color: "#a4a9b2", textDecoration: "none" }}>
           ← Terug naar home
         </a>
         <div style={{ marginTop: "28px", fontSize: "12px", fontWeight: 600, letterSpacing: ".22em", textTransform: "uppercase", color: RED }}>
           Onze werkwijze
         </div>
-        <h1 style={{ margin: "14px 0 18px", fontSize: "clamp(26px, 4.2vw, 42px)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+        <h1 style={{ margin: "14px 0 18px", fontSize: "clamp(22px, 3.4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
           Zo bouwen wij jouw website
         </h1>
         <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "62ch" }}>
@@ -99,7 +99,7 @@ function WerkwijzePage() {
 
         {/* Proces */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Van idee naar livegang</h2>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Van idee naar livegang</h2>
           <div style={{ marginTop: "30px" }}>
             {steps.map((s, i) => {
               const Icon = s.icon;
@@ -136,7 +136,7 @@ function WerkwijzePage() {
 
         {/* Principes */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Waar we voor staan</h2>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Waar we voor staan</h2>
           <div style={{ marginTop: "26px", display: "grid", gap: "16px", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
             {principles.map((p) => (
               <div key={p.title} style={{ padding: "22px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
@@ -149,7 +149,7 @@ function WerkwijzePage() {
 
         {/* Kwaliteitsstandaard */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Wat elke site standaard meekrijgt</h2>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Wat elke site standaard meekrijgt</h2>
           <div style={{ marginTop: "26px", display: "grid", gap: "16px", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
             {standards.map((s) => (
               <div key={s.title}>

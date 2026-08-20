@@ -49,7 +49,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
           <h1
             style={{
               margin: "14px 0 18px",
-              fontSize: "clamp(26px, 4.2vw, 42px)",
+              fontSize: "clamp(22px, 3.4vw, 34px)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
@@ -100,7 +100,7 @@ export function LocationLanding({ data }: { data: LocationData }) {
       <div className="mx-auto max-w-5xl px-6 pb-24">
         {/* Regio-tekst */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>
             Jouw webdesigner voor {city} en de regio {region}
           </h2>
           <p style={{ marginTop: "18px", fontSize: "14.5px", lineHeight: 1.75, color: "#b6b6bd", maxWidth: "68ch" }}>

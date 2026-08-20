@@ -116,7 +116,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       <div style={{ position: "relative", zIndex: 1 }}>
       <Nav />
 
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-32 pb-24">
+      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16">
         {/* Hero */}
         <section
           className={examples && examples.length > 0 ? "grid md:grid-cols-[1fr_1.15fr] gap-12 items-center" : undefined}
@@ -140,7 +140,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <h1
               style={{
                 margin: "14px 0 18px",
-                fontSize: "clamp(26px, 4.2vw, 42px)",
+                fontSize: "clamp(22px, 3.4vw, 34px)",
                 fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,
@@ -173,7 +173,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
         {/* Wat je krijgt — uitklapbare kaarten */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Wat je krijgt</h2>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Wat je krijgt</h2>
           <p style={{ marginTop: "10px", fontSize: "13px", color: "#7d7d85" }}>Klik op een onderdeel voor meer uitleg.</p>
           <div
             style={{
@@ -233,7 +233,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
         {/* Proces — genummerde stappenkaarten */}
         <section style={{ marginTop: "64px" }}>
-          <h2 style={{ fontSize: "clamp(20px, 3vw, 27px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Zo werkt het</h2>
+          <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Zo werkt het</h2>
           <div
             style={{
               marginTop: "26px",

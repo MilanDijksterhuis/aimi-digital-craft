@@ -28,7 +28,13 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken | Webdesign Veendam & Hoogeveen — AIMI" },
+      {
+        name: "twitter:description",
+        content:
+          "Website of webshop laten maken? AIMI bouwt snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 499.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [

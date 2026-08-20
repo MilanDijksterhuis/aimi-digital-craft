@@ -109,7 +109,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24" style={{ background: "#1a1a1a" }}>
+    <section id="faq" className="py-12" style={{ background: "#1a1a1a" }}>
       <div className="mx-auto max-w-3xl px-6">
 
         <motion.p
