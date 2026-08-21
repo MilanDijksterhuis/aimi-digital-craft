@@ -71,7 +71,7 @@ export function Footer() {
           <span className="text-white font-medium">
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </span>
-          <span>Webdevelopment uit Veendam &amp; Hoogeveen — voor heel Nederland</span>
+          <span>Webdesign uit Noord-Nederland — voor heel Nederland</span>
           <span>© {new Date().getFullYear()} AIMI — Alle rechten voorbehouden</span>
         </div>
       </div>

@@ -105,11 +105,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AIMI — Web Agency" },
-      { name: "description", content: "AIMI is een web agency van Aidan & Milan. Design, development & hosting voor groeiende merken." },
+      { title: "AIMI — Webdesign Noord-Nederland" },
+      { name: "description", content: "AIMI is een webdesignbureau uit Noord-Nederland. Design, development & hosting voor groeiende merken." },
       { name: "author", content: "AIMI" },
       { property: "og:site_name", content: "AIMI" },
-      { property: "og:title", content: "AIMI — Web Agency" },
+      { property: "og:title", content: "AIMI — Webdesign Noord-Nederland" },
       { property: "og:description", content: "Design, development & hosting door Aidan & Milan." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "nl_NL" },
@@ -158,7 +158,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           image: LOGO_URL,
           email: "sales@aimi-development.nl",
           description:
-            "AIMI is een web agency van Aidan & Milan. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+            "AIMI is een webdesignbureau uit Noord-Nederland. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
           areaServed: [
             { "@type": "AdministrativeArea", name: "Groningen" },
             { "@type": "AdministrativeArea", name: "Drenthe" },

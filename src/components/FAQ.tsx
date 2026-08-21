@@ -32,8 +32,8 @@ export const faqItems = [
     a: "Voor de bouw van een website werk je met een eenmalige offerte, geen doorlopend contract. Voor hosting en onderhoud geldt een maandabonnement zonder langlopende verplichting, met een opzegtermijn van één maand. Zo blijf je nergens aan vastzitten.",
   },
   {
-    q: "Werken jullie ook voor bedrijven buiten Veendam of Hoogeveen?",
-    a: "Zeker. We werken veel voor ondernemers in Veendam, Hoogeveen en de rest van Groningen en Drenthe, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
+    q: "Werken jullie ook voor bedrijven buiten Noord-Nederland?",
+    a: "Zeker. We zitten zelf in Veendam en werken veel voor ondernemers in Groningen, Drenthe en Friesland, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
   },
   {
     q: "Wat kost een website laten maken?",
@@ -64,7 +64,7 @@ export const faqItems = [
     a: "De eerste technische verbeteringen zijn vaak binnen enkele weken zichtbaar in Search Console. Stijgingen in posities voor concurrerende zoekwoorden kosten doorgaans 2 tot 4 maanden, afhankelijk van je huidige startpositie en de concurrentie in jouw branche.",
   },
   {
-    q: "Doen jullie ook lokale SEO voor Veendam, Hoogeveen of de regio?",
+    q: "Doen jullie ook lokale SEO voor mijn plaats in Noord-Nederland?",
     a: "Ja. Naast landelijke vindbaarheid optimaliseren we ook specifiek voor lokale zoekopdrachten zoals 'website laten maken in de buurt', inclusief een correcte koppeling met je Google Bedrijfsprofiel en lokale structured data.",
   },
   {

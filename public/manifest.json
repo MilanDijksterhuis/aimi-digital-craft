@@ -1,7 +1,7 @@
 {
   "name": "AIMI",
   "short_name": "AIMI",
-  "description": "AIMI is een web agency van Aidan & Milan. Design, development & hosting voor groeiende merken.",
+  "description": "AIMI is een webdesignbureau uit Noord-Nederland. Design, development & hosting voor groeiende merken.",
   "lang": "nl",
   "id": "/",
   "start_url": "/",
@@ -16,18 +16,19 @@
     },
     {
       "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
+      "sizes": "230x230",
       "type": "image/png"
     },
     {
       "src": "/icon-192.png",
-      "sizes": "192x192",
+      "sizes": "246x246",
       "type": "image/png"
     },
     {
       "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "sizes": "656x656",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

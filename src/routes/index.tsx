@@ -14,26 +14,26 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Website laten maken | Webdesign Veendam & Hoogeveen | AIMI" },
+      { title: "Website laten maken | Webdesign Noord-Nederland | AIMI" },
       {
         name: "description",
         content:
-          "Website of webshop laten maken? AIMI bouwt snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 499.",
+          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
       },
-      { property: "og:title", content: "Website laten maken | Webdesign Veendam & Hoogeveen — AIMI" },
+      { property: "og:title", content: "Website laten maken | Webdesign Noord-Nederland — AIMI" },
       {
         property: "og:description",
         content:
-          "Website of webshop laten maken? AIMI bouwt snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 499.",
+          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
       },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken | Webdesign Veendam & Hoogeveen — AIMI" },
+      { name: "twitter:title", content: "Website laten maken | Webdesign Noord-Nederland — AIMI" },
       {
         name: "twitter:description",
         content:
-          "Website of webshop laten maken? AIMI bouwt snelle, professionele websites voor ondernemers in Veendam, Hoogeveen en heel Nederland. Vanaf € 499.",
+          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
