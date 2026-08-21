@@ -19,13 +19,35 @@ const ld = (obj: unknown): LdScript => ({
   children: JSON.stringify(obj),
 });
 
-/** Service-schema voor een dienstenpagina. */
+/** Standaard werkgebied voor de generieke dienstenpagina's. */
+const DEFAULT_AREA_SERVED = [
+  { "@type": "City", name: "Veendam" },
+  { "@type": "City", name: "Hoogeveen" },
+  { "@type": "AdministrativeArea", name: "Groningen" },
+  { "@type": "AdministrativeArea", name: "Drenthe" },
+  { "@type": "Country", name: "Nederland" },
+];
+
+/** Werkgebied voor één plaats: gebruikt door de locatiepagina's, zodat elke
+ * stadspagina zijn eigen plaats + provincie claimt in plaats van het generieke
+ * lijstje. */
+export const cityAreaServed = (city: string, region: string) => [
+  { "@type": "City", name: city },
+  { "@type": "AdministrativeArea", name: region },
+];
+
+/** Service-schema voor een dienstenpagina.
+ * `areaServed` overschrijft het standaard werkgebied (locatiepagina's geven hun
+ * eigen plaats mee); `null` laat areaServed helemaal weg (branchepagina's, die
+ * niet regiogebonden zijn). */
 export function serviceJsonLd(opts: {
   name: string;
   description: string;
   url: string;
   serviceType: string;
+  areaServed?: unknown[] | null;
 }): LdScript {
+  const area = opts.areaServed === undefined ? DEFAULT_AREA_SERVED : opts.areaServed;
   return ld({
     "@context": "https://schema.org",
     "@type": "Service",
@@ -34,13 +56,7 @@ export function serviceJsonLd(opts: {
     description: opts.description,
     url: opts.url,
     provider: { "@id": ORG_ID },
-    areaServed: [
-      { "@type": "City", name: "Veendam" },
-      { "@type": "City", name: "Hoogeveen" },
-      { "@type": "AdministrativeArea", name: "Groningen" },
-      { "@type": "AdministrativeArea", name: "Drenthe" },
-      { "@type": "Country", name: "Nederland" },
-    ],
+    ...(area ? { areaServed: area } : {}),
   });
 }
 

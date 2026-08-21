@@ -1,4 +1,4 @@
-# Node Description Batch 24 of 42
+# Node Description Batch 24 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,25 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_callbackschedulemodal_callbackschedulemodal": "CallbackScheduleModal()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L137 | neighbors=[CallbackScheduleModal.tsx]
+- "components_callbackschedulemodal_callbackschedulevalue": "CallbackScheduleValue" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L5 | neighbors=[CallbackScheduleModal.tsx]
+- "components_chatwidget_message": "Message" | kind=code-symbol | source=src/components/ChatWidget.tsx:L4 | neighbors=[ChatWidget.tsx]
+- "components_confirmdialog_confirmcontext": "ConfirmContext" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L46 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_confirmcontextvalue": "ConfirmContextValue" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L41 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_confirmoptions": "ConfirmOptions" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L22 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_pending": "Pending" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L56 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_pendingconfirm": "PendingConfirm" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L54 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_pendingprompt": "PendingPrompt" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L55 | neighbors=[ConfirmDialog.tsx]
+- "components_confirmdialog_promptoptions": "PromptOptions" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L30 | neighbors=[ConfirmDialog.tsx]
+- "components_contact_field": "Field()" | kind=code-symbol | source=src/components/Contact.tsx:L239 | neighbors=[Contact.tsx]
+- "components_contact_mode": "Mode" | kind=code-symbol | source=src/components/Contact.tsx:L8 | neighbors=[Contact.tsx]
+- "components_cookiebanner_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/CookieBanner.tsx:L4 | neighbors=[CookieBanner.tsx]
+- "components_cookiebanner_loadprefs": "loadPrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L12 | neighbors=[CookieBanner.tsx]
+- "components_cookiebanner_saveprefs": "savePrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L21 | neighbors=[CookieBanner.tsx]
+- "components_faq_items": "items" | kind=code-symbol | source=src/components/FAQ.tsx:L5 | neighbors=[FAQ.tsx]
+- "components_footer_columns": "columns" | kind=code-symbol | source=src/components/Footer.tsx:L5 | neighbors=[Footer.tsx]
+- "components_idletimeout_activity_events": "ACTIVITY_EVENTS" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L19 | neighbors=[IdleTimeout.tsx]
+- "components_leadspanel_activity_label": "ACTIVITY_LABEL" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L49 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_downloadcsv": "downloadCsv()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L122 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_fmtdate": "fmtDate()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L94 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_kpicard": "KpiCard()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L581 | neighbors=[LeadsPanel.tsx]
@@ -38,25 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_leadspanel_statuses": "STATUSES" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L37 | neighbors=[LeadsPanel.tsx]
 - "components_locationlanding_locationfaq": "LocationFaq" | kind=code-symbol | source=src/components/LocationLanding.tsx:L16 | neighbors=[LocationLanding.tsx]
 - "components_locationlanding_reasons": "REASONS" | kind=code-symbol | source=src/components/LocationLanding.tsx:L46 | neighbors=[LocationLanding.tsx]
-- "components_locationlanding_services": "SERVICES" | kind=code-symbol | source=src/components/LocationLanding.tsx:L27 | neighbors=[LocationLanding.tsx]
-- "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L13 | neighbors=[Nav.tsx]
-- "components_nav_navlink": "NavLink()" | kind=code-symbol | source=src/components/Nav.tsx:L19 | neighbors=[Nav.tsx]
-- "components_nav_services": "services" | kind=code-symbol | source=src/components/Nav.tsx:L6 | neighbors=[Nav.tsx]
-- "components_nav_servicesmenu": "ServicesMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L44 | neighbors=[Nav.tsx]
-- "components_onboardingwizard_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L16 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_contacts": "Contacts" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L17 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L256 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_fadevariants": "fadeVariants" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L37 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_field": "Field()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L294 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_formstate": "FormState" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L19 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_progressbar": "ProgressBar()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L274 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_step_titles": "STEP_TITLES" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L29 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_stepcompany": "StepCompany()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L308 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_stepcontact": "StepContact()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L322 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_stepcontacts": "StepContacts()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L355 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_stepproject": "StepProject()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L343 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L378 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L223 | neighbors=[OnboardingWizard.tsx]
 
 ## Instructions
 

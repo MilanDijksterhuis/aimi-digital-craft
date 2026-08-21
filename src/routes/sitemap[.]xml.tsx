@@ -26,9 +26,34 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/webshop-laten-maken", lastmod: "2026-08-20" },
           { path: "/onderhoud-hosting", lastmod: "2026-08-20" },
 
-          // Lokale landingspagina's — hoofddoel voor lokale SEO (Veendam/Hoogeveen)
-          { path: "/website-laten-maken-veendam", lastmod: "2026-08-20" },
-          { path: "/website-laten-maken-hoogeveen", lastmod: "2026-08-20" },
+          // Branchepagina's — geen regio-as, functionele zoektermen
+          { path: "/branches", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-kapsalon", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-nagelstudio", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-schoonheidssalon", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-pedicure", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-hovenier", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-klusbedrijf", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-schilder", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-loodgieter", lastmod: "2026-08-21" },
+
+          // Lokale landingspagina's — hoofddoel voor lokale SEO
+          { path: "/webdesign", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-veendam", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-hoogeveen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-groningen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-assen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-hoogezand", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-stadskanaal", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-emmen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-winschoten", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-roden", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-coevorden", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-meppel", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-leeuwarden", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-drachten", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-heerenveen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-sneek", lastmod: "2026-08-21" },
 
           // Overige publieke pagina's
           { path: "/werkwijze", lastmod: "2026-08-20" },

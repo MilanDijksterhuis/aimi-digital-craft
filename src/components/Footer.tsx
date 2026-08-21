@@ -10,11 +10,13 @@ const columns: { heading: string; links: { label: string; to: string }[] }[] = [
       { label: "Webshop laten maken", to: "/webshop-laten-maken" },
       { label: "Onderhoud & hosting", to: "/onderhoud-hosting" },
       { label: "Meer diensten", to: "/meer-diensten" },
+      { label: "Webdesign per branche", to: "/branches" },
     ],
   },
   {
     heading: "Regio",
     links: [
+      { label: "Webdesign per regio", to: "/webdesign" },
       { label: "Website laten maken Veendam", to: "/website-laten-maken-veendam" },
       { label: "Website laten maken Hoogeveen", to: "/website-laten-maken-hoogeveen" },
     ],

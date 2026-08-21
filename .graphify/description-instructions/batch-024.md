@@ -1,4 +1,4 @@
-# Node Description Batch 25 of 42
+# Node Description Batch 25 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,26 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_locationlanding_services": "SERVICES" | kind=code-symbol | source=src/components/LocationLanding.tsx:L27 | neighbors=[LocationLanding.tsx]
+- "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L16 | neighbors=[Nav.tsx]
+- "components_nav_motionlink": "MotionLink" | kind=code-symbol | source=src/components/Nav.tsx:L6 | neighbors=[Nav.tsx]
+- "components_nav_navlink": "NavLink()" | kind=code-symbol | source=src/components/Nav.tsx:L23 | neighbors=[Nav.tsx]
+- "components_nav_services": "services" | kind=code-symbol | source=src/components/Nav.tsx:L8 | neighbors=[Nav.tsx]
+- "components_nav_servicesmenu": "ServicesMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L48 | neighbors=[Nav.tsx]
+- "components_onboardingwizard_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L16 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_contacts": "Contacts" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L17 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L256 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_fadevariants": "fadeVariants" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L37 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_field": "Field()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L294 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_formstate": "FormState" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L19 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_progressbar": "ProgressBar()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L274 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_step_titles": "STEP_TITLES" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L29 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepcompany": "StepCompany()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L308 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepcontact": "StepContact()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L322 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepcontacts": "StepContacts()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L355 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepproject": "StepProject()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L343 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L378 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L223 | neighbors=[OnboardingWizard.tsx]
 - "components_portalonboardingtour_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L12 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_contacts": "Contacts" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L13 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L245 | neighbors=[PortalOnboardingTour.tsx]
@@ -37,26 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_portaltutorial_slide": "Slide" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L11 | neighbors=[PortalTutorial.tsx]
 - "components_portaltutorial_slides": "SLIDES" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L17 | neighbors=[PortalTutorial.tsx]
 - "components_pricing_addons": "addons" | kind=code-symbol | source=src/components/Pricing.tsx:L4 | neighbors=[Pricing.tsx]
-- "components_pricing_tiers": "tiers" | kind=code-symbol | source=src/components/Pricing.tsx:L4 | neighbors=[Pricing.tsx]
-- "components_processtimeline_phases": "phases" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L5 | neighbors=[ProcessTimeline.tsx]
-- "components_servicepage_internallink": "InternalLink" | kind=code-symbol | source=src/components/ServicePage.tsx:L17 | neighbors=[ServicePage.tsx]
-- "components_servicepage_servicefaq": "ServiceFaq" | kind=code-symbol | source=src/components/ServicePage.tsx:L16 | neighbors=[ServicePage.tsx]
-- "components_work_projects": "projects" | kind=code-symbol | source=src/components/Work.tsx:L4 | neighbors=[Work.tsx]
-- "components_work_work": "Work()" | kind=code-symbol | source=src/components/Work.tsx:L11 | neighbors=[Work.tsx]
-- "design_handoff_meer_diensten_support_bundledblob": "bundledBlob()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1136 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_componentdidmount": "componentDidMount()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L831 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_componentdidupdate": "componentDidUpdate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L833 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_componentwillunmount": "componentWillUnmount()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L835 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_constructor": "constructor()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L818 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_forceupdate": "forceUpdate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L828 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_hiderawtemplate": "hideRawTemplate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1818 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_hinttomin": "hintToMin()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L883 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_placeholder": "Placeholder()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L862 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_renderdeckkids": "renderDeckKids()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L543 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_rendervals": "renderVals()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L838 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_resolvedottedpath": "resolveDottedPath()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1161 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_setstate": "setState()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L825 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_shallowequal": "shallowEqual()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L854 | neighbors=[support.js]
 
 ## Instructions
 

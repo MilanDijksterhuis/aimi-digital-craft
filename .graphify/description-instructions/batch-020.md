@@ -1,4 +1,4 @@
-# Node Description Batch 21 of 42
+# Node Description Batch 21 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,22 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_alertspanel": "AlertsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L791 | neighbors=[admin.tsx]
+- "authenticated_admin_archivedchangespanel": "ArchivedChangesPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L755 | neighbors=[admin.tsx]
+- "authenticated_admin_card": "Card()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L323 | neighbors=[admin.tsx]
+- "authenticated_admin_changes_adminchangespage": "AdminChangesPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L36 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_changeid_adminchangedetailpage": "AdminChangeDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L23 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_attachmentlist": "AttachmentList()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L197 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_changedetail": "ChangeDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L59 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_changeheader": "ChangeHeader()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L98 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_communicatietab": "CommunicatieTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L216 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L150 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L18 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeid_tijdlijntab": "TijdlijnTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.$changeId.tsx:L269 | neighbors=[admin.changes.$changeId.tsx]
+- "authenticated_admin_changes_changeslistsection": "ChangesListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L166 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_changessidebar": "ChangesSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L87 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_formfield": "FormField()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L332 | neighbors=[admin.changes.tsx]
+- "authenticated_admin_changes_newchangesection": "NewChangeSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L344 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L34 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_changes_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L17 | neighbors=[admin.changes.tsx]
 - "authenticated_admin_dashboard": "Dashboard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L233 | neighbors=[admin.tsx]
@@ -41,22 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_projecten_projectid_activitytab": "ActivityTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L346 | neighbors=[admin.projecten.$projectId.tsx]
 - "authenticated_admin_projecten_projectid_adminprojectdetailpage": "AdminProjectDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L64 | neighbors=[admin.projecten.$projectId.tsx]
 - "authenticated_admin_projecten_projectid_changestab": "ChangesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L976 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_contactstab": "ContactsTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L445 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_notestab": "NotesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L380 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L260 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_projectdetail": "ProjectDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L100 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_projectheader": "ProjectHeader()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L158 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_recurrence_label": "RECURRENCE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L714 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L59 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_settingstab": "SettingsTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L521 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_taskstab": "TasksTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L716 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectid_timetab": "TimeTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L857 | neighbors=[admin.projecten.$projectId.tsx]
-- "authenticated_admin_projecten_projectslistsection": "ProjectsListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L348 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L69 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_statssection": "StatsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L214 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L46 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_templatessection": "TemplatesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L810 | neighbors=[admin.projecten.tsx]
-- "authenticated_admin_projecten_websitelinkdetail": "WebsiteLinkDetail()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L491 | neighbors=[admin.projecten.tsx]
 
 ## Instructions
 

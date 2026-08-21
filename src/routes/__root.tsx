@@ -162,8 +162,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           areaServed: [
             { "@type": "AdministrativeArea", name: "Groningen" },
             { "@type": "AdministrativeArea", name: "Drenthe" },
+            { "@type": "AdministrativeArea", name: "Fryslân" },
             { "@type": "City", name: "Veendam" },
-            { "@type": "City", name: "Hoogeveen" },
             { "@type": "Country", name: "Nederland" },
           ],
           founder: [

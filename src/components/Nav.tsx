@@ -10,8 +10,8 @@ const services = [
   { label: "Webshop laten maken", href: "/webshop-laten-maken", desc: "Verkoopklare online winkel" },
   { label: "Onderhoud & hosting", href: "/onderhoud-hosting", desc: "Snel, veilig en up-to-date" },
   { label: "Meer diensten", href: "/meer-diensten", desc: "Hosting, performance en SEO los" },
-  { label: "Website laten maken in Veendam", href: "/website-laten-maken-veendam", desc: "Webdesign voor Veendam en omgeving" },
-  { label: "Website laten maken in Hoogeveen", href: "/website-laten-maken-hoogeveen", desc: "Webdesign voor Hoogeveen en omgeving" },
+  { label: "Webdesign per regio", href: "/webdesign", desc: "Website laten maken in jouw plaats" },
+  { label: "Webdesign per branche", href: "/branches", desc: "Website laten maken voor jouw vakgebied" },
 ];
 
 const links = [

@@ -11,10 +11,38 @@ const data: ServicePageData = {
   intro:
     "Snelle, veilige hosting en onderhoud zonder gedoe. AIMI host je website op een eigen VPS met Nederlandse servers, verzorgt updates en back-ups en houdt 24/7 de uptime in de gaten. Heb je al een site? Wij nemen 'm probleemloos over. Geen setup-kosten, geen serverstress.",
   offerings: [
-    { title: "Snelle Nederlandse hosting", desc: "Je site draait op onze eigen VPS, geoptimaliseerd voor snelheid en betrouwbaarheid." },
-    { title: "Beveiliging & updates", desc: "SSL, security-patches en updates zitten standaard bij het abonnement inbegrepen." },
-    { title: "Dagelijkse back-ups", desc: "Automatische back-ups zodat je nooit werk of data verliest." },
-    { title: "24/7 monitoring", desc: "We houden de uptime in de gaten en grijpen in vóór jij het merkt." },
+    {
+      title: "Snelle Nederlandse hosting",
+      desc: "Je site draait op onze eigen VPS, geoptimaliseerd voor snelheid en betrouwbaarheid.",
+      details: [
+        "Geen gedeelde hosting met andere klanten: je site heeft eigen serverruimte, zonder dat de drukte van andere sites jouw snelheid beïnvloedt.",
+        "Servers staan in Nederland, wat zorgt voor lage latency en een snelle laadtijd voor je Nederlandse bezoekers.",
+      ],
+    },
+    {
+      title: "Beveiliging & updates",
+      desc: "SSL, security-patches en updates zitten standaard bij het abonnement inbegrepen.",
+      details: [
+        "SSL-certificaat wordt automatisch aangevraagd en vernieuwd, zodat je site altijd veilig en vertrouwd oogt.",
+        "We houden software en afhankelijkheden actief bij, zodat bekende kwetsbaarheden snel worden gedicht.",
+      ],
+    },
+    {
+      title: "Dagelijkse back-ups",
+      desc: "Automatische back-ups zodat je nooit werk of data verliest.",
+      details: [
+        "Elke dag wordt automatisch een volledige back-up gemaakt en veilig bewaard, los van de productieomgeving.",
+        "Bij problemen kunnen we je site binnen enkele minuten terugzetten naar de laatste werkende versie.",
+      ],
+    },
+    {
+      title: "24/7 monitoring",
+      desc: "We houden de uptime in de gaten en grijpen in vóór jij het merkt.",
+      details: [
+        "Geautomatiseerde monitoring controleert continu of je site bereikbaar is en signaleert storingen direct.",
+        "Bij een probleem grijpen we zelf in, vaak nog voordat jij of je bezoekers er iets van merken.",
+      ],
+    },
   ],
   steps: [
     { title: "Kennismaking", desc: "We bekijken je huidige site en hostingwensen." },

@@ -1,4 +1,4 @@
-# Node Description Batch 15 of 42
+# Node Description Batch 15 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,21 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_progress": "progress.tsx" | kind=code-symbol | source=src/components/ui/progress.tsx:L1 | neighbors=[utils.ts, cn(), Progress]
+- "ui_slider": "slider.tsx" | kind=code-symbol | source=src/components/ui/slider.tsx:L1 | neighbors=[utils.ts, cn(), Slider]
+- "ui_sonner": "sonner.tsx" | kind=code-symbol | source=src/components/ui/sonner.tsx:L1 | neighbors=[__root.tsx, Toaster(), ToasterProps]
+- "ui_switch": "switch.tsx" | kind=code-symbol | source=src/components/ui/switch.tsx:L1 | neighbors=[utils.ts, cn(), Switch]
+- "ui_textarea": "textarea.tsx" | kind=code-symbol | source=src/components/ui/textarea.tsx:L1 | neighbors=[utils.ts, cn(), Textarea]
+- "authenticated_account_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L7 | neighbors=[account.tsx, routeTree.gen.ts]
+- "authenticated_admin_accounts_accountslistsection": "AccountsListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L264 | neighbors=[admin.accounts.tsx, accountStatus()]
+- "authenticated_admin_accounts_accountstatus": "accountStatus()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L39 | neighbors=[admin.accounts.tsx, AccountsListSection()]
+- "authenticated_admin_accounts_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L17 | neighbors=[admin.accounts.tsx, routeTree.gen.ts]
+- "authenticated_admin_changes_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L12 | neighbors=[admin.changes.tsx, routeTree.gen.ts]
+- "authenticated_admin_projecten_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L41 | neighbors=[admin.projecten.tsx, routeTree.gen.ts]
+- "authenticated_admin_rollen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L20 | neighbors=[admin.rollen.tsx, routeTree.gen.ts]
+- "authenticated_admin_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L64 | neighbors=[admin.tsx, routeTree.gen.ts]
+- "authenticated_portal_matchesfilter": "matchesFilter()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L106 | neighbors=[portal.tsx, mapStatus()]
+- "authenticated_portal_projecten_projectid_monitoringsection": "MonitoringSection()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L80 | neighbors=[portal.projecten.$projectId.tsx, timeAgo()]
 - "authenticated_portal_projecten_projectid_timeago": "timeAgo()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L27 | neighbors=[portal.projecten.$projectId.tsx, MonitoringSection()]
 - "authenticated_portal_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L58 | neighbors=[portal.tsx, routeTree.gen.ts]
 - "authenticated_portal_stepper": "Stepper()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L822 | neighbors=[portal.tsx, stepIndex()]
@@ -29,6 +44,7 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_server_statuscolor": "statusColor()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L52 | neighbors=[server.tsx, ServerPage()]
 - "components_about_about": "About()" | kind=code-symbol | source=src/components/About.tsx:L4 | neighbors=[About.tsx, index.tsx]
 - "components_adminchatpanel_adminchatpanel": "AdminChatPanel()" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L27 | neighbors=[admin.tsx, AdminChatPanel.tsx]
+- "components_analyticsloader_analyticsloader": "AnalyticsLoader()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L27 | neighbors=[AnalyticsLoader.tsx, __root.tsx]
 - "components_berichtentab_berichtentab": "BerichtenTab()" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L11 | neighbors=[admin.tsx, BerichtenTab.tsx]
 - "components_callbackagenda_adddays": "addDays()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L40 | neighbors=[CallbackAgenda.tsx, startOfWeek()]
 - "components_callbackagenda_callbackitem": "CallbackItem()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L275 | neighbors=[CallbackAgenda.tsx, fmtTime()]
@@ -39,24 +55,8 @@ one-sentence description — no prose, no markdown fences.
 - "components_chatwidget_chatwidget": "ChatWidget()" | kind=code-symbol | source=src/components/ChatWidget.tsx:L15 | neighbors=[portal.tsx, ChatWidget.tsx]
 - "components_confirmdialog_confirmprovider": "ConfirmProvider()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L58 | neighbors=[ConfirmDialog.tsx, __root.tsx]
 - "components_deletedchangestab_deletedchangestab": "DeletedChangesTab()" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L12 | neighbors=[admin.tsx, DeletedChangesTab.tsx]
+- "components_faq_faqitems": "faqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L5 | neighbors=[FAQ.tsx, faq.tsx]
 - "components_hero_hero": "Hero()" | kind=code-symbol | source=src/components/Hero.tsx:L5 | neighbors=[Hero.tsx, index.tsx]
-- "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]
-- "components_leadspanel_initials": "initials()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L75 | neighbors=[LeadsPanel.tsx, LeadDetail()]
-- "components_leadspanel_reltime": "relTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L102 | neighbors=[LeadsPanel.tsx, LeadDetail()]
-- "components_onboardingwizard_onboardingwizard": "OnboardingWizard()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L43 | neighbors=[admin.accounts.$accountId.tsx, OnboardingWizard.tsx]
-- "components_portalonboardingtour_portalonboardingtour": "PortalOnboardingTour()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L46 | neighbors=[portal.tsx, PortalOnboardingTour.tsx]
-- "components_portaltutorial_portaltutorial": "PortalTutorial()" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L51 | neighbors=[portal.tsx, PortalTutorial.tsx]
-- "components_pricing_pricing": "Pricing()" | kind=code-symbol | source=src/components/Pricing.tsx:L36 | neighbors=[Pricing.tsx, index.tsx]
-- "components_processtimeline_processtimeline": "ProcessTimeline()" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L48 | neighbors=[ProcessTimeline.tsx, index.tsx]
-- "components_services_services": "services" | kind=code-symbol | source=src/components/Services.tsx:L4 | neighbors=[Services.tsx, index.tsx]
-- "components_teamtab_teamtab": "TeamTab()" | kind=code-symbol | source=src/components/TeamTab.tsx:L12 | neighbors=[admin.tsx, TeamTab.tsx]
-- "components_telegrammfacard_telegrammfacard": "TelegramMfaCard()" | kind=code-symbol | source=src/components/TelegramMfaCard.tsx:L16 | neighbors=[admin.accounts.$accountId.tsx, TelegramMfaCard.tsx]
-- "design_handoff_meer_diensten_support_cdnscriptfor": "cdnScriptFor()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1149 | neighbors=[support.js, loadReactUmd()]
-- "design_handoff_meer_diensten_support_contentkey": "contentKey()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L771 | neighbors=[support.js, walkElement()]
-- "design_handoff_meer_diensten_support_createexternalmodules": "createExternalModules()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1171 | neighbors=[support.js, createRuntime()]
-- "design_handoff_meer_diensten_support_createhelmetmanager": "createHelmetManager()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1366 | neighbors=[support.js, createRuntime()]
-- "design_handoff_meer_diensten_support_createpseudosheet": "createPseudoSheet()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1567 | neighbors=[support.js, createRuntime()]
-- "design_handoff_meer_diensten_support_createregistry": "createRegistry()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1592 | neighbors=[support.js, createRuntime()]
 
 ## Instructions
 

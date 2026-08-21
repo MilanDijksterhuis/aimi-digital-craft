@@ -10,10 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WerkwijzeRouteImport } from './routes/werkwijze'
+import { Route as WebsiteLatenMakenWinschotenRouteImport } from './routes/website-laten-maken-winschoten'
 import { Route as WebsiteLatenMakenVeendamRouteImport } from './routes/website-laten-maken-veendam'
+import { Route as WebsiteLatenMakenStadskanaalRouteImport } from './routes/website-laten-maken-stadskanaal'
+import { Route as WebsiteLatenMakenSneekRouteImport } from './routes/website-laten-maken-sneek'
+import { Route as WebsiteLatenMakenSchoonheidssalonRouteImport } from './routes/website-laten-maken-schoonheidssalon'
+import { Route as WebsiteLatenMakenSchilderRouteImport } from './routes/website-laten-maken-schilder'
+import { Route as WebsiteLatenMakenRodenRouteImport } from './routes/website-laten-maken-roden'
+import { Route as WebsiteLatenMakenPedicureRouteImport } from './routes/website-laten-maken-pedicure'
+import { Route as WebsiteLatenMakenNagelstudioRouteImport } from './routes/website-laten-maken-nagelstudio'
+import { Route as WebsiteLatenMakenMeppelRouteImport } from './routes/website-laten-maken-meppel'
+import { Route as WebsiteLatenMakenLoodgieterRouteImport } from './routes/website-laten-maken-loodgieter'
+import { Route as WebsiteLatenMakenLeeuwardenRouteImport } from './routes/website-laten-maken-leeuwarden'
+import { Route as WebsiteLatenMakenKlusbedrijfRouteImport } from './routes/website-laten-maken-klusbedrijf'
+import { Route as WebsiteLatenMakenKapsalonRouteImport } from './routes/website-laten-maken-kapsalon'
+import { Route as WebsiteLatenMakenHovenierRouteImport } from './routes/website-laten-maken-hovenier'
+import { Route as WebsiteLatenMakenHoogezandRouteImport } from './routes/website-laten-maken-hoogezand'
 import { Route as WebsiteLatenMakenHoogeveenRouteImport } from './routes/website-laten-maken-hoogeveen'
+import { Route as WebsiteLatenMakenHeerenveenRouteImport } from './routes/website-laten-maken-heerenveen'
+import { Route as WebsiteLatenMakenGroningenRouteImport } from './routes/website-laten-maken-groningen'
+import { Route as WebsiteLatenMakenEmmenRouteImport } from './routes/website-laten-maken-emmen'
+import { Route as WebsiteLatenMakenDrachtenRouteImport } from './routes/website-laten-maken-drachten'
+import { Route as WebsiteLatenMakenCoevordenRouteImport } from './routes/website-laten-maken-coevorden'
+import { Route as WebsiteLatenMakenAssenRouteImport } from './routes/website-laten-maken-assen'
 import { Route as WebsiteLatenMakenRouteImport } from './routes/website-laten-maken'
 import { Route as WebshopLatenMakenRouteImport } from './routes/webshop-laten-maken'
+import { Route as WebdesignRouteImport } from './routes/webdesign'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacybeleidRouteImport } from './routes/privacybeleid'
@@ -23,6 +45,7 @@ import { Route as MeerDienstenRouteImport } from './routes/meer-diensten'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BranchesRouteImport } from './routes/branches'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -51,10 +74,97 @@ const WerkwijzeRoute = WerkwijzeRouteImport.update({
   path: '/werkwijze',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebsiteLatenMakenWinschotenRoute =
+  WebsiteLatenMakenWinschotenRouteImport.update({
+    id: '/website-laten-maken-winschoten',
+    path: '/website-laten-maken-winschoten',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const WebsiteLatenMakenVeendamRoute =
   WebsiteLatenMakenVeendamRouteImport.update({
     id: '/website-laten-maken-veendam',
     path: '/website-laten-maken-veendam',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenStadskanaalRoute =
+  WebsiteLatenMakenStadskanaalRouteImport.update({
+    id: '/website-laten-maken-stadskanaal',
+    path: '/website-laten-maken-stadskanaal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenSneekRoute = WebsiteLatenMakenSneekRouteImport.update({
+  id: '/website-laten-maken-sneek',
+  path: '/website-laten-maken-sneek',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebsiteLatenMakenSchoonheidssalonRoute =
+  WebsiteLatenMakenSchoonheidssalonRouteImport.update({
+    id: '/website-laten-maken-schoonheidssalon',
+    path: '/website-laten-maken-schoonheidssalon',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenSchilderRoute =
+  WebsiteLatenMakenSchilderRouteImport.update({
+    id: '/website-laten-maken-schilder',
+    path: '/website-laten-maken-schilder',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenRodenRoute = WebsiteLatenMakenRodenRouteImport.update({
+  id: '/website-laten-maken-roden',
+  path: '/website-laten-maken-roden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebsiteLatenMakenPedicureRoute =
+  WebsiteLatenMakenPedicureRouteImport.update({
+    id: '/website-laten-maken-pedicure',
+    path: '/website-laten-maken-pedicure',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenNagelstudioRoute =
+  WebsiteLatenMakenNagelstudioRouteImport.update({
+    id: '/website-laten-maken-nagelstudio',
+    path: '/website-laten-maken-nagelstudio',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenMeppelRoute = WebsiteLatenMakenMeppelRouteImport.update({
+  id: '/website-laten-maken-meppel',
+  path: '/website-laten-maken-meppel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebsiteLatenMakenLoodgieterRoute =
+  WebsiteLatenMakenLoodgieterRouteImport.update({
+    id: '/website-laten-maken-loodgieter',
+    path: '/website-laten-maken-loodgieter',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenLeeuwardenRoute =
+  WebsiteLatenMakenLeeuwardenRouteImport.update({
+    id: '/website-laten-maken-leeuwarden',
+    path: '/website-laten-maken-leeuwarden',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenKlusbedrijfRoute =
+  WebsiteLatenMakenKlusbedrijfRouteImport.update({
+    id: '/website-laten-maken-klusbedrijf',
+    path: '/website-laten-maken-klusbedrijf',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenKapsalonRoute =
+  WebsiteLatenMakenKapsalonRouteImport.update({
+    id: '/website-laten-maken-kapsalon',
+    path: '/website-laten-maken-kapsalon',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenHovenierRoute =
+  WebsiteLatenMakenHovenierRouteImport.update({
+    id: '/website-laten-maken-hovenier',
+    path: '/website-laten-maken-hovenier',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenHoogezandRoute =
+  WebsiteLatenMakenHoogezandRouteImport.update({
+    id: '/website-laten-maken-hoogezand',
+    path: '/website-laten-maken-hoogezand',
     getParentRoute: () => rootRouteImport,
   } as any)
 const WebsiteLatenMakenHoogeveenRoute =
@@ -63,6 +173,40 @@ const WebsiteLatenMakenHoogeveenRoute =
     path: '/website-laten-maken-hoogeveen',
     getParentRoute: () => rootRouteImport,
   } as any)
+const WebsiteLatenMakenHeerenveenRoute =
+  WebsiteLatenMakenHeerenveenRouteImport.update({
+    id: '/website-laten-maken-heerenveen',
+    path: '/website-laten-maken-heerenveen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenGroningenRoute =
+  WebsiteLatenMakenGroningenRouteImport.update({
+    id: '/website-laten-maken-groningen',
+    path: '/website-laten-maken-groningen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenEmmenRoute = WebsiteLatenMakenEmmenRouteImport.update({
+  id: '/website-laten-maken-emmen',
+  path: '/website-laten-maken-emmen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebsiteLatenMakenDrachtenRoute =
+  WebsiteLatenMakenDrachtenRouteImport.update({
+    id: '/website-laten-maken-drachten',
+    path: '/website-laten-maken-drachten',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenCoevordenRoute =
+  WebsiteLatenMakenCoevordenRouteImport.update({
+    id: '/website-laten-maken-coevorden',
+    path: '/website-laten-maken-coevorden',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebsiteLatenMakenAssenRoute = WebsiteLatenMakenAssenRouteImport.update({
+  id: '/website-laten-maken-assen',
+  path: '/website-laten-maken-assen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WebsiteLatenMakenRoute = WebsiteLatenMakenRouteImport.update({
   id: '/website-laten-maken',
   path: '/website-laten-maken',
@@ -71,6 +215,11 @@ const WebsiteLatenMakenRoute = WebsiteLatenMakenRouteImport.update({
 const WebshopLatenMakenRoute = WebshopLatenMakenRouteImport.update({
   id: '/webshop-laten-maken',
   path: '/webshop-laten-maken',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebdesignRoute = WebdesignRouteImport.update({
+  id: '/webdesign',
+  path: '/webdesign',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrackDotjsRoute = TrackDotjsRouteImport.update({
@@ -116,6 +265,11 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BranchesRoute = BranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
@@ -242,6 +396,7 @@ const AuthenticatedAdminAccountsAccountIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -251,10 +406,32 @@ export interface FileRoutesByFullPath {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
+  '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
+  '/website-laten-maken-coevorden': typeof WebsiteLatenMakenCoevordenRoute
+  '/website-laten-maken-drachten': typeof WebsiteLatenMakenDrachtenRoute
+  '/website-laten-maken-emmen': typeof WebsiteLatenMakenEmmenRoute
+  '/website-laten-maken-groningen': typeof WebsiteLatenMakenGroningenRoute
+  '/website-laten-maken-heerenveen': typeof WebsiteLatenMakenHeerenveenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-hoogezand': typeof WebsiteLatenMakenHoogezandRoute
+  '/website-laten-maken-hovenier': typeof WebsiteLatenMakenHovenierRoute
+  '/website-laten-maken-kapsalon': typeof WebsiteLatenMakenKapsalonRoute
+  '/website-laten-maken-klusbedrijf': typeof WebsiteLatenMakenKlusbedrijfRoute
+  '/website-laten-maken-leeuwarden': typeof WebsiteLatenMakenLeeuwardenRoute
+  '/website-laten-maken-loodgieter': typeof WebsiteLatenMakenLoodgieterRoute
+  '/website-laten-maken-meppel': typeof WebsiteLatenMakenMeppelRoute
+  '/website-laten-maken-nagelstudio': typeof WebsiteLatenMakenNagelstudioRoute
+  '/website-laten-maken-pedicure': typeof WebsiteLatenMakenPedicureRoute
+  '/website-laten-maken-roden': typeof WebsiteLatenMakenRodenRoute
+  '/website-laten-maken-schilder': typeof WebsiteLatenMakenSchilderRoute
+  '/website-laten-maken-schoonheidssalon': typeof WebsiteLatenMakenSchoonheidssalonRoute
+  '/website-laten-maken-sneek': typeof WebsiteLatenMakenSneekRoute
+  '/website-laten-maken-stadskanaal': typeof WebsiteLatenMakenStadskanaalRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/website-laten-maken-winschoten': typeof WebsiteLatenMakenWinschotenRoute
   '/werkwijze': typeof WerkwijzeRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
@@ -279,6 +456,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -288,10 +466,32 @@ export interface FileRoutesByTo {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
+  '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
+  '/website-laten-maken-coevorden': typeof WebsiteLatenMakenCoevordenRoute
+  '/website-laten-maken-drachten': typeof WebsiteLatenMakenDrachtenRoute
+  '/website-laten-maken-emmen': typeof WebsiteLatenMakenEmmenRoute
+  '/website-laten-maken-groningen': typeof WebsiteLatenMakenGroningenRoute
+  '/website-laten-maken-heerenveen': typeof WebsiteLatenMakenHeerenveenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-hoogezand': typeof WebsiteLatenMakenHoogezandRoute
+  '/website-laten-maken-hovenier': typeof WebsiteLatenMakenHovenierRoute
+  '/website-laten-maken-kapsalon': typeof WebsiteLatenMakenKapsalonRoute
+  '/website-laten-maken-klusbedrijf': typeof WebsiteLatenMakenKlusbedrijfRoute
+  '/website-laten-maken-leeuwarden': typeof WebsiteLatenMakenLeeuwardenRoute
+  '/website-laten-maken-loodgieter': typeof WebsiteLatenMakenLoodgieterRoute
+  '/website-laten-maken-meppel': typeof WebsiteLatenMakenMeppelRoute
+  '/website-laten-maken-nagelstudio': typeof WebsiteLatenMakenNagelstudioRoute
+  '/website-laten-maken-pedicure': typeof WebsiteLatenMakenPedicureRoute
+  '/website-laten-maken-roden': typeof WebsiteLatenMakenRodenRoute
+  '/website-laten-maken-schilder': typeof WebsiteLatenMakenSchilderRoute
+  '/website-laten-maken-schoonheidssalon': typeof WebsiteLatenMakenSchoonheidssalonRoute
+  '/website-laten-maken-sneek': typeof WebsiteLatenMakenSneekRoute
+  '/website-laten-maken-stadskanaal': typeof WebsiteLatenMakenStadskanaalRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/website-laten-maken-winschoten': typeof WebsiteLatenMakenWinschotenRoute
   '/werkwijze': typeof WerkwijzeRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
@@ -318,6 +518,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
@@ -327,10 +528,32 @@ export interface FileRoutesById {
   '/privacybeleid': typeof PrivacybeleidRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/track.js': typeof TrackDotjsRoute
+  '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
+  '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
+  '/website-laten-maken-coevorden': typeof WebsiteLatenMakenCoevordenRoute
+  '/website-laten-maken-drachten': typeof WebsiteLatenMakenDrachtenRoute
+  '/website-laten-maken-emmen': typeof WebsiteLatenMakenEmmenRoute
+  '/website-laten-maken-groningen': typeof WebsiteLatenMakenGroningenRoute
+  '/website-laten-maken-heerenveen': typeof WebsiteLatenMakenHeerenveenRoute
   '/website-laten-maken-hoogeveen': typeof WebsiteLatenMakenHoogeveenRoute
+  '/website-laten-maken-hoogezand': typeof WebsiteLatenMakenHoogezandRoute
+  '/website-laten-maken-hovenier': typeof WebsiteLatenMakenHovenierRoute
+  '/website-laten-maken-kapsalon': typeof WebsiteLatenMakenKapsalonRoute
+  '/website-laten-maken-klusbedrijf': typeof WebsiteLatenMakenKlusbedrijfRoute
+  '/website-laten-maken-leeuwarden': typeof WebsiteLatenMakenLeeuwardenRoute
+  '/website-laten-maken-loodgieter': typeof WebsiteLatenMakenLoodgieterRoute
+  '/website-laten-maken-meppel': typeof WebsiteLatenMakenMeppelRoute
+  '/website-laten-maken-nagelstudio': typeof WebsiteLatenMakenNagelstudioRoute
+  '/website-laten-maken-pedicure': typeof WebsiteLatenMakenPedicureRoute
+  '/website-laten-maken-roden': typeof WebsiteLatenMakenRodenRoute
+  '/website-laten-maken-schilder': typeof WebsiteLatenMakenSchilderRoute
+  '/website-laten-maken-schoonheidssalon': typeof WebsiteLatenMakenSchoonheidssalonRoute
+  '/website-laten-maken-sneek': typeof WebsiteLatenMakenSneekRoute
+  '/website-laten-maken-stadskanaal': typeof WebsiteLatenMakenStadskanaalRoute
   '/website-laten-maken-veendam': typeof WebsiteLatenMakenVeendamRoute
+  '/website-laten-maken-winschoten': typeof WebsiteLatenMakenWinschotenRoute
   '/werkwijze': typeof WerkwijzeRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
@@ -357,6 +580,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/algemene-voorwaarden'
+    | '/branches'
     | '/contact'
     | '/faq'
     | '/login'
@@ -366,10 +590,32 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webdesign'
     | '/webshop-laten-maken'
     | '/website-laten-maken'
+    | '/website-laten-maken-assen'
+    | '/website-laten-maken-coevorden'
+    | '/website-laten-maken-drachten'
+    | '/website-laten-maken-emmen'
+    | '/website-laten-maken-groningen'
+    | '/website-laten-maken-heerenveen'
     | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-hoogezand'
+    | '/website-laten-maken-hovenier'
+    | '/website-laten-maken-kapsalon'
+    | '/website-laten-maken-klusbedrijf'
+    | '/website-laten-maken-leeuwarden'
+    | '/website-laten-maken-loodgieter'
+    | '/website-laten-maken-meppel'
+    | '/website-laten-maken-nagelstudio'
+    | '/website-laten-maken-pedicure'
+    | '/website-laten-maken-roden'
+    | '/website-laten-maken-schilder'
+    | '/website-laten-maken-schoonheidssalon'
+    | '/website-laten-maken-sneek'
+    | '/website-laten-maken-stadskanaal'
     | '/website-laten-maken-veendam'
+    | '/website-laten-maken-winschoten'
     | '/werkwijze'
     | '/account'
     | '/admin'
@@ -394,6 +640,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/algemene-voorwaarden'
+    | '/branches'
     | '/contact'
     | '/faq'
     | '/login'
@@ -403,10 +650,32 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webdesign'
     | '/webshop-laten-maken'
     | '/website-laten-maken'
+    | '/website-laten-maken-assen'
+    | '/website-laten-maken-coevorden'
+    | '/website-laten-maken-drachten'
+    | '/website-laten-maken-emmen'
+    | '/website-laten-maken-groningen'
+    | '/website-laten-maken-heerenveen'
     | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-hoogezand'
+    | '/website-laten-maken-hovenier'
+    | '/website-laten-maken-kapsalon'
+    | '/website-laten-maken-klusbedrijf'
+    | '/website-laten-maken-leeuwarden'
+    | '/website-laten-maken-loodgieter'
+    | '/website-laten-maken-meppel'
+    | '/website-laten-maken-nagelstudio'
+    | '/website-laten-maken-pedicure'
+    | '/website-laten-maken-roden'
+    | '/website-laten-maken-schilder'
+    | '/website-laten-maken-schoonheidssalon'
+    | '/website-laten-maken-sneek'
+    | '/website-laten-maken-stadskanaal'
     | '/website-laten-maken-veendam'
+    | '/website-laten-maken-winschoten'
     | '/werkwijze'
     | '/account'
     | '/admin'
@@ -432,6 +701,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/algemene-voorwaarden'
+    | '/branches'
     | '/contact'
     | '/faq'
     | '/login'
@@ -441,10 +711,32 @@ export interface FileRouteTypes {
     | '/privacybeleid'
     | '/sitemap.xml'
     | '/track.js'
+    | '/webdesign'
     | '/webshop-laten-maken'
     | '/website-laten-maken'
+    | '/website-laten-maken-assen'
+    | '/website-laten-maken-coevorden'
+    | '/website-laten-maken-drachten'
+    | '/website-laten-maken-emmen'
+    | '/website-laten-maken-groningen'
+    | '/website-laten-maken-heerenveen'
     | '/website-laten-maken-hoogeveen'
+    | '/website-laten-maken-hoogezand'
+    | '/website-laten-maken-hovenier'
+    | '/website-laten-maken-kapsalon'
+    | '/website-laten-maken-klusbedrijf'
+    | '/website-laten-maken-leeuwarden'
+    | '/website-laten-maken-loodgieter'
+    | '/website-laten-maken-meppel'
+    | '/website-laten-maken-nagelstudio'
+    | '/website-laten-maken-pedicure'
+    | '/website-laten-maken-roden'
+    | '/website-laten-maken-schilder'
+    | '/website-laten-maken-schoonheidssalon'
+    | '/website-laten-maken-sneek'
+    | '/website-laten-maken-stadskanaal'
     | '/website-laten-maken-veendam'
+    | '/website-laten-maken-winschoten'
     | '/werkwijze'
     | '/_authenticated/account'
     | '/_authenticated/admin'
@@ -471,6 +763,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
+  BranchesRoute: typeof BranchesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
@@ -480,10 +773,32 @@ export interface RootRouteChildren {
   PrivacybeleidRoute: typeof PrivacybeleidRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrackDotjsRoute: typeof TrackDotjsRoute
+  WebdesignRoute: typeof WebdesignRoute
   WebshopLatenMakenRoute: typeof WebshopLatenMakenRoute
   WebsiteLatenMakenRoute: typeof WebsiteLatenMakenRoute
+  WebsiteLatenMakenAssenRoute: typeof WebsiteLatenMakenAssenRoute
+  WebsiteLatenMakenCoevordenRoute: typeof WebsiteLatenMakenCoevordenRoute
+  WebsiteLatenMakenDrachtenRoute: typeof WebsiteLatenMakenDrachtenRoute
+  WebsiteLatenMakenEmmenRoute: typeof WebsiteLatenMakenEmmenRoute
+  WebsiteLatenMakenGroningenRoute: typeof WebsiteLatenMakenGroningenRoute
+  WebsiteLatenMakenHeerenveenRoute: typeof WebsiteLatenMakenHeerenveenRoute
   WebsiteLatenMakenHoogeveenRoute: typeof WebsiteLatenMakenHoogeveenRoute
+  WebsiteLatenMakenHoogezandRoute: typeof WebsiteLatenMakenHoogezandRoute
+  WebsiteLatenMakenHovenierRoute: typeof WebsiteLatenMakenHovenierRoute
+  WebsiteLatenMakenKapsalonRoute: typeof WebsiteLatenMakenKapsalonRoute
+  WebsiteLatenMakenKlusbedrijfRoute: typeof WebsiteLatenMakenKlusbedrijfRoute
+  WebsiteLatenMakenLeeuwardenRoute: typeof WebsiteLatenMakenLeeuwardenRoute
+  WebsiteLatenMakenLoodgieterRoute: typeof WebsiteLatenMakenLoodgieterRoute
+  WebsiteLatenMakenMeppelRoute: typeof WebsiteLatenMakenMeppelRoute
+  WebsiteLatenMakenNagelstudioRoute: typeof WebsiteLatenMakenNagelstudioRoute
+  WebsiteLatenMakenPedicureRoute: typeof WebsiteLatenMakenPedicureRoute
+  WebsiteLatenMakenRodenRoute: typeof WebsiteLatenMakenRodenRoute
+  WebsiteLatenMakenSchilderRoute: typeof WebsiteLatenMakenSchilderRoute
+  WebsiteLatenMakenSchoonheidssalonRoute: typeof WebsiteLatenMakenSchoonheidssalonRoute
+  WebsiteLatenMakenSneekRoute: typeof WebsiteLatenMakenSneekRoute
+  WebsiteLatenMakenStadskanaalRoute: typeof WebsiteLatenMakenStadskanaalRoute
   WebsiteLatenMakenVeendamRoute: typeof WebsiteLatenMakenVeendamRoute
+  WebsiteLatenMakenWinschotenRoute: typeof WebsiteLatenMakenWinschotenRoute
   WerkwijzeRoute: typeof WerkwijzeRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
@@ -500,6 +815,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WerkwijzeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/website-laten-maken-winschoten': {
+      id: '/website-laten-maken-winschoten'
+      path: '/website-laten-maken-winschoten'
+      fullPath: '/website-laten-maken-winschoten'
+      preLoaderRoute: typeof WebsiteLatenMakenWinschotenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/website-laten-maken-veendam': {
       id: '/website-laten-maken-veendam'
       path: '/website-laten-maken-veendam'
@@ -507,11 +829,151 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebsiteLatenMakenVeendamRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/website-laten-maken-stadskanaal': {
+      id: '/website-laten-maken-stadskanaal'
+      path: '/website-laten-maken-stadskanaal'
+      fullPath: '/website-laten-maken-stadskanaal'
+      preLoaderRoute: typeof WebsiteLatenMakenStadskanaalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-sneek': {
+      id: '/website-laten-maken-sneek'
+      path: '/website-laten-maken-sneek'
+      fullPath: '/website-laten-maken-sneek'
+      preLoaderRoute: typeof WebsiteLatenMakenSneekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-schoonheidssalon': {
+      id: '/website-laten-maken-schoonheidssalon'
+      path: '/website-laten-maken-schoonheidssalon'
+      fullPath: '/website-laten-maken-schoonheidssalon'
+      preLoaderRoute: typeof WebsiteLatenMakenSchoonheidssalonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-schilder': {
+      id: '/website-laten-maken-schilder'
+      path: '/website-laten-maken-schilder'
+      fullPath: '/website-laten-maken-schilder'
+      preLoaderRoute: typeof WebsiteLatenMakenSchilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-roden': {
+      id: '/website-laten-maken-roden'
+      path: '/website-laten-maken-roden'
+      fullPath: '/website-laten-maken-roden'
+      preLoaderRoute: typeof WebsiteLatenMakenRodenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-pedicure': {
+      id: '/website-laten-maken-pedicure'
+      path: '/website-laten-maken-pedicure'
+      fullPath: '/website-laten-maken-pedicure'
+      preLoaderRoute: typeof WebsiteLatenMakenPedicureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-nagelstudio': {
+      id: '/website-laten-maken-nagelstudio'
+      path: '/website-laten-maken-nagelstudio'
+      fullPath: '/website-laten-maken-nagelstudio'
+      preLoaderRoute: typeof WebsiteLatenMakenNagelstudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-meppel': {
+      id: '/website-laten-maken-meppel'
+      path: '/website-laten-maken-meppel'
+      fullPath: '/website-laten-maken-meppel'
+      preLoaderRoute: typeof WebsiteLatenMakenMeppelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-loodgieter': {
+      id: '/website-laten-maken-loodgieter'
+      path: '/website-laten-maken-loodgieter'
+      fullPath: '/website-laten-maken-loodgieter'
+      preLoaderRoute: typeof WebsiteLatenMakenLoodgieterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-leeuwarden': {
+      id: '/website-laten-maken-leeuwarden'
+      path: '/website-laten-maken-leeuwarden'
+      fullPath: '/website-laten-maken-leeuwarden'
+      preLoaderRoute: typeof WebsiteLatenMakenLeeuwardenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-klusbedrijf': {
+      id: '/website-laten-maken-klusbedrijf'
+      path: '/website-laten-maken-klusbedrijf'
+      fullPath: '/website-laten-maken-klusbedrijf'
+      preLoaderRoute: typeof WebsiteLatenMakenKlusbedrijfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-kapsalon': {
+      id: '/website-laten-maken-kapsalon'
+      path: '/website-laten-maken-kapsalon'
+      fullPath: '/website-laten-maken-kapsalon'
+      preLoaderRoute: typeof WebsiteLatenMakenKapsalonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-hovenier': {
+      id: '/website-laten-maken-hovenier'
+      path: '/website-laten-maken-hovenier'
+      fullPath: '/website-laten-maken-hovenier'
+      preLoaderRoute: typeof WebsiteLatenMakenHovenierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-hoogezand': {
+      id: '/website-laten-maken-hoogezand'
+      path: '/website-laten-maken-hoogezand'
+      fullPath: '/website-laten-maken-hoogezand'
+      preLoaderRoute: typeof WebsiteLatenMakenHoogezandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/website-laten-maken-hoogeveen': {
       id: '/website-laten-maken-hoogeveen'
       path: '/website-laten-maken-hoogeveen'
       fullPath: '/website-laten-maken-hoogeveen'
       preLoaderRoute: typeof WebsiteLatenMakenHoogeveenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-heerenveen': {
+      id: '/website-laten-maken-heerenveen'
+      path: '/website-laten-maken-heerenveen'
+      fullPath: '/website-laten-maken-heerenveen'
+      preLoaderRoute: typeof WebsiteLatenMakenHeerenveenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-groningen': {
+      id: '/website-laten-maken-groningen'
+      path: '/website-laten-maken-groningen'
+      fullPath: '/website-laten-maken-groningen'
+      preLoaderRoute: typeof WebsiteLatenMakenGroningenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-emmen': {
+      id: '/website-laten-maken-emmen'
+      path: '/website-laten-maken-emmen'
+      fullPath: '/website-laten-maken-emmen'
+      preLoaderRoute: typeof WebsiteLatenMakenEmmenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-drachten': {
+      id: '/website-laten-maken-drachten'
+      path: '/website-laten-maken-drachten'
+      fullPath: '/website-laten-maken-drachten'
+      preLoaderRoute: typeof WebsiteLatenMakenDrachtenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-coevorden': {
+      id: '/website-laten-maken-coevorden'
+      path: '/website-laten-maken-coevorden'
+      fullPath: '/website-laten-maken-coevorden'
+      preLoaderRoute: typeof WebsiteLatenMakenCoevordenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-laten-maken-assen': {
+      id: '/website-laten-maken-assen'
+      path: '/website-laten-maken-assen'
+      fullPath: '/website-laten-maken-assen'
+      preLoaderRoute: typeof WebsiteLatenMakenAssenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/website-laten-maken': {
@@ -526,6 +988,13 @@ declare module '@tanstack/react-router' {
       path: '/webshop-laten-maken'
       fullPath: '/webshop-laten-maken'
       preLoaderRoute: typeof WebshopLatenMakenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webdesign': {
+      id: '/webdesign'
+      path: '/webdesign'
+      fullPath: '/webdesign'
+      preLoaderRoute: typeof WebdesignRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/track.js': {
@@ -589,6 +1058,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/branches': {
+      id: '/branches'
+      path: '/branches'
+      fullPath: '/branches'
+      preLoaderRoute: typeof BranchesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algemene-voorwaarden': {
@@ -863,6 +1339,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
+  BranchesRoute: BranchesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
@@ -872,10 +1349,33 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacybeleidRoute: PrivacybeleidRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrackDotjsRoute: TrackDotjsRoute,
+  WebdesignRoute: WebdesignRoute,
   WebshopLatenMakenRoute: WebshopLatenMakenRoute,
   WebsiteLatenMakenRoute: WebsiteLatenMakenRoute,
+  WebsiteLatenMakenAssenRoute: WebsiteLatenMakenAssenRoute,
+  WebsiteLatenMakenCoevordenRoute: WebsiteLatenMakenCoevordenRoute,
+  WebsiteLatenMakenDrachtenRoute: WebsiteLatenMakenDrachtenRoute,
+  WebsiteLatenMakenEmmenRoute: WebsiteLatenMakenEmmenRoute,
+  WebsiteLatenMakenGroningenRoute: WebsiteLatenMakenGroningenRoute,
+  WebsiteLatenMakenHeerenveenRoute: WebsiteLatenMakenHeerenveenRoute,
   WebsiteLatenMakenHoogeveenRoute: WebsiteLatenMakenHoogeveenRoute,
+  WebsiteLatenMakenHoogezandRoute: WebsiteLatenMakenHoogezandRoute,
+  WebsiteLatenMakenHovenierRoute: WebsiteLatenMakenHovenierRoute,
+  WebsiteLatenMakenKapsalonRoute: WebsiteLatenMakenKapsalonRoute,
+  WebsiteLatenMakenKlusbedrijfRoute: WebsiteLatenMakenKlusbedrijfRoute,
+  WebsiteLatenMakenLeeuwardenRoute: WebsiteLatenMakenLeeuwardenRoute,
+  WebsiteLatenMakenLoodgieterRoute: WebsiteLatenMakenLoodgieterRoute,
+  WebsiteLatenMakenMeppelRoute: WebsiteLatenMakenMeppelRoute,
+  WebsiteLatenMakenNagelstudioRoute: WebsiteLatenMakenNagelstudioRoute,
+  WebsiteLatenMakenPedicureRoute: WebsiteLatenMakenPedicureRoute,
+  WebsiteLatenMakenRodenRoute: WebsiteLatenMakenRodenRoute,
+  WebsiteLatenMakenSchilderRoute: WebsiteLatenMakenSchilderRoute,
+  WebsiteLatenMakenSchoonheidssalonRoute:
+    WebsiteLatenMakenSchoonheidssalonRoute,
+  WebsiteLatenMakenSneekRoute: WebsiteLatenMakenSneekRoute,
+  WebsiteLatenMakenStadskanaalRoute: WebsiteLatenMakenStadskanaalRoute,
   WebsiteLatenMakenVeendamRoute: WebsiteLatenMakenVeendamRoute,
+  WebsiteLatenMakenWinschotenRoute: WebsiteLatenMakenWinschotenRoute,
   WerkwijzeRoute: WerkwijzeRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,

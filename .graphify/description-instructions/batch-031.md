@@ -1,4 +1,4 @@
-# Node Description Batch 32 of 42
+# Node Description Batch 32 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,28 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_portal_functions_assertownproject": "assertOwnProject()" | kind=code-symbol | source=src/lib/portal.functions.ts:L558 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_cancelmychange": "cancelMyChange" | kind=code-symbol | source=src/lib/portal.functions.ts:L290 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_getattachmenturl": "getAttachmentUrl" | kind=code-symbol | source=src/lib/portal.functions.ts:L517 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_getmydashboard": "getMyDashboard" | kind=code-symbol | source=src/lib/portal.functions.ts:L8 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_loglogin": "logLogin" | kind=code-symbol | source=src/lib/portal.functions.ts:L226 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_markallnotificationsread": "markAllNotificationsRead" | kind=code-symbol | source=src/lib/portal.functions.ts:L461 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_marknotificationread": "markNotificationRead" | kind=code-symbol | source=src/lib/portal.functions.ts:L447 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalcompleteonboarding": "portalCompleteOnboarding" | kind=code-symbol | source=src/lib/portal.functions.ts:L189 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalcompletetutorial": "portalCompleteTutorial" | kind=code-symbol | source=src/lib/portal.functions.ts:L214 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalgetonboardingstate": "portalGetOnboardingState" | kind=code-symbol | source=src/lib/portal.functions.ts:L123 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalgetproject": "portalGetProject" | kind=code-symbol | source=src/lib/portal.functions.ts:L610 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalgetprojectmonitoring": "portalGetProjectMonitoring" | kind=code-symbol | source=src/lib/portal.functions.ts:L625 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalgettutorialstate": "portalGetTutorialState" | kind=code-symbol | source=src/lib/portal.functions.ts:L201 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portallistmilestonedependencies": "portalListMilestoneDependencies" | kind=code-symbol | source=src/lib/portal.functions.ts:L670 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portallistmyprojects": "portalListMyProjects" | kind=code-symbol | source=src/lib/portal.functions.ts:L579 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portallistmyprojectsforchangeform": "portalListMyProjectsForChangeForm" | kind=code-symbol | source=src/lib/portal.functions.ts:L597 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portallistprojectmilestones": "portalListProjectMilestones" | kind=code-symbol | source=src/lib/portal.functions.ts:L655 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portallistprojectnotes": "portalListProjectNotes" | kind=code-symbol | source=src/lib/portal.functions.ts:L691 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_portalsaveonboardingstep": "portalSaveOnboardingStep" | kind=code-symbol | source=src/lib/portal.functions.ts:L138 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_postcustomercomment": "postCustomerComment" | kind=code-symbol | source=src/lib/portal.functions.ts:L473 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_requestextracredits": "requestExtraCredits" | kind=code-symbol | source=src/lib/portal.functions.ts:L435 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_requestpasswordreset": "requestPasswordReset" | kind=code-symbol | source=src/lib/portal.functions.ts:L537 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_simple_categories_server": "SIMPLE_CATEGORIES_SERVER" | kind=code-symbol | source=src/lib/portal.functions.ts:L338 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_submitchangerequest": "submitChangeRequest" | kind=code-symbol | source=src/lib/portal.functions.ts:L317 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_updatemyprofile": "updateMyProfile" | kind=code-symbol | source=src/lib/portal.functions.ts:L92 | neighbors=[portal.functions.ts]
@@ -31,32 +53,10 @@ one-sentence description — no prose, no markdown fences.
 - "lib_rbac_approle": "AppRole" | kind=code-symbol | source=src/lib/rbac.ts:L2 | neighbors=[rbac.ts]
 - "lib_rbac_isstaffrole": "isStaffRole()" | kind=code-symbol | source=src/lib/rbac.ts:L30 | neighbors=[rbac.ts]
 - "lib_rbac_staff_roles": "STAFF_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L21 | neighbors=[rbac.ts]
-- "lib_seo_ldscript": "LdScript" | kind=code-symbol | source=src/lib/seo.ts:L8 | neighbors=[seo.ts]
+- "lib_seo_ldscript": "LdScript" | kind=code-symbol | source=src/lib/seo.ts:L15 | neighbors=[seo.ts]
 - "lib_status_simple_categories": "SIMPLE_CATEGORIES" | kind=code-symbol | source=src/lib/status.ts:L73 | neighbors=[status.ts]
 - "lib_status_status_flow": "STATUS_FLOW" | kind=code-symbol | source=src/lib/status.ts:L13 | neighbors=[status.ts]
 - "lib_telegram_functions_admincreaterecipient": "adminCreateRecipient" | kind=code-symbol | source=src/lib/telegram.functions.ts:L125 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admindeleterecipient": "adminDeleteRecipient" | kind=code-symbol | source=src/lib/telegram.functions.ts:L193 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingeneraterecipientlink": "adminGenerateRecipientLink" | kind=code-symbol | source=src/lib/telegram.functions.ts:L142 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingeneratetelegramlink": "adminGenerateTelegramLink" | kind=code-symbol | source=src/lib/telegram.functions.ts:L13 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingettelegramstatus": "adminGetTelegramStatus" | kind=code-symbol | source=src/lib/telegram.functions.ts:L25 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_adminlistrecipients": "adminListRecipients" | kind=code-symbol | source=src/lib/telegram.functions.ts:L112 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_adminsetmfaenabled": "adminSetMfaEnabled" | kind=code-symbol | source=src/lib/telegram.functions.ts:L73 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_adminsetrecipientnotify": "adminSetRecipientNotify" | kind=code-symbol | source=src/lib/telegram.functions.ts:L167 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admintogglerecipient": "adminToggleRecipient" | kind=code-symbol | source=src/lib/telegram.functions.ts:L153 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_adminunlinktelegram": "adminUnlinkTelegram" | kind=code-symbol | source=src/lib/telegram.functions.ts:L45 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_anonclient": "anonClient()" | kind=code-symbol | source=src/lib/telegram.functions.ts:L218 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_loginresendmfa": "loginResendMfa" | kind=code-symbol | source=src/lib/telegram.functions.ts:L316 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_loginstart": "loginStart" | kind=code-symbol | source=src/lib/telegram.functions.ts:L227 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_loginverifymfa": "loginVerifyMfa" | kind=code-symbol | source=src/lib/telegram.functions.ts:L285 | neighbors=[telegram.functions.ts]
-- "lib_telegram_server_linkscope": "LinkScope" | kind=code-symbol | source=src/lib/telegram.server.ts:L65 | neighbors=[telegram.server.ts]
-- "lib_telegram_server_notifynewchange": "notifyNewChange()" | kind=code-symbol | source=src/lib/telegram.server.ts:L290 | neighbors=[telegram.server.ts]
-- "lib_telegram_server_telegramupdate": "TelegramUpdate" | kind=code-symbol | source=src/lib/telegram.server.ts:L113 | neighbors=[telegram.server.ts]
-- "lib_telegram_server_verifymfacode": "verifyMfaCode()" | kind=code-symbol | source=src/lib/telegram.server.ts:L249 | neighbors=[telegram.server.ts]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_available_credits": "public.available_credits()" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L81 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_has_role": "public.has_role()" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L74 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_touch_updated_at": "public.touch_updated_at()" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L116 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_customer_costs": "public.customer_costs" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L85 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_onboarding_items": "public.onboarding_items" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L102 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…]
 
 ## Instructions
 

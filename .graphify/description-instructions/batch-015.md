@@ -1,4 +1,4 @@
-# Node Description Batch 16 of 42
+# Node Description Batch 16 of 43
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,21 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]
+- "components_leadspanel_initials": "initials()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L75 | neighbors=[LeadsPanel.tsx, LeadDetail()]
+- "components_leadspanel_reltime": "relTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L102 | neighbors=[LeadsPanel.tsx, LeadDetail()]
+- "components_onboardingwizard_onboardingwizard": "OnboardingWizard()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L43 | neighbors=[admin.accounts.$accountId.tsx, OnboardingWizard.tsx]
+- "components_portalonboardingtour_portalonboardingtour": "PortalOnboardingTour()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L46 | neighbors=[portal.tsx, PortalOnboardingTour.tsx]
+- "components_portaltutorial_portaltutorial": "PortalTutorial()" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L51 | neighbors=[portal.tsx, PortalTutorial.tsx]
+- "components_pricing_pricing": "Pricing()" | kind=code-symbol | source=src/components/Pricing.tsx:L36 | neighbors=[Pricing.tsx, index.tsx]
+- "components_teamtab_teamtab": "TeamTab()" | kind=code-symbol | source=src/components/TeamTab.tsx:L12 | neighbors=[admin.tsx, TeamTab.tsx]
+- "components_telegrammfacard_telegrammfacard": "TelegramMfaCard()" | kind=code-symbol | source=src/components/TelegramMfaCard.tsx:L16 | neighbors=[admin.accounts.$accountId.tsx, TelegramMfaCard.tsx]
+- "design_handoff_meer_diensten_support_cdnscriptfor": "cdnScriptFor()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1149 | neighbors=[support.js, loadReactUmd()]
+- "design_handoff_meer_diensten_support_contentkey": "contentKey()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L771 | neighbors=[support.js, walkElement()]
+- "design_handoff_meer_diensten_support_createexternalmodules": "createExternalModules()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1171 | neighbors=[support.js, createRuntime()]
+- "design_handoff_meer_diensten_support_createhelmetmanager": "createHelmetManager()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1366 | neighbors=[support.js, createRuntime()]
+- "design_handoff_meer_diensten_support_createpseudosheet": "createPseudoSheet()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1567 | neighbors=[support.js, createRuntime()]
+- "design_handoff_meer_diensten_support_createregistry": "createRegistry()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1592 | neighbors=[support.js, createRuntime()]
 - "design_handoff_meer_diensten_support_createstreamtracker": "createStreamTracker()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1792 | neighbors=[support.js, init()]
 - "design_handoff_meer_diensten_support_dcnamefrompath": "dcNameFromPath()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L75 | neighbors=[support.js, rootNameForDocument()]
 - "design_handoff_meer_diensten_support_encodecamelattrs": "encodeCamelAttrs()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L366 | neighbors=[support.js, encodeCase()]
@@ -42,21 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "hooks_use_mobile_useismobile": "useIsMobile()" | kind=code-symbol | source=src/hooks/use-mobile.tsx:L5 | neighbors=[use-mobile.tsx, sidebar.tsx]
 - "lib_accounts_functions_ensureadmin": "ensureAdmin()" | kind=code-symbol | source=src/lib/accounts.functions.ts:L13 | neighbors=[accounts.functions.ts, getRoles()]
 - "lib_accounts_functions_ensuresuper": "ensureSuper()" | kind=code-symbol | source=src/lib/accounts.functions.ts:L17 | neighbors=[accounts.functions.ts, getRoles()]
-- "lib_admin_functions_ensureadmin": "ensureAdmin()" | kind=code-symbol | source=src/lib/admin.functions.ts:L34 | neighbors=[admin.functions.ts, ensureRoles()]
-- "lib_admin_functions_ensureleadsaccess": "ensureLeadsAccess()" | kind=code-symbol | source=src/lib/admin.functions.ts:L3464 | neighbors=[admin.functions.ts, ensureRoles()]
-- "lib_admin_functions_ensurestaff": "ensureStaff()" | kind=code-symbol | source=src/lib/admin.functions.ts:L42 | neighbors=[admin.functions.ts, ensureRoles()]
-- "lib_admin_functions_ensuresuperadmin": "ensureSuperAdmin()" | kind=code-symbol | source=src/lib/admin.functions.ts:L38 | neighbors=[admin.functions.ts, ensureRoles()]
-- "lib_admin_functions_generateduerecurringtaskinstances": "generateDueRecurringTaskInstances()" | kind=code-symbol | source=src/lib/admin.functions.ts:L2140 | neighbors=[admin.functions.ts, nextRecurrenceDueDate()]
-- "lib_admin_functions_getroles": "getRoles()" | kind=code-symbol | source=src/lib/admin.functions.ts:L21 | neighbors=[admin.functions.ts, ensureRoles()]
-- "lib_admin_functions_nextrecurrenceduedate": "nextRecurrenceDueDate()" | kind=code-symbol | source=src/lib/admin.functions.ts:L2128 | neighbors=[admin.functions.ts, generateDueRecurringTaskInstances()]
-- "lib_admin_server_admincreatecustomer": "adminCreateCustomer()" | kind=code-symbol | source=src/lib/admin.server.ts:L11 | neighbors=[admin.server.ts, generateTempPassword()]
-- "lib_admin_server_admininvitestaffmember": "adminInviteStaffMember()" | kind=code-symbol | source=src/lib/admin.server.ts:L265 | neighbors=[admin.server.ts, genTempPw()]
-- "lib_admin_server_generatetemppassword": "generateTempPassword()" | kind=code-symbol | source=src/lib/admin.server.ts:L3 | neighbors=[admin.server.ts, adminCreateCustomer()]
-- "lib_admin_server_gentemppw": "genTempPw()" | kind=code-symbol | source=src/lib/admin.server.ts:L228 | neighbors=[admin.server.ts, adminInviteStaffMember()]
-- "lib_auth_guards_server_ensureadmin": "ensureAdmin()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L29 | neighbors=[auth-guards.server.ts, ensureRoles()]
-- "lib_auth_guards_server_ensurestaff": "ensureStaff()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L37 | neighbors=[auth-guards.server.ts, ensureRoles()]
-- "lib_auth_guards_server_ensuresuperadmin": "ensureSuperAdmin()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L33 | neighbors=[auth-guards.server.ts, ensureRoles()]
-- "lib_auth_guards_server_getroles": "getRoles()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L11 | neighbors=[auth-guards.server.ts, ensureRoles()]
 
 ## Instructions
 
