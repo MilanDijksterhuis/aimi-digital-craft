@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-schoonheidssalon`;
 
 const data: BranchPageData = {
   branch: "schoonheidssalon",
+  h1: "Webdesign voor je schoonheidssalon",
   kicker: "Webdesign voor schoonheidssalons",
   intro:
     "Voordat iemand voor het eerst een schoonheidsbehandeling boekt, wil die weten wat er precies gebeurt en bij wie. Daarom bouwt AIMI websites voor schoonheidssalons met een rustige, verzorgde uitstraling, een behandelmenu met uitleg per behandeling en een manier om vooraf intakegegevens door te geven.",

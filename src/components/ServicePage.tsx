@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare dienst-/contentpagina in de AIMI-huisstijl (donker + rood).
@@ -35,15 +36,51 @@ export type ServicePageData = {
 
 function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
   const [index, setIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
+  /* A-40: de timer liep permanent door, ook buiten het viewport en op mobiel
+     waar het element verborgen was. Nu draait hij alleen als de slideshow
+     daadwerkelijk zichtbaar is, en respecteert hij prefers-reduced-motion. */
   useEffect(() => {
     if (images.length < 2) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
-    return () => clearInterval(id);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const start = () => {
+      if (timer === undefined) {
+        timer = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
+      }
+    };
+    const stop = () => {
+      clearInterval(timer);
+      timer = undefined;
+    };
+
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && document.visibilityState === "visible") start();
+      else stop();
+    });
+    io.observe(el);
+
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") stop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      stop();
+    };
   }, [images.length]);
 
   return (
     <div
+      ref={containerRef}
       style={{
         position: "relative",
         width: "100%",
@@ -59,6 +96,12 @@ function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
           key={images[index].src}
           src={images[index].src}
           alt={images[index].alt}
+          /* A-48: expliciete afmetingen + loading/decoding. CLS was al afgevangen
+             door de aspect-ratio op de container, maar de attributen horen erop. */
+          width={1440}
+          height={900}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding="async"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -67,23 +110,38 @@ function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
         />
       </AnimatePresence>
       {images.length > 1 && (
-        <div style={{ position: "absolute", bottom: "14px", left: 0, right: 0, display: "flex", justifyContent: "center", gap: "8px" }}>
+        <div style={{ position: "absolute", bottom: "2px", left: 0, right: 0, display: "flex", justifyContent: "center", gap: "0px" }}>
           {images.map((img, i) => (
+            /* M-5: het tapdoel was 8x8 px. De stip blijft visueel 8 px, maar het
+               klikbare gebied is nu 32x32 — relevant nu de slideshow ook op
+               mobiel staat (A-16). */
             <button
               key={img.src}
+              type="button"
               onClick={() => setIndex(i)}
               aria-label={`Toon voorbeeld ${i + 1}`}
+              aria-current={i === index}
               style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "9999px",
+                width: "32px",
+                height: "32px",
+                display: "grid",
+                placeItems: "center",
+                background: "none",
                 border: "none",
                 padding: 0,
                 cursor: "pointer",
-                background: i === index ? RED : "rgba(255,255,255,0.35)",
-                transition: "background 0.2s",
               }}
-            />
+            >
+              <span
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "9999px",
+                  background: i === index ? RED : "rgba(255,255,255,0.35)",
+                  transition: "background 0.2s",
+                }}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -122,9 +180,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           className={examples && examples.length > 0 ? "grid md:grid-cols-[1fr_1.15fr] gap-12 items-center" : undefined}
         >
           <div>
-            <a href="/" style={{ fontSize: "13px", color: "#a4a9b2", textDecoration: "none" }}>
-              ← Terug naar home
-            </a>
+            {/* A-29 + I-5: dit was een generieke "← Terug naar home"-link. Een
+                echt kruimelpad spiegelt de BreadcrumbList-markup én levert een
+                beschrijvende ankertekst op. */}
+            <Breadcrumbs trail={[["Home", "/"], [h1, "#"]]} />
             <div
               style={{
                 marginTop: "28px",
@@ -157,7 +216,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 Vraag een offerte aan
               </a>
               <a
-                href="/#pricing"
+                href="/tarieven"
                 style={{ padding: "12px 22px", border: "1px solid rgba(255,255,255,0.18)", color: "#efeff1", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}
               >
                 Bekijk tarieven
@@ -165,7 +224,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             </div>
           </div>
           {examples && examples.length > 0 && (
-            <div className="hidden md:block">
+            /* A-16: stond op `hidden md:block`. Dit zijn de enige echte
+               afbeeldingen van de site, dus bij mobile-first indexing bestonden
+               ze voor Google niet. Nu ook op mobiel zichtbaar. */
+            <div className="mt-10 md:mt-0">
               <ExampleSlideshow images={examples} />
             </div>
           )}
@@ -187,9 +249,12 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             {offerings.map((o, i) => {
               const isOpen = openOffering === i;
               return (
+                /* A-57: dit was een klikbare motion.div zonder role, tabIndex of
+                   keyboard-handler. Nu het standaard accordion-patroon: de knop
+                   zit ín de heading (een <h3> mag niet binnen een <button>), met
+                   aria-expanded en aria-controls. */
                 <motion.div
                   key={o.title}
-                  onClick={() => setOpenOffering(isOpen ? null : i)}
                   whileHover={{ y: -3, borderColor: "rgba(254,44,2,0.35)" }}
                   transition={{ duration: 0.18 }}
                   style={{
@@ -197,21 +262,43 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                     borderRadius: "6px",
                     border: "1px solid rgba(255,255,255,0.08)",
                     background: isOpen ? "rgba(254,44,2,0.05)" : "rgba(255,255,255,0.02)",
-                    cursor: "pointer",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
-                    <h3 style={{ fontSize: "16px", fontWeight: 600, marginBottom: "8px" }}>{o.title}</h3>
-                    <motion.div
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      style={{ flex: "none", color: isOpen ? RED : "#a4a9b2", marginTop: "2px" }}
+                  <h3 style={{ fontSize: "16px", fontWeight: 600, margin: 0 }}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenOffering(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                      aria-controls={`offering-panel-${i}`}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                        width: "100%",
+                        marginBottom: "8px",
+                        padding: 0,
+                        font: "inherit",
+                        color: "inherit",
+                        textAlign: "left",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
                     >
-                      <Plus className="w-4 h-4" strokeWidth={1.5} />
-                    </motion.div>
-                  </div>
+                      <span>{o.title}</span>
+                      <motion.span
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        style={{ flex: "none", color: isOpen ? RED : "#a4a9b2", marginTop: "2px" }}
+                      >
+                        <Plus className="w-4 h-4" strokeWidth={1.5} />
+                      </motion.span>
+                    </button>
+                  </h3>
                   <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>{o.desc}</p>
                   <motion.div
+                    id={`offering-panel-${i}`}
                     initial={false}
                     animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}

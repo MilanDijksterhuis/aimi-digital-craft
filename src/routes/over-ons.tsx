@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
 
 const stats: [string, string][] = [
   ["2", "Directe contactpersonen"],
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/over-ons")({
         property: "og:description",
         content: "Twee developers, geen groot bureau. Maak kennis met AIMI.",
       },
-      { property: "og:url", content: "https://aimi-development.nl/over-ons" },
+      { property: "og:url", content: `${SITE_URL}/over-ons` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/over-ons")({
       { name: "twitter:description", content: "Twee developers, geen groot bureau. Maak kennis met AIMI." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/over-ons" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/over-ons` }],
     scripts: [breadcrumbJsonLd([["Home", "/"], ["Over ons", "/over-ons"]])],
   }),
   component: OverOns,
@@ -103,7 +103,7 @@ function OverOns() {
             >
               <p>
                 AIMI is opgericht door Aidan &amp; Milan. We bouwen websites voor
-                kleine bedrijven, zelfstandigen en verenigingen mensen die een
+                kleine bedrijven, zelfstandigen en verenigingen: mensen die een
                 professionele site willen zonder de trage processen en hoge kosten
                 van een groot bureau.
               </p>

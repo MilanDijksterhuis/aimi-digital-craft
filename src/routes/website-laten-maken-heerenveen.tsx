@@ -3,12 +3,13 @@ import { LocationPageV2, type LocationPageData } from "@/components/LocationPage
 import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed} from "@/lib/seo";
 
 const CITY = "Heerenveen";
-const REGION = "Fryslân";
+const REGION = "Friesland";
 const PATH = "/website-laten-maken-heerenveen";
 const URL = `${SITE_URL}${PATH}`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken in Heerenveen",
   region: REGION,
   kicker: "Webdesign in Heerenveen",
   intro:
@@ -56,6 +57,11 @@ export const Route = createFileRoute("/website-laten-maken-heerenveen")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      // A-45: deze vier Friese pagina's misten de geo-meta die de 11 andere
+      // plaatspagina's wel hadden. Google gebruikt ze niet, maar een set die
+      // half is ingevuld is een onderhoudssignaal.
+      { name: "geo.region", content: "NL-FR" },
+      { name: "geo.placename", content: "Heerenveen" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
@@ -73,7 +79,7 @@ export const Route = createFileRoute("/website-laten-maken-heerenveen")({
         description: DESCRIPTION,
         url: URL,
         serviceType: "Webdesign",
-        areaServed: cityAreaServed("Heerenveen", "Fryslân"),
+        areaServed: cityAreaServed("Heerenveen", "Friesland"),
       }),
       breadcrumbJsonLd([
         ["Home", "/"],

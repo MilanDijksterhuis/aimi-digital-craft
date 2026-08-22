@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-stadskanaal`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken in Stadskanaal",
   region: "Groningen",
   kicker: "Webdesign Stadskanaal",
   intro:

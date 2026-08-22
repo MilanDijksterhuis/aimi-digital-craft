@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { SITE_URL } from "@/lib/seo";
 import { loginStart, loginVerifyMfa, loginResendMfa } from "@/lib/telegram.functions";
 
 export const Route = createFileRoute("/login")({
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/login")({
       { name: "description", content: "Log in op het AIMI klantenportaal." },
       { name: "robots", content: "noindex" },
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/login" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/login` }],
   }),
   component: LoginPage,
 });

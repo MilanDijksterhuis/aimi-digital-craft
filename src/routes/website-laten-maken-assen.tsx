@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-assen`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Webdesigner in Assen voor ondernemers in Drenthe",
   region: "Drenthe",
   kicker: "Webdesign in Assen",
   intro:

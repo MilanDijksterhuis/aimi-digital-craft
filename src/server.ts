@@ -224,8 +224,68 @@ async function applyRateLimit(request: Request): Promise<Response | null> {
   return null;
 }
 
+const NOT_FOUND_TITLE = "Pagina niet gevonden — AIMI";
+
+/**
+ * A-35: op een 404 staan er twee <title>-tags in de SSR-HTML — eerst de
+ * root-default uit __root.tsx (via HeadContent), daarna de titel die React 19
+ * vanuit NotFoundComponent naar de head hoist. Browsers en crawlers gebruiken
+ * de *eerste*, dus zonder deze correctie draagt elke 404 de homepagetitel.
+ *
+ * We vervangen daarom de eerste titel en gooien de rest weg. Dit gebeurt hier
+ * en niet in de component, omdat de volgorde van head-elementen niet vanuit
+ * React te sturen is.
+ */
+async function fixNotFoundTitle(response: Response): Promise<Response> {
+  if (response.status !== 404) return response;
+  const type = response.headers.get("content-type") ?? "";
+  if (!type.includes("text/html")) return response;
+
+  try {
+    const html = await response.text();
+    let replaced = false;
+    const patched = html.replace(/<title>[\s\S]*?<\/title>/g, (match) => {
+      if (!replaced) {
+        replaced = true;
+        return `<title>${NOT_FOUND_TITLE}</title>`;
+      }
+      return ""; // duplicaat: weg ermee
+    });
+    return new Response(patched, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  } catch {
+    return response;
+  }
+}
+
+/**
+ * Trailing slash: /contact/ hoort permanent naar /contact te wijzen.
+ * Productie gaf hier een 307 (tijdelijk). Een 307 vertelt Google dat de
+ * situatie kan veranderen, dus consolideert hij de signalen niet en blijft hij
+ * beide vormen crawlen. Voor een canonieke URL-vorm hoort dat een 301 te zijn.
+ *
+ * Alleen voor GET/HEAD op niet-API-paden: een 301 op een POST zou de methode
+ * omzetten naar GET en het formulier stilzwijgend slopen.
+ */
+function redirectTrailingSlash(request: Request): Response | null {
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+
+  const url = new URL(request.url);
+  if (url.pathname === "/" || !url.pathname.endsWith("/")) return null;
+  if (url.pathname.startsWith("/api/")) return null;
+
+  url.pathname = url.pathname.replace(/\/+$/, "");
+  return new Response(null, { status: 301, headers: { Location: url.toString() } });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const slashRedirect = redirectTrailingSlash(request);
+    if (slashRedirect) return applySecurityHeaders(slashRedirect, request);
+
     const limited = await applyRateLimit(request);
     if (limited) return applySecurityHeaders(limited, request);
 
@@ -233,7 +293,8 @@ export default {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response, request);
-      return applySecurityHeaders(normalized, request);
+      const titled = await fixNotFoundTitle(normalized);
+      return applySecurityHeaders(titled, request);
     } catch (error) {
       console.error(error);
       await logServerCrash(error, request);

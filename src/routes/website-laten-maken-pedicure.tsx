@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-pedicure`;
 
 const data: BranchPageData = {
   branch: "pedicurepraktijk",
+  h1: "Website laten maken voor je pedicurepraktijk",
   kicker: "Webdesign voor pedicurepraktijken",
   intro:
     "We spreken hier bewust van een pedicurepraktijk in plaats van pedicure, omdat dat laatste woord zowel de behandelaar als de behandeling kan betekenen. AIMI bouwt websites voor pedicurepraktijken die vertrouwen wekken bij een vaak oudere doelgroep, met grote leesbare tekst en eenvoudig afspraken maken.",

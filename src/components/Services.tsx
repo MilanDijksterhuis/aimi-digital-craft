@@ -192,8 +192,11 @@ export function Services() {
                     >
                       Meer over {s.title.toLowerCase()}
                     </a>
+                    {/* Was `#contact`: dat anker bestaat alleen op de homepage,
+                        terwijl <Services/> ook op de 15 plaatspagina's en op
+                        /webdesign staat. Daar wees deze knop dus nergens heen. */}
                     <a
-                      href="#contact"
+                      href="/contact"
                       className="inline-flex items-center gap-2 text-sm font-medium"
                       style={{
                         color: "#ffffff",

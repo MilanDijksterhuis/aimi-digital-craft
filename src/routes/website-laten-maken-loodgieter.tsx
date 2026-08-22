@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-loodgieter`;
 
 const data: BranchPageData = {
   branch: "loodgietersbedrijf",
+  h1: "Een website waarmee je loodgietersbedrijf gebeld wordt",
   kicker: "Webdesign voor loodgieters",
   intro:
     "Wie een loodgieter zoekt, doet dat vaak midden in een lekkage, met een telefoon in de hand en weinig geduld voor een trage website. Een website voor je loodgietersbedrijf moet daarom binnen een paar seconden laten zien dat je er bent, en het telefoonnummer moet je meteen kunnen zien en aantikken.",
@@ -55,15 +56,15 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-loodgieter")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je loodgieter | AIMI" },
+      { title: "Website laten maken voor je loodgietersbedrijf | AIMI" },
       { name: "description", content: "Snelle website voor je loodgietersbedrijf met telefoonnummer voorop, spoedmelding bovenaan en razendsnelle mobiele laadtijd." },
-      { property: "og:title", content: "Website laten maken voor je loodgieter | AIMI" },
+      { property: "og:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken voor je loodgieter | AIMI" },
+      { name: "twitter:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
       { name: "twitter:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -81,7 +82,7 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
           provider: { "@id": ORG_ID },
         }),
       },
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgieter", "/website-laten-maken-loodgieter"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgietersbedrijf", "/website-laten-maken-loodgieter"]]),
     ],
   }),
   component: () => <BranchPage data={data} />,

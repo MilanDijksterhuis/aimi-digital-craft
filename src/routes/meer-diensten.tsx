@@ -5,7 +5,9 @@ import { Server, Zap, Search, ArrowRight, Check, Plus } from "lucide-react";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+
+const URL = `${SITE_URL}/meer-diensten`;
 
 /* ---------------------------------------------------------------------------
  * "Meer diensten" — rustige, geanimeerde pagina in de AIMI-huisstijl.
@@ -63,11 +65,19 @@ const SERVICES = [
   },
 ];
 
+/** Diensten die inmiddels een eigen, canonieke pagina hebben. */
+const DETAIL_PAGE: Record<string, { href: string; label: string }> = {
+  hosting: { href: "/onderhoud-hosting", label: "Alles over onderhoud & hosting" },
+  seo: { href: "/seo", label: "Alles over SEO" },
+};
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.6, delay, ease: [0.2, 0.8, 0.2, 1] },
+  // `as const` maakt hier een cubic-bezier tuple van; zonder dat leest TS het
+  // als number[] en accepteert motion's Easing-type het niet.
+  transition: { duration: 0.6, delay, ease: [0.2, 0.8, 0.2, 1] as const },
 });
 
 export const Route = createFileRoute("/meer-diensten")({
@@ -84,7 +94,7 @@ export const Route = createFileRoute("/meer-diensten")({
         property: "og:description",
         content: "Hosting, performance en SEO ook los af te nemen.",
       },
-      { property: "og:url", content: "https://aimi-development.nl/meer-diensten" },
+      { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
@@ -92,17 +102,31 @@ export const Route = createFileRoute("/meer-diensten")({
       { name: "twitter:description", content: "Hosting, performance en SEO ook los af te nemen." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/meer-diensten" }],
+    links: [{ rel: "canonical", href: URL }],
     scripts: [
       breadcrumbJsonLd([["Home", "/"], ["Meer diensten", "/meer-diensten"]]),
-      ...SERVICES.map((s) =>
-        serviceJsonLd({
+      // A-26: elk van de drie diensten krijgt een eigen `@id`-fragment, anders
+      // claimen drie Service-objecten dezelfde entiteit op dezelfde URL.
+      //
+      // Keyword mapping: hosting en SEO hebben inmiddels een eigen pagina
+      // (/onderhoud-hosting en /seo). Die pagina's zijn de canonieke eigenaar
+      // van die zoekintentie, dus hun Service-objecten wijzen daarheen in
+      // plaats van hier mee te concurreren. Alleen performance blijft van deze
+      // pagina zelf.
+      ...SERVICES.map((s) => {
+        const owner: Record<string, string> = {
+          hosting: `${SITE_URL}/onderhoud-hosting`,
+          seo: `${SITE_URL}/seo`,
+        };
+        const target = owner[s.key] ?? `${URL}#${s.key}`;
+        return serviceJsonLd({
+          id: owner[s.key] ? `${owner[s.key]}#service` : `${URL}#${s.key}`,
           name: s.label,
           serviceType: s.serviceType,
           description: s.desc,
-          url: "https://aimi-development.nl/meer-diensten",
-        }),
-      ),
+          url: target,
+        });
+      }),
     ],
   }),
   component: MeerDiensten,
@@ -285,7 +309,7 @@ function MeerDiensten() {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     style={{ overflow: "hidden" }}
                   >
-                    <div style={{ padding: "0 26px 26px", borderTop: "1px solid #2a2b2b", marginTop: "2px", paddingTop: "22px" }}>
+                    <div style={{ padding: "0 26px 26px", borderTop: "1px solid #2a2b2b", marginTop: "2px", paddingTop: "22px", display: "flex", flexWrap: "wrap", gap: "18px" }}>
                       <a
                         href="/contact"
                         style={{
@@ -301,6 +325,27 @@ function MeerDiensten() {
                       >
                         Aanvragen <ArrowRight size={14} />
                       </a>
+                      {/* Hosting en SEO hebben een eigen pagina die de canonieke
+                          eigenaar van die zoekintentie is. Het Service-schema
+                          hierboven wijst daarheen, dus de zichtbare content moet
+                          dat spiegelen. */}
+                      {DETAIL_PAGE[s.key] && (
+                        <a
+                          href={DETAIL_PAGE[s.key].href}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            fontSize: "12.5px",
+                            fontWeight: 600,
+                            color: "#a4a9b2",
+                            textDecoration: "none",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {DETAIL_PAGE[s.key].label} <ArrowRight size={14} />
+                        </a>
+                      )}
                     </div>
                   </motion.div>
                 </motion.div>

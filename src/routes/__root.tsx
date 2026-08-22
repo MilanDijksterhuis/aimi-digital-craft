@@ -13,7 +13,7 @@ import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { ConfirmProvider } from "@/components/ConfirmDialog";
 import { AnalyticsLoader } from "@/components/AnalyticsLoader";
-import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID } from "@/lib/seo";
+import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID, PRICE_VALID_UNTIL } from "@/lib/seo";
 
 const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 
@@ -21,12 +21,13 @@ function NotFoundComponent() {
   // De noindex voor 404's wordt server-side afgedwongen via de
   // X-Robots-Tag-header (server.ts) — betrouwbaarder dan een client-side
   // meta-tag, die crawlers pas na JS-executie zien.
-  useEffect(() => {
-    document.title = "Pagina niet gevonden — AIMI";
-  }, []);
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      {/* A-35: dit stond in een useEffect, waardoor de SSR-HTML van een 404 de
+          root-default ("AIMI — Webdesign Noord-Nederland") droeg. Een crawler
+          die geen JS uitvoert zag dus een homepagetitel op een 404. React 19
+          hoist dit <title>-element server-side naar de head. */}
+      <title>Pagina niet gevonden — AIMI</title>
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina niet gevonden</h2>
@@ -152,17 +153,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": ["Organization", "ProfessionalService"],
           "@id": ORG_ID,
           name: "AIMI",
-          alternateName: "AIMI Development",
+          // "AIMI" alleen is een dubbelzinnige naam: er bestaan meerdere
+          // organisaties met dezelfde afkorting. Meerdere alternateNames plus
+          // knowsAbout geven zoekmachines en AI-assistenten houvast om déze
+          // entiteit te onderscheiden. Zodra er profielen zijn (Google
+          // Bedrijfsprofiel, LinkedIn, KvK) hoort daar een `sameAs` bij — dat
+          // is het sterkste disambiguatiesignaal dat er is.
+          alternateName: ["AIMI Development", "AIMI Web Agency"],
           url: SITE_URL,
           logo: LOGO_URL,
           image: LOGO_URL,
           email: "sales@aimi-development.nl",
+          knowsAbout: [
+            "Webdesign",
+            "Website laten maken",
+            "Webshop laten maken",
+            "Webhosting",
+            "Zoekmachineoptimalisatie",
+            "Core Web Vitals",
+            "Lokale SEO",
+          ],
           description:
-            "AIMI is een webdesignbureau uit Noord-Nederland. We ontwerpen, bouwen en hosten snelle, premium websites voor groeiende merken.",
+            "AIMI is een webdesignbureau uit Veendam in Noord-Nederland. We ontwerpen, bouwen en hosten snelle, professionele websites en webshops voor ondernemers, met vaste prijzen vanaf € 499.",
           areaServed: [
             { "@type": "AdministrativeArea", name: "Groningen" },
             { "@type": "AdministrativeArea", name: "Drenthe" },
-            { "@type": "AdministrativeArea", name: "Fryslân" },
+            { "@type": "AdministrativeArea", name: "Friesland" },
             { "@type": "City", name: "Veendam" },
             { "@type": "Country", name: "Nederland" },
           ],
@@ -180,8 +196,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 price: "499",
                 priceCurrency: "EUR",
                 availability: "https://schema.org/InStock",
-                url: `${SITE_URL}/#pricing`,
-                priceValidUntil: "2027-08-19",
+                url: `${SITE_URL}/tarieven`,
+                priceValidUntil: PRICE_VALID_UNTIL,
               },
               {
                 "@type": "Offer",
@@ -189,8 +205,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 price: "749",
                 priceCurrency: "EUR",
                 availability: "https://schema.org/InStock",
-                url: `${SITE_URL}/#pricing`,
-                priceValidUntil: "2027-08-19",
+                url: `${SITE_URL}/tarieven`,
+                priceValidUntil: PRICE_VALID_UNTIL,
               },
             ],
           },

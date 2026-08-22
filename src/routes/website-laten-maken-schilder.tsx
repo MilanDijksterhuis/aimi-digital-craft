@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-schilder`;
 
 const data: BranchPageData = {
   branch: "schildersbedrijf",
+  h1: "Webdesign voor je schildersbedrijf",
   kicker: "Webdesign voor schilders",
   intro:
     "Bij een schildersbedrijf overtuigt afgewerkt werk het meest, maar bezoekers willen ook snel begrijpen wat je precies doet: binnen, buiten, of beide. Een website voor je schildersbedrijf laat je vakwerk zien en maakt het makkelijk om vrijblijvend een offerte aan te vragen voor een concrete klus.",
@@ -56,15 +57,15 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-schilder")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je schilder | AIMI" },
+      { title: "Website laten maken voor je schildersbedrijf | AIMI" },
       { name: "description", content: "Website voor je schildersbedrijf: onderscheid binnen/buiten, projectfoto's en een offerteformulier op maat." },
-      { property: "og:title", content: "Website laten maken voor je schilder | AIMI" },
+      { property: "og:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken voor je schilder | AIMI" },
+      { name: "twitter:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
       { name: "twitter:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -82,7 +83,7 @@ export const Route = createFileRoute("/website-laten-maken-schilder")({
           provider: { "@id": ORG_ID },
         }),
       },
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schilder", "/website-laten-maken-schilder"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schildersbedrijf", "/website-laten-maken-schilder"]]),
     ],
   }),
   component: () => <BranchPage data={data} />,

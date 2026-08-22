@@ -10,6 +10,7 @@ const DESCRIPTION =
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken in Meppel",
   region: "Drenthe",
   kicker: "Webdesign in Meppel",
   intro:

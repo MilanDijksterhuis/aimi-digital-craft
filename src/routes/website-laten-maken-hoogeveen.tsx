@@ -1,16 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed } from "@/lib/seo";
 
 const CITY = "Hoogeveen";
 const PATH = "/website-laten-maken-hoogeveen";
-const URL = `https://aimi-development.nl${PATH}`;
+const URL = `${SITE_URL}${PATH}`;
 const TITLE = "Website laten maken in Hoogeveen | AIMI Webdesign";
 const DESCRIPTION =
   "Zoek je een webdesigner in Hoogeveen? AIMI bouwt en host snelle websites voor ondernemers in Zuid-Drenthe. Persoonlijk contact, vanaf € 499.";
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Webdesign in Hoogeveen, van ontwerp tot hosting",
   region: "Drenthe",
   kicker: "Webdesign in Hoogeveen",
   intro:

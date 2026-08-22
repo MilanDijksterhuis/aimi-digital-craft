@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-nagelstudio`;
 
 const data: BranchPageData = {
   branch: "nagelstudio",
+  h1: "Een website die je nagelstudio laat zien",
   kicker: "Webdesign voor nagelstudio's",
   intro:
     "Bij een nagelstudio verkoopt de website vooral via beeld: klanten kiezen een stijl op basis van foto's van nailart voordat ze een afspraak maken. AIMI bouwt websites voor nagelstudio's waarin dat portfolio centraal staat, zonder dat de site daardoor traag wordt, met online boeken en heldere prijzen erbij.",

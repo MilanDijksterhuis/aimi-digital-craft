@@ -10,6 +10,7 @@ const DESCRIPTION =
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Een website die werkt voor bedrijven in Coevorden",
   region: "Drenthe",
   kicker: "Webdesign in Coevorden",
   intro:

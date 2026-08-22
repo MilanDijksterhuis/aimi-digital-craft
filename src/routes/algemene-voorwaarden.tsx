@@ -1,14 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Footer } from "@/components/Footer";
+import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
       { title: "Algemene Voorwaarden — AIMI" },
       { name: "description", content: "De algemene voorwaarden van AIMI." },
-      { name: "robots", content: "noindex" },
+      // A-21: stond op noindex — zie privacybeleid.tsx. Nu indexeerbaar en in
+      // de sitemap.
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/algemene-voorwaarden" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/algemene-voorwaarden` }],
   }),
   component: VoorwaardenPage,
 });

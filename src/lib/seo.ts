@@ -12,6 +12,13 @@ export const ORG_ID = `${SITE_URL}/#organization`;
  * geen tegenstrijdig adres/geo claimen op de gedeelde organisatie-entiteit. */
 export const localBusinessId = (path: string) => `${SITE_URL}${path}#localbusiness`;
 
+/** A-41: `priceValidUntil` niet hardcoden. Een vaste datum verloopt stilletjes en
+ * levert daarna waarschuwingen op in de Rich Results Test. Eén jaar vooruit,
+ * berekend bij het renderen. */
+export const PRICE_VALID_UNTIL = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .slice(0, 10);
+
 type LdScript = { type: "application/ld+json"; children: string };
 
 const ld = (obj: unknown): LdScript => ({
@@ -46,11 +53,15 @@ export function serviceJsonLd(opts: {
   url: string;
   serviceType: string;
   areaServed?: unknown[] | null;
+  /** Eigen `@id`, nodig zodra één pagina meerdere Services beschrijft: zonder
+   * eigen id claimen ze alle drie dezelfde entiteit op dezelfde URL. */
+  id?: string;
 }): LdScript {
   const area = opts.areaServed === undefined ? DEFAULT_AREA_SERVED : opts.areaServed;
   return ld({
     "@context": "https://schema.org",
     "@type": "Service",
+    ...(opts.id ? { "@id": opts.id } : {}),
     name: opts.name,
     serviceType: opts.serviceType,
     description: opts.description,

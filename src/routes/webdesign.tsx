@@ -53,11 +53,11 @@ export const Route = createFileRoute("/webdesign")({
         description: "Websites en webshops voor ondernemers in Groningen, Drenthe en Friesland, gebouwd en gehost door AIMI vanuit Veendam.",
         url: URL,
         serviceType: "Webdesign",
-        // Expliciet: de hub dekt ook Fryslân, dat ontbreekt in het standaardlijstje.
+        // Expliciet: de hub dekt ook Friesland, dat ontbreekt in het standaardlijstje.
         areaServed: [
           { "@type": "AdministrativeArea", name: "Groningen" },
           { "@type": "AdministrativeArea", name: "Drenthe" },
-          { "@type": "AdministrativeArea", name: "Fryslân" },
+          { "@type": "AdministrativeArea", name: "Friesland" },
           { "@type": "Country", name: "Nederland" },
         ],
       }),
@@ -74,7 +74,9 @@ export const Route = createFileRoute("/webdesign")({
               Webdesign in Noord-Nederland
             </div>
             <h1 style={{ margin: "14px 0 18px", fontSize: "clamp(24px, 3.6vw, 36px)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-              Website laten maken bij AIMI
+              {/* A-23: H1 cannibaliseerde met /website-laten-maken. Deze pagina is
+                  de regio-hub, niet de dienstpagina. */}
+              Webdesign per regio in Noord-Nederland
             </h1>
             <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "62ch" }}>
               AIMI ontwerpt, bouwt en host websites en webshops vanuit Veendam. We werken voor ondernemers
@@ -90,7 +92,7 @@ export const Route = createFileRoute("/webdesign")({
               <a href="/contact" style={{ padding: "12px 22px", background: RED, color: "#fff", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
                 Vraag een offerte aan
               </a>
-              <a href="/#pricing" style={{ padding: "12px 22px", border: "1px solid rgba(255,255,255,0.18)", color: "#efeff1", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
+              <a href="/tarieven" style={{ padding: "12px 22px", border: "1px solid rgba(255,255,255,0.18)", color: "#efeff1", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
                 Bekijk tarieven
               </a>
             </div>

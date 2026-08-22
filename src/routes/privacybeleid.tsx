@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Footer } from "@/components/Footer";
+import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacybeleid")({
   head: () => ({
     meta: [
       { title: "Privacybeleid — AIMI" },
       { name: "description", content: "Lees hoe AIMI omgaat met jouw persoonsgegevens." },
-      { name: "robots", content: "noindex" },
+      // A-21: stond op noindex. Een privacybeleid is een vertrouwenssignaal dat
+      // bezoekers én Google mogen zien; het hoort gewoon indexeerbaar te zijn.
+      // Staat nu ook in de sitemap.
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/privacybeleid" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/privacybeleid` }],
   }),
   component: PrivacyPage,
 });

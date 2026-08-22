@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-groningen`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken in Groningen",
   region: "Groningen",
   kicker: "Webdesign in Groningen",
   intro:

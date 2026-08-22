@@ -18,6 +18,13 @@ const branches: { label: string; href: string; desc: string }[] = [
   { label: "Website laten maken voor je klusbedrijf", href: "/website-laten-maken-klusbedrijf", desc: "Offerte met foto-upload, mobiel-first" },
   { label: "Website laten maken voor je schildersbedrijf", href: "/website-laten-maken-schilder", desc: "Projectfoto's, offerteaanvraag, seizoensplanning" },
   { label: "Website laten maken voor je loodgietersbedrijf", href: "/website-laten-maken-loodgieter", desc: "Telefoonnummer voorop, spoedgevallen, razendsnel op mobiel" },
+  { label: "Website laten maken voor je autobedrijf", href: "/website-laten-maken-autobedrijf", desc: "Actuele occasionvoorraad, aparte ingang voor de werkplaats" },
+  { label: "Website laten maken voor je autorijschool", href: "/website-laten-maken-autorijschool", desc: "Heldere pakketprijzen, leerlingervaringen, online inschrijven" },
+  { label: "Website laten maken voor je makelaarskantoor", href: "/website-laten-maken-makelaar", desc: "Verkopers overtuigen, verkochte woningen als bewijs" },
+  { label: "Website laten maken voor je administratiekantoor", href: "/website-laten-maken-boekhouder", desc: "Opgesplitst per type ondernemer, overstap uitgelegd" },
+  { label: "Website laten maken voor je restaurant", href: "/website-laten-maken-restaurant", desc: "Openingstijden en kaart vooraan, snel reserveren" },
+  { label: "Website laten maken voor je cateringbedrijf", href: "/website-laten-maken-cateringbedrijf", desc: "Formules, richtprijzen en bruikbare offerteaanvragen" },
+  { label: "Website laten maken voor je bloemenwinkel", href: "/website-laten-maken-bloemist", desc: "Bestellen en bezorgen, rouwwerk apart, grip op piekdagen" },
 ];
 
 export const Route = createFileRoute("/branches")({

@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-kapsalon`;
 
 const data: BranchPageData = {
   branch: "kapsalon",
+  h1: "Website laten maken voor je kapsalon",
   kicker: "Webdesign voor kapsalons",
   intro:
     "Een kapsalon leeft van boekingen die makkelijk binnenkomen en van klanten die op basis van foto's en prijzen al een keuze maken voordat ze bellen. AIMI bouwt websites voor kapsalons die dat proces soepel laten verlopen, met online afspraken, een duidelijke prijslijst en een uitstraling die past bij je stijl.",

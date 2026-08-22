@@ -14,26 +14,29 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Website laten maken | Webdesign Noord-Nederland | AIMI" },
+      // A-03: de homepage mikte op exact dezelfde term als /website-laten-maken
+      // (en /webdesign). Die kernterm hoort nu bij /website-laten-maken; de
+      // homepage positioneert op merk + overzicht van de diensten.
+      { title: "AIMI — Webdesignbureau uit Noord-Nederland | Websites & webshops" },
       {
         name: "description",
         content:
-          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
+          "AIMI is een webdesignbureau uit Veendam: twee developers die websites en webshops ontwerpen, bouwen en hosten. Vaste prijzen vanaf € 499 en direct contact.",
       },
-      { property: "og:title", content: "Website laten maken | Webdesign Noord-Nederland — AIMI" },
+      { property: "og:title", content: "AIMI — Webdesignbureau uit Noord-Nederland" },
       {
         property: "og:description",
         content:
-          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
+          "Twee developers uit Veendam die websites en webshops ontwerpen, bouwen en hosten. Vaste prijzen vanaf € 499 en direct contact.",
       },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken | Webdesign Noord-Nederland — AIMI" },
+      { name: "twitter:title", content: "AIMI — Webdesignbureau uit Noord-Nederland" },
       {
         name: "twitter:description",
         content:
-          "Website of webshop laten maken? AIMI is een webdesignbureau uit Noord-Nederland en bouwt snelle, professionele websites voor ondernemers. Vanaf € 499.",
+          "Twee developers uit Veendam die websites en webshops ontwerpen, bouwen en hosten. Vaste prijzen vanaf € 499 en direct contact.",
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-klusbedrijf`;
 
 const data: BranchPageData = {
   branch: "klusbedrijf",
+  h1: "Website laten maken voor je klusbedrijf",
   kicker: "Webdesign voor klusbedrijven",
   intro:
     "Klanten van een klusbedrijf zoeken vaak vanaf hun telefoon, tussen andere dingen door, naar iemand die snel en breed inzetbaar is. Een website voor je klusbedrijf moet daarom vooral mobiel-first zijn: snel laden, direct duidelijk wat je doet, en een laagdrempelige manier om een klus aan te melden.",

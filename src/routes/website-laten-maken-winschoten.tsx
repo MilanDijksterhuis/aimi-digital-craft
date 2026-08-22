@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-winschoten`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken voor ondernemers in Winschoten",
   region: "Groningen",
   kicker: "Webdesign Winschoten",
   intro:

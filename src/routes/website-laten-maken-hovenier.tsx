@@ -6,6 +6,7 @@ const URL = `${SITE_URL}/website-laten-maken-hovenier`;
 
 const data: BranchPageData = {
   branch: "hoveniersbedrijf",
+  h1: "Een website die je hovenierswerk laat spreken",
   kicker: "Webdesign voor hoveniers",
   intro:
     "Een hoveniersbedrijf verkoopt vooral op basis van wat klanten kunnen zien: aangelegde tuinen, strak onderhoud, vakwerk in bestrating en beplanting. Een website voor je hoveniersbedrijf moet dat werk goed laten zien en het makkelijk maken om een offerte aan te vragen, zonder dat bezoekers eerst hoeven te bellen.",
@@ -55,15 +56,15 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-hovenier")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je hovenier | AIMI" },
+      { title: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       { name: "description", content: "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud." },
-      { property: "og:title", content: "Website laten maken voor je hovenier | AIMI" },
+      { property: "og:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken voor je hovenier | AIMI" },
+      { name: "twitter:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       { name: "twitter:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -81,7 +82,7 @@ export const Route = createFileRoute("/website-laten-maken-hovenier")({
           provider: { "@id": ORG_ID },
         }),
       },
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hovenier", "/website-laten-maken-hovenier"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hoveniersbedrijf", "/website-laten-maken-hovenier"]]),
     ],
   }),
   component: () => <BranchPage data={data} />,

@@ -1,20 +1,41 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import heroImg from "../assets/hero-forest.webp";
+import heroW640 from "../assets/hero-forest-640.webp";
+import heroW960 from "../assets/hero-forest-960.webp";
+import heroW1280 from "../assets/hero-forest-1280.webp";
+import heroW1920 from "../assets/hero-forest-1920.webp";
+
+/* A-07: de hero is de LCP. Stond eerst als één 594 KB CSS-background met een
+   high-priority preload — een telefoon op 4G haalde dus met voorrang exact
+   hetzelfde bestand binnen als een 4K-desktop. Nu een echte <img> met srcset,
+   zodat mobiel ~22 KB laadt in plaats van 594 KB. Een CSS-background kan geen
+   srcset dragen, vandaar de omzetting. */
+const WEBP_SRCSET = `${heroW640} 640w, ${heroW960} 960w, ${heroW1280} 1280w, ${heroW1920} 1920w`;
+const SIZES = "100vw";
 
 export function Hero() {
   return (
-    <section
-      className="relative min-h-screen flex flex-col"
-      style={{
-        backgroundImage: `url(${heroImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center 30%",
-      }}
-    >
-      {/* PERF-7: hero is de LCP-afbeelding (CSS background). React 19 hoist deze
-          preload-hint naar de head zodat de browser 'm met hoge prioriteit laadt. */}
-      <link rel="preload" as="image" href={heroImg} fetchPriority="high" />
+    <section className="relative min-h-screen flex flex-col">
+      {/* Geen handmatige <link rel="preload">: React 19 hoist voor een <img> met
+          fetchPriority="high" zelf al een preload met dezelfde imageSrcSet naar
+          de head. Een eigen link erbij levert alleen een dubbele tag op.
+          Bewust ook géén AVIF-<source>: de preload kan server-side niet weten
+          welk formaat de browser kiest, dus AVIF erbij geeft AVIF-capabele
+          browsers een tweede LCP-request. De winst was hier 0-12%. */}
+      <img
+        src={heroW1280}
+        srcSet={WEBP_SRCSET}
+        sizes={SIZES}
+        alt=""
+        aria-hidden="true"
+        width={1920}
+        height={1255}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full"
+        style={{ objectFit: "cover", objectPosition: "center 30%" }}
+      />
+
       {/* Dark gradient overlay — top for nav legibility */}
       <div
         className="absolute inset-0"
@@ -64,8 +85,11 @@ export function Hero() {
             Neem contact op
             <ArrowRight className="w-4 h-4 arrow" />
           </a>
-          <a href="#services" className="btn-secondary">
-            Bekijk services
+          {/* A-03: de homepage claimt de kernterm niet meer zelf, maar geeft
+              /website-laten-maken een sterke keyword-ankertekst vanaf de
+              belangrijkste pagina van de site. */}
+          <a href="/website-laten-maken" className="btn-secondary">
+            Website laten maken
           </a>
         </motion.div>
 

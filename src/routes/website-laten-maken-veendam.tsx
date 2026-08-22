@@ -1,16 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { ORG_ID, OG_IMAGE_URL, LOGO_URL, localBusinessId, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, ORG_ID, OG_IMAGE_URL, LOGO_URL, localBusinessId, breadcrumbJsonLd } from "@/lib/seo";
 
 const CITY = "Veendam";
 const PATH = "/website-laten-maken-veendam";
-const URL = `https://aimi-development.nl${PATH}`;
+const URL = `${SITE_URL}${PATH}`;
 const TITLE = "Website laten maken in Veendam | AIMI Webdesign";
 const DESCRIPTION =
   "Webdesigner in Veendam nodig? AIMI zit hier zelf gevestigd en bouwt snelle websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vanaf € 499.";
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Website laten maken in Veendam",
   region: "Groningen",
   kicker: "Webdesign vanuit Veendam",
   intro:

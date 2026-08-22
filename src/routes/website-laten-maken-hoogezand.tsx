@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-hoogezand`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Een professionele website voor ondernemers in Hoogezand",
   region: "Groningen",
   kicker: "Webdesign in Hoogezand",
   intro:

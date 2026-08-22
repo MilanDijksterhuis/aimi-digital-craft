@@ -46,8 +46,13 @@ export function Pricing() {
         >
           Vaste prijzen.
         </motion.h2>
-        <p className="text-center text-sm mb-16" style={{ color: "#a4a9b2" }}>
+        <p className="text-center text-sm mb-4" style={{ color: "#a4a9b2" }}>
           Je weet vooraf wat het kost. Geen uurtje-factuurtje.
+        </p>
+        <p className="text-center text-sm mb-16">
+          <a href="/tarieven" style={{ color: "#ffffff" }}>
+            Bekijk alle tarieven en wat er precies bij zit →
+          </a>
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

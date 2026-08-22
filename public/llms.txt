@@ -7,23 +7,69 @@
 - [Home](/): Overzicht van AIMI's diensten, werkwijze, tarieven en contact.
 - [Website laten maken](/website-laten-maken): Professioneel webdesign op maat, vanaf € 499.
 - [Webshop laten maken](/webshop-laten-maken): Verkoopklare webshops op maat met veilige betaalmethodes.
+- [Website laten vernieuwen](/website-laten-vernieuwen): Bestaande site opknappen of opnieuw bouwen, met behoud van URL's en posities.
 - [Onderhoud & hosting](/onderhoud-hosting): Snelle Nederlandse hosting, onderhoud en monitoring vanaf € 30 p/m.
-- [Website laten maken in Veendam](/website-laten-maken-veendam): Lokale landingspagina voor webdesign, webshops en SEO in Veendam en omgeving.
-- [Website laten maken in Hoogeveen](/website-laten-maken-hoogeveen): Lokale landingspagina voor webdesign, webshops en SEO in Hoogeveen en omgeving.
+- [SEO](/seo): Technische SEO, Core Web Vitals, zoekintentie en lokale vindbaarheid. Geen beloftes over posities.
+- [Tarieven](/tarieven): Wat kost een website laten maken — vaste prijzen vanaf € 499 eenmalig en € 30 per maand.
+- [Meer diensten](/meer-diensten): Losse diensten, waaronder performance-optimalisatie.
+- [WordPress of maatwerk?](/wordpress-of-maatwerk): Eerlijke vergelijking op kosten, snelheid, beheer, beveiliging en SEO.
 - [Werkwijze](/werkwijze): Hoe AIMI werkt — van kennismaking tot livegang, met vaste prijzen.
-- [Meer diensten](/meer-diensten): Losse diensten — hosting, performance-optimalisatie en SEO.
 - [Over ons](/over-ons): Wie zijn Aidan & Milan en hoe werkt AIMI.
 - [FAQ](/faq): Veelgestelde vragen over websites laten maken, prijzen en werkwijze.
 - [Contact](/contact): Vraag een offerte aan of plan een gesprek.
 
+## Webdesign per regio
+
+- [Webdesign per regio](/webdesign): Hub met alle plaatsen waar AIMI actief is.
+- [Website laten maken in Veendam](/website-laten-maken-veendam): Vestigingsplaats van AIMI, in de Groningse veenkoloniën.
+- [Website laten maken in Hoogeveen](/website-laten-maken-hoogeveen): Drenthe, langs de A28/A37.
+- [Website laten maken in Groningen](/website-laten-maken-groningen): Studentenstad en grootste economie van het Noorden.
+- [Website laten maken in Assen](/website-laten-maken-assen): Hoofdstad van Drenthe.
+- [Website laten maken in Hoogezand](/website-laten-maken-hoogezand): Groningen, industrie en scheepsbouw.
+- [Website laten maken in Stadskanaal](/website-laten-maken-stadskanaal): Groningen, streekfunctie in de veenkoloniën.
+- [Website laten maken in Emmen](/website-laten-maken-emmen): Grootste plaats van Zuidoost-Drenthe.
+- [Website laten maken in Winschoten](/website-laten-maken-winschoten): Oost-Groningen, regionale winkelfunctie.
+- [Website laten maken in Roden](/website-laten-maken-roden): Drenthe, dicht tegen de stad Groningen aan.
+- [Website laten maken in Coevorden](/website-laten-maken-coevorden): Zuidoost-Drenthe, logistiek en grensregio.
+- [Website laten maken in Meppel](/website-laten-maken-meppel): Zuidwest-Drenthe, knooppunt richting de Randstad.
+- [Website laten maken in Leeuwarden](/website-laten-maken-leeuwarden): Hoofdstad van Friesland.
+- [Website laten maken in Drachten](/website-laten-maken-drachten): Friesland, technische maakindustrie.
+- [Website laten maken in Heerenveen](/website-laten-maken-heerenveen): Friesland, sport en bedrijvigheid.
+- [Website laten maken in Sneek](/website-laten-maken-sneek): Friesland, watersport en toerisme.
+
+## Webdesign per branche
+
+- [Webdesign per branche](/branches): Hub met alle branches waarvoor AIMI websites bouwt.
+- [Website laten maken voor je kapsalon](/website-laten-maken-kapsalon): Online afspraken, behandelingen en prijzen.
+- [Website laten maken voor je nagelstudio](/website-laten-maken-nagelstudio): Portfolio van eerder werk en boekingen.
+- [Website laten maken voor je schoonheidssalon](/website-laten-maken-schoonheidssalon): Behandelingen, intake en afspraken.
+- [Website laten maken voor je pedicurepraktijk](/website-laten-maken-pedicure): Regulier en medisch pedicure, registraties.
+- [Website laten maken voor je hoveniersbedrijf](/website-laten-maken-hovenier): Voor- en na-foto's, offerteaanvraag, werkgebied.
+- [Website laten maken voor je klusbedrijf](/website-laten-maken-klusbedrijf): Diensten, werkgebied en offerteaanvraag.
+- [Website laten maken voor je schildersbedrijf](/website-laten-maken-schilder): Projectfoto's, offerteaanvraag, seizoensplanning.
+- [Website laten maken voor je loodgietersbedrijf](/website-laten-maken-loodgieter): Telefoonnummer voorop, spoedgevallen, snel op mobiel.
+- [Website laten maken voor je autobedrijf](/website-laten-maken-autobedrijf): Actuele occasionvoorraad en een aparte ingang voor de werkplaats.
+- [Website laten maken voor je autorijschool](/website-laten-maken-autorijschool): Heldere pakketprijzen, leerlingervaringen en online inschrijven.
+- [Website laten maken voor je makelaarskantoor](/website-laten-maken-makelaar): Gericht op het winnen van verkoopopdrachten, met verkochte woningen als bewijs.
+- [Website laten maken voor je administratiekantoor](/website-laten-maken-boekhouder): Opgesplitst per type ondernemer, met richtprijzen en een uitgelegde overstap.
+- [Website laten maken voor je restaurant](/website-laten-maken-restaurant): Openingstijden en menukaart vooraan, snel reserveren op mobiel.
+- [Website laten maken voor je cateringbedrijf](/website-laten-maken-cateringbedrijf): Duidelijke formules, richtprijzen en bruikbare offerteaanvragen.
+- [Website laten maken voor je bloemenwinkel](/website-laten-maken-bloemist): Bestellen en bezorgen, rouwwerk apart en grip op piekdagen.
+
+## Juridisch
+
+- [Privacybeleid](/privacybeleid): Hoe AIMI omgaat met persoonsgegevens.
+- [Algemene voorwaarden](/algemene-voorwaarden): De algemene voorwaarden van AIMI.
+
 ## Diensten
 
-- Website laten maken (vanaf € 499)
-- Webshop laten maken
+- Website laten maken (vanaf € 499 eenmalig)
+- Webshop laten maken (op maat)
+- Hosting, onderhoud en beveiliging (vanaf € 30 per maand)
+- Performance-optimalisatie
 - SEO & vindbaarheid in Google
-- Hosting, onderhoud en beveiliging
 
 ## Contact
 
 - E-mail: sales@aimi-development.nl
-- Regio: Veendam, Hoogeveen, Groningen, Drenthe en heel Nederland
+- Regio: Veendam, Hoogeveen, Groningen, Drenthe, Friesland en heel Nederland

@@ -3,7 +3,7 @@ import { ClipboardList, Paintbrush, Code2, Rocket } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, howToJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/werkwijze`;
 
@@ -68,6 +68,14 @@ export const Route = createFileRoute("/werkwijze")({
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       breadcrumbJsonLd([["Home", "/"], ["Werkwijze", "/werkwijze"]]),
+      // A-27: dit is dé processpagina van de site en had als enige geen HowTo,
+      // terwijl de stappen hieronder er letterlijk al staan.
+      howToJsonLd({
+        name: "Zo bouwen wij jouw website",
+        description:
+          "Van kennismaking en ontwerp tot livegang en nazorg: de vier stappen waarin AIMI een website oplevert.",
+        steps: steps.map((s) => ({ title: s.title, desc: s.desc })),
+      }),
     ],
   }),
   component: WerkwijzePage,
@@ -89,7 +97,7 @@ function WerkwijzePage() {
         </h1>
         <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "62ch" }}>
           Een goede website laten maken begint bij een goede aanpak. Bij AIMI werk je van begin tot
-          eind direct met de twee developers die je site bouwen Aidan &amp; Milan. Geen
+          eind direct met de twee developers die je site bouwen: Aidan &amp; Milan. Geen
           bureaupolitiek, geen tussenlagen, geen verrassingen, wel een helder webdesign-traject en
           vaste prijzen. Van de eerste kennismaking tot de livegang van je website of webshop, en ook
           daarna blijf je altijd rechtstreeks in contact met de mensen die je project bouwen.

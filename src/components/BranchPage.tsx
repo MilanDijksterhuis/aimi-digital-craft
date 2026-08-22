@@ -2,6 +2,7 @@ import type { ReactElement } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare branchepagina ("Website laten maken voor je [branche]").
@@ -18,6 +19,10 @@ export type BranchSectionId = "needs" | "pitfalls" | "approach" | "pricing" | "f
 
 export type BranchPageData = {
   branch: string; // "kapsalon" — zoals gebruikt in de lopende tekst/H1
+  /** A-9: standaard "Website laten maken voor je {branch}". Zie de toelichting
+   * in LocationPageV2 — identieke H1-templates over een hele set versterken het
+   * doorway-patroon. */
+  h1?: string;
   kicker: string;
   intro: string;
   needsHeading: string;
@@ -99,18 +104,27 @@ export function BranchPage({ data }: { data: BranchPageData }) {
       <main id="main-content">
         <div className="mx-auto max-w-5xl px-6 pt-32">
           <section>
+            {/* A-29: spiegelt de BreadcrumbList-markup uit de route-head. */}
+            <Breadcrumbs
+              className="mb-5"
+              trail={[
+                ["Home", "/"],
+                ["Branches", "/branches"],
+                [`Website laten maken voor je ${branch}`, `#${branch}`],
+              ]}
+            />
             <div style={{ fontSize: "12px", fontWeight: 600, letterSpacing: ".22em", textTransform: "uppercase", color: RED }}>
               {kicker}
             </div>
             <h1 style={{ margin: "14px 0 18px", fontSize: "clamp(22px, 3.4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-              Website laten maken voor je {branch}
+              {data.h1 ?? `Website laten maken voor je ${branch}`}
             </h1>
             <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "60ch" }}>{intro}</p>
             <div style={{ marginTop: "26px", display: "flex", flexWrap: "wrap", gap: "12px" }}>
               <a href="/contact" style={{ padding: "12px 22px", background: RED, color: "#fff", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
                 Vraag een offerte aan
               </a>
-              <a href="/#pricing" style={{ padding: "12px 22px", border: "1px solid rgba(255,255,255,0.18)", color: "#efeff1", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
+              <a href="/tarieven" style={{ padding: "12px 22px", border: "1px solid rgba(255,255,255,0.18)", color: "#efeff1", borderRadius: "4px", fontWeight: 600, fontSize: "14px", textDecoration: "none" }}>
                 Bekijk tarieven
               </a>
             </div>

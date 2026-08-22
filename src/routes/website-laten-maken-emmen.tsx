@@ -7,6 +7,7 @@ const URL = `${SITE_URL}/website-laten-maken-emmen`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Webdesign in Emmen dat klanten oplevert",
   region: "Drenthe",
   kicker: "Webdesign Emmen",
   intro:

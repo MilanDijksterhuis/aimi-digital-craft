@@ -3,7 +3,7 @@ import { Nav } from "@/components/Nav";
 import { FAQ, faqItems } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { OG_IMAGE_URL, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 const faqs = faqItems;
 
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/faq")({
         property: "og:description",
         content: "Antwoorden op veelgestelde vragen over websites, doorlooptijd, hosting en samenwerken met AIMI.",
       },
-      { property: "og:url", content: "https://aimi-development.nl/faq" },
+      { property: "og:url", content: `${SITE_URL}/faq` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/faq")({
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: "https://aimi-development.nl/faq" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/faq` }],
     scripts: [breadcrumbJsonLd([["Home", "/"], ["FAQ", "/faq"]]), faqJsonLd(faqs)],
   }),
   component: FaqPage,

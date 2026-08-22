@@ -14,7 +14,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht je krijgt binnen één werkdag antwoord.",
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht — je krijgt binnen één werkdag antwoord.",
       },
       { property: "og:title", content: "Contact — AIMI" },
       { property: "og:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },

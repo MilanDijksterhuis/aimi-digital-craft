@@ -3,19 +3,20 @@ import { LocationPageV2, type LocationPageData } from "@/components/LocationPage
 import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed} from "@/lib/seo";
 
 const CITY = "Drachten";
-const REGION = "Fryslân";
+const REGION = "Friesland";
 const PATH = "/website-laten-maken-drachten";
 const URL = `${SITE_URL}${PATH}`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Een zakelijke website voor ondernemers in Drachten",
   region: REGION,
   kicker: "Webdesign in Drachten",
   intro:
     "Drachten, hoofdplaats van de gemeente Smallingerland, staat bekend om zijn technische maakindustrie en innovatieve bedrijfsleven. AIMI bouwt websites voor die technische en industriële ondernemers, met dezelfde nauwkeurigheid en betrouwbaarheid die je van hun eigen producten verwacht.",
   contextHeading: "Webdesign in Drachten: techniek verdient een technische partner",
   contextBody: [
-    "Drachten is binnen Fryslân een uitzondering: een plaats waar technische maakindustrie en innovatie een prominente plek innemen in de lokale economie. De gemeente Smallingerland telt van oudsher een sterk technisch bedrijfsleven, met bedrijven die precisie, betrouwbaarheid en engineering hoog in het vaandel hebben staan. Die mentaliteit vraagt om een website die dezelfde eigenschappen uitstraalt: geen loze marketingtaal, maar een heldere, functionele presentatie van wat een bedrijf daadwerkelijk kan.",
+    "Drachten is binnen Friesland een uitzondering: een plaats waar technische maakindustrie en innovatie een prominente plek innemen in de lokale economie. De gemeente Smallingerland telt van oudsher een sterk technisch bedrijfsleven, met bedrijven die precisie, betrouwbaarheid en engineering hoog in het vaandel hebben staan. Die mentaliteit vraagt om een website die dezelfde eigenschappen uitstraalt: geen loze marketingtaal, maar een heldere, functionele presentatie van wat een bedrijf daadwerkelijk kan.",
     "AIMI bouwt websites voor technische bedrijven en maakindustrie in Drachten met oog voor die nuchtere, resultaatgerichte instelling. Dat betekent een website die snel laadt, duidelijk communiceert wat je doet en voor wie, en technisch op orde is tot in de details, van paginastructuur tot laadtijd. Voor bedrijven die zakelijke klanten of toeleveranciers bedienen, is een professionele eerste indruk vaak doorslaggevend, en die indruk begint tegenwoordig bij de website.",
     "Naast de technische en industriële sector heeft Drachten ook een breed lokaal bedrijfsleven met retail, dienstverlening en horeca. Ook voor die ondernemers geldt dat een website geen los project moet zijn, maar een verlengstuk van hoe je zaken doet: betrouwbaar, snel en zonder poespas. We houden daarbij de techniek zelf beheerd, inclusief hosting en servermonitoring, zodat je niet afhankelijk bent van losse leveranciers voor elk onderdeel.",
   ],
@@ -55,6 +56,11 @@ export const Route = createFileRoute("/website-laten-maken-drachten")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      // A-45: deze vier Friese pagina's misten de geo-meta die de 11 andere
+      // plaatspagina's wel hadden. Google gebruikt ze niet, maar een set die
+      // half is ingevuld is een onderhoudssignaal.
+      { name: "geo.region", content: "NL-FR" },
+      { name: "geo.placename", content: "Drachten" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
@@ -72,7 +78,7 @@ export const Route = createFileRoute("/website-laten-maken-drachten")({
         description: DESCRIPTION,
         url: URL,
         serviceType: "Webdesign",
-        areaServed: cityAreaServed("Drachten", "Fryslân"),
+        areaServed: cityAreaServed("Drachten", "Friesland"),
       }),
       breadcrumbJsonLd([
         ["Home", "/"],

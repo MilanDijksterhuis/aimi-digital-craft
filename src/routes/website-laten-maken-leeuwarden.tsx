@@ -3,19 +3,20 @@ import { LocationPageV2, type LocationPageData } from "@/components/LocationPage
 import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed} from "@/lib/seo";
 
 const CITY = "Leeuwarden";
-const REGION = "Fryslân";
+const REGION = "Friesland";
 const PATH = "/website-laten-maken-leeuwarden";
 const URL = `${SITE_URL}${PATH}`;
 
 const data: LocationPageData = {
   city: CITY,
+  h1: "Webdesign in Leeuwarden, hoofdstad van Friesland",
   region: REGION,
   kicker: "Webdesign in Leeuwarden",
   intro:
-    "Als hoofdstad van Fryslân heeft Leeuwarden een brede en diverse ondernemersbasis: van culturele instellingen en horeca tot zzp'ers, adviesbureaus en maakbedrijven. AIMI bouwt voor die ondernemers snelle, professionele websites, inclusief hosting en onderhoud, zodat je online net zo scherp voor de dag komt als je onderneming dat verdient.",
+    "Als hoofdstad van Friesland heeft Leeuwarden een brede en diverse ondernemersbasis: van culturele instellingen en horeca tot zzp'ers, adviesbureaus en maakbedrijven. AIMI bouwt voor die ondernemers snelle, professionele websites, inclusief hosting en onderhoud, zodat je online net zo scherp voor de dag komt als je onderneming dat verdient.",
   contextHeading: "Website laten maken in Leeuwarden: waarom lokaal maatwerk telt",
   contextBody: [
-    "Leeuwarden is als hoofdstad van Fryslân een stad met een ongewoon brede economische basis voor haar omvang. Naast overheidsinstellingen en onderwijs is er een levendige culturele sector, mede dankzij het jaar als Culturele Hoofdstad van Europa, die de stad blijvend op de kaart heeft gezet als plek waar creativiteit en ondernemerschap samenkomen. Die combinatie zie je terug in het soort bedrijven dat er zit: van musea en theaters tot horeca, retail, zorgpraktijken en zakelijke dienstverleners.",
+    "Leeuwarden is als hoofdstad van Friesland een stad met een ongewoon brede economische basis voor haar omvang. Naast overheidsinstellingen en onderwijs is er een levendige culturele sector, mede dankzij het jaar als Culturele Hoofdstad van Europa, die de stad blijvend op de kaart heeft gezet als plek waar creativiteit en ondernemerschap samenkomen. Die combinatie zie je terug in het soort bedrijven dat er zit: van musea en theaters tot horeca, retail, zorgpraktijken en zakelijke dienstverleners.",
     "Voor een webdesigner in Leeuwarden betekent dat maatwerk. Een culturele instelling heeft andere prioriteiten dan een advocatenkantoor: de een wil bezoekers verleiden met beeld en verhaal, de ander wil vooral snel en betrouwbaar overkomen. AIMI bouwt websites op basis van wat jouw bedrijf nodig heeft, niet op basis van een vast sjabloon dat voor iedereen hetzelfde is. We kijken naar je doelgroep, je aanbod en de manier waarop mensen in Leeuwarden en de wijde regio naar je op zoek gaan.",
     "Wat daarbij niet verandert, is de technische basis. Iedere website die we opleveren draait op eigen infrastructuur die wij zelf beheren en monitoren, is gebouwd met moderne technologie gericht op laadsnelheid, en is vanaf de eerste regel code opgezet met zoekmachinevindbaarheid in het achterhoofd. Zo sta je als ondernemer in Leeuwarden niet alleen mooi op je scherm, maar ook goed vindbaar in Google.",
   ],
@@ -56,6 +57,11 @@ export const Route = createFileRoute("/website-laten-maken-leeuwarden")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      // A-45: deze vier Friese pagina's misten de geo-meta die de 11 andere
+      // plaatspagina's wel hadden. Google gebruikt ze niet, maar een set die
+      // half is ingevuld is een onderhoudssignaal.
+      { name: "geo.region", content: "NL-FR" },
+      { name: "geo.placename", content: "Leeuwarden" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
@@ -73,7 +79,7 @@ export const Route = createFileRoute("/website-laten-maken-leeuwarden")({
         description: DESCRIPTION,
         url: URL,
         serviceType: "Webdesign",
-        areaServed: cityAreaServed("Leeuwarden", "Fryslân"),
+        areaServed: cityAreaServed("Leeuwarden", "Friesland"),
       }),
       breadcrumbJsonLd([
         ["Home", "/"],
