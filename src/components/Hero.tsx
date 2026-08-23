@@ -93,6 +93,17 @@ export function Hero() {
           </a>
         </motion.div>
 
+        <motion.a
+          href="/website-checker"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 text-sm underline underline-offset-4"
+          style={{ color: "rgba(255,255,255,0.85)", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+        >
+          Gratis website check! →
+        </motion.a>
+
         {/* Founders */}
         <motion.div
           initial={{ opacity: 0 }}

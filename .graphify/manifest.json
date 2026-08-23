@@ -40,16 +40,16 @@
     "hash": "ae670756af0092aeac4847e945813221"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Hero.tsx": {
-    "mtime": 1787376465732.2034,
-    "hash": "fbbb199b68d8f578443cca003a7865f8"
+    "mtime": 1787504585448.7727,
+    "hash": "eb53d18ac833a5c5e9fefe091c36c2cc"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/LeadsPanel.tsx": {
     "mtime": 1785698683163.609,
     "hash": "c09080ea9227ea9273cecb7d9939ac4e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Nav.tsx": {
-    "mtime": 1787400041459.9475,
-    "hash": "7d1fddfc1ac9e8ae601a304b4c646ac7"
+    "mtime": 1787504578989.2468,
+    "hash": "b51bd456b6090ed4743ab160ec5f6647"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Pricing.tsx": {
     "mtime": 1787375782905.94,
@@ -356,16 +356,16 @@
     "hash": "e3f848f1b39f863e6164cf58b5a8e752"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routeTree.gen.ts": {
-    "mtime": 1787400015009.7021,
-    "hash": "0f9938d9497422c3ce427138248d1b6a"
+    "mtime": 1787504575137.3167,
+    "hash": "77e3469902b45fe5e37a627494ccce0a"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/router.tsx": {
     "mtime": 1779559624812.223,
     "hash": "1399708ae830799467737d473ea53a30"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/__root.tsx": {
-    "mtime": 1787400082855.862,
-    "hash": "a659ebb6bde7bca1b25a5fefed242a0d"
+    "mtime": 1787504836396.5854,
+    "hash": "2c7a6af916a05d3090adf4926445d77c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/_authenticated.tsx": {
     "mtime": 1785685710438.2456,
@@ -460,8 +460,8 @@
     "hash": "ca2b4124de7d3d8a0c4585033ddbe4f3"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/server.ts": {
-    "mtime": 1787399741477.6128,
-    "hash": "804e7af0175ce0c4d984d8dfed7310dd"
+    "mtime": 1787504593936.5237,
+    "hash": "8fcd9749013fb197a55742f3d3ce9602"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/start.ts": {
     "mtime": 1782556743687.8728,
@@ -3884,8 +3884,8 @@
     "hash": "5dc50a157dfc1b64d2c71f64ee05b61e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/robots.txt": {
-    "mtime": 1786902584355.1443,
-    "hash": "deb30444fd45fe0a47577d4925a817f4"
+    "mtime": 1787504036218.4512,
+    "hash": "f1204eaa90001d5afe9d637b842869bc"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/public/favicon.svg": {
     "mtime": 1782572015721.5288,
@@ -3920,140 +3920,140 @@
     "hash": "696dcbc091fb2e3e3f5b41408652fb8c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/GRAPH_REPORT.md": {
-    "mtime": 1787395704656.421,
-    "hash": "12bcc31457a7bef4b707fab8f608bed5"
+    "mtime": 1787400543384.1853,
+    "hash": "7df79e1f49a69163f9c13435ab9a5b3c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-000.md": {
-    "mtime": 1787395704484.8513,
-    "hash": "859c79093ae986fdf252855e75bad41d"
+    "mtime": 1787400543246.1858,
+    "hash": "00e25becc0e23fff24c702850a455d48"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-001.md": {
-    "mtime": 1787395704486.3552,
+    "mtime": 1787400543247.1873,
     "hash": "1c3b2336e5a3af182a853a427514bd56"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-002.md": {
-    "mtime": 1787395704487.3474,
-    "hash": "355be178965bbe1015cb66a59e05b069"
+    "mtime": 1787400543248.194,
+    "hash": "87c8ebf05a9b82ee6de9d2a9e5f03d09"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-003.md": {
-    "mtime": 1787395704488.8486,
-    "hash": "9daa77c2d66b8026f7f6af9d88cc72d8"
+    "mtime": 1787400543249.6895,
+    "hash": "d489395368b5b94e1fad6e284c23af83"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-004.md": {
-    "mtime": 1787395704489.848,
+    "mtime": 1787400543250.6926,
     "hash": "62f509e5ec26fbf7190cd0f63212c847"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-005.md": {
-    "mtime": 1787395704490.853,
+    "mtime": 1787400543251.6929,
     "hash": "6551f662943e483581cbcc46a0ff03fe"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-006.md": {
-    "mtime": 1787395704492.3477,
+    "mtime": 1787400543252.6865,
     "hash": "886f31fed2fe8324a2658633d719f195"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-007.md": {
-    "mtime": 1787395704493.849,
+    "mtime": 1787400543253.6848,
     "hash": "27fabac7cd4c607bb466c005c633dea5"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-008.md": {
-    "mtime": 1787395704495.347,
+    "mtime": 1787400543254.1853,
     "hash": "1cd9ce2e3833c831b8415fa45fbbb187"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-009.md": {
-    "mtime": 1787395704496.3474,
-    "hash": "a1879e152e6d038aae71de8d7134bafc"
+    "mtime": 1787400543255.1877,
+    "hash": "85be59607aa008b396745c96a2d26f77"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-010.md": {
-    "mtime": 1787395704497.3467,
+    "mtime": 1787400543256.1858,
     "hash": "a3bed91ab0de98fb89eab7aee6cdffb5"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-011.md": {
-    "mtime": 1787395704498.8562,
-    "hash": "fd486700e51d9ee2c0e75f5168205c9b"
+    "mtime": 1787400543257.1877,
+    "hash": "c3a00358aaef7b61a37327a1134ff4ed"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-012.md": {
-    "mtime": 1787395704500.355,
+    "mtime": 1787400543258.1843,
     "hash": "8683cbc0c19ba742cfe817291448979d"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-013.md": {
-    "mtime": 1787395704500.8555,
+    "mtime": 1787400543259.1863,
     "hash": "d954859d635f4dbc6fea4759a30750ea"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-014.md": {
-    "mtime": 1787395704501.8567,
+    "mtime": 1787400543260.186,
     "hash": "59b8168f967e55e20efcd7488be49309"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-015.md": {
-    "mtime": 1787395704502.856,
+    "mtime": 1787400543261.1875,
     "hash": "eff822f832b29d88dcb11d8f9802e10d"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-016.md": {
-    "mtime": 1787395704503.8562,
+    "mtime": 1787400543262.1868,
     "hash": "18ac081d91b217edefcf8f897149cafb"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-017.md": {
-    "mtime": 1787395704504.3586,
+    "mtime": 1787400543263.186,
     "hash": "dba77e188e72a96249e8a761c06fa91e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-018.md": {
-    "mtime": 1787395704505.8555,
-    "hash": "f9b37a18cc5ec185a8af5fc034409728"
+    "mtime": 1787400543264.1997,
+    "hash": "97ee62400700c0c10260acfac8d54cb0"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-019.md": {
-    "mtime": 1787395704506.8691,
-    "hash": "f64089b900980edbb12c94884d183c9f"
+    "mtime": 1787400543264.684,
+    "hash": "1e21087b8b3edf649711b84b853b86a0"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-020.md": {
-    "mtime": 1787395704507.357,
-    "hash": "38ff4d03f7ce5d19d046b95ccccc2163"
+    "mtime": 1787400543265.6873,
+    "hash": "196e1e11af1a264c202deb8c2cd9e99e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-021.md": {
-    "mtime": 1787395704508.355,
-    "hash": "04635af3d392e13c3e060f005e462289"
+    "mtime": 1787400543266.694,
+    "hash": "64342dd95fcdd32b7c9234e142d5f30b"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-022.md": {
-    "mtime": 1787395704509.3557,
-    "hash": "ddb1a63f187cecaec3e0d38eb1c0b0c4"
+    "mtime": 1787400543267.687,
+    "hash": "ede5983f5c5894e6ad3c60eced356d5c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-023.md": {
-    "mtime": 1787395704509.8562,
-    "hash": "e486e12c8ecdac63e0d6b7ae1e4aa768"
+    "mtime": 1787400543268.6853,
+    "hash": "2a76a017f4c60f08d8644fd6700c21d3"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-024.md": {
-    "mtime": 1787395704510.8567,
-    "hash": "82f5a0db8b444a30b5e362b0d1924ecd"
+    "mtime": 1787400543269.1833,
+    "hash": "ad15c5c306e761980766d514899a8183"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-025.md": {
-    "mtime": 1787395704511.3557,
-    "hash": "502389eb148ab0ca0a5b7360f1ebe43e"
+    "mtime": 1787400543270.2021,
+    "hash": "08b413550182915a8cc24cc8725d27b3"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-026.md": {
-    "mtime": 1787395704512.365,
-    "hash": "16ed9d540585d0b3874cd4023fbc0d34"
+    "mtime": 1787400543270.6938,
+    "hash": "c38a3a986f6c945cebc5edc2f1e1d778"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-027.md": {
-    "mtime": 1787395704512.365,
-    "hash": "43bb80a5bd7d57ba9e679a1b833dd3d1"
+    "mtime": 1787400543271.687,
+    "hash": "7128037f5ebc423587426639bb5b5c76"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-028.md": {
-    "mtime": 1787395704513.8867,
-    "hash": "5fe88ea0747f63e75adba5a0f5d5aa57"
+    "mtime": 1787400543272.193,
+    "hash": "aa638b27adac2b929dc715699fe2738e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-029.md": {
-    "mtime": 1787395704514.885,
-    "hash": "753fd4b8a23a04cd3c13e619896f3223"
+    "mtime": 1787400543273.189,
+    "hash": "c7edb7717fb018b51a2272a93a77d75c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-030.md": {
-    "mtime": 1787395704515.8843,
-    "hash": "a1bc739991a27fe36b3028b0b5cff6b3"
+    "mtime": 1787400543273.6895,
+    "hash": "862105d2eb8324f556ff8c2b76b84164"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-031.md": {
-    "mtime": 1787395704516.3838,
-    "hash": "6214058a535aa1eee278eac5f7b551ac"
+    "mtime": 1787400543274.6914,
+    "hash": "2dec2c9c1ac1f1379c02312da576cfe2"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/label-instructions/communities.md": {
-    "mtime": 1787395702999.2527,
-    "hash": "3d82eb150af4b776ce4fb8658760137c"
+    "mtime": 1787400542186.8982,
+    "hash": "c4c486c7d7e70e09ffd61842b25157cf"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/permissions.server.ts": {
     "mtime": 1784281489259.352,
@@ -4076,12 +4076,12 @@
     "hash": "d5208479a57718cd6c22f3cca5c7e240"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-032.md": {
-    "mtime": 1787395704517.3845,
-    "hash": "de6f5124fbd8bc0fecb048fe7bf96f73"
+    "mtime": 1787400543275.1912,
+    "hash": "936e48f15967b666133de624e4f2e103"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-033.md": {
-    "mtime": 1787395704518.382,
-    "hash": "43fae08a0e19c9e03d32af6edecc12f6"
+    "mtime": 1787400543276.2097,
+    "hash": "ccbbc8491edf7dfcd9422cd64d2e5f1e"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/docs/review-2026-07-16.md": {
     "mtime": 1784211666742.7166,
@@ -4100,8 +4100,8 @@
     "hash": "24acbbb3aee5bfe9c460d963f953fb68"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-034.md": {
-    "mtime": 1787395704518.8833,
-    "hash": "8e8f11e8fe44e1bcb81377b0b8d56571"
+    "mtime": 1787400543277.1848,
+    "hash": "cdc8cce7d5e8ff27e6fa139e5fc86c9f"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/lib/auth-guards.server.ts": {
     "mtime": 1784300084859.435,
@@ -4148,8 +4148,8 @@
     "hash": "d42399638f39668073d94dd7a0f50982"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-035.md": {
-    "mtime": 1787395704519.885,
-    "hash": "f20b8dfcb184d6fdc9b5956ede98f753"
+    "mtime": 1787400543277.6875,
+    "hash": "61350f17fa03d0018cee470702f99879"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/scripts/set-telegram-webhook.ts": {
     "mtime": 1785511801265.1455,
@@ -4180,8 +4180,8 @@
     "hash": "ff0404745f6c286aa8a6c4abb9d08130"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-036.md": {
-    "mtime": 1787395704520.884,
-    "hash": "403743c8e7c268ed2ca51b79390fce3d"
+    "mtime": 1787400543278.685,
+    "hash": "3ddcfa65dbf91d78e165f2e4322fa728"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js": {
     "mtime": 1785702399850.5337,
@@ -4204,8 +4204,8 @@
     "hash": "2145724f4caa10febda438447e7e8a88"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-037.md": {
-    "mtime": 1787395704521.8838,
-    "hash": "00415101f790d586610ed53c8f1a333b"
+    "mtime": 1787400543279.6848,
+    "hash": "92cf289d36516b5918d74db147d2f1a9"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/Geanimeerde achtergronden voor website/design_handoff_meer_diensten/Meer Diensten.dc.html": {
     "mtime": 1785702399795.0269,
@@ -4228,12 +4228,12 @@
     "hash": "d1f794a362622ca7ce07760db00c273c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-038.md": {
-    "mtime": 1787395704522.8835,
-    "hash": "86cddc19e254e2f5a282f69ee64f4683"
+    "mtime": 1787400543280.1848,
+    "hash": "c52b2cdaf153248f1cfab6e1965c4eb5"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-039.md": {
-    "mtime": 1787395704523.3845,
-    "hash": "b7558ba8d48630fe22c92bb229d23e06"
+    "mtime": 1787400543281.1863,
+    "hash": "e546b8ff022a0ed8d60c7e2a6236f56c"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/ServicePage.tsx": {
     "mtime": 1787377867866.0886,
@@ -4260,16 +4260,16 @@
     "hash": "bb1442124ac10515e9da1931d0920ee4"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-040.md": {
-    "mtime": 1787395704524.3838,
-    "hash": "364d6c51a941842dbf41889ae369a6b6"
+    "mtime": 1787400543282.1848,
+    "hash": "504d9e91e662088f2097fd042736a012"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/werkwijze.tsx": {
     "mtime": 1787378140709.7842,
     "hash": "403acbf6928c33618b65715e3b6df330"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-041.md": {
-    "mtime": 1787395704525.391,
-    "hash": "6b2f7a8808b180ce62a256ea814338e1"
+    "mtime": 1787400543282.6853,
+    "hash": "6b73adc821bbe5db1fa615b5bcf6e788"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/AnalyticsLoader.tsx": {
     "mtime": 1786905374359.0146,
@@ -4452,7 +4452,83 @@
     "hash": "6b529597ac814361794d700471c147ef"
   },
   "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-042.md": {
-    "mtime": 1787395704526.3835,
-    "hash": "26c142544452c3a28ff2b02dc175d5d6"
+    "mtime": 1787400543283.6853,
+    "hash": "be4a4a94167484d635290811f2de0dcf"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/components/Breadcrumbs.tsx": {
+    "mtime": 1787377812672.0388,
+    "hash": "1f224c77676c0df3e62ccc00893133b8"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/seo.tsx": {
+    "mtime": 1787399843903.5996,
+    "hash": "577cb8e24ee61d8c5f79bd8c21fabb04"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/tarieven.tsx": {
+    "mtime": 1787375772701.3474,
+    "hash": "93d7d25642757542f078eb473b3b3288"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-autobedrijf.tsx": {
+    "mtime": 1787395119462.123,
+    "hash": "8c1660bc45542da9ebabde7c24715c1d"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-autorijschool.tsx": {
+    "mtime": 1787395175966.2993,
+    "hash": "648ad318615ccf9561d7086db7aa0f6a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-bloemist.tsx": {
+    "mtime": 1787395466035.0627,
+    "hash": "2fea812f64fde9c7471433c107126b24"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-boekhouder.tsx": {
+    "mtime": 1787395289279.2227,
+    "hash": "c3bad79bc1e6dd1c1699f73ea255b3dd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-cateringbedrijf.tsx": {
+    "mtime": 1787395404637.2654,
+    "hash": "abd3a8654b452465166e2bf5797021eb"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-makelaar.tsx": {
+    "mtime": 1787395231847.1038,
+    "hash": "069a1f4b885c14edfb2dbeb27bf3b69a"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-maken-restaurant.tsx": {
+    "mtime": 1787395346714.807,
+    "hash": "727c65d885486c0c0af2023c2ab139fd"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/website-laten-vernieuwen.tsx": {
+    "mtime": 1787400022409.2659,
+    "hash": "f43260cf1301d0e25e0bb1be39b54e5c"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/routes/wordpress-of-maatwerk.tsx": {
+    "mtime": 1787400013820.9072,
+    "hash": "da096ee45d7fd0f6ad010671d23d7513"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-043.md": {
+    "mtime": 1787400543284.692,
+    "hash": "e94a7bafb82596af68ba9f79773ac1ba"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-044.md": {
+    "mtime": 1787400543286.185,
+    "hash": "2bf2e5b4ec8daf698afef64c2cedb0a3"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/.graphify/description-instructions/batch-045.md": {
+    "mtime": 1787400543287.1875,
+    "hash": "9ec9800b3988046fb541be40e98e4388"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/assets/hero-forest-1280.webp": {
+    "mtime": 1787375804369,
+    "hash": "3d183b7f4719d6e3c9e1401b60251941"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/assets/hero-forest-1920.webp": {
+    "mtime": 1787375806122,
+    "hash": "46e3cb0199b87fbef1501ef724dd0b9f"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/assets/hero-forest-640.webp": {
+    "mtime": 1787375802415,
+    "hash": "2f4834217751bce25447487e49f1ee30"
+  },
+  "C:/Users/milan/Documents/AIMI/aimi-digital-craft/src/assets/hero-forest-960.webp": {
+    "mtime": 1787375803115,
+    "hash": "bd73825b36a8ec3a1db64871c4c7abc1"
   }
 }

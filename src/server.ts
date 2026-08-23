@@ -215,6 +215,18 @@ async function applyRateLimit(request: Request): Promise<Response | null> {
     return null;
   }
 
+  // Website Checker: doet een server-side fetch naar een door de gebruiker
+  // opgegeven URL (SSRF-gevoelig) en is duur (netwerk-IO) — extra strikte
+  // limiet hier bovenop de per-ip-hash limiet in checkWebsite zelf.
+  if (path.includes("checkWebsite")) {
+    const { allowed, retryAfter } = await checkRateLimit(`website-check-ip:${ip}`, 5, 60 * 60 * 1000);
+    if (!allowed) {
+      console.warn(`[security] website-checker rate limit overschreden ip=${ip}`);
+      return rateLimitedResponse(retryAfter);
+    }
+    return null;
+  }
+
   // All other POST/PUT endpoints: moderate limit
   const { allowed, retryAfter } = await checkRateLimit(`general:${ip}`, 30, 60 * 1000);
   if (!allowed) {

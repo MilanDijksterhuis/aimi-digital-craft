@@ -42,19 +42,31 @@ function botUsername(): string {
  * (contactformulier-notificatie).
  */
 export async function sendTelegramMessage(chatId: string, text: string): Promise<void> {
-  const res = await fetch(`${TELEGRAM_API}/bot${botToken()}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      parse_mode: "Markdown",
-      disable_web_page_preview: true,
-    }),
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Telegram sendMessage faalde (${res.status}): ${body.slice(0, 300)}`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(`${TELEGRAM_API}/bot${botToken()}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "Markdown",
+        disable_web_page_preview: true,
+      }),
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Telegram sendMessage faalde (${res.status}): ${body.slice(0, 300)}`);
+    }
+  } catch (err) {
+    if (err instanceof Error && err.name === "AbortError") {
+      throw new Error("Telegram sendMessage time-out (8s) — geen reactie van de Telegram-API.");
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

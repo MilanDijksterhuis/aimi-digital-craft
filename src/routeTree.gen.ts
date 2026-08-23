@@ -43,6 +43,7 @@ import { Route as WebsiteLatenMakenAutorijschoolRouteImport } from './routes/web
 import { Route as WebsiteLatenMakenAutobedrijfRouteImport } from './routes/website-laten-maken-autobedrijf'
 import { Route as WebsiteLatenMakenAssenRouteImport } from './routes/website-laten-maken-assen'
 import { Route as WebsiteLatenMakenRouteImport } from './routes/website-laten-maken'
+import { Route as WebsiteCheckerRouteImport } from './routes/website-checker'
 import { Route as WebshopLatenMakenRouteImport } from './routes/webshop-laten-maken'
 import { Route as WebdesignRouteImport } from './routes/webdesign'
 import { Route as TrackDotjsRouteImport } from './routes/track[.]js'
@@ -275,6 +276,11 @@ const WebsiteLatenMakenRoute = WebsiteLatenMakenRouteImport.update({
   path: '/website-laten-maken',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebsiteCheckerRoute = WebsiteCheckerRouteImport.update({
+  id: '/website-checker',
+  path: '/website-checker',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WebshopLatenMakenRoute = WebshopLatenMakenRouteImport.update({
   id: '/webshop-laten-maken',
   path: '/webshop-laten-maken',
@@ -483,6 +489,7 @@ export interface FileRoutesByFullPath {
   '/track.js': typeof TrackDotjsRoute
   '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-checker': typeof WebsiteCheckerRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
   '/website-laten-maken-autobedrijf': typeof WebsiteLatenMakenAutobedrijfRoute
@@ -554,6 +561,7 @@ export interface FileRoutesByTo {
   '/track.js': typeof TrackDotjsRoute
   '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-checker': typeof WebsiteCheckerRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
   '/website-laten-maken-autobedrijf': typeof WebsiteLatenMakenAutobedrijfRoute
@@ -627,6 +635,7 @@ export interface FileRoutesById {
   '/track.js': typeof TrackDotjsRoute
   '/webdesign': typeof WebdesignRoute
   '/webshop-laten-maken': typeof WebshopLatenMakenRoute
+  '/website-checker': typeof WebsiteCheckerRoute
   '/website-laten-maken': typeof WebsiteLatenMakenRoute
   '/website-laten-maken-assen': typeof WebsiteLatenMakenAssenRoute
   '/website-laten-maken-autobedrijf': typeof WebsiteLatenMakenAutobedrijfRoute
@@ -700,6 +709,7 @@ export interface FileRouteTypes {
     | '/track.js'
     | '/webdesign'
     | '/webshop-laten-maken'
+    | '/website-checker'
     | '/website-laten-maken'
     | '/website-laten-maken-assen'
     | '/website-laten-maken-autobedrijf'
@@ -771,6 +781,7 @@ export interface FileRouteTypes {
     | '/track.js'
     | '/webdesign'
     | '/webshop-laten-maken'
+    | '/website-checker'
     | '/website-laten-maken'
     | '/website-laten-maken-assen'
     | '/website-laten-maken-autobedrijf'
@@ -843,6 +854,7 @@ export interface FileRouteTypes {
     | '/track.js'
     | '/webdesign'
     | '/webshop-laten-maken'
+    | '/website-checker'
     | '/website-laten-maken'
     | '/website-laten-maken-assen'
     | '/website-laten-maken-autobedrijf'
@@ -916,6 +928,7 @@ export interface RootRouteChildren {
   TrackDotjsRoute: typeof TrackDotjsRoute
   WebdesignRoute: typeof WebdesignRoute
   WebshopLatenMakenRoute: typeof WebshopLatenMakenRoute
+  WebsiteCheckerRoute: typeof WebsiteCheckerRoute
   WebsiteLatenMakenRoute: typeof WebsiteLatenMakenRoute
   WebsiteLatenMakenAssenRoute: typeof WebsiteLatenMakenAssenRoute
   WebsiteLatenMakenAutobedrijfRoute: typeof WebsiteLatenMakenAutobedrijfRoute
@@ -1194,6 +1207,13 @@ declare module '@tanstack/react-router' {
       path: '/website-laten-maken'
       fullPath: '/website-laten-maken'
       preLoaderRoute: typeof WebsiteLatenMakenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/website-checker': {
+      id: '/website-checker'
+      path: '/website-checker'
+      fullPath: '/website-checker'
+      preLoaderRoute: typeof WebsiteCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/webshop-laten-maken': {
@@ -1580,6 +1600,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrackDotjsRoute: TrackDotjsRoute,
   WebdesignRoute: WebdesignRoute,
   WebshopLatenMakenRoute: WebshopLatenMakenRoute,
+  WebsiteCheckerRoute: WebsiteCheckerRoute,
   WebsiteLatenMakenRoute: WebsiteLatenMakenRoute,
   WebsiteLatenMakenAssenRoute: WebsiteLatenMakenAssenRoute,
   WebsiteLatenMakenAutobedrijfRoute: WebsiteLatenMakenAutobedrijfRoute,

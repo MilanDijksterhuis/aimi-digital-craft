@@ -164,6 +164,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           logo: LOGO_URL,
           image: LOGO_URL,
           email: "sales@aimi-development.nl",
+          // Google Bedrijfsprofiel "AIMI Development" — sterkste disambiguatie-
+          // signaal dat er is: koppelt deze entiteit direct aan het Maps-profiel
+          // dat Google al aan de naam "AIMI" toont.
+          sameAs: ["https://maps.app.goo.gl/EKAvqcdgMuUsoFrSA"],
           knowsAbout: [
             "Webdesign",
             "Website laten maken",

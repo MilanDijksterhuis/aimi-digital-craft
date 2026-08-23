@@ -273,11 +273,15 @@ export const loginStart = createServerFn({ method: "POST" })
       expires_at: expiresAt,
     });
 
+    // Niet awaiten: de Telegram-API kan traag zijn (netwerk/rate limit) en de
+    // gebruiker hoeft niet te wachten tot het bericht daadwerkelijk is afgeleverd
+    // voordat het code-invoerscherm verschijnt. "not_linked" is hierboven al
+    // gecontroleerd (telegram_chat_id), dus die faalmodus hoeft niet meer
+    // synchroon afgehandeld te worden. Rate-limit blijft werken via /resend.
     const { generateAndSendMfaCode } = await import("./telegram.server");
-    const sendResult = await generateAndSendMfaCode(auth.user.id);
-    if (!sendResult.sent && sendResult.reason === "not_linked") {
-      return { ok: false as const, error: "mfa_not_linked" };
-    }
+    void generateAndSendMfaCode(auth.user.id).catch((err) => {
+      console.error("[telegram] MFA-code versturen bij login mislukt:", err);
+    });
 
     return { ok: true as const, mfa: true as const, pending_token: pendingToken };
   });
