@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { PHONE_DISPLAY, PHONE_E164, ACTIVE_SINCE_YEAR } from "@/lib/seo";
 
 const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 
@@ -90,7 +91,11 @@ function LinkRow({ heading, items }: { heading: string; items: { label: string; 
       <ul className="flex flex-wrap gap-x-4 gap-y-2">
         {items.map((l) => (
           <li key={l.to}>
-            <Link to={l.to} className="text-xs transition-colors hover:text-white" style={{ color: "#a4a9b2" }}>
+            <Link
+              to={l.to}
+              className="text-xs transition-colors hover:text-white"
+              style={{ color: "#a4a9b2" }}
+            >
               {l.label}
             </Link>
           </li>
@@ -104,6 +109,30 @@ export function Footer() {
   return (
     <footer style={{ background: "#161717", borderTop: "1px solid #2a2b2b", fontFamily: FONT }}>
       <div className="mx-auto max-w-7xl px-6 py-14">
+        {/* NAP-blok (SEO-audit 2026-09-02: local.md #1, content.md CQ-1) —
+            telefoonnummer stond nergens zichtbaar op de site, alleen als
+            e-mailadres. Nu op elke pagina bereikbaar via de footer. */}
+        <div
+          className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs"
+          style={{ color: "#a4a9b2" }}
+        >
+          <a
+            href={`tel:${PHONE_E164}`}
+            className="transition-colors hover:text-white"
+            style={{ color: "#a4a9b2" }}
+          >
+            {PHONE_DISPLAY}
+          </a>
+          <a
+            href="mailto:sales@aimi-development.nl"
+            className="transition-colors hover:text-white"
+            style={{ color: "#a4a9b2" }}
+          >
+            sales@aimi-development.nl
+          </a>
+          <span>Veendam — actief sinds {ACTIVE_SINCE_YEAR}</span>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           {columns.map((col) => (
             <nav key={col.heading} aria-label={col.heading}>

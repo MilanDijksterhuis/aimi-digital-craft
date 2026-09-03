@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-klusbedrijf`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een klusbedrijf",
   pricingBody: [
-    "Wat een website voor een klusbedrijf kost, hangt af van het aantal pagina's en de functionaliteit die je nodig hebt: een compacte site met dienstenoverzicht en offerteformulier is minder werk dan een uitgebreide site met aparte pagina's per specialisme. Via het offerteformulier geef je aan wat je ongeveer nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang.",
+    "Een eenvoudige website voor je klusbedrijf met diensten, werkgebied en contact begint bij € 499 eenmalig (Starter). Met een online planningsmodule voor afspraken zit je eerder in het Pro-traject vanaf € 749. Wat een website voor een klusbedrijf verder kost, hangt af van het aantal pagina's en de functionaliteit die je nodig hebt: een compacte site met dienstenoverzicht en offerteformulier is minder werk dan een uitgebreide site met aparte pagina's per specialisme. Via het offerteformulier geef je aan wat je ongeveer nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang.",
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste klusbedrijven volstaat een site met een handvol pagina's, een duidelijk overzicht van specialismen en een offerteformulier met foto-upload; wie meerdere aparte diensten breed wil uitlichten, kiest vaak voor een uitgebreider pakket. We stemmen dat altijd vooraf met je af, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [
@@ -43,12 +43,13 @@ const data: BranchPageData = {
     { q: "Wat als ik na livegang teksten wil aanpassen?", a: "Via het klantenportaal kun je aanvragen indienen voor tekstuele of visuele aanpassingen, zonder dat je zelf hoeft te programmeren." },
     { q: "Werken jullie landelijk of in een bepaalde regio?", a: "We werken voor klusbedrijven in Noord-Nederland, maar richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
     { q: "Wordt mijn klusbedrijf gevonden op zoektermen als 'klusbedrijf website laten maken'?", a: "Een snelle, technisch schone site is de basis waarop Google kan vertrouwen. Wij zorgen dat die basis klopt; verdere groei in vindbaarheid hangt ook af van je content en tijd." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn klusbedrijf?", a: "Een standaard website met dienstenoverzicht en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken hovenier", href: "/website-laten-maken-hovenier" },
-    { label: "Website laten maken schilder", href: "/website-laten-maken-schilder" },
     { label: "Website laten maken loodgieter", href: "/website-laten-maken-loodgieter" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Webdesign", href: "/webdesign" },
   ],
   sectionOrder: ["pitfalls", "needs", "approach", "faq", "pricing"],
@@ -71,19 +72,15 @@ export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je klusbedrijf",
-          serviceType: "Webdesign",
-          description: "Mobiel-first websites voor klusbedrijven, met offerteformulier, foto-upload en eigen hosting.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je klusbedrijf",
+        description: "Mobiel-first websites voor klusbedrijven, met offerteformulier, foto-upload en eigen hosting.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je klusbedrijf", "/website-laten-maken-klusbedrijf"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

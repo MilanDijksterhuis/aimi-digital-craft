@@ -9,7 +9,6 @@ import {
   OG_IMAGE_URL,
   breadcrumbJsonLd,
   faqJsonLd,
-  howToJsonLd,
   serviceJsonLd,
 } from "@/lib/seo";
 
@@ -133,12 +132,6 @@ export const Route = createFileRoute("/website-laten-vernieuwen")({
         description:
           "Bestaande websites vernieuwen met behoud van URL's, content en posities, inclusief redirects en migratie.",
         url: URL,
-      }),
-      howToJsonLd({
-        name: "Zo vernieuwen we je website",
-        description:
-          "Van analyse van je huidige site tot livegang met redirects, met behoud van wat al waarde heeft.",
-        steps,
       }),
       faqJsonLd(faqs),
       breadcrumbJsonLd([["Home", "/"], ["Website laten vernieuwen", "/website-laten-vernieuwen"]]),

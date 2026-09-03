@@ -65,15 +65,19 @@ export function Hero() {
           werken.
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        {/* Performance-audit 2026-09-02: dit is de gemeten LCP-element
+            (p.mt-8), niet de hero-afbeelding. Een motion-gedreven
+            opacity:0 -> 1 hield hem 7+ seconden onzichtbaar totdat JS
+            hydrateerde. Nu een gewone <p> die al zichtbaar staat in de
+            SSR-HTML — geen JS-gated vertraging meer op het LCP-element. */}
+        <p
           className="mt-8 max-w-lg text-base leading-relaxed"
           style={{ color: "rgba(255,255,255,0.72)" }}
         >
-          Wij ontwerpen, bouwen en hosten websites met als focus voor kleine ondernemers die net begonnen zijn. Onze focus ligt op lage kosten, hoge kwaliteit en een snelle oplevering. Zo kan jij je focussen op wat echt belangrijk is.
-        </motion.p>
+          Wij ontwerpen, bouwen en hosten websites met als focus voor kleine ondernemers die net
+          begonnen zijn. Onze focus ligt op lage kosten, hoge kwaliteit en een snelle oplevering. Zo
+          kan jij je focussen op wat echt belangrijk is.
+        </p>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -99,7 +103,10 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 text-sm underline underline-offset-4"
-          style={{ color: "rgba(255,255,255,0.85)", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          style={{
+            color: "rgba(255,255,255,0.85)",
+            fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+          }}
         >
           Gratis website check! →
         </motion.a>
@@ -122,7 +129,10 @@ export function Hero() {
               </div>
             ))}
           </div>
-          <span className="text-sm" style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}>
+          <span
+            className="text-sm"
+            style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          >
             Aidan & Milan
           </span>
         </motion.div>

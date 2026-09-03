@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-schoonheidssalon`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een schoonheidssalon",
   pricingBody: [
-    "De prijs van een website voor een schoonheidssalon hangt af van de omvang van het behandelmenu, of er een intakeformulier en boekingssysteem gekoppeld moeten worden, en hoeveel pagina's er nodig zijn om alle behandelingen goed uit te leggen. Een salon met een uitgebreid aanbod vraagt meer content en structuur dan een salon met een compact menu.",
+    "Een eenvoudige website voor je schoonheidssalon met behandelmenu, prijslijst en team begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een schoonheidssalon hangt af van de omvang van het behandelmenu, of er een intakeformulier en boekingssysteem gekoppeld moeten worden, en hoeveel pagina's er nodig zijn om alle behandelingen goed uit te leggen. Een salon met een uitgebreid aanbod vraagt meer content en structuur dan een salon met een compact menu.",
     "Bekijk de knop 'Bekijk tarieven' hierboven voor onze actuele bedragen. Tijdens de kennismaking bepalen we samen welke onderdelen jouw schoonheidssalon nodig heeft, zodat de offerte precies aansluit op je behandelmenu en werkwijze.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Kan elke behandeling een eigen uitleg krijgen op de website?", a: "Ja, we werken het behandelmenu uit met een korte, heldere uitleg per behandeling, zodat nieuwe klanten weten wat ze kunnen verwachten." },
     { q: "Past de uitstraling van de website bij mijn salon?", a: "We ontwerpen op maat, met een rustige en verzorgde uitstraling die aansluit bij hoe jouw schoonheidssalon zich wil presenteren, zonder standaardsjabloon." },
     { q: "Wat kost een website voor een schoonheidssalon laten maken?", a: "Dat hangt af van de omvang van het behandelmenu en de gewenste functionaliteit. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn schoonheidssalon?", a: "Een standaard website met behandelmenu en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en informatie over je behandelingen ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je kapsalon", href: "/website-laten-maken-kapsalon" },
     { label: "Website voor je pedicurepraktijk", href: "/website-laten-maken-pedicure" },
-    { label: "Webdesign per regio", href: "/webdesign" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "faq", "pitfalls", "pricing"],
@@ -73,23 +74,19 @@ export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je schoonheidssalon",
-          serviceType: "Webdesign voor schoonheidssalons",
-          description: "Websites op maat voor schoonheidssalons, met behandelmenu, intakeformulier en boekingsmogelijkheden, gebouwd en gehost door AIMI.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je schoonheidssalon",
+        description: "Websites op maat voor schoonheidssalons, met behandelmenu, intakeformulier en boekingsmogelijkheden, gebouwd en gehost door AIMI.",
+        url: URL,
+        serviceType: "Webdesign voor schoonheidssalons",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
         ["Website laten maken voor je schoonheidssalon", "/website-laten-maken-schoonheidssalon"],
       ]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

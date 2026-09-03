@@ -4,7 +4,14 @@ import { Check, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, PRICE_VALID_UNTIL, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  OG_IMAGE_URL,
+  ORG_ID,
+  PRICE_VALID_UNTIL,
+  breadcrumbJsonLd,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const URL = `${SITE_URL}/tarieven`;
 
@@ -101,6 +108,39 @@ const notIncluded = [
   "Beloften over posities in Google — die verkopen we niet",
 ];
 
+const comparison = [
+  {
+    aspect: "Startprijs",
+    aimi: "Vanaf € 499 eenmalig, vaste prijs vooraf",
+    bouwpakket: 'Vaak "gratis" te starten, maar pas online met een betaald abonnement',
+    freelancer: "Wisselend, vaak € 40–90 per uur zonder vast eindbedrag vooraf",
+  },
+  {
+    aspect: "Doorlopende kosten",
+    aimi: "€ 30 per maand, alles inbegrepen (hosting, SSL, back-ups, updates)",
+    bouwpakket: "€ 15–40 per maand licentiekosten, prijs stijgt vaak na 1–2 jaar",
+    freelancer: "Losse hostingkosten, apart te regelen en te onderhouden",
+  },
+  {
+    aspect: "Eigenaarschap broncode",
+    aimi: "Volledig van jou, geen lock-in, je kunt altijd overstappen",
+    bouwpakket: "Broncode blijft eigendom van het platform, overstappen kost een rebuild",
+    freelancer: "Meestal van jou, maar afhankelijk van de gemaakte afspraken",
+  },
+  {
+    aspect: "Hostingsnelheid",
+    aimi: "Eigen Nederlandse VPS, gebouwd zonder zware plugins of sjablonen",
+    bouwpakket: "Gedeelde infrastructuur, snelheid hangt af van het platform",
+    freelancer: "Wisselend, afhankelijk van waar de freelancer hostte",
+  },
+  {
+    aspect: "Ondersteuning",
+    aimi: "Direct contact met de developer die de site bouwde",
+    bouwpakket: "Alleen algemene support via chat of ticket",
+    freelancer: "Persoonlijk, maar stopt vaak na oplevering zonder onderhoudscontract",
+  },
+];
+
 const faqs = [
   {
     q: "Wat kost een website laten maken?",
@@ -144,7 +184,8 @@ export const Route = createFileRoute("/tarieven")({
       { property: "og:title", content: "Tarieven — wat kost een website laten maken? | AIMI" },
       {
         property: "og:description",
-        content: "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
+        content:
+          "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
@@ -153,12 +194,16 @@ export const Route = createFileRoute("/tarieven")({
       { name: "twitter:title", content: "Tarieven — wat kost een website laten maken? | AIMI" },
       {
         name: "twitter:description",
-        content: "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
+        content:
+          "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
       },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      breadcrumbJsonLd([["Home", "/"], ["Tarieven", "/tarieven"]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Tarieven", "/tarieven"],
+      ]),
       {
         type: "application/ld+json" as const,
         children: JSON.stringify({
@@ -230,15 +275,31 @@ function TarievenPage() {
             </div>
             <h1
               className="text-white max-w-3xl"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}
+              style={{
+                fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+              }}
             >
               Wat kost een website laten maken?
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-relaxed" style={{ color: "#a4a9b2" }}>
-              Een professionele website begint bij AIMI op <strong style={{ color: "#ffffff" }}>€ 499 eenmalig</strong>,
-              plus <strong style={{ color: "#ffffff" }}>€ 30 per maand</strong> voor hosting en onderhoud. Dat zijn
-              vaste prijzen: je weet vooraf precies wat je betaalt, we werken niet met uurtje-factuurtje en er komt
-              achteraf niets bij.
+              Een professionele website begint bij AIMI op{" "}
+              <strong style={{ color: "#ffffff" }}>€ 499 eenmalig</strong>, plus{" "}
+              <strong style={{ color: "#ffffff" }}>€ 30 per maand</strong> voor hosting en
+              onderhoud. Dat zijn vaste prijzen: je weet vooraf precies wat je betaalt, we werken
+              niet met uurtje-factuurtje en er komt achteraf niets bij.
+            </p>
+            {/* SEO-audit 2026-09-02 (sxo.md SXO-2): deze paragraaf diende alleen
+                AIMI's eigen prijs. De oriënterende zoeker die nog twijfelt tussen
+                een bouwpakket, freelancer of bureau krijgt hier het bredere
+                marktbeeld, zodat de pagina ook die awareness-fase bedient. */}
+            <p className="mt-4 max-w-2xl text-[14px] leading-relaxed" style={{ color: "#868b94" }}>
+              Ter oriëntatie: in de Nederlandse markt kost een eenvoudige website via een bouwpakket
+              of freelancer doorgaans tussen de € 500 en € 1.500, een zakelijke site met meer
+              pagina's € 1.500–5.000 en een webshop al snel € 3.000 en meer. Een freelancer op
+              uurtarief rekent vaak € 40–90 per uur zonder vast eindbedrag vooraf.
             </p>
           </div>
         </section>
@@ -246,7 +307,14 @@ function TarievenPage() {
         {/* Eenmalige pakketten */}
         <section className="py-12" style={{ background: "#161717" }}>
           <div className="mx-auto max-w-7xl px-6">
-            <h2 className="text-white mb-3" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <h2
+              className="text-white mb-3"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
               Eenmalige prijs voor het bouwen
             </h2>
             <p className="text-[15px] mb-12 max-w-2xl" style={{ color: "#a4a9b2" }}>
@@ -267,7 +335,12 @@ function TarievenPage() {
                   {t.featured && (
                     <span
                       className="absolute -top-3 left-6 px-3 py-1 text-[12px] font-medium"
-                      style={{ background: RED, color: "#ffffff", borderRadius: "9999px", letterSpacing: "0.02em" }}
+                      style={{
+                        background: RED,
+                        color: "#ffffff",
+                        borderRadius: "9999px",
+                        letterSpacing: "0.02em",
+                      }}
                     >
                       Meest gekozen
                     </span>
@@ -278,7 +351,12 @@ function TarievenPage() {
                   </h3>
                   <div
                     className="text-white mt-2 mb-3"
-                    style={{ fontSize: "2.2rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1 }}
+                    style={{
+                      fontSize: "2.2rem",
+                      fontWeight: 300,
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                    }}
                   >
                     {t.price}
                   </div>
@@ -291,7 +369,11 @@ function TarievenPage() {
 
                   <ul className="space-y-3 flex-1 mb-8">
                     {t.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3 text-[14.5px]" style={{ color: "#a4a9b2" }}>
+                      <li
+                        key={f}
+                        className="flex items-start gap-3 text-[14.5px]"
+                        style={{ color: "#a4a9b2" }}
+                      >
                         <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "#49de80" }} />
                         <span>{f}</span>
                       </li>
@@ -321,7 +403,14 @@ function TarievenPage() {
         {/* Maandelijks */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6">
-            <h2 className="text-white mb-3" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <h2
+              className="text-white mb-3"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
               Maandelijkse kosten
             </h2>
             <p className="text-[15px] mb-10 max-w-2xl" style={{ color: "#a4a9b2" }}>
@@ -340,11 +429,19 @@ function TarievenPage() {
                   </h3>
                   <div
                     className="text-white mt-2 mb-4"
-                    style={{ fontSize: "1.8rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1 }}
+                    style={{
+                      fontSize: "1.8rem",
+                      fontWeight: 300,
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                    }}
                   >
                     {r.price}
                   </div>
-                  <p className="text-[15px] leading-relaxed flex-1 mb-6" style={{ color: "#a4a9b2" }}>
+                  <p
+                    className="text-[15px] leading-relaxed flex-1 mb-6"
+                    style={{ color: "#a4a9b2" }}
+                  >
                     {r.desc}
                   </p>
                   <Link
@@ -365,12 +462,23 @@ function TarievenPage() {
         <section className="py-16" style={{ background: "#161717" }}>
           <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
-              <h2 className="text-white mb-6" style={{ fontSize: "clamp(1.35rem, 2.5vw, 1.75rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+              <h2
+                className="text-white mb-6"
+                style={{
+                  fontSize: "clamp(1.35rem, 2.5vw, 1.75rem)",
+                  fontWeight: 700,
+                  letterSpacing: "-0.02em",
+                }}
+              >
                 Wat zit er altijd bij
               </h2>
               <ul className="space-y-3">
                 {included.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-[15px]" style={{ color: "#a4a9b2" }}>
+                  <li
+                    key={f}
+                    className="flex items-start gap-3 text-[15px]"
+                    style={{ color: "#a4a9b2" }}
+                  >
                     <Check className="w-4 h-4 mt-1 shrink-0" style={{ color: "#49de80" }} />
                     <span>{f}</span>
                   </li>
@@ -378,12 +486,23 @@ function TarievenPage() {
               </ul>
             </div>
             <div>
-              <h2 className="text-white mb-6" style={{ fontSize: "clamp(1.35rem, 2.5vw, 1.75rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+              <h2
+                className="text-white mb-6"
+                style={{
+                  fontSize: "clamp(1.35rem, 2.5vw, 1.75rem)",
+                  fontWeight: 700,
+                  letterSpacing: "-0.02em",
+                }}
+              >
                 Wat er niet bij zit
               </h2>
               <ul className="space-y-3">
                 {notIncluded.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-[15px]" style={{ color: "#a4a9b2" }}>
+                  <li
+                    key={f}
+                    className="flex items-start gap-3 text-[15px]"
+                    style={{ color: "#a4a9b2" }}
+                  >
                     <span className="mt-1 shrink-0" style={{ color: "#868b94" }}>
                       —
                     </span>
@@ -392,17 +511,94 @@ function TarievenPage() {
                 ))}
               </ul>
               <p className="mt-6 text-[14px] leading-relaxed" style={{ color: "#868b94" }}>
-                We zijn hier liever eerlijk over dan dat je er later achter komt. Wat we niet doen, is beloften
-                verkopen over posities in Google.
+                We zijn hier liever eerlijk over dan dat je er later achter komt. Wat we niet doen,
+                is beloften verkopen over posities in Google.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Vergelijking: AIMI vs. bouwpakket vs. freelancer */}
+        <section className="py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <h2
+              className="text-white mb-3"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              AIMI vergeleken met een bouwpakket of freelancer
+            </h2>
+            <p className="text-[15px] mb-10 max-w-2xl" style={{ color: "#a4a9b2" }}>
+              Een bouwpakket zoals Wix of Squarespace oogt in de eerste maand goedkoper, en een
+              freelancer op uurtarief kan voordelig lijken bij een kleine klus. Op de langere
+              termijn ziet de vergelijking er anders uit.
+            </p>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-[14.5px]" style={{ minWidth: "640px" }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid #2a2b2b" }}>
+                    <th className="text-left py-4 pr-6 font-medium" style={{ color: "#868b94" }}>
+                      Aspect
+                    </th>
+                    <th className="text-left py-4 px-6 font-medium" style={{ color: RED }}>
+                      AIMI
+                    </th>
+                    <th className="text-left py-4 px-6 font-medium" style={{ color: "#a4a9b2" }}>
+                      Bouwpakket (Wix/Squarespace)
+                    </th>
+                    <th className="text-left py-4 pl-6 font-medium" style={{ color: "#a4a9b2" }}>
+                      Freelancer op uurtarief
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparison.map((row) => (
+                    <tr key={row.aspect} style={{ borderBottom: "1px solid #2a2b2b" }}>
+                      <td
+                        className="py-4 pr-6 align-top"
+                        style={{ color: "#ffffff", fontWeight: 500 }}
+                      >
+                        {row.aspect}
+                      </td>
+                      <td className="py-4 px-6 align-top" style={{ color: "#a4a9b2" }}>
+                        {row.aimi}
+                      </td>
+                      <td className="py-4 px-6 align-top" style={{ color: "#a4a9b2" }}>
+                        {row.bouwpakket}
+                      </td>
+                      <td className="py-4 pl-6 align-top" style={{ color: "#a4a9b2" }}>
+                        {row.freelancer}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-8 text-[14px] leading-relaxed max-w-2xl" style={{ color: "#868b94" }}>
+              Eerlijk gezegd: voor een eenvoudige hobbysite zonder groeiplannen is een bouwpakket
+              vaak prima. Zodra snelheid, eigenaarschap of het vermijden van oplopende
+              licentiekosten meetellen, is maatwerk met vaste prijzen doorgaans de voordeligere
+              keuze op de lange termijn.
+            </p>
           </div>
         </section>
 
         {/* FAQ */}
         <section className="py-16">
           <div className="mx-auto max-w-3xl px-6">
-            <h2 className="text-white mb-10" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <h2
+              className="text-white mb-10"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
               Veelgestelde vragen over prijzen
             </h2>
             <div className="space-y-6">
@@ -434,11 +630,19 @@ function TarievenPage() {
         {/* CTA */}
         <section className="py-20" style={{ background: "#161717" }}>
           <div className="mx-auto max-w-3xl px-6 text-center">
-            <h2 className="text-white mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <h2
+              className="text-white mb-4"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
               Benieuwd wat jouw site kost?
             </h2>
             <p className="text-[16px] mb-8" style={{ color: "#a4a9b2" }}>
-              Vertel kort wat je nodig hebt. Je krijgt binnen één werkdag een concreet antwoord met een vaste prijs.
+              Vertel kort wat je nodig hebt. Je krijgt binnen één werkdag een concreet antwoord met
+              een vaste prijs.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link to="/contact" className="btn-primary">

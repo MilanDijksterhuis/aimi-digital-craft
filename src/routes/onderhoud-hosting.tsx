@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageData } from "@/components/ServicePage";
-import { serviceJsonLd, breadcrumbJsonLd, howToJsonLd, offeringsJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
+import { serviceJsonLd, breadcrumbJsonLd, offeringsJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
 import { RedDiagonalBackground } from "../components/rodeachtergrond";
 
 const URL = `${SITE_URL}/onderhoud-hosting`;
@@ -91,12 +91,6 @@ export const Route = createFileRoute("/onderhoud-hosting")({
       breadcrumbJsonLd([["Home", "/"], ["Onderhoud & hosting", "/onderhoud-hosting"]]),
       // A-28: de twee andere ServicePages hebben deze twee wél; hier waren ze
       // vergeten terwijl `steps` en `offerings` hierboven al bestaan.
-      howToJsonLd({
-        name: "Zo nemen we je hosting en onderhoud over",
-        description:
-          "Van kennismaking en migratie tot doorlopend beheer: zo brengt AIMI een bestaande website naar eigen hosting.",
-        steps: data.steps,
-      }),
       offeringsJsonLd({
         name: "Wat zit er bij onderhoud & hosting",
         offerings: data.offerings,

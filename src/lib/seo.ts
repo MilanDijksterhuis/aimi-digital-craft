@@ -4,6 +4,13 @@
 export const SITE_URL = "https://aimi-development.nl";
 export const LOGO_URL = "https://aimi-development.nl/aimi-logo.png";
 export const OG_IMAGE_URL = "https://aimi-development.nl/og-image.png";
+/** Telefoonnummer als NAP-anker (SEO-audit 2026-09-02: local.md #1, content.md
+ * CQ-1) — één plek, zowel voor zichtbare `tel:`-links als voor schema. */
+export const PHONE_DISPLAY = "06 11851093";
+export const PHONE_E164 = "+31611851093";
+/** Actief sinds: trust-signaal op stadspagina's (sxo.md SXO-1). Geen jaartal
+ * verzinnen — dit is het echte startjaar. */
+export const ACTIVE_SINCE_YEAR = 2025;
 /** Canonieke entiteit-id: elk Organization/LocalBusiness-schema op de site
  * verwijst hiernaar, zodat Google één bedrijf ziet in plaats van meerdere
  * losse entiteiten per pagina. */
@@ -81,21 +88,6 @@ export function breadcrumbJsonLd(trail: [string, string][]): LdScript {
       position: i + 1,
       name,
       item: `${SITE_URL}${path}`,
-    })),
-  });
-}
-
-/** HowTo-schema voor een stappenplan/proces op een dienstenpagina. */
-export function howToJsonLd(opts: { name: string; description: string; steps: { title: string; desc: string }[] }): LdScript {
-  return ld({
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: opts.name,
-    description: opts.description,
-    step: opts.steps.map((s) => ({
-      "@type": "HowToStep",
-      name: s.title,
-      text: s.desc,
     })),
   });
 }

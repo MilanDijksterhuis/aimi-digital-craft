@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-loodgieter`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een loodgietersbedrijf",
   pricingBody: [
-    "De prijs van een website voor een loodgietersbedrijf hangt af van de omvang: een compacte site met spoedmelding, telefoonnummer en dienstenoverzicht vraagt minder werk dan een uitgebreide site met aparte pagina's per dienst. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
+    "Een eenvoudige website voor je loodgietersbedrijf met diensten, spoedcontact en werkgebied begint bij € 499 eenmalig (Starter). Met uitgebreide dienstenpagina's per specialisme zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een loodgietersbedrijf hangt verder af van de omvang: een compacte site met spoedmelding, telefoonnummer en dienstenoverzicht vraagt minder werk dan een uitgebreide site met aparte pagina's per dienst. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste loodgietersbedrijven is een compacte, snelle site met nadruk op spoedcontact voldoende; wie meerdere diensten apart wil uitlichten, kiest vaak voor een uitgebreider pakket. Dat bespreken we altijd vooraf, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [
@@ -43,11 +43,12 @@ const data: BranchPageData = {
     { q: "Blijft de website ook bereikbaar tijdens drukte, bijvoorbeeld bij vorst?", a: "We hosten op eigen infrastructuur met servermonitoring, zodat de site ook op piekmomenten bereikbaar blijft." },
     { q: "Werken jullie in een specifieke regio?", a: "We werken voor loodgietersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
     { q: "Wordt mijn bedrijf gevonden op zoektermen als 'loodgieter website laten maken'?", a: "Snelheid en een schone technische structuur vormen de basis waarop zoekmachines vertrouwen. Voor een storingsdienst is dat extra belangrijk, omdat mensen tijdens een lekkage snel op mobiel zoeken." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn loodgietersbedrijf?", a: "Een standaard website met spoedmelding en dienstenoverzicht staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
-    { label: "Webdesign", href: "/webdesign" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -83,6 +84,7 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
         }),
       },
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgietersbedrijf", "/website-laten-maken-loodgieter"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

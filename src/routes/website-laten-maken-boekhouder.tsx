@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-boekhouder`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een administratiekantoor",
   pricingBody: [
-    "Voor de meeste administratiekantoren volstaat een meerpagina-site: een homepage, een pagina per doelgroep, een pagina over het kantoor en de mensen, een pagina over overstappen en een contactpagina met aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je boekhoudkantoor met dienstenoverzicht, tarieven en contact begint bij € 499 eenmalig (Starter). Met een koppeling naar een klantportaal zit je eerder in het Pro-traject vanaf € 749. Voor de meeste administratiekantoren volstaat een meerpagina-site: een homepage, een pagina per doelgroep, een pagina over het kantoor en de mensen, een pagina over overstappen en een contactpagina met aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
     "Wil je daarnaast een beveiligde omgeving waarin klanten stukken kunnen aanleveren, dan wordt het maatwerk. Dat is technisch goed te doen, maar vraagt extra aandacht voor beveiliging en bewaartermijnen, en dat prijzen we apart. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Hoe help ik bezoekers over de drempel van het overstappen?", a: "Door het proces expliciet te beschrijven: dat het ook midden in het jaar kan, wat je van de vorige boekhouder nodig hebt en hoeveel werk het de klant zelf kost. Die pagina is bij boekhouders vaak de best gelezen pagina van de site." },
     { q: "Kan ik zelf teksten en bedragen aanpassen?", a: "Ja. In deze branche veranderen tarieven en regels jaarlijks, dus je moet dat zelf kunnen bijwerken zonder ons erbij te halen. Dat richten we in via het klantenportaal." },
     { q: "Werken jullie ook voor kantoren buiten de regio?", a: "Ja. We zitten in Veendam en werken veel in Noord-Nederland, maar het traject verloopt volledig op afstand. Het werkgebied op je site stemmen we af op waar jij klanten wilt hebben." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn boekhoudkantoor?", a: "Een standaard website met dienstenoverzicht en tarieven staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en gegevens per doelgroep ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken makelaar", href: "/website-laten-maken-makelaar" },
     { label: "Onze werkwijze", href: "/werkwijze" },
-    { label: "Tarieven", href: "/tarieven" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "pricing", "faq"],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-boekhouder")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je administratiekantoor",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor boekhouders en administratiekantoren, opgesplitst per doelgroep en met heldere tarieven.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je administratiekantoor",
+        description: "Websites op maat voor boekhouders en administratiekantoren, opgesplitst per doelgroep en met heldere tarieven.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je administratiekantoor", "/website-laten-maken-boekhouder"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

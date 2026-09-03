@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed} from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
 
 const CITY = "Hoogezand";
 const URL = `${SITE_URL}/website-laten-maken-hoogezand`;
@@ -42,7 +42,7 @@ const data: LocationPageData = {
     { label: "Webdesign per regio", href: "/webdesign" },
     { label: "Website laten maken Veendam", href: "/website-laten-maken-veendam" },
     { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
-    { label: "Website laten maken Stadskanaal", href: "/website-laten-maken-stadskanaal" },
+    { label: "Website laten maken loodgieter", href: "/website-laten-maken-loodgieter" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["workflow", "context", "businessTypes", "faq"],
@@ -89,6 +89,7 @@ export const Route = createFileRoute("/website-laten-maken-hoogezand")({
         ["Webdesign", "/webdesign"],
         ["Website laten maken in Hoogezand", "/website-laten-maken-hoogezand"],
       ]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <LocationPageV2 data={data} />,

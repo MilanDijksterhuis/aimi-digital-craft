@@ -13,7 +13,7 @@ import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { ConfirmProvider } from "@/components/ConfirmDialog";
 import { AnalyticsLoader } from "@/components/AnalyticsLoader";
-import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID, PRICE_VALID_UNTIL } from "@/lib/seo";
+import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID, PRICE_VALID_UNTIL, PHONE_E164 } from "@/lib/seo";
 
 const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 
@@ -77,7 +77,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           Deze pagina kon niet laden
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Er ging iets mis aan onze kant. Probeer de pagina te verversen of ga terug naar de homepage.
+          Er ging iets mis aan onze kant. Probeer de pagina te verversen of ga terug naar de
+          homepage.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -107,7 +108,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "AIMI — Webdesign Noord-Nederland" },
-      { name: "description", content: "AIMI is een webdesignbureau uit Noord-Nederland. Design, development & hosting voor groeiende merken." },
+      {
+        name: "description",
+        content:
+          "AIMI is een webdesignbureau uit Noord-Nederland. Design, development & hosting voor groeiende merken.",
+      },
       { name: "author", content: "AIMI" },
       { property: "og:site_name", content: "AIMI" },
       { property: "og:title", content: "AIMI — Webdesign Noord-Nederland" },
@@ -164,6 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           logo: LOGO_URL,
           image: LOGO_URL,
           email: "sales@aimi-development.nl",
+          telephone: PHONE_E164,
           // Google Bedrijfsprofiel "AIMI Development" — sterkste disambiguatie-
           // signaal dat er is: koppelt deze entiteit direct aan het Maps-profiel
           // dat Google al aan de naam "AIMI" toont.
@@ -226,6 +232,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "AIMI",
           inLanguage: "nl-NL",
           publisher: { "@id": ORG_ID },
+        }),
+      },
+      // Performance-audit 2026-09-02 (Finding 5): prefetch de meest gekozen
+      // vervolgstappen uit de hoofdnavigatie, zodat die pagina's al warm staan
+      // tegen de tijd dat iemand erop klikt. Browsers die de Speculation Rules
+      // API niet ondersteunen negeren dit script gewoon.
+      {
+        type: "speculationrules",
+        children: JSON.stringify({
+          prefetch: [
+            {
+              source: "document",
+              where: { href_matches: ["/contact", "/tarieven", "/website-laten-maken"] },
+              eagerness: "moderate",
+            },
+          ],
         }),
       },
     ],

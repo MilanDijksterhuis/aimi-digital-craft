@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-autorijschool`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een rijschool",
   pricingBody: [
-    "Voor de meeste rijscholen is een meerpagina-site voldoende: een pagina met pakketten en prijzen, een pagina over de rijschool en de instructeurs, een pagina met veelgestelde vragen over het traject, en een inschrijfformulier. Dat past doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je rijschool met lespakketten, planning en tarieven begint bij € 499 eenmalig (Starter). Met een online lesplanning-module zit je eerder in het Pro-traject vanaf € 749. Voor de meeste rijscholen is een meerpagina-site voldoende: een pagina met pakketten en prijzen, een pagina over de rijschool en de instructeurs, een pagina met veelgestelde vragen over het traject, en een inschrijfformulier. Dat past doorgaans binnen ons Pro-pakket.",
     "Wil je daarnaast een gekoppelde lesagenda of een online betaalmogelijkheid voor pakketten, dan wordt het maatwerk en krijg je daar vooraf een aparte prijs voor. Op de tarievenpagina zie je waar we beginnen; wat jouw rijschool nodig heeft bespreken we in het kennismakingsgesprek.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Kan mijn lesagenda gekoppeld worden?", a: "Dat kan, maar het is maatwerk en niet voor elke rijschool nodig. Veel scholen zijn beter af met een eenvoudig aanmeldformulier en hun eigen planning. We bespreken vooraf wat in jouw situatie zinvol is." },
     { q: "Kan ik ervaringen van leerlingen tonen?", a: "Ja, daar maken we een vaste plek voor. Belangrijk: gebruik echte reacties van echte leerlingen. Verzonnen ervaringen zijn niet alleen misleidend, ze vallen bezoekers ook op." },
     { q: "Werken jullie ook voor rijscholen buiten Noord-Nederland?", a: "Ja. We zitten zelf in Veendam, maar het hele traject kan op afstand. Het werkgebied dat we op je site vermelden richten we in op de plaatsen waar jij daadwerkelijk lesgeeft." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn rijschool?", a: "Een standaard website met pakketten en een inschrijfformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je lespakketten en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken autobedrijf", href: "/website-laten-maken-autobedrijf" },
     { label: "Tarieven", href: "/tarieven" },
-    { label: "Onze werkwijze", href: "/werkwijze" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "faq", "pricing"],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-autorijschool")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je autorijschool",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor rijscholen, met heldere pakketprijzen, leerlingervaringen en online inschrijven.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je autorijschool",
+        description: "Websites op maat voor rijscholen, met heldere pakketprijzen, leerlingervaringen en online inschrijven.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je autorijschool", "/website-laten-maken-autorijschool"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

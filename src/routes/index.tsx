@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, faqJsonLd } from "@/lib/seo";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
@@ -10,6 +10,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Pricing } from "@/components/Pricing";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { FAQ, faqItems } from "@/components/FAQ";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,6 +45,9 @@ export const Route = createFileRoute("/")({
       { rel: "canonical", href: `${SITE_URL}/` },
       // Font wordt self-hosted (zie styles.css) — geen externe Google-Fonts link meer.
     ],
+    // FAQPage-schema hoort alleen bij content die ook echt op de pagina staat
+    // (Google-richtlijn) — zie <FAQ /> hieronder in de component.
+    scripts: [faqJsonLd(faqItems)],
   }),
   component: Index,
 });
@@ -59,6 +63,7 @@ function Index() {
         <About />
 
         <Pricing />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

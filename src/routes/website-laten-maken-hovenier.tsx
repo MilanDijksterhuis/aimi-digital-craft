@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-hovenier`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een hoveniersbedrijf",
   pricingBody: [
-    "De prijs van een hovenierswebsite hangt af van de omvang: een eenvoudige site met een projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor aanleg, onderhoud en losse diensten. Via het offerteformulier op onze site vertel je kort wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
+    "Een eenvoudige website voor je hoveniersbedrijf met dienstenoverzicht, projectfoto's en contactgegevens begint bij € 499 eenmalig (Starter). Met een online offerteaanvraag zit je eerder in het Pro-traject vanaf € 749. De prijs van een hovenierswebsite hangt verder af van de omvang: een eenvoudige site met een projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor aanleg, onderhoud en losse diensten. Via het offerteformulier op onze site vertel je kort wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
     "Onze tarieven staan overzichtelijk op de pricing-pagina als startpunt. Voor de meeste hoveniersbedrijven is een site met een aantal vaste pagina's, een projectgalerij en een offerteformulier voldoende; wie meerdere specialismen apart wil uitlichten of een uitgebreidere fotobibliotheek wil, kiest vaak voor een groter pakket. We bespreken dat altijd vooraf, zodat er geen verrassingen zijn.",
   ],
   faqs: [
@@ -42,11 +42,12 @@ const data: BranchPageData = {
     { q: "Hoeveel kost een website voor mijn hoveniersbedrijf?", a: "Dat hangt af van de omvang van het project. Vraag via het offerteformulier een vrijblijvende inschatting aan, of bekijk onze tarievenpagina als startpunt." },
     { q: "Werken jullie alleen in één regio?", a: "We werken voor hoveniersbedrijven in Noord-Nederland, maar de website zelf richten we in op het werkgebied dat voor jouw bedrijf klopt." },
     { q: "Wordt de site ook gevonden op zoektermen als 'hovenier website laten maken'?", a: "We leggen een technisch gezonde basis neer (snelheid, structuur, duidelijke pagina's) waarmee zoekmachines de site goed kunnen doorgronden. Verdere groei in vindbaarheid volgt uit content en tijd." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn hoveniersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
-    { label: "Website laten maken schilder", href: "/website-laten-maken-schilder" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Webdesign", href: "/webdesign" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-hovenier")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je hoveniersbedrijf",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor hoveniersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je hoveniersbedrijf",
+        description: "Websites op maat voor hoveniersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hoveniersbedrijf", "/website-laten-maken-hovenier"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

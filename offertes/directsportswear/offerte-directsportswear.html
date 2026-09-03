@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Voorstel webshop Direct SportsWear NL | AIMI Development</title>
+<style>
+  @page {
+    size: A4;
+    margin: 22mm 20mm 20mm 20mm;
+  }
+  @page :first {
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #d5d9df;
+  }
+
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.85;
+    color: #2b2b2b;
+    background: #fff;
+    width: 210mm;
+    margin: 24px auto;
+    padding: 0;
+    box-shadow: 0 2px 20px rgba(15, 23, 42, .2);
+    text-align: left;
+  }
+
+  /* ---------- Paginastructuur ---------- */
+  .sheet {
+    padding: 22mm 20mm;
+    break-after: page;
+    page-break-after: always;
+  }
+  .sheet:last-child { break-after: auto; page-break-after: auto; }
+
+  /* ---------- Typografie ---------- */
+  h1, h2, h3 {
+    color: #0f172a;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 15pt;
+    line-height: 1.3;
+    margin: 0 0 22px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d9dee5;
+    letter-spacing: -.2px;
+  }
+  h2 .no {
+    display: inline-block;
+    min-width: 30px;
+    color: #b91c1c;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 11pt;
+    line-height: 1.45;
+    margin: 30px 0 10px 0;
+    letter-spacing: .1px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p { margin: 0 0 16px 0; orphans: 3; widows: 3; }
+  p:last-child { margin-bottom: 0; }
+
+  ul { margin: 0 0 20px 0; padding-left: 0; list-style: none; }
+  ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  ul li:before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: .72em;
+    width: 5px;
+    height: 5px;
+    background: #b91c1c;
+    border-radius: 50%;
+  }
+  ul:last-child { margin-bottom: 0; }
+
+  strong { color: #0f172a; font-weight: 600; }
+  .lead { font-size: 11.5pt; line-height: 1.75; color: #3f4a5a; margin-bottom: 26px; }
+  .note { font-size: 9pt; line-height: 1.7; color: #6b7684; }
+
+  /* ---------- Voorblad ---------- */
+  .cover {
+    height: 297mm;
+    padding: 34mm 24mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #0f172a;
+    color: #fff;
+    break-after: page;
+    page-break-after: always;
+  }
+  .cover .brand {
+    font-size: 9.5pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #f87171;
+    font-weight: 700;
+  }
+  .cover h1 {
+    color: #fff;
+    font-size: 32pt;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+  }
+  .cover .sub {
+    font-size: 13pt;
+    color: #b6c0cf;
+    line-height: 1.6;
+    max-width: 120mm;
+    font-weight: 300;
+  }
+  .cover .rule { width: 64px; height: 3px; background: #b91c1c; margin: 0 0 26px 0; }
+  .cover-meta {
+    border-top: 1px solid #33415a;
+    padding-top: 22px;
+    display: flex;
+    gap: 20mm;
+    font-size: 10pt;
+  }
+  .cover-meta span {
+    display: block;
+    font-size: 8pt;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #7c8ba1;
+    margin-bottom: 6px;
+  }
+  .cover-meta div { color: #e8edf4; }
+
+  /* ---------- Inhoudsopgave ---------- */
+  .toc { margin-top: 4px; }
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8ecf1;
+    break-inside: avoid;
+  }
+  .toc-item .no {
+    color: #b91c1c;
+    font-weight: 700;
+    min-width: 26px;
+    font-size: 10.5pt;
+  }
+  .toc-item .t { flex: 1; color: #0f172a; font-weight: 600; }
+  .toc-item .d { flex: 1; color: #6b7684; font-size: 9.5pt; }
+
+  /* ---------- Tabellen ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4px 0 20px 0;
+    font-size: 10pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #0f172a;
+    color: #fff;
+    text-align: left;
+    padding: 13px 14px;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e4e9ef;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:nth-child(even) td { background: #f7f9fb; }
+  .num { text-align: right; white-space: nowrap; }
+  tfoot td {
+    font-weight: 700;
+    color: #0f172a;
+    background: #eef2f7 !important;
+    border-top: 2px solid #0f172a;
+    border-bottom: none;
+  }
+
+  /* ---------- Bevindingen ---------- */
+  .finding {
+    margin-bottom: 26px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .finding:last-child { margin-bottom: 0; }
+  .finding h3 {
+    margin: 0 0 8px 0;
+    font-size: 10.5pt;
+    color: #0f172a;
+  }
+  .finding p { margin: 0; color: #414b59; }
+
+  /* ---------- Optiekaarten ---------- */
+  .card {
+    border: 1px solid #d9dee5;
+    border-radius: 5px;
+    padding: 24px 26px;
+    margin-bottom: 24px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .card:last-child { margin-bottom: 0; }
+  .card.accent { border: 2px solid #b91c1c; }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  .card-head h3 { margin: 0; font-size: 13pt; }
+  .price { color: #b91c1c; font-size: 16pt; font-weight: 700; white-space: nowrap; }
+  .tag {
+    display: inline-block;
+    background: #b91c1c;
+    color: #fff;
+    font-size: 7.5pt;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .lede { color: #6b7684; margin-bottom: 16px; font-size: 10pt; }
+  .card .foot {
+    font-size: 9.5pt;
+    color: #6b7684;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid #e8ecf1;
+  }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: #f7f9fb;
+    border-left: 4px solid #b91c1c;
+    padding: 22px 26px;
+    margin: 0 0 22px 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .callout:last-child { margin-bottom: 0; }
+  .callout h3 { margin: 0 0 10px 0; font-size: 11pt; }
+
+  .sig {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #0f172a;
+    line-height: 1.8;
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    html { background: none; }
+    body { width: auto; margin: 0; box-shadow: none; }
+    .sheet { padding: 0; }
+    .cover { height: 297mm; padding: 34mm 24mm; }
+  }
+
+  @media screen and (max-width: 230mm) {
+    body { width: auto; margin: 0; box-shadow: none; }
+    .sheet { padding: 24px 20px; }
+    .cover { height: auto; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ VOORBLAD ============ -->
+<section class="cover">
+  <div class="brand">AIMI Development</div>
+  <div>
+    <div class="rule"></div>
+    <h1>Voorstel<br>webshop</h1>
+    <p class="sub">Van prototype naar een webshop waarin uw klanten kunnen bestellen, betalen en inloggen, en die u zelf beheert.</p>
+  </div>
+  <div class="cover-meta">
+    <div><span>Voor</span>Direct SportsWear NL</div>
+    <div><span>Datum</span>26 augustus 2026</div>
+    <div><span>Geldig tot</span>26 september 2026</div>
+  </div>
+</section>
+
+<!-- ============ INHOUD ============ -->
+<section class="sheet">
+  <h2><span class="no"></span>Inhoud</h2>
+
+  <div class="toc">
+    <div class="toc-item"><span class="no">1</span><span class="t">Samenvatting</span><span class="d">De kern in het kort</span></div>
+    <div class="toc-item"><span class="no">2</span><span class="t">Onze bevindingen</span><span class="d">Wat er op dit moment niet werkt</span></div>
+    <div class="toc-item"><span class="no">3</span><span class="t">Het contactformulier en de AVG</span><span class="d">Een risico dat aandacht vraagt</span></div>
+    <div class="toc-item"><span class="no">4</span><span class="t">Ons advies</span><span class="d">Waarom opnieuw opbouwen</span></div>
+    <div class="toc-item"><span class="no">5</span><span class="t">De drie opties</span><span class="d">Shopify, maatwerk of maatwerk compleet</span></div>
+    <div class="toc-item"><span class="no">6</span><span class="t">Maandelijkse kosten</span><span class="d">Hosting, onderhoud en support</span></div>
+    <div class="toc-item"><span class="no">7</span><span class="t">Wat wij van u nodig hebben</span><span class="d">Om te kunnen starten</span></div>
+    <div class="toc-item"><span class="no">8</span><span class="t">Wat wij niet opstellen</span><span class="d">Juridische teksten</span></div>
+    <div class="toc-item"><span class="no">9</span><span class="t">Twee zaken met haast</span><span class="d">Vindbaarheid en juridische teksten</span></div>
+    <div class="toc-item"><span class="no">10</span><span class="t">Vervolgstappen</span><span class="d">Hoe wij verdergaan</span></div>
+  </div>
+
+  <h3>Over dit voorstel</h3>
+  <p>Wij hebben directsportswear.nl technisch doorgelicht: de opbouw van de site, de werking van de knoppen, de vindbaarheid in Google en wat er nodig is om er een volwaardige webshop van te maken.</p>
+  <p class="note">Alle in dit document genoemde bedragen zijn exclusief BTW.</p>
+</section>
+
+<!-- ============ 1. SAMENVATTING ============ -->
+<section class="sheet" id="s1">
+  <h2><span class="no">1</span>Samenvatting</h2>
+
+  <p class="lead">De huidige site ziet er goed uit, maar is technisch gezien een etalage: er kan niet besteld, betaald of ingelogd worden. Wij adviseren het fundament opnieuw op te bouwen en de bestaande vormgeving mee te nemen.</p>
+
+  <h3>Wat er aan de hand is</h3>
+  <p>De vormgeving is sportief en past bij het merk. Daar bouwen wij graag op voort. Onder de motorkap ontbreekt echter alles wat een webshop tot een webshop maakt: er is geen winkelmand, geen betaalmogelijkheid, geen klantaccount en geen database. De zes producten staan vast in de programmacode en zijn niet door uzelf aan te passen.</p>
+  <p>Daarnaast is de site vrijwel onvindbaar in Google en staan er verzonnen bedrijfsgegevens op, waaronder een adres dat niet bestaat.</p>
+
+  <h3>Wat wij voorstellen</h3>
+  <p>Wij bieden drie routes aan, zodat u zelf de afweging kunt maken tussen investering, snelheid en eigendom.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Optie</th>
+        <th>Geschikt wanneer</th>
+        <th class="num">Investering</th>
+        <th class="num">Doorlooptijd</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Shopify</strong></td>
+        <td>Budget en snelheid zijn leidend</td>
+        <td class="num">&euro; 4.940</td>
+        <td class="num">3 tot 4 weken</td>
+      </tr>
+      <tr>
+        <td><strong>2. Maatwerk, startversie</strong></td>
+        <td>U wilt eigendom zonder platformkosten</td>
+        <td class="num">&euro; 8.710</td>
+        <td class="num">6 tot 8 weken</td>
+      </tr>
+      <tr>
+        <td><strong>3. Maatwerk, compleet</strong></td>
+        <td>U wilt ruimte om door te groeien</td>
+        <td class="num">&euro; 13.390</td>
+        <td class="num">10 tot 12 weken</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note">Onze aanbeveling bij een beperkt budget is optie 1. Voor een assortiment van deze omvang biedt Shopify een beproefd fundament tegen de laagste investering.</p>
+</section>
+
+<!-- ============ 2. BEVINDINGEN ============ -->
+<section class="sheet" id="s2">
+  <h2><span class="no">2</span>Onze bevindingen</h2>
+
+  <div class="finding">
+    <h3>Er kan nog niet besteld worden</h3>
+    <p>De knop "Toevoegen aan winkelmand" staat er wel, maar er is geen winkelmand, geen afrekenpagina en geen betaalmogelijkheid. iDEAL is niet aangesloten.</p>
+  </div>
+
+  <div class="finding">
+    <h3>Inloggen bestaat nog niet</h3>
+    <p>Er is geen klantaccount, geen bestelhistorie en geen database waarin klanten of bestellingen worden bewaard.</p>
+  </div>
+
+  <div class="finding">
+    <h3>Ongeveer tien knoppen leiden nergens heen</h3>
+    <p>Waaronder Algemene Voorwaarden, Privacybeleid, Retouren, Veelgestelde Vragen en de Maattabel. De eerste vier zijn wettelijk verplicht voor een Nederlandse webshop.</p>
+  </div>
+
+  <div class="finding">
+    <h3>De site is vrijwel onvindbaar in Google</h3>
+    <p>De paginatitel die Google nu toont is letterlijk "Preview - Chariot", niet uw bedrijfsnaam. Er is geen sitemap en geen robots-bestand, en de site is technisch zo gebouwd dat zoekmachines de inhoud nauwelijks kunnen lezen. Op alle pagina's staan bovendien dezelfde omschrijvingen.</p>
+  </div>
+
+  <div class="finding">
+    <h3>De bedrijfsgegevens kloppen niet</h3>
+    <p>Het vermelde adres "Sportlaan 123, 1011 AB Amsterdam" en de openingstijden zijn automatisch gegenereerde voorbeeldgegevens. KvK- en BTW-nummer ontbreken volledig.</p>
+  </div>
+
+  <div class="finding">
+    <h3>Producten zijn niet zelf te beheren</h3>
+    <p>De zes artikelen staan vast in de programmacode. Een prijs wijzigen of een product toevoegen kan nu alleen door een ontwikkelaar.</p>
+  </div>
+</section>
+
+<!-- ============ 3. AVG ============ -->
+<section class="sheet">
+  <h2><span class="no">3</span>Het contactformulier en de AVG</h2>
+
+  <p class="lead">De gegevens die bezoekers invullen worden nu verstuurd naar een externe partij. Dat brengt zowel een juridisch als een praktisch risico met zich mee.</p>
+
+  <p>Naam, e-mailadres en de inhoud van het bericht gaan naar chariotai.com, de bouwer van de huidige site. Concreet betekent dat het volgende.</p>
+
+  <ul>
+    <li><strong>Er is geen verwerkersovereenkomst.</strong> Op grond van de AVG bent u als website-eigenaar verwerkingsverantwoordelijke en verplicht die overeenkomst te hebben zodra een derde partij persoonsgegevens voor u verwerkt.</li>
+    <li><strong>Onbekend is waar de gegevens worden opgeslagen.</strong> Staat dat buiten de Europese Unie, dan gelden aanvullende eisen waaraan op dit moment niet wordt voldaan.</li>
+    <li><strong>De bezoeker wordt nergens geïnformeerd.</strong> Er wordt niet gemeld dat zijn gegevens naar een derde partij gaan, en er is geen privacyverklaring die dit dekt.</li>
+    <li><strong>U loopt aanvragen mis zonder het te merken.</strong> Stopt het abonnement bij die partij, dan verdwijnen binnenkomende berichten zonder foutmelding.</li>
+  </ul>
+
+  <div class="callout">
+    <h3>Hoe wij dit oplossen</h3>
+    <p>In elke optie vervangen wij dit door een formulier dat de gegevens opslaat in uw eigen database, onder uw eigen beheer en binnen de Europese Unie. Daarmee vervalt de noodzaak van een verwerkersovereenkomst met een onbekende derde partij.</p>
+  </div>
+</section>
+
+<!-- ============ 4. ADVIES ============ -->
+<section class="sheet">
+  <h2><span class="no">4</span>Ons advies</h2>
+
+  <p class="lead">De huidige site is een prototype, geen webshop. Repareren kost meer dan opnieuw opbouwen, omdat het volledige fundament er nog onder moet.</p>
+
+  <p>Een webshop rust op drie lagen die er nu geen van alle zijn: een database waarin producten, klanten en bestellingen leven, een betaalkoppeling die geld veilig verwerkt, en een beheeromgeving waarmee u dat alles zelf bijhoudt. Die lagen zijn niet achteraf onder een bestaande site te schuiven; ze bepalen juist hoe de site gebouwd wordt.</p>
+
+  <p><strong>De vormgeving nemen wij mee.</strong> De huisstijl, de kleurstelling en de sfeer van de huidige site blijven behouden, zodat uw merk herkenbaar blijft en de investering in het ontwerp niet verloren gaat.</p>
+
+  <h3>Wat dit u oplevert</h3>
+  <ul>
+    <li>Klanten kunnen daadwerkelijk bestellen en betalen met iDEAL</li>
+    <li>U beheert zelf producten, prijzen, voorraad en bestellingen</li>
+    <li>De shop wordt vindbaar in Google, met correcte titels per pagina</li>
+    <li>Klantgegevens staan in uw eigen omgeving, met dagelijkse back-ups</li>
+    <li>De basis is uitbreidbaar richting bijvoorbeeld zakelijk of bulk bestellen</li>
+  </ul>
+</section>
+
+<!-- ============ 5. OPTIES ============ -->
+<section class="sheet" id="s5">
+  <h2><span class="no">5</span>De drie opties</h2>
+
+  <div class="card accent">
+    <div class="tag">Aanbevolen bij een beperkt budget</div>
+    <div class="card-head">
+      <h3>Optie 1: Shopify</h3>
+      <span class="price">&euro; 4.940</span>
+    </div>
+    <p class="lede">Snelste route, laagste investering.</p>
+    <p>Wij bouwen de webshop op Shopify, met een maatwerk-ontwerp in uw bestaande huisstijl. Betalen, voorraad, bestellingen, retouren en verzendlabels zijn standaard aanwezig en beproefd.</p>
+    <ul>
+      <li>Volledig werkende webshop met iDEAL, creditcard en achteraf betalen</li>
+      <li>Klantaccounts en bestelhistorie</li>
+      <li>Zelf producten, prijzen, foto's en voorraad beheren</li>
+      <li>Complete SEO-inrichting en koppeling met Google Search Console</li>
+      <li>De wettelijk verplichte pagina's technisch ingericht</li>
+      <li>Training en handleiding</li>
+    </ul>
+    <p class="foot">Doorlooptijd 3 tot 4 weken. Aanvullend: Shopify-abonnement van circa &euro; 36 per maand.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h3>Optie 2: Maatwerk, startversie</h3>
+      <span class="price">&euro; 8.710</span>
+    </div>
+    <p class="lede">Eigen webshop met alles wat nodig is om te verkopen.</p>
+    <p>Op maat gebouwd op moderne techniek, volledig uw eigendom en zonder afhankelijkheid van een platform.</p>
+    <ul>
+      <li>Alles uit optie 1, en daarnaast:</li>
+      <li>Eigen database en eigen klantaccounts, zonder maandelijkse platformkosten</li>
+      <li>Beheeromgeving voor producten, voorraad en bestellingen</li>
+      <li>Technisch geoptimaliseerd voor Google door server-side rendering</li>
+      <li>Vrij uitbreidbaar richting zakelijk bestellen of teamkleding</li>
+    </ul>
+    <p class="foot">Doorlooptijd 6 tot 8 weken.</p>
+  </div>
+</section>
+
+<section class="sheet">
+  <h2><span class="no">5</span>De drie opties, vervolg</h2>
+
+  <div class="card">
+    <div class="card-head">
+      <h3>Optie 3: Maatwerk, compleet</h3>
+      <span class="price">&euro; 13.390</span>
+    </div>
+    <p class="lede">De volledige uitvoering, met ruimte om door te groeien.</p>
+    <ul>
+      <li>Alles uit optie 2, en daarnaast:</li>
+      <li>Uitgebreid beheerdashboard met omzetinzicht en orderafhandeling</li>
+      <li>Uitgebreide filters, zoekfunctie en categoriestructuur</li>
+      <li>Complete transactionele e-mailstroom in uw huisstijl</li>
+      <li>Volledige SEO-uitwerking met productmarkeringen voor rijke Google-resultaten</li>
+      <li>Content-migratie tot 50 producten inclusief beeldoptimalisatie</li>
+    </ul>
+    <p class="foot">Doorlooptijd 10 tot 12 weken.</p>
+  </div>
+
+  <h3>Meerwerk op aanvraag</h3>
+  <p>De volgende onderdelen vallen buiten de genoemde bedragen en offreren wij desgewenst apart.</p>
+  <ul>
+    <li>Productfotografie, vanaf &euro; 450</li>
+    <li>Productteksten en copywriting, vanaf &euro; 375</li>
+    <li>Meer dan 50 producten bij oplevering</li>
+    <li>Koppeling met boekhoudpakket of verzendpartij</li>
+  </ul>
+</section>
+
+<!-- ============ 6. MAANDLASTEN ============ -->
+<section class="sheet">
+  <h2><span class="no">6</span>Maandelijkse kosten</h2>
+
+  <p class="lead">Naast de eenmalige investering brengt een webshop vaste lasten met zich mee voor hosting, onderhoud en beveiliging.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Post</th>
+        <th class="num">Optie 1</th>
+        <th class="num">Optie 2 en 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Hosting en database</td><td class="num">inbegrepen</td><td class="num">&euro; 55</td></tr>
+      <tr><td>Shopify-abonnement</td><td class="num">&euro; 36</td><td class="num">niet van toepassing</td></tr>
+      <tr><td>Domein en beveiligingscertificaat</td><td class="num">&euro; 2</td><td class="num">&euro; 2</td></tr>
+      <tr><td>Onderhoud, updates, back-ups, monitoring en 1 uur support</td><td class="num">&euro; 75</td><td class="num">&euro; 95</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>Totaal per maand</td><td class="num">&euro; 113</td><td class="num">&euro; 152</td></tr>
+    </tfoot>
+  </table>
+
+  <h3>Waarom onderhoud geen optie is</h3>
+  <p>Een webshop verwerkt betalingen en persoonsgegevens. Zonder tijdige beveiligingsupdates wordt zo'n omgeving binnen een jaar een risico, zowel voor uw klanten als voor uzelf. Het onderhoudscontract dekt updates, dagelijkse back-ups, monitoring en een uur support per maand.</p>
+
+  <p class="note">Betaaltransacties worden rechtstreeks door de betaaldienst in rekening gebracht, circa &euro; 0,29 per iDEAL-bestelling. Deze kosten lopen niet via ons.</p>
+</section>
+
+<!-- ============ 7 EN 8 ============ -->
+<section class="sheet">
+  <h2><span class="no">7</span>Wat wij van u nodig hebben</h2>
+
+  <ul>
+    <li><strong>Productfoto's en productteksten.</strong> Wij kunnen dit ook verzorgen, zie het meerwerk bij hoofdstuk 5.</li>
+    <li><strong>Bedrijfsgegevens.</strong> Correct vestigingsadres, KvK-nummer, BTW-nummer en openingstijden.</li>
+    <li><strong>Toegang tot het domein</strong> directsportswear.nl.</li>
+    <li><strong>Een zakelijke rekening</strong> voor de betaalkoppeling.</li>
+    <li><strong>De juridische teksten</strong>, zie hoofdstuk 8.</li>
+  </ul>
+
+  <p class="note">In de praktijk is het aanleveren van foto's en teksten de grootste vertragingsfactor. Wij adviseren hier bij aanvang een datum voor af te spreken.</p>
+
+  <h2 style="margin-top:44px;"><span class="no">8</span>Wat wij niet opstellen</h2>
+
+  <p class="lead">Wij zijn geen juridisch dienstverlener en stellen geen wettelijke documenten of juridische teksten op.</p>
+
+  <p>Dat geldt voor de algemene voorwaarden, de privacy- en cookieverklaring, het retour-, garantie- en herroepingsbeleid, en verwerkersovereenkomsten.</p>
+
+  <p>Dit zijn bindende documenten waarvoor u aansprakelijk bent en die moeten aansluiten op uw specifieke bedrijfsvoering, verzendbeleid en assortiment. Een algemene tekst of een door software gegenereerde versie biedt u geen bescherming en kan bij een geschil tegen u werken.</p>
+
+  <div class="callout">
+    <h3>Wat wij wel doen</h3>
+    <p>Wij bouwen de pagina's, plaatsen uw aangeleverde teksten erop, richten de cookiebanner met correcte toestemmingsregistratie in en zorgen dat alles op de juiste momenten in de bestelprocedure wordt getoond zoals de wet voorschrijft. Deze inrichting zit in elke optie inbegrepen.</p>
+  </div>
+
+  <p><strong>Ons advies:</strong> neem een abonnement bij een gespecialiseerde aanbieder zoals ICTRecht of Thuiswinkel.org. Reken op eenmalig &euro; 200 tot &euro; 400, of circa &euro; 15 per maand voor teksten die automatisch meebewegen met wetswijzigingen. Wij leveren u een overzicht van precies welke documenten uw shop nodig heeft.</p>
+</section>
+
+<!-- ============ 9 EN 10 ============ -->
+<section class="sheet">
+  <h2><span class="no">9</span>Twee zaken met haast</h2>
+
+  <div class="callout">
+    <h3>De huidige site schaadt uw vindbaarheid, elke dag</h3>
+    <p>Zolang Google "Preview - Chariot" als paginatitel ziet en elke verzonnen URL een geldige pagina lijkt, bouwt uw domein een negatieve reputatie op die later tijd kost om te herstellen. Wij zetten dit vandaag nog voor u recht, kosteloos en ongeacht welke optie u kiest.</p>
+  </div>
+
+  <div class="callout">
+    <h3>Regel de juridische teksten nu, niet vlak voor livegang</h3>
+    <p>Zodra u online verkoopt bent u verplicht algemene voorwaarden, een privacyverklaring en een herroepingsregeling te tonen. Wij stellen die niet op, maar het is wel de post die projecten het vaakst vertraagt. Zet dit direct uit bij een jurist of abonnementsdienst, dan ligt het klaar wanneer wij het inbouwen.</p>
+  </div>
+
+  <h2 style="margin-top:44px;"><span class="no">10</span>Vervolgstappen</h2>
+
+  <h3>Eerst zekerheid, dan pas vastleggen</h3>
+  <p>Wilt u eerst helderheid voordat u zich aan een volledig traject verbindt? Wij bieden een <strong>betaalde verkenning van &euro; 520</strong> aan: een sessie waarin wij samen de productstructuur, de gewenste functionaliteit en de planning vastleggen, met een concreet ontwerpvoorstel als resultaat. Dit bedrag verrekenen wij volledig zodra u de opdracht verstrekt.</p>
+
+  <h3>Betaling</h3>
+  <p>De betaling verloopt in drie termijnen: 40 procent bij opdracht, 40 procent bij oplevering van de testomgeving en 20 procent bij livegang.</p>
+
+  <h3>Hoe nu verder</h3>
+  <p>Laat ons weten welke van de drie opties uw voorkeur heeft, of dat u eerst de verkenning wilt inplannen. Wij nemen daarna contact op om een gesprek af te stemmen.</p>
+
+  <div class="sig">
+    <strong>AIMI Development</strong><br>
+    sales@aimi-development.nl
+  </div>
+</section>
+
+</body>
+</html>

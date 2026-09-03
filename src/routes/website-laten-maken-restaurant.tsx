@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-restaurant`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een restaurant",
   pricingBody: [
-    "Veel restaurants zijn goed geholpen met een compacte site: openingstijden, de kaart, sfeerbeeld, route en reserveren. Dat past regelmatig binnen ons Starter- of Pro-pakket, afhankelijk van het aantal pagina's en of je de kaart zelf wilt kunnen beheren.",
+    "Een eenvoudige website voor je restaurant met menukaart, openingstijden en reserveren begint bij € 499 eenmalig (Starter). Met een online reserveringssysteem zit je eerder in het Pro-traject vanaf € 749. Veel restaurants zijn goed geholpen met een compacte site: openingstijden, de kaart, sfeerbeeld, route en reserveren. Dat past regelmatig binnen ons Starter- of Pro-pakket, afhankelijk van het aantal pagina's en of je de kaart zelf wilt kunnen beheren.",
     "Heb je meerdere vestigingen, een aparte lunchkaart en dinerkaart, een zaal voor groepen of een cadeaubonnenverkoop, dan groeit het naar maatwerk. We bespreken dat vooraf en zetten er een vaste prijs op. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Heb ik nog een website nodig als ik actief ben op social media?", a: "Ja. Op social media heb je geen grip op je vindbaarheid en geen eigendom van je informatie. Mensen die in Google zoeken naar eten in jouw plaats, vinden daar je socials meestal niet. Je site is de plek waar jij bepaalt wat er staat." },
     { q: "Hoe zorgen jullie dat de site snel blijft met veel foto's?", a: "We verkleinen en converteren afbeeldingen automatisch naar moderne formaten en laden ze pas in wanneer ze nodig zijn. Zo blijft de zaak er goed uitzien zonder dat de pagina traag wordt." },
     { q: "Kunnen jullie ook afhaal of bezorging inbouwen?", a: "Dat kan, maar dan wordt het een webshop-achtig traject met betalingen en bestelbeheer. Dat is maatwerk en bespreken we apart, omdat het qua omvang echt iets anders is dan een informatieve horecasite." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn restaurant?", a: "Een standaard website met menukaart en reserveren staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we de menukaart, foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken cateringbedrijf", href: "/website-laten-maken-cateringbedrijf" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
-    { label: "Tarieven", href: "/tarieven" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-restaurant")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je restaurant",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor restaurants en horeca, met openingstijden, een leesbare menukaart en reserveren.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je restaurant",
+        description: "Websites op maat voor restaurants en horeca, met openingstijden, een leesbare menukaart en reserveren.",
+        url: URL,
+        serviceType: "Webdesign voor horeca",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je restaurant", "/website-laten-maken-restaurant"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

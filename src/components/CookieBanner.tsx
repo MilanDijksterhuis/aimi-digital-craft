@@ -75,12 +75,15 @@ export function CookieBanner() {
               fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
             }}
           >
-            <p className="text-white text-sm font-medium mb-1">
-              Wij gebruiken cookies
-            </p>
+            <p className="text-white text-sm font-medium mb-1">Wij gebruiken cookies</p>
             <p className="text-sm mb-4" style={{ color: "#a4a9b2" }}>
-              We gebruiken cookies om de site goed te laten werken en om te begrijpen hoe bezoekers de site gebruiken. Jij bepaalt wat je toestaat. Lees ons{" "}
-              <a href="/privacybeleid" className="underline underline-offset-2" style={{ color: "#a4a9b2" }}>
+              We gebruiken cookies om de site goed te laten werken en om te begrijpen hoe bezoekers
+              de site gebruiken. Jij bepaalt wat je toestaat. Lees ons{" "}
+              <a
+                href="/privacybeleid"
+                className="underline underline-offset-2"
+                style={{ color: "#a4a9b2" }}
+              >
                 privacybeleid
               </a>
               .
@@ -160,17 +163,23 @@ export function CookieBanner() {
               )}
             </AnimatePresence>
 
-            <div className="flex flex-wrap items-center gap-2">
+            {/* UX-fix (SEO-audit 2026-09-02, visual.md #1): op smalle schermen
+                stonden deze knoppen op één rij en liep de rechterknop buiten
+                de viewport — "Alleen noodzakelijk" was daardoor vrijwel
+                ontapbaar. Onder de sm-breakpoint staan de acties nu onder
+                elkaar en vol-breed, zodat elke knop altijd volledig
+                zichtbaar en bereikbaar is. */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2">
               <button
                 onClick={accept}
-                className="btn-primary text-xs px-4 py-2"
+                className="btn-primary text-xs px-4 py-2 w-full sm:w-auto justify-center"
                 style={{ borderRadius: "9999px", fontSize: 13 }}
               >
                 Alles accepteren
               </button>
               <button
                 onClick={reject}
-                className="btn-secondary text-xs px-4 py-2"
+                className="btn-secondary text-xs px-4 py-2 w-full sm:w-auto justify-center"
                 style={{ borderRadius: "9999px", fontSize: 13 }}
               >
                 Alleen noodzakelijk
@@ -178,7 +187,7 @@ export function CookieBanner() {
               {expanded ? (
                 <button
                   onClick={saveCustom}
-                  className="text-xs underline underline-offset-2 transition-colors"
+                  className="text-xs underline underline-offset-2 transition-colors py-2 sm:py-0"
                   style={{ color: "#a4a9b2" }}
                 >
                   Opslaan
@@ -186,7 +195,7 @@ export function CookieBanner() {
               ) : (
                 <button
                   onClick={() => setExpanded(true)}
-                  className="text-xs underline underline-offset-2 transition-colors"
+                  className="text-xs underline underline-offset-2 transition-colors py-2 sm:py-0"
                   style={{ color: "#a4a9b2" }}
                 >
                   Aanpassen

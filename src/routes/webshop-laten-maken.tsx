@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageData } from "@/components/ServicePage";
-import { serviceJsonLd, breadcrumbJsonLd, howToJsonLd, offeringsJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
+import { serviceJsonLd, breadcrumbJsonLd, offeringsJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
 import { RedDiagonalBackground } from "@/components/rodeachtergrond";
 
 const URL = `${SITE_URL}/webshop-laten-maken`;
@@ -102,11 +102,6 @@ export const Route = createFileRoute("/webshop-laten-maken")({
         url: URL,
       }),
       breadcrumbJsonLd([["Home", "/"], ["Webshop laten maken", "/webshop-laten-maken"]]),
-      howToJsonLd({
-        name: "Zo werkt het: webshop laten maken bij AIMI",
-        description: "Het proces van kennismaking tot livegang van je webshop.",
-        steps: data.steps,
-      }),
       offeringsJsonLd({ name: "Wat je krijgt bij een webshop van AIMI", offerings: data.offerings }),
     ],
   }),

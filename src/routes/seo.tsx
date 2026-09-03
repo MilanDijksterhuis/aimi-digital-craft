@@ -9,7 +9,6 @@ import {
   OG_IMAGE_URL,
   breadcrumbJsonLd,
   faqJsonLd,
-  howToJsonLd,
   serviceJsonLd,
 } from "@/lib/seo";
 
@@ -151,11 +150,6 @@ export const Route = createFileRoute("/seo")({
         description:
           "Technische SEO, Core Web Vitals, zoekintentie en lokale vindbaarheid voor ondernemers in Noord-Nederland en daarbuiten.",
         url: URL,
-      }),
-      howToJsonLd({
-        name: "Hoe een SEO-traject bij AIMI verloopt",
-        description: "Van nulmeting en technische audit tot uitvoeren, meten en bijsturen.",
-        steps,
       }),
       faqJsonLd(faqs),
       breadcrumbJsonLd([["Home", "/"], ["SEO", "/seo"]]),

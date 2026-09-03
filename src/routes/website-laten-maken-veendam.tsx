@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, ORG_ID, OG_IMAGE_URL, LOGO_URL, localBusinessId, breadcrumbJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  ORG_ID,
+  OG_IMAGE_URL,
+  LOGO_URL,
+  localBusinessId,
+  breadcrumbJsonLd,
+  PHONE_E164,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Veendam";
 const PATH = "/website-laten-maken-veendam";
@@ -76,9 +85,9 @@ const data: LocationPageData = {
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
-    { label: "Website laten maken Hoogezand", href: "/website-laten-maken-hoogezand" },
     { label: "Website laten maken Stadskanaal", href: "/website-laten-maken-stadskanaal" },
     { label: "Website laten maken Winschoten", href: "/website-laten-maken-winschoten" },
+    { label: "Website laten maken restaurant", href: "/website-laten-maken-restaurant" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["context", "workflow", "faq", "businessTypes"],
@@ -120,6 +129,7 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
           url: URL,
           image: LOGO_URL,
           email: "sales@aimi-development.nl",
+          telephone: PHONE_E164,
           priceRange: "€€",
           areaServed: [
             { "@type": "City", name: "Veendam" },
@@ -139,6 +149,7 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
         ["Webdesign", "/webdesign"],
         ["Website laten maken in Veendam", PATH],
       ]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <LocationPageV2 data={data} />,

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-kapsalon`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een kapsalon",
   pricingBody: [
-    "De uiteindelijke prijs voor een website voor je kapsalon hangt af van de scope: een eenvoudige site met prijslijst, team en contactgegevens is minder omvangrijk dan een site met een gekoppeld boekingssysteem, meertalige content of een uitgebreide portfolio-pagina per stylist. Ook het aantal pagina's en of er al bruikbare foto's zijn, of dat er nog fotografie nodig is, speelt mee.",
+    "Een eenvoudige website voor je kapsalon met prijslijst, team en openingstijden begint bij € 499 eenmalig (Starter). Met een online afsprakenmodule zit je eerder in het Pro-traject vanaf € 749. De uiteindelijke prijs voor een website voor je kapsalon hangt af van de scope: een eenvoudige site met prijslijst, team en contactgegevens is minder omvangrijk dan een site met een gekoppeld boekingssysteem, meertalige content of een uitgebreide portfolio-pagina per stylist. Ook het aantal pagina's en of er al bruikbare foto's zijn, of dat er nog fotografie nodig is, speelt mee.",
     "Onze tarieven staan overzichtelijk op de website; bekijk de knop 'Bekijk tarieven' hierboven voor de actuele bedragen. In een kennismakingsgesprek bepalen we samen welke onderdelen nodig zijn voor jouw salon, zodat de offerte aansluit op wat je echt gebruikt in plaats van op een standaardpakket.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Werken jullie ook met salons buiten de grote steden?", a: "We werken voor kapsalons in heel Noord-Nederland, van kleine dorpssalons tot salons met meerdere stylisten." },
     { q: "Kan ik foto's van geknipt en gekleurd haar toevoegen zonder dat de site traag wordt?", a: "We optimaliseren alle afbeeldingen bij oplevering, zodat een pagina vol foto's toch snel blijft laden, ook op mobiel." },
     { q: "Wat kost een website voor een kapsalon laten maken?", a: "Dat hangt af van de gewenste functionaliteit, zoals wel of geen boekingssysteem en het aantal pagina's. Bekijk de tarievenpagina voor een indicatie of vraag een offerte aan." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn kapsalon?", a: "Een standaard website met prijslijst en online afspraken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je nagelstudio", href: "/website-laten-maken-nagelstudio" },
     { label: "Website voor je schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
-    { label: "Webdesign per regio", href: "/webdesign" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "pricing", "faq"],
@@ -73,23 +74,19 @@ export const Route = createFileRoute("/website-laten-maken-kapsalon")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je kapsalon",
-          serviceType: "Webdesign voor kapsalons",
-          description: "Websites op maat voor kapsalons, met online afspraken, prijslijst en portfolio, gebouwd en gehost door AIMI.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je kapsalon",
+        description: "Websites op maat voor kapsalons, met online afspraken, prijslijst en portfolio, gebouwd en gehost door AIMI.",
+        url: URL,
+        serviceType: "Webdesign voor kapsalons",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
         ["Website laten maken voor je kapsalon", "/website-laten-maken-kapsalon"],
       ]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

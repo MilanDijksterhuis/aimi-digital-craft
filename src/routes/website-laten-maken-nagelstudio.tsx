@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-nagelstudio`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een nagelstudio",
   pricingBody: [
-    "De prijs van een website voor een nagelstudio hangt samen met de gewenste opzet: een compacte site met portfolio, prijslijst en contactgegevens vraagt minder werk dan een site met online boeken, cadeaubonnen en uitgebreide categorieën binnen het portfolio. Ook het aantal foto's dat verwerkt moet worden en of er al een boekingssysteem is, spelen mee in de scope.",
+    "Een eenvoudige website voor je nagelstudio met behandelmenu, prijslijst en openingstijden begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een nagelstudio hangt verder samen met de gewenste opzet: een compacte site met portfolio, prijslijst en contactgegevens vraagt minder werk dan een site met online boeken, cadeaubonnen en uitgebreide categorieën binnen het portfolio. Ook het aantal foto's dat verwerkt moet worden en of er al een boekingssysteem is, spelen mee in de scope.",
     "Bekijk de knop 'Bekijk tarieven' hierboven voor onze actuele bedragen. In een kort kennismakingsgesprek kijken we samen welke onderdelen voor jouw nagelstudio nodig zijn, zodat je een offerte krijgt die aansluit op wat je website daadwerkelijk moet doen.",
   ],
   faqs: [
@@ -42,12 +42,13 @@ const data: BranchPageData = {
     { q: "Hoeveel foto's kan ik in mijn portfolio zetten?", a: "Er is geen harde limiet; we richten de galerij zo in dat ook een groot portfolio overzichtelijk en snel blijft, bijvoorbeeld met categorieën per stijl." },
     { q: "Werken jullie alleen met nagelstudio's in de grote steden?", a: "We werken voor nagelstudio's in heel Noord-Nederland, ongeacht de grootte van de studio." },
     { q: "Wat kost een website voor een nagelstudio laten maken?", a: "Dat is afhankelijk van de gewenste functionaliteit, zoals online boeken en het aantal foto's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn nagelstudio?", a: "Een standaard website met portfolio en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je kapsalon", href: "/website-laten-maken-kapsalon" },
     { label: "Website voor je schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
-    { label: "Webdesign per regio", href: "/webdesign" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Website laten maken", href: "/website-laten-maken" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -73,23 +74,19 @@ export const Route = createFileRoute("/website-laten-maken-nagelstudio")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je nagelstudio",
-          serviceType: "Webdesign voor nagelstudio's",
-          description: "Websites op maat voor nagelstudio's, met visueel portfolio, online boeken en cadeaubonnen, gebouwd en gehost door AIMI.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je nagelstudio",
+        description: "Websites op maat voor nagelstudio's, met visueel portfolio, online boeken en cadeaubonnen, gebouwd en gehost door AIMI.",
+        url: URL,
+        serviceType: "Webdesign voor nagelstudio's",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
         ["Website laten maken voor je nagelstudio", "/website-laten-maken-nagelstudio"],
       ]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

@@ -4,6 +4,7 @@ import { Send, CheckCircle2, Calendar, Mail } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { submitContactForm } from "@/lib/contact.functions";
+import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/seo";
 
 type Mode = "choice" | "appointment" | "form";
 
@@ -29,7 +30,7 @@ export function Contact() {
       (window as any).Calendly.initInlineWidget({ url, parentElement: el });
     };
     const existing = document.querySelector<HTMLScriptElement>(
-      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]',
     );
     if ((window as any).Calendly) {
       requestAnimationFrame(mount);
@@ -78,7 +79,16 @@ export function Contact() {
           Stel je vraag of plan een gesprek.
         </motion.h2>
         <p className="mt-4 text-center text-sm" style={{ color: "#a4a9b2" }}>
-          Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag.
+          Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag. Liever
+          bellen?{" "}
+          <a
+            href={`tel:${PHONE_E164}`}
+            className="underline underline-offset-2"
+            style={{ color: "#a4a9b2" }}
+          >
+            {PHONE_DISPLAY}
+          </a>
+          .
         </p>
 
         {mode !== "choice" && (
@@ -86,14 +96,25 @@ export function Contact() {
             <button
               type="button"
               onClick={() => setMode("appointment")}
-              className={mode === "appointment" ? "btn-primary text-[13px] !py-2 !px-4" : "btn-secondary text-[13px] !py-2 !px-4"}
+              className={
+                mode === "appointment"
+                  ? "btn-primary text-[13px] !py-2 !px-4"
+                  : "btn-secondary text-[13px] !py-2 !px-4"
+              }
             >
               <Calendar className="w-4 h-4" /> Afspraak
             </button>
             <button
               type="button"
-              onClick={() => { setMode("form"); setSent(false); }}
-              className={mode === "form" ? "btn-primary text-[13px] !py-2 !px-4" : "btn-secondary text-[13px] !py-2 !px-4"}
+              onClick={() => {
+                setMode("form");
+                setSent(false);
+              }}
+              className={
+                mode === "form"
+                  ? "btn-primary text-[13px] !py-2 !px-4"
+                  : "btn-secondary text-[13px] !py-2 !px-4"
+              }
             >
               <Mail className="w-4 h-4" /> Contactformulier
             </button>
@@ -141,15 +162,12 @@ export function Contact() {
             transition={{ duration: 0.4 }}
             className="mt-8 rounded-lg border border-border bg-card overflow-hidden"
           >
-            <div
-              ref={calendlyRef}
-              style={{ minWidth: 320, height: 700 }}
-            />
+            <div ref={calendlyRef} style={{ minWidth: 320, height: 700 }} />
           </motion.div>
         )}
 
-        {mode === "form" && (
-          sent ? (
+        {mode === "form" &&
+          (sent ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -157,10 +175,15 @@ export function Contact() {
               aria-live="polite"
               className="mt-8 p-10 rounded-lg border border-border bg-card text-center space-y-4"
             >
-              <CheckCircle2 className="w-12 h-12 text-primary mx-auto" aria-hidden strokeWidth={1.5} />
+              <CheckCircle2
+                className="w-12 h-12 text-primary mx-auto"
+                aria-hidden
+                strokeWidth={1.5}
+              />
               <h3 className="text-2xl">Bericht verzonden!</h3>
               <p className="text-muted-foreground">
-                Bedankt voor je bericht. We hebben het ontvangen en nemen binnen 24 uur contact met je op.
+                Bedankt voor je bericht. We hebben het ontvangen en nemen binnen 24 uur contact met
+                je op.
               </p>
               <button type="button" onClick={() => setSent(false)} className="btn-secondary">
                 Nog een bericht sturen
@@ -193,7 +216,10 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
+                <label
+                  htmlFor="message"
+                  className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground"
+                >
                   Bericht
                 </label>
                 <textarea
@@ -207,7 +233,16 @@ export function Contact() {
                 />
               </div>
               {/* SEC-6 honeypot: buiten beeld, weg van screenreaders en tab-volgorde. */}
-              <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: 1,
+                  height: 1,
+                  overflow: "hidden",
+                }}
+              >
                 <label>
                   Bedrijfswebsite (niet invullen)
                   <input
@@ -225,21 +260,37 @@ export function Contact() {
                   {error}
                 </p>
               )}
-              <button type="submit" disabled={pending} className="btn-primary w-full disabled:opacity-60">
-                {pending ? "Versturen…" : (<>Stuur bericht <Send className="w-4 h-4" /></>)}
+              <button
+                type="submit"
+                disabled={pending}
+                className="btn-primary w-full disabled:opacity-60"
+              >
+                {pending ? (
+                  "Versturen…"
+                ) : (
+                  <>
+                    Stuur bericht <Send className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </motion.form>
-          )
-        )}
+          ))}
       </div>
     </section>
   );
 }
 
-function Field({ label, name, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({
+  label,
+  name,
+  ...props
+}: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label htmlFor={name} className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground">
+      <label
+        htmlFor={name}
+        className="text-[11px] uppercase tracking-[0.12em] font-medium text-muted-foreground"
+      >
         {label}
       </label>
       <input

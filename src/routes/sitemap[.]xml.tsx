@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import type { } from "@tanstack/react-start";
+import type {} from "@tanstack/react-start";
 
 const BASE_URL = import.meta.env.VITE_SITE_URL ?? "https://aimi-development.nl";
 
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/sitemap.xml")({
 
           // Informatief / oriënterend
           { path: "/wordpress-of-maatwerk", lastmod: "2026-08-22" },
+          { path: "/website-checker", lastmod: "2026-09-03" },
 
           // Branchepagina's — geen regio-as, functionele zoektermen
           { path: "/branches", lastmod: "2026-08-21" },
@@ -80,9 +81,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/algemene-voorwaarden", lastmod: "2026-08-22" },
         ];
         const urls = entries.map((e) =>
-          [`  <url>`, `    <loc>${BASE_URL}${e.path}</loc>`, `    <lastmod>${e.lastmod}</lastmod>`, `  </url>`].join(
-            "\n",
-          ),
+          [
+            `  <url>`,
+            `    <loc>${BASE_URL}${e.path}</loc>`,
+            `    <lastmod>${e.lastmod}</lastmod>`,
+            `  </url>`,
+          ].join("\n"),
         );
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,

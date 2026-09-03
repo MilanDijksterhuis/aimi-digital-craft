@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-autobedrijf`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een autobedrijf",
   pricingBody: [
-    "Een autowebsite valt bijna altijd buiten de standaardpakketten, omdat het voorraadgedeelte maatwerk is: het aantal auto's, de filters en een eventuele koppeling met je bestaande systeem bepalen het werk. Een site met een handmatig beheerde voorraad is aanzienlijk eenvoudiger dan een site die automatisch synchroniseert met een occasionplatform.",
+    "Een eenvoudige website voor je autobedrijf met voorraadoverzicht, contactgegevens en openingstijden begint bij € 499 eenmalig (Starter). Met een doorzoekbaar voertuigaanbod inclusief filters zit je eerder in het Pro-traject vanaf € 749. Een autowebsite valt bijna altijd buiten de standaardpakketten, omdat het voorraadgedeelte maatwerk is: het aantal auto's, de filters en een eventuele koppeling met je bestaande systeem bepalen het werk. Een site met een handmatig beheerde voorraad is aanzienlijk eenvoudiger dan een site die automatisch synchroniseert met een occasionplatform.",
     "We bespreken dat vooraf en geven daarna een vaste prijs, zodat je niet halverwege voor verrassingen komt te staan. Op onze tarievenpagina zie je waar onze prijzen beginnen; voor een autobedrijf maken we op basis van je voorraad en wensen een concrete offerte.",
   ],
   faqs: [
@@ -42,11 +42,12 @@ const data: BranchPageData = {
     { q: "Hoeveel foto's per auto zijn verstandig?", a: "In de praktijk werkt zes tot tien foto's per occasion goed: buitenkant van meerdere kanten, interieur, kilometerteller en eventuele gebruikssporen. Eerlijk fotograferen scheelt je bovendien teleurgestelde bezichtigingen." },
     { q: "Blijft de site snel met veel auto's erop?", a: "Daar richten we de site specifiek op in. Afbeeldingen worden automatisch verkleind en de voorraadpagina laadt auto's stapsgewijs, zodat het aantal occasions de snelheid niet opeet." },
     { q: "Kan ik ook alleen de werkplaats online zetten?", a: "Zeker. Niet elk autobedrijf verkoopt occasions. Doe je vooral onderhoud, APK en reparatie, dan bouwen we een compactere site die volledig op die diensten en op bereikbaarheid is gericht." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn autobedrijf?", a: "Een standaard website met voorraadoverzicht en contactinformatie staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je voertuigaanbod en foto's ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken autorijschool", href: "/website-laten-maken-autorijschool" },
-    { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-autobedrijf")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je autobedrijf",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor autobedrijven, met een doorzoekbare occasionvoorraad, werkplaatsafspraken en eigen hosting.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je autobedrijf",
+        description: "Websites op maat voor autobedrijven, met een doorzoekbare occasionvoorraad, werkplaatsafspraken en eigen hosting.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je autobedrijf", "/website-laten-maken-autobedrijf"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

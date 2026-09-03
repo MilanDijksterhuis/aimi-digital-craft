@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-cateringbedrijf`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een cateringbedrijf",
   pricingBody: [
-    "Voor de meeste cateraars werkt een meerpagina-site goed: een homepage, een pagina per type catering, een pagina met praktische informatie en veelgestelde vragen, referenties en een uitgebreider aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je cateringbedrijf met menukaart, offerteaanvraag en referenties begint bij € 499 eenmalig (Starter). Met een online offerte- of bestelmodule zit je eerder in het Pro-traject vanaf € 749. Voor de meeste cateraars werkt een meerpagina-site goed: een homepage, een pagina per type catering, een pagina met praktische informatie en veelgestelde vragen, referenties en een uitgebreider aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
     "Wil je dat klanten online een vaste formule kunnen afrekenen, bijvoorbeeld standaard lunchpakketten voor bedrijven, dan schuift het richting een webshop en wordt het maatwerk. Dat prijzen we apart en spreken we vooraf af, zodat de kosten geen verrassing zijn.",
   ],
   faqs: [
@@ -42,11 +42,12 @@ const data: BranchPageData = {
     { q: "Hoe ga ik om met allergenen en dieetwensen op de site?", a: "Zet op de site dat je ermee werkt en hoe je het uitvraagt, maar publiceer geen dichtgetimmerde allergenenlijst per gerecht als je met maatwerk werkt. Het is beter om dat per opdracht vast te leggen dan een lijst te hebben die veroudert." },
     { q: "Kan ik zelf foto's van opdrachten toevoegen?", a: "Ja, via het klantenportaal. Vraag wel altijd toestemming aan de opdrachtgever voordat je foto's van een besloten gelegenheid publiceert, zeker bij bruiloften en uitvaarten." },
     { q: "Kan ik zakelijke en particuliere catering op één site combineren?", a: "Dat kan prima, mits je ze duidelijk scheidt. Het zijn twee verschillende bezoekers met andere vragen en andere budgetten, dus ze krijgen elk een eigen pad in plaats van één gemengde pagina." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn cateringbedrijf?", a: "Een standaard website met menukaart en aanvraagformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je formules, foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken restaurant", href: "/website-laten-maken-restaurant" },
-    { label: "Webshop laten maken", href: "/webshop-laten-maken" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-cateringbedrijf")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je cateringbedrijf",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor cateringbedrijven, met heldere formules, richtprijzen en een bruikbaar aanvraagformulier.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je cateringbedrijf",
+        description: "Websites op maat voor cateringbedrijven, met heldere formules, richtprijzen en een bruikbaar aanvraagformulier.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je cateringbedrijf", "/website-laten-maken-cateringbedrijf"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

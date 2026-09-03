@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-schilder`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een schildersbedrijf",
   pricingBody: [
-    "De prijs van een website voor een schildersbedrijf hangt af van de omvang: een compacte site met projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor binnen- en buitenschilderwerk en een toelichting op werkwijze en materialen. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die past bij de daadwerkelijke omvang.",
+    "Een eenvoudige website voor je schildersbedrijf met diensten, werkgebied en contact begint bij € 499 eenmalig (Starter). Met een uitgebreide projectgalerij en offerteaanvraag zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een schildersbedrijf hangt af van de omvang: een compacte site met projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor binnen- en buitenschilderwerk en een toelichting op werkwijze en materialen. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die past bij de daadwerkelijke omvang.",
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste schildersbedrijven is een site met een aantal vaste pagina's en een goed gevulde fotogalerij voldoende; wie binnen- en buitenwerk allebei breed wil uitlichten, kiest vaak voor een groter pakket. Dat bespreken we altijd vooraf, zodat er geen verrassingen ontstaan.",
   ],
   faqs: [
@@ -43,13 +43,14 @@ const data: BranchPageData = {
     { q: "Kan ik uitleggen welke verf en materialen ik gebruik?", a: "Zeker, we nemen een kort stuk over werkwijze en materialen op, wat bij veel klanten vertrouwen wekt voordat ze contact opnemen." },
     { q: "Werken jullie in een specifieke regio?", a: "We werken voor schildersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
     { q: "Wordt mijn schildersbedrijf gevonden op zoektermen als 'schilder website laten maken'?", a: "De technische basis (snelheid, structuur, leesbare pagina's) leggen we goed neer, zodat zoekmachines de site kunnen doorgronden. Vindbaarheid bouw je daarna verder op met content en tijd." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn schildersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
     { label: "Website laten maken hovenier", href: "/website-laten-maken-hovenier" },
     { label: "Webdesign", href: "/webdesign" },
-    { label: "Website laten maken", href: "/website-laten-maken" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
   ],
   sectionOrder: ["needs", "pricing", "pitfalls", "approach", "faq"],
 };
@@ -71,19 +72,15 @@ export const Route = createFileRoute("/website-laten-maken-schilder")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je schildersbedrijf",
-          serviceType: "Webdesign",
-          description: "Websites op maat voor schildersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je schildersbedrijf",
+        description: "Websites op maat voor schildersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
+        url: URL,
+        serviceType: "Webdesign voor schilders",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schildersbedrijf", "/website-laten-maken-schilder"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,

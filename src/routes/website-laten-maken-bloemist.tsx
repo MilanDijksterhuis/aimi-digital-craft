@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-bloemist`;
 
@@ -32,7 +32,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een bloemenwinkel",
   pricingBody: [
-    "Wil je alleen gevonden worden met je openingstijden, assortiment en bezorginformatie, dan is een compacte site voldoende en zit je in de buurt van ons Starter- of Pro-pakket. Dat is voor bloemisten die vooral van de winkel en telefonische bestellingen leven een prima startpunt.",
+    "Een eenvoudige website voor je bloemenwinkel met assortiment, bezorggebied en openingstijden begint bij € 499 eenmalig (Starter). Met een online besteltool met bezorgopties zit je eerder in het Pro-traject vanaf € 749. Wil je alleen gevonden worden met je openingstijden, assortiment en bezorginformatie, dan is een compacte site voldoende en zit je in de buurt van ons Starter- of Pro-pakket. Dat is voor bloemisten die vooral van de winkel en telefonische bestellingen leven een prima startpunt.",
     "Wil je daadwerkelijk online laten bestellen en afrekenen, met bezorgdatum, kaartje en beschikbaarheid per dag, dan is het een webshoptraject. Dat is maatwerk, omdat betalingen, bezorglogica en voorraad meespelen. We bekijken samen wat je nodig hebt en geven daarna een vaste prijs.",
   ],
   faqs: [
@@ -42,11 +42,12 @@ const data: BranchPageData = {
     { q: "Hoeveel boeketten moet ik online zetten?", a: "Minder dan de meeste mensen denken. Een beperkte set in een paar duidelijke prijsklassen is makkelijker te onderhouden, makkelijker te kiezen en voorkomt dat er producten online staan die je niet meer maakt." },
     { q: "Kan ik mijn bezorggebied instellen?", a: "Ja. We zetten je bezorggebied vooraan in het proces, bijvoorbeeld met een postcodecontrole, zodat niemand pas bij het afrekenen ontdekt dat je zijn adres niet bezorgt." },
     { q: "Kan ik zelf seizoensaanbod wisselen?", a: "Ja, via het klantenportaal. Bij bloemen verandert het aanbod continu, dus je moet boeketten en prijzen zelf kunnen aanpassen zonder ons daarvoor nodig te hebben." },
+    { q: "Hoe lang duurt het bouwen van een website voor mijn bloemenwinkel?", a: "Een standaard website met assortiment en bezorginformatie staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je boeketfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
-    { label: "Website laten maken restaurant", href: "/website-laten-maken-restaurant" },
+    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -70,19 +71,15 @@ export const Route = createFileRoute("/website-laten-maken-bloemist")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je bloemenwinkel",
-          serviceType: "Webdesign",
-          description: "Websites en webshops op maat voor bloemisten, met bezorging, rouwwerk en beschikbaarheid per dag.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
+      serviceJsonLd({
+        name: "Website laten maken voor je bloemenwinkel",
+        description: "Websites en webshops op maat voor bloemisten, met bezorging, rouwwerk en beschikbaarheid per dag.",
+        url: URL,
+        serviceType: "Webdesign",
+        areaServed: null,
+      }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je bloemenwinkel", "/website-laten-maken-bloemist"]]),
+      faqJsonLd(data.faqs),
     ],
   }),
   component: () => <BranchPage data={data} />,
