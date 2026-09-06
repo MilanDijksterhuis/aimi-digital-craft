@@ -1,5 +1,10 @@
 import "./lib/error-capture";
 
+import { brotliCompress, constants as zlibConstants, gzip } from "node:zlib";
+import { promisify } from "node:util";
+
+const brotliCompressAsync = promisify(brotliCompress);
+const gzipAsync = promisify(gzip);
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { checkRateLimit, getClientIp, isIpBanned, recordStrike } from "./lib/rate-limit";
@@ -12,10 +17,14 @@ const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 async function logServerCrash(error: unknown, request: Request): Promise<void> {
   try {
     const { supabaseAdmin } = await import("./integrations/supabase/client.server");
-    const message = error instanceof Error ? `${error.message}\n${error.stack ?? ""}` : String(error);
+    const message =
+      error instanceof Error ? `${error.message}\n${error.stack ?? ""}` : String(error);
     await supabaseAdmin.from("site_errors").insert({
       user_id: SITE_TRACK_UID,
-      message: `ServerCrash [${request.method} ${new URL(request.url).pathname}]: ${message}`.slice(0, 1900),
+      message: `ServerCrash [${request.method} ${new URL(request.url).pathname}]: ${message}`.slice(
+        0,
+        1900,
+      ),
       url: request.url,
     });
   } catch {
@@ -32,7 +41,7 @@ let serverEntryPromise: Promise<ServerEntry> | undefined;
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
-      (m) => ((m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry)),
+      (m) => (m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry),
     );
   }
   return serverEntryPromise;
@@ -72,7 +81,10 @@ function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boole
 
 // h3 swallows in-handler throws into a normal 500 Response with body
 // {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
-async function normalizeCatastrophicSsrResponse(response: Response, request: Request): Promise<Response> {
+async function normalizeCatastrophicSsrResponse(
+  response: Response,
+  request: Request,
+): Promise<Response> {
   if (response.status < 500) return response;
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.includes("application/json")) return response;
@@ -144,7 +156,8 @@ const IMMUTABLE_ASSET_RE = /^\/(assets|_build)\/|^\/fonts\/.+\.woff2$/;
 // Statische publieke bestanden die zelden wijzigen maar niet content-gehasht
 // zijn — kortere, niet-immutable cache zodat een update niet dagenlang stale
 // blijft, maar herhaalbezoeken ze wél uit de browsercache krijgen.
-const SHORT_CACHE_ASSET_RE = /^\/(og-image\.(png|svg)|favicon\.(svg|ico)|apple-touch-icon\.png|aimi-logo\.png|icon-(192|512)\.png|robots\.txt|llms\.txt|manifest\.json)$/;
+const SHORT_CACHE_ASSET_RE =
+  /^\/(og-image\.(png|svg)|favicon\.(svg|ico)|apple-touch-icon\.png|aimi-logo\.png|icon-(192|512)\.png|robots\.txt|llms\.txt|manifest\.json)$/;
 
 function applyAssetCaching(response: Response, request: Request): void {
   if (request.method !== "GET" && request.method !== "HEAD") return;
@@ -163,16 +176,105 @@ function applyAssetCaching(response: Response, request: Request): void {
   }
 }
 
+// SEO-audit 2026-09-02/03 (technical.md "Static JS/CSS assets served with no
+// compression at all"): nginx serves /assets/ uncompressed and we have no
+// access to that VPS config from this repo. Compress here instead, at the
+// app layer that already wraps every response — no nginx change needed.
+// Content-hashed assets never change, so a small in-memory cache per
+// pathname+encoding avoids recompressing the same bytes on every request;
+// it's bounded by the build's asset count and clears on the next deploy's
+// process restart.
+const COMPRESSIBLE_CONTENT_TYPE_RE =
+  /^(application\/javascript|text\/javascript|text\/css|application\/json|image\/svg\+xml|text\/plain|(application|text)\/xml)\b/i;
+const MIN_COMPRESSIBLE_BYTES = 512; // niet de moeite voor hele kleine bestanden
+const compressedAssetCache = new Map<string, Uint8Array>();
+// Voorkomt dat meerdere gelijktijdige requests voor hetzelfde nog-niet-
+// gecachte asset elk hun eigen compressie starten (typisch vlak na een
+// deploy-restart, wanneer meerdere crawler-/bezoekerrequests dezelfde
+// gedeelde JS-chunk tegelijk opvragen).
+const compressionInFlight = new Map<string, Promise<Uint8Array | null>>();
+
+function pickEncoding(acceptEncoding: string): "br" | "gzip" | null {
+  if (/\bbr\b/.test(acceptEncoding)) return "br";
+  if (/\bgzip\b/.test(acceptEncoding)) return "gzip";
+  return null;
+}
+
+async function compressStaticAsset(response: Response, request: Request): Promise<Response> {
+  if (request.method !== "GET") return response;
+  if (response.status !== 200) return response;
+  if (response.headers.has("Content-Encoding")) return response;
+
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!COMPRESSIBLE_CONTENT_TYPE_RE.test(contentType)) return response;
+
+  let pathname: string;
+  try {
+    pathname = new URL(request.url).pathname;
+  } catch {
+    return response;
+  }
+  // Alleen content-gehashte/statische build-assets: HTML/SSR-responses lopen
+  // hier expres niet doorheen (die zijn per-request uniek, dus geen bruikbare
+  // cache-sleutel en het risico dat gevoelige headers/Server-Timing per
+  // request verschillen is niet de moeite van dit optimalisatiepad waard).
+  if (!IMMUTABLE_ASSET_RE.test(pathname) && !SHORT_CACHE_ASSET_RE.test(pathname)) return response;
+
+  const acceptEncoding = request.headers.get("accept-encoding") ?? "";
+  const encoding = pickEncoding(acceptEncoding);
+  if (!encoding) return response;
+
+  const cacheKey = `${encoding}:${pathname}`;
+  let compressed: Uint8Array | null = compressedAssetCache.get(cacheKey) ?? null;
+
+  if (!compressed) {
+    let inFlight = compressionInFlight.get(cacheKey);
+    if (!inFlight) {
+      inFlight = (async () => {
+        const buf = new Uint8Array(await response.clone().arrayBuffer());
+        if (buf.byteLength < MIN_COMPRESSIBLE_BYTES) return null;
+        // Async i.p.v. *Sync: brotli op quality 11 kan bij een bundel van
+        // honderden KB's merkbaar duren, en de *Sync-varianten blokkeren de
+        // event loop volledig zolang ze draaien — elke andere gelijktijdige
+        // request zou dan stilstaan, met name direct na een deploy-restart
+        // wanneer de cache nog leeg is. De async variant draait via libuv's
+        // threadpool, dus de rest van de server blijft intussen bereikbaar.
+        const result =
+          encoding === "br"
+            ? await brotliCompressAsync(buf, {
+                params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 },
+              })
+            : await gzipAsync(buf, { level: 9 });
+        // Alleen cachen als het écht kleiner is — voorkomt dat al-gecomprimeerde
+        // of ongunstige inhoud permanent (nutteloos) in het geheugen blijft staan.
+        if (result.byteLength >= buf.byteLength) return null;
+        compressedAssetCache.set(cacheKey, result);
+        return result;
+      })().finally(() => compressionInFlight.delete(cacheKey));
+      compressionInFlight.set(cacheKey, inFlight);
+    }
+    compressed = await inFlight;
+    if (!compressed) return response;
+  }
+
+  const headers = new Headers(response.headers);
+  headers.set("Content-Encoding", encoding);
+  headers.set("Content-Length", String(compressed.byteLength));
+  headers.append("Vary", "Accept-Encoding");
+  return new Response(compressed as BodyInit, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function applySecurityHeaders(response: Response, request: Request): Response {
   try {
     for (const [k, v] of Object.entries(SECURITY_HEADERS)) response.headers.set(k, v);
     applyAssetCaching(response, request);
     // HSTS alleen over https, zodat lokale http-dev niet breekt.
     if (isHttps(request)) {
-      response.headers.set(
-        "Strict-Transport-Security",
-        "max-age=31536000; includeSubDomains",
-      );
+      response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
     }
     // 404's mogen niet geïndexeerd worden; via een header werkt dit ook als
     // Googlebot de pagina niet (volledig) rendert.
@@ -197,7 +299,9 @@ async function applyRateLimit(request: Request): Promise<Response | null> {
   // mobiele gebruikers op hetzelfde IP als een eerdere misbruiker.
   const ban = await isIpBanned(ip);
   if (ban.banned) {
-    console.warn(`[security] geweigerd (ban actief) ip=${ip} retryAfter=${ban.retryAfter}s path=${new URL(request.url).pathname}`);
+    console.warn(
+      `[security] geweigerd (ban actief) ip=${ip} retryAfter=${ban.retryAfter}s path=${new URL(request.url).pathname}`,
+    );
     return rateLimitedResponse(ban.retryAfter);
   }
 
@@ -209,7 +313,9 @@ async function applyRateLimit(request: Request): Promise<Response | null> {
     const { allowed, retryAfter } = await checkRateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
     if (!allowed) {
       await recordStrike(ip);
-      console.warn(`[security] rate limit overschreden ip=${ip} path=${new URL(request.url).pathname}`);
+      console.warn(
+        `[security] rate limit overschreden ip=${ip} path=${new URL(request.url).pathname}`,
+      );
       return rateLimitedResponse(retryAfter);
     }
     return null;
@@ -219,7 +325,11 @@ async function applyRateLimit(request: Request): Promise<Response | null> {
   // opgegeven URL (SSRF-gevoelig) en is duur (netwerk-IO) — extra strikte
   // limiet hier bovenop de per-ip-hash limiet in checkWebsite zelf.
   if (path.includes("checkWebsite")) {
-    const { allowed, retryAfter } = await checkRateLimit(`website-check-ip:${ip}`, 5, 60 * 60 * 1000);
+    const { allowed, retryAfter } = await checkRateLimit(
+      `website-check-ip:${ip}`,
+      5,
+      60 * 60 * 1000,
+    );
     if (!allowed) {
       console.warn(`[security] website-checker rate limit overschreden ip=${ip}`);
       return rateLimitedResponse(retryAfter);
@@ -306,7 +416,8 @@ export default {
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response, request);
       const titled = await fixNotFoundTitle(normalized);
-      return applySecurityHeaders(titled, request);
+      const secured = applySecurityHeaders(titled, request);
+      return await compressStaticAsset(secured, request);
     } catch (error) {
       console.error(error);
       await logServerCrash(error, request);

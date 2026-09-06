@@ -59,7 +59,7 @@ export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
   head: () => ({
     meta: [
       { title: "Website laten maken voor je klusbedrijf | AIMI" },
-      { name: "description", content: "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerte met foto-upload en snelle techniek." },
+      { name: "description", content: "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerteaanvraag met foto-upload en techniek die ook op de bouwplaats snel laadt." },
       { property: "og:title", content: "Website laten maken voor je klusbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon." },
       { property: "og:type", content: "website" },

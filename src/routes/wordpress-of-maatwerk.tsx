@@ -175,7 +175,16 @@ function VergelijkingPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-relaxed" style={{ color: "#a4a9b2" }}>
               Wij bouwen maatwerk, dus je mag dit stuk met gepaste argwaan lezen. Daarom hebben we er ook in gezet
-              wanneer WordPress de betere keuze is — want die gevallen bestaan echt. Hieronder de eerlijke
+              wanneer{" "}
+              <a
+                href="https://wordpress.org/"
+                target="_blank"
+                rel="noopener"
+                style={{ color: "#fe2c02", textDecoration: "underline" }}
+              >
+                WordPress
+              </a>{" "}
+              de betere keuze is — want die gevallen bestaan echt. Hieronder de eerlijke
               afweging, zodat je zelf kunt bepalen wat bij je past.
             </p>
           </div>

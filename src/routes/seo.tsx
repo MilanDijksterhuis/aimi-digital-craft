@@ -119,7 +119,7 @@ const faqs = [
 export const Route = createFileRoute("/seo")({
   head: () => ({
     meta: [
-      { title: "SEO laten doen | Technische SEO, snelheid & lokale vindbaarheid — AIMI" },
+      { title: "SEO laten doen | Snelheid & lokale vindbaarheid — AIMI" },
       {
         name: "description",
         content:
@@ -200,7 +200,17 @@ function SeoPage() {
             </h2>
             <p className="mt-4 max-w-2xl text-[15px]" style={{ color: "#a4a9b2" }}>
               Welke onderdelen zwaar wegen verschilt per site. Bij een trage webshop ligt het accent ergens anders
-              dan bij een dienstverlener die lokaal gevonden wil worden.
+              dan bij een dienstverlener die lokaal gevonden wil worden. De drempelwaarden voor Core Web Vitals
+              zijn overigens geen interpretatie van ons: LCP, INP en CLS staan{" "}
+              <a
+                href="https://web.dev/articles/vitals"
+                target="_blank"
+                rel="noopener"
+                style={{ color: "#fe2c02", textDecoration: "underline" }}
+              >
+                publiek gedocumenteerd door Google
+              </a>
+              , en daar meten we tegen af.
             </p>
 
             <div className="mt-12 grid gap-4 md:grid-cols-2">

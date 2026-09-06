@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       // A-03: de homepage mikte op exact dezelfde term als /website-laten-maken
       // (en /webdesign). Die kernterm hoort nu bij /website-laten-maken; de
       // homepage positioneert op merk + overzicht van de diensten.
-      { title: "AIMI — Webdesignbureau uit Noord-Nederland | Websites & webshops" },
+      { title: "AIMI — Webdesignbureau uit Veendam | Websites & webshops" },
       {
         name: "description",
         content:

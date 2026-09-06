@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PHONE_DISPLAY, PHONE_E164, ACTIVE_SINCE_YEAR } from "@/lib/seo";
+import { PHONE_DISPLAY, PHONE_E164, ACTIVE_SINCE_YEAR, ADDRESS, KVK, VAT_ID } from "@/lib/seo";
 
 const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 
@@ -106,6 +106,7 @@ function LinkRow({ heading, items }: { heading: string; items: { label: string; 
 }
 
 export function Footer() {
+  const hasAddress = Boolean(ADDRESS.streetAddress && ADDRESS.postalCode);
   return (
     <footer style={{ background: "#161717", borderTop: "1px solid #2a2b2b", fontFamily: FONT }}>
       <div className="mx-auto max-w-7xl px-6 py-14">
@@ -158,6 +159,27 @@ export function Footer() {
           <LinkRow heading="Website laten maken in" items={cities} />
           <LinkRow heading="Website laten maken voor je" items={branches} />
         </div>
+
+        {/* Bedrijfsgegevens — SEO-audit 2026-09-04 (content.md CQ-1, local.md
+            LOC-1/LOC-2). KvK en BTW-ID zijn wettelijk verplicht op een
+            Nederlandse bedrijfswebsite, en adres + registratienummer zijn de
+            goedkoopste vertrouwenssignalen die er zijn. Elk onderdeel rendert
+            alleen als het in seo.ts is ingevuld, zodat er nooit een half of
+            leeg adres op de site komt te staan. */}
+        {(hasAddress || KVK || VAT_ID) && (
+          <div
+            className="mt-12 pt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs"
+            style={{ borderTop: "1px solid #2a2b2b", color: "#868b94" }}
+          >
+            {hasAddress && (
+              <address className="not-italic">
+                AIMI — {ADDRESS.streetAddress}, {ADDRESS.postalCode} {ADDRESS.addressLocality}
+              </address>
+            )}
+            {KVK && <span>KvK {KVK}</span>}
+            {VAT_ID && <span>BTW {VAT_ID}</span>}
+          </div>
+        )}
 
         <div
           className="mt-12 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs"

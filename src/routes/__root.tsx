@@ -13,7 +13,16 @@ import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { ConfirmProvider } from "@/components/ConfirmDialog";
 import { AnalyticsLoader } from "@/components/AnalyticsLoader";
-import { SITE_URL, LOGO_URL, OG_IMAGE_URL, ORG_ID, PRICE_VALID_UNTIL, PHONE_E164 } from "@/lib/seo";
+import {
+  SITE_URL,
+  LOGO_URL,
+  OG_IMAGE_URL,
+  ORG_ID,
+  PRICE_VALID_UNTIL,
+  PHONE_E164,
+  EMAIL,
+  businessIdentityJsonLd,
+} from "@/lib/seo";
 
 const SITE_TRACK_UID = "6a34e404-ba3e-42d4-965c-62d04aef0f93";
 
@@ -168,8 +177,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           url: SITE_URL,
           logo: LOGO_URL,
           image: LOGO_URL,
-          email: "sales@aimi-development.nl",
+          email: EMAIL,
           telephone: PHONE_E164,
+          // SEO-audit 2026-09-04 (schema.md SCH-1): ProfessionalService is een
+          // LocalBusiness-subtype, dus Google verwacht hier een adres. Levert
+          // pas iets op zodra ADDRESS/KVK/VAT_ID in seo.ts gevuld zijn.
+          ...businessIdentityJsonLd(),
+          // Prijsindicatie: zelfde niveau als de Veendam-vestigingspagina al
+          // claimt, zodat de twee entiteiten elkaar niet tegenspreken.
+          priceRange: "€€",
           // Google Bedrijfsprofiel "AIMI Development" — sterkste disambiguatie-
           // signaal dat er is: koppelt deze entiteit direct aan het Maps-profiel
           // dat Google al aan de naam "AIMI" toont.

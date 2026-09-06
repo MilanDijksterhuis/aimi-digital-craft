@@ -6,9 +6,16 @@ export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
       { title: "Algemene Voorwaarden — AIMI" },
-      { name: "description", content: "De algemene voorwaarden van AIMI." },
+      {
+        name: "description",
+        content:
+          "De algemene voorwaarden van AIMI: afspraken over offertes, betaling, oplevering, onderhoud en hosting, eigendom van de website en aansprakelijkheid.",
+      },
       // A-21: stond op noindex — zie privacybeleid.tsx. Nu indexeerbaar en in
       // de sitemap.
+      // SEO-audit 2026-09-04 (onpage.md OP-2): og:url ontbrak hier als enige.
+      { property: "og:url", content: `${SITE_URL}/algemene-voorwaarden` },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/algemene-voorwaarden` }],
   }),

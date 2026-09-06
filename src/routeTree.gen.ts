@@ -58,6 +58,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BranchesRouteImport } from './routes/branches'
+import { Route as B03bb73bce86422c6a74b3cfc829f2ddDottxtRouteImport } from './routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -351,6 +352,12 @@ const BranchesRoute = BranchesRouteImport.update({
   path: '/branches',
   getParentRoute: () => rootRouteImport,
 } as any)
+const B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute =
+  B03bb73bce86422c6a74b3cfc829f2ddDottxtRouteImport.update({
+    id: '/b03bb73bce86422c6a74b3cfc829f2dd.txt',
+    path: '/b03bb73bce86422c6a74b3cfc829f2dd.txt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AlgemeneVoorwaardenRoute = AlgemeneVoorwaardenRouteImport.update({
   id: '/algemene-voorwaarden',
   path: '/algemene-voorwaarden',
@@ -475,6 +482,7 @@ const AuthenticatedAdminAccountsAccountIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -547,6 +555,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -621,6 +630,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
+  '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -695,6 +705,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/algemene-voorwaarden'
+    | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -767,6 +778,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/algemene-voorwaarden'
+    | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -840,6 +852,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/algemene-voorwaarden'
+    | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -914,6 +927,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
+  B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute: typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
   BranchesRoute: typeof BranchesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
@@ -1314,6 +1328,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BranchesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/b03bb73bce86422c6a74b3cfc829f2dd.txt': {
+      id: '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+      path: '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+      fullPath: '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+      preLoaderRoute: typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/algemene-voorwaarden': {
       id: '/algemene-voorwaarden'
       path: '/algemene-voorwaarden'
@@ -1586,6 +1607,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
+  B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute:
+    B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute,
   BranchesRoute: BranchesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,

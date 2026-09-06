@@ -6,7 +6,7 @@ const CITY = "Roden";
 const URL = `${SITE_URL}/website-laten-maken-roden`;
 const TITLE = "Website laten maken in Roden | AIMI";
 const DESCRIPTION =
-  "Webdesigner in Roden gezocht? AIMI bouwt snelle, professionele websites voor ZZP'ers en mkb in Noordenveld.";
+  "Webdesigner in Roden gezocht? AIMI bouwt snelle, professionele websites voor ZZP'ers en mkb in Noordenveld, met eigen hosting en vaste prijzen vanaf € 499.";
 
 const data: LocationPageData = {
   city: CITY,

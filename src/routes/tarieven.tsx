@@ -175,7 +175,7 @@ const faqs = [
 export const Route = createFileRoute("/tarieven")({
   head: () => ({
     meta: [
-      { title: "Wat kost een website laten maken? | Tarieven vanaf € 499 — AIMI" },
+      { title: "Wat kost een website laten maken? Tarieven vanaf € 499" },
       {
         name: "description",
         content:

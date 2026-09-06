@@ -6,10 +6,18 @@ export const Route = createFileRoute("/privacybeleid")({
   head: () => ({
     meta: [
       { title: "Privacybeleid — AIMI" },
-      { name: "description", content: "Lees hoe AIMI omgaat met jouw persoonsgegevens." },
+      {
+        name: "description",
+        content:
+          "Hoe AIMI omgaat met jouw persoonsgegevens: welke gegevens we verzamelen via het contactformulier en de website, waarom we ze bewaren, hoe lang, en welke rechten je hebt.",
+      },
       // A-21: stond op noindex. Een privacybeleid is een vertrouwenssignaal dat
       // bezoekers én Google mogen zien; het hoort gewoon indexeerbaar te zijn.
       // Staat nu ook in de sitemap.
+      // SEO-audit 2026-09-04 (onpage.md OP-2): als enige twee pagina's zonder
+      // og:url. Zonder die tag kiest een deler zelf de canonieke URL.
+      { property: "og:url", content: `${SITE_URL}/privacybeleid` },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/privacybeleid` }],
   }),
@@ -84,7 +92,17 @@ function PrivacyPage() {
               <li>Inzage te vragen in jouw persoonsgegevens</li>
               <li>Gegevens te laten corrigeren of verwijderen</li>
               <li>Bezwaar te maken tegen verwerking</li>
-              <li>Een klacht in te dienen bij de Autoriteit Persoonsgegevens</li>
+              <li>
+                Een klacht in te dienen bij de{" "}
+                <a
+                  href="https://www.autoriteitpersoonsgegevens.nl/"
+                  target="_blank"
+                  rel="noopener"
+                  className="text-foreground underline underline-offset-2"
+                >
+                  Autoriteit Persoonsgegevens
+                </a>
+              </li>
             </ul>
             <p className="mt-2">
               Neem contact op via{" "}

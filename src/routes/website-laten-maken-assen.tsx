@@ -54,7 +54,7 @@ export const Route = createFileRoute("/website-laten-maken-assen")({
       {
         name: "description",
         content:
-          "AIMI ontwikkelt professionele websites voor zakelijke dienstverleners in Assen, met snelle techniek en eigen hosting.",
+          "AIMI ontwikkelt professionele websites voor zakelijke dienstverleners in Assen, met snelle techniek, eigen Nederlandse hosting en vaste prijzen vanaf € 499.",
       },
       { name: "geo.region", content: "NL-DR" },
       { name: "geo.placename", content: "Assen" },

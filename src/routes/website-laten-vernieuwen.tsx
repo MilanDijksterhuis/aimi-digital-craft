@@ -101,7 +101,7 @@ const faqs = [
 export const Route = createFileRoute("/website-laten-vernieuwen")({
   head: () => ({
     meta: [
-      { title: "Website laten vernieuwen | Opknappen of opnieuw bouwen — AIMI" },
+      { title: "Website laten vernieuwen | Opknappen of opnieuw bouwen" },
       {
         name: "description",
         content:

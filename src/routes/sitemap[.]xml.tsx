@@ -19,32 +19,32 @@ export const Route = createFileRoute("/sitemap.xml")({
         // zijn trust-signalen), dus horen ze er nu wél in.
         const entries: SitemapEntry[] = [
           // Kernpagina's
-          { path: "/", lastmod: "2026-08-20" },
+          { path: "/", lastmod: "2026-09-04" },
 
           // Dienstenpagina's
           { path: "/website-laten-maken", lastmod: "2026-08-20" },
           { path: "/webshop-laten-maken", lastmod: "2026-08-20" },
           { path: "/onderhoud-hosting", lastmod: "2026-08-20" },
-          { path: "/website-laten-vernieuwen", lastmod: "2026-08-22" },
-          { path: "/seo", lastmod: "2026-08-22" },
-          { path: "/tarieven", lastmod: "2026-08-22" },
+          { path: "/website-laten-vernieuwen", lastmod: "2026-09-04" },
+          { path: "/seo", lastmod: "2026-09-04" },
+          { path: "/tarieven", lastmod: "2026-09-04" },
 
           // Informatief / oriënterend
           { path: "/wordpress-of-maatwerk", lastmod: "2026-08-22" },
           { path: "/website-checker", lastmod: "2026-09-03" },
 
           // Branchepagina's — geen regio-as, functionele zoektermen
-          { path: "/branches", lastmod: "2026-08-21" },
+          { path: "/branches", lastmod: "2026-09-04" },
           { path: "/website-laten-maken-kapsalon", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-nagelstudio", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-schoonheidssalon", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-pedicure", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-hovenier", lastmod: "2026-08-21" },
-          { path: "/website-laten-maken-klusbedrijf", lastmod: "2026-08-21" },
-          { path: "/website-laten-maken-schilder", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-klusbedrijf", lastmod: "2026-09-04" },
+          { path: "/website-laten-maken-schilder", lastmod: "2026-09-04" },
           { path: "/website-laten-maken-loodgieter", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-autobedrijf", lastmod: "2026-08-22" },
-          { path: "/website-laten-maken-autorijschool", lastmod: "2026-08-22" },
+          { path: "/website-laten-maken-autorijschool", lastmod: "2026-09-04" },
           { path: "/website-laten-maken-makelaar", lastmod: "2026-08-22" },
           { path: "/website-laten-maken-boekhouder", lastmod: "2026-08-22" },
           { path: "/website-laten-maken-restaurant", lastmod: "2026-08-22" },
@@ -56,12 +56,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/website-laten-maken-veendam", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-hoogeveen", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-groningen", lastmod: "2026-08-21" },
-          { path: "/website-laten-maken-assen", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-assen", lastmod: "2026-09-04" },
           { path: "/website-laten-maken-hoogezand", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-stadskanaal", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-emmen", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-winschoten", lastmod: "2026-08-21" },
-          { path: "/website-laten-maken-roden", lastmod: "2026-08-21" },
+          { path: "/website-laten-maken-roden", lastmod: "2026-09-04" },
           { path: "/website-laten-maken-coevorden", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-meppel", lastmod: "2026-08-21" },
           { path: "/website-laten-maken-leeuwarden", lastmod: "2026-08-21" },
@@ -74,11 +74,11 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/meer-diensten", lastmod: "2026-08-20" },
           { path: "/over-ons", lastmod: "2026-08-20" },
           { path: "/faq", lastmod: "2026-08-20" },
-          { path: "/contact", lastmod: "2026-08-20" },
+          { path: "/contact", lastmod: "2026-09-04" },
 
           // Juridisch — trust-signalen, indexeerbaar sinds A-21
-          { path: "/privacybeleid", lastmod: "2026-08-22" },
-          { path: "/algemene-voorwaarden", lastmod: "2026-08-22" },
+          { path: "/privacybeleid", lastmod: "2026-09-04" },
+          { path: "/algemene-voorwaarden", lastmod: "2026-09-04" },
         ];
         const urls = entries.map((e) =>
           [

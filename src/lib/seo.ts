@@ -8,13 +8,73 @@ export const OG_IMAGE_URL = "https://aimi-development.nl/og-image.png";
  * CQ-1) — één plek, zowel voor zichtbare `tel:`-links als voor schema. */
 export const PHONE_DISPLAY = "06 11851093";
 export const PHONE_E164 = "+31611851093";
+/** Zakelijk e-mailadres als NAP-anker, net als het telefoonnummer op één plek
+ * (SEO-audit 2026-09-04): gebruikt door zowel het Organization-schema als het
+ * ContactPoint, zodat die twee nooit uit elkaar kunnen lopen. */
+export const EMAIL = "sales@aimi-development.nl";
 /** Actief sinds: trust-signaal op stadspagina's (sxo.md SXO-1). Geen jaartal
  * verzinnen — dit is het echte startjaar. */
 export const ACTIVE_SINCE_YEAR = 2025;
+
+/** IndexNow-sleutel (SEO-audit 2026-09-03, technical.md Low priority #5).
+ * Moet exact overeenkomen met de bestandsnaam van de key-verificatieroute
+ * (`src/routes/${INDEXNOW_KEY}[.]txt.tsx`) en met wat `scripts/indexnow-submit.mjs`
+ * meestuurt. Vast en willekeurig gegenereerd — geen geheim, puur eigenaarschap-bewijs. */
+export const INDEXNOW_KEY = "b03bb73bce86422c6a74b3cfc829f2dd";
 /** Canonieke entiteit-id: elk Organization/LocalBusiness-schema op de site
  * verwijst hiernaar, zodat Google één bedrijf ziet in plaats van meerdere
  * losse entiteiten per pagina. */
 export const ORG_ID = `${SITE_URL}/#organization`;
+
+/* ---------------------------------------------------------------------------
+ * Bedrijfsgegevens — INVULLEN DOOR AIMI (SEO-audit 2026-09-04).
+ *
+ * Deze drie constanten zijn de enige plek waar adres, KvK en BTW hoeven te
+ * staan; het Organization-schema en de footer pakken ze automatisch op zodra
+ * ze gevuld zijn. Bewust leeg gelaten: een half PostalAddress of een verzonnen
+ * KvK-nummer is slechter dan géén, want het is een controleerbaar gegeven.
+ *
+ * Zie schema.md SCH-1, content.md CQ-1 en local.md LOC-1/LOC-2.
+ * ------------------------------------------------------------------------- */
+
+/** Vestigingsadres. Vul streetAddress én postalCode in; pas dan wordt het
+ * PostalAddress in het schema opgenomen. */
+export const ADDRESS = {
+  streetAddress: "", // bv. "Kerkstraat 1"
+  postalCode: "", // bv. "9641 AA"
+  addressLocality: "Veendam",
+  addressRegion: "Groningen",
+  addressCountry: "NL",
+};
+
+/** Handelsregisternummer (8 cijfers). Wettelijk verplicht op de website. */
+export const KVK = "";
+/** BTW-identificatienummer, formaat NL123456789B01. Wettelijk verplicht. */
+export const VAT_ID = "";
+
+/** Geeft het PostalAddress alleen terug als straat én postcode gevuld zijn. */
+export const postalAddress = () =>
+  ADDRESS.streetAddress && ADDRESS.postalCode
+    ? { "@type": "PostalAddress", ...ADDRESS }
+    : undefined;
+
+/** Schema-fragment met adres, KvK en BTW: levert per veld alleen iets op als
+ * het daadwerkelijk ingevuld is, zodat er nooit lege velden in de JSON-LD
+ * belanden. Spread dit in een Organization/LocalBusiness-entiteit. */
+export const businessIdentityJsonLd = () => ({
+  ...(postalAddress() ? { address: postalAddress() } : {}),
+  ...(VAT_ID ? { vatID: VAT_ID } : {}),
+  ...(KVK
+    ? {
+        identifier: {
+          "@type": "PropertyValue",
+          name: "KvK",
+          propertyID: "https://www.kvk.nl",
+          value: KVK,
+        },
+      }
+    : {}),
+});
 /** Eigen entiteit-id per vestigingspagina, los van ORG_ID, zodat stadspagina's
  * geen tegenstrijdig adres/geo claimen op de gedeelde organisatie-entiteit. */
 export const localBusinessId = (path: string) => `${SITE_URL}${path}#localbusiness`;
@@ -121,5 +181,46 @@ export function faqJsonLd(faqs: { q: string; a: string }[]): LdScript {
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+  });
+}
+
+/** ContactPage + ContactPoint (SEO-audit 2026-09-04, schema.md SCH-4).
+ * /contact droeg alleen de site-brede Organization/WebSite/Breadcrumb-entiteiten.
+ * Een eigen ContactPage maakt expliciet dát dit de contactpagina is, en het
+ * ContactPoint zet telefoon, e-mail en taal in een vorm die zoekmachines en
+ * AI-assistenten direct kunnen uitlezen.
+ *
+ * `mainEntity` hergebruikt bewust ORG_ID: JSON-LD voegt nodes met hetzelfde
+ * `@id` samen, dus dit hángt het contactPoint aan de bestaande organisatie in
+ * plaats van een tweede entiteit te maken. */
+export function contactPageJsonLd(opts: {
+  url: string;
+  name: string;
+  description: string;
+}): LdScript {
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${opts.url}#contactpage`,
+    url: opts.url,
+    name: opts.name,
+    description: opts.description,
+    inLanguage: "nl-NL",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": ORG_ID },
+    mainEntity: {
+      "@type": "Organization",
+      "@id": ORG_ID,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: PHONE_E164,
+          email: EMAIL,
+          availableLanguage: ["nl", "Dutch"],
+          areaServed: "NL",
+        },
+      ],
+    },
   });
 }

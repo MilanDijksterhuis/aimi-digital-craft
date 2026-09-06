@@ -37,4 +37,8 @@ pm2 startOrRestart ecosystem.config.cjs --update-env
 pm2 save
 
 pm2 status
+
+echo "==> IndexNow-submit (Bing/Yandex/Naver; mag deploy nooit blokkeren)"
+node scripts/indexnow-submit.mjs || true
+
 echo "==> klaar"

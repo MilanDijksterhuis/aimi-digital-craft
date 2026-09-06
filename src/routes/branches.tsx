@@ -33,7 +33,7 @@ export const Route = createFileRoute("/branches")({
       { title: "Website laten maken per branche | AIMI" },
       {
         name: "description",
-        content: "AIMI bouwt websites die aansluiten op hoe jouw vakgebied werkt. Bekijk per branche wat een website écht moet kunnen.",
+        content: "AIMI bouwt websites die aansluiten op hoe jouw vakgebied werkt. Bekijk per branche — van kapsalon tot klusbedrijf — wat een website écht moet kunnen.",
       },
       { property: "og:title", content: "Website laten maken per branche | AIMI" },
       { property: "og:description", content: "Websites op maat voor kappers, hoveniers, klussenbedrijven en meer vakgebieden." },

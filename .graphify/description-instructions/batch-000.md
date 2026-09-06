@@ -1,4 +1,4 @@
-# Node Description Batch 1 of 47
+# Node Description Batch 1 of 49
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -19,7 +19,7 @@ relations (neighbors) and the provided citations/evidence — e.g.
 Ground entity descriptions in the citations/evidence when present; do not
 speculate beyond the context, so a node with no supporting context may be
 left out of the reply.
-Write every description in Portuguese (pt). Do not switch languages.
+Write every description in English (en). Do not switch languages.
 No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
@@ -36,34 +36,34 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions": "admin.functions.ts" | kind=code-symbol | source=src/lib/admin.functions.ts:L1 | neighbors=[12764e3 Security: fix IDOR vulnerabilit…, 2d50590 wip: lokale wijzigingen voor pu…, 2fcc9a3 fixes, 39d363a server basic, 5bc9ff0 google authenticatoin, 74ecdc1 code fixes]
 - "authenticated_portal": "portal.tsx" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1 | neighbors=[ALLOWED_ATTACHMENT_MIME, ChangeCard(), EmptyChanges(), FILTER_LABEL, FilterKey, LegacyWebsiteMonitoring()]
 - "authenticated_admin": "admin.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L1 | neighbors=[AanvragenTab(), AdminPage(), AdminSidebar(), AfsprakenTab(), AlertsPanel(), ArchivedChangesPanel()]
+- "lib_seo": "seo.ts" | kind=code-symbol | source=src/lib/seo.ts:L1 | neighbors=[36d8ccb new pages, 5d3df91 new, 8fdd571 SEO, aabf034 SEO, c27f4c8 new, f207e52 feat(seo): dienstenpagina's web…]
 - "design_handoff_meer_diensten_support": "support.js" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1 | neighbors=[fc7da2d animaties en paginas, boot(), bundledBlob(), cdnScriptFor(), collectProps(), compileAttr()]
-- "lib_seo": "seo.ts" | kind=code-symbol | source=src/lib/seo.ts:L1 | neighbors=[36d8ccb new pages, 5d3df91 new, 8fdd571 SEO, c27f4c8 new, f207e52 feat(seo): dienstenpagina's web…, breadcrumbJsonLd()]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@36d8ccbb2c7a128fe10b4f02718f8ada22d886ac": "36d8ccb new pages" | kind=Commit | source=git | neighbors=[04564c5 fixes, main, BranchPage.tsx, Breadcrumbs.tsx, Footer.tsx, Hero.tsx]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@36d8ccbb2c7a128fe10b4f02718f8ada22d886ac": "36d8ccb new pages" | kind=Commit | source=git | neighbors=[04564c5 fixes, main, dda7a04 web tester, BranchPage.tsx, Breadcrumbs.tsx, Footer.tsx]
 - "components_nav": "Nav.tsx" | kind=code-symbol | source=src/components/Nav.tsx:L1 | neighbors=[05a6c9e Verbeter admin changes-tab layo…, 2d81f50 feat(seo): vervang /cases door …, 36d8ccb new pages, 6262799 fixes, 7476011 Changes, 79f7d0a Changes]
-- "authenticated_admin_projecten_projectid": "admin.projecten.$projectId.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L1 | neighbors=[ActivityTab(), AdminProjectDetailPage(), ChangesTab(), ContactsTab(), NotesTab(), OverzichtTab()]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@aabf034c7bafc8ac4b97edbc88df6ed32e9fefac": "aabf034 SEO" | kind=Commit | source=git | neighbors=[main, BranchPage.tsx, Contact.tsx, CookieBanner.tsx, ExampleSlideshow.tsx, Footer.tsx]
 - "routes_index": "index.tsx" | kind=code-symbol | source=src/routes/index.tsx:L1 | neighbors=[04564c5 fixes, 04c01f8 SEO, 129b916 manier van werken, 36d8ccb new pages, 5820182 Changes, 5d3df91 new]
+- "authenticated_admin_projecten_projectid": "admin.projecten.$projectId.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L1 | neighbors=[ActivityTab(), AdminProjectDetailPage(), ChangesTab(), ContactsTab(), NotesTab(), OverzichtTab()]
+- "lib_seo_breadcrumbjsonld": "breadcrumbJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L142 | neighbors=[seo.ts, ld(), branches.tsx, contact.tsx, faq.tsx, meer-diensten.tsx]
+- "routes_root": "__root.tsx" | kind=code-symbol | source=src/routes/__root.tsx:L1 | neighbors=[04564c5 fixes, 36d8ccb new pages, 37c0d11 Dock tokens toegevoegd & emojis…, 408d241 Changes, 422202c Made the requested updates, 5d3df91 new]
 - "lib_portal_functions": "portal.functions.ts" | kind=code-symbol | source=src/lib/portal.functions.ts:L1 | neighbors=[12764e3 Security: fix IDOR vulnerabilit…, 2fcc9a3 fixes, 3417a43 fixes, 74ecdc1 code fixes, 7f7208a new, 81a87ed commit]
-- "lib_seo_breadcrumbjsonld": "breadcrumbJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L75 | neighbors=[seo.ts, ld(), branches.tsx, contact.tsx, faq.tsx, meer-diensten.tsx]
 - "ui_sidebar": "sidebar.tsx" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L1 | neighbors=[use-mobile.tsx, useIsMobile(), utils.ts, cn(), button.tsx, Button]
 - "lib_utils": "utils.ts" | kind=code-symbol | source=src/lib/utils.ts:L1 | neighbors=[ConfirmDialog.tsx, cn(), accordion.tsx, alert.tsx, alert-dialog.tsx, avatar.tsx]
 - "lib_utils_cn": "cn()" | kind=code-symbol | source=src/lib/utils.ts:L4 | neighbors=[ConfirmDialog.tsx, utils.ts, accordion.tsx, alert.tsx, alert-dialog.tsx, avatar.tsx]
 - "authenticated_admin_accounts_accountid": "admin.accounts.$accountId.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L1 | neighbors=[AccountDetail(), AccountHeader(), ActiviteitTab(), AdminAccountDetailPage(), CustomRolesSection(), FinancieelTab()]
-- "routes_root": "__root.tsx" | kind=code-symbol | source=src/routes/__root.tsx:L1 | neighbors=[04564c5 fixes, 36d8ccb new pages, 37c0d11 Dock tokens toegevoegd & emojis…, 408d241 Changes, 422202c Made the requested updates, 5d3df91 new]
-- "routes_meer_diensten": "meer-diensten.tsx" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L1 | neighbors=[04c01f8 SEO, 1c0e00f fixes, 36d8ccb new pages, 5d3df91 new, 6262799 fixes, 8fdd571 SEO]
-- "components_footer": "Footer.tsx" | kind=code-symbol | source=src/components/Footer.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04564c5 fixes, 2d7a8d4 teksr wijzigingen, 2d81f50 feat(seo): vervang /cases door …, 36d8ccb new pages, 85ad012 Cinematisch redesign: forest he…]
-- "components_locationpagev2": "LocationPageV2.tsx" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L1 | neighbors=[36d8ccb new pages, c27f4c8 new, Breadcrumbs.tsx, Breadcrumbs(), CookieBanner.tsx, CookieBanner()]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c27f4c803b9e3eadefa156ab20bcb558f0cbdaf1": "c27f4c8 new" | kind=Commit | source=git | neighbors=[6262799 fixes, main, 04564c5 fixes, BranchPage.tsx, Footer.tsx, LocationPageV2.tsx]
+- "components_locationpagev2": "LocationPageV2.tsx" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, Breadcrumbs.tsx, Breadcrumbs(), CookieBanner.tsx]
 - "src_server": "server.ts" | kind=code-symbol | source=src/server.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, 36d8ccb new pages, 3901302 Fix mojibake in admin dashboard…, 5d1e827 Log server-side (SSR) crashes t…, 5d3df91 new]
+- "components_footer": "Footer.tsx" | kind=code-symbol | source=src/components/Footer.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04564c5 fixes, 2d7a8d4 teksr wijzigingen, 2d81f50 feat(seo): vervang /cases door …, 36d8ccb new pages, 85ad012 Cinematisch redesign: forest he…]
+- "lib_seo_faqjsonld": "faqJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L175 | neighbors=[seo.ts, ld(), faq.tsx, index.tsx, seo.tsx, tarieven.tsx]
+- "routes_meer_diensten": "meer-diensten.tsx" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L1 | neighbors=[04c01f8 SEO, 1c0e00f fixes, 36d8ccb new pages, 5d3df91 new, 6262799 fixes, 8fdd571 SEO]
+- "components_branchpage": "BranchPage.tsx" | kind=code-symbol | source=src/components/BranchPage.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, ApproachSection(), BranchPage(), BranchPageData]
+- "lib_seo_servicejsonld": "serviceJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L117 | neighbors=[seo.ts, ld(), branches.tsx, meer-diensten.tsx, onderhoud-hosting.tsx, seo.tsx]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c27f4c803b9e3eadefa156ab20bcb558f0cbdaf1": "c27f4c8 new" | kind=Commit | source=git | neighbors=[6262799 fixes, main, 04564c5 fixes, BranchPage.tsx, Footer.tsx, LocationPageV2.tsx]
 - "components_leadspanel": "LeadsPanel.tsx" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L1 | neighbors=[admin.leads.tsx, 9a2689c code fixes, c480d2e leads, f958216 leads functions, fc7da2d animaties en paginas, CallbackScheduleModal.tsx]
 - "authenticated_server": "server.tsx" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L1 | neighbors=[DISK_DAYS_OPTIONS, downloadCsv(), ErrorBox(), ExpandableMetricCard(), ExportButton(), formatDateShort()]
-- "components_branchpage": "BranchPage.tsx" | kind=code-symbol | source=src/components/BranchPage.tsx:L1 | neighbors=[36d8ccb new pages, c27f4c8 new, ApproachSection(), BranchPage(), BranchPageData, BranchSectionId]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@8fdd571f29e94604cdb34287a0859bf6a360ade5": "8fdd571 SEO" | kind=Commit | source=git | neighbors=[main, 1c0e00f fixes, AnalyticsLoader.tsx, Contact.tsx, CookieBanner.tsx, FAQ.tsx]
 - "lib_accounts_functions": "accounts.functions.ts" | kind=code-symbol | source=src/lib/accounts.functions.ts:L1 | neighbors=[74ecdc1 code fixes, 81a87ed commit, a3773ee sec fixes, c480d2e leads, adminArchiveChange, adminAssignChange]
 - "authenticated_admin_projecten": "admin.projecten.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L1 | neighbors=[AdminProjectenPage(), DashboardWidgetsSection(), KanbanCard(), KanbanColumn(), KanbanSection(), NewProjectSection()]
 - "authenticated_portal_projecten_projectid": "portal.projecten.$projectId.tsx" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L1 | neighbors=[MonitoringSection(), PortalProjectDetailPage(), ProjectSwitcher(), Route, timeAgo(), UptimeChart()]
-- "components_confirmdialog": "ConfirmDialog.tsx" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.projecten.tsx, admin.projecten.$projectId.tsx, 9a2689c code fixes, BerichtenTab.tsx, CallbackAgenda.tsx]
-- "routes_authenticated": "_authenticated.tsx" | kind=code-symbol | source=src/routes/_authenticated.tsx:L1 | neighbors=[423b3f1 cashing, 7dbbf18 perf fixes, 85ad012 Cinematisch redesign: forest he…, 965b87a Fix foto, nav animaties, portal…, 9a2689c code fixes, ab23069 admin en klantportaal wijziging…]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@81a87edaf7b9db05e33477346e1821aa12e8e485": "81a87ed commit" | kind=Commit | source=git | neighbors=[7f7208a new, admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx]
 
 ## Instructions
 

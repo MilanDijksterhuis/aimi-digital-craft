@@ -3,7 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Contact } from "@/components/Contact";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, contactPageJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/contact`;
 
@@ -27,7 +27,17 @@ export const Route = createFileRoute("/contact")({
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
-    scripts: [breadcrumbJsonLd([["Home", "/"], ["Contact", "/contact"]])],
+    scripts: [
+      breadcrumbJsonLd([["Home", "/"], ["Contact", "/contact"]]),
+      // SEO-audit 2026-09-04 (schema.md SCH-4): deze pagina had geen eigen
+      // paginatype-schema, alleen de site-brede entiteiten.
+      contactPageJsonLd({
+        url: URL,
+        name: "Contact — AIMI",
+        description:
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht — je krijgt binnen één werkdag antwoord.",
+      }),
+    ],
   }),
   component: ContactPage,
 });
