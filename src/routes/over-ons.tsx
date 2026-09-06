@@ -118,6 +118,19 @@ function OverOns() {
                 Elke site die we opleveren draait snel, ziet er premium uit en is
                 gebouwd om mee te groeien met jouw bedrijf.
               </p>
+              <p>
+                Ons werk is ook te vinden in de{" "}
+                <a
+                  href="http://www.webdesigngids.nl/"
+                  target="_blank"
+                  rel="noopener"
+                  className="underline underline-offset-4 transition-colors hover:text-white"
+                  style={{ color: "#a4a9b2" }}
+                >
+                  Webdesigngids
+                </a>
+                , een overzicht van webdesigners en webdevelopers in Nederland.
+              </p>
             </motion.div>
 
             <motion.div

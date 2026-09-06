@@ -1,0 +1,253 @@
+{
+  "_README": [
+    "JSON-LD voor /webdesignbureau-veendam-vergelijken.",
+    "Bewust WEGGELATEN: AggregateRating. AIMI heeft nog geen publieke reviews, en",
+    "de scores van concurrenten (NC-Websites 9,8 / Convident 5,0) in ons eigen schema",
+    "zetten zou betekenen dat wij hun ratings claimen. Beide is een handmatige-actie-risico.",
+    "Zichtbare reviewcijfers horen in de tabel met bronvermelding, niet in de JSON-LD.",
+    "",
+    "dateModified handmatig bijwerken bij elke kwartaalcontrole.",
+    "In de route: dit blok opsplitsen en via head().scripts meegeven, of in zijn geheel",
+    "als een @graph-script. breadcrumbJsonLd() en faqJsonLd() uit src/lib/seo.ts",
+    "genereren onderdeel 2 en 4 al - zie IMPLEMENTATIE onderaan."
+  ],
+
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#webpage",
+      "url": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken",
+      "name": "Webdesign Veendam: 5 bureaus vergeleken met prijzen (2026)",
+      "description": "Welk webdesignbureau past bij jouw bedrijf in Veendam? We zetten 5 bureaus naast elkaar op prijs, techniek, vestiging en aanpak. Met echte bedragen.",
+      "inLanguage": "nl-NL",
+      "datePublished": "2026-09-06",
+      "dateModified": "2026-09-06",
+      "isPartOf": { "@id": "https://aimi-development.nl/#website" },
+      "author": { "@id": "https://aimi-development.nl/#organization" },
+      "publisher": { "@id": "https://aimi-development.nl/#organization" },
+      "about": {
+        "@type": "Thing",
+        "name": "Webdesign in Veendam"
+      },
+      "mainEntity": {
+        "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#itemlist"
+      },
+      "breadcrumb": {
+        "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#breadcrumb"
+      }
+    },
+
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aimi-development.nl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Webdesign",
+          "item": "https://aimi-development.nl/webdesign"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Webdesignbureaus Veendam vergeleken",
+          "item": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken"
+        }
+      ]
+    },
+
+    {
+      "_comment": "itemListOrder bewust 'Unordered': het is geen ranglijst maar een overzicht. Een ItemListOrderDescending suggereert dat wij de nummer 1 bepalen, en dat is bij een vergelijking waar wij zelf in staan niet houdbaar.",
+      "@type": "ItemList",
+      "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#itemlist",
+      "name": "Webdesignbureaus die actief zijn in Veendam",
+      "description": "Overzicht van vijf webdesignbureaus die zich op Veendam richten, vergeleken op vestiging, prijstransparantie, platform en dienstenaanbod. Gegevens gecontroleerd op 6 september 2026.",
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "ProfessionalService",
+            "name": "NC-Websites",
+            "url": "https://www.nc-websites.nl/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Engelstilstraat 5a",
+              "postalCode": "9671 JE",
+              "addressLocality": "Winschoten",
+              "addressCountry": "NL"
+            },
+            "areaServed": { "@type": "City", "name": "Veendam" },
+            "description": "Full-service bureau uit Winschoten, actief sinds 2009, met circa 20 medewerkers. Combineert webdesign met online marketing, Google Ads en videoproductie."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "ProfessionalService",
+            "name": "Convident",
+            "url": "https://www.convident.nl/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Kraneweg 48",
+              "postalCode": "9718 JS",
+              "addressLocality": "Groningen",
+              "addressCountry": "NL"
+            },
+            "areaServed": { "@type": "City", "name": "Veendam" },
+            "description": "WordPress-specialist uit Groningen, actief sinds 2015. Richt zich op leadgeneratie-websites en breed online marketing."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "ProfessionalService",
+            "@id": "https://aimi-development.nl/website-laten-maken-veendam#localbusiness",
+            "name": "AIMI",
+            "url": "https://aimi-development.nl/",
+            "areaServed": { "@type": "City", "name": "Veendam" },
+            "description": "Als enige van de vijf gevestigd in Veendam zelf. Bouwt maatwerkwebsites op eigen Nederlandse VPS en publiceert vaste tarieven: vanaf 499 euro eenmalig plus 30 euro per maand voor hosting en onderhoud.",
+            "makesOffer": [
+              {
+                "@type": "Offer",
+                "name": "Website laten maken - Starter",
+                "price": "499",
+                "priceCurrency": "EUR",
+                "url": "https://aimi-development.nl/tarieven"
+              },
+              {
+                "@type": "Offer",
+                "name": "Hosting en onderhoud",
+                "priceCurrency": "EUR",
+                "url": "https://aimi-development.nl/onderhoud-hosting",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": "30",
+                  "priceCurrency": "EUR",
+                  "unitCode": "MON"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "ProfessionalService",
+            "name": "ON. Digital IT",
+            "url": "https://weareon-it.nl/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Groningen",
+              "addressCountry": "NL"
+            },
+            "areaServed": { "@type": "City", "name": "Veendam" },
+            "description": "Groningse partij die WordPress-websites en WooCommerce-webshops bouwt en werkt met een vaste prijs na een adviesgesprek."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "ProfessionalService",
+            "name": "Webmazters",
+            "url": "https://webmazters.nl/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Zomertaling 173",
+              "postalCode": "6601 DW",
+              "addressLocality": "Wijchen",
+              "addressCountry": "NL"
+            },
+            "areaServed": { "@type": "City", "name": "Veendam" },
+            "description": "WordPress- en Elementor-bureau uit Wijchen in Gelderland, met een landelijk werkgebied en nadruk op snelheid en lokale SEO."
+          }
+        }
+      ]
+    },
+
+    {
+      "@type": "FAQPage",
+      "@id": "https://aimi-development.nl/webdesignbureau-veendam-vergelijken#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wat kost een website laten maken in Veendam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vier van de vijf bureaus die op Veendam mikken publiceren geen tarieven; je krijgt daar een bedrag na een gesprek. AIMI hanteert vaste prijzen: 499 euro eenmalig voor een eenpagina-website, 749 euro voor een meerpagina-site met CMS, plus 30 euro per maand voor hosting en onderhoud. Marktbreed ligt een zakelijke website in de regio doorgaans tussen 500 en 5.000 euro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is een bureau uit Veendam zelf beter dan een bureau uit Groningen of Winschoten?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Niet automatisch. Afstand zegt niets over kwaliteit, en Winschoten of Groningen is nog geen half uur rijden. Het maakt vooral verschil als je fysiek wilt afspreken of iemand nodig hebt die je klantenkring kent. Voor het technische werk zelf is de locatie van het bureau niet doorslaggevend."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Moet ik voor WordPress kiezen of voor maatwerk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WordPress is de standaard bij de meeste bureaus in de regio en is een prima keuze als je veel zelf wilt aanpassen of later plugins wilt toevoegen. Maatwerk levert doorgaans kortere laadtijden en minder onderhoud op, maar is minder makkelijk door een willekeurige andere bouwer over te nemen. Vraag beide partijen om een bestaande klantsite en meet de snelheid zelf."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hoe lang duurt het voordat mijn website online staat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Geen van de bureaus publiceert een harde doorlooptijd. In de praktijk duurt een eenvoudige zakelijke website enkele weken en een webshop of maatwerktraject langer. De grootste vertraging zit meestal niet bij de bouwer, maar bij het aanleveren van teksten en beeldmateriaal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat zijn de maandelijkse kosten na oplevering?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reken op hosting, SSL, back-ups en updates. Alleen AIMI noemt een bedrag: 30 euro per maand inclusief alles. Bij de andere bureaus krijg je dat pas in de offerte. Reken het altijd door over drie jaar, want 30 euro versus 60 euro per maand scheelt over die periode ruim 1.000 euro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan ik later overstappen naar een ander bureau?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dat hangt af van de afspraken. Vraag vooraf of de domeinnaam op jouw naam komt, of je de broncode meekrijgt en of overstappen een volledige rebuild vereist. Bij WordPress is verhuizen doorgaans eenvoudig; bij maatwerk hangt het af van wat er contractueel is vastgelegd."
+          }
+        }
+      ]
+    }
+  ],
+
+  "_IMPLEMENTATIE": {
+    "hergebruik": [
+      "breadcrumbJsonLd() in src/lib/seo.ts genereert het BreadcrumbList-blok",
+      "faqJsonLd() genereert het FAQPage-blok uit dezelfde faqs-array die de pagina rendert",
+      "ORG_ID uit src/lib/seo.ts is https://aimi-development.nl/#organization - gebruik die constante, niet de letterlijke string",
+      "localBusinessId('/website-laten-maken-veendam') levert de @id waar het AIMI-item naar verwijst"
+    ],
+    "nieuw_te_bouwen": [
+      "Het ItemList-blok en het WebPage-blok bestaan nog niet als helper. Overweeg itemListJsonLd() toe te voegen aan src/lib/seo.ts als er meer vergelijkingspagina's komen."
+    ],
+    "controle_na_publicatie": [
+      "Rich Results Test op de live URL",
+      "Schema Markup Validator voor het volledige @graph",
+      "Alleen FAQ en Breadcrumb geven rich results; ItemList is hier puur entiteitsduiding voor AI-zoekmachines"
+    ]
+  }
+}
