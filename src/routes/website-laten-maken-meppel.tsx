@@ -17,7 +17,7 @@ const data: LocationPageData = {
     "Meppel geldt van oudsher als poort naar Drenthe: een spoorknooppunt met sterke logistieke en grafische bedrijvigheid. AIMI ontwerpt, bouwt en host websites voor ondernemers in Meppel die net zo snel en betrouwbaar moeten werken als het knooppunt waar ze middenin zitten.",
   contextHeading: "Webdesign in Meppel: van spoorknooppunt tot digitale vindbaarheid",
   contextBody: [
-    "Meppel dankt zijn positie voor een belangrijk deel aan de ligging als spoor- en verkeersknooppunt: de stad wordt niet voor niets 'de poort van Drenthe' genoemd. Die functie heeft de lokale economie gevormd. Meppel kent van oudsher een sterke logistieke sector, en daarnaast een opvallend stevige grafische industrie — drukkerijen en aanverwante bedrijven die deels teruggaan tot de negentiende eeuw. Beide sectoren draaien om precisie, betrouwbaarheid en op tijd leveren, en dat zijn precies de eigenschappen die je ook terug wilt zien in de website van een Meppeler bedrijf.",
+    "Meppel dankt zijn positie voor een belangrijk deel aan de ligging als spoor- en verkeersknooppunt: de stad wordt niet voor niets 'de poort van Drenthe' genoemd. Die functie heeft de lokale economie gevormd. Meppel kent van oudsher een sterke logistieke sector, en daarnaast een opvallend stevige grafische industrie, drukkerijen en aanverwante bedrijven die deels teruggaan tot de negentiende eeuw. Beide sectoren draaien om precisie, betrouwbaarheid en op tijd leveren, en dat zijn precies de eigenschappen die je ook terug wilt zien in de website van een Meppeler bedrijf.",
     "Voor een logistiek bedrijf in Meppel is een website die traag laadt of onduidelijk communiceert een slecht visitekaartje: klanten die op zoek zijn naar een betrouwbare partner in transport of opslag verwachten een site die net zo strak georganiseerd oogt als het proces erachter. Voor bedrijven in de grafische sector geldt iets vergelijkbaars, maar dan visueel: een website is voor een drukkerij of vormgevingsbureau ook een presentatiemiddel van het eigen vakmanschap, en moet er dus verzorgd uitzien, met scherp weergegeven beeldmateriaal en een prettige leeservaring.",
     "AIMI bouwt websites op maat, zonder trage page builders, zodat de laadtijd kort blijft op elk apparaat. Voor Meppeler ondernemers betekent dat een website die past bij de nuchtere, functionele mentaliteit van de stad: geen overbodige versieringen, wel een heldere opbouw, snelle techniek en een duidelijke manier om contact op te nemen. Omdat we zelf hosten en de site monitoren, ligt het technisch beheer niet bij jou, maar bij ons.",
   ],
@@ -36,7 +36,7 @@ const data: LocationPageData = {
     },
     {
       title: "Bouw met moderne techniek",
-      desc: "De website wordt gebouwd met lichte, snelle techniek, zodat hij op elk apparaat vlot laadt — belangrijk voor zowel bezoekers als vindbaarheid.",
+      desc: "De website wordt gebouwd met lichte, snelle techniek, zodat hij op elk apparaat vlot laadt, belangrijk voor zowel bezoekers als vindbaarheid.",
     },
     {
       title: "Testen voor livegang",

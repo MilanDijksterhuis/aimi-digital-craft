@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
+import { WELLNESS_EXAMPLES } from "@/components/ExampleSlideshow";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const URL = `${SITE_URL}/website-laten-maken-schoonheidssalon`;
@@ -89,5 +90,14 @@ export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
       faqJsonLd(data.faqs),
     ],
   }),
-  component: () => <BranchPage data={data} />,
+  component: () => (
+    <BranchPage
+      data={data}
+      images={WELLNESS_EXAMPLES}
+      imageAspectRatio="909 / 2160"
+      imageWidth={909}
+      imageHeight={2160}
+      imageMaxWidth="360px"
+    />
+  ),
 });

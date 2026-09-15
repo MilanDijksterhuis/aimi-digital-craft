@@ -9,7 +9,17 @@ export type ServiceExample = { src: string; alt: string };
    BranchPage) dezelfde voorbeeldslideshow kunnen hergebruiken in plaats van
    zonder enige afbeelding te blijven — zie SEO-audit 2026-09-02 (visual.md #2,
    sxo.md SXO-4, geo.md #4). */
-export function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
+export function ExampleSlideshow({
+  images,
+  aspectRatio = "1440 / 900",
+  width = 1440,
+  height = 900,
+}: {
+  images: ServiceExample[];
+  aspectRatio?: string;
+  width?: number;
+  height?: number;
+}) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,7 +66,7 @@ export function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
       style={{
         position: "relative",
         width: "100%",
-        aspectRatio: "1440 / 900",
+        aspectRatio,
         borderRadius: "10px",
         overflow: "hidden",
         border: "1px solid rgba(255,255,255,0.1)",
@@ -68,8 +78,8 @@ export function ExampleSlideshow({ images }: { images: ServiceExample[] }) {
           key={images[index].src}
           src={images[index].src}
           alt={images[index].alt}
-          width={1440}
-          height={900}
+          width={width}
+          height={height}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
           initial={{ opacity: 0 }}
@@ -147,5 +157,22 @@ export const GENERIC_EXAMPLES: ServiceExample[] = [
   {
     src: "/voorbeelden/voorbeeld-website-3-saas.webp",
     alt: "Voorbeeld website voor een SaaS-bedrijf",
+  },
+];
+
+/* Branchespecifieke voorbeelden voor de wellness- & beauty-paginas
+   (kapsalon, nagelstudio, schoonheidssalon, pedicure). */
+export const WELLNESS_EXAMPLES: ServiceExample[] = [
+  {
+    src: "/voorbeelden/voorbeeld-wellness-1-schoonheidssalon.webp",
+    alt: "Voorbeeld website voor een schoonheidssalon",
+  },
+  {
+    src: "/voorbeelden/voorbeeld-wellness-2-nagelstudio.webp",
+    alt: "Voorbeeld website voor een nagelstudio",
+  },
+  {
+    src: "/voorbeelden/voorbeeld-wellness-3-massagestudio.webp",
+    alt: "Voorbeeld website voor een massagestudio",
   },
 ];

@@ -17,6 +17,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_seo_localbusinessid": "localBusinessId()" | kind=code-symbol | source=src/lib/seo.ts:L80 | neighbors=[seo.ts, website-laten-maken-veendam.tsx, website-laten-maken-hoogeveen.tsx]
+- "lib_seo_pagelastmod": "pageLastmod()" | kind=code-symbol | source=src/lib/seo.ts:L173 | neighbors=[UpdatedOn.tsx, seo.ts, webPageJsonLd()]
 - "lib_seo_price_valid_until": "PRICE_VALID_UNTIL" | kind=code-symbol | source=src/lib/seo.ts:L85 | neighbors=[seo.ts, __root.tsx, tarieven.tsx]
 - "lib_status_category_keys": "CATEGORY_KEYS" | kind=code-symbol | source=src/lib/status.ts:L69 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
 - "lib_status_priceforchange": "priceForChange()" | kind=code-symbol | source=src/lib/status.ts:L82 | neighbors=[portal.tsx, status.ts, isCategoryFree()]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_callbacks_migration": "supabase-callbacks-migration.sql" | kind=code-symbol | source=supabase-callbacks-migration.sql:L1 | neighbors=[f958216 leads functions, lead_callbacks, leads]
 - "supabase_leads_migration": "supabase-leads-migration.sql" | kind=code-symbol | source=supabase-leads-migration.sql:L1 | neighbors=[c480d2e leads, lead_activities, leads]
 - "supabase_migration_profiles": "profiles" | kind=code-symbol | source=supabase-migration.sql:L129 | neighbors=[supabase-migration.sql, project_members, projects]
-- "supabase_migration_project_members": "project_members" | kind=code-symbol | source=supabase-migration.sql:L134 | neighbors=[supabase-migration.sql, profiles, projects]
-- "supabase_migration_projects": "projects" | kind=code-symbol | source=supabase-migration.sql:L124 | neighbors=[supabase-migration.sql, project_members, profiles]
 
 ## Instructions
 

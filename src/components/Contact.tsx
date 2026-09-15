@@ -67,7 +67,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20" style={{ background: "#161717" }}>
+    <section id="contact" className="snap-section snap-center py-20" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-3xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
@@ -79,7 +79,7 @@ export function Contact() {
           Stel je vraag of plan een gesprek.
         </motion.h2>
         <p className="mt-4 text-center text-base" style={{ color: "#a4a9b2" }}>
-          Plan een afspraak in onze agenda of stuur een bericht — we reageren binnen een dag. Liever
+          Plan een afspraak in onze agenda of stuur een bericht. We reageren binnen een dag. Liever
           bellen?{" "}
           <a
             href={`tel:${PHONE_E164}`}
@@ -129,9 +129,12 @@ export function Contact() {
             transition={{ duration: 0.5 }}
             className="mt-12 grid md:grid-cols-2 gap-5"
           >
-            <button
+            <motion.button
               type="button"
               onClick={() => setMode("appointment")}
+              whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.15 }}
               className="group text-left p-8 rounded-lg border border-border bg-card hover:border-primary transition-colors"
             >
               <Calendar className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
@@ -139,18 +142,21 @@ export function Contact() {
               <p className="text-sm text-muted-foreground">
                 Boek direct een moment in onze agenda voor een kennismaking of projectbespreking.
               </p>
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
               onClick={() => setMode("form")}
+              whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.15 }}
               className="group text-left p-8 rounded-lg border border-border bg-card hover:border-primary transition-colors"
             >
               <Mail className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
               <h3 className="text-xl mb-2">Stuur een bericht</h3>
               <p className="text-sm text-muted-foreground">
-                Liever schrijven? Vul het contactformulier in — we reageren binnen 24 uur.
+                Liever schrijven? Vul het contactformulier in. We reageren binnen 24 uur.
               </p>
-            </button>
+            </motion.button>
           </motion.div>
         )}
 

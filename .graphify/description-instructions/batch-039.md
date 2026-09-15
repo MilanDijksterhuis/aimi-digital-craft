@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_onderhoud_hosting_data": "data" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L8 | neighbors=[onderhoud-hosting.tsx]
+- "routes_onderhoud_hosting_faqs": "faqs" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L7 | neighbors=[onderhoud-hosting.tsx]
+- "routes_over_ons_overons": "OverOns()" | kind=code-symbol | source=src/routes/over-ons.tsx:L71 | neighbors=[over-ons.tsx]
+- "routes_over_ons_stats": "stats" | kind=code-symbol | source=src/routes/over-ons.tsx:L8 | neighbors=[over-ons.tsx]
+- "routes_over_ons_values": "values" | kind=code-symbol | source=src/routes/over-ons.tsx:L15 | neighbors=[over-ons.tsx]
+- "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L28 | neighbors=[privacybeleid.tsx]
+- "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L59 | neighbors=[__root.tsx]
+- "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L29 | neighbors=[__root.tsx]
 - "routes_root_rootcomponent": "RootComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L294 | neighbors=[__root.tsx]
 - "routes_root_rootshell": "RootShell()" | kind=code-symbol | source=src/routes/__root.tsx:L277 | neighbors=[__root.tsx]
 - "routes_seo_faqs": "faqs" | kind=code-symbol | source=src/routes/seo.tsx:L84 | neighbors=[seo.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_checker_groupneedsattention": "groupNeedsAttention()" | kind=code-symbol | source=src/routes/website-checker.tsx:L485 | neighbors=[website-checker.tsx]
 - "routes_website_checker_groups": "GROUPS" | kind=code-symbol | source=src/routes/website-checker.tsx:L447 | neighbors=[website-checker.tsx]
 - "routes_website_checker_hero_categories": "HERO_CATEGORIES" | kind=code-symbol | source=src/routes/website-checker.tsx:L112 | neighbors=[website-checker.tsx]
-- "routes_website_checker_skeletonbody": "SkeletonBody()" | kind=code-symbol | source=src/routes/website-checker.tsx:L424 | neighbors=[website-checker.tsx]
-- "routes_website_laten_maken_assen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-assen.tsx:L8 | neighbors=[website-laten-maken-assen.tsx]
-- "routes_website_laten_maken_autobedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-autobedrijf.tsx:L7 | neighbors=[website-laten-maken-autobedrijf.tsx]
-- "routes_website_laten_maken_autorijschool_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L7 | neighbors=[website-laten-maken-autorijschool.tsx]
-- "routes_website_laten_maken_bloemist_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-bloemist.tsx:L7 | neighbors=[website-laten-maken-bloemist.tsx]
-- "routes_website_laten_maken_boekhouder_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-boekhouder.tsx:L7 | neighbors=[website-laten-maken-boekhouder.tsx]
-- "routes_website_laten_maken_cateringbedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-cateringbedrijf.tsx:L7 | neighbors=[website-laten-maken-cateringbedrijf.tsx]
-- "routes_website_laten_maken_coevorden_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-coevorden.tsx:L11 | neighbors=[website-laten-maken-coevorden.tsx]
 
 ## Instructions
 

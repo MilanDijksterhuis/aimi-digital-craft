@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_authenticatedportalroute": "AuthenticatedPortalRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L380 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalroutechildren": "AuthenticatedPortalRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1576 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedportalroutewithchildren": "AuthenticatedPortalRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1585 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedroute": "AuthenticatedRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L366 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedroutechildren": "AuthenticatedRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1588 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedroutewithchildren": "AuthenticatedRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1602 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_authenticatedserverroute": "AuthenticatedServerRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L375 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_b03bb73bce86422c6a74b3cfc829f2dddottxtroute": "B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L355 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_branchesroute": "BranchesRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L350 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_casesroute": "CasesRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L116 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_contactroute": "ContactRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L345 | neighbors=[routeTree.gen.ts]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "src_routetree_gen_websitelatenmakenboekhouderroute": "WebsiteLatenMakenBoekhouderRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L246 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakencateringbedrijfroute": "WebsiteLatenMakenCateringbedrijfRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L240 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakencoevordenroute": "WebsiteLatenMakenCoevordenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L234 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakendrachtenroute": "WebsiteLatenMakenDrachtenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L228 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenemmenroute": "WebsiteLatenMakenEmmenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L223 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakengroningenroute": "WebsiteLatenMakenGroningenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L217 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenheerenveenroute": "WebsiteLatenMakenHeerenveenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L211 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenhoogeveenroute": "WebsiteLatenMakenHoogeveenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L205 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenhoogezandroute": "WebsiteLatenMakenHoogezandRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L199 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenhovenierroute": "WebsiteLatenMakenHovenierRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L193 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenkapsalonroute": "WebsiteLatenMakenKapsalonRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L187 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

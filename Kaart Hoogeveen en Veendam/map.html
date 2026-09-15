@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+  html,body{margin:0;padding:0;background:#f4f3f1;}
+  #wrap{width:900px;height:1050px;background:#f4f3f1;display:flex;align-items:center;justify-content:center;font-family:Helvetica,Arial,sans-serif;}
+</style>
+</head>
+<body>
+<div id="wrap"><svg id="map" width="900" height="1050"></svg></div>
+<script>
+const GREY_DARK = "#3f3f46";
+const GREY_LINE = "#a8a7a4";
+const RED = "#d92d2d";
+const BG = "#f4f3f1";
+const LAND = "#e4e2de";
+
+const cities = [
+  { name: "Hoogeveen", lat: 52.7225, lon: 6.4764 },
+  { name: "Veendam", lat: 53.1069, lon: 6.8683 }
+];
+
+Promise.all([
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json"),
+  d3.json("https://cdn.jsdelivr.net/gh/martynafford/natural-earth-geojson@master/10m/physical/ne_10m_lakes.json").catch(() => null)
+]).then(([topology, lakes]) => {
+  const countries = topojson.feature(topology, topology.objects.countries);
+  let nl = countries.features.find(f => f.id === "528" || f.id === 528);
+  // keep only mainland (drop Caribbean islands, far from Europe)
+  const isMainlandRing = ring => ring.every(([lon]) => lon > -20);
+  if (nl.geometry.type === "MultiPolygon") {
+    nl = { ...nl, geometry: { type: "MultiPolygon", coordinates: nl.geometry.coordinates.filter(poly => isMainlandRing(poly[0])) } };
+  }
+
+  let ijsselmeer = null;
+  if (lakes && lakes.features) {
+    ijsselmeer = lakes.features.find(f => (f.properties.name || "").toLowerCase().includes("ijsselmeer"));
+  }
+
+  const svg = d3.select("#map");
+  const width = 900, height = 1050;
+
+  const projection = d3.geoMercator().fitExtent([[80,80],[width-80,height-200]], nl);
+  const path = d3.geoPath().projection(projection);
+
+  svg.append("rect").attr("width", width).attr("height", height).attr("fill", BG);
+
+  svg.append("path")
+    .datum(nl)
+    .attr("d", path)
+    .attr("fill", LAND)
+    .attr("stroke", GREY_LINE)
+    .attr("stroke-width", 2);
+
+  if (ijsselmeer) {
+    svg.append("path")
+      .datum(ijsselmeer)
+      .attr("d", path)
+      .attr("fill", BG)
+      .attr("stroke", GREY_LINE)
+      .attr("stroke-width", 1.5);
+  }
+
+  const g = svg.append("g");
+
+  cities.forEach(c => {
+    const [x, y] = projection([c.lon, c.lat]);
+    const pin = g.append("g").attr("transform", `translate(${x},${y})`);
+    pin.append("circle").attr("r", 22).attr("fill", RED).attr("stroke", BG).attr("stroke-width", 4);
+    pin.append("circle").attr("r", 7).attr("fill", BG);
+    pin.append("text")
+      .attr("x", 30).attr("y", 8)
+      .attr("font-size", 34)
+      .attr("font-family", "Helvetica, Arial, sans-serif")
+      .attr("font-weight", 700)
+      .attr("fill", GREY_DARK)
+      .text(c.name);
+  });
+
+  svg.append("text")
+    .attr("x", width/2).attr("y", height-70)
+    .attr("text-anchor", "middle")
+    .attr("font-family", "Helvetica, Arial, sans-serif")
+    .attr("font-size", 26)
+    .attr("fill", GREY_LINE)
+    .text("Nederland");
+
+  document.title = "map-ready";
+  window.__mapReady = true;
+});
+</script>
+</body>
+</html>

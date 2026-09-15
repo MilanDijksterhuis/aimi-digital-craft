@@ -49,7 +49,7 @@ export function ProcessTimeline() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="process" className="py-12" style={{ background: "#161717" }}>
+    <section id="process" className="snap-section snap-center py-12" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.h2
@@ -81,9 +81,12 @@ export function ProcessTimeline() {
             const isDone = i < active;
 
             return (
-              <button
+              <motion.button
                 key={phase.id}
                 onClick={() => setActive(i)}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.15 }}
                 className="group flex-1 text-left lg:border-r last:border-r-0"
                 style={{ borderColor: "#2a2b2b" }}
               >
@@ -129,7 +132,7 @@ export function ProcessTimeline() {
                     <CheckCircle size={14} strokeWidth={1.5} style={{ color: "#49de80", marginTop: 2 }} />
                   )}
                 </div>
-              </button>
+              </motion.button>
             );
           })}
         </div>
@@ -215,8 +218,11 @@ export function ProcessTimeline() {
                     ))}
                   </div>
 
-                  <a
+                  <motion.a
                     href="#contact"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
                     className="inline-flex items-center gap-2 mt-8 text-sm font-medium"
                     style={{
                       color: "#ffffff",
@@ -228,7 +234,7 @@ export function ProcessTimeline() {
                     }}
                   >
                     Plan een gratis intake
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             );

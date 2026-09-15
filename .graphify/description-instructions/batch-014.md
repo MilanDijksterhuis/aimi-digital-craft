@@ -17,9 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_callbackagenda_sameday": "sameDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L50 | neighbors=[CallbackAgenda.tsx, isToday(), startOfDay()]
 - "components_callbackagenda_startofday": "startOfDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L39 | neighbors=[CallbackAgenda.tsx, sameDay(), startOfWeek()]
 - "components_contact_contact": "Contact()" | kind=code-symbol | source=src/components/Contact.tsx:L11 | neighbors=[Contact.tsx, contact.tsx, index.tsx]
-- "components_exampleslideshow_generic_examples": "GENERIC_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L138 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx]
+- "components_exampleslideshow_generic_examples": "GENERIC_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L148 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx]
+- "components_exampleslideshow_serviceexample": "ServiceExample" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L6 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, ServicePage.tsx]
 - "components_faq_faq": "FAQ()" | kind=code-symbol | source=src/components/FAQ.tsx:L223 | neighbors=[FAQ.tsx, index.tsx, faq.tsx]
 - "components_faq_faqitems": "faqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L22 | neighbors=[FAQ.tsx, faq.tsx, index.tsx]
 - "components_leadspanel_leaddetail": "LeadDetail()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L620 | neighbors=[LeadsPanel.tsx, initials(), relTime()]
@@ -55,8 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_rate_limit_getclientip": "getClientIp()" | kind=code-symbol | source=src/lib/rate-limit.ts:L54 | neighbors=[rate-limit.ts, website-checker.functions.ts, server.ts]
 - "lib_seo_businessidentityjsonld": "businessIdentityJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L64 | neighbors=[seo.ts, postalAddress(), __root.tsx]
 - "lib_seo_contactpagejsonld": "contactPageJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L338 | neighbors=[seo.ts, ld(), contact.tsx]
-- "lib_seo_localbusinessid": "localBusinessId()" | kind=code-symbol | source=src/lib/seo.ts:L80 | neighbors=[seo.ts, website-laten-maken-veendam.tsx, website-laten-maken-hoogeveen.tsx]
-- "lib_seo_pagelastmod": "pageLastmod()" | kind=code-symbol | source=src/lib/seo.ts:L173 | neighbors=[UpdatedOn.tsx, seo.ts, webPageJsonLd()]
 
 ## Instructions
 

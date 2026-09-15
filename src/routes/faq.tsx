@@ -11,13 +11,13 @@ const faqs = faqItems;
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "Veelgestelde vragen over websites laten maken — AIMI" },
+      { title: "Veelgestelde vragen over websites laten maken: AIMI" },
       {
         name: "description",
         content:
           "Antwoorden op veelgestelde vragen over websites laten maken, doorlooptijd, prijzen, hosting en samenwerken met AIMI. Alles wat je wil weten voor je begint.",
       },
-      { property: "og:title", content: "Veelgestelde vragen — AIMI" },
+      { property: "og:title", content: "Veelgestelde vragen: AIMI" },
       {
         property: "og:description",
         content: "Antwoorden op veelgestelde vragen over websites, doorlooptijd, hosting en samenwerken met AIMI.",
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/faq")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Veelgestelde vragen — AIMI" },
+      { name: "twitter:title", content: "Veelgestelde vragen: AIMI" },
       {
         name: "twitter:description",
         content: "Antwoorden op veelgestelde vragen over websites, doorlooptijd, hosting en samenwerken met AIMI.",
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/faq")({
       faqJsonLd(faqs),
       webPageJsonLd({
         path: "/faq",
-        name: "Veelgestelde vragen over websites laten maken — AIMI",
+        name: "Veelgestelde vragen over websites laten maken: AIMI",
         description:
           "Antwoorden op veelgestelde vragen over websites laten maken, prijzen, werkwijze, techniek, webshops en onderhoud bij AIMI.",
       }),

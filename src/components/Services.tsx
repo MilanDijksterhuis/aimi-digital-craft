@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const services = [
   {
@@ -57,7 +57,7 @@ export function Services() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="services" className="py-12" style={{ background: "#161717" }}>
+    <section id="services" className="snap-section snap-center py-12" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
 
         <motion.h2
@@ -78,10 +78,16 @@ export function Services() {
             {services.map((s, i) => {
               const isActive = active === i;
               return (
-                <button
+                <motion.button
                   key={s.href}
                   onClick={() => setActive(i)}
-                  className="group text-left py-4 pr-4 flex items-start gap-5 transition-all duration-200"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 4, transition: { duration: 0.15, delay: 0 } }}
+                  whileTap={{ scale: 0.98, transition: { duration: 0.15, delay: 0 } }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="group text-left py-4 pr-4 flex items-start gap-5"
                   style={{ borderColor: "#2a2b2b" }}
                 >
                   <div className="flex-1 min-w-0">
@@ -127,7 +133,7 @@ export function Services() {
                     className="w-px self-stretch shrink-0"
                     style={{ background: "#fe2c02", originY: "center" }}
                   />
-                </button>
+                </motion.button>
               );
             })}
           </div>
@@ -137,10 +143,17 @@ export function Services() {
             className="relative rounded-2xl p-6 lg:p-8 overflow-hidden"
             style={{ background: "#1e1f1f", minHeight: 300 }}
           >
-            {services.map((s, i) => {
-              const isActive = active === i;
-              return (
-                <div key={s.href} style={{ display: isActive ? "block" : "none" }}>
+            <AnimatePresence mode="wait">
+              {(() => {
+                const s = services[active];
+                return (
+                  <motion.div
+                    key={s.href}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                  >
                   <h3
                     className="text-white mb-3"
                     style={{
@@ -179,8 +192,11 @@ export function Services() {
                   </div>
 
                   <div className="flex flex-wrap gap-3 mt-6">
-                    <a
+                    <motion.a
                       href={s.href}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
                       className="inline-flex items-center gap-2 text-sm font-medium"
                       style={{
                         color: "#0f0e0d",
@@ -191,12 +207,15 @@ export function Services() {
                       }}
                     >
                       Meer over {s.title.toLowerCase()}
-                    </a>
+                    </motion.a>
                     {/* Was `#contact`: dat anker bestaat alleen op de homepage,
                         terwijl <Services/> ook op de 15 plaatspagina's en op
                         /webdesign staat. Daar wees deze knop dus nergens heen. */}
-                    <a
+                    <motion.a
                       href="/contact"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
                       className="inline-flex items-center gap-2 text-sm font-medium"
                       style={{
                         color: "#ffffff",
@@ -208,11 +227,12 @@ export function Services() {
                       }}
                     >
                       Neem contact op
-                    </a>
+                    </motion.a>
                   </div>
-                </div>
-              );
-            })}
+                  </motion.div>
+                );
+              })()}
+            </AnimatePresence>
           </div>
 
         </div>

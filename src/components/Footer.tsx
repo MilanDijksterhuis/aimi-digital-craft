@@ -108,7 +108,10 @@ function LinkRow({ heading, items }: { heading: string; items: { label: string; 
 export function Footer() {
   const hasAddress = Boolean(ADDRESS.streetAddress && ADDRESS.postalCode);
   return (
-    <footer style={{ background: "#161717", borderTop: "1px solid #2a2b2b", fontFamily: FONT }}>
+    <footer
+      className="snap-footer"
+      style={{ background: "#161717", borderTop: "1px solid #2a2b2b", fontFamily: FONT }}
+    >
       <div className="mx-auto max-w-7xl px-6 py-14">
         {/* NAP-blok (SEO-audit 2026-09-02: local.md #1, content.md CQ-1) —
             telefoonnummer stond nergens zichtbaar op de site, alleen als
@@ -131,7 +134,7 @@ export function Footer() {
           >
             sales@aimi-development.nl
           </a>
-          <span>Veendam — actief sinds {ACTIVE_SINCE_YEAR}</span>
+          <span>Veendam, actief sinds {ACTIVE_SINCE_YEAR}</span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
@@ -173,7 +176,7 @@ export function Footer() {
           >
             {hasAddress && (
               <address className="not-italic">
-                AIMI — {ADDRESS.streetAddress}, {ADDRESS.postalCode} {ADDRESS.addressLocality}
+                AIMI: {ADDRESS.streetAddress}, {ADDRESS.postalCode} {ADDRESS.addressLocality}
               </address>
             )}
             {KVK && <span>KvK {KVK}</span>}
@@ -188,8 +191,8 @@ export function Footer() {
           <span className="text-white font-medium">
             AIMI<span style={{ color: "#fe2c02" }}>.</span>
           </span>
-          <span>Webdesign uit Noord-Nederland — voor heel Nederland</span>
-          <span>© {new Date().getFullYear()} AIMI — Alle rechten voorbehouden</span>
+          <span>Webdesign uit Noord-Nederland, voor heel Nederland</span>
+          <span>© {new Date().getFullYear()} AIMI. Alle rechten voorbehouden</span>
         </div>
       </div>
     </footer>

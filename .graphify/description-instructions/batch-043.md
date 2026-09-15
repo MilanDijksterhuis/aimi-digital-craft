@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_websitelatenmakendrachtenroute": "WebsiteLatenMakenDrachtenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L228 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenemmenroute": "WebsiteLatenMakenEmmenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L223 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakengroningenroute": "WebsiteLatenMakenGroningenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L217 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenheerenveenroute": "WebsiteLatenMakenHeerenveenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L211 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenhoogeveenroute": "WebsiteLatenMakenHoogeveenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L205 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenhoogezandroute": "WebsiteLatenMakenHoogezandRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L199 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenhovenierroute": "WebsiteLatenMakenHovenierRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L193 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenkapsalonroute": "WebsiteLatenMakenKapsalonRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L187 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenklusbedrijfroute": "WebsiteLatenMakenKlusbedrijfRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L181 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenleeuwardenroute": "WebsiteLatenMakenLeeuwardenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L175 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenloodgieterroute": "WebsiteLatenMakenLoodgieterRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L169 | neighbors=[routeTree.gen.ts]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_migration_dns_checks": "dns_checks" | kind=code-symbol | source=supabase-migration.sql:L32 | neighbors=[supabase-migration.sql]
 - "supabase_migration_monitoring_alerts": "monitoring_alerts" | kind=code-symbol | source=supabase-migration.sql:L42 | neighbors=[supabase-migration.sql]
 - "supabase_migration_role_permissions": "role_permissions" | kind=code-symbol | source=supabase-migration.sql:L59 | neighbors=[supabase-migration.sql]
-- "supabase_migration_site_response_times": "site_response_times" | kind=code-symbol | source=supabase-migration.sql:L7 | neighbors=[supabase-migration.sql]
-- "supabase_migration_ssl_checks": "ssl_checks" | kind=code-symbol | source=supabase-migration.sql:L19 | neighbors=[supabase-migration.sql]
-- "supabase_telegram_changes_migration": "supabase-telegram-changes-migration.sql" | kind=code-symbol | source=supabase-telegram-changes-migration.sql:L1 | neighbors=[fc7da2d animaties en paginas]
-- "supabase_types_compositetypes": "CompositeTypes" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1525 | neighbors=[types.ts]
-- "supabase_types_constants": "Constants" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1542 | neighbors=[types.ts]
-- "supabase_types_databasewithoutinternals": "DatabaseWithoutInternals" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1425 | neighbors=[types.ts]
-- "supabase_types_defaultschema": "DefaultSchema" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1427 | neighbors=[types.ts]
-- "supabase_types_enums": "Enums" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1508 | neighbors=[types.ts]
 
 ## Instructions
 

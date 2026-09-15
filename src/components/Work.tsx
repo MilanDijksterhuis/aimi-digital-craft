@@ -14,7 +14,7 @@ export function Work() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
           <div>
-            <p className="section-label mb-4">03 — Selected work</p>
+            <p className="section-label mb-4">03: Selected work</p>
             <h2>Recent shipped.</h2>
           </div>
           <a href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">

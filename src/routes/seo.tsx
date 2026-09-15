@@ -119,13 +119,13 @@ const faqs = [
 export const Route = createFileRoute("/seo")({
   head: () => ({
     meta: [
-      { title: "SEO laten doen | Snelheid & lokale vindbaarheid — AIMI" },
+      { title: "SEO laten doen | Snelheid & lokale vindbaarheid: AIMI" },
       {
         name: "description",
         content:
           "SEO laten doen bij AIMI: technische SEO, Core Web Vitals, zoekintentie en lokale vindbaarheid. Geen beloftes over posities, wel werk waar je invloed op hebt.",
       },
-      { property: "og:title", content: "SEO laten doen — AIMI" },
+      { property: "og:title", content: "SEO laten doen: AIMI" },
       {
         property: "og:description",
         content: "Technische SEO, snelheid, zoekintentie en lokale vindbaarheid. Zonder gouden bergen te beloven.",
@@ -134,7 +134,7 @@ export const Route = createFileRoute("/seo")({
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "SEO laten doen — AIMI" },
+      { name: "twitter:title", content: "SEO laten doen: AIMI" },
       {
         name: "twitter:description",
         content: "Technische SEO, snelheid, zoekintentie en lokale vindbaarheid. Zonder gouden bergen te beloven.",
@@ -247,7 +247,7 @@ function SeoPage() {
               {notPromised.map((n) => (
                 <li key={n} className="flex items-start gap-3 text-[15px] leading-relaxed" style={{ color: "#a4a9b2" }}>
                   <span className="mt-1 shrink-0" style={{ color: "#868b94" }}>
-                    —
+                    -
                   </span>
                   <span>{n}</span>
                 </li>

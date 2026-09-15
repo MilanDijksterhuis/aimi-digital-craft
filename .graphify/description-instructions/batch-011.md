@@ -26,7 +26,6 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "components_answerblock": "AnswerBlock.tsx" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L1 | neighbors=[dca01f9 pagina updates, AnswerBlock(), index.tsx, W, prices, facts] | lang=en
 - "components_updatedon_updatedon": "UpdatedOn()" | kind=code-symbol | source=src/components/UpdatedOn.tsx:L7 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, ServicePage.tsx, UpdatedOn.tsx, faq.tsx, tarieven.tsx] | lang=en
 - "design_handoff_meer_diensten_support_collectprops": "collectProps()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L415 | neighbors=[support.js, compileAttr(), kebabToCamel(), walkComponent(), walkElement(), walkXImport()] | lang=en
 - "design_handoff_meer_diensten_support_compileattr": "compileAttr()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L401 | neighbors=[support.js, collectProps(), walkComponent(), walkFor(), walkIf(), walkXImport()] | lang=en
@@ -60,6 +59,7 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d38d9ab3d106b833295f59fd31ca4d775b3ee14a": "d38d9ab Add IndexNow key route" | kind=Commit | source=git | neighbors=[aabf034 SEO, main, 59bb970 eyoo, b03bb73bce86422c6a74b3cfc829f2dd[.]txt.…, indexnow-submit.mjs] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ec1f3228cec9a33d761d219ab621cf344e07acd0": "ec1f322 feat(ui): Diensten-dropdown in nav + tijdlijn zonder nummers + sfeer-ac…" | kind=Commit | source=git | neighbors=[2d81f50 feat(seo): vervang /cases door …, main, 04c01f8 SEO, Nav.tsx, ServicePage.tsx] | lang=nl
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fa2ea52f59de7d272b890bac4dfe7ad4b8edade2": "fa2ea52 feat(seo): nav + uitgebreide footer met interne links (geen orphan page…" | kind=Commit | source=git | neighbors=[e0f6b72 feat(seo): interne links op lok…, main, ef44acd feat(seo): sitemap + llms.txt a…, Footer.tsx, Nav.tsx] | lang=nl
+- "components_exampleslideshow_wellness_examples": "WELLNESS_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L165 | neighbors=[ExampleSlideshow.tsx, website-laten-maken-kapsalon.tsx, website-laten-maken-nagelstudio.tsx, website-laten-maken-pedicure.tsx, website-laten-maken-schoonheidssalon.tsx] | lang=en
 - "components_services_services": "services" | kind=code-symbol | source=src/components/Services.tsx:L4 | neighbors=[LocationLanding.tsx, Services.tsx, index.tsx, webdesign.tsx, LocationPageV2.tsx] | lang=en
 - "components_truststrip": "TrustStrip.tsx" | kind=code-symbol | source=src/components/TrustStrip.tsx:L1 | neighbors=[aabf034 SEO, BranchPage.tsx, LocationPageV2.tsx, TrustStrip(), seo.ts] | lang=en
 - "components_work": "Work.tsx" | kind=code-symbol | source=src/components/Work.tsx:L1 | neighbors=[ecdbe8e fixes, projects, Work(), 98edc37 Changes, ab14295 Design overhauled, A11y-bar weg] | lang=en

@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TrustStrip } from "@/components/TrustStrip";
-import { ExampleSlideshow, GENERIC_EXAMPLES } from "@/components/ExampleSlideshow";
+import { ExampleSlideshow, GENERIC_EXAMPLES, type ServiceExample } from "@/components/ExampleSlideshow";
 import { UpdatedOn } from "@/components/UpdatedOn";
 import { webPageJsonLd } from "@/lib/seo";
 
@@ -76,25 +76,23 @@ function ApproachSection({ data }: { data: BranchPageData }) {
       >
         {data.approachHeading}
       </h2>
-      <ol style={{ marginTop: "22px", display: "grid", gap: "18px" }}>
-        {data.approachSteps.map((s, i) => (
-          <li key={s.title} style={{ display: "flex", gap: "16px" }}>
-            <span style={{ color: RED, fontWeight: 700, fontSize: "13px", minWidth: "22px" }}>
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <div style={{ fontWeight: 600, fontSize: "14.5px" }}>{s.title}</div>
-              <div
-                style={{
-                  marginTop: "4px",
-                  fontSize: "13.5px",
-                  lineHeight: 1.65,
-                  color: "#b6b6bd",
-                  maxWidth: "60ch",
-                }}
-              >
-                {s.desc}
-              </div>
+      <ol style={{ marginTop: "22px", display: "grid", gap: "18px", listStyle: "none", padding: 0 }}>
+        {data.approachSteps.map((s) => (
+          <li
+            key={s.title}
+            style={{ paddingLeft: "16px", borderLeft: `2px solid ${RED}` }}
+          >
+            <div style={{ fontWeight: 600, fontSize: "14.5px" }}>{s.title}</div>
+            <div
+              style={{
+                marginTop: "4px",
+                fontSize: "13.5px",
+                lineHeight: 1.65,
+                color: "#b6b6bd",
+                maxWidth: "60ch",
+              }}
+            >
+              {s.desc}
             </div>
           </li>
         ))}
@@ -148,7 +146,27 @@ const sectionRenderers: Record<BranchSectionId, (data: BranchPageData) => ReactE
   faq: (data) => <FaqSection key="faq" data={data} />,
 };
 
-export function BranchPage({ data }: { data: BranchPageData }) {
+export function BranchPage({
+  data,
+  images = GENERIC_EXAMPLES,
+  /** Standaard 1440/900 (brede homepage-screenshots). Sommige aangeleverde
+      voorbeelden zijn volle-pagina-exports met een heel andere (staande)
+      verhouding — die moet hier overeenkomen, anders knipt object-fit:
+      cover het beeld af en lijkt de foto ingezoomd. */
+  imageAspectRatio = "1440 / 900",
+  imageWidth = 1440,
+  imageHeight = 900,
+  /** Optionele maximumbreedte voor de kolom, nodig bij een staand formaat
+      zodat de afbeelding niet torenhoog wordt op de gebruikelijke breedte. */
+  imageMaxWidth,
+}: {
+  data: BranchPageData;
+  images?: ServiceExample[];
+  imageAspectRatio?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageMaxWidth?: string;
+}) {
   const { branch, intro, related, kicker } = data;
   // Alle brancheslugs zijn /website-laten-maken-{branch}; pad voor het
   // WebPage-schema en de "Bijgewerkt op"-datum uit PAGE_DATES.
@@ -263,8 +281,13 @@ export function BranchPage({ data }: { data: BranchPageData }) {
             </div>
             {/* SEO-audit 2026-09-02 (visual.md #2, sxo.md SXO-4): branchepagina's
                 hadden geen enkele afbeelding. */}
-            <div className="mt-10 md:mt-0">
-              <ExampleSlideshow images={GENERIC_EXAMPLES} />
+            <div className="mt-10 md:mt-0" style={imageMaxWidth ? { width: imageMaxWidth, marginLeft: "auto" } : undefined}>
+              <ExampleSlideshow
+                images={images}
+                aspectRatio={imageAspectRatio}
+                width={imageWidth}
+                height={imageHeight}
+              />
             </div>
           </section>
         </div>

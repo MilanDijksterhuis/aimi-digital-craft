@@ -17,15 +17,20 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_locationpagev2_faqsection": "FaqSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L208 | neighbors=[LocationPageV2.tsx]
+- "components_locationpagev2_local_services": "LOCAL_SERVICES" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L27 | neighbors=[LocationPageV2.tsx]
+- "components_locationpagev2_locationsectionid": "LocationSectionId" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L22 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_sectionrenderers": "sectionRenderers" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L241 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_workflowsection": "WorkflowSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L124 | neighbors=[LocationPageV2.tsx]
-- "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L37 | neighbors=[Nav.tsx]
-- "components_nav_mobilemenu": "MobileMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L180 | neighbors=[Nav.tsx]
+- "components_nav_branchegroups": "brancheGroups" | kind=code-symbol | source=src/components/Nav.tsx:L39 | neighbors=[Nav.tsx]
+- "components_nav_branchesmenuitem": "BranchesMenuItem()" | kind=code-symbol | source=src/components/Nav.tsx:L85 | neighbors=[Nav.tsx]
+- "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L47 | neighbors=[Nav.tsx]
+- "components_nav_mobilemenu": "MobileMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L247 | neighbors=[Nav.tsx]
 - "components_nav_motionlink": "MotionLink" | kind=code-symbol | source=src/components/Nav.tsx:L6 | neighbors=[Nav.tsx]
-- "components_nav_navlink": "NavLink()" | kind=code-symbol | source=src/components/Nav.tsx:L45 | neighbors=[Nav.tsx]
+- "components_nav_navlink": "NavLink()" | kind=code-symbol | source=src/components/Nav.tsx:L55 | neighbors=[Nav.tsx]
 - "components_nav_servicecategories": "serviceCategories" | kind=code-symbol | source=src/components/Nav.tsx:L8 | neighbors=[Nav.tsx]
 - "components_nav_services": "services" | kind=code-symbol | source=src/components/Nav.tsx:L35 | neighbors=[Nav.tsx]
-- "components_nav_servicesmenu": "ServicesMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L72 | neighbors=[Nav.tsx]
+- "components_nav_servicesmenu": "ServicesMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L135 | neighbors=[Nav.tsx]
 - "components_onboardingwizard_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L16 | neighbors=[OnboardingWizard.tsx]
 - "components_onboardingwizard_contacts": "Contacts" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L17 | neighbors=[OnboardingWizard.tsx]
 - "components_onboardingwizard_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L256 | neighbors=[OnboardingWizard.tsx]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_portalonboardingtour_stepcompany": "StepCompany()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L300 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_stepcontact": "StepContact()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L315 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_stepcontacts": "StepContacts()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L346 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepproject": "StepProject()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L336 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L370 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portalonboardingtour_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L207 | neighbors=[PortalOnboardingTour.tsx]
-- "components_portaltutorial_fadevariants": "fadeVariants" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L45 | neighbors=[PortalTutorial.tsx]
-- "components_portaltutorial_progressdots": "ProgressDots()" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L151 | neighbors=[PortalTutorial.tsx]
 
 ## Instructions
 

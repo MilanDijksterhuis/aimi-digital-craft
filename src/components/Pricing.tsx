@@ -35,7 +35,7 @@ const tiers = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-20" style={{ background: "#161717" }}>
+    <section id="pricing" className="snap-section snap-center py-20" style={{ background: "#161717" }}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -62,6 +62,7 @@ export function Pricing() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              whileHover={{ y: -6, borderColor: "rgba(255,255,255,0.3)" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="relative flex flex-col p-8"
               style={{
@@ -114,8 +115,11 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <a
+              <motion.a
                 href="#contact"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
                 className="inline-flex items-center justify-center text-sm font-medium transition-opacity duration-150 hover:opacity-75"
                 style={{
                   background: t.featured ? "#ffffff" : "transparent",
@@ -127,7 +131,7 @@ export function Pricing() {
                 }}
               >
                 Neem contact op
-              </a>
+              </motion.a>
             </motion.div>
           ))}
         </div>
@@ -142,8 +146,11 @@ export function Pricing() {
           <p className="text-sm mb-6" style={{ color: "#a4a9b2" }}>
             Heb je al een site en wil je alleen hosting, performance of SEO? Dat kan ook los.
           </p>
-          <a
+          <motion.a
             href="/meer-diensten"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
             className="group inline-flex items-center gap-2 text-sm font-medium text-white transition-opacity duration-150 hover:opacity-75"
             style={{
               border: "1px solid rgba(255,255,255,0.2)",
@@ -154,7 +161,7 @@ export function Pricing() {
           >
             Meer diensten
             <ArrowRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5" />
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

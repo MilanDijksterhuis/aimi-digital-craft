@@ -34,6 +34,16 @@ const serviceCategories = [
 
 const services = serviceCategories.flatMap((c) => c.items);
 
+// Groepen van de /branches pagina (src/routes/branches.tsx) — hier los
+// gehouden i.p.v. geïmporteerd om een circulaire import Nav <-> route te vermijden.
+const brancheGroups = [
+  { id: "wellness-beauty", label: "Wellness & beauty" },
+  { id: "bouw-klussen", label: "Bouw & klussen" },
+  { id: "mobiliteit", label: "Mobiliteit" },
+  { id: "zakelijke-dienstverlening", label: "Zakelijke dienstverlening" },
+  { id: "horeca-retail", label: "Horeca & retail" },
+];
+
 const links = [
   { label: "Tarieven", href: "/tarieven" },
   { label: "Werkwijze", href: "/werkwijze" },
@@ -66,6 +76,59 @@ function NavLink({ label, href }: { label: string; href: string }) {
         style={{ position: "absolute", bottom: "8px", left: 0, right: 0, height: "1px", background: "#fe2c02", display: "block" }}
       />
     </MotionLink>
+  );
+}
+
+/** Rij "Webdesign per branche" binnen het diensten-mega-menu: bij hover
+    klapt de lijst met branchegroepen uit, van daaruit navigeer je verder
+    naar de bijbehorende sectie op /branches. */
+function BranchesMenuItem({ s }: { s: { label: string; href: string; desc: string } }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="rounded-[10px] transition-colors"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      style={{ background: open ? "rgba(254,44,2,0.10)" : "transparent" }}
+    >
+      <Link to={s.href} role="menuitem" className="flex flex-col gap-0.5 px-3 py-2.5" style={{ fontFamily: FONT, textDecoration: "none" }}>
+        <span className="flex items-center justify-between text-[13.5px] font-medium" style={{ color: "#ffffff" }}>
+          {s.label}
+          <motion.svg
+            width="8"
+            height="8"
+            viewBox="0 0 12 12"
+            animate={{ rotate: open ? 90 : 0 }}
+            transition={{ duration: 0.15 }}
+            style={{ flexShrink: 0, marginLeft: "8px" }}
+          >
+            <path d="M4 2 L8 6 L4 10" fill="none" stroke="#868b94" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </motion.svg>
+        </span>
+        <span className="text-[12px]" style={{ color: "#a4a9b2" }}>
+          {s.desc}
+        </span>
+      </Link>
+      <div style={{ maxHeight: open ? "220px" : "0px", overflow: "hidden", transition: "max-height 0.18s ease-out" }}>
+        <div className="px-3 pb-2 pt-1 flex flex-col gap-0.5">
+          {brancheGroups.map((g) => (
+            <Link
+              key={g.id}
+              to="/branches"
+              hash={g.id}
+              role="menuitem"
+              className="rounded-[8px] px-2.5 py-1.5 text-[12px] transition-colors"
+              style={{ color: "#c7c9ce", textDecoration: "none" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            >
+              {g.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -149,24 +212,28 @@ function ServicesMenu() {
               >
                 {cat.label}
               </div>
-              {cat.items.map((s) => (
-                <Link
-                  key={s.href}
-                  to={s.href}
-                  role="menuitem"
-                  className="group flex flex-col gap-0.5 rounded-[10px] px-3 py-2.5 transition-colors"
-                  style={{ fontFamily: FONT, textDecoration: "none" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(254,44,2,0.10)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                >
-                  <span className="text-[13.5px] font-medium" style={{ color: "#ffffff" }}>
-                    {s.label}
-                  </span>
-                  <span className="text-[12px]" style={{ color: "#a4a9b2" }}>
-                    {s.desc}
-                  </span>
-                </Link>
-              ))}
+              {cat.items.map((s) =>
+                s.href === "/branches" ? (
+                  <BranchesMenuItem key={s.href} s={s} />
+                ) : (
+                  <Link
+                    key={s.href}
+                    to={s.href}
+                    role="menuitem"
+                    className="group flex flex-col gap-0.5 rounded-[10px] px-3 py-2.5 transition-colors"
+                    style={{ fontFamily: FONT, textDecoration: "none" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(254,44,2,0.10)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                  >
+                    <span className="text-[13.5px] font-medium" style={{ color: "#ffffff" }}>
+                      {s.label}
+                    </span>
+                    <span className="text-[12px]" style={{ color: "#a4a9b2" }}>
+                      {s.desc}
+                    </span>
+                  </Link>
+                ),
+              )}
             </div>
           ))}
         </div>
@@ -284,6 +351,22 @@ function MobileMenu() {
                             {s.desc}
                           </span>
                         </Link>
+                        {s.href === "/branches" && (
+                          <ul className="mt-1 space-y-1 pl-3">
+                            {brancheGroups.map((g) => (
+                              <li key={g.id}>
+                                <Link
+                                  to="/branches"
+                                  hash={g.id}
+                                  className="block rounded-[8px] px-3 py-2 text-[14px]"
+                                  style={{ color: "#c7c9ce", textDecoration: "none" }}
+                                >
+                                  {g.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>

@@ -18,8 +18,8 @@ const data: LocationPageData = {
   contextHeading: "Webdesign voor Coevorden: logistiek, industrie en de Duitse markt",
   contextBody: [
     "Coevorden heeft een economisch profiel dat afwijkt van veel andere Drentse plaatsen: de stad functioneert al decennia als logistiek en industrieel centrum, mede dankzij de directe ligging aan de Duitse grens en de aanwezigheid van bedrijventerreinen die zich richten op transport, techniek en industrie. Voor ondernemers in Coevorden betekent die grensligging iets concreets: een deel van de potentiële klanten en zakenpartners zit niet in Nederland, maar over de grens in Niedersachsen. Een website die alleen is ingericht op een Nederlandstalig publiek, laat daarmee kansen liggen.",
-    "Wij houden bij websites voor Coevordense ondernemers rekening met die grensregio-dynamiek. Dat betekent niet automatisch een volledig Duitstalige website — voor veel bedrijven volstaat het om de site zo te structureren dat een Duitse bezoeker moeiteloos de weg vindt, of om een Duitse taalversie toe te voegen wanneer dat voor de doelgroep relevant is. Belangrijker nog is dat de techniek onder de motorkap klopt: een logistiek of industrieel bedrijf met klanten aan weerszijden van de grens heeft baat bij een site die snel laadt, ongeacht vanaf welk netwerk of apparaat hij bezocht wordt, en die duidelijk maakt wat je levert, aan wie en hoe je te bereiken bent.",
-    "Voor bedrijven in transport, techniek, groothandel en industrie in en rond Coevorden bouwen we websites die verder gaan dan een digitale folder: heldere productie- of dienstenoverzichten, een logische navigatie voor zakelijke bezoekers die snel willen weten of je de juiste partij bent, en een technische basis die meegroeit met het bedrijf. Omdat we zelf hosten en de site monitoren, blijft de website ook bij piekbelasting — bijvoorbeeld na een beursbezoek of een vermelding in een vakblad — gewoon stabiel.",
+    "Wij houden bij websites voor Coevordense ondernemers rekening met die grensregio-dynamiek. Dat betekent niet automatisch een volledig Duitstalige website. Voor veel bedrijven volstaat het om de site zo te structureren dat een Duitse bezoeker moeiteloos de weg vindt, of om een Duitse taalversie toe te voegen wanneer dat voor de doelgroep relevant is. Belangrijker nog is dat de techniek onder de motorkap klopt: een logistiek of industrieel bedrijf met klanten aan weerszijden van de grens heeft baat bij een site die snel laadt, ongeacht vanaf welk netwerk of apparaat hij bezocht wordt, en die duidelijk maakt wat je levert, aan wie en hoe je te bereiken bent.",
+    "Voor bedrijven in transport, techniek, groothandel en industrie in en rond Coevorden bouwen we websites die verder gaan dan een digitale folder: heldere productie- of dienstenoverzichten, een logische navigatie voor zakelijke bezoekers die snel willen weten of je de juiste partij bent, en een technische basis die meegroeit met het bedrijf. Omdat we zelf hosten en de site monitoren, blijft de website ook bij piekbelasting, bijvoorbeeld na een beursbezoek of een vermelding in een vakblad, gewoon stabiel.",
   ],
   businessTypesHeading: "Voor welke bedrijven in Coevorden bouwen we websites?",
   businessTypesBody:
@@ -28,7 +28,7 @@ const data: LocationPageData = {
   workflowSteps: [
     {
       title: "Intake en doelgroepbepaling",
-      desc: "We bespreken wie je klanten zijn — lokaal, regionaal of grensoverschrijdend — en wat de website concreet moet opleveren.",
+      desc: "We bespreken wie je klanten zijn, lokaal, regionaal of grensoverschrijdend, en wat de website concreet moet opleveren.",
     },
     {
       title: "Structuur en ontwerp",

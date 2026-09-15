@@ -78,19 +78,19 @@ const data: ServicePageData = {
 export const Route = createFileRoute("/website-laten-maken")({
   head: () => ({
     meta: [
-      { title: "Website laten maken | Professioneel & vanaf € 499 — AIMI" },
+      { title: "Website laten maken | Professioneel & vanaf € 499: AIMI" },
       {
         name: "description",
         content:
           "Website laten maken door AIMI? Professioneel webdesign op maat voor ondernemers en ZZP'ers. Snel en goed vindbaar. Vaste prijs vanaf € 499.",
       },
-      { property: "og:title", content: "Website laten maken — AIMI Webdesign" },
+      { property: "og:title", content: "Website laten maken: AIMI Webdesign" },
       { property: "og:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten maken — AIMI Webdesign" },
+      { name: "twitter:title", content: "Website laten maken: AIMI Webdesign" },
       { name: "twitter:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

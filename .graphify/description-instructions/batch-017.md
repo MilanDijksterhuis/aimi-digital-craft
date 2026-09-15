@@ -17,10 +17,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_callbackschedulemodal_callbackscheduleform": "CallbackScheduleForm()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L17 | neighbors=[CallbackScheduleModal.tsx, LeadsPanel.tsx]
 - "components_chatwidget_chatwidget": "ChatWidget()" | kind=code-symbol | source=src/components/ChatWidget.tsx:L15 | neighbors=[portal.tsx, ChatWidget.tsx]
 - "components_confirmdialog_confirmprovider": "ConfirmProvider()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L58 | neighbors=[ConfirmDialog.tsx, __root.tsx]
 - "components_deletedchangestab_deletedchangestab": "DeletedChangesTab()" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L12 | neighbors=[admin.tsx, DeletedChangesTab.tsx]
-- "components_exampleslideshow_serviceexample": "ServiceExample" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L6 | neighbors=[ExampleSlideshow.tsx, ServicePage.tsx]
 - "components_faq_faqgrouped": "FaqGrouped()" | kind=code-symbol | source=src/components/FAQ.tsx:L172 | neighbors=[FAQ.tsx, faq.tsx]
 - "components_hero_hero": "Hero()" | kind=code-symbol | source=src/components/Hero.tsx:L16 | neighbors=[Hero.tsx, index.tsx]
 - "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]

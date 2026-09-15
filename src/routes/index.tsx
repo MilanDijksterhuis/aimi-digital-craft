@@ -4,7 +4,6 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { AnswerBlock } from "@/components/AnswerBlock";
 import { Services } from "@/components/Services";
-import { About } from "@/components/About";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { CookieBanner } from "@/components/CookieBanner";
 
@@ -19,13 +18,13 @@ export const Route = createFileRoute("/")({
       // A-03: de homepage mikte op exact dezelfde term als /website-laten-maken
       // (en /webdesign). Die kernterm hoort nu bij /website-laten-maken; de
       // homepage positioneert op merk + overzicht van de diensten.
-      { title: "AIMI — Webdesignbureau uit Veendam | Websites & webshops" },
+      { title: "AIMI: Webdesignbureau uit Veendam | Websites & webshops" },
       {
         name: "description",
         content:
           "AIMI is een webdesignbureau uit Veendam: twee developers die websites en webshops ontwerpen, bouwen en hosten. Vaste prijzen vanaf € 499 en direct contact.",
       },
-      { property: "og:title", content: "AIMI — Webdesignbureau uit Noord-Nederland" },
+      { property: "og:title", content: "AIMI: Webdesignbureau uit Noord-Nederland" },
       {
         property: "og:description",
         content:
@@ -34,7 +33,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AIMI — Webdesignbureau uit Noord-Nederland" },
+      { name: "twitter:title", content: "AIMI: Webdesignbureau uit Noord-Nederland" },
       {
         name: "twitter:description",
         content:
@@ -54,7 +53,7 @@ export const Route = createFileRoute("/")({
       // zodat AI-machines zien dat de homepage actueel is en waar hij over gaat.
       webPageJsonLd({
         path: "/",
-        name: "AIMI — Webdesignbureau uit Veendam",
+        name: "AIMI: Webdesignbureau uit Veendam",
         description:
           "AIMI Development is een webdesignbureau uit Veendam dat websites en webshops ontwerpt, bouwt en host voor ondernemers in Noord-Nederland. Vaste prijzen vanaf € 499.",
       }),
@@ -65,15 +64,13 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="home-snap min-h-screen bg-background text-foreground">
       <Nav />
       <main id="main-content">
         <Hero />
         <AnswerBlock />
         <Services />
         <ProcessTimeline />
-        <About />
-
         <Pricing />
         <FAQ />
         <Contact />

@@ -14,7 +14,7 @@ import {
 const CITY = "Veendam";
 const PATH = "/website-laten-maken-veendam";
 const URL = `${SITE_URL}${PATH}`;
-const TITLE = "Website laten maken in Veendam — lokaal webdesign | AIMI";
+const TITLE = "Website laten maken in Veendam: lokaal webdesign | AIMI";
 const DESCRIPTION =
   "Webdesigner in Veendam nodig? AIMI zit hier zelf gevestigd en bouwt snelle websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vanaf € 499.";
 
@@ -38,7 +38,7 @@ const data: LocationPageData = {
   workflowSteps: [
     {
       title: "Kennismaking, desnoods aan tafel",
-      desc: "We bespreken je plannen telefonisch, via video of gewoon op locatie — we zitten in dezelfde plaats, dus dat kost niemand een reisdag.",
+      desc: "We bespreken je plannen telefonisch, via video of gewoon op locatie. We zitten in dezelfde plaats, dus dat kost niemand een reisdag.",
     },
     {
       title: "Structuur en ontwerp",

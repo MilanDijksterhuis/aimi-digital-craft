@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260717130000_project_rls_baseline_public_is_staff_user": "public.is_staff_user()" | kind=code-symbol | source=supabase/migrations/20260717130000_project_rls_baseline.sql:L27 | neighbors=[20260717130000_project_rls_baseline.sql]
+- "migrations_20260717140000_sec4_own_projects_primary_user": "20260717140000_sec4_own_projects_primary_user.sql" | kind=code-symbol | source=supabase/migrations/20260717140000_sec4_own_projects_primary_user.sql:L1 | neighbors=[a3773ee sec fixes]
+- "migrations_20260717150000_sec5_durable_rate_limit_public_is_ip_banned": "public.is_ip_banned()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L68 | neighbors=[20260717150000_sec5_durable_rate_limit.…]
+- "migrations_20260717160000_perf1_indexes": "20260717160000_perf1_indexes.sql" | kind=code-symbol | source=supabase/migrations/20260717160000_perf1_indexes.sql:L1 | neighbors=[7dbbf18 perf fixes]
+- "migrations_20260717170000_perf2_site_ping_counts_public_site_ping_counts": "public.site_ping_counts()" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L14 | neighbors=[20260717170000_perf2_site_ping_counts.s…]
 - "migrations_20260717180000_perf3_project_last_activity_public_project_last_activity": "public.project_last_activity()" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L9 | neighbors=[20260717180000_perf3_project_last_activ…]
 - "migrations_20260823120000_website_checker_public_cleanup_old_website_checks": "public.cleanup_old_website_checks()" | kind=code-symbol | source=supabase/migrations/20260823120000_website_checker.sql:L27 | neighbors=[20260823120000_website_checker.sql]
 - "migrations_20260823120000_website_checker_public_website_checks": "public.website_checks" | kind=code-symbol | source=supabase/migrations/20260823120000_website_checker.sql:L8 | neighbors=[20260823120000_website_checker.sql]
@@ -29,10 +34,13 @@ one-sentence description — no prose, no markdown fences.
 - "routes_authenticated_authlayout": "AuthLayout()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L34 | neighbors=[_authenticated.tsx]
 - "routes_authenticated_inner": "Inner()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L42 | neighbors=[_authenticated.tsx]
 - "routes_b03bb73bce86422c6a74b3cfc829f2dd_txt_route": "Route" | kind=code-symbol | source=src/routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt.tsx:L7 | neighbors=[b03bb73bce86422c6a74b3cfc829f2dd[.]txt.…]
+- "routes_branches_branche": "Branche" | kind=code-symbol | source=src/routes/branches.tsx:L15 | neighbors=[branches.tsx]
+- "routes_branches_branchegroup": "BrancheGroup" | kind=code-symbol | source=src/routes/branches.tsx:L16 | neighbors=[branches.tsx]
+- "routes_branches_branchegroups": "brancheGroups" | kind=code-symbol | source=src/routes/branches.tsx:L18 | neighbors=[branches.tsx]
 - "routes_branches_branches": "branches" | kind=code-symbol | source=src/routes/branches.tsx:L12 | neighbors=[branches.tsx]
 - "routes_contact_contactpage": "ContactPage()" | kind=code-symbol | source=src/routes/contact.tsx:L45 | neighbors=[contact.tsx]
 - "routes_faq_faqpage": "FaqPage()" | kind=code-symbol | source=src/routes/faq.tsx:L51 | neighbors=[faq.tsx]
-- "routes_index_index": "Index()" | kind=code-symbol | source=src/routes/index.tsx:L66 | neighbors=[index.tsx]
+- "routes_index_index": "Index()" | kind=code-symbol | source=src/routes/index.tsx:L65 | neighbors=[index.tsx]
 - "routes_login_loginpage": "LoginPage()" | kind=code-symbol | source=src/routes/login.tsx:L20 | neighbors=[login.tsx]
 - "routes_meer_diensten_bloom": "Bloom" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L121 | neighbors=[meer-diensten.tsx]
 - "routes_meer_diensten_branch": "Branch" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L120 | neighbors=[meer-diensten.tsx]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_meer_diensten_splitquad": "splitQuad()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L110 | neighbors=[meer-diensten.tsx]
 - "routes_meer_diensten_store": "Store" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L328 | neighbors=[meer-diensten.tsx]
 - "routes_meer_diensten_surge": "Surge" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L122 | neighbors=[meer-diensten.tsx]
-- "routes_onderhoud_hosting_data": "data" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L8 | neighbors=[onderhoud-hosting.tsx]
-- "routes_onderhoud_hosting_faqs": "faqs" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L7 | neighbors=[onderhoud-hosting.tsx]
-- "routes_over_ons_overons": "OverOns()" | kind=code-symbol | source=src/routes/over-ons.tsx:L71 | neighbors=[over-ons.tsx]
-- "routes_over_ons_stats": "stats" | kind=code-symbol | source=src/routes/over-ons.tsx:L8 | neighbors=[over-ons.tsx]
-- "routes_over_ons_values": "values" | kind=code-symbol | source=src/routes/over-ons.tsx:L15 | neighbors=[over-ons.tsx]
-- "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L28 | neighbors=[privacybeleid.tsx]
-- "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L59 | neighbors=[__root.tsx]
-- "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L29 | neighbors=[__root.tsx]
 
 ## Instructions
 

@@ -8,7 +8,7 @@ import { loginStart, loginVerifyMfa, loginResendMfa } from "@/lib/telegram.funct
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Inloggen — AIMI Klantenportaal" },
+      { title: "Inloggen: AIMI Klantenportaal" },
       { name: "description", content: "Log in op het AIMI klantenportaal." },
       { name: "robots", content: "noindex" },
     ],

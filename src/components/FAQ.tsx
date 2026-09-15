@@ -28,7 +28,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Werkwijze",
     q: "Wat als ik geen content of teksten heb?",
-    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers — vraag ernaar tijdens het intakegesprek.",
+    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers, vraag ernaar tijdens het intakegesprek.",
   },
   {
     category: "Prijzen",
@@ -63,7 +63,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Prijzen",
     q: "Wat kost een website laten maken?",
-    a: "Een professionele website bij AIMI start vanaf € 499. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs — geen uurtje-factuurtje.",
+    a: "Een professionele website bij AIMI start vanaf € 499. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs, geen uurtje-factuurtje.",
   },
   {
     category: "Prijzen",
@@ -143,7 +143,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Techniek & SEO",
     q: "Werkt performance-optimalisatie ook op een site die niet door AIMI gebouwd is?",
-    a: "Ja. We voeren eerst een technische audit uit op je bestaande website — ongeacht het platform — en leveren daarna gerichte performance-optimalisaties, met een meetbaar resultaat op zowel mobiel als desktop.",
+    a: "Ja. We voeren eerst een technische audit uit op je bestaande website, ongeacht het platform, en leveren daarna gerichte performance-optimalisaties, met een meetbaar resultaat op zowel mobiel als desktop.",
   },
 ];
 
@@ -224,7 +224,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-12" style={{ background: "#1a1a1a" }}>
+    <section id="faq" className="snap-section snap-center py-12" style={{ background: "#1a1a1a" }}>
       <div className="mx-auto max-w-3xl px-6">
 
         <motion.p
@@ -252,13 +252,22 @@ export function FAQ() {
           {homepageFaqItems.map((item, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} style={{ borderColor: "#2a2b2b" }}>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                style={{ borderColor: "#2a2b2b" }}
+              >
                 <h3 className="m-0">
-                  <button
+                  <motion.button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${i}`}
-                    className="w-full flex items-center justify-between gap-6 py-6 text-left"
+                    whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                    transition={{ duration: 0.15 }}
+                    className="w-full flex items-center justify-between gap-6 py-6 px-2 -mx-2 text-left rounded-lg"
                   >
                     <span
                       className="text-base font-medium text-white"
@@ -274,7 +283,7 @@ export function FAQ() {
                     >
                       <Plus className="w-5 h-5" strokeWidth={1.5} />
                     </motion.div>
-                  </button>
+                  </motion.button>
                 </h3>
                 <motion.div
                   id={`faq-answer-${i}`}
@@ -287,7 +296,7 @@ export function FAQ() {
                     {item.a}
                   </p>
                 </motion.div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -295,7 +304,7 @@ export function FAQ() {
         <div className="mt-10">
           <Link
             to="/faq"
-            className="text-base font-medium underline underline-offset-4 transition-colors"
+            className="inline-block text-base font-medium underline underline-offset-4 transition-all duration-150 hover:translate-x-1"
             style={{ color: "#fe2c02", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
           >
             Bekijk alle veelgestelde vragen →

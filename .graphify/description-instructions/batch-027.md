@@ -17,6 +17,9 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_contact_mode": "Mode" | kind=code-symbol | source=src/components/Contact.tsx:L9 | neighbors=[Contact.tsx]
+- "components_cookiebanner_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/CookieBanner.tsx:L4 | neighbors=[CookieBanner.tsx]
+- "components_cookiebanner_loadprefs": "loadPrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L12 | neighbors=[CookieBanner.tsx]
 - "components_cookiebanner_saveprefs": "savePrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L21 | neighbors=[CookieBanner.tsx]
 - "components_faq_faq_categories": "FAQ_CATEGORIES" | kind=code-symbol | source=src/components/FAQ.tsx:L10 | neighbors=[FAQ.tsx]
 - "components_faq_faqcategory": "FaqCategory" | kind=code-symbol | source=src/components/FAQ.tsx:L18 | neighbors=[FAQ.tsx]
@@ -54,9 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_locationlanding_services": "SERVICES" | kind=code-symbol | source=src/components/LocationLanding.tsx:L27 | neighbors=[LocationLanding.tsx]
 - "components_locationpagev2_businesstypessection": "BusinessTypesSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L101 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_contextsection": "ContextSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L75 | neighbors=[LocationPageV2.tsx]
-- "components_locationpagev2_faqsection": "FaqSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L208 | neighbors=[LocationPageV2.tsx]
-- "components_locationpagev2_local_services": "LOCAL_SERVICES" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L27 | neighbors=[LocationPageV2.tsx]
-- "components_locationpagev2_locationsectionid": "LocationSectionId" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L22 | neighbors=[LocationPageV2.tsx]
 
 ## Instructions
 

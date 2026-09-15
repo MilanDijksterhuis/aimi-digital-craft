@@ -49,19 +49,19 @@ const standards = [
 export const Route = createFileRoute("/werkwijze")({
   head: () => ({
     meta: [
-      { title: "Onze werkwijze | Zo bouwen wij jouw website — AIMI" },
+      { title: "Onze werkwijze | Zo bouwen wij jouw website: AIMI" },
       {
         name: "description",
         content:
           "Zo werkt AIMI: van kennismaking en ontwerp tot livegang en nazorg. Vaste prijzen, direct contact met de developers en volledig eigenaarschap na oplevering.",
       },
-      { property: "og:title", content: "Onze werkwijze — AIMI" },
+      { property: "og:title", content: "Onze werkwijze: AIMI" },
       { property: "og:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Onze werkwijze — AIMI" },
+      { name: "twitter:title", content: "Onze werkwijze: AIMI" },
       { name: "twitter:description", content: "Van kennismaking tot livegang: zo bouwen wij jouw website. Vaste prijzen, direct contact." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

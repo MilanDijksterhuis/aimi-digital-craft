@@ -15,7 +15,7 @@ const SIZES = "100vw";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col">
+    <section className="snap-section relative min-h-screen flex flex-col">
       {/* Geen handmatige <link rel="preload">: React 19 hoist voor een <img> met
           fetchPriority="high" zelf al een preload met dezelfde imageSrcSet naar
           de head. Een eigen link erbij levert alleen een dubbele tag op.
@@ -75,7 +75,7 @@ export function Hero() {
         >
           <strong style={{ color: "#fff", fontWeight: 600 }}>AIMI Development</strong> is een
           webdesignbureau in Veendam (Groningen) dat websites en webshops bouwt voor ondernemers in
-          Noord-Nederland — vanaf € 499 eenmalig plus € 30 per maand voor hosting en onderhoud. Wij
+          Noord-Nederland, vanaf € 499 eenmalig plus € 30 per maand voor hosting en onderhoud. Wij
           ontwerpen, bouwen en hosten zelf, met focus op lage kosten, hoge kwaliteit en snelle
           oplevering.
         </p>

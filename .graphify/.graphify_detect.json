@@ -6,7 +6,6 @@
       "eslint.config.js",
       "scripts/indexnow-submit.mjs",
       "scripts/set-telegram-webhook.ts",
-      "src/components/About.tsx",
       "src/components/AdminChatPanel.tsx",
       "src/components/AnalyticsLoader.tsx",
       "src/components/AnswerBlock.tsx",
@@ -1219,10 +1218,10 @@
     ],
     "video": []
   },
-  "total_files": 1209,
-  "total_words": 799931,
+  "total_files": 1208,
+  "total_words": 800926,
   "needs_graph": true,
-  "warning": "Large corpus: 1209 files · ~799.931 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
+  "warning": "Large corpus: 1208 files · ~800.926 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder, or use --no-semantic to run AST-only.",
   "skipped_sensitive": [
     "graphify-out/obsidian/PasswordResetsPanel().md",
     "graphify-out/obsidian/adminListPasswordResets.md",
@@ -1236,7 +1235,7 @@
   "graphifyignore_patterns": 30,
   "git": {
     "source_owner": "git",
-    "source_hash": "cc405f4b18ac550381c9432541596964a8d2bf8e",
+    "source_hash": "e84aa2e8d47ac69232a5f8cf79f36432aaa8ac63",
     "branches": [
       "main"
     ],
@@ -1249,13 +1248,13 @@
     "source": "default-auto",
     "root": ".",
     "git_root": ".",
-    "head": "cc405f4b18ac550381c9432541596964a8d2bf8e",
-    "candidate_count": 1882,
-    "included_count": 1209,
-    "excluded_untracked_count": 4,
+    "head": "e84aa2e8d47ac69232a5f8cf79f36432aaa8ac63",
+    "candidate_count": 1887,
+    "included_count": 1208,
+    "excluded_untracked_count": 78,
     "excluded_ignored_count": 37046,
     "excluded_sensitive_count": 8,
-    "missing_committed_count": 10,
+    "missing_committed_count": 11,
     "warnings": [],
     "recommendation": "Use --scope all or graphify.yaml inputs.corpus for a knowledge-base folder."
   }

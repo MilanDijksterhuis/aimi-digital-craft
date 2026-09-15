@@ -537,3 +537,50 @@
 .anim-fade-up {
   animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Homepage-only scroll-snap: elke sectie is een eigen "stap" i.p.v. alles in
+   één vloeiende scroll door elkaar heen. Scope via :has() op de wrapper-class
+   zodat andere pagina's (zonder .home-snap) gewoon normaal blijven scrollen.
+   scroll-behavior:auto (i.p.v. het globale smooth) laat de browser hier direct
+   naar het snap-punt springen — met smooth erbij voelde de overgang traag en
+   "zwevend" aan in plaats van snappy. */
+html:has(.home-snap) {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: auto;
+}
+
+.home-snap .snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+/* Verticaal centreren binnen het zichtbare deel ónder de fixed nav (64px).
+   Niet op .snap-section zelf: de Hero regelt zijn eigen volledige-hoogte
+   layout (full-bleed achtergrond) en zou door de padding-top juist misvormen.
+   Bewust géén scroll-margin-top hier: dat combineerde met scroll-snap-stop:
+   always tot een browserbug die downscrollend af en toe naar een verkeerd
+   (niet-marge-gecorrigeerd) tussenpunt snapte — top-naar-onder centreerde dan
+   niet goed, terwijl onder-naar-boven wel klopte. De nav-marge komt nu puur
+   uit padding-top, zodat elke sectie maar één, ondubbelzinnig snap-doel heeft
+   (de eigen top). */
+.home-snap .snap-section.snap-center {
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Zonder ankerpunt ná de laatste sectie blijft mandatory-snap terugtrekken
+   naar Contact en is de footer onbereikbaar. De footer krijgt daarom zelf
+   een (niet-geforceerd) snap-punt, zodat scrollen erna gewoon doorloopt. */
+.home-snap .snap-footer {
+  scroll-snap-align: end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.home-snap) {
+    scroll-snap-type: none;
+  }
+}

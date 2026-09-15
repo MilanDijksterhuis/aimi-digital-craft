@@ -6,7 +6,7 @@ export const Route = createFileRoute("/privacybeleid")({
   head: () => ({
     meta: [
       // SEO-audit 2026-09-15 (TECH-9): title was 20 tekens — te kort voor de SERP.
-      { title: "Privacybeleid — AIMI webdesignbureau Veendam" },
+      { title: "Privacybeleid: AIMI webdesignbureau Veendam" },
       {
         name: "description",
         content:

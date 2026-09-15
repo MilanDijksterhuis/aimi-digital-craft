@@ -110,11 +110,11 @@ export const Route = createFileRoute("/wordpress-of-maatwerk")({
       // SEO-audit 2026-09-15 (SXO-10): de SERP voor "wordpress of maatwerk" toont
       // alleen "maatwerk WordPress"-dienstpagina's; de vergelijkingsintentie leeft
       // onder "wordpress vs maatwerk". Title/H1 geretarget naar de vs-variant.
-      { title: "WordPress vs maatwerk website: eerlijke vergelijking — AIMI" },
+      { title: "WordPress vs maatwerk website: eerlijke vergelijking | AIMI" },
       {
         name: "description",
         content:
-          "WordPress vs een maatwerk website: eerlijke vergelijking van kosten, snelheid, beheer, beveiliging en SEO — inclusief wanneer WordPress de betere keuze is.",
+          "WordPress vs een maatwerk website: eerlijke vergelijking van kosten, snelheid, beheer, beveiliging en SEO, inclusief wanneer WordPress de betere keuze is.",
       },
       { property: "og:title", content: "WordPress vs maatwerk website: een eerlijke vergelijking" },
       {
@@ -187,7 +187,7 @@ function VergelijkingPage() {
               >
                 WordPress
               </a>{" "}
-              de betere keuze is — want die gevallen bestaan echt. Hieronder de eerlijke
+              de betere keuze is, want die gevallen bestaan echt. Hieronder de eerlijke
               afweging, zodat je zelf kunt bepalen wat bij je past.
             </p>
           </div>

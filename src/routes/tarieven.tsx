@@ -107,7 +107,7 @@ const notIncluded = [
   "Teksten schrijven voor je hele site (kan wel, in overleg)",
   "Professionele fotografie",
   "Betaalde advertenties of Google Ads-beheer",
-  "Beloften over posities in Google — die verkopen we niet",
+  "Beloften over posities in Google, die verkopen we niet",
 ];
 
 const comparison = [
@@ -183,7 +183,7 @@ export const Route = createFileRoute("/tarieven")({
         content:
           "Vaste prijzen voor een website laten maken: vanaf € 499 eenmalig en € 30 per maand voor hosting en onderhoud. Geen uurtje-factuurtje, geen verborgen kosten.",
       },
-      { property: "og:title", content: "Tarieven — wat kost een website laten maken? | AIMI" },
+      { property: "og:title", content: "Tarieven: wat kost een website laten maken? | AIMI" },
       {
         property: "og:description",
         content:
@@ -193,7 +193,7 @@ export const Route = createFileRoute("/tarieven")({
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Tarieven — wat kost een website laten maken? | AIMI" },
+      { name: "twitter:title", content: "Tarieven: wat kost een website laten maken? | AIMI" },
       {
         name: "twitter:description",
         content:
@@ -220,7 +220,7 @@ export const Route = createFileRoute("/tarieven")({
               .filter((t) => t.amount)
               .map((t) => ({
                 "@type": "Offer",
-                name: `Website laten maken — ${t.name}`,
+                name: `Website laten maken: ${t.name}`,
                 description: t.desc,
                 price: String(t.amount),
                 priceCurrency: "EUR",
@@ -513,7 +513,7 @@ function TarievenPage() {
                     style={{ color: "#a4a9b2" }}
                   >
                     <span className="mt-1 shrink-0" style={{ color: "#868b94" }}>
-                      —
+                      -
                     </span>
                     <span>{f}</span>
                   </li>

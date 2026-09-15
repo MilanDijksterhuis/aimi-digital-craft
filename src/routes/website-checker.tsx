@@ -28,19 +28,19 @@ const RED = "#ff3b21";
 export const Route = createFileRoute("/website-checker")({
   head: () => ({
     meta: [
-      { title: "Gratis Website Check | Score jouw site in 10 seconden — AIMI" },
+      { title: "Gratis Website Check | Score jouw site in 10 seconden: AIMI" },
       {
         name: "description",
         content:
           "Check gratis en direct hoe jouw website scoort op techniek, SEO, snelheid en mobielvriendelijkheid. Geen account nodig, resultaat binnen enkele seconden.",
       },
-      { property: "og:title", content: "Gratis Website Check — AIMI" },
+      { property: "og:title", content: "Gratis Website Check: AIMI" },
       { property: "og:description", content: "Score jouw website op techniek, SEO, snelheid en mobiel. Gratis en direct." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: PAGE_URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Gratis Website Check — AIMI" },
+      { name: "twitter:title", content: "Gratis Website Check: AIMI" },
       { name: "twitter:description", content: "Score jouw website op techniek, SEO, snelheid en mobiel. Gratis en direct." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -139,7 +139,7 @@ function getFindings(report: WebsiteCheckReport | null): string[] {
     .map((c) => ({ label: HERO_CATEGORIES.find((h) => h.key === c.naam)?.label ?? c.naam, count: c.checks.filter((chk) => chk.status !== "pass").length }))
     .filter((c) => c.count > 0)
     .sort((a, b) => b.count - a.count);
-  if (withIssues.length === 0) return ["Geen directe aandachtspunten gevonden — knap gedaan."];
+  if (withIssues.length === 0) return ["Geen directe aandachtspunten gevonden. Knap gedaan."];
   return withIssues.slice(0, 2).map((c) => `${c.label}: ${c.count === 1 ? "1 aandachtspunt gevonden." : "meerdere aandachtspunten gevonden."}`);
 }
 
@@ -517,7 +517,7 @@ function ChecksSection({ checkMap, reduced }: { checkMap: Map<string, CheckResul
               geen gok
             </h2>
             <p className="mt-4" style={{ fontSize: 14, color: FG_SECONDARY, maxWidth: 340, lineHeight: 1.6 }}>
-              We halen je website live op en analyseren de broncode — precies zoals een bezoeker
+              We halen je website live op en analyseren de broncode, precies zoals een bezoeker
               of Google dat ook doet. Niks gesimuleerd, niks gegokt.
             </p>
             <p className="mt-7" style={{ fontFamily: MONO, fontSize: 10, letterSpacing: "0.14em", color: FG_TERTIARY, textTransform: "uppercase" }}>

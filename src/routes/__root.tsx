@@ -36,7 +36,7 @@ function NotFoundComponent() {
           root-default ("AIMI — Webdesign Noord-Nederland") droeg. Een crawler
           die geen JS uitvoert zag dus een homepagetitel op een 404. React 19
           hoist dit <title>-element server-side naar de head. */}
-      <title>Pagina niet gevonden — AIMI</title>
+      <title>Pagina niet gevonden: AIMI</title>
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina niet gevonden</h2>
@@ -116,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AIMI — Webdesign Noord-Nederland" },
+      { title: "AIMI: Webdesign Noord-Nederland" },
       {
         name: "description",
         content:
@@ -124,7 +124,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "AIMI" },
       { property: "og:site_name", content: "AIMI" },
-      { property: "og:title", content: "AIMI — Webdesign Noord-Nederland" },
+      { property: "og:title", content: "AIMI: Webdesign Noord-Nederland" },
       { property: "og:description", content: "Design, development & hosting door Aidan & Milan." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "nl_NL" },
@@ -133,9 +133,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: OG_IMAGE_URL },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "AIMI — Web Agency" },
+      { property: "og:image:alt", content: "AIMI: Web Agency" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AIMI — Web Agency" },
+      { name: "twitter:title", content: "AIMI: Web Agency" },
       { name: "twitter:description", content: "Design, development & hosting door Aidan & Milan." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

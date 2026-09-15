@@ -10,19 +10,19 @@ const URL = `${SITE_URL}/contact`;
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact | Vraag een offerte aan — AIMI" },
+      { title: "Contact | Vraag een offerte aan: AIMI" },
       {
         name: "description",
         content:
-          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht — je krijgt binnen één werkdag antwoord.",
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord.",
       },
-      { property: "og:title", content: "Contact — AIMI" },
+      { property: "og:title", content: "Contact: AIMI" },
       { property: "og:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Contact — AIMI" },
+      { name: "twitter:title", content: "Contact: AIMI" },
       { name: "twitter:description", content: "Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -33,9 +33,9 @@ export const Route = createFileRoute("/contact")({
       // paginatype-schema, alleen de site-brede entiteiten.
       contactPageJsonLd({
         url: URL,
-        name: "Contact — AIMI",
+        name: "Contact: AIMI",
         description:
-          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht — je krijgt binnen één werkdag antwoord.",
+          "Neem contact op met AIMI voor een nieuwe website of webshop. Plan een gesprek of stuur een bericht. Je krijgt binnen één werkdag antwoord.",
       }),
     ],
   }),
