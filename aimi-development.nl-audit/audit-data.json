@@ -1,25 +1,28 @@
 {
   "summary": {
-    "health_score": 81,
-    "business_type": "Service Area Business — web agency (Veendam, Groningen; serving Noord-Nederland + NL)",
-    "audit_date": "2026-09-06",
+    "health_score": 80,
+    "business_type": "Service Area Business — webdesignbureau (Veendam, Groningen; werkgebied Noord-Nederland + NL)",
+    "audit_date": "2026-09-15",
     "pages_crawled": 48,
     "pages_in_sitemap": 48,
     "top_findings": [
-      "No case studies, portfolio, testimonials or quantified results anywhere on the site — confirmed live across 14 pages; the single largest E-E-A-T and conversion gap for a web agency",
-      "Mobile cookie-consent banner is broken sitewide — missing -translate-x-1/2 pushes accept/reject buttons off-screen on every page, on every mobile session (VIS-1)",
-      "Organization/LocalBusiness schema has no street address, KvK or BTW number anywhere — legally required in NL and the cheapest available local-trust signal",
-      "LCP is Poor-to-Needs-Improvement under lab stress test on all 4 sampled pages (3.4-4.4s), driven by main-thread JS contention (Framer Motion + Radix), not the already-optimized hero image",
-      "Zero reviews and only one external profile link (Google Maps) — Local SEO scores 44/100 on the weighted rubric, driven almost entirely by off-site signals"
+      "Nul bewijs van geleverd werk op de hele site: geen cases, portfolio, klantnamen, testimonials of reviews — het grootste E-E-A-T- en conversiegat voor een webbureau (CQ-1, SXO-6/8, Local)",
+      "KvK-nummer, BTW-nummer en straatadres ontbreken overal (site, schema én juridische pagina's) — wettelijk verplicht in NL en blokkeert directory-citaties; de velden in src/lib/seo.ts staan klaar maar zijn leeg (CQ-2, SCH-1, SCH-4)",
+      "Cookiebanner valt op mobiel half buiten beeld op alle pagina's — ontbrekende -translate-x-1/2 in src/components/CookieBanner.tsx:67 (VIS-1)",
+      "LCP 3,5-4,3s (mobiel lab): 83-86% van de LCP-tijd is renderuitstel door main-thread JS (Framer Motion + Radix; hero start op opacity:0 tot hydratie) — niet het netwerk of de afbeeldingen (TECH-1, PERF-1)",
+      "/wordpress-of-maatwerk mikt op de verkeerde zoekvariant: de SERP voor de letterlijke zoekterm toont alleen 'maatwerk WordPress'-dienstpagina's; de vergelijkingsintentie leeft onder 'wordpress vs maatwerk' — goedkope title/H1-fix (SXO-10)",
+      "Google Bedrijfsprofiel komt niet op voor merkzoekopdracht 'AIMI webdesign Veendam'; nul externe reviews (Trustpilot/Klantenvertellen 404) en nul externe citaties/links (Local, Backlinks)"
     ],
     "quick_wins": [
-      "Fix the cookie-banner CSS bug (add -translate-x-1/2) — one CSS class, fixes a defect visible on 100% of mobile sessions",
-      "Fill ADDRESS.streetAddress, postalCode, KVK and VAT_ID in src/lib/seo.ts — footer and schema already read from these constants and will render automatically",
-      "Add brand name (\"AIMI\") back into FAQ answers and /wordpress-of-maatwerk body copy — 22/25 FAQ answers and the whole comparison page currently say \"we/wij\" only, weakening AI-citation attribution (GEO-6)",
-      "Swap the shared GENERIC_EXAMPLES portfolio image out of ExampleSlideshow — one component change fixes the same irrelevant stock image appearing on all 13 vertical + 15 city pages (SXO-5 / VIS-2)",
-      "Consolidate the duplicate Cache-Control header and set server_tokens off in nginx — 10 minutes, closes two Low findings"
+      "Vul ADDRESS.streetAddress, postalCode, KVK en VAT_ID in src/lib/seo.ts — footer en schema renderen ze automatisch; voeg KvK/BTW ook toe aan /algemene-voorwaarden",
+      "Fix de cookiebanner: voeg -translate-x-1/2 toe in CookieBanner.tsx:67 (één CSS-klasse)",
+      "Hernoem title/H1 van /wordpress-of-maatwerk naar de 'WordPress vs maatwerk'-variant (verifieer eerst met GSC-query-data zodra beschikbaar)",
+      "Zet Brotli aan in nginx (nu alleen gzip) — ~60-90 KB besparing per pagina, pure serverconfig",
+      "Toon een vanaf-prijs op /webshop-laten-maken ('op aanvraag' is de enige prijsloze pagina in de SERP)",
+      "Voeg 'AIMI' toe aan citeerbare passages: 22/25 FAQ-antwoorden en heel /wordpress-of-maatwerk zeggen alleen 'wij/we' (GEO-6)",
+      "Voeg webPageJsonLd() toe aan /over-ons (enige pagina zonder; éénregelige fix, SCH-5)"
     ],
-    "note": "Volledige live audit uitgevoerd 2026-09-06 door 11 gespecialiseerde subagents (technical, content, schema, sitemap, performance, visual, geo, local, sxo, backlinks, drift), bovenop de bestaande 2026-09-04 baseline. Technical/Schema/Content/Performance/Local/GEO scores hieronder zijn live herverifieerd; On-Page en Images scores zijn ongewijzigd overgenomen uit 2026-09-04 (niet dit keer opnieuw gecrawld). Zie findings/ voor volledige bewijsvoering per categorie."
+    "note": "Volledige live audit 2026-09-15 door 9 gespecialiseerde subagents (technical, content, schema, performance, visual, geo, local, sxo, backlinks) over alle 48 pagina's. Gewogen score volgens seo-audit-rubriek: Technical 22%, Content 23%, On-Page 20%, Schema 10%, Performance 10%, AI 10%, Images 5% = 80/100. Local (44), Visual (70), SXO (63) en Backlinks (onvoldoende data) zijn aanvullend gerapporteerd, buiten de hoofdweging. Vorige audit (2026-09-06) scoorde 81; verschil komt door strengere content-meting (echte main-content-woordaantallen), niet door regressie — performance verbeterde juist van 58 naar 74. Volledige bewijsvoering per categorie in findings/."
   },
   "categories": [
     {
@@ -27,537 +30,238 @@
       "score": 90,
       "weight": 22,
       "what_works": [
-        "robots.txt exemplary and live-verified (2026-09-06): AI crawlers (GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended, Googlebot, Bingbot) explicitly allowed; scrapers (Bytespider, PetalBot, MJ12bot) blocked; /portal, /admin, /account, /server, /api/, /track.js disallowed; sitemap declared",
-        "Sitemap validated via sitemap_discovery.py: found through robots.txt declaration, HTTP 200, valid urlset, all 48 URLs present",
-        "Canonicals self-referencing and correct on all sampled pages (home, tarieven, 2 vertical, 2 city pages)",
-        "Redirects clean: http→https 301, www→apex 301, trailing-slash→no-slash 301, max 2 hops on combined http+www case, true 404 (not soft-404) on unknown URLs",
-        "Compression now fixed — Content-Encoding: gzip confirmed live on JS, CSS and woff2 (previously Critical finding TECH-1, verified resolved 2026-09-06)",
-        "Caching now fixed — fonts and hero images now return Cache-Control: public, max-age=31536000, immutable (previously High finding TECH-2, verified resolved 2026-09-06)",
-        "IndexNow key file now live — /b03bb73bce86422c6a74b3cfc829f2dd.txt returns 200 with correct key content (previously High finding TECH-3, verified resolved 2026-09-06; route added in commit d38d9ab)",
-        "Strong security headers: CSP with object-src 'none'/base-uri 'self'/frame-ancestors 'self', HSTS 1yr+includeSubDomains, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy",
-        "Structured data is rich and page-type-aware: Organization/ProfessionalService + WebSite sitewide, FAQPage + BreadcrumbList on content pages, LocalBusiness on city pages, Service on vertical pages, OfferCatalog/Offer with pricing on /tarieven",
-        "SSR content parity confirmed: raw HTTP fetch (no JS) returns full page text (is_spa: false via render_page.py) — content is fully crawlable by non-JS clients and AI answer engines",
-        "Programmatic city/vertical pages are adequately differentiated (~30-35% text similarity between same-type pages, rest unique), word counts ~1,100-1,250 — no thin/duplicate content risk detected in sample",
-        "Mobile viewport correct (width=device-width, initial-scale=1, zoom not disabled); single variable font file with font-display: swap avoids extra font requests/FOIT",
-        "LCP hero image uses responsive srcset/webp, fetchPriority=high, preload, and explicit width/height attributes (CLS-safe)",
-        "llms.txt present and well-curated (agent-UX bonus, not a core scoring category)"
+        "robots.txt correct: AI-crawlers expliciet toegestaan, scrapers geblokkeerd, gevoelige paden disallowed, sitemap gedeclareerd",
+        "Sitemap valide, 48/48 URL's in canonieke vorm, geen geblokkeerde paden, geen toekomstige lastmod",
+        "0 canonical-mismatches over alle 48 pagina's; 48/48 unieke titles en descriptions; geen onbedoelde noindex",
+        "Redirects correct: http→https, www→apex, trailing slash, /index.html 404't; echte 404 (geen soft-404) met branded errorpagina",
+        "Security headers op 100% van de pagina's (HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)",
+        "IndexNow volledig geïmplementeerd en verankerd in scripts/deploy.sh",
+        "Volledige SSR: content aanwezig in ruwe HTML zonder JS; mediane TTFB 122ms",
+        "0 afbeeldingen zonder width/height; 1-jaar immutable cache op statische assets; gzip actief",
+        "llms.txt aanwezig en goed opgebouwd"
       ],
       "findings": [
-        {
-          "title": "Static assets served completely uncompressed",
-          "severity": "Critical",
-          "description": "No Content-Encoding on any /assets/*.js or *.css. Main bundle 881,681 B served vs 248,487 B at gzip -9. The homepage ships ~1.2 MB of JS/CSS where ~330 KB would do. HTML is gzipped; files nginx serves from disk are not. VERIFIED 2026-09-06: curl now shows Content-Encoding: gzip on /assets/index-*.js, styles-*.css and the woff2 font. Issue resolved.",
-          "recommendation": "Add gzip_types covering application/javascript, text/css, image/svg+xml and font/woff2 to the nginx static location. Add brotli if ngx_brotli is available.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "Fonts and images have no Cache-Control",
-          "severity": "High",
-          "description": "/fonts/*.woff2 (27 KB, preloaded) and /assets/hero-forest-*.webp (74 KB, the LCP element) return no Cache-Control and no Expires, while sibling .js/.css files correctly get max-age=31536000, immutable. VERIFIED 2026-09-06: font and hero webp now return Cache-Control: public, max-age=31536000, immutable. Issue resolved.",
-          "recommendation": "Extend the nginx location regex to cover woff2, webp, png, jpg, svg and avif.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "IndexNow key file returns 404",
-          "severity": "High",
-          "description": "/b03bb73bce86422c6a74b3cfc829f2dd.txt is 404. INDEXNOW_KEY is defined in src/lib/seo.ts and scripts/indexnow-submit.mjs exists, but the verification route is uncommitted and undeployed, so every submission is rejected. VERIFIED 2026-09-06: https://aimi-development.nl/b03bb73bce86422c6a74b3cfc829f2dd.txt now returns 200 with body 'b03bb73bce86422c6a74b3cfc829f2dd'. Issue resolved. Note: only key verification was checked live; whether scripts/indexnow-submit.mjs is actually invoked on publish (CI/cron) was not verified in this pass.",
-          "recommendation": "Commit and deploy the key route, then verify the URL serves the key as plain text.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "Duplicate Cache-Control headers",
-          "severity": "Low",
-          "description": "Static assets return Cache-Control twice (max-age=31536000 and public, immutable) — an nginx expires directive and an add_header both firing. Some proxies handle duplicates inconsistently. STILL PRESENT 2026-09-06: confirmed via curl -D- on /assets/index-*.js and styles-*.css — two Cache-Control lines are still emitted (max-age=31536000 then public, immutable).",
-          "recommendation": "Consolidate into a single add_header directive."
-        },
-        {
-          "title": "Sitemap lastmod is stale",
-          "severity": "Low",
-          "description": "PARTIALLY IMPROVED 2026-09-06: lastmod dates are no longer a single stale value — sitemap.xml now shows 5 distinct dates (2026-08-20 x7, 2026-08-21 x20, 2026-08-22 x7, 2026-09-03 x1, 2026-09-04 x13), but the large identical clusters (20 URLs sharing one date, 13 sharing another) still look like batch/deploy timestamps rather than genuine per-page content-change tracking.",
-          "recommendation": "Derive lastmod from actual content/CMS modification timestamps, or omit the field if that data isn't reliably tracked."
-        },
-        {
-          "title": "CSP allows 'unsafe-inline' for script-src and style-src",
-          "severity": "Medium",
-          "description": "Live CSP header: default-src 'self'; img-src 'self' data: https://*.supabase.co; connect-src 'self' https://*.supabase.co https://calendly.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://assets.calendly.com; frame-src 'self' https://calendly.com; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'. 'unsafe-inline' on script-src and style-src neutralizes CSP's main defense against injected/XSS script and style execution — any inline script that gets injected (e.g. via a compromised dependency or reflected input) would still execute.",
-          "recommendation": "Move inline styles/scripts to external files or adopt a nonce/hash-based CSP (nonce-{random} per response, generated in server.ts) so 'unsafe-inline' can be dropped from both directives."
-        },
-        {
-          "title": "Homepage eagerly modulepreloads ~21 JS chunks, including non-critical ones",
-          "severity": "Medium",
-          "description": "Homepage <head> contains 21 <link rel=\"modulepreload\"> tags fired at high priority alongside the LCP image and font, including chunks not needed for first paint: Contact-B2LhGYg3.js, Footer-BB8uYLHM.js, contact.functions-Df-PP1OP.js, auth-middleware-BxmmoFAN.js, calendar-5Yl3ivCd.js, mail-DyXXUlUJ.js, send-CjJ7l3aR.js. Combined gzip size of the core chunks alone (index+radix+utils+motion+index2) is ~325 KB gzip / ~950 KB uncompressed. This front-loads network contention on the critical path and adds hydration/parse work that can push out LCP and increase INP on mid/low-end mobile, particularly since is_spa is false but the page still fully hydrates client-side.",
-          "recommendation": "Restrict modulepreload to chunks required for first paint/interaction; lazy-load or route-split Contact/Footer/calendar/mail/auth-middleware chunks so they load on interaction or viewport-entry instead of eagerly on every page load. Re-measure with Lighthouse/PSI once API credentials are available."
-        },
-        {
-          "title": "Security headers duplicated on HTML responses (two layers both setting them)",
-          "severity": "Low",
-          "description": "curl -D- on https://aimi-development.nl/ shows X-Frame-Options, X-Content-Type-Options, Referrer-Policy and Strict-Transport-Security each emitted twice — once lowercase, once Title-Case, with identical values (e.g. 'x-frame-options: SAMEORIGIN' and 'X-Frame-Options: SAMEORIGIN'). CSP and Permissions-Policy are NOT duplicated, indicating nginx re-adds a legacy subset of headers already set by the Node/TanStack Start app. Not currently harmful since values match, but it's config drift risk — if the two layers are edited independently in future they could silently diverge.",
-          "recommendation": "Set these 4 headers in exactly one layer (either server.ts or nginx, not both) to remove duplication and the drift risk."
-        },
-        {
-          "title": "Server header discloses exact nginx version",
-          "severity": "Low",
-          "description": "Server: nginx/1.28.3 (Ubuntu) is sent on every response, disclosing the exact web server version and OS distribution.",
-          "recommendation": "Set server_tokens off; in nginx.conf to suppress version disclosure."
-        }
+        {"title": "Hero-H1 en ~47 above-the-fold elementen starten op opacity:0 tot framer-motion hydrateert", "severity": "High", "description": "Het waarschijnlijke LCP-element (hero-H1) is onzichtbaar tot de JS geladen en uitgevoerd is — klassiek LCP-vertragingspatroon op een verder goed ge-SSR'de site (TECH-1).", "recommendation": "Vervang above-the-fold Framer Motion-entrance-animaties door CSS-animaties; render de H1 direct zichtbaar."},
+        {"title": "Homepage modulepreload't ~21 JS-chunks, ook niet-kritieke", "severity": "Medium", "description": "Contact, Footer, calendar, mail en auth-middleware-chunks concurreren met LCP-afbeelding/font om bandbreedte (TECH-2).", "recommendation": "Beperk modulepreload tot kritieke chunks; lazy-load de rest."},
+        {"title": "CSP staat 'unsafe-inline' toe voor script-src/style-src", "severity": "Medium", "description": "Ondermijnt de belangrijkste XSS-bescherming van CSP (TECH-3).", "recommendation": "Werk toe naar nonces/hashes voor inline scripts en styles."},
+        {"title": "Dubbele Cache-Control header op JS/CSS; 4 security headers dubbel geëmit; Server-header toont nginx-versie+OS", "severity": "Low", "description": "nginx en app-laag zetten beide headers; JS/CSS-locationblok nog niet ontdubbeld (TECH-4/5/6).", "recommendation": "Headers op één laag zetten; server_tokens off."},
+        {"title": "Hoofdlettervarianten (/CONTACT) geven 200 i.p.v. 301", "severity": "Low", "description": "Leunt op canonical-tag i.p.v. expliciete redirect voor consolidatie (TECH-8).", "recommendation": "301-redirect naar lowercase in nginx."},
+        {"title": "Titles juridische pagina's te kort (20 en 27 tekens)", "severity": "Low", "description": "/privacybeleid en /algemene-voorwaarden benutten SERP-ruimte niet (TECH-9).", "recommendation": "Titles uitbreiden met merknaam en context."}
       ]
     },
     {
       "name": "Content Quality",
-      "score": 58,
+      "score": 55,
       "weight": 23,
-      "note": "Rescored 2026-09-06 after live re-verification via render_page.py (extracted_text), superseding the 2026-09-04 score of 78. Word-count and E-E-A-T figures below come from live rendered pages, not source code. See findings/content.md for full method, sample list (14/48 pages), and explicit list of what was not re-checked this pass.",
-      "eeat_breakdown": {
-        "experience": 30,
-        "expertise": 45,
-        "authoritativeness": 22,
-        "trustworthiness": 52,
-        "weights": {
-          "experience": 0.2,
-          "expertise": 0.25,
-          "authoritativeness": 0.25,
-          "trustworthiness": 0.3
-        }
-      },
-      "ai_citation_readiness": 66,
       "what_works": [
-        "FAQPage JSON-LD confirmed live and valid on homepage (25 Q&As) and on the kapsalon vertical page (7 Q&As, including industry-specific price and duration answers)",
-        "Branch-specific pricing (€499 Starter / €749 Pro) and “hoe lang duurt” answers now present on all 6 vertical pages sampled — confirms the 2026-08-24 code-audit gap (C-2/C-3) has been fixed",
-        "Vertical pages (kapsalon vs. hovenier, direct text diff) contain genuinely different, industry-specific substance, not find-and-replace text — duplicate-content risk assessed as low on the 12 programmatic pages sampled",
-        "Strong pricing/policy transparency sitewide: explicit € amounts, “geen lock-in”, source-code ownership stated, one-month cancellation term, security stack listed (SSL, daily backups, 24/7 monitoring)",
-        "Organization/ProfessionalService schema includes Person entities for the two named founders — present on sampled pages"
+        "Branche- en stadspagina's zijn inhoudelijk écht per pagina geschreven (geen doorway/spun content): echte vakspecifieke en plaatsspecifieke argumenten",
+        "Prijs- en beleidstransparantie is een sterke trust-asset: expliciete bedragen, eerlijke 'wat zit er niet bij'-sectie, duidelijke opzegvoorwaarden, AIMI-vs-Wix-vs-freelancer-vergelijkingstabel",
+        "FAQPage-schema correct met concrete, citeerbare numerieke antwoorden",
+        "Geloofwaardige direct-contact-positionering: founders bij naam, echte telefoon/e-mail zichtbaar",
+        "Technische accuraatheid (CWV, hosting/VPS, NL-betaalmethoden) overal in orde"
       ],
       "findings": [
-        {
-          "title": "No case studies, portfolio, testimonials, or quantified results anywhere sampled",
-          "severity": "High",
-          "description": "Live-checked homepage, /over-ons, and 12 programmatic pages: zero client names, zero before/after examples, zero “X websites delivered” style numbers, zero review/rating content. /over-ons names the two founders and states principles but shows no evidence of past delivered work. Confirms the 2026-08-24 code-audit finding is still true live, not stale.",
-          "recommendation": "Add at minimum 2-3 real case examples (client name with permission, what was built, one concrete outcome number) before further programmatic page expansion — this is a prerequisite for Experience/Authoritativeness to improve."
-        },
-        {
-          "title": "No KvK/BTW/postal address confirmed on sampled pages",
-          "severity": "High",
-          "description": "Not re-verified live on /contact in this pass (out of the 14 pages sampled this run). Carried over from the 2026-09-04 findings file, which reported 0 hits for KvK/BTW across all 48 pages. Treat as unconfirmed-but-likely-still-true pending direct re-check.",
-          "recommendation": "Verify live on /contact and sitewide footer; if still absent, add KvK number, BTW/VAT ID and postal/visiting address."
-        },
-        {
-          "title": "Vertical/service pages measure 646-760 words live, below the 800-word service-page floor",
-          "severity": "Medium",
-          "description": "All 6 sampled vertical pages (kapsalon, nagelstudio, hovenier, makelaar, autobedrijf, boekhouder) measured 646-760 words of extracted main content. Not a ranking factor by itself, but combined with the lack of case evidence and identical template skeleton across 13 pages, topical depth per page is on the thin side.",
-          "recommendation": "Expand the “Veelvoorkomende knelpunten” section per page with one concrete, industry-specific example; verify the remaining 7 unsampled vertical pages match this range."
-        },
-        {
-          "title": "Identical template skeleton repeats across all sampled vertical/city pages",
-          "severity": "Low",
-          "description": "Direct text comparison (kapsalon vs. hovenier) shows identical section order/headings with genuinely different substance per section — not a duplicate-content violation, but a formulaic pattern visible across 13 near-identical page skeletons.",
-          "recommendation": "Vary section order or add one vertical-specific section type (e.g. image gallery for visually-driven trades vs. compliance/document section for boekhouder) to break the pattern."
-        },
-        {
-          "title": "/over-ons thin for its trust-building role",
-          "severity": "Medium",
-          "description": "223 words live. Names founders and states 4 principles but has no case evidence, no team-photo reference in text, no years-in-business claim, no numbers.",
-          "recommendation": "Expand with founder background and, once available, the case-study evidence from the case-studies finding above."
-        },
-        {
-          "title": "Word-count figures in this category conflict with the 2026-09-04 version of this file by roughly 2x",
-          "severity": "Low",
-          "description": "Previous Content Quality entry reported city/branch page averages of 1,051/1,177 words; this live pass measured 562-760 words on overlapping page types using trafilatura extracted_text (which strips nav/footer/related-links chrome by design). The Technical SEO category in this same file also reports ~1,100-1,250 words for the same page types, suggesting the higher numbers may include page chrome rather than main content.",
-          "recommendation": "Reconcile methodology across categories before reporting word-count trends: re-run both a raw-HTML-text count and an extracted_text count on 2-3 identical URLs to identify the source of the ~500-word gap."
-        },
-        {
-          "title": "✅ Branch-specific pricing and duration long-tail gap (prior audit C-2/C-3) fixed",
-          "severity": "Medium",
-          "description": "Confirmed live on 6/13 vertical pages: branch-specific price ranges and “hoe lang duurt” FAQ answers are present and correctly structured as distinct FAQPage Q&As.",
-          "recommendation": "Spot-check the remaining 7 vertical pages for consistency; no action needed on the 6 sampled.",
-          "outcome": "fixed"
-        }
+        {"title": "Geen cases, portfolio, testimonials of reviews op de hele site", "severity": "High", "description": "Nul klantnamen, nul voor/na-voorbeelden, geen Review/AggregateRating-schema op alle 48 pagina's. Drijft de zwakke Authoritativeness (20/100) en Experience (25/100) sub-scores (CQ-1).", "recommendation": "Bouw een portfolio/cases-sectie met echte klantprojecten, resultaten en testimonials; pas dan Review-schema toevoegen."},
+        {"title": "KvK/BTW/postadres nergens vermeld", "severity": "High", "description": "Ook niet op /privacybeleid en /algemene-voorwaarden — wettelijk verplicht (CQ-2).", "recommendation": "KvK- en BTW-nummer toevoegen aan juridische pagina's en footer; velden in seo.ts vullen."},
+        {"title": "30 branche/stad-pagina's delen identiek 6-secties-skelet", "severity": "Medium", "description": "Karaktersimilariteit 0,29-0,38 tussen pagina's — substantie is gedifferentieerd, maar CTA-zin en servicebullet-blok zijn 100% verbatim op naam na; structurele monotonie oogt programmatisch (CQ-3).", "recommendation": "Varieer sectievolgorde/vorm per cluster en herschrijf de verbatim gedeelde blokken."},
+        {"title": "Kernpagina's dunner dan long-tail-pagina's (echte main-content-telling)", "severity": "Medium", "description": "/over-ons 223 woorden, /contact 76, /website-laten-maken 474 — terwijl branche-pagina's ~690 halen. Crawl-woordaantallen bleken ~1,7x geïnflateerd door nav/footer (CQ-6/7).", "recommendation": "Bouw /over-ons uit met team/verhaal/werkwijze (E-E-A-T-drager) en versterk /website-laten-maken als belangrijkste commerciële pagina."},
+        {"title": "Homepage-FAQ is 100% verbatim duplicaat van /faq", "severity": "Medium", "description": "25/25 Q&A's identiek, beide met eigen FAQPage-schema — verwatert de canonieke bron voor AI-citatie (CQ-5).", "recommendation": "Toon op de homepage een subset (5-6) met link naar /faq; laat het schema alleen op /faq staan."},
+        {"title": "Geen freshness/dateModified-signaal", "severity": "Low", "description": "Nergens zichtbare of gestructureerde wijzigingsdatum aangetroffen.", "recommendation": "dateModified toevoegen aan WebPage-schema, gevoed door echte wijzigingsdata."}
       ]
     },
     {
       "name": "On-Page SEO",
-      "score": 96,
+      "score": 92,
       "weight": 20,
       "what_works": [
-        "Canonical, single h1, lang=nl, viewport, og:image, og:title, og:type and twitter:card all 48/48",
-        "Zero duplicate or missing titles and descriptions",
-        "No accidental noindex anywhere",
-        "All primary content present in server-rendered HTML"
+        "48/48 unieke titles en meta descriptions, vrijwel allemaal binnen lengtegrenzen",
+        "Exact één H1 per pagina (visuele regelafbreking, geen dubbele tags)",
+        "Geen orphan-pagina's: elke sitemap-URL heeft meerdere inbound interne links; footer linkt alle stads- en branchepagina's vanaf alle 48 pagina's",
+        "Alle interne links wijzen naar canonieke sitemap-URL's; geen stray/broken interne paden",
+        "Logische, platte URL-structuur met keyword-dragende slugs"
       ],
       "findings": [
-        {
-          "title": "✅ Four titles exceed the SERP display limit",
-          "severity": "Medium",
-          "description": "/seo is 70 chars, / is 64, /tarieven 63, /website-laten-vernieuwen 61. Google truncates around 60, and /tarieven risks losing its EUR 499 price hook.",
-          "recommendation": "Trim each to 60 characters or fewer, keeping the strongest click driver in front.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "✅ Two pages missing og:url",
-          "severity": "Low",
-          "description": "/privacybeleid and /algemene-voorwaarden are the only pages without og:url.",
-          "recommendation": "Add og:url to both for consistency.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "✅ Six descriptions slightly under target",
-          "severity": "Low",
-          "description": "112-117 characters where 120-160 is useful: /website-laten-maken-assen, /branches, /website-laten-maken-autorijschool, /website-laten-maken-klusbedrijf, /website-laten-maken-schilder and /website-laten-maken-roden.",
-          "recommendation": "Extend each to roughly 150 characters.",
-          "outcome": "fixed"
-        }
+        {"title": "Titles juridische pagina's te kort", "severity": "Low", "description": "/privacybeleid 20 tekens (description 169), /algemene-voorwaarden 27 tekens.", "recommendation": "Uitbreiden naar ~45-60 tekens met merknaam."},
+        {"title": "Geen contextuele kruislinks tussen stads- en branchepagina's", "severity": "Medium", "description": "Footer linkt alles, maar in-content links voor gecombineerde intentie ('webdesign kapsalon Groningen') ontbreken.", "recommendation": "Voeg per pagina 2-3 contextuele links naar relevante combinaties toe."}
       ]
     },
     {
       "name": "Schema / Structured Data",
-      "score": 88,
+      "score": 87,
       "weight": 10,
       "what_works": [
-        "Live-verified 2026-09-06 across 10 sampled URLs (/, /tarieven, /website-laten-maken, /webshop-laten-maken, /faq, /website-laten-maken-kapsalon, /website-laten-maken-groningen, /webdesign, /over-ons, /contact): every JSON-LD block parses without error, uses https://schema.org context, and avoids deprecated types (no HowTo, no SpecialAnnouncement)",
-        "Stable @id entities (/#organization, /#website) are byte-for-byte identical across all 10 sampled pages — confirmed live, no duplicate/conflicting entity graphs",
-        "Homepage's 25-question FAQ IS emitted as FAQPage schema (8,829 bytes, 25 Question/Answer pairs) — an older static-audit hypothesis that this was missing is now confirmed stale",
-        "/contact now carries a dedicated ContactPage + ContactPoint (telephone, email, availableLanguage nl, contactType customer service) correctly nested under the shared Organization @id — previously flagged gap is confirmed fixed live",
-        "Kapsalon's Service block is produced by the same shared serviceJsonLd() helper as every other Service block, with areaServed intentionally set to null via a documented parameter for branch pages — an older hypothesis that it was an inconsistent inline one-off is confirmed false",
-        "Veendam LocalBusiness correctly uses parentOrganization to link back to /#organization",
-        "priceValidUntil computed dynamically (2027-09-06) rather than hardcoded"
+        "Eén geconsolideerde Organization/ProfessionalService/WebSite entity-graph via ORG_ID, éénmaal gedefinieerd en overal hergebruikt — geen conflicterende entiteiten",
+        "/tarieven heeft volledige OfferCatalog + per-tier Offers + UnitPriceSpecification voor €30/mnd, met rollende priceValidUntil",
+        "Service-schema differentieert areaServed correct (branche: null by design; stad: stad+provincie)",
+        "BreadcrumbList consistent; ContactPage/ContactPoint hergebruikt ORG_ID; FAQPage-content matcht on-page; geen verzonnen AggregateRating; geen deprecated types",
+        "LocalBusiness correct gereserveerd voor het echte Veendam-kantoor; overige steden correct als Service+areaServed (vermijdt local-spam-patroon)"
       ],
       "findings": [
-        {
-          "title": "ProfessionalService/Organization has no address, geo or opening hours anywhere",
-          "severity": "High",
-          "description": "The shared /#organization entity (identical on all 10 sampled pages) declares telephone, email, priceRange (€€), sameAs, knowsAbout, areaServed and hasOfferCatalog, but no address, geo or openingHoursSpecification. The only PostalAddress on the site (Veendam LocalBusiness) has addressLocality/addressRegion/addressCountry but no streetAddress or postalCode — confirmed live, matches src/lib/seo.ts where ADDRESS.streetAddress and postalCode are deliberately left empty.",
-          "recommendation": "Fill in the real street address and postcode in the ADDRESS constant in src/lib/seo.ts — postalAddress() already auto-includes it in both the organization entity and the Veendam LocalBusiness the moment those two fields are non-empty, no schema code changes needed. Add openingHoursSpecification once hours are confirmed."
-        },
-        {
-          "title": "Only one sameAs reference",
-          "severity": "Medium",
-          "description": "sameAs contains a single Google Maps short link on every sampled page. No LinkedIn, Facebook, Instagram or KvK register URL to cross-corroborate the entity.",
-          "recommendation": "Add profile URLs as they become available."
-        },
-        {
-          "title": "No aggregateRating or Review markup",
-          "severity": "Medium",
-          "description": "No review markup on any of the 10 sampled pages, consistent with the absence of collected reviews on-site.",
-          "recommendation": "Collect real reviews first, then mark them up. Do not mark up ratings without genuine reviews behind them."
-        },
-        {
-          "title": "Identical FAQPage schema duplicated verbatim on / and /faq",
-          "severity": "Info",
-          "description": "The homepage's FAQPage block and the /faq page's FAQPage block are both exactly 8,829 bytes with the same 25 Question/Answer pairs, byte-identical. No mainEntityOfPage or distinct @id on either block to indicate which URL is authoritative for that content.",
-          "recommendation": "Not a Google ranking risk (FAQ rich results are retired for all sites), but redundant. Either trim the homepage's FAQ to a curated subset (as already done on vertical/city pages, which each carry a distinct 6-8 question set) and keep the full 25 only on /faq, or add mainEntityOfPage to disambiguate."
-        },
-        {
-          "title": "Homepage FAQPage carries 25 questions",
-          "severity": "Info",
-          "description": "Valid schema, all 25 questions verified live to mirror visible on-page content. Google retired FAQ rich results for ALL sites as of 2026-05-07 (superseding the 2023 gov/health-only restriction), so there is no SERP benefit; any AI/GEO citation benefit is unconfirmed.",
-          "recommendation": "No action required for Google SERP purposes. Optional: consolidate with the /faq duplication finding above."
-        },
-        {
-          "title": "/over-ons has no WebPage/AboutPage entity",
-          "severity": "Low",
-          "description": "/over-ons carries only the site-wide Organization, WebSite and BreadcrumbList blocks. The codebase already defines a webPageJsonLd() helper (src/lib/seo.ts) with about/isPartOf/dateModified, but it was not observed on any of the 10 sampled live pages.",
-          "recommendation": "Apply the existing webPageJsonLd() helper to /over-ons (and confirm whether it is intended to run sitewide) — no new schema design work needed, the helper already exists."
-        }
+        {"title": "Organization-entity mist address, geo en openingHoursSpecification", "severity": "High", "description": "ADDRESS.streetAddress/postalCode bewust leeg in seo.ts; wiring is correct — puur ontbrekende data (SCH-1).", "recommendation": "Velden vullen in seo.ts; openingHoursSpecification toevoegen."},
+        {"title": "Slechts één sameAs-vermelding (Google Maps)", "severity": "Medium", "description": "Geen LinkedIn/Facebook/KvK-register-URL voor entity-disambiguatie (SCH-3).", "recommendation": "sameAs uitbreiden zodra profielen bestaan (LinkedIn eerst)."},
+        {"title": "KVK/VAT_ID-constanten leeg", "severity": "Medium", "description": "Juridisch vereist, onafhankelijk van SEO; schema-code emit ze zodra data bestaat (SCH-4).", "recommendation": "Nummers invullen."},
+        {"title": "/over-ons mist webPageJsonLd()", "severity": "Low", "description": "Enige vergelijkbare pagina zonder; oogt als omissie (SCH-5).", "recommendation": "Eénregelige fix: webPageJsonLd() toevoegen."},
+        {"title": "/ en /faq emitten byte-identiek FAQPage-schema", "severity": "Info", "description": "Geen SERP-consequentie (FAQ rich results uitgefaseerd), wel content-architectuur-redundantie (SCH-2).", "recommendation": "Schema alleen op /faq laten staan bij het inkorten van de homepage-FAQ."}
       ]
     },
     {
       "name": "Performance (CWV)",
-      "score": 58,
+      "score": 74,
       "weight": 10,
       "what_works": [
-        "46 ms median TTFB, 275 ms worst case",
-        "LCP image preloaded with a responsive imageSrcSet (640/960/1280 WebP)",
-        "Font self-hosted and preloaded with crossorigin",
-        "max-age=31536000, immutable on hashed JS/CSS",
-        "Zero render-blocking third-party scripts"
+        "Echte server-TTFB 30-40ms; mediane pagina-TTFB 122ms",
+        "CLS 0-0,002 overal (uitstekend); geen layout shift",
+        "Font-strategie in orde: self-hosted variable woff2, font-display swap, preload, unicode-range subsetting",
+        "Hero-afbeeldingen responsive webp met fetchPriority=high, preload en expliciete afmetingen",
+        "Statische assets: 1-jaar immutable cache, gzip bevestigd",
+        "Verbetering t.o.v. 2026-09-06: compressie- en cachingproblemen opgelost (score 58 → 74)"
       ],
       "findings": [
-        {
-          "title": "No compression on any static asset",
-          "severity": "Critical",
-          "description": "The main bundle ships 881 KB instead of 248 KB; total JS/CSS is roughly 1.2 MB instead of ~330 KB. This is the highest-impact fix on the site, is server config only, and carries no regression risk.",
-          "recommendation": "Enable gzip (and brotli) for JS/CSS MIME types in nginx."
-        },
-        {
-          "title": "881 KB main bundle is oversized even compressed",
-          "severity": "High",
-          "description": "At 248 KB gzipped it remains large for a marketing site. Radix UI (54 KB raw) and motion (127 KB raw) are significant contributors, and Radix is largely needed by the authenticated portal and admin rather than public pages.",
-          "recommendation": "Split portal/admin code out of the bundle that public marketing routes load. Do this after compression is enabled."
-        },
-        {
-          "title": "21 modulepreload-hints op de homepage (afgezwakt)",
-          "severity": "Low",
-          "description": "Oorspronkelijk High. Correctie: index.tsx rendert echt <Contact />, dus die chunks horen bij de afhankelijkheden van de pagina. Wat overblijft: formuliercode onder de vouw laadt met dezelfde prioriteit als content erboven. Na compressie is het totaal ~330 KB.",
-          "recommendation": "Bewust niet aangepast: lazy laden zou het formulier uit de SSR-HTML halen, wat slechter is voor SEO dan de winst waard is."
-        },
-        {
-          "title": "LCP image and font uncached",
-          "severity": "High",
-          "description": "The hero WebP (74 KB, the LCP element) and the preloaded font (27 KB) carry no Cache-Control, so repeat visitors pay for both again.",
-          "recommendation": "Add immutable cache headers for webp and woff2."
-        },
-        {
-          "title": "Homepage HTML is 109 KB",
-          "severity": "Low",
-          "description": "More than twice the 42 KB site average, largely from 25 inline FAQ entries in JSON-LD plus 12.7 KB of inline scripts.",
-          "recommendation": "Trim the homepage FAQ schema to the most valuable entries."
-        }
+        {"title": "LCP-renderuitstel: 83-86% van LCP-tijd is main-thread JS-contention op alle 3 geteste pagina's", "severity": "High", "description": "Lighthouse mobiel (gesimuleerde throttling): LCP 4,33s (/), 3,69s (/website-laten-maken), 3,54s (/tarieven). Load Delay/Load Time = 0ms; knelpunt is JS parse/execute (hoofdbundel + Framer Motion + Radix) die paint blokkeert (PERF-1).", "recommendation": "Code-split Radix/portal-code uit publieke marketingroutes; vervang above-fold Framer Motion door CSS-animaties."},
+        {"title": "Brotli niet actief (alleen gzip)", "severity": "Medium", "description": "curl met Accept-Encoding: br → nginx valt terug op ongecomprimeerd; ~60-90 KB besparing per pagina laten liggen (PERF-2).", "recommendation": "ngx_brotli aanzetten — pure serverconfig-fix."},
+        {"title": "Framer Motion + Radix: ~59 KB gecomprimeerd op élke pagina; ~141 KB unused JS per pagina", "severity": "Medium", "description": "Ook op platte contentpagina's (PERF-3).", "recommendation": "Bundle-splitsing per routetype."},
+        {"title": "HTML-documenten hebben geen Cache-Control header", "severity": "Low", "description": "Korte max-age/stale-while-revalidate zou herhaalbezoek helpen zonder staleness-risico (PERF-5).", "recommendation": "Cache-Control: max-age=300, stale-while-revalidate op HTML."}
       ]
     },
     {
-      "name": "AI Search Readiness",
-      "score": 84,
+      "name": "AI Search Readiness (GEO)",
+      "score": 82,
       "weight": 10,
       "what_works": [
-        "/llms.txt present, 75 lines, correct format with real per-URL detail — above the standard of most implementations",
-        "AI crawlers explicitly allowed: GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended",
-        "All content in server-rendered HTML — no AI crawler needs to execute JavaScript",
-        "249 unique Q&A pairs in FAQPage schema, the most citable format there is",
-        "Clean entity graph with stable @ids"
+        "Technische toegankelijkheid 98/100: volledige SSR, AI-crawlers expliciet toegestaan in robots.txt",
+        "llms.txt aanwezig, goed gestructureerd, met substantiële one-line beschrijvingen per link",
+        "/tarieven is vrijwel ideaal citeerbaar: zelfstandige antwoordpassage met entiteit + prijs in de eerste zin, marktcontext met concurrentprijzen, liftbare vergelijkingstabel",
+        "/faq: 25 echte Q&A's in valide FAQPage-schema, antwoorden beginnen met directe claim ('Jij.', 'Ja.', 'Nee.')",
+        "/wordpress-of-maatwerk: eerlijke framing en beslislijsten die answer engines belonen"
       ],
       "findings": [
-        {
-          "title": "✅ No outbound citations",
-          "severity": "Medium",
-          "description": "Zero external links site-wide. Generative engines preferentially cite sources that are themselves well-connected and verifiable.",
-          "recommendation": "Add honest citations to authoritative sources from the pages where they are natural.",
-          "outcome": "fixed"
-        },
-        {
-          "title": "Person-entiteiten voor de oprichters zijn te dun",
-          "severity": "Low",
-          "description": "Correctie: founder-entiteiten voor Aidan en Milan bestaan al in het Organization-schema. Wat ontbreekt is kleiner: geen @id, geen jobTitle, geen sameAs.",
-          "recommendation": "Add Person schema linked to the organization via founder/employee."
-        },
-        {
-          "title": "No date signals on any content",
-          "severity": "Medium",
-          "description": "No datePublished or dateModified anywhere, and only one Article. AI systems weight recency when choosing between competing sources.",
-          "recommendation": "Add dateModified to substantive pages."
-        },
-        {
-          "title": "sameAs too thin to corroborate the entity",
-          "severity": "Medium",
-          "description": "One Google Maps link. Cross-platform corroboration is how an engine gains confidence that an entity is real.",
-          "recommendation": "Expand sameAs — see the schema category."
-        },
-        {
-          "title": "Answers not front-loaded on service pages",
-          "severity": "Low",
-          "description": "City and branch pages open with brand framing before the substantive answer. Passage-level retrieval favours self-contained answers that appear early.",
-          "recommendation": "Lead each section with the direct answer, then elaborate."
-        }
+        {"title": "Merknaam ontbreekt in citeerbare passages", "severity": "Medium", "description": "Slechts 3/25 FAQ-antwoorden bevatten 'AIMI'; /wordpress-of-maatwerk noemt AIMI nérgens in de bodytekst; homepage slechts 2x in ~7.700 tekens. Geciteerde passages dragen dan geen merkanker (GEO-6).", "recommendation": "Herformuleer sleutelantwoorden zodat 'AIMI' natuurlijk in de passage staat."},
+        {"title": "Brand mention-voetafdruk buiten eigen site vrijwel nul", "severity": "High", "description": "Geen externe vermeldingen gevonden; answer engines wegen onafhankelijke bronnen mee.", "recommendation": "Zelfde fix als local/backlinks: citaties, LinkedIn, directories, klantlinks."},
+        {"title": "Multi-modal content beperkt", "severity": "Low", "description": "Tekst-only; geen video of schema-afbeeldingen beoordeeld.", "recommendation": "Overwegen: korte uitlegvideo's of geannoteerde voorbeelden."}
       ]
     },
     {
       "name": "Images",
-      "score": 95,
+      "score": 92,
       "weight": 5,
       "what_works": [
-        "0 of 33 images missing alt text",
-        "0 of 33 images missing width/height — consistent CLS prevention",
-        "WebP throughout, with a 640/960/1280 responsive srcset on the hero",
-        "LCP image preloaded with a matching imageSrcSet"
+        "0 afbeeldingen site-breed zonder width/height (geen CLS-risico)",
+        "Responsive webp met srcset (640/960/1280/1920), preload + fetchPriority=high op hero",
+        "Decoratieve afbeeldingen correct met alt=\"\" + aria-hidden",
+        "Lazy loading en compressie op orde"
       ],
       "findings": [
-        {
-          "title": "Hero WebP and font are uncached",
-          "severity": "Low",
-          "description": "The LCP image returns no Cache-Control, so it is re-fetched on repeat visits.",
-          "recommendation": "Covered by the nginx cache-header fix."
-        },
-        {
-          "title": "og-image.png is a 112 KB PNG",
-          "severity": "Low",
-          "description": "It is fetched by every crawler and link unfurler that touches a shared URL.",
-          "recommendation": "Convert to WebP or optimise the PNG."
-        }
+        {"title": "Voorbeeld-slideshow toont generieke stockvoorbeelden", "severity": "Medium", "description": "GENERIC_EXAMPLES hard-gecodeerd in ExampleSlideshow, op 23 pagina's — kapsalonpagina toont SaaS/architect-mockup terwijl de tekst 'foto's van eigen werk' belooft (SXO-5/VIS-2).", "recommendation": "Vervang door echte projectvoorbeelden per branche zodra portfolio bestaat."}
       ]
     },
     {
-      "name": "Local SEO",
-      "score": 72,
+      "name": "Local SEO (aanvullend, buiten hoofdweging)",
+      "score": 44,
       "weight": 0,
       "what_works": [
-        "15 city pages averaging 1,051 words with only 7.7% heading overlap — not doorway pages",
-        "Honest SAB modelling: only Veendam claims PostalAddress + GeoCoordinates; other cities use areaServed",
-        "NAP single-sourced in code via PHONE_DISPLAY / PHONE_E164, so visible links and schema cannot drift apart",
-        "ACTIVE_SINCE_YEAR used as a genuine trust signal rather than an invented founding date"
+        "15 echte, gedifferentieerde stadspagina's (970-1.226 woorden, eigen H1's en FAQ's) — geen doorway-patroon",
+        "NAP intern 100% consistent (single-source in seo.ts): nul drift tussen footer, /contact en JSON-LD",
+        "Footer linkt alle 15 stads- en 15 branchepagina's vanaf alle 48 pagina's",
+        "Correcte schema-discipline: LocalBusiness alleen voor echt Veendam-kantoor; overige steden Service+areaServed",
+        "sameAs Google Maps-link resolvet naar echte, uniek genaamde GBP-listing"
       ],
       "findings": [
-        {
-          "title": "No postal address published on-page",
-          "severity": "High",
-          "description": "The Veendam address exists only inside JSON-LD on one page — not on /contact, not in the footer. Google cross-checks on-page NAP against GBP and citations.",
-          "recommendation": "Publish the full address in the footer and on /contact."
-        },
-        {
-          "title": "No KvK / BTW number",
-          "severity": "High",
-          "description": "Beyond the legal requirement, the KvK number is a primary local-citation key used by directories to match a business to the register.",
-          "recommendation": "Add both to the footer."
-        },
-        {
-          "title": "No reviews",
-          "severity": "High",
-          "description": "No review content and no aggregateRating. Review count and velocity are among the strongest map-pack ranking factors, and a Google Maps profile already exists.",
-          "recommendation": "Build a systematic review request into project handover."
-        },
-        {
-          "title": "Single sameAs, no citation footprint",
-          "severity": "Medium",
-          "description": "One Google Maps link and no evidence of Dutch directory listings.",
-          "recommendation": "Build foundational citations: KvK register, LinkedIn, regional directories."
-        },
-        {
-          "title": "No opening hours",
-          "severity": "Medium",
-          "description": "Neither openingHoursSpecification in schema nor visible hours on /contact.",
-          "recommendation": "Add both."
-        }
+        {"title": "GBP-listing komt niet op voor eigen merk+locatie-zoekopdracht", "severity": "Critical", "description": "Live zoekopdracht 'AIMI webdesign Veendam' gaf nul organische AIMI-resultaten; listing bestaat wel maar categorie/uren/reviews onverifieerbaar zonder dashboard.", "recommendation": "GBP-dashboard checken: categorie, uren, foto's, diensten, posts; reviews actief vragen."},
+        {"title": "Geen straatadres gepubliceerd", "severity": "Critical", "description": "On-page noch in schema (alleen locality); velden in seo.ts leeg maar wiring klaar.", "recommendation": "Adres + postcode invullen."},
+        {"title": "Nul reviews off-site bevestigd", "severity": "Critical", "description": "Trustpilot en Klantenvertellen 404'en; on-site geen testimonials.", "recommendation": "Reviewstrategie starten: Google eerst, daarna Klantenvertellen."},
+        {"title": "Geen KvK/BTW-nummer", "severity": "High", "description": "Wettelijk verplicht; blokkeert NL-directory-citaties die op KvK de-dupen.", "recommendation": "Invullen (zelfde fix als SCH-4/CQ-2)."},
+        {"title": "Nul externe citatie-voetafdruk", "severity": "High", "description": "Bevestigd via live search en Common Crawl (0 verwijzende domeinen); slechts één sameAs site-breed.", "recommendation": "Citatieplan uit findings/backlinks.md uitvoeren."},
+        {"title": "Geen openingstijden (schema of /contact); geen Maps-embed; geo-coördinaten 4 decimalen", "severity": "Medium", "description": "Kleinere lokale signalen die nu ontbreken.", "recommendation": "openingHoursSpecification, Maps-embed op /contact of Veendam-pagina, coördinaten op 5-6 decimalen."}
       ]
     },
     {
-      "name": "Search Experience (SXO)",
-      "score": 77,
+      "name": "Visual / Mobile UX (aanvullend, buiten hoofdweging)",
+      "score": 70,
       "weight": 0,
       "what_works": [
-        "Page type matches intent across the board — no mismatches found",
-        "Prices published publicly on 18 of 48 pages, winning high-intent cost queries",
-        "/website-checker is a genuine lead magnet matching real intent",
-        "Branch pages framed around the reader problem rather than the agency service list"
+        "Geen page-level horizontale overflow op enige pagina/viewport",
+        "CLS-benadering ≤0,025 overal; correcte viewport-meta",
+        "H1 + minimaal één CTA boven de vouw op mobiel op alle 4 geteste pagina's",
+        "Hamburgermenu correct; geen console-errors"
       ],
       "findings": [
-        {
-          "title": "No proof of work for a visual buying decision",
-          "severity": "High",
-          "description": "No portfolio, case study or before/after, and testimonial language on one page. A company selling websites describes quality at length but never shows it.",
-          "recommendation": "Build a case-study section — the highest-leverage conversion fix on the site."
-        },
-        {
-          "title": "Ook interessant blocks are undifferentiated",
-          "severity": "Medium",
-          "description": "Every city and branch page ends with the same related-links pattern, which reads as navigation rather than recommendation.",
-          "recommendation": "Use these blocks for genuine contextual linking that also builds hierarchy."
-        },
-        {
-          "title": "Trust signals absent at the decision point",
-          "severity": "Medium",
-          "description": "/contact carries no address, KvK, hours or post-submission clarity — at the moment intent is highest.",
-          "recommendation": "Add trust details to /contact."
-        },
-        {
-          "title": "Founders under-used as differentiator",
-          "severity": "Low",
-          "description": "The strongest line on the site — direct access to Aidan or Milan — appears on 6 of 48 pages and none of the 30 acquisition pages.",
-          "recommendation": "Surface it on the programmatic templates."
-        }
+        {"title": "Cookiebanner rendert half buiten beeld op mobiel — alle pagina's", "severity": "High", "description": "CookieBanner.tsx:67 mist -translate-x-1/2 bij left-1/2: op 390px viewport loopt de banner van 195px tot 585px — knoppen deels buiten beeld (VIS-1).", "recommendation": "Eén CSS-klasse toevoegen."},
+        {"title": "Prijstabel /tarieven horizontaal scrollbaar zonder visuele hint (mobiel)", "severity": "Medium", "description": "scrollWidth 640px vs clientWidth 342px; derde kolom (Wix/freelancer) standaard onzichtbaar.", "recommendation": "Scroll-affordance (schaduw/pijl) of responsieve herindeling."},
+        {"title": "Veel tikdoelen onder 44×44px", "severity": "Medium", "description": "Headernav ~34-38px; footer/contact-tekstlinks 15-20px; 59-69 sub-44px elementen per pagina op mobiel.", "recommendation": "Padding vergroten op nav- en footerlinks."},
+        {"title": "Bodytekst onder 16px op sommige pagina's", "severity": "Low", "description": "Basis 14px; paragrafen 15px op /website-laten-maken, 14px op /contact.", "recommendation": "Minimaal 16px voor lopende tekst op mobiel."}
       ]
     },
     {
-      "name": "Backlink Profile",
+      "name": "SXO (aanvullend, buiten hoofdweging)",
+      "score": 63,
+      "weight": 0,
+      "what_works": [
+        "4 van 5 doelkeywords: paginatype ALIGNED met wat de SERP beloont (service page, prijs-verankerd)",
+        "Prijstransparantie op /website-laten-maken en /tarieven matcht de prijs-verankerde SERP-norm"
+      ],
+      "findings": [
+        {"title": "/wordpress-of-maatwerk: keyword/intent-mismatch", "severity": "Critical", "description": "6/6 resultaten voor de letterlijke zoekterm zijn 'maatwerk WordPress'-dienstpagina's; vergelijkingsintentie leeft onder 'wordpress vs maatwerk website' (SXO-10). Directioneel signaal — bevestig met GSC-data.", "recommendation": "Title/H1 retargeten naar de vs-variant; content is al goed."},
+        {"title": "/webshop-laten-maken toont geen prijs", "severity": "High", "description": "priceLabel 'op aanvraag' waar elke concurrent een bedrag toont (€699/€1.249) en DIY-bouwers (~€30/mnd) in dezelfde SERP staan (SXO-9).", "recommendation": "Vanaf-prijs tonen."},
+        {"title": "Nul benoemd bewijs op geldpagina's", "severity": "High", "description": "Concurrenten tonen 3-5 benoemde cases, reviewaantallen, '1000+ ondernemers'-claims; AIMI niets (SXO-6/8).", "recommendation": "Zelfde fix als CQ-1: portfolio/cases."},
+        {"title": "Kapsalonpagina begraaft prijs in proza en toont branchevreemde mockup", "severity": "Medium", "description": "Spreekt eigen belofte 'foto's van eigen werk' tegen (SXO-7); root cause is het gedeelde ExampleSlideshow-component (SXO-5, 23 pagina's).", "recommendation": "Prijs prominenter; echte branchevoorbeelden."}
+      ]
+    },
+    {
+      "name": "Backlinks (aanvullend, buiten hoofdweging)",
       "score": null,
-      "score_status": "insufficient_data",
       "weight": 0,
-      "data_sources": {
-        "tier": 0,
-        "tier_description": "Basic (Common Crawl + Verify only)",
-        "moz": {
-          "available": false
-        },
-        "bing": {
-          "available": false
-        },
-        "dataforseo": {
-          "available": false
-        },
-        "commoncrawl": {
-          "available": true,
-          "confidence": 0.5,
-          "in_crawl": false,
-          "in_rankings": false,
-          "pagerank": null,
-          "harmonic_centrality": null,
-          "note": "aimi-development.nl not found in Common Crawl host graph (cc-main-2026-jan-feb-mar) — too new/small to be sampled, not a negative score."
-        }
-      },
       "what_works": [],
       "findings": [
-        {
-          "title": "No link-earning asset exists",
-          "severity": "Medium",
-          "description": "Every one of the 48 URLs is a commercial service page. There is no blog, research, tool writeup, or dataset — nothing whose natural purpose is to be cited. /website-checker is the closest thing to a linkable asset.",
-          "recommendation": "Build a small linkable asset (e.g. a genuinely useful tool or article series) tied to existing service pages."
-        },
-        {
-          "title": "Zero outbound links",
-          "severity": "Medium",
-          "description": "The site links out to nothing across all 48 pages (see Content Quality CQ-4). Linking out is part of how a site enters a topical neighbourhood and becomes citable in turn.",
-          "recommendation": "Add honest outbound citations where relevant (already recommended under Content Quality)."
-        },
-        {
-          "title": "Thin external footprint",
-          "severity": "Medium",
-          "description": "Only one sameAs (Google Maps) and no discoverable directory presence found. No KvK register listing, LinkedIn company page, or regional business directory links identified.",
-          "recommendation": "Establish foundational citations: KvK register, Google Business Profile (exists), LinkedIn company page, regional business directories."
-        },
-        {
-          "title": "Domain not present in Common Crawl host graph",
-          "severity": "Informational",
-          "description": "commoncrawl_graph.py returned in_crawl: false and in_rankings: false for aimi-development.nl — no PageRank or harmonic centrality data exists. Expected for a young/small site; not itself a red flag, but it means no free automated authority estimate is currently possible.",
-          "recommendation": "No action needed beyond normal growth; re-check in a future Common Crawl release once more pages/links accumulate."
-        },
-        {
-          "title": "No Moz, Bing Webmaster, or DataForSEO data available",
-          "severity": "Informational",
-          "description": "Tier 0 only (backlinks_auth.py --check). Without a link index, referring-domain count, DA/PA, anchor text distribution, toxic link ratio, link velocity, and geographic relevance cannot be measured — 0 of 7 confidence-weighted scoring factors have a data source, so no numeric Backlink Health Score can be produced.",
-          "recommendation": "Sign up for the Moz API free tier (https://moz.com/products/api, 2,500 rows/month) and/or verify the domain in Bing Webmaster Tools (free) to unlock real DA/PA and referring-domain data for a future audit."
-        }
+        {"title": "Domein afwezig in Common Crawl-hostgraaf: geen meetbare autoriteit", "severity": "Info", "description": "Geen Moz/Bing-keys; Common Crawl kent het domein niet (te jong/klein — verwacht, geen rode vlag). Score: INSUFFICIENT DATA.", "recommendation": "Geprioriteerd linkplan in findings/backlinks.md: NL-basiscitaties → regionale verenigingen/gidsen → klant-colofonlinks → website-checker als open-source linkable asset."}
       ]
     }
   ],
   "action_plan": {
     "phases": [
       {
-        "name": "Phase 1: Critical Fixes",
+        "name": "Fase 1: Kritieke fixes & juridische basis",
         "timeframe": "Week 1",
         "items": [
-          "Enable gzip/brotli for JS+CSS in nginx — ~870 KB saved per uncached visit (15 min)",
-          "Add Cache-Control for woff2 and webp, including the LCP hero image (10 min)",
-          "Deploy the already-written IndexNow key route so submissions verify (5 min)",
-          "Collapse the duplicate Cache-Control header (5 min)"
+          "KvK, BTW, straatadres en postcode invullen in src/lib/seo.ts + toevoegen aan /algemene-voorwaarden (fixt CQ-2, SCH-1, SCH-4, Local-2/4 in één keer)",
+          "Cookiebanner-fix: -translate-x-1/2 toevoegen in CookieBanner.tsx:67",
+          "Google Bedrijfsprofiel claimen/completeren: categorie, uren, foto's, diensten; eerste reviews vragen aan bestaande klanten",
+          "Brotli aanzetten in nginx",
+          "/wordpress-of-maatwerk title/H1 retargeten naar 'WordPress vs maatwerk' (na GSC-check indien mogelijk)",
+          "webPageJsonLd() toevoegen aan /over-ons; titles juridische pagina's verlengen"
         ]
       },
       {
-        "name": "Phase 2: High-Impact Improvements",
-        "timeframe": "Weeks 2-3",
+        "name": "Fase 2: Bewijs & conversie",
+        "timeframe": "Week 2-3",
         "items": [
-          "Add KvK, BTW and postal address to the site-wide footer (30 min)",
-          "Add address, geo, openingHours and priceRange to the Organization schema (20 min)",
-          "Start collecting Google reviews systematically (ongoing)",
-          "Expand sameAs with LinkedIn, social profiles and the KvK register (15 min)",
-          "Shorten 4 over-length titles, add 2 missing og:url, fix entity double-encoding (30 min)"
+          "Portfolio/cases-sectie bouwen met echte klantprojecten (bv. Direct SportsWear) incl. resultaten en testimonials",
+          "GENERIC_EXAMPLES in ExampleSlideshow vervangen door echte projectvoorbeelden (fixt 23 pagina's in één component)",
+          "Vanaf-prijs tonen op /webshop-laten-maken",
+          "/over-ons uitbouwen (team, verhaal, werkwijze — E-E-A-T-drager) en /website-laten-maken verdiepen",
+          "Homepage-FAQ inkorten tot subset met link naar /faq; FAQPage-schema alleen op /faq",
+          "'AIMI' toevoegen aan sleutelantwoorden (FAQ, /wordpress-of-maatwerk, homepage-passages)"
         ]
       },
       {
-        "name": "Phase 3: Content & Authority",
-        "timeframe": "Month 2",
+        "name": "Fase 3: Autoriteit & performance",
+        "timeframe": "Maand 2",
         "items": [
-          "Build a portfolio or case-study section — the largest single gap",
-          "Add bylined author identity and Person schema to the 30 programmatic pages",
-          "Build contextual internal links via the Ook interessant blocks to create hierarchy",
-          "Add honest outbound citations to authoritative sources",
-          "Enrich /contact with NAP, opening hours and ContactPage schema"
+          "Citatieplan uitvoeren: LinkedIn-bedrijfspagina, Google/Bing Places, NL-directories (KvK-consistent), regionale ondernemersverenigingen",
+          "Klant-colofonlinks vragen; website-checker als open-source linkable asset publiceren",
+          "LCP-refactor: above-fold Framer Motion → CSS-animaties; Radix/portal-code uit marketingroutes splitsen; modulepreload beperken",
+          "Contextuele kruislinks stad×branche toevoegen; structurele variatie in het 30-pagina-skelet aanbrengen",
+          "Tikdoelen en 14px-tekst op mobiel verbeteren; scroll-hint op /tarieven-tabel"
         ]
       },
       {
-        "name": "Phase 4: Monitoring & Iteration",
-        "timeframe": "Ongoing",
+        "name": "Fase 4: Meten & itereren",
+        "timeframe": "Doorlopend",
         "items": [
-          "Trim the 21 homepage modulepreload hints to the critical path only",
-          "Split portal/admin code out of the public marketing bundle",
-          "Lazy-load below-fold images and optimise og-image.png",
-          "Make sitemap lastmod reflect real content changes",
-          "Connect Google Search Console and Bing Webmaster Tools, then re-audit"
+          "Google Search Console + GOOGLE_API_KEY (PSI/CrUX) configureren zodat volgende audits velddata hebben",
+          "Reviewvelocity opbouwen (Google eerst, daarna Klantenvertellen)",
+          "SEO-drift-baseline vastleggen en bij elke deploy vergelijken",
+          "GSC-querydata gebruiken om SXO-hypotheses (wordpress-vs, webshopprijs) te valideren",
+          "dateModified-signalen toevoegen en actueel houden"
         ]
       }
     ]
@@ -565,7 +269,7 @@
   "artifacts": {
     "findings_dir": "findings/",
     "screenshots_dir": "screenshots/",
-    "own_tasks": "JOUW-TAKEN.md",
-    "applied_fixes": "WAT-IK-AL-DEED.md"
+    "lighthouse_dir": "lighthouse-runs/",
+    "crawl_data": "crawl-data.json"
   }
 }

@@ -546,6 +546,12 @@ function TarievenPage() {
               termijn ziet de vergelijking er anders uit.
             </p>
 
+            {/* SEO-audit 2026-09-15 (VIS-2): de tabel scrollt horizontaal op mobiel
+                (640px min-width vs ~342px viewport) zonder dat dat zichtbaar was —
+                de derde kolom bleef onopgemerkt. Expliciete hint op kleine schermen. */}
+            <p className="md:hidden mb-3 text-xs" style={{ color: "#868b94" }}>
+              Schuif de tabel opzij voor de volledige vergelijking →
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-[14.5px]" style={{ minWidth: "640px" }}>
                 <thead>

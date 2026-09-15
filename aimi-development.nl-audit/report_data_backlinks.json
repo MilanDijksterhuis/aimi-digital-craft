@@ -1,0 +1,44 @@
+{
+  "domain": "aimi-development.nl",
+  "tier": 0,
+  "score": null,
+  "score_status": "INSUFFICIENT_DATA",
+  "factors_scored": [],
+  "factors_skipped": [
+    "referring_domain_count",
+    "domain_quality_distribution",
+    "anchor_text_naturalness",
+    "toxic_link_ratio",
+    "link_velocity_trend",
+    "follow_nofollow_ratio",
+    "geographic_relevance"
+  ],
+  "sources": [
+    {
+      "name": "Common Crawl Web Graph",
+      "confidence": 0.50,
+      "release": "cc-main-2026-jan-feb-mar",
+      "in_crawl": false,
+      "in_rankings": false,
+      "pagerank": null,
+      "harmonic_centrality": null
+    },
+    {
+      "name": "Verification crawler",
+      "confidence": 0.95,
+      "status": "skipped_no_links_supplied"
+    },
+    {
+      "name": "Moz API",
+      "available": false
+    },
+    {
+      "name": "Bing Webmaster API",
+      "available": false
+    },
+    {
+      "name": "DataForSEO",
+      "available": false
+    }
+  ]
+}

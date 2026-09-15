@@ -1,4 +1,4 @@
-# Node Description Batch 17 of 49
+# Node Description Batch 17 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_checkbox": "checkbox.tsx" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L1 | neighbors=[utils.ts, cn(), Checkbox]
+- "ui_hover_card": "hover-card.tsx" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L1 | neighbors=[utils.ts, cn(), HoverCardContent]
+- "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
+- "ui_progress": "progress.tsx" | kind=code-symbol | source=src/components/ui/progress.tsx:L1 | neighbors=[utils.ts, cn(), Progress]
+- "ui_slider": "slider.tsx" | kind=code-symbol | source=src/components/ui/slider.tsx:L1 | neighbors=[utils.ts, cn(), Slider]
 - "ui_sonner": "sonner.tsx" | kind=code-symbol | source=src/components/ui/sonner.tsx:L1 | neighbors=[__root.tsx, Toaster(), ToasterProps]
 - "ui_switch": "switch.tsx" | kind=code-symbol | source=src/components/ui/switch.tsx:L1 | neighbors=[utils.ts, cn(), Switch]
 - "ui_textarea": "textarea.tsx" | kind=code-symbol | source=src/components/ui/textarea.tsx:L1 | neighbors=[utils.ts, cn(), Textarea]
@@ -43,6 +48,7 @@ one-sentence description — no prose, no markdown fences.
 - "components_about_about": "About()" | kind=code-symbol | source=src/components/About.tsx:L4 | neighbors=[About.tsx, index.tsx]
 - "components_adminchatpanel_adminchatpanel": "AdminChatPanel()" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L27 | neighbors=[admin.tsx, AdminChatPanel.tsx]
 - "components_analyticsloader_analyticsloader": "AnalyticsLoader()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L27 | neighbors=[AnalyticsLoader.tsx, __root.tsx]
+- "components_answerblock_answerblock": "AnswerBlock()" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L8 | neighbors=[AnswerBlock.tsx, index.tsx]
 - "components_berichtentab_berichtentab": "BerichtenTab()" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L11 | neighbors=[admin.tsx, BerichtenTab.tsx]
 - "components_callbackagenda_adddays": "addDays()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L40 | neighbors=[CallbackAgenda.tsx, startOfWeek()]
 - "components_callbackagenda_callbackitem": "CallbackItem()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L275 | neighbors=[CallbackAgenda.tsx, fmtTime()]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_callbackagenda_istoday": "isToday()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L51 | neighbors=[CallbackAgenda.tsx, sameDay()]
 - "components_callbackschedulemodal_callbackscheduleform": "CallbackScheduleForm()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L17 | neighbors=[CallbackScheduleModal.tsx, LeadsPanel.tsx]
 - "components_chatwidget_chatwidget": "ChatWidget()" | kind=code-symbol | source=src/components/ChatWidget.tsx:L15 | neighbors=[portal.tsx, ChatWidget.tsx]
-- "components_confirmdialog_confirmprovider": "ConfirmProvider()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L58 | neighbors=[ConfirmDialog.tsx, __root.tsx]
-- "components_deletedchangestab_deletedchangestab": "DeletedChangesTab()" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L12 | neighbors=[admin.tsx, DeletedChangesTab.tsx]
-- "components_exampleslideshow_serviceexample": "ServiceExample" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L6 | neighbors=[ExampleSlideshow.tsx, ServicePage.tsx]
-- "components_faq_faqgrouped": "FaqGrouped()" | kind=code-symbol | source=src/components/FAQ.tsx:L153 | neighbors=[FAQ.tsx, faq.tsx]
-- "components_hero_hero": "Hero()" | kind=code-symbol | source=src/components/Hero.tsx:L16 | neighbors=[Hero.tsx, index.tsx]
-- "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]
 
 ## Instructions
 

@@ -1,4 +1,4 @@
-# Node Description Batch 4 of 49
+# Node Description Batch 4 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,8 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_project_status": "project-status.ts" | kind=code-symbol | source=src/lib/project-status.ts:L1 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, portal.tsx, portal.projecten.$projectId.tsx, 7f7208a new, isProjectOverdue()] | lang=en
+- "routes_sitemap_xml": "sitemap[.]xml.tsx" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L1 | neighbors=[2d81f50 feat(seo): vervang /cases door …, 36d8ccb new pages, 59bb970 eyoo, 5d3df91 new, 8fdd571 SEO, aabf034 SEO] | lang=en
 - "routes_webdesign": "webdesign.tsx" | kind=code-symbol | source=src/routes/webdesign.tsx:L1 | neighbors=[36d8ccb new pages, c27f4c8 new, CookieBanner.tsx, CookieBanner(), Footer.tsx, Footer()] | lang=en
 - "ui_skeleton": "skeleton.tsx" | kind=code-symbol | source=src/components/ui/skeleton.tsx:L1 | neighbors=[admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx, admin.projecten.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@00e2564e6e05873392daa31f3002dbcd55ba5e49": "00e2564 voorwaaren en privacy" | kind=Commit | source=git | neighbors=[main, d3cd320 Hero tekst groter, Services whi…, Footer.tsx, Pricing.tsx, algemene-voorwaarden.tsx, privacybeleid.tsx] | lang=en
@@ -38,7 +40,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d42e3c51de5036824a5f1115e09ae44224507b66": "d42e3c5 Logo toegevoegd aan site" | kind=Commit | source=git | neighbors=[8f2439f Calendly-link bijgewerkt, main, 482bba9 Work in progress, 825b6d5 Logo teruggezet naar vorige ver…, Nav.tsx, index.tsx] | lang=nl
 - "lib_seo_cityareaserved": "cityAreaServed()" | kind=code-symbol | source=src/lib/seo.ts:L250 | neighbors=[seo.ts, website-laten-maken-assen.tsx, website-laten-maken-coevorden.tsx, website-laten-maken-drachten.tsx, website-laten-maken-emmen.tsx, website-laten-maken-groningen.tsx] | lang=en
 - "routes_branches": "branches.tsx" | kind=code-symbol | source=src/routes/branches.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, c27f4c8 new, CookieBanner.tsx, CookieBanner(), Footer.tsx] | lang=en
-- "routes_sitemap_xml": "sitemap[.]xml.tsx" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L1 | neighbors=[2d81f50 feat(seo): vervang /cases door …, 36d8ccb new pages, 59bb970 eyoo, 5d3df91 new, 8fdd571 SEO, aabf034 SEO] | lang=en
 - "routes_website_laten_maken_assen": "website-laten-maken-assen.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-assen.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData] | lang=en
 - "routes_website_laten_maken_roden": "website-laten-maken-roden.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-roden.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData] | lang=en
 - "ui_form": "form.tsx" | kind=code-symbol | source=src/components/ui/form.tsx:L1 | neighbors=[utils.ts, cn(), FormControl, FormDescription, FormField(), FormFieldContext] | lang=en
@@ -65,7 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_klusbedrijf": "website-laten-maken-klusbedrijf.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage()] | lang=en
 - "routes_website_laten_maken_leeuwarden": "website-laten-maken-leeuwarden.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-leeuwarden.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_meppel": "website-laten-maken-meppel.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-meppel.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
-- "routes_website_laten_maken_schilder": "website-laten-maken-schilder.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-schilder.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage()] | lang=en
 
 ## Instructions
 

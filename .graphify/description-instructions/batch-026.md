@@ -1,4 +1,4 @@
-# Node Description Batch 27 of 49
+# Node Description Batch 27 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_server_serversidebar": "ServerSidebar()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L251 | neighbors=[server.tsx]
+- "authenticated_server_skeletoncard": "SkeletonCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L72 | neighbors=[server.tsx]
+- "authenticated_server_status_dot": "STATUS_DOT" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L58 | neighbors=[server.tsx]
+- "authenticated_server_statusindicator": "StatusIndicator()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L142 | neighbors=[server.tsx]
+- "authenticated_server_trendicon": "TrendIcon()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L212 | neighbors=[server.tsx]
+- "components_adminchatpanel_chatrow": "ChatRow" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L15 | neighbors=[AdminChatPanel.tsx]
 - "components_adminchatpanel_message": "Message" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L5 | neighbors=[AdminChatPanel.tsx]
 - "components_analyticsloader_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L6 | neighbors=[AnalyticsLoader.tsx]
 - "components_analyticsloader_loadtrackjs": "loadTrackJs()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L17 | neighbors=[AnalyticsLoader.tsx]
@@ -48,15 +54,9 @@ one-sentence description — no prose, no markdown fences.
 - "components_cookiebanner_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/CookieBanner.tsx:L4 | neighbors=[CookieBanner.tsx]
 - "components_cookiebanner_loadprefs": "loadPrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L12 | neighbors=[CookieBanner.tsx]
 - "components_cookiebanner_saveprefs": "savePrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L21 | neighbors=[CookieBanner.tsx]
-- "components_faq_faq_categories": "FAQ_CATEGORIES" | kind=code-symbol | source=src/components/FAQ.tsx:L9 | neighbors=[FAQ.tsx]
-- "components_faq_faqcategory": "FaqCategory" | kind=code-symbol | source=src/components/FAQ.tsx:L17 | neighbors=[FAQ.tsx]
-- "components_faq_faqitem": "FaqItem" | kind=code-symbol | source=src/components/FAQ.tsx:L19 | neighbors=[FAQ.tsx]
-- "components_faq_items": "items" | kind=code-symbol | source=src/components/FAQ.tsx:L5 | neighbors=[FAQ.tsx]
-- "components_footer_branches": "branches" | kind=code-symbol | source=src/components/Footer.tsx:L69 | neighbors=[Footer.tsx]
-- "components_footer_cities": "cities" | kind=code-symbol | source=src/components/Footer.tsx:L51 | neighbors=[Footer.tsx]
-- "components_footer_columns": "columns" | kind=code-symbol | source=src/components/Footer.tsx:L6 | neighbors=[Footer.tsx]
-- "components_footer_linkrow": "LinkRow()" | kind=code-symbol | source=src/components/Footer.tsx:L87 | neighbors=[Footer.tsx]
-- "components_idletimeout_activity_events": "ACTIVITY_EVENTS" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L19 | neighbors=[IdleTimeout.tsx]
+- "components_faq_faq_categories": "FAQ_CATEGORIES" | kind=code-symbol | source=src/components/FAQ.tsx:L10 | neighbors=[FAQ.tsx]
+- "components_faq_faqcategory": "FaqCategory" | kind=code-symbol | source=src/components/FAQ.tsx:L18 | neighbors=[FAQ.tsx]
+- "components_faq_faqitem": "FaqItem" | kind=code-symbol | source=src/components/FAQ.tsx:L20 | neighbors=[FAQ.tsx]
 
 ## Instructions
 

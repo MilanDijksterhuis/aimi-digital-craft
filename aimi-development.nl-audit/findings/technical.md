@@ -1,271 +1,294 @@
 # Technical SEO — aimi-development.nl
 
-Live-site audit, 2026-09-06. Supersedes the code-based audit dated 2026-08-24 and
-the prior findings snapshot dated 2026-09-04 — every claim below was re-verified
-against live HTTP responses/HTML on 2026-09-06, not assumed from source or the
-older doc.
+Full live-site audit, 2026-09-15. Supersedes the 2026-09-06 snapshot. That
+snapshot sampled 6 of 48 pages in full; this pass uses the complete 48-page
+pre-crawl (`crawl-data.json`) for site-wide checks (canonicals, titles,
+headers, structured data, images, TTFB) plus fresh live `curl` probes for
+everything that requires a real HTTP round-trip (redirects, 404 handling,
+robots.txt, sitemap.xml, IndexNow key, case-sensitivity, CSP/header
+duplication, asset caching). `sitemap_discovery.py --json` used for sitemap
+discovery/validation. No Google PageSpeed Insights/CrUX credentials are
+configured in this environment — Core Web Vitals below are lab/source-signal
+inferences from HTML, headers and asset sizes, not field data or a Lighthouse
+run. This is flagged explicitly as a scope limit, not presented as a
+measured CWV score.
 
 **Score: 90/100**
 
-Method: `sitemap_discovery.py` for sitemap validation; `render_page.py --mode auto`
-(homepage, confirmed `is_spa: false`, no Playwright needed) plus direct `curl`
-against the live site for headers, redirects, and HTML source. Sample pages
-audited in full: homepage (`/`), `/tarieven`, two vertical pages
-(`/website-laten-maken-kapsalon`, `/website-laten-maken-hovenier`), two city
-pages (`/website-laten-maken-veendam`, `/website-laten-maken-groningen`). Spot
-checks (http→https, www→apex, trailing slash, 404, robots.txt, sitemap.xml,
-llms.txt, IndexNow key) were run against the live domain directly.
+## What works well
 
-No Google PageSpeed Insights/CrUX credentials are configured in this
-environment, so Core Web Vitals below are lab/source-signal inferences from
-HTML and asset headers, not field data or a Lighthouse run — flagged
-explicitly as a limitation, not presented as a full CWV audit.
-
-## What works
-
-- **robots.txt** (live-fetched, not just declared): AI crawlers explicitly
-  allowed — `GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`,
-  `ClaudeBot`, `Google-Extended`, plus `Googlebot`/`Bingbot`; scrapers
-  (`Bytespider`, `PetalBot`, `MJ12bot`) disallowed; `/portal`, `/admin`,
-  `/account`, `/server`, `/api/`, `/track.js` disallowed; `/login` deliberately
-  left crawlable (comment explains this is so Google can read its noindex);
-  `Sitemap:` line present and correct.
+- **Crawlability / robots.txt** (live-fetched): `Allow: /` by default;
+  `/portal`, `/admin`, `/account`, `/server`, `/api/`, `/track.js`
+  disallowed; `/login` deliberately left crawlable (comment: so Google can
+  read its noindex meta) — verified live, `/login` returns `200` with
+  `<meta name="robots" content="noindex"/>` and a self-referencing canonical.
+  `/portal` also returns `200` with `noindex` (and is additionally blocked
+  from crawling by `Disallow: /portal`, so it gets neither crawled nor
+  indexed — correct belt-and-suspenders handling). AI crawlers explicitly
+  allowed (`GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`,
+  `ClaudeBot`, `Google-Extended`), scrapers blocked (`Bytespider`,
+  `PetalBot`, `MJ12bot`). `Sitemap:` line present and correct.
 - **Sitemap**: `sitemap_discovery.py --json` confirms discovery via the
-  robots.txt declaration, HTTP 200, `valid: true`, `kind: urlset`. Manual fetch
-  confirms 48 `<loc>` entries, all in canonical (https, apex, no trailing
-  slash) form, matching the 48-page inventory in the task brief.
-- **Canonicals**: self-referencing and correct on all 6 sampled pages
-  (`https://aimi-development.nl/`, `/tarieven`, `/website-laten-maken-kapsalon`,
-  `/website-laten-maken-hovenier`, `/website-laten-maken-veendam`,
-  `/website-laten-maken-groningen`).
-- **Redirects**: `http://aimi-development.nl/` → 301 → `https://aimi-development.nl/`;
-  `https://www.aimi-development.nl/` → 301 → `https://aimi-development.nl/`;
-  `http://www.aimi-development.nl/` chains through 2 hops
-  (http→https-www→apex) to the final canonical URL — no loop, no excess hops.
-  `/tarieven/` (trailing slash) → 301 → `/tarieven`. Unknown path
-  (`/this-page-does-not-exist-xyz`) returns a true `404`, not a soft-404.
-- **Security headers** (live `curl -D-` on `/`): `content-security-policy`,
+  robots.txt declaration (not a stale/fallback path), `HTTP 200`,
+  `valid: true`, `kind: urlset`. 48 `<loc>` entries, all canonical
+  (https, apex, no trailing slash) form, matching the 48-page inventory.
+  Zero sitemap URLs match any disallowed path prefix. All `lastmod` values
+  are plausible (none in the future, range 2026-08-20 to 2026-09-04).
+- **Canonicals**: verified across all 48 pages via `crawl-data.json` —
+  0 mismatches between `canonical` and page `url` (upgraded from the prior
+  audit's 6-page sample to a full site check).
+- **Redirect hygiene**: `http://` → `https://` apex, 301; `https://www.` →
+  `https://` apex, 301 (single hop); `http://www.` chains 2 hops
+  (http→https-www→apex) to the same final URL — functional, no loop, but
+  see TECH-7 below (one avoidable extra hop). Trailing-slash URLs
+  (`/contact/`, `/website-laten-maken/`) 301 to the canonical no-slash form.
+  `/index.html` correctly 404s rather than serving duplicate content at a
+  second URL.
+- **404 handling**: unknown path (`/this-page-does-not-exist-xyz123`)
+  returns a true HTTP `404` (not a soft-404) with a proper Dutch
+  "Pagina niet gevonden — AIMI" branded error page, full meta/OG tags,
+  same layout/CSS as the rest of the site.
+- **Security headers** (live `curl -D-`): `content-security-policy`,
   `strict-transport-security: max-age=31536000; includeSubDomains`,
   `x-content-type-options: nosniff`, `x-frame-options: SAMEORIGIN`,
   `referrer-policy: strict-origin-when-cross-origin`,
-  `permissions-policy: geolocation=(), microphone=(), camera=()`. Confirms the
-  server.ts claim in the older code audit, with two caveats noted below
-  (duplicate emission, `unsafe-inline` in CSP).
-- **Previously-flagged issues from the 2026-09-04 findings snapshot are now
-  fixed, verified live today:**
-  - Asset compression: `curl -H "Accept-Encoding: gzip"` on
-    `/assets/index-CxzhDqWp.js`, `/assets/styles-DdbuqqY2.css` and
-    `/fonts/plus-jakarta-sans-latin-wght-normal.woff2` all now return
-    `Content-Encoding: gzip` (previously served fully uncompressed — was
-    Critical).
-  - Font/image caching: the font and the hero webp
-    (`/assets/hero-forest-1280-DAG1AbCS.webp`) now return
-    `Cache-Control: public, max-age=31536000, immutable` (previously had no
-    caching header at all — was High).
-  - IndexNow key file: `https://aimi-development.nl/b03bb73bce86422c6a74b3cfc829f2dd.txt`
-    now returns `200` with body `b03bb73bce86422c6a74b3cfc829f2dd`, matching
-    `scripts/indexnow-submit.mjs` (route was added in commit `d38d9ab`,
-    previously 404 — was High). **Not verified**: whether the submission
-    script is actually invoked on publish (CI hook / cron) — that's a process
-    check outside the scope of a live-site fetch.
-- **Structured data**: page-type-aware and comprehensive. Sitewide
-  `Organization`/`ProfessionalService` + `WebSite`. `/tarieven` adds
-  `OfferCatalog`/`Offer` with real prices and `FAQPage`. City pages
-  (Veendam, Groningen) add `LocalBusiness` with `PostalAddress`/`GeoCoordinates`.
-  Vertical pages (kapsalon, hovenier) add `Service`. All sampled pages also
-  carry `BreadcrumbList` and `FAQPage`. No validation errors observed in the
-  raw JSON (well-formed, consistent `@id` usage linking `Organization` across
-  page types).
-- **SSR/crawlability**: `render_page.py` reports `is_spa: false` for the
-  homepage, and a plain `curl` (no JS execution) returns the full page text
-  (`extracted_text` matches what a browser would render) — content is not
-  gated behind client-side rendering. Good for both classic crawlers and AI
+  `permissions-policy: geolocation=(), microphone=(), camera=()` present on
+  100% of 48 crawled pages (`crawl-data.json` header-presence check: 0
+  pages missing any of these). No `Server`-header tech-stack leak beyond
+  nginx version/OS (see TECH-6), no `X-Powered-By` leak.
+- **IndexNow**: key file `https://aimi-development.nl/b03bb73bce86422c6a74b3cfc829f2dd.txt`
+  live-verified, returns `200`, body = `b03bb73bce86422c6a74b3cfc829f2dd`,
+  matching `INDEXNOW_KEY` in `scripts/indexnow-submit.mjs`. **Newly
+  confirmed this session** (open item in the prior audit): `scripts/deploy.sh`
+  line 42 runs `node scripts/indexnow-submit.mjs || true` on every deploy —
+  the submit call is wired into the actual publish pipeline, non-blocking on
+  failure, and fetches the live sitemap.xml at submit time (not a stale
+  URL list). This is a complete IndexNow implementation.
+- **Case-sensitivity handling**: `/CONTACT` and `/Contact` both resolve
+  `200` (framework routing is case-insensitive) but both carry
+  `<link rel="canonical" href="https://aimi-development.nl/contact"/>` —
+  Google will consolidate signals to the lowercase canonical URL rather than
+  treating these as separate duplicate pages. Not best practice (a 301 to
+  the canonical case would be cleaner — see TECH-8) but the safety net
+  works.
+- **Structured data**: valid, well-formed JSON-LD sitewide (spot-checked
+  homepage's 3 `<script type="application/ld+json">` blocks — all parse
+  clean). Page-type-aware coverage across 48 pages: `Organization` +
+  `ProfessionalService` + `WebSite` on all 48; `BreadcrumbList` on 45;
+  `Service` on 39; `FAQPage` on 36; plus `LocalBusiness`, `OfferCatalog`,
+  `Article`, `ContactPage`, `ItemList` on relevant pages. No page has zero
+  structured data.
+- **SSR/crawlability**: a plain `curl` (no JS execution) returns full body
+  text matching what a browser renders (homepage: ~1,977 words in raw HTML,
+  matches `word_count` in the pre-crawl). Content is not gated behind
+  client-side rendering — confirmed good for both classic crawlers and AI
   answer engines that don't execute JS.
-- **Content differentiation**: measured textual similarity (Python
-  `difflib.SequenceMatcher` on stripped body text) between same-type
-  templated pages: Veendam vs. Groningen ≈ 35%, kapsalon vs. hovenier ≈ 30%.
-  The rest is unique per-page copy (local context, FAQ answers, service
-  framing). Word counts ~1,100–1,250 per page. No thin-content or
-  near-duplicate risk found in the sample.
-- **Mobile viewport**: `<meta name="viewport" content="width=device-width,
-  initial-scale=1"/>` present on all sampled pages, zoom not disabled (no
-  `maximum-scale`/`user-scalable=no`).
-- **Fonts**: single variable-weight woff2 (`Plus Jakarta Sans`, weight range
-  200–800) with `font-display: swap` in the CSS — avoids extra per-weight font
-  requests and minimizes FOIT risk.
-- **LCP resource**: the hero image uses a responsive `srcset`/`sizes`, `webp`
-  format, `fetchPriority="high"`, is `<link rel="preload">`'d, and has explicit
+- **Titles/descriptions**: 48/48 unique titles, 48/48 unique descriptions
+  (zero duplicates site-wide). Only 2 minor length outliers (see TECH-9,
+  Low). No `meta name="robots"` unexpectedly present on any indexable page.
+- **Images**: only 1 image site-wide flagged "missing alt"
+  (`hero-forest-*.webp` on the homepage) and on inspection this is
+  correctly implemented as decorative (`alt=""` + `aria-hidden="true"`,
+  purely a background/atmosphere image) — a false positive from naive
+  alt-text linting, not a real accessibility/SEO gap. 0 images site-wide are
+  missing explicit `width`/`height` (no CLS risk from unsized images).
+- **LCP resource**: hero image uses responsive `srcset`/`sizes`, WebP,
+  `fetchPriority="high"`, `<link rel="preload">`, explicit
   `width="1920" height="1255"` — correct practice for both LCP and CLS.
-- **llms.txt**: present at `/llms.txt` (200), well-structured with page
-  descriptions grouped by section (core pages, "webdesign per regio" hub with
-  links to all city pages). Not a core scoring category but a genuine
-  agent-UX asset worth keeping current as pages change.
-- **Titles/descriptions**: unique per sampled page, reasonable lengths (e.g.
-  homepage title ~58 chars, description ~152 chars; vertical/city pages
-  40–75 chars titles), no `meta name="robots"` present anywhere sampled
-  (correct default index/follow, no accidental noindex found).
-- **hreflang**: not applicable — single-locale site (`nl_NL`), no
-  alternate-language versions exist, so no hreflang implementation is
-  expected or missing.
+  Self-hosted variable-weight WOFF2 font (`Plus Jakarta Sans`), preloaded,
+  `font-display: swap` — no third-party font-blocking, minimal FOIT risk.
+- **Asset caching/compression**: static assets (JS/CSS/fonts/images) all
+  return `Cache-Control: public, max-age=31536000, immutable` (or the
+  duplicated equivalent, see TECH-4) and `Content-Encoding: gzip` confirmed
+  live on the main JS bundle. HTML documents correctly have no long-lived
+  cache header (expected for SSR content).
+- **TTFB**: median 122ms, mean 164ms across 48 pages — excellent. Only one
+  outlier (`/website-laten-maken`, 700ms; see TECH-10, Low, likely a single
+  cold-cache sample).
+- **Mobile viewport**: `<meta name="viewport" content="width=device-width,
+  initial-scale=1"/>` present, zoom not disabled.
+- **hreflang**: not applicable — single-locale (`nl_NL`) site, no
+  alternate-language versions exist.
 
 ## Findings
 
-### TECH-1 — CSP allows `'unsafe-inline'` for `script-src` and `style-src` (Medium)
+### TECH-1 — Hero H1 and ~47 above-the-fold elements start at `opacity:0`, animated in via client-side JS (High — Core Web Vitals / LCP risk)
 
-Live CSP header on `/`:
+The homepage `<h1>` ("Websites die écht werken.") — very likely the LCP
+element on this page — is served with inline `style="...opacity:0;
+transform:translateY(20px)"`. The homepage carries 47 elements with this
+same "hidden until JS animates it in" pattern (hero subhead, nav items,
+CTAs), consistent with a `framer-motion`/`motion` fade-in-on-load library
+(`/assets/motion-Bp-EBsJ0.js` is preloaded). `transform` is compositor-only
+so it won't itself cause a layout shift (CLS is likely fine), but
+`opacity:0` means the largest above-the-fold text block is invisible at
+first paint and only becomes visible once JS has loaded, hydrated, and run
+the animation. This is a well-documented LCP anti-pattern: it ties "time to
+visually complete" to JS execution time rather than to HTML/CSS parse time,
+which is exactly what SSR is supposed to avoid. This was not flagged in the
+prior audit (source inspection focused on JS payload size, not animation
+strategy) but is a distinct, likely larger contributor to LCP delay than
+TECH-2 below.
+
+**Recommendation**: for the LCP candidate specifically (the H1 and/or hero
+image, whichever paints largest), either (a) remove the opacity animation
+entirely and let it render at full opacity immediately, or (b) if the
+fade-in is a deliberate brand choice, implement it with a CSS-only
+`@keyframes`/`animation-delay` approach (no JS dependency for the *first*
+paint) so the element is visually present even if JS hasn't hydrated yet,
+or (c) use the `content-visibility`/CSS `@starting-style` pattern instead of
+a JS-driven opacity toggle. Re-measure with Lighthouse/PSI once credentials
+are available to quantify the actual LCP delta.
+
+### TECH-2 — Homepage eagerly `modulepreload`s ~21 JS chunks, some non-critical (Medium — Core Web Vitals risk, unchanged from prior audit)
+
+Still present as of 2026-09-15: `<head>` fires 21 `<link rel="modulepreload">`
+tags including `Contact-B2LhGYg3.js`, `Footer-BB8uYLHM.js`,
+`contact.functions-Df-PP1OP.js`, `auth-middleware-BxmmoFAN.js`,
+`calendar-5Yl3ivCd.js`, `mail-DyXXUlUJ.js`, `send-CjJ7l3aR.js` — none needed
+for first paint of a hero-focused landing page. This competes with the LCP
+image/font for bandwidth on the critical path and adds hydration-related
+main-thread work that can affect INP shortly after load.
+
+**Recommendation**: unchanged from prior audit — restrict `modulepreload` to
+first-paint/first-interaction chunks; route-split or lazy-load `Contact`,
+`Footer`, `calendar`, `mail`, `auth-middleware`, `send` behind
+scroll-into-view or user interaction.
+
+### TECH-3 — CSP allows `'unsafe-inline'` for `script-src` and `style-src` (Medium, unchanged)
+
 ```
 content-security-policy: default-src 'self'; img-src 'self' data: https://*.supabase.co;
 connect-src 'self' https://*.supabase.co https://calendly.com; style-src 'self' 'unsafe-inline';
 script-src 'self' 'unsafe-inline' https://assets.calendly.com; frame-src 'self' https://calendly.com;
 font-src 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'
 ```
-`'unsafe-inline'` on both `script-src` and `style-src` removes CSP's main
-protection against injected inline script/style execution — if an inline
-script is ever injected (compromised dependency, reflected input, third-party
-tag), the CSP will not block it. The rest of the policy (`object-src 'none'`,
-`base-uri 'self'`, `frame-ancestors 'self'`) is solid, which makes this the
-one meaningful gap.
+`'unsafe-inline'` on both directives removes CSP's primary protection
+against injected inline script/style execution. The rest of the policy
+(`object-src 'none'`, `base-uri 'self'`, `frame-ancestors 'self'`) is solid.
 
-**Recommendation**: move any inline `<style>`/`<script>` to external files, or
-switch to a nonce-based CSP (generate a per-response `nonce-{random}` in
-`server.ts` and apply it to the few inline tags that remain, e.g. structured
-data `<script type="application/ld+json">` — note: JSON-LD script blocks do
-not need `'unsafe-inline'` since they're not executed, only inline
-*executable* `<script>`/`<style>` tags need the nonce). Drop `'unsafe-inline'`
-once nonces are in place.
+**Recommendation**: move inline `<style>`/`<script>` to external files or
+switch to a nonce-based CSP generated per-response in `server.ts`; JSON-LD
+`<script type="application/ld+json">` blocks don't need `'unsafe-inline'`
+since they're not executed — only inline *executable* tags need the nonce.
 
-### TECH-2 — Homepage eagerly `modulepreload`s ~21 JS chunks, including non-critical ones (Medium — Core Web Vitals risk)
+### TECH-4 — Duplicate `Cache-Control` header on JS/CSS assets (Low, unchanged)
 
-The homepage `<head>` fires 21 `<link rel="modulepreload">` tags at high
-fetch priority, competing with the LCP image and font for bandwidth on the
-critical path. Several are not needed for first paint or even first
-interaction on a page whose primary job is to render hero content:
-`Contact-B2LhGYg3.js`, `Footer-BB8uYLHM.js`, `contact.functions-Df-PP1OP.js`,
-`auth-middleware-BxmmoFAN.js`, `calendar-5Yl3ivCd.js`, `mail-DyXXUlUJ.js`,
-`send-CjJ7l3aR.js`.
+`/assets/index-CxzhDqWp.js` and `/assets/styles-DdbuqqY2.css` still emit two
+`Cache-Control` lines (`max-age=31536000` and `public, immutable`
+separately) — an nginx `expires`/`add_header` pair both firing. Fonts and
+images already emit a single correctly-combined header
+(`public, max-age=31536000, immutable`), so the JS/CSS location block is the
+one left unfixed.
 
-Measured gzip sizes (`curl -H "Accept-Encoding: gzip"`, actual wire bytes):
+**Recommendation**: consolidate into one `add_header Cache-Control "public,
+max-age=31536000, immutable";` in the JS/CSS location block.
 
-| Asset | gzip size |
-|---|---|
-| `index-CxzhDqWp.js` | 249,717 B |
-| `motion-Bp-EBsJ0.js` | 41,531 B |
-| `radix-Ehmlw_UZ.js` | 18,267 B |
-| `styles-DdbuqqY2.css` | 18,011 B |
-| `utils-DZiiT1zZ.js` | 8,962 B |
-| `index-DoZ3MidG.js` | 4,971 B |
-| `CookieBanner-BfP0EHBy.js` | 3,819 B |
-| `Contact-B2LhGYg3.js` | 2,413 B |
-| `Services-R5olLsou.js` | 1,955 B |
-| `auth-middleware-BxmmoFAN.js` | 1,879 B |
-| `Footer-BB8uYLHM.js` | 1,666 B |
+### TECH-5 — Security headers duplicated on HTML responses (Low, unchanged)
 
-Core chunks alone total ~325 KB gzip (~950 KB uncompressed per the
-`Content-Length: 883060` seen on `index-CxzhDqWp.js` without
-`Accept-Encoding`). The page is server-rendered (`is_spa: false`, content is
-present without JS), but it still fully hydrates client-side, so this JS has
-to be fetched, parsed and executed regardless. Preloading it all eagerly at
-high priority is a plausible contributor to LCP delay (network contention)
-and INP degradation (main-thread work during/after hydration) on mid/low-end
-mobile — this is an inference from source inspection, not a measured lab
-score (no PageSpeed/Lighthouse credentials available in this environment).
-
-**Recommendation**: restrict `modulepreload` to chunks required for first
-paint/first interaction; route-split or defer `Contact`, `Footer`, `calendar`,
-`mail`, `auth-middleware`, `send` so they load on scroll-into-view or user
-interaction instead of eagerly with every page load. Re-measure with
-Lighthouse/PSI once API credentials are available to confirm actual LCP/INP
-field impact.
-
-### TECH-3 — Security headers duplicated on HTML responses (Low)
-
-`curl -D- https://aimi-development.nl/` shows four headers emitted **twice**
-each, once lowercase and once Title-Case, with identical values:
-```
-x-frame-options: SAMEORIGIN
-X-Frame-Options: SAMEORIGIN
-x-content-type-options: nosniff
-X-Content-Type-Options: nosniff
-referrer-policy: strict-origin-when-cross-origin
-Referrer-Policy: strict-origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains
-Strict-Transport-Security: max-age=31536000; includeSubDomains
-```
-`content-security-policy` and `permissions-policy` are **not** duplicated,
-which points at nginx re-adding a legacy subset of headers that the
-Node/TanStack Start app (`server.ts`) already sets. Not currently harmful
-since the values agree, but it's redundant bytes on every response and a
-config-drift risk if the two layers are ever edited independently and fall
-out of sync.
+`x-frame-options`, `x-content-type-options`, `referrer-policy` and
+`strict-transport-security` are each emitted twice per response (once
+lowercase, once Title-Case, identical values) — `content-security-policy`
+and `permissions-policy` are not duplicated. Points at nginx re-adding a
+legacy subset of headers the Node app already sets. Not currently harmful
+(values agree) but redundant and a config-drift risk if the two layers are
+edited independently in future.
 
 **Recommendation**: set these 4 headers in exactly one layer (either
 `server.ts` or the nginx vhost, not both).
 
-### TECH-4 — Duplicate `Cache-Control` header on JS/CSS assets, unchanged from prior audit (Low)
+### TECH-6 — `Server` header discloses exact nginx version and OS (Low, informational, unchanged)
 
-Still present as of 2026-09-06 (confirmed via `curl -D-`):
-```
-Cache-Control: max-age=31536000
-Cache-Control: public, immutable
-```
-on `/assets/index-CxzhDqWp.js` and `/assets/styles-DdbuqqY2.css` — an nginx
-`expires`/`add_header` pair both firing. Note this is scoped to the JS/CSS
-location block only: the font and hero webp checked in this pass return a
-single, correctly-combined header (`public, max-age=31536000, immutable`), so
-the fix applied to fonts/images was not also applied to the JS/CSS rule.
-
-**Recommendation**: consolidate into one `add_header Cache-Control "public,
-max-age=31536000, immutable";` in the JS/CSS location block, matching what's
-already correct for fonts/images.
-
-### TECH-5 — Sitemap `lastmod` still looks batch/deploy-driven, not content-driven (Low, improved since 2026-09-04)
-
-Current `sitemap.xml` `lastmod` distribution across the 48 URLs:
-
-| Date | Count |
-|---|---|
-| 2026-08-21 | 20 |
-| 2026-09-04 | 13 |
-| 2026-08-20 | 7 |
-| 2026-08-22 | 7 |
-| 2026-09-03 | 1 |
-
-This is better than the 2026-09-04 snapshot (which had 47/48 URLs on the same
-handful of dates with effectively one outlier), but the large identical
-clusters (20 URLs sharing one exact date, 13 sharing another) still look like
-deploy/build timestamps rather than genuine per-page content-change tracking.
-Google is known to distrust `lastmod` values that don't correlate with real
-changes, which reduces its usefulness as a recrawl signal over time.
-
-**Recommendation**: derive `lastmod` from actual content/CMS modification
-timestamps per route, or omit the field entirely if that data isn't reliably
-tracked (Google ignores `changefreq`/`priority` already, correctly absent
-here).
-
-### TECH-6 — Server header discloses exact nginx version and OS (Low, informational)
-
-`Server: nginx/1.28.3 (Ubuntu)` is sent on every response. Minor information
-disclosure — makes it trivial to check the exact nginx version against known
-CVEs.
+`Server: nginx/1.28.3 (Ubuntu)` sent on every response — trivial to check
+against known CVEs for that exact version.
 
 **Recommendation**: add `server_tokens off;` to the nginx config.
 
+### TECH-7 — `http://www.` variant takes 2 redirect hops instead of 1 (Low)
+
+`http://www.aimi-development.nl/` → 301 → `https://www.aimi-development.nl/`
+→ 301 → `https://aimi-development.nl/`. Functional, no loop, but every other
+entry point (`http://` apex, `https://www.`) resolves in a single hop. Low
+priority — real-world traffic hitting the `http+www` combination specifically
+is rare, but it's an easy fix and shaves one round-trip for any crawler or
+old backlink using that exact form.
+
+**Recommendation**: have the nginx `www` server block redirect straight to
+`https://aimi-development.nl/` regardless of the incoming scheme, instead of
+upgrading scheme first and stripping `www` second.
+
+### TECH-8 — Mixed-case URLs (`/CONTACT`, `/Contact`) serve `200` instead of redirecting to canonical case (Low)
+
+Framework routing is case-insensitive: `/CONTACT` and `/Contact` both return
+`200` with full page content and correctly self-reference
+`https://aimi-development.nl/contact` via `<link rel="canonical">`. This
+mitigates duplicate-indexing risk (Google should consolidate to the
+canonical), but it's not best practice — anyone linking to a mixed-case
+variant (typos, some case-preserving CMSs, old links) creates a second
+crawlable, 200-status URL that relies entirely on the canonical tag rather
+than an explicit redirect. No evidence this is currently causing duplicate
+indexing, but it's an avoidable gap.
+
+**Recommendation**: add a canonicalizing redirect (301, lowercase the path)
+at the router/nginx level so mixed-case requests land on the exact canonical
+URL rather than depending on the canonical tag alone.
+
+### TECH-9 — Two pages have title/description length outliers (Low)
+
+`/privacybeleid`: title is 20 characters (well under the ~30–60 char
+sweet spot) and meta description is 169 characters (9 over the ~160 soft
+cap, likely truncated in some SERP layouts). `/algemene-voorwaarden`: title
+is 27 characters. Both are legal/boilerplate pages with minimal commercial
+SEO value, so this is genuinely low priority, not ignorable-by-default on a
+more important page.
+
+**Recommendation**: optional — lengthen the two short titles slightly for
+consistency (e.g. "Privacybeleid — AIMI Webdesign Veendam") and trim the
+privacybeleid description under 160 characters if it matters for this page's
+SERP snippet.
+
+### TECH-10 — Single TTFB outlier on `/website-laten-maken` (Low, monitor only)
+
+47 of 48 pages return TTFB in the 102–171ms range; `/website-laten-maken`
+recorded 700ms in the pre-crawl. Single data point — consistent with a
+cold cache/cold SSR render rather than a systemic issue (re-requesting this
+page in this session was not part of the brief's scope for re-verification).
+
+**Recommendation**: not urgent; if this recurs across multiple crawls, check
+whether this specific route has a slower data dependency (e.g. an
+uncached Supabase call) that others don't.
+
+## Sitemap lastmod distribution (informational, unchanged pattern from prior audit)
+
+| Date | Count |
+|---|---|
+| 2026-08-20 | 7 |
+| 2026-08-21 | 20 |
+| 2026-08-22 | 7 |
+| 2026-09-03 | 1 |
+| 2026-09-04 | 13 |
+
+Large identical clusters (20 URLs sharing one exact date, 13 sharing
+another) still read as deploy/build timestamps rather than genuine
+per-page content-change tracking. Not a Critical/High issue — Google
+tolerates this — but reduces `lastmod`'s usefulness as a recrawl-priority
+signal. No blocked/disallowed paths appear in the sitemap, and no
+future-dated entries.
+
 ## Explicitly out of scope / not verified in this pass
 
-- No PageSpeed Insights/CrUX API credentials configured — all Core Web Vitals
-  commentary above is inferred from source/asset inspection (sizes, headers,
-  preload strategy), not measured field or lab scores. Recommend running
-  Lighthouse/PSI manually once credentials are available to confirm TECH-2's
-  actual LCP/INP impact.
-- Only 6 of 48 pages were fetched and parsed in full; the remaining 42 were
-  spot-checked only via the sitemap.xml URL list and status-code samples
-  (`tarieven`, 2 vertical, 2 city, homepage, plus http/https/www/trailing-slash/404
-  probes). Full per-URL canonical/redirect verification across all 48 pages
-  was not re-run in this session — the 2026-09-04 snapshot recorded 48/48
-  canonicals correct and 48/48 returning 200, and nothing observed in this
-  session's sample contradicts that.
-- Whether `scripts/indexnow-submit.mjs` is actually triggered on content
-  publish (CI hook, cron, or manual) was not verified — only that the
-  verification key file itself now resolves correctly.
-- Detailed hreflang validation is not applicable here (single-locale site);
+- No PageSpeed Insights/CrUX API credentials configured — all Core Web
+  Vitals commentary (TECH-1, TECH-2) is inferred from source/asset
+  inspection (animation strategy, preload strategy, sizes), not measured
+  field or lab scores. Recommend running Lighthouse/PSI manually once
+  credentials are available, prioritizing TECH-1 (opacity-gated LCP
+  element) for confirmation since it's the most likely to move a measured
+  LCP score.
+- Detailed hreflang validation is not applicable (single-locale site);
   deferred to the `seo-hreflang` sub-skill for any future multi-locale work.
+- Full per-page HTML fetch (H1/schema/animation-pattern spot checks) was
+  done for the homepage, `/website-checker`, `/login`, `/portal`,
+  `/CONTACT`/`/Contact`, and `/this-page-does-not-exist-xyz123`; the
+  remaining pages were assessed via the structured `crawl-data.json`
+  fields (title/description/canonical/headers/schema/images/word count),
+  which cover all 48 pages but not full raw-HTML inspection of each.

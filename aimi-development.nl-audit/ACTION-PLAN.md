@@ -1,173 +1,44 @@
-# Action Plan — aimi-development.nl
+# Actieplan — aimi-development.nl (audit 15 sep 2026)
 
-**Date:** 2026-09-04 · **Health Score:** 79/100
-Ordered by impact ÷ effort. Phase 1 is roughly half a day and moves the score most.
+Prioriteit: Critical → High → Medium → Low. Verwijzingen: `FULL-AUDIT-REPORT.md` en `findings/`.
 
----
+## Fase 1 — Kritieke fixes & juridische basis (week 1)
 
-## Phase 1 — Critical fixes (this week)
+| # | Actie | Fixt | Moeite |
+|---|---|---|---|
+| 1 | **KvK, BTW, straatadres, postcode invullen** in `src/lib/seo.ts` (constanten `ADDRESS.streetAddress`, `postalCode`, `KVK`, `VAT_ID`) + KvK/BTW vermelden op /algemene-voorwaarden. Footer en JSON-LD renderen automatisch mee. | CQ-2, SCH-1, SCH-4, Local (juridisch verplicht) | 15 min + data opzoeken |
+| 2 | **Cookiebanner-fix**: `-translate-x-1/2` toevoegen aan de container in `src/components/CookieBanner.tsx:67`. | VIS-1 (High, 100% van mobiele sessies) | 1 regel |
+| 3 | **Google Bedrijfsprofiel** via dashboard completeren: categorie ("Webdesigner"), openingstijden, foto's, diensten, beschrijving; link naar site verifiëren. Eerste 3–5 reviews vragen aan bestaande klanten (o.a. Direct SportsWear). | Local-1/3 (Critical) | 1–2 uur |
+| 4 | **Brotli aanzetten** in nginx (`ngx_brotli`). | PERF-2 | serverconfig |
+| 5 | **/wordpress-of-maatwerk retargeten**: title/H1 naar "WordPress vs maatwerk"-variant. NB: eerst GSC-querydata checken zodra beschikbaar — SXO-10 is een sterk maar directioneel signaal. | SXO-10 (Critical) | 30 min |
+| 6 | Kleine fixes: `webPageJsonLd()` op /over-ons (SCH-5); titles /privacybeleid en /algemene-voorwaarden verlengen naar ~50–60 tekens. | SCH-5, TECH-9 | 30 min |
 
-### 1.1 Enable compression for static assets `[Critical · 15 min · server]`
+## Fase 2 — Bewijs & conversie (week 2–3)
 
-**Impact: highest on the site.** Saves ~870 KB per uncached visit.
-
-nginx currently gzips only the proxied HTML, not the files it serves from disk. In the server block:
-
-```nginx
-gzip on;
-gzip_vary on;
-gzip_comp_level 6;
-gzip_min_length 1024;
-gzip_proxied any;
-gzip_types
-    application/javascript
-    text/javascript
-    text/css
-    application/json
-    image/svg+xml
-    font/woff2;
-```
-
-Brotli is better still if `ngx_brotli` is available (`brotli on; brotli_types <same list>;`) — roughly 15–20% smaller again.
-
-Verify:
-
-```bash
-curl -sI -H "Accept-Encoding: gzip, br" https://aimi-development.nl/assets/index-B6pDCZvI.js | grep -i content-encoding
-```
-
-Expect `Content-Encoding: gzip` (or `br`). Currently returns nothing.
-
-> Do **not** gzip `.webp` — it is already compressed. It needs caching (1.2), not compression.
-
-### 1.2 Add cache headers for fonts and images `[High · 10 min · server]`
-
-`/fonts/*.woff2` and `/assets/*.webp` return no `Cache-Control` at all — including the **LCP hero image**. Extend the static location to cover them, and collapse the duplicate header while there (an `expires` directive and an `add_header` are both firing, producing two `Cache-Control` lines):
-
-```nginx
-location ~* \.(js|css|woff2|webp|png|jpg|svg|avif)$ {
-    add_header Cache-Control "public, max-age=31536000, immutable" always;
-    access_log off;
-}
-```
-
-### 1.3 Deploy the IndexNow key route `[High · 5 min]`
-
-`https://aimi-development.nl/b03bb73bce86422c6a74b3cfc829f2dd.txt` returns **404**, so every IndexNow submission is rejected and the feature does nothing.
-
-The route already exists locally but is uncommitted:
-
-- `src/routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt.tsx`
-- `scripts/indexnow-submit.mjs`
-
-Commit and deploy, then confirm the URL returns the key as plain text.
-
----
-
-## Phase 2 — Trust & compliance (weeks 2–3)
-
-### 2.1 Add KvK, BTW and postal address to the footer `[High · 30 min]`
-
-Currently **0 of 48 pages** show either number. This is a legal requirement for a Dutch business under the Handelsregisterwet, and simultaneously the cheapest E-E-A-T signal available.
-
-Add to [Footer.tsx](src/components/Footer.tsx) so it appears site-wide: company name, Veendam postal address, KvK number, BTW-ID, phone, email.
-
-### 2.2 Complete the Organization schema `[High · 20 min]`
-
-`ProfessionalService` is a `LocalBusiness` subtype, so Google expects an address. The `/#organization` entity in [seo.ts](src/lib/seo.ts) currently has none. The real Veendam address is already used on the city page — reuse it:
-
-```js
-address: { "@type": "PostalAddress", streetAddress: "…", postalCode: "…",
-           addressLocality: "Veendam", addressRegion: "Groningen", addressCountry: "NL" },
-geo: { "@type": "GeoCoordinates", latitude: 53.1042, longitude: 6.8778 },
-openingHoursSpecification: [{ "@type": "OpeningHoursSpecification",
-  dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-  opens: "09:00", closes: "17:00" }],
-priceRange: "€€",
-```
-
-### 2.3 Start collecting reviews `[High · ongoing]`
-
-No reviews anywhere, and no `aggregateRating` because there is nothing real to mark up. A Google Business Profile already exists (it is the one `sameAs` link). Ask every delivered client for a Google review; add `aggregateRating` **only once genuine reviews exist** — never mark up ratings without them.
-
-### 2.4 Expand `sameAs` `[Medium · 15 min]`
-
-One Maps link is thin corroboration for entity resolution. Add LinkedIn, Instagram/Facebook and the KvK register URL as they become available.
-
-### 2.5 Fix over-length titles `[Medium · 15 min]`
-
-| Page | Now | Suggested |
+| # | Actie | Fixt |
 |---|---|---|
-| `/seo` | 70 | SEO laten doen \| Technisch, snel & lokaal vindbaar — AIMI |
-| `/` | 64 | AIMI — Webdesignbureau Noord-Nederland \| Websites & webshops |
-| `/tarieven` | 63 | Wat kost een website? \| Tarieven vanaf € 499 — AIMI |
-| `/website-laten-vernieuwen` | 61 | Website laten vernieuwen \| Opknappen of opnieuw — AIMI |
+| 7 | **Portfolio/cases-sectie** met echte klantprojecten: naam, branche, voor/na, resultaat, quote. Minimaal 3 cases. Daarna (pas dan) Review-schema overwegen. | CQ-1, SXO-6/8 — grootste ranking- én conversieblokker |
+| 8 | **`GENERIC_EXAMPLES` vervangen** in `ExampleSlideshow` door echte projectvoorbeelden per branche — één componentwijziging, effect op 23 pagina's. | SXO-5, VIS-2 |
+| 9 | **Vanaf-prijs op /webshop-laten-maken** (nu "op aanvraag"). | SXO-9 |
+| 10 | **/over-ons uitbouwen** (team, verhaal, werkwijze, foto's — E-E-A-T-drager; nu 223 echte woorden) en **/website-laten-maken verdiepen** (nu 474 — dunner dan de long-tail-pagina's die ernaar linken). | CQ-6/7 |
+| 11 | **Homepage-FAQ inkorten** tot 5–6 vragen + link naar /faq; FAQPage-schema alleen op /faq laten. | CQ-5, SCH-2 |
+| 12 | **Merknaam in citeerbare passages**: "AIMI" natuurlijk verwerken in sleutelantwoorden (FAQ, /wordpress-of-maatwerk, homepage). | GEO-6 |
 
-Also: add `og:url` to `/privacybeleid` and `/algemene-voorwaarden`, and fix the `&#x27;` double-encoding in the `/website-laten-maken-schilder` and `/website-laten-maken-roden` descriptions.
+## Fase 3 — Autoriteit & performance (maand 2)
 
----
+| # | Actie | Fixt |
+|---|---|---|
+| 13 | **Citaties opbouwen** (volgorde uit `findings/backlinks.md`): LinkedIn-bedrijfspagina → Google/Bing Places → NL-directories (KvK-consistent) → regionale ondernemersverenigingen (Veendam/Groningen) → branchegidsen. `sameAs` in schema aanvullen per nieuw profiel. | Local, Backlinks, SCH-3, GEO |
+| 14 | **Klant-colofonlinks** vragen; **website-checker als open-source repo** publiceren (linkable asset). | Backlinks |
+| 15 | **LCP-refactor**: above-fold Framer Motion-animaties → CSS; Radix/portal-code uit publieke routes splitsen; modulepreload beperken tot kritieke chunks. Doel: LCP < 2,5 s mobiel lab. | TECH-1/2, PERF-1/3 |
+| 16 | **Contextuele stad×branche-kruislinks** in content ("webdesign kapsalon Groningen"); structurele variatie aanbrengen in het gedeelde 6-secties-skelet van de 30 landingspagina's. | CQ-3, On-Page |
+| 17 | Mobiele UX: tikdoelen ≥ 44 px (nav/footer), bodytekst ≥ 16 px, scroll-hint op /tarieven-tabel. | VIS-3/4 |
+| 18 | Serveropruiming: dubbele headers ontdubbelen, `server_tokens off`, /CONTACT → 301 lowercase, Cache-Control op HTML (`max-age=300, stale-while-revalidate`), CSP richting nonces. | TECH-4–8, PERF-5 |
 
-## Phase 3 — Content & authority (month 2)
+## Fase 4 — Meten & itereren (doorlopend)
 
-### 3.1 Build a portfolio or case-study section `[High · significant]`
-
-The largest single gap. The site sells websites and shows none. Even three case studies — problem, approach, outcome, screenshot — would address the proof gap (SXO-1), give the site its first genuinely linkable asset (BL-1), and create material worth citing.
-
-### 3.2 Add author identity to the programmatic pages `[High · moderate]`
-
-Aidan and Milan appear on 6 of 48 pages, and on **none** of the 30 pages built to attract visitors. Add a short bylined block — photo, name, one line of experience — to the city and branch templates, plus `Person` schema linked via `founder`/`employee` (GEO-2). For a two-person agency the founders *are* the differentiator; right now they are the least visible thing on the site.
-
-### 3.3 Build contextual internal links `[Medium · moderate]`
-
-Every page currently links to every other page, so internal linking conveys no hierarchy. Use the existing "Ook interessant" blocks to create one: city pages → regional hub + main service page; branch pages → 2–3 genuinely related branches + `/tarieven`. In-body contextual links carry more weight than boilerplate nav links.
-
-### 3.4 Add outbound citations `[Medium · 1 hour]`
-
-Zero external links site-wide. Add a handful of honest ones — web.dev on Core Web Vitals from `/seo`, the KvK register from `/over-ons`, Rijksoverheid where legal obligations are mentioned. Helps E-E-A-T and materially helps AI citability.
-
-### 3.5 Enrich `/contact` `[Medium · 30 min]`
-
-At 304 words it is the thinnest page on the site, and it is where intent is highest. Add postal address, opening hours, response-time commitment, service area, and what happens after submitting. Add `ContactPage` schema with `contactPoint`.
-
----
-
-## Phase 4 — Performance & monitoring (ongoing)
-
-### 4.1 Trim the homepage modulepreload list `[High · 1 hour]`
-
-21 `modulepreload` hints fire on the homepage, including `auth-middleware`, `contact.functions`, `calendar`, `mail` and `send` — none needed to render it. They compete with the LCP image and font for early bandwidth. Preload the critical path only.
-
-### 4.2 Split portal/admin code out of the public bundle `[Medium · moderate]`
-
-The 881 KB main bundle carries Radix UI (54 KB) largely needed by the authenticated portal and admin, not by marketing pages. Route-level splitting would cut first-visit payload materially. Do this **after** 1.1 — compression alone changes the picture.
-
-### 4.3 Lazy-load below-fold images `[Low · 15 min]`
-
-0 of 33 images use `loading="lazy"`. Add it to below-fold images; keep the hero eager.
-
-### 4.4 Optimise `og-image.png` `[Low · 10 min]`
-
-112 KB PNG, fetched by every crawler and link unfurler.
-
-### 4.5 Make sitemap `lastmod` real `[Low · 30 min]`
-
-47 of 48 URLs claim 2026-08-20/22 despite a 2026-09-03 deploy. Derive it from actual content changes or drop the field — inaccurate dates train Google to ignore it.
-
-### 4.6 Connect measurement `[High · 30 min]`
-
-This audit had no field data. Worth doing before the next one:
-
-- **Google Search Console** — real LCP/INP/CLS, indexation, query data
-- **Bing Webmaster Tools** (free) — backlink profile and anchor text, so the authority category can be scored
-- Re-run this audit afterwards to measure Phase 1 impact
-
----
-
-## Expected impact
-
-| After | Score |
-|---|---|
-| Now | **79** |
-| Phase 1 | **~85** — Performance 58 → 85, Technical 78 → 90 |
-| Phase 2 | **~89** — Content, Schema and Local all lift |
-| Phase 3 | **~93** — Content Quality and authority |
+- **Google Search Console koppelen + `GOOGLE_API_KEY`** (PSI/CrUX) configureren → volgende audit met velddata en querydata; valideert ook SXO-hypotheses (#5, #9).
+- **Reviewvelocity**: structureel na elke oplevering om een review vragen (Google eerst, later Klantenvertellen).
+- **Drift-baseline** vastleggen (`claude-seo` drift) en bij elke deploy vergelijken.
+- **dateModified** in WebPage-schema, gevoed door echte wijzigingsdata.
+- Kwartaalritme: her-audit + Lighthouse-vergelijking (`lighthouse-runs/`).

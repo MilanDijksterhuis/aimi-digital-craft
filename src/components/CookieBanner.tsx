@@ -64,8 +64,7 @@ export function CookieBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 z-50 w-full max-w-lg px-4"
-          style={{ transform: "translateX(-50%)" }}
+          className="fixed bottom-6 inset-x-0 z-50 mx-auto w-full max-w-lg px-4"
         >
           <div
             className="rounded-2xl p-6 shadow-2xl"

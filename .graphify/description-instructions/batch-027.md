@@ -1,4 +1,4 @@
-# Node Description Batch 28 of 49
+# Node Description Batch 28 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_faq_homepage_faq_questions": "HOMEPAGE_FAQ_QUESTIONS" | kind=code-symbol | source=src/components/FAQ.tsx:L154 | neighbors=[FAQ.tsx]
+- "components_faq_homepagefaqitems": "homepageFaqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L163 | neighbors=[FAQ.tsx]
+- "components_faq_items": "items" | kind=code-symbol | source=src/components/FAQ.tsx:L5 | neighbors=[FAQ.tsx]
+- "components_footer_branches": "branches" | kind=code-symbol | source=src/components/Footer.tsx:L69 | neighbors=[Footer.tsx]
+- "components_footer_cities": "cities" | kind=code-symbol | source=src/components/Footer.tsx:L51 | neighbors=[Footer.tsx]
+- "components_footer_columns": "columns" | kind=code-symbol | source=src/components/Footer.tsx:L6 | neighbors=[Footer.tsx]
+- "components_footer_linkrow": "LinkRow()" | kind=code-symbol | source=src/components/Footer.tsx:L87 | neighbors=[Footer.tsx]
+- "components_idletimeout_activity_events": "ACTIVITY_EVENTS" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L19 | neighbors=[IdleTimeout.tsx]
 - "components_leadspanel_activity_label": "ACTIVITY_LABEL" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L49 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_downloadcsv": "downloadCsv()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L122 | neighbors=[LeadsPanel.tsx]
 - "components_leadspanel_fmtdate": "fmtDate()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L94 | neighbors=[LeadsPanel.tsx]
@@ -48,15 +56,7 @@ one-sentence description — no prose, no markdown fences.
 - "components_locationpagev2_sectionrenderers": "sectionRenderers" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L241 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_workflowsection": "WorkflowSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L124 | neighbors=[LocationPageV2.tsx]
 - "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L37 | neighbors=[Nav.tsx]
-- "components_nav_mobilemenu": "MobileMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L178 | neighbors=[Nav.tsx]
-- "components_nav_motionlink": "MotionLink" | kind=code-symbol | source=src/components/Nav.tsx:L6 | neighbors=[Nav.tsx]
-- "components_nav_navlink": "NavLink()" | kind=code-symbol | source=src/components/Nav.tsx:L45 | neighbors=[Nav.tsx]
-- "components_nav_servicecategories": "serviceCategories" | kind=code-symbol | source=src/components/Nav.tsx:L8 | neighbors=[Nav.tsx]
-- "components_nav_services": "services" | kind=code-symbol | source=src/components/Nav.tsx:L35 | neighbors=[Nav.tsx]
-- "components_nav_servicesmenu": "ServicesMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L70 | neighbors=[Nav.tsx]
-- "components_onboardingwizard_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L16 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_contacts": "Contacts" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L17 | neighbors=[OnboardingWizard.tsx]
-- "components_onboardingwizard_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L256 | neighbors=[OnboardingWizard.tsx]
+- "components_nav_mobilemenu": "MobileMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L180 | neighbors=[Nav.tsx]
 
 ## Instructions
 

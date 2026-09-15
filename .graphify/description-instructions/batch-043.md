@@ -1,4 +1,4 @@
-# Node Description Batch 44 of 49
+# Node Description Batch 44 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_websitelatenmakennagelstudioroute": "WebsiteLatenMakenNagelstudioRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L152 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenpedicureroute": "WebsiteLatenMakenPedicureRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L146 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenrestaurantroute": "WebsiteLatenMakenRestaurantRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L140 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenrodenroute": "WebsiteLatenMakenRodenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L135 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenroute": "WebsiteLatenMakenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L275 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenschilderroute": "WebsiteLatenMakenSchilderRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L129 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_websitelatenmakenschoonheidssalonroute": "WebsiteLatenMakenSchoonheidssalonRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L123 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakensneekroute": "WebsiteLatenMakenSneekRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L118 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenstadskanaalroute": "WebsiteLatenMakenStadskanaalRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L112 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenveendamroute": "WebsiteLatenMakenVeendamRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L106 | neighbors=[routeTree.gen.ts]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_types_tablesinsert": "TablesInsert" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1458 | neighbors=[types.ts]
 - "supabase_types_tablesupdate": "TablesUpdate" | kind=code-symbol | source=src/integrations/supabase/types.ts:L1483 | neighbors=[types.ts]
 - "ui_accordion_accordioncontent": "AccordionContent" | kind=code-symbol | source=src/components/ui/accordion.tsx:L37 | neighbors=[accordion.tsx]
-- "ui_accordion_accordionitem": "AccordionItem" | kind=code-symbol | source=src/components/ui/accordion.tsx:L9 | neighbors=[accordion.tsx]
-- "ui_accordion_accordiontrigger": "AccordionTrigger" | kind=code-symbol | source=src/components/ui/accordion.tsx:L17 | neighbors=[accordion.tsx]
-- "ui_alert_alert": "Alert" | kind=code-symbol | source=src/components/ui/alert.tsx:L22 | neighbors=[alert.tsx]
-- "ui_alert_alertdescription": "AlertDescription" | kind=code-symbol | source=src/components/ui/alert.tsx:L41 | neighbors=[alert.tsx]
-- "ui_alert_alerttitle": "AlertTitle" | kind=code-symbol | source=src/components/ui/alert.tsx:L30 | neighbors=[alert.tsx]
-- "ui_alert_alertvariants": "alertVariants" | kind=code-symbol | source=src/components/ui/alert.tsx:L6 | neighbors=[alert.tsx]
-- "ui_alert_dialog_alertdialogoverlay": "AlertDialogOverlay" | kind=code-symbol | source=src/components/ui/alert-dialog.tsx:L13 | neighbors=[alert-dialog.tsx]
 
 ## Instructions
 

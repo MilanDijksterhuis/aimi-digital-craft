@@ -46,7 +46,9 @@ function NavLink({ label, href }: { label: string; href: string }) {
   return (
     <MotionLink
       to={href}
-      className="relative text-[15px] py-1"
+      // SEO-audit 2026-09-15 (VIS-3): py-1 gaf ~34px tikhoogte; py-3 haalt de
+      // 44px-richtlijn zonder layoutverschuiving (header is h-16, items-center).
+      className="relative text-[15px] py-3"
       style={{ color: "rgba(255,255,255,0.65)", fontFamily: FONT }}
       whileHover="hover"
       initial="rest"
@@ -61,7 +63,7 @@ function NavLink({ label, href }: { label: string; href: string }) {
       <motion.span
         variants={{ rest: { scaleX: 0, originX: 0 }, hover: { scaleX: 1, originX: 0 } }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "1px", background: "#fe2c02", display: "block" }}
+        style={{ position: "absolute", bottom: "8px", left: 0, right: 0, height: "1px", background: "#fe2c02", display: "block" }}
       />
     </MotionLink>
   );
@@ -88,7 +90,7 @@ function ServicesMenu() {
         aria-haspopup="true"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="relative flex items-center gap-1.5 text-[15px] py-1"
+        className="relative flex items-center gap-1.5 text-[15px] py-3"
         style={{ color: open ? "#ffffff" : "rgba(255,255,255,0.65)", fontFamily: FONT, background: "none", border: "none", cursor: "pointer" }}
       >
         Diensten

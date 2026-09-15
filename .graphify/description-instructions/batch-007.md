@@ -1,4 +1,4 @@
-# Node Description Batch 8 of 49
+# Node Description Batch 8 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a11075959148ee41dbd0fd64057e80ac25a771e7": "a110759 Work in progress" | kind=Commit | source=git | neighbors=[0b21971 Changes weergave verbeterd, main, f3ee883 Lovable update, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a4fa2cf4d68d63e3b7ed9217a876e7fff63b058b": "a4fa2cf Work in progress" | kind=Commit | source=git | neighbors=[3d42113 Kleurproblemen opgeholzen, main, 204f17a Changes, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a8375281beebe589a5e4a6f040eeead6fae497ab": "a837528 bug fixes" | kind=Commit | source=git | neighbors=[6500c48 bug fixes, main, 23bb181 sec, monitoring.shared.ts, tmp-main-merge, tmp-revert-main] | lang=pt
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ad950dd3bd93400aa56c67e7a37c7fad5176f47c": "ad950dd Changes" | kind=Commit | source=git | neighbors=[41d8eb5 Changes, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
@@ -65,7 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_deletedchangestab": "DeletedChangesTab.tsx" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L1 | neighbors=[admin.tsx, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, 9a2689c code fixes, ConfirmDialog.tsx, useConfirm()] | lang=en
 - "components_idletimeout": "IdleTimeout.tsx" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L1 | neighbors=[9a2689c code fixes, ACTIVITY_EVENTS, IdleTimeout(), alert-dialog.tsx, AlertDialogAction, AlertDialogContent] | lang=en
 - "components_processtimeline": "ProcessTimeline.tsx" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L1 | neighbors=[129b916 manier van werken, 6262799 fixes, 85a6666 SEO en robot, 8fdd571 SEO, 9a2689c code fixes, ecdbe8e fixes] | lang=en
-- "hooks_use_permissions": "use-permissions.tsx" | kind=code-symbol | source=src/hooks/use-permissions.tsx:L1 | neighbors=[admin.tsx, admin.leads.tsx, server.tsx, 81a87ed commit, BerichtenTab.tsx, DeletedChangesTab.tsx] | lang=en
 
 ## Instructions
 

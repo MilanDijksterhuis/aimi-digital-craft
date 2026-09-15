@@ -1,4 +1,4 @@
-# Node Description Batch 16 of 49
+# Node Description Batch 16 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_status_category_keys": "CATEGORY_KEYS" | kind=code-symbol | source=src/lib/status.ts:L69 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
+- "lib_status_priceforchange": "priceForChange()" | kind=code-symbol | source=src/lib/status.ts:L82 | neighbors=[portal.tsx, status.ts, isCategoryFree()]
+- "lib_status_priority_color": "PRIORITY_COLOR" | kind=code-symbol | source=src/lib/status.ts:L49 | neighbors=[admin.changes.tsx, admin.changes.$changeId.tsx, status.ts]
+- "lib_status_priority_weight": "PRIORITY_WEIGHT" | kind=code-symbol | source=src/lib/status.ts:L42 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
+- "lib_telegram_server_safesend": "safeSend()" | kind=code-symbol | source=src/lib/telegram.server.ts:L193 | neighbors=[telegram.server.ts, handleTelegramWebhook(), sendTelegramMessage()]
 - "lib_website_checker_server_asserthttpurl": "assertHttpUrl()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L117 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
 - "lib_website_checker_server_fetchtext": "fetchText()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L234 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
 - "lib_website_checker_server_isblockedip": "isBlockedIp()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L64 | neighbors=[website-checker.server.ts, isBlockedIpv4(), isBlockedIpv6()]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "supabase_migration_project_members": "project_members" | kind=code-symbol | source=supabase-migration.sql:L134 | neighbors=[supabase-migration.sql, profiles, projects]
 - "supabase_migration_projects": "projects" | kind=code-symbol | source=supabase-migration.sql:L124 | neighbors=[supabase-migration.sql, project_members, profiles]
 - "telegram_webhook": "webhook.ts" | kind=code-symbol | source=src/routes/api/telegram/webhook.ts:L1 | neighbors=[2b1d78f telegram, routeTree.gen.ts, Route]
-- "ui_checkbox": "checkbox.tsx" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L1 | neighbors=[utils.ts, cn(), Checkbox]
-- "ui_hover_card": "hover-card.tsx" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L1 | neighbors=[utils.ts, cn(), HoverCardContent]
-- "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
-- "ui_progress": "progress.tsx" | kind=code-symbol | source=src/components/ui/progress.tsx:L1 | neighbors=[utils.ts, cn(), Progress]
-- "ui_slider": "slider.tsx" | kind=code-symbol | source=src/components/ui/slider.tsx:L1 | neighbors=[utils.ts, cn(), Slider]
 
 ## Instructions
 

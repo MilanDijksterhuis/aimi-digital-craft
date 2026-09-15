@@ -93,7 +93,7 @@ function LinkRow({ heading, items }: { heading: string; items: { label: string; 
           <li key={l.to}>
             <Link
               to={l.to}
-              className="text-xs transition-colors hover:text-white"
+              className="text-xs transition-colors hover:text-white inline-block py-1"
               style={{ color: "#a4a9b2" }}
             >
               {l.label}
@@ -119,14 +119,14 @@ export function Footer() {
         >
           <a
             href={`tel:${PHONE_E164}`}
-            className="transition-colors hover:text-white"
+            className="transition-colors hover:text-white inline-block py-1"
             style={{ color: "#a4a9b2" }}
           >
             {PHONE_DISPLAY}
           </a>
           <a
             href="mailto:sales@aimi-development.nl"
-            className="transition-colors hover:text-white"
+            className="transition-colors hover:text-white inline-block py-1"
             style={{ color: "#a4a9b2" }}
           >
             sales@aimi-development.nl
@@ -143,7 +143,7 @@ export function Footer() {
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className="text-xs transition-colors hover:text-white"
+                      className="text-xs transition-colors hover:text-white inline-block py-1"
                       style={{ color: "#a4a9b2" }}
                     >
                       {l.label}

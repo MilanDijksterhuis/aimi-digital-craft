@@ -1,4 +1,4 @@
-# Node Description Batch 21 of 49
+# Node Description Batch 21 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_bans": "public.rate_limit_bans" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L20 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
+- "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_hits": "public.rate_limit_hits" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L13 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
+- "migrations_20260717150000_sec5_durable_rate_limit_v_count": "v_count" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L57 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
+- "migrations_20260717150000_sec5_durable_rate_limit_v_strikes": "v_strikes" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L103 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
+- "migrations_20260717170000_perf2_site_ping_counts": "20260717170000_perf2_site_ping_counts.sql" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L1 | neighbors=[7dbbf18 perf fixes, public.site_ping_counts()]
+- "migrations_20260717180000_perf3_project_last_activity": "20260717180000_perf3_project_last_activity.sql" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L1 | neighbors=[7dbbf18 perf fixes, public.project_last_activity()]
 - "public_site_error_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L18 | neighbors=[site-error.ts, routeTree.gen.ts]
 - "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
 - "routes_algemene_voorwaarden_route": "Route" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L5 | neighbors=[algemene-voorwaarden.tsx, routeTree.gen.ts]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_autorijschool_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L57 | neighbors=[website-laten-maken-autorijschool.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_bloemist_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-bloemist.tsx:L57 | neighbors=[website-laten-maken-bloemist.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_boekhouder_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-boekhouder.tsx:L57 | neighbors=[website-laten-maken-boekhouder.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_cateringbedrijf_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-cateringbedrijf.tsx:L57 | neighbors=[website-laten-maken-cateringbedrijf.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_coevorden_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-coevorden.tsx:L86 | neighbors=[website-laten-maken-coevorden.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_drachten_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L55 | neighbors=[website-laten-maken-drachten.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_emmen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-emmen.tsx:L52 | neighbors=[website-laten-maken-emmen.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_groningen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L50 | neighbors=[website-laten-maken-groningen.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_heerenveen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L56 | neighbors=[website-laten-maken-heerenveen.tsx, routeTree.gen.ts]
 
 ## Instructions
 

@@ -5,7 +5,8 @@ import { SITE_URL } from "@/lib/seo";
 export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
-      { title: "Algemene Voorwaarden — AIMI" },
+      // SEO-audit 2026-09-15 (TECH-9): title was 27 tekens — te kort voor de SERP.
+      { title: "Algemene Voorwaarden — AIMI webdesignbureau Veendam" },
       {
         name: "description",
         content:

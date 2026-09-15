@@ -1,4 +1,4 @@
-# Node Description Batch 24 of 49
+# Node Description Batch 24 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_accounts_accountid_onboardingtab": "OnboardingTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L500 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L283 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L263 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_role_label": "ROLE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L53 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L48 | neighbors=[admin.accounts.$accountId.tsx]
+- "authenticated_admin_accounts_accountid_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L607 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_toegangtab": "ToegangTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L557 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountssidebar": "AccountsSidebar()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L95 | neighbors=[admin.accounts.tsx]
 - "authenticated_admin_accounts_adminaccountspage": "AdminAccountsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L58 | neighbors=[admin.accounts.tsx]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_instellingen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L16 | neighbors=[admin.instellingen.tsx]
 - "authenticated_admin_leads_leadspage": "LeadsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L23 | neighbors=[admin.leads.tsx]
 - "authenticated_admin_leads_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L8 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_sectionkey": "SectionKey" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L21 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_sections": "SECTIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L17 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L305 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationsbell": "NotificationsBell()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L679 | neighbors=[admin.tsx]
-- "authenticated_admin_notificationspanel": "NotificationsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L715 | neighbors=[admin.tsx]
-- "authenticated_admin_passwordresetspanel": "PasswordResetsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L406 | neighbors=[admin.tsx]
 
 ## Instructions
 

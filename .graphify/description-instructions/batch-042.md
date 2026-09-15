@@ -1,4 +1,4 @@
-# Node Description Batch 43 of 49
+# Node Description Batch 43 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "src_routetree_gen_fileroutesbyid": "FileRoutesById" | kind=code-symbol | source=src/routeTree.gen.ts:L628 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbypath": "FileRoutesByPath" | kind=code-symbol | source=src/routeTree.gen.ts:L987 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutesbyto": "FileRoutesByTo" | kind=code-symbol | source=src/routeTree.gen.ts:L555 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_fileroutetypes": "FileRouteTypes" | kind=code-symbol | source=src/routeTree.gen.ts:L703 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_indexroute": "IndexRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L370 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_loginroute": "LoginRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L335 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_meerdienstenroute": "MeerDienstenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L330 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_onderhoudhostingroute": "OnderhoudHostingRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L325 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_overonsroute": "OverOnsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L320 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_privacybeleidroute": "PrivacybeleidRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L315 | neighbors=[routeTree.gen.ts]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "src_routetree_gen_websitelatenmakenloodgieterroute": "WebsiteLatenMakenLoodgieterRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L169 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenmakelaarroute": "WebsiteLatenMakenMakelaarRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L163 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_websitelatenmakenmeppelroute": "WebsiteLatenMakenMeppelRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L158 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakennagelstudioroute": "WebsiteLatenMakenNagelstudioRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L152 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenpedicureroute": "WebsiteLatenMakenPedicureRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L146 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenrestaurantroute": "WebsiteLatenMakenRestaurantRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L140 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenrodenroute": "WebsiteLatenMakenRodenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L135 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenroute": "WebsiteLatenMakenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L275 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenschilderroute": "WebsiteLatenMakenSchilderRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L129 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_websitelatenmakenschoonheidssalonroute": "WebsiteLatenMakenSchoonheidssalonRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L123 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

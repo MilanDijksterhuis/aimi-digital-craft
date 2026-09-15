@@ -518,3 +518,22 @@
 * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* SEO-audit 2026-09-15 (TECH-1/PERF-1): entrance-animaties van above-the-fold
+   content in CSS i.p.v. framer-motion. Motion-gedreven initial={{opacity:0}}
+   hield de hero onzichtbaar tot JS gehydrateerd was (83-86% van de LCP-tijd was
+   renderuitstel). CSS-animaties starten al bij de eerste paint. Reduced motion
+   wordt afgedekt door de globale prefers-reduced-motion regel hierboven. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}

@@ -61,7 +61,8 @@ function ContactPage() {
             >
               Laten we je project bespreken.
             </h1>
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>
+            {/* SEO-audit 2026-09-15 (VIS-4): lopende tekst op /contact was 14px. */}
+            <p className="mt-6 max-w-2xl text-base leading-relaxed" style={{ color: "#a4a9b2" }}>
               Of je nu een nieuwe website of webshop wilt, je bestaande site wilt vernieuwen of
               alleen hosting zoekt. Vertel ons kort over je plannen. Je praat direct met Aidan of
               Milan en krijgt binnen één werkdag antwoord. Ook per e-mail bereikbaar via{" "}

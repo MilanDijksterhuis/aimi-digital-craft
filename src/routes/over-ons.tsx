@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
 
 const stats: [string, string][] = [
   ["2", "Directe contactpersonen"],
@@ -54,7 +54,16 @@ export const Route = createFileRoute("/over-ons")({
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/over-ons` }],
-    scripts: [breadcrumbJsonLd([["Home", "/"], ["Over ons", "/over-ons"]])],
+    scripts: [
+      breadcrumbJsonLd([["Home", "/"], ["Over ons", "/over-ons"]]),
+      // SEO-audit 2026-09-15 (SCH-5): enige vergelijkbare pagina zonder WebPage JSON-LD.
+      webPageJsonLd({
+        path: "/over-ons",
+        name: "Over ons — AIMI webdesignbureau Veendam",
+        description:
+          "AIMI is een web agency van Aidan & Milan. Twee developers die websites ontwerpen, bouwen en hosten voor kleine bedrijven, zelfstandigen en verenigingen.",
+      }),
+    ],
   }),
   component: OverOns,
 });

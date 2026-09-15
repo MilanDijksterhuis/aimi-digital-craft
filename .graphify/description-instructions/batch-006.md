@@ -1,4 +1,4 @@
-# Node Description Batch 7 of 49
+# Node Description Batch 7 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -23,6 +23,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@2d7a8d4952eb8794ea8f21d6907999d78483dc8f": "2d7a8d4 teksr wijzigingen" | kind=Commit | source=git | neighbors=[main, c431436 footer tekst weer anders, Footer.tsx, d3cd320 Hero tekst groter, Services whi…, tmp-main-merge, tmp-revert-main] | lang=pt
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@332d0c84e235acf00e0169547cf9351c6b8fbe24": "332d0c8 Fix: externalize googleapis/nodemailer, cast app_settings queries" | kind=Commit | source=git | neighbors=[main, b83b044 Revert: verwijder Google OAuth …, vite.config.ts, 54af09c Remove .env from tracking, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@36052ffdb5f67ae9df46279a1daf2e88f60b7c63": "36052ff Code edited in Lovable Code Editor" | kind=Commit | source=git | neighbors=[1dfd3b7 Code edited in Lovable Code Edi…, main, 0bb1900 Code edited in Lovable Code Edi…, Hero.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@408d241df64c7048369cea062f4a02732bb61b6e": "408d241 Changes" | kind=Commit | source=git | neighbors=[020d807 Changes, main, e8bc1c3 Changes, __root.tsx, tmp-main-merge, tmp-revert-main] | lang=en
@@ -62,7 +63,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@99450d7635f335cbc90f6cc2f7db94f8eea736bd": "99450d7 Fix typo in Hero component text 2" | kind=Commit | source=git | neighbors=[38037d9 Update Hero.tsx, main, 37c0d11 Dock tokens toegevoegd & emojis…, Hero.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9c4f5d59d7aaee8742a75ce6ef4159e4cd297482": "9c4f5d5 nummers verwijderd" | kind=Commit | source=git | neighbors=[6aba49e euro teken, main, 423b3f1 cashing, Services.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9f689f765315a425413d8b8e88445aebcf7c9a5c": "9f689f7 tracking voor user M" | kind=Commit | source=git | neighbors=[129b916 manier van werken, main, 8c0bb37 nieuwe featues, __root.tsx, tmp-main-merge, tmp-revert-main] | lang=nl
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a11075959148ee41dbd0fd64057e80ac25a771e7": "a110759 Work in progress" | kind=Commit | source=git | neighbors=[0b21971 Changes weergave verbeterd, main, f3ee883 Lovable update, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
 
 ## Instructions
 

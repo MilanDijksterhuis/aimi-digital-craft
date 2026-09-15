@@ -1,4 +1,4 @@
-# Node Description Batch 15 of 49
+# Node Description Batch 15 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_contact_contact": "Contact()" | kind=code-symbol | source=src/components/Contact.tsx:L11 | neighbors=[Contact.tsx, contact.tsx, index.tsx]
+- "components_exampleslideshow_generic_examples": "GENERIC_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L138 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx]
+- "components_faq_faq": "FAQ()" | kind=code-symbol | source=src/components/FAQ.tsx:L223 | neighbors=[FAQ.tsx, index.tsx, faq.tsx]
+- "components_faq_faqitems": "faqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L22 | neighbors=[FAQ.tsx, faq.tsx, index.tsx]
 - "components_leadspanel_leaddetail": "LeadDetail()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L620 | neighbors=[LeadsPanel.tsx, initials(), relTime()]
 - "components_leadspanel_leadspanel": "LeadsPanel()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L157 | neighbors=[admin.leads.tsx, LeadsPanel.tsx, admin.tsx]
 - "components_locationlanding_locationdata": "LocationData" | kind=code-symbol | source=src/components/LocationLanding.tsx:L18 | neighbors=[LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx]
@@ -51,12 +55,8 @@ one-sentence description — no prose, no markdown fences.
 - "lib_seo_businessidentityjsonld": "businessIdentityJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L64 | neighbors=[seo.ts, postalAddress(), __root.tsx]
 - "lib_seo_contactpagejsonld": "contactPageJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L338 | neighbors=[seo.ts, ld(), contact.tsx]
 - "lib_seo_localbusinessid": "localBusinessId()" | kind=code-symbol | source=src/lib/seo.ts:L80 | neighbors=[seo.ts, website-laten-maken-veendam.tsx, website-laten-maken-hoogeveen.tsx]
+- "lib_seo_pagelastmod": "pageLastmod()" | kind=code-symbol | source=src/lib/seo.ts:L173 | neighbors=[UpdatedOn.tsx, seo.ts, webPageJsonLd()]
 - "lib_seo_price_valid_until": "PRICE_VALID_UNTIL" | kind=code-symbol | source=src/lib/seo.ts:L85 | neighbors=[seo.ts, __root.tsx, tarieven.tsx]
-- "lib_status_category_keys": "CATEGORY_KEYS" | kind=code-symbol | source=src/lib/status.ts:L69 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
-- "lib_status_priceforchange": "priceForChange()" | kind=code-symbol | source=src/lib/status.ts:L82 | neighbors=[portal.tsx, status.ts, isCategoryFree()]
-- "lib_status_priority_color": "PRIORITY_COLOR" | kind=code-symbol | source=src/lib/status.ts:L49 | neighbors=[admin.changes.tsx, admin.changes.$changeId.tsx, status.ts]
-- "lib_status_priority_weight": "PRIORITY_WEIGHT" | kind=code-symbol | source=src/lib/status.ts:L42 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
-- "lib_telegram_server_safesend": "safeSend()" | kind=code-symbol | source=src/lib/telegram.server.ts:L193 | neighbors=[telegram.server.ts, handleTelegramWebhook(), sendTelegramMessage()]
 
 ## Instructions
 

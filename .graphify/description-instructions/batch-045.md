@@ -1,4 +1,4 @@
-# Node Description Batch 46 of 49
+# Node Description Batch 46 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_chart_chartcontainer": "ChartContainer" | kind=code-symbol | source=src/components/ui/chart.tsx:L35 | neighbors=[chart.tsx]
+- "ui_chart_chartcontext": "ChartContext" | kind=code-symbol | source=src/components/ui/chart.tsx:L23 | neighbors=[chart.tsx]
+- "ui_chart_chartcontextprops": "ChartContextProps" | kind=code-symbol | source=src/components/ui/chart.tsx:L19 | neighbors=[chart.tsx]
+- "ui_chart_chartlegendcontent": "ChartLegendContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L243 | neighbors=[chart.tsx]
+- "ui_chart_chartstyle": "ChartStyle()" | kind=code-symbol | source=src/components/ui/chart.tsx:L64 | neighbors=[chart.tsx]
+- "ui_chart_charttooltipcontent": "ChartTooltipContent" | kind=code-symbol | source=src/components/ui/chart.tsx:L95 | neighbors=[chart.tsx]
+- "ui_chart_getpayloadconfigfrompayload": "getPayloadConfigFromPayload()" | kind=code-symbol | source=src/components/ui/chart.tsx:L299 | neighbors=[chart.tsx]
 - "ui_chart_themes": "THEMES" | kind=code-symbol | source=src/components/ui/chart.tsx:L7 | neighbors=[chart.tsx]
 - "ui_chart_usechart": "useChart()" | kind=code-symbol | source=src/components/ui/chart.tsx:L25 | neighbors=[chart.tsx]
 - "ui_checkbox_checkbox": "Checkbox" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L7 | neighbors=[checkbox.tsx]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_drawer_drawerheader": "DrawerHeader()" | kind=code-symbol | source=src/components/ui/drawer.tsx:L53 | neighbors=[drawer.tsx]
 - "ui_drawer_draweroverlay": "DrawerOverlay" | kind=code-symbol | source=src/components/ui/drawer.tsx:L20 | neighbors=[drawer.tsx]
 - "ui_drawer_drawertitle": "DrawerTitle" | kind=code-symbol | source=src/components/ui/drawer.tsx:L63 | neighbors=[drawer.tsx]
-- "ui_dropdown_menu_dropdownmenucheckboxitem": "DropdownMenuCheckboxItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L94 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenucontent": "DropdownMenuContent" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L57 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuitem": "DropdownMenuItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L76 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenulabel": "DropdownMenuLabel" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L139 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuradioitem": "DropdownMenuRadioItem" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L117 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenuseparator": "DropdownMenuSeparator" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L153 | neighbors=[dropdown-menu.tsx]
-- "ui_dropdown_menu_dropdownmenushortcut": "DropdownMenuShortcut()" | kind=code-symbol | source=src/components/ui/dropdown-menu.tsx:L165 | neighbors=[dropdown-menu.tsx]
 
 ## Instructions
 

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 22mm 18mm 25mm 18mm;
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 9pt;
+      color: #6b7280;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+    @bottom-left {
+      content: "Confidential";
+      font-size: 7pt;
+      color: #d6d3cc;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+    @bottom-right {
+      content: "aimi-development.nl Google SEO Report";
+      font-size: 8pt;
+      color: #cbd5e1;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+  }
+
+  @page :first {
+    margin: 0;
+    @bottom-left { content: none; }
+    @bottom-center { content: none; }
+    @bottom-right { content: none; }
+  }
+
+  @page toc {
+    @bottom-center {
+      content: counter(page);
+      font-size: 9pt;
+      color: #6b7280;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Times New Roman', 'DejaVu Serif', Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: #1e293b;
+    background: white;
+  }
+
+  /* ─── Title Page (Clean White) ─── */
+  .title-page {
+    page: first;
+    width: 210mm;
+    height: 297mm;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1a1a2e;
+    position: relative;
+    padding: 50mm 30mm 40mm 30mm;
+    border-top: 6mm solid #1e3a5f;
+  }
+
+  .title-page .badge {
+    background: #f7f6f3;
+    border: 1px solid #d6d3cc;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 9pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15mm;
+    color: #1e3a5f;
+  }
+
+  .title-page h1 {
+    font-size: 28pt;
+    font-weight: bold;
+    margin-bottom: 5mm;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    color: #1a1a2e;
+  }
+
+  .title-page .subtitle {
+    font-size: 13pt;
+    color: #6b7280;
+    margin-bottom: 12mm;
+    font-weight: 300;
+  }
+
+  .title-page .url {
+    font-size: 12pt;
+    color: #1e3a5f;
+    margin-bottom: 15mm;
+    padding: 4mm 8mm;
+    border: 1px solid #d6d3cc;
+    border-radius: 6px;
+    background: #faf9f7;
+  }
+
+  .title-page .score-box {
+    background: #faf9f7;
+    border: 2px solid #d6d3cc;
+    border-radius: 12px;
+    padding: 6mm 12mm;
+    margin-bottom: 15mm;
+  }
+
+  .title-page .score-number {
+    font-size: 42pt;
+    font-weight: bold;
+    color: #1e3a5f;
+    line-height: 1;
+  }
+
+  .title-page .score-label {
+    font-size: 10pt;
+    color: #6b7280;
+    margin-top: 2mm;
+  }
+
+  .title-page .meta {
+    font-size: 9pt;
+    color: #6b7280;
+    margin-top: 8mm;
+    padding-top: 5mm;
+    border-top: 1px solid #d6d3cc;
+  }
+
+  .title-page .meta span {
+    margin: 0 8px;
+  }
+
+  /* ─── Table of Contents ─── */
+  .toc-page {
+    page: toc;
+    page-break-before: always;
+  }
+
+  .toc-page h2 {
+    font-size: 18pt;
+    color: #1e3a5f;
+    margin-bottom: 8mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid #1e3a5f;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .toc-list li {
+    padding: 2mm 0;
+    border-bottom: 1px solid #f1f5f9;
+    overflow: hidden;
+  }
+
+  .toc-list li.toc-section {
+    font-weight: bold;
+    font-size: 11pt;
+    padding-top: 4mm;
+    color: #0f172a;
+  }
+
+  .toc-list li.toc-sub {
+    padding-left: 8mm;
+    font-size: 9.5pt;
+    color: #475569;
+  }
+
+  .toc-score {
+    display: inline-block;
+    float: right;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 9pt;
+    font-weight: bold;
+    color: white;
+  }
+
+  .score-good { background: #2d6a4f; }
+  .score-warn { background: #d4740e; }
+  .score-bad { background: #c53030; }
+
+  /* ─── Section Styles ─── */
+  div.section {
+    page-break-before: always;
+  }
+
+  .section-header {
+    background: #faf9f7;
+    border-left: 4px solid #1e3a5f;
+    padding: 5mm 6mm;
+    margin-bottom: 6mm;
+    page-break-after: avoid;
+  }
+
+  .section-header h2 {
+    font-size: 16pt;
+    color: #0f172a;
+    margin-bottom: 1mm;
+  }
+
+  .section-header .section-score {
+    font-size: 12pt;
+    font-weight: bold;
+    float: right;
+    margin-top: -6mm;
+  }
+
+  h3 {
+    font-size: 12pt;
+    color: #1e3a5f;
+    margin-top: 6mm;
+    margin-bottom: 3mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid #d6d3cc;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 10.5pt;
+    color: #334155;
+    margin-top: 4mm;
+    margin-bottom: 2mm;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 3mm;
+    color: #334155;
+  }
+
+  .highlight {
+    background: #fef3c7;
+    border-left: 3px solid #d4740e;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .critical-box {
+    background: #fef2f2;
+    border-left: 3px solid #c53030;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .success-box {
+    background: #f0fdf4;
+    border-left: 3px solid #2d6a4f;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  /* ─── Tables ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm 0;
+    font-size: 9pt;
+  }
+
+  thead th {
+    background: #f7f6f3;
+    color: #0f172a;
+    font-weight: bold;
+    padding: 3mm 4mm;
+    text-align: left;
+    border-bottom: 2px solid #d6d3cc;
+    font-size: 9pt;
+  }
+
+  tbody td {
+    padding: 2.5mm 3mm;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #fdfcfa;
+  }
+
+  .status-pass {
+    color: #2d6a4f;
+    font-weight: bold;
+  }
+
+  .status-fail {
+    color: #c53030;
+    font-weight: bold;
+  }
+
+  .status-warn {
+    color: #d4740e;
+    font-weight: bold;
+  }
+
+  .status-partial {
+    color: #4a5568;
+    font-weight: bold;
+  }
+
+  /* ─── Charts ─── */
+  .chart-container {
+    text-align: center;
+    margin: 4mm 0;
+  }
+
+  .chart-container img {
+    max-width: 100%;
+    max-height: 120mm;
+    height: auto;
+  }
+
+  .chart-caption {
+    font-size: 8.5pt;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 2mm;
+    text-align: center;
+  }
+
+  .chart-half {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    text-align: center;
+    margin: 2mm 0;
+  }
+
+  .chart-half img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ─── Two column layout ─── */
+  .two-col {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 3mm 0;
+  }
+
+  .two-col .col {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 2mm;
+  }
+
+  .four-col {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 3mm 0;
+  }
+
+  .four-col .col {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 1.5mm;
+  }
+
+  /* ─── Metric Cards ─── */
+  .metric-card {
+    background: #faf9f7;
+    border: 1px solid #d6d3cc;
+    border-radius: 6px;
+    padding: 2.5mm 3mm;
+    text-align: center;
+    margin: 2mm 0;
+  }
+
+  .metric-card .value {
+    font-size: 14pt;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .metric-card .label {
+    font-size: 7.5pt;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1mm;
+  }
+
+  /* ─── Action Plan ─── */
+  .action-item {
+    background: #faf9f7;
+    border-radius: 4px;
+    padding: 3mm 4mm;
+    margin: 3mm 0;
+    border-left: 3px solid #cbd5e1;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .action-item.critical {
+    border-left-color: #c53030;
+    background: #fdf2f2;
+  }
+
+  .action-item.high {
+    border-left-color: #d4740e;
+    background: #fdf8ef;
+  }
+
+  .action-item.medium {
+    border-left-color: #1e3a5f;
+    background: #f0f4f8;
+  }
+
+  .action-item.low {
+    border-left-color: #94a3b8;
+  }
+
+  .action-item h4 {
+    margin-top: 0;
+    margin-bottom: 1.5mm;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .action-item .effort {
+    font-size: 8.5pt;
+    color: #64748b;
+    float: right;
+  }
+
+  .priority-tag {
+    display: inline-block;
+    padding: 0.5mm 3mm;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: bold;
+    color: white;
+    margin-right: 2mm;
+    vertical-align: middle;
+  }
+
+  .priority-critical { background: #c53030; }
+  .priority-high { background: #d4740e; }
+  .priority-medium { background: #1e3a5f; }
+  .priority-low { background: #94a3b8; }
+
+  /* ─── Code blocks ─── */
+  .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 3mm 4mm;
+    border-radius: 4px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 8pt;
+    line-height: 1.6;
+    margin: 3mm 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid #d6d3cc;
+    margin: 5mm 0;
+  }
+
+  /* ─── Roadmap ─── */
+  .roadmap-phase {
+    background: #faf9f7;
+    border-radius: 6px;
+    padding: 4mm 5mm;
+    margin: 4mm 0;
+    border: 1px solid #d6d3cc;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .roadmap-phase h4 {
+    margin-top: 0;
+    border-bottom: none;
+    color: #1e3a5f;
+  }
+
+  .roadmap-phase ul {
+    margin: 2mm 0 0 5mm;
+    padding: 0;
+  }
+
+  .roadmap-phase li {
+    margin-bottom: 1.5mm;
+    font-size: 9.5pt;
+    color: #334155;
+  }
+
+  /* ─── Lists ─── */
+  ul {
+    margin-left: 5mm;
+    margin-bottom: 3mm;
+  }
+
+  li {
+    margin-bottom: 1.5mm;
+  }
+
+  /* ─── Data freshness ─── */
+  .data-freshness {
+    font-size: 8pt;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 4mm;
+    padding-top: 2mm;
+    border-top: 1px solid #d6d3cc;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================================================= TITLE PAGE === -->
+<div class="title-page">
+  <div class="badge">Full SEO Audit Report</div>
+  <h1>aimi-development.nl</h1>
+  <div class="subtitle">Prepared by Claude SEO</div>
+  <div class="score-box">
+    <div class="score-number">80<span style="font-size: 20pt; color: #94a3b8;">/100</span></div>
+    <div class="score-label">SEO Health Score</div>
+  </div>
+  <div class="meta">
+    <span>September 15, 2026</span>
+    <span>Full Audit</span>
+  </div>
+</div>
+
+
+<!-- ======================================================= TABLE OF CONTENTS === -->
+<div class="toc-page">
+  <h2>Table of Contents</h2>
+  <ul class="toc-list">
+    <li class="toc-section"><span>1. Executive Summary</span></li>
+    <li class="toc-sub"><span>Key Metrics, Critical Issues &amp; Quick Wins</span></li>
+    <li class="toc-section"><span>2. Audit Categories</span></li>
+    <li class="toc-sub"><span>What Works</span></li>
+    <li class="toc-sub"><span>Findings by Severity</span></li>
+    <li class="toc-section"><span>3. Action Plan</span></li>
+    <li class="toc-sub"><span>Phased Roadmap</span></li>
+    <li class="toc-section"><span>4. Data Sources &amp; Methodology</span></li>
+  </ul>
+</div>
+
+
+<!-- ======================================================= 1. EXECUTIVE SUMMARY === -->
+<div class="section">
+  <div class="section-header">
+    <h2>1. Executive Summary</h2>
+  </div>
+
+  <p>This report presents a comprehensive SEO audit of <strong>aimi-development.nl</strong> for a <strong>Service Area Business — webdesignbureau (Veendam, Groningen; werkgebied Noord-Nederland + NL)</strong> site, generated on September 15, 2026. Findings combine technical, content, schema, performance, visual, and search-readiness evidence as available.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="metric-card">
+        <div class="value" style="color: #d4740e;">80/100</div>
+        <div class="label">SEO Health Score</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="critical-box">
+    <strong>Critical Issues Found:</strong>
+    <ol>
+      <li><strong>Info:</strong> Nul bewijs van geleverd werk op de hele site: geen cases, portfolio, klantnamen, testimonials of reviews — het grootste E-E-A-T- en conversiegat voor een webbureau (CQ-1, SXO-6/8, Local)</li>
+      <li><strong>Info:</strong> KvK-nummer, BTW-nummer en straatadres ontbreken overal (site, schema én juridische pagina&#x27;s) — wettelijk verplicht in NL en blokkeert directory-citaties; de velden in src/lib/seo.ts staan klaar maar zijn leeg (CQ-2, SCH-1, SCH-4)</li>
+      <li><strong>Info:</strong> Cookiebanner valt op mobiel half buiten beeld op alle pagina&#x27;s — ontbrekende -translate-x-1/2 in src/components/CookieBanner.tsx:67 (VIS-1)</li>
+      <li><strong>Info:</strong> LCP 3,5-4,3s (mobiel lab): 83-86% van de LCP-tijd is renderuitstel door main-thread JS (Framer Motion + Radix; hero start op opacity:0 tot hydratie) — niet het netwerk of de afbeeldingen (TECH-1, PERF-1)</li>
+      <li><strong>Info:</strong> /wordpress-of-maatwerk mikt op de verkeerde zoekvariant: de SERP voor de letterlijke zoekterm toont alleen &#x27;maatwerk WordPress&#x27;-dienstpagina&#x27;s; de vergelijkingsintentie leeft onder &#x27;wordpress vs maatwerk&#x27; — goedkope title/H1-fix (SXO-10)</li>
+    </ol>
+  </div>
+
+  <div class="success-box">
+    <strong>Quick Wins:</strong>
+    <ol>
+      <li>Vul ADDRESS.streetAddress, postalCode, KVK en VAT_ID in src/lib/seo.ts — footer en schema renderen ze automatisch; voeg KvK/BTW ook toe aan /algemene-voorwaarden</li>
+      <li>Fix de cookiebanner: voeg -translate-x-1/2 toe in CookieBanner.tsx:67 (één CSS-klasse)</li>
+      <li>Hernoem title/H1 van /wordpress-of-maatwerk naar de &#x27;WordPress vs maatwerk&#x27;-variant (verifieer eerst met GSC-query-data zodra beschikbaar)</li>
+      <li>Zet Brotli aan in nginx (nu alleen gzip) — ~60-90 KB besparing per pagina, pure serverconfig</li>
+      <li>Toon een vanaf-prijs op /webshop-laten-maken (&#x27;op aanvraag&#x27; is de enige prijsloze pagina in de SERP)</li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- ======================================================= 2. AUDIT CATEGORIES === -->
+<div class="section">
+  <div class="section-header">
+    <h2>2. Audit Categories</h2>
+  </div>
+
+  <h3>2.1 Technical SEO</h3>
+  <p><strong>Score:</strong> <span class="status-pass">90/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>robots.txt correct: AI-crawlers expliciet toegestaan, scrapers geblokkeerd, gevoelige paden disallowed, sitemap gedeclareerd</li>
+    <li>Sitemap valide, 48/48 URL&#x27;s in canonieke vorm, geen geblokkeerde paden, geen toekomstige lastmod</li>
+    <li>0 canonical-mismatches over alle 48 pagina&#x27;s; 48/48 unieke titles en descriptions; geen onbedoelde noindex</li>
+    <li>Redirects correct: http→https, www→apex, trailing slash, /index.html 404&#x27;t; echte 404 (geen soft-404) met branded errorpagina</li>
+    <li>Security headers op 100% van de pagina&#x27;s (HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)</li>
+    <li>IndexNow volledig geïmplementeerd en verankerd in scripts/deploy.sh</li>
+    <li>Volledige SSR: content aanwezig in ruwe HTML zonder JS; mediane TTFB 122ms</li>
+    <li>0 afbeeldingen zonder width/height; 1-jaar immutable cache op statische assets; gzip actief</li>
+    <li>llms.txt aanwezig en goed opgebouwd</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Hero-H1 en ~47 above-the-fold elementen starten op opacity:0 tot framer-motion hydrateert <span class="status-warn">High</span></h4>
+    <p>Het waarschijnlijke LCP-element (hero-H1) is onzichtbaar tot de JS geladen en uitgevoerd is — klassiek LCP-vertragingspatroon op een verder goed ge-SSR&#x27;de site (TECH-1).</p>
+    <p><strong>Recommendation:</strong> Vervang above-the-fold Framer Motion-entrance-animaties door CSS-animaties; render de H1 direct zichtbaar.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Homepage modulepreload&#x27;t ~21 JS-chunks, ook niet-kritieke <span class="status-warn">Medium</span></h4>
+    <p>Contact, Footer, calendar, mail en auth-middleware-chunks concurreren met LCP-afbeelding/font om bandbreedte (TECH-2).</p>
+    <p><strong>Recommendation:</strong> Beperk modulepreload tot kritieke chunks; lazy-load de rest.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>CSP staat &#x27;unsafe-inline&#x27; toe voor script-src/style-src <span class="status-warn">Medium</span></h4>
+    <p>Ondermijnt de belangrijkste XSS-bescherming van CSP (TECH-3).</p>
+    <p><strong>Recommendation:</strong> Werk toe naar nonces/hashes voor inline scripts en styles.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Dubbele Cache-Control header op JS/CSS; 4 security headers dubbel geëmit; Server-header toont nginx-versie+OS <span class="status-warn">Low</span></h4>
+    <p>nginx en app-laag zetten beide headers; JS/CSS-locationblok nog niet ontdubbeld (TECH-4/5/6).</p>
+    <p><strong>Recommendation:</strong> Headers op één laag zetten; server_tokens off.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Hoofdlettervarianten (/CONTACT) geven 200 i.p.v. 301 <span class="status-warn">Low</span></h4>
+    <p>Leunt op canonical-tag i.p.v. expliciete redirect voor consolidatie (TECH-8).</p>
+    <p><strong>Recommendation:</strong> 301-redirect naar lowercase in nginx.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Titles juridische pagina&#x27;s te kort (20 en 27 tekens) <span class="status-warn">Low</span></h4>
+    <p>/privacybeleid en /algemene-voorwaarden benutten SERP-ruimte niet (TECH-9).</p>
+    <p><strong>Recommendation:</strong> Titles uitbreiden met merknaam en context.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.2 Content Quality</h3>
+  <p><strong>Score:</strong> <span class="status-warn">55/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Branche- en stadspagina&#x27;s zijn inhoudelijk écht per pagina geschreven (geen doorway/spun content): echte vakspecifieke en plaatsspecifieke argumenten</li>
+    <li>Prijs- en beleidstransparantie is een sterke trust-asset: expliciete bedragen, eerlijke &#x27;wat zit er niet bij&#x27;-sectie, duidelijke opzegvoorwaarden, AIMI-vs-Wix-vs-freelancer-vergelijkingstabel</li>
+    <li>FAQPage-schema correct met concrete, citeerbare numerieke antwoorden</li>
+    <li>Geloofwaardige direct-contact-positionering: founders bij naam, echte telefoon/e-mail zichtbaar</li>
+    <li>Technische accuraatheid (CWV, hosting/VPS, NL-betaalmethoden) overal in orde</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Geen cases, portfolio, testimonials of reviews op de hele site <span class="status-warn">High</span></h4>
+    <p>Nul klantnamen, nul voor/na-voorbeelden, geen Review/AggregateRating-schema op alle 48 pagina&#x27;s. Drijft de zwakke Authoritativeness (20/100) en Experience (25/100) sub-scores (CQ-1).</p>
+    <p><strong>Recommendation:</strong> Bouw een portfolio/cases-sectie met echte klantprojecten, resultaten en testimonials; pas dan Review-schema toevoegen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>KvK/BTW/postadres nergens vermeld <span class="status-warn">High</span></h4>
+    <p>Ook niet op /privacybeleid en /algemene-voorwaarden — wettelijk verplicht (CQ-2).</p>
+    <p><strong>Recommendation:</strong> KvK- en BTW-nummer toevoegen aan juridische pagina&#x27;s en footer; velden in seo.ts vullen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>30 branche/stad-pagina&#x27;s delen identiek 6-secties-skelet <span class="status-warn">Medium</span></h4>
+    <p>Karaktersimilariteit 0,29-0,38 tussen pagina&#x27;s — substantie is gedifferentieerd, maar CTA-zin en servicebullet-blok zijn 100% verbatim op naam na; structurele monotonie oogt programmatisch (CQ-3).</p>
+    <p><strong>Recommendation:</strong> Varieer sectievolgorde/vorm per cluster en herschrijf de verbatim gedeelde blokken.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Kernpagina&#x27;s dunner dan long-tail-pagina&#x27;s (echte main-content-telling) <span class="status-warn">Medium</span></h4>
+    <p>/over-ons 223 woorden, /contact 76, /website-laten-maken 474 — terwijl branche-pagina&#x27;s ~690 halen. Crawl-woordaantallen bleken ~1,7x geïnflateerd door nav/footer (CQ-6/7).</p>
+    <p><strong>Recommendation:</strong> Bouw /over-ons uit met team/verhaal/werkwijze (E-E-A-T-drager) en versterk /website-laten-maken als belangrijkste commerciële pagina.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Homepage-FAQ is 100% verbatim duplicaat van /faq <span class="status-warn">Medium</span></h4>
+    <p>25/25 Q&amp;A&#x27;s identiek, beide met eigen FAQPage-schema — verwatert de canonieke bron voor AI-citatie (CQ-5).</p>
+    <p><strong>Recommendation:</strong> Toon op de homepage een subset (5-6) met link naar /faq; laat het schema alleen op /faq staan.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Geen freshness/dateModified-signaal <span class="status-warn">Low</span></h4>
+    <p>Nergens zichtbare of gestructureerde wijzigingsdatum aangetroffen.</p>
+    <p><strong>Recommendation:</strong> dateModified toevoegen aan WebPage-schema, gevoed door echte wijzigingsdata.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.3 On-Page SEO</h3>
+  <p><strong>Score:</strong> <span class="status-pass">92/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>48/48 unieke titles en meta descriptions, vrijwel allemaal binnen lengtegrenzen</li>
+    <li>Exact één H1 per pagina (visuele regelafbreking, geen dubbele tags)</li>
+    <li>Geen orphan-pagina&#x27;s: elke sitemap-URL heeft meerdere inbound interne links; footer linkt alle stads- en branchepagina&#x27;s vanaf alle 48 pagina&#x27;s</li>
+    <li>Alle interne links wijzen naar canonieke sitemap-URL&#x27;s; geen stray/broken interne paden</li>
+    <li>Logische, platte URL-structuur met keyword-dragende slugs</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Titles juridische pagina&#x27;s te kort <span class="status-warn">Low</span></h4>
+    <p>/privacybeleid 20 tekens (description 169), /algemene-voorwaarden 27 tekens.</p>
+    <p><strong>Recommendation:</strong> Uitbreiden naar ~45-60 tekens met merknaam.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Geen contextuele kruislinks tussen stads- en branchepagina&#x27;s <span class="status-warn">Medium</span></h4>
+    <p>Footer linkt alles, maar in-content links voor gecombineerde intentie (&#x27;webdesign kapsalon Groningen&#x27;) ontbreken.</p>
+    <p><strong>Recommendation:</strong> Voeg per pagina 2-3 contextuele links naar relevante combinaties toe.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.4 Schema / Structured Data</h3>
+  <p><strong>Score:</strong> <span class="status-pass">87/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Eén geconsolideerde Organization/ProfessionalService/WebSite entity-graph via ORG_ID, éénmaal gedefinieerd en overal hergebruikt — geen conflicterende entiteiten</li>
+    <li>/tarieven heeft volledige OfferCatalog + per-tier Offers + UnitPriceSpecification voor €30/mnd, met rollende priceValidUntil</li>
+    <li>Service-schema differentieert areaServed correct (branche: null by design; stad: stad+provincie)</li>
+    <li>BreadcrumbList consistent; ContactPage/ContactPoint hergebruikt ORG_ID; FAQPage-content matcht on-page; geen verzonnen AggregateRating; geen deprecated types</li>
+    <li>LocalBusiness correct gereserveerd voor het echte Veendam-kantoor; overige steden correct als Service+areaServed (vermijdt local-spam-patroon)</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Organization-entity mist address, geo en openingHoursSpecification <span class="status-warn">High</span></h4>
+    <p>ADDRESS.streetAddress/postalCode bewust leeg in seo.ts; wiring is correct — puur ontbrekende data (SCH-1).</p>
+    <p><strong>Recommendation:</strong> Velden vullen in seo.ts; openingHoursSpecification toevoegen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Slechts één sameAs-vermelding (Google Maps) <span class="status-warn">Medium</span></h4>
+    <p>Geen LinkedIn/Facebook/KvK-register-URL voor entity-disambiguatie (SCH-3).</p>
+    <p><strong>Recommendation:</strong> sameAs uitbreiden zodra profielen bestaan (LinkedIn eerst).</p>
+  </div>
+  <div class="action-item medium">
+    <h4>KVK/VAT_ID-constanten leeg <span class="status-warn">Medium</span></h4>
+    <p>Juridisch vereist, onafhankelijk van SEO; schema-code emit ze zodra data bestaat (SCH-4).</p>
+    <p><strong>Recommendation:</strong> Nummers invullen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>/over-ons mist webPageJsonLd() <span class="status-warn">Low</span></h4>
+    <p>Enige vergelijkbare pagina zonder; oogt als omissie (SCH-5).</p>
+    <p><strong>Recommendation:</strong> Eénregelige fix: webPageJsonLd() toevoegen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>/ en /faq emitten byte-identiek FAQPage-schema <span class="status-warn">Info</span></h4>
+    <p>Geen SERP-consequentie (FAQ rich results uitgefaseerd), wel content-architectuur-redundantie (SCH-2).</p>
+    <p><strong>Recommendation:</strong> Schema alleen op /faq laten staan bij het inkorten van de homepage-FAQ.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.5 Performance (CWV)</h3>
+  <p><strong>Score:</strong> <span class="status-warn">74/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Echte server-TTFB 30-40ms; mediane pagina-TTFB 122ms</li>
+    <li>CLS 0-0,002 overal (uitstekend); geen layout shift</li>
+    <li>Font-strategie in orde: self-hosted variable woff2, font-display swap, preload, unicode-range subsetting</li>
+    <li>Hero-afbeeldingen responsive webp met fetchPriority=high, preload en expliciete afmetingen</li>
+    <li>Statische assets: 1-jaar immutable cache, gzip bevestigd</li>
+    <li>Verbetering t.o.v. 2026-09-06: compressie- en cachingproblemen opgelost (score 58 → 74)</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>LCP-renderuitstel: 83-86% van LCP-tijd is main-thread JS-contention op alle 3 geteste pagina&#x27;s <span class="status-warn">High</span></h4>
+    <p>Lighthouse mobiel (gesimuleerde throttling): LCP 4,33s (/), 3,69s (/website-laten-maken), 3,54s (/tarieven). Load Delay/Load Time = 0ms; knelpunt is JS parse/execute (hoofdbundel + Framer Motion + Radix) die paint blokkeert (PERF-1).</p>
+    <p><strong>Recommendation:</strong> Code-split Radix/portal-code uit publieke marketingroutes; vervang above-fold Framer Motion door CSS-animaties.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Brotli niet actief (alleen gzip) <span class="status-warn">Medium</span></h4>
+    <p>curl met Accept-Encoding: br → nginx valt terug op ongecomprimeerd; ~60-90 KB besparing per pagina laten liggen (PERF-2).</p>
+    <p><strong>Recommendation:</strong> ngx_brotli aanzetten — pure serverconfig-fix.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Framer Motion + Radix: ~59 KB gecomprimeerd op élke pagina; ~141 KB unused JS per pagina <span class="status-warn">Medium</span></h4>
+    <p>Ook op platte contentpagina&#x27;s (PERF-3).</p>
+    <p><strong>Recommendation:</strong> Bundle-splitsing per routetype.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>HTML-documenten hebben geen Cache-Control header <span class="status-warn">Low</span></h4>
+    <p>Korte max-age/stale-while-revalidate zou herhaalbezoek helpen zonder staleness-risico (PERF-5).</p>
+    <p><strong>Recommendation:</strong> Cache-Control: max-age=300, stale-while-revalidate op HTML.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.6 AI Search Readiness (GEO)</h3>
+  <p><strong>Score:</strong> <span class="status-pass">82/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Technische toegankelijkheid 98/100: volledige SSR, AI-crawlers expliciet toegestaan in robots.txt</li>
+    <li>llms.txt aanwezig, goed gestructureerd, met substantiële one-line beschrijvingen per link</li>
+    <li>/tarieven is vrijwel ideaal citeerbaar: zelfstandige antwoordpassage met entiteit + prijs in de eerste zin, marktcontext met concurrentprijzen, liftbare vergelijkingstabel</li>
+    <li>/faq: 25 echte Q&amp;A&#x27;s in valide FAQPage-schema, antwoorden beginnen met directe claim (&#x27;Jij.&#x27;, &#x27;Ja.&#x27;, &#x27;Nee.&#x27;)</li>
+    <li>/wordpress-of-maatwerk: eerlijke framing en beslislijsten die answer engines belonen</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Merknaam ontbreekt in citeerbare passages <span class="status-warn">Medium</span></h4>
+    <p>Slechts 3/25 FAQ-antwoorden bevatten &#x27;AIMI&#x27;; /wordpress-of-maatwerk noemt AIMI nérgens in de bodytekst; homepage slechts 2x in ~7.700 tekens. Geciteerde passages dragen dan geen merkanker (GEO-6).</p>
+    <p><strong>Recommendation:</strong> Herformuleer sleutelantwoorden zodat &#x27;AIMI&#x27; natuurlijk in de passage staat.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Brand mention-voetafdruk buiten eigen site vrijwel nul <span class="status-warn">High</span></h4>
+    <p>Geen externe vermeldingen gevonden; answer engines wegen onafhankelijke bronnen mee.</p>
+    <p><strong>Recommendation:</strong> Zelfde fix als local/backlinks: citaties, LinkedIn, directories, klantlinks.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Multi-modal content beperkt <span class="status-warn">Low</span></h4>
+    <p>Tekst-only; geen video of schema-afbeeldingen beoordeeld.</p>
+    <p><strong>Recommendation:</strong> Overwegen: korte uitlegvideo&#x27;s of geannoteerde voorbeelden.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.7 Images</h3>
+  <p><strong>Score:</strong> <span class="status-pass">92/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>0 afbeeldingen site-breed zonder width/height (geen CLS-risico)</li>
+    <li>Responsive webp met srcset (640/960/1280/1920), preload + fetchPriority=high op hero</li>
+    <li>Decoratieve afbeeldingen correct met alt=&quot;&quot; + aria-hidden</li>
+    <li>Lazy loading en compressie op orde</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Voorbeeld-slideshow toont generieke stockvoorbeelden <span class="status-warn">Medium</span></h4>
+    <p>GENERIC_EXAMPLES hard-gecodeerd in ExampleSlideshow, op 23 pagina&#x27;s — kapsalonpagina toont SaaS/architect-mockup terwijl de tekst &#x27;foto&#x27;s van eigen werk&#x27; belooft (SXO-5/VIS-2).</p>
+    <p><strong>Recommendation:</strong> Vervang door echte projectvoorbeelden per branche zodra portfolio bestaat.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.8 Local SEO (aanvullend, buiten hoofdweging)</h3>
+  <p><strong>Score:</strong> <span class="status-fail">44/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>15 echte, gedifferentieerde stadspagina&#x27;s (970-1.226 woorden, eigen H1&#x27;s en FAQ&#x27;s) — geen doorway-patroon</li>
+    <li>NAP intern 100% consistent (single-source in seo.ts): nul drift tussen footer, /contact en JSON-LD</li>
+    <li>Footer linkt alle 15 stads- en 15 branchepagina&#x27;s vanaf alle 48 pagina&#x27;s</li>
+    <li>Correcte schema-discipline: LocalBusiness alleen voor echt Veendam-kantoor; overige steden Service+areaServed</li>
+    <li>sameAs Google Maps-link resolvet naar echte, uniek genaamde GBP-listing</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>GBP-listing komt niet op voor eigen merk+locatie-zoekopdracht <span class="status-warn">Critical</span></h4>
+    <p>Live zoekopdracht &#x27;AIMI webdesign Veendam&#x27; gaf nul organische AIMI-resultaten; listing bestaat wel maar categorie/uren/reviews onverifieerbaar zonder dashboard.</p>
+    <p><strong>Recommendation:</strong> GBP-dashboard checken: categorie, uren, foto&#x27;s, diensten, posts; reviews actief vragen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Geen straatadres gepubliceerd <span class="status-warn">Critical</span></h4>
+    <p>On-page noch in schema (alleen locality); velden in seo.ts leeg maar wiring klaar.</p>
+    <p><strong>Recommendation:</strong> Adres + postcode invullen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Nul reviews off-site bevestigd <span class="status-warn">Critical</span></h4>
+    <p>Trustpilot en Klantenvertellen 404&#x27;en; on-site geen testimonials.</p>
+    <p><strong>Recommendation:</strong> Reviewstrategie starten: Google eerst, daarna Klantenvertellen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Geen KvK/BTW-nummer <span class="status-warn">High</span></h4>
+    <p>Wettelijk verplicht; blokkeert NL-directory-citaties die op KvK de-dupen.</p>
+    <p><strong>Recommendation:</strong> Invullen (zelfde fix als SCH-4/CQ-2).</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Nul externe citatie-voetafdruk <span class="status-warn">High</span></h4>
+    <p>Bevestigd via live search en Common Crawl (0 verwijzende domeinen); slechts één sameAs site-breed.</p>
+    <p><strong>Recommendation:</strong> Citatieplan uit findings/backlinks.md uitvoeren.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Geen openingstijden (schema of /contact); geen Maps-embed; geo-coördinaten 4 decimalen <span class="status-warn">Medium</span></h4>
+    <p>Kleinere lokale signalen die nu ontbreken.</p>
+    <p><strong>Recommendation:</strong> openingHoursSpecification, Maps-embed op /contact of Veendam-pagina, coördinaten op 5-6 decimalen.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.9 Visual / Mobile UX (aanvullend, buiten hoofdweging)</h3>
+  <p><strong>Score:</strong> <span class="status-warn">70/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Geen page-level horizontale overflow op enige pagina/viewport</li>
+    <li>CLS-benadering ≤0,025 overal; correcte viewport-meta</li>
+    <li>H1 + minimaal één CTA boven de vouw op mobiel op alle 4 geteste pagina&#x27;s</li>
+    <li>Hamburgermenu correct; geen console-errors</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Cookiebanner rendert half buiten beeld op mobiel — alle pagina&#x27;s <span class="status-warn">High</span></h4>
+    <p>CookieBanner.tsx:67 mist -translate-x-1/2 bij left-1/2: op 390px viewport loopt de banner van 195px tot 585px — knoppen deels buiten beeld (VIS-1).</p>
+    <p><strong>Recommendation:</strong> Eén CSS-klasse toevoegen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Prijstabel /tarieven horizontaal scrollbaar zonder visuele hint (mobiel) <span class="status-warn">Medium</span></h4>
+    <p>scrollWidth 640px vs clientWidth 342px; derde kolom (Wix/freelancer) standaard onzichtbaar.</p>
+    <p><strong>Recommendation:</strong> Scroll-affordance (schaduw/pijl) of responsieve herindeling.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Veel tikdoelen onder 44×44px <span class="status-warn">Medium</span></h4>
+    <p>Headernav ~34-38px; footer/contact-tekstlinks 15-20px; 59-69 sub-44px elementen per pagina op mobiel.</p>
+    <p><strong>Recommendation:</strong> Padding vergroten op nav- en footerlinks.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Bodytekst onder 16px op sommige pagina&#x27;s <span class="status-warn">Low</span></h4>
+    <p>Basis 14px; paragrafen 15px op /website-laten-maken, 14px op /contact.</p>
+    <p><strong>Recommendation:</strong> Minimaal 16px voor lopende tekst op mobiel.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.10 SXO (aanvullend, buiten hoofdweging)</h3>
+  <p><strong>Score:</strong> <span class="status-warn">63/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>4 van 5 doelkeywords: paginatype ALIGNED met wat de SERP beloont (service page, prijs-verankerd)</li>
+    <li>Prijstransparantie op /website-laten-maken en /tarieven matcht de prijs-verankerde SERP-norm</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>/wordpress-of-maatwerk: keyword/intent-mismatch <span class="status-warn">Critical</span></h4>
+    <p>6/6 resultaten voor de letterlijke zoekterm zijn &#x27;maatwerk WordPress&#x27;-dienstpagina&#x27;s; vergelijkingsintentie leeft onder &#x27;wordpress vs maatwerk website&#x27; (SXO-10). Directioneel signaal — bevestig met GSC-data.</p>
+    <p><strong>Recommendation:</strong> Title/H1 retargeten naar de vs-variant; content is al goed.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>/webshop-laten-maken toont geen prijs <span class="status-warn">High</span></h4>
+    <p>priceLabel &#x27;op aanvraag&#x27; waar elke concurrent een bedrag toont (€699/€1.249) en DIY-bouwers (~€30/mnd) in dezelfde SERP staan (SXO-9).</p>
+    <p><strong>Recommendation:</strong> Vanaf-prijs tonen.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Nul benoemd bewijs op geldpagina&#x27;s <span class="status-warn">High</span></h4>
+    <p>Concurrenten tonen 3-5 benoemde cases, reviewaantallen, &#x27;1000+ ondernemers&#x27;-claims; AIMI niets (SXO-6/8).</p>
+    <p><strong>Recommendation:</strong> Zelfde fix als CQ-1: portfolio/cases.</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Kapsalonpagina begraaft prijs in proza en toont branchevreemde mockup <span class="status-warn">Medium</span></h4>
+    <p>Spreekt eigen belofte &#x27;foto&#x27;s van eigen werk&#x27; tegen (SXO-7); root cause is het gedeelde ExampleSlideshow-component (SXO-5, 23 pagina&#x27;s).</p>
+    <p><strong>Recommendation:</strong> Prijs prominenter; echte branchevoorbeelden.</p>
+  </div>
+  <hr class="divider">
+  <h3>2.11 Backlinks (aanvullend, buiten hoofdweging)</h3>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Domein afwezig in Common Crawl-hostgraaf: geen meetbare autoriteit <span class="status-warn">Info</span></h4>
+    <p>Geen Moz/Bing-keys; Common Crawl kent het domein niet (te jong/klein — verwacht, geen rode vlag). Score: INSUFFICIENT DATA.</p>
+    <p><strong>Recommendation:</strong> Geprioriteerd linkplan in findings/backlinks.md: NL-basiscitaties → regionale verenigingen/gidsen → klant-colofonlinks → website-checker als open-source linkable asset.</p>
+  </div>
+  <hr class="divider">
+</div>
+
+<!-- ======================================================= 3. ACTION PLAN === -->
+<div class="section">
+  <div class="section-header">
+    <h2>3. Action Plan</h2>
+  </div>
+
+  <div class="roadmap-phase">
+    <h4>Fase 1: Kritieke fixes &amp; juridische basis <span class="effort">Week 1</span></h4>
+    <ul>
+      <li>KvK, BTW, straatadres en postcode invullen in src/lib/seo.ts + toevoegen aan /algemene-voorwaarden (fixt CQ-2, SCH-1, SCH-4, Local-2/4 in één keer)</li>
+      <li>Cookiebanner-fix: -translate-x-1/2 toevoegen in CookieBanner.tsx:67</li>
+      <li>Google Bedrijfsprofiel claimen/completeren: categorie, uren, foto&#x27;s, diensten; eerste reviews vragen aan bestaande klanten</li>
+      <li>Brotli aanzetten in nginx</li>
+      <li>/wordpress-of-maatwerk title/H1 retargeten naar &#x27;WordPress vs maatwerk&#x27; (na GSC-check indien mogelijk)</li>
+      <li>webPageJsonLd() toevoegen aan /over-ons; titles juridische pagina&#x27;s verlengen</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Fase 2: Bewijs &amp; conversie <span class="effort">Week 2-3</span></h4>
+    <ul>
+      <li>Portfolio/cases-sectie bouwen met echte klantprojecten (bv. Direct SportsWear) incl. resultaten en testimonials</li>
+      <li>GENERIC_EXAMPLES in ExampleSlideshow vervangen door echte projectvoorbeelden (fixt 23 pagina&#x27;s in één component)</li>
+      <li>Vanaf-prijs tonen op /webshop-laten-maken</li>
+      <li>/over-ons uitbouwen (team, verhaal, werkwijze — E-E-A-T-drager) en /website-laten-maken verdiepen</li>
+      <li>Homepage-FAQ inkorten tot subset met link naar /faq; FAQPage-schema alleen op /faq</li>
+      <li>&#x27;AIMI&#x27; toevoegen aan sleutelantwoorden (FAQ, /wordpress-of-maatwerk, homepage-passages)</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Fase 3: Autoriteit &amp; performance <span class="effort">Maand 2</span></h4>
+    <ul>
+      <li>Citatieplan uitvoeren: LinkedIn-bedrijfspagina, Google/Bing Places, NL-directories (KvK-consistent), regionale ondernemersverenigingen</li>
+      <li>Klant-colofonlinks vragen; website-checker als open-source linkable asset publiceren</li>
+      <li>LCP-refactor: above-fold Framer Motion → CSS-animaties; Radix/portal-code uit marketingroutes splitsen; modulepreload beperken</li>
+      <li>Contextuele kruislinks stad×branche toevoegen; structurele variatie in het 30-pagina-skelet aanbrengen</li>
+      <li>Tikdoelen en 14px-tekst op mobiel verbeteren; scroll-hint op /tarieven-tabel</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Fase 4: Meten &amp; itereren <span class="effort">Doorlopend</span></h4>
+    <ul>
+      <li>Google Search Console + GOOGLE_API_KEY (PSI/CrUX) configureren zodat volgende audits velddata hebben</li>
+      <li>Reviewvelocity opbouwen (Google eerst, daarna Klantenvertellen)</li>
+      <li>SEO-drift-baseline vastleggen en bij elke deploy vergelijken</li>
+      <li>GSC-querydata gebruiken om SXO-hypotheses (wordpress-vs, webshopprijs) te valideren</li>
+      <li>dateModified-signalen toevoegen en actueel houden</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================================================= DATA SOURCES & METHODOLOGY === -->
+<div class="section" style="text-align: center; padding-top: 15mm;">
+  <hr class="divider">
+  <h3 style="text-align: left;">Data Sources &amp; Methodology</h3>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>Description</th><th>Update Frequency</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PageSpeed Insights API</td>
+          <td>Lighthouse lab audit (mobile emulation, Moto G Power, slow 4G)</td>
+          <td>Real-time</td></tr>
+      <tr><td>Chrome UX Report (CrUX)</td>
+          <td>28-day rolling field data from real Chrome users</td>
+          <td>Daily ~04:00 UTC</td></tr>
+      <tr><td>CrUX History API</td>
+          <td>25-week p75 trend data per metric</td>
+          <td>Weekly</td></tr>
+      <tr><td>Google Search Console</td>
+          <td>Search Analytics (clicks, impressions, CTR, position)</td>
+          <td>2-3 day lag</td></tr>
+      <tr><td>URL Inspection API</td>
+          <td>Per-URL index status, coverage state, crawl info</td>
+          <td>Real-time (2,000/day)</td></tr>
+    </tbody>
+  </table>
+  <p style="color: #94a3b8; font-size: 9pt; margin-top: 5mm;">
+    Report generated by Claude SEO &mdash; Google SEO Intelligence Skill &mdash; September 15, 2026<br>
+    Methodology based on Google Web Vitals thresholds, Search Console documentation, and Lighthouse scoring algorithms.
+  </p>
+</div>
+
+</body>
+</html>

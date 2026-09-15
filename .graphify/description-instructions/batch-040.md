@@ -1,4 +1,4 @@
-# Node Description Batch 41 of 49
+# Node Description Batch 41 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_website_laten_maken_groningen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L8 | neighbors=[website-laten-maken-groningen.tsx]
+- "routes_website_laten_maken_heerenveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L10 | neighbors=[website-laten-maken-heerenveen.tsx]
+- "routes_website_laten_maken_hoogeveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogeveen.tsx:L12 | neighbors=[website-laten-maken-hoogeveen.tsx]
+- "routes_website_laten_maken_hoogezand_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogezand.tsx:L8 | neighbors=[website-laten-maken-hoogezand.tsx]
+- "routes_website_laten_maken_hovenier_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L7 | neighbors=[website-laten-maken-hovenier.tsx]
+- "routes_website_laten_maken_kapsalon_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-kapsalon.tsx:L7 | neighbors=[website-laten-maken-kapsalon.tsx]
+- "routes_website_laten_maken_klusbedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L7 | neighbors=[website-laten-maken-klusbedrijf.tsx]
 - "routes_website_laten_maken_leeuwarden_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-leeuwarden.tsx:L10 | neighbors=[website-laten-maken-leeuwarden.tsx]
 - "routes_website_laten_maken_loodgieter_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-loodgieter.tsx:L7 | neighbors=[website-laten-maken-loodgieter.tsx]
 - "routes_website_laten_maken_makelaar_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-makelaar.tsx:L7 | neighbors=[website-laten-maken-makelaar.tsx]
@@ -45,18 +52,11 @@ one-sentence description — no prose, no markdown fences.
 - "routes_wordpress_of_maatwerk_comparison": "comparison" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L23 | neighbors=[wordpress-of-maatwerk.tsx]
 - "routes_wordpress_of_maatwerk_faqs": "faqs" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L80 | neighbors=[wordpress-of-maatwerk.tsx]
 - "routes_wordpress_of_maatwerk_row": "Row" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L21 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_vergelijkingpage": "VergelijkingPage()" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L158 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_vergelijkingpage": "VergelijkingPage()" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L161 | neighbors=[wordpress-of-maatwerk.tsx]
 - "scripts_indexnow_submit_main": "main()" | kind=code-symbol | source=scripts/indexnow-submit.mjs:L11 | neighbors=[indexnow-submit.mjs]
 - "scripts_set_telegram_webhook_main": "main()" | kind=code-symbol | source=scripts/set-telegram-webhook.ts:L23 | neighbors=[set-telegram-webhook.ts]
 - "src_routetree_gen_algemenevoorwaardenroute": "AlgemeneVoorwaardenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L361 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_apipublichooksexpireaccountsroute": "ApiPublicHooksExpireAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L445 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublicsiteerrorroute": "ApiPublicSiteErrorRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L405 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublicsitepingroute": "ApiPublicSitePingRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L400 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apitelegramwebhookroute": "ApiTelegramWebhookRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L395 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedaccountroute": "AuthenticatedAccountRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L390 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsaccountidroute": "AuthenticatedAdminAccountsAccountIdRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L475 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsroute": "AuthenticatedAdminAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L439 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_authenticatedadminaccountsroutechildren": "AuthenticatedAdminAccountsRouteChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1495 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

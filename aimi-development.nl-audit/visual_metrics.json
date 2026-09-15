@@ -1,0 +1,874 @@
+{
+  "homepage": {
+    "desktop": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Websites die échtwerken.",
+      "h1InViewport": true,
+      "h1Top": 184.703125,
+      "cta": {
+        "text": "Contact",
+        "top": 15.171875,
+        "left": 855.3125,
+        "width": 59.0625,
+        "height": 33.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 77,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 104
+        },
+        {
+          "tag": "button",
+          "text": "Diensten",
+          "width": 80,
+          "height": 34,
+          "top": 15,
+          "left": 391
+        },
+        {
+          "tag": "a",
+          "text": "Tarieven",
+          "width": 58,
+          "height": 34,
+          "top": 15,
+          "left": 503
+        },
+        {
+          "tag": "a",
+          "text": "Werkwijze",
+          "width": 71,
+          "height": 34,
+          "top": 15,
+          "left": 594
+        },
+        {
+          "tag": "a",
+          "text": "Over ons",
+          "width": 64,
+          "height": 34,
+          "top": 15,
+          "left": 697
+        },
+        {
+          "tag": "a",
+          "text": "FAQ",
+          "width": 30,
+          "height": 34,
+          "top": 15,
+          "left": 793
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 59,
+          "height": 34,
+          "top": 15,
+          "left": 855
+        },
+        {
+          "tag": "a",
+          "text": "Portaal",
+          "width": 85,
+          "height": 40,
+          "top": 12,
+          "left": 1147
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 1245
+        },
+        {
+          "tag": "a",
+          "text": "Neem contact op",
+          "width": 181,
+          "height": 39,
+          "top": 466,
+          "left": 535
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "16px",
+      "cookieBanner": null,
+      "documentHeight": 6701,
+      "clsApprox": 0.0008198858399777093,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\homepage-desktop.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\homepage-desktop-fold.png"
+    },
+    "mobile": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Websites die échtwerken.",
+      "h1InViewport": true,
+      "h1Top": 139.5625,
+      "cta": {
+        "text": "Contact",
+        "top": 13.171875,
+        "left": 228.515625,
+        "width": 91.484375,
+        "height": 37.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 68,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 229
+        },
+        {
+          "tag": "a",
+          "text": "Gratis website check! →",
+          "width": 157,
+          "height": 20,
+          "top": 518,
+          "left": 116
+        },
+        {
+          "tag": "a",
+          "text": "Meer over website laten maken",
+          "width": 246,
+          "height": 40,
+          "top": 1602,
+          "left": 48
+        },
+        {
+          "tag": "a",
+          "text": "Neem contact op",
+          "width": 159,
+          "height": 42,
+          "top": 1654,
+          "left": 48
+        },
+        {
+          "tag": "a",
+          "text": "Plan een gratis intake",
+          "width": 182,
+          "height": 42,
+          "top": 2766,
+          "left": 48
+        },
+        {
+          "tag": "a",
+          "text": "Meer over ons",
+          "width": 117,
+          "height": 20,
+          "top": 3172,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Bekijk alle tarieven en wat er precies b",
+          "width": 285,
+          "height": 18,
+          "top": 3657,
+          "left": 53
+        },
+        {
+          "tag": "a",
+          "text": "Neem contact op",
+          "width": 276,
+          "height": 42,
+          "top": 4099,
+          "left": 57
+        },
+        {
+          "tag": "a",
+          "text": "Neem contact op",
+          "width": 276,
+          "height": 40,
+          "top": 4524,
+          "left": 57
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "16px",
+      "cookieBanner": null,
+      "documentHeight": 9707,
+      "clsApprox": 0,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\homepage-mobile.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\homepage-mobile-fold.png"
+    }
+  },
+  "website-laten-maken": {
+    "desktop": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Website laten maken",
+      "h1InViewport": true,
+      "h1Top": 195.3125,
+      "cta": {
+        "text": "Contact",
+        "top": 15.171875,
+        "left": 855.3125,
+        "width": 59.0625,
+        "height": 33.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 76,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 104
+        },
+        {
+          "tag": "button",
+          "text": "Diensten",
+          "width": 80,
+          "height": 34,
+          "top": 15,
+          "left": 391
+        },
+        {
+          "tag": "a",
+          "text": "Tarieven",
+          "width": 58,
+          "height": 34,
+          "top": 15,
+          "left": 503
+        },
+        {
+          "tag": "a",
+          "text": "Werkwijze",
+          "width": 71,
+          "height": 34,
+          "top": 15,
+          "left": 594
+        },
+        {
+          "tag": "a",
+          "text": "Over ons",
+          "width": 64,
+          "height": 34,
+          "top": 15,
+          "left": 697
+        },
+        {
+          "tag": "a",
+          "text": "FAQ",
+          "width": 30,
+          "height": 34,
+          "top": 15,
+          "left": 793
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 59,
+          "height": 34,
+          "top": 15,
+          "left": 855
+        },
+        {
+          "tag": "a",
+          "text": "Portaal",
+          "width": 85,
+          "height": 40,
+          "top": 12,
+          "left": 1147
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 1245
+        },
+        {
+          "tag": "a",
+          "text": "Home",
+          "width": 38,
+          "height": 21,
+          "top": 112,
+          "left": 232
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "15px",
+      "cookieBanner": null,
+      "documentHeight": 2747,
+      "clsApprox": 0.00038739417223936903,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\website-laten-maken-desktop.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\website-laten-maken-desktop-fold.png"
+    },
+    "mobile": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Website laten maken",
+      "h1InViewport": true,
+      "h1Top": 195.3125,
+      "cta": {
+        "text": "Contact",
+        "top": 13.171875,
+        "left": 228.515625,
+        "width": 91.484375,
+        "height": 37.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 69,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 229
+        },
+        {
+          "tag": "a",
+          "text": "Home",
+          "width": 38,
+          "height": 21,
+          "top": 112,
+          "left": 24
+        },
+        {
+          "tag": "button",
+          "text": "Toon voorbeeld 1",
+          "width": 32,
+          "height": 32,
+          "top": 819,
+          "left": 147
+        },
+        {
+          "tag": "button",
+          "text": "Toon voorbeeld 2",
+          "width": 32,
+          "height": 32,
+          "top": 819,
+          "left": 179
+        },
+        {
+          "tag": "button",
+          "text": "Toon voorbeeld 3",
+          "width": 32,
+          "height": 32,
+          "top": 819,
+          "left": 211
+        },
+        {
+          "tag": "button",
+          "text": "Design op maat",
+          "width": 296,
+          "height": 18,
+          "top": 1018,
+          "left": 47
+        },
+        {
+          "tag": "button",
+          "text": "Razendsnel & mobiel",
+          "width": 296,
+          "height": 18,
+          "top": 1149,
+          "left": 47
+        },
+        {
+          "tag": "button",
+          "text": "SEO-basis inbegrepen",
+          "width": 296,
+          "height": 18,
+          "top": 1280,
+          "left": 47
+        },
+        {
+          "tag": "button",
+          "text": "Zelf te beheren",
+          "width": 296,
+          "height": 18,
+          "top": 1411,
+          "left": 47
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "15px",
+      "cookieBanner": null,
+      "documentHeight": 4643,
+      "clsApprox": 0,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\website-laten-maken-mobile.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\website-laten-maken-mobile-fold.png"
+    }
+  },
+  "tarieven": {
+    "desktop": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Wat kost een website laten maken?",
+      "h1InViewport": true,
+      "h1Top": 212.4375,
+      "cta": {
+        "text": "Contact",
+        "top": 15.171875,
+        "left": 855.3125,
+        "width": 59.0625,
+        "height": 33.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 71,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 104
+        },
+        {
+          "tag": "button",
+          "text": "Diensten",
+          "width": 80,
+          "height": 34,
+          "top": 15,
+          "left": 391
+        },
+        {
+          "tag": "a",
+          "text": "Tarieven",
+          "width": 58,
+          "height": 34,
+          "top": 15,
+          "left": 503
+        },
+        {
+          "tag": "a",
+          "text": "Werkwijze",
+          "width": 71,
+          "height": 34,
+          "top": 15,
+          "left": 594
+        },
+        {
+          "tag": "a",
+          "text": "Over ons",
+          "width": 64,
+          "height": 34,
+          "top": 15,
+          "left": 697
+        },
+        {
+          "tag": "a",
+          "text": "FAQ",
+          "width": 30,
+          "height": 34,
+          "top": 15,
+          "left": 793
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 59,
+          "height": 34,
+          "top": 15,
+          "left": 855
+        },
+        {
+          "tag": "a",
+          "text": "Portaal",
+          "width": 85,
+          "height": 40,
+          "top": 12,
+          "left": 1147
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 1245
+        },
+        {
+          "tag": "a",
+          "text": "Home",
+          "width": 38,
+          "height": 16,
+          "top": 131,
+          "left": 104
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "16px",
+      "cookieBanner": null,
+      "documentHeight": 5474,
+      "clsApprox": 0.007580481886373135,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\tarieven-desktop.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\tarieven-desktop-fold.png"
+    },
+    "mobile": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Wat kost een website laten maken?",
+      "h1InViewport": true,
+      "h1Top": 212.4375,
+      "cta": {
+        "text": "Contact",
+        "top": 13.171875,
+        "left": 228.515625,
+        "width": 91.484375,
+        "height": 37.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 63,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 229
+        },
+        {
+          "tag": "a",
+          "text": "Home",
+          "width": 38,
+          "height": 16,
+          "top": 131,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Onderhoud & hosting",
+          "width": 276,
+          "height": 26,
+          "top": 3148,
+          "left": 57
+        },
+        {
+          "tag": "a",
+          "text": "Meer diensten",
+          "width": 276,
+          "height": 26,
+          "top": 3447,
+          "left": 57
+        },
+        {
+          "tag": "a",
+          "text": "hoe we werken",
+          "width": 106,
+          "height": 19,
+          "top": 7426,
+          "left": 222
+        },
+        {
+          "tag": "a",
+          "text": "Vraag een offerte aan",
+          "width": 183,
+          "height": 42,
+          "top": 7749,
+          "left": 104
+        },
+        {
+          "tag": "a",
+          "text": "Website laten maken",
+          "width": 173,
+          "height": 42,
+          "top": 7803,
+          "left": 108
+        },
+        {
+          "tag": "a",
+          "text": "06 11851093",
+          "width": 70,
+          "height": 16,
+          "top": 7982,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "sales@aimi-development.nl",
+          "width": 160,
+          "height": 16,
+          "top": 7982,
+          "left": 118
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "16px",
+      "cookieBanner": null,
+      "documentHeight": 9245,
+      "clsApprox": 0,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\tarieven-mobile.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\tarieven-mobile-fold.png"
+    }
+  },
+  "contact": {
+    "desktop": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Laten we je project bespreken.",
+      "h1InViewport": true,
+      "h1Top": 192,
+      "cta": {
+        "text": "Contact",
+        "top": 15.171875,
+        "left": 855.3125,
+        "width": 59.0625,
+        "height": 33.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 66,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 104
+        },
+        {
+          "tag": "button",
+          "text": "Diensten",
+          "width": 80,
+          "height": 34,
+          "top": 15,
+          "left": 391
+        },
+        {
+          "tag": "a",
+          "text": "Tarieven",
+          "width": 58,
+          "height": 34,
+          "top": 15,
+          "left": 503
+        },
+        {
+          "tag": "a",
+          "text": "Werkwijze",
+          "width": 71,
+          "height": 34,
+          "top": 15,
+          "left": 594
+        },
+        {
+          "tag": "a",
+          "text": "Over ons",
+          "width": 64,
+          "height": 34,
+          "top": 15,
+          "left": 697
+        },
+        {
+          "tag": "a",
+          "text": "FAQ",
+          "width": 30,
+          "height": 34,
+          "top": 15,
+          "left": 793
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 59,
+          "height": 34,
+          "top": 15,
+          "left": 855
+        },
+        {
+          "tag": "a",
+          "text": "Portaal",
+          "width": 85,
+          "height": 40,
+          "top": 12,
+          "left": 1147
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 1245
+        },
+        {
+          "tag": "a",
+          "text": "sales@aimi-development.nl",
+          "width": 186,
+          "height": 18,
+          "top": 321,
+          "left": 372
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "14px",
+      "cookieBanner": null,
+      "documentHeight": 1700,
+      "clsApprox": 0.024370585701396927,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\contact-desktop.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\contact-desktop-fold.png"
+    },
+    "mobile": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "hasHorizontalOverflow": false,
+      "viewportMetaContent": "width=device-width, initial-scale=1",
+      "h1Text": "Laten we je project bespreken.",
+      "h1InViewport": true,
+      "h1Top": 192,
+      "cta": {
+        "text": "Contact",
+        "top": 13.171875,
+        "left": 228.515625,
+        "width": 91.484375,
+        "height": 37.640625,
+        "inViewport": true
+      },
+      "smallTapTargetsCount": 59,
+      "smallTapTargetsSample": [
+        {
+          "tag": "a",
+          "text": "AIMI.",
+          "width": 54,
+          "height": 33,
+          "top": 16,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Contact",
+          "width": 91,
+          "height": 38,
+          "top": 13,
+          "left": 229
+        },
+        {
+          "tag": "a",
+          "text": "sales@aimi-development.nl",
+          "width": 186,
+          "height": 18,
+          "top": 412,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "06 11851093",
+          "width": 81,
+          "height": 18,
+          "top": 655,
+          "left": 178
+        },
+        {
+          "tag": "a",
+          "text": "06 11851093",
+          "width": 70,
+          "height": 16,
+          "top": 1279,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "sales@aimi-development.nl",
+          "width": 160,
+          "height": 16,
+          "top": 1279,
+          "left": 118
+        },
+        {
+          "tag": "a",
+          "text": "Website laten maken",
+          "width": 118,
+          "height": 15,
+          "top": 1400,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Website laten vernieuwen",
+          "width": 145,
+          "height": 15,
+          "top": 1434,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "Webshop laten maken",
+          "width": 126,
+          "height": 15,
+          "top": 1468,
+          "left": 24
+        },
+        {
+          "tag": "a",
+          "text": "SEO",
+          "width": 26,
+          "height": 15,
+          "top": 1502,
+          "left": 24
+        }
+      ],
+      "bodyFontSize": "14px",
+      "pFontSize": "14px",
+      "cookieBanner": null,
+      "documentHeight": 2542,
+      "clsApprox": 0,
+      "consoleErrors": [],
+      "screenshotFull": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\contact-mobile.png",
+      "screenshotFold": "C:\\Users\\milan\\Documents\\AIMI\\aimi-digital-craft\\aimi-development.nl-audit\\screenshots\\contact-mobile-fold.png"
+    }
+  }
+}

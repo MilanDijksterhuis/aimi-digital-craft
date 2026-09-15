@@ -1,4 +1,4 @@
-# Node Description Batch 40 of 49
+# Node Description Batch 40 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_seo_notpromised": "notPromised" | kind=code-symbol | source=src/routes/seo.tsx:L69 | neighbors=[seo.tsx]
+- "routes_seo_seopage": "SeoPage()" | kind=code-symbol | source=src/routes/seo.tsx:L161 | neighbors=[seo.tsx]
+- "routes_seo_steps": "steps" | kind=code-symbol | source=src/routes/seo.tsx:L76 | neighbors=[seo.tsx]
+- "routes_sitemap_xml_lastmod": "LASTMOD" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L14 | neighbors=[sitemap[.]xml.tsx]
+- "routes_sitemap_xml_route": "Route" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L7 | neighbors=[sitemap[.]xml.tsx]
+- "routes_sitemap_xml_sitemapentry": "SitemapEntry" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L6 | neighbors=[sitemap[.]xml.tsx]
+- "routes_tarieven_comparison": "comparison" | kind=code-symbol | source=src/routes/tarieven.tsx:L113 | neighbors=[tarieven.tsx]
 - "routes_tarieven_faqs": "faqs" | kind=code-symbol | source=src/routes/tarieven.tsx:L146 | neighbors=[tarieven.tsx]
 - "routes_tarieven_included": "included" | kind=code-symbol | source=src/routes/tarieven.tsx:L97 | neighbors=[tarieven.tsx]
 - "routes_tarieven_notincluded": "notIncluded" | kind=code-symbol | source=src/routes/tarieven.tsx:L106 | neighbors=[tarieven.tsx]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_drachten_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L10 | neighbors=[website-laten-maken-drachten.tsx]
 - "routes_website_laten_maken_emmen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-emmen.tsx:L8 | neighbors=[website-laten-maken-emmen.tsx]
 - "routes_website_laten_maken_faqs": "faqs" | kind=code-symbol | source=src/routes/website-laten-maken.tsx:L7 | neighbors=[website-laten-maken.tsx]
-- "routes_website_laten_maken_groningen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L8 | neighbors=[website-laten-maken-groningen.tsx]
-- "routes_website_laten_maken_heerenveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L10 | neighbors=[website-laten-maken-heerenveen.tsx]
-- "routes_website_laten_maken_hoogeveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogeveen.tsx:L12 | neighbors=[website-laten-maken-hoogeveen.tsx]
-- "routes_website_laten_maken_hoogezand_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogezand.tsx:L8 | neighbors=[website-laten-maken-hoogezand.tsx]
-- "routes_website_laten_maken_hovenier_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L7 | neighbors=[website-laten-maken-hovenier.tsx]
-- "routes_website_laten_maken_kapsalon_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-kapsalon.tsx:L7 | neighbors=[website-laten-maken-kapsalon.tsx]
-- "routes_website_laten_maken_klusbedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L7 | neighbors=[website-laten-maken-klusbedrijf.tsx]
 
 ## Instructions
 

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SITE_URL, OG_IMAGE_URL, faqJsonLd, webPageJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, webPageJsonLd } from "@/lib/seo";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { AnswerBlock } from "@/components/AnswerBlock";
@@ -11,7 +11,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Pricing } from "@/components/Pricing";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { FAQ, faqItems } from "@/components/FAQ";
+import { FAQ } from "@/components/FAQ";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,10 +46,10 @@ export const Route = createFileRoute("/")({
       { rel: "canonical", href: `${SITE_URL}/` },
       // Font wordt self-hosted (zie styles.css) — geen externe Google-Fonts link meer.
     ],
-    // FAQPage-schema hoort alleen bij content die ook echt op de pagina staat
-    // (Google-richtlijn) — zie <FAQ /> hieronder in de component.
+    // SEO-audit 2026-09-15 (CQ-5/SCH-2): geen FAQPage-schema meer op de homepage.
+    // De homepage toont een subset van de FAQ; /faq is de canonieke bron en
+    // draagt als enige het FAQPage-schema.
     scripts: [
-      faqJsonLd(faqItems),
       // GEO-audit 2026-09-06 (punt 9): WebPage-node met dateModified + about,
       // zodat AI-machines zien dat de homepage actueel is en waar hij over gaat.
       webPageJsonLd({

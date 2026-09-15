@@ -47,11 +47,10 @@ export function Hero() {
 
       {/* Content — floats over photo */}
       <div className="relative flex-1 flex flex-col items-center justify-center text-center px-6 pt-24 pb-20">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-white max-w-3xl"
+        {/* SEO-audit 2026-09-15 (TECH-1): entrance via CSS (.anim-fade-up) i.p.v.
+            framer-motion, zodat de H1 niet op opacity:0 wacht tot JS hydrateert. */}
+        <h1
+          className="text-white max-w-3xl anim-fade-up"
           style={{
             fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
             fontSize: "clamp(1.9rem, 4vw, 3rem)",
@@ -63,7 +62,7 @@ export function Hero() {
           Websites die écht
           <br />
           werken.
-        </motion.h1>
+        </h1>
 
         {/* Performance-audit 2026-09-02: dit is de gemeten LCP-element
             (p.mt-8), niet de hero-afbeelding. Een motion-gedreven
@@ -81,11 +80,9 @@ export function Hero() {
           oplevering.
         </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex items-center gap-4 text-base"
+        <div
+          className="mt-10 flex items-center gap-4 text-base anim-fade-up"
+          style={{ animationDelay: "0.28s" }}
         >
           <a href="#contact" className="btn-primary group">
             Neem contact op
@@ -97,29 +94,24 @@ export function Hero() {
           <a href="/website-laten-maken" className="btn-secondary">
             Website laten maken
           </a>
-        </motion.div>
+        </div>
 
-        <motion.a
+        <a
           href="/website-checker"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 text-sm underline underline-offset-4"
+          className="mt-6 text-sm underline underline-offset-4 anim-fade-up"
           style={{
             color: "rgba(255,255,255,0.85)",
             fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+            animationDelay: "0.38s",
           }}
         >
           Gratis website check! →
-        </motion.a>
+        </a>
 
         {/* Founders */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-14 flex items-center gap-3"
-          style={{ color: "rgba(255,255,255,0.5)" }}
+        <div
+          className="mt-14 flex items-center gap-3 anim-fade-up"
+          style={{ color: "rgba(255,255,255,0.5)", animationDelay: "0.45s" }}
         >
           <div className="flex -space-x-2">
             {["A", "M"].map((l) => (
@@ -137,15 +129,14 @@ export function Hero() {
           >
             Aidan & Milan
           </span>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="relative flex justify-center pb-10"
+      {/* Scroll indicator — entrance in CSS; de oneindige loops hieronder blijven
+          framer-motion (decoratief, geen LCP-impact). */}
+      <div
+        className="relative flex justify-center pb-10 anim-fade-up"
+        style={{ animationDelay: "0.8s" }}
       >
         <motion.div
           className="flex flex-col items-center gap-1.5"
@@ -169,7 +160,7 @@ export function Hero() {
             />
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

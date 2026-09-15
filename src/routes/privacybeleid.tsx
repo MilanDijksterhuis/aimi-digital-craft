@@ -5,11 +5,12 @@ import { SITE_URL } from "@/lib/seo";
 export const Route = createFileRoute("/privacybeleid")({
   head: () => ({
     meta: [
-      { title: "Privacybeleid — AIMI" },
+      // SEO-audit 2026-09-15 (TECH-9): title was 20 tekens — te kort voor de SERP.
+      { title: "Privacybeleid — AIMI webdesignbureau Veendam" },
       {
         name: "description",
         content:
-          "Hoe AIMI omgaat met jouw persoonsgegevens: welke gegevens we verzamelen via het contactformulier en de website, waarom we ze bewaren, hoe lang, en welke rechten je hebt.",
+          "Hoe AIMI omgaat met jouw persoonsgegevens: wat we verzamelen via het contactformulier en de website, waarom, hoe lang we het bewaren en welke rechten je hebt.",
       },
       // A-21: stond op noindex. Een privacybeleid is een vertrouwenssignaal dat
       // bezoekers én Google mogen zien; het hoort gewoon indexeerbaar te zijn.

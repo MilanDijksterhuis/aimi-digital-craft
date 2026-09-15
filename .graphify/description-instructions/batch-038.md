@@ -1,4 +1,4 @@
-# Node Description Batch 39 of 49
+# Node Description Batch 39 of 50
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "public_site_error_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L12 | neighbors=[site-error.ts]
+- "public_site_ping_body": "Body" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L6 | neighbors=[site-ping.ts]
+- "public_site_ping_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L12 | neighbors=[site-ping.ts]
+- "routes_algemene_voorwaarden_voorwaardenpage": "VoorwaardenPage()" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L26 | neighbors=[algemene-voorwaarden.tsx]
+- "routes_authenticated_accountmenu": "AccountMenu()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L148 | neighbors=[_authenticated.tsx]
+- "routes_authenticated_authlayout": "AuthLayout()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L34 | neighbors=[_authenticated.tsx]
+- "routes_authenticated_inner": "Inner()" | kind=code-symbol | source=src/routes/_authenticated.tsx:L42 | neighbors=[_authenticated.tsx]
 - "routes_b03bb73bce86422c6a74b3cfc829f2dd_txt_route": "Route" | kind=code-symbol | source=src/routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt.tsx:L7 | neighbors=[b03bb73bce86422c6a74b3cfc829f2dd[.]txt.…]
 - "routes_branches_branches": "branches" | kind=code-symbol | source=src/routes/branches.tsx:L12 | neighbors=[branches.tsx]
 - "routes_contact_contactpage": "ContactPage()" | kind=code-symbol | source=src/routes/contact.tsx:L45 | neighbors=[contact.tsx]
@@ -40,23 +47,16 @@ one-sentence description — no prose, no markdown fences.
 - "routes_meer_diensten_surge": "Surge" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L122 | neighbors=[meer-diensten.tsx]
 - "routes_onderhoud_hosting_data": "data" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L8 | neighbors=[onderhoud-hosting.tsx]
 - "routes_onderhoud_hosting_faqs": "faqs" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L7 | neighbors=[onderhoud-hosting.tsx]
-- "routes_over_ons_overons": "OverOns()" | kind=code-symbol | source=src/routes/over-ons.tsx:L62 | neighbors=[over-ons.tsx]
+- "routes_over_ons_overons": "OverOns()" | kind=code-symbol | source=src/routes/over-ons.tsx:L71 | neighbors=[over-ons.tsx]
 - "routes_over_ons_stats": "stats" | kind=code-symbol | source=src/routes/over-ons.tsx:L8 | neighbors=[over-ons.tsx]
 - "routes_over_ons_values": "values" | kind=code-symbol | source=src/routes/over-ons.tsx:L15 | neighbors=[over-ons.tsx]
-- "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L27 | neighbors=[privacybeleid.tsx]
+- "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L28 | neighbors=[privacybeleid.tsx]
 - "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L59 | neighbors=[__root.tsx]
 - "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L29 | neighbors=[__root.tsx]
 - "routes_root_rootcomponent": "RootComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L294 | neighbors=[__root.tsx]
 - "routes_root_rootshell": "RootShell()" | kind=code-symbol | source=src/routes/__root.tsx:L277 | neighbors=[__root.tsx]
 - "routes_seo_faqs": "faqs" | kind=code-symbol | source=src/routes/seo.tsx:L84 | neighbors=[seo.tsx]
 - "routes_seo_included": "included" | kind=code-symbol | source=src/routes/seo.tsx:L29 | neighbors=[seo.tsx]
-- "routes_seo_notpromised": "notPromised" | kind=code-symbol | source=src/routes/seo.tsx:L69 | neighbors=[seo.tsx]
-- "routes_seo_seopage": "SeoPage()" | kind=code-symbol | source=src/routes/seo.tsx:L161 | neighbors=[seo.tsx]
-- "routes_seo_steps": "steps" | kind=code-symbol | source=src/routes/seo.tsx:L76 | neighbors=[seo.tsx]
-- "routes_sitemap_xml_lastmod": "LASTMOD" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L14 | neighbors=[sitemap[.]xml.tsx]
-- "routes_sitemap_xml_route": "Route" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L7 | neighbors=[sitemap[.]xml.tsx]
-- "routes_sitemap_xml_sitemapentry": "SitemapEntry" | kind=code-symbol | source=src/routes/sitemap[.]xml.tsx:L6 | neighbors=[sitemap[.]xml.tsx]
-- "routes_tarieven_comparison": "comparison" | kind=code-symbol | source=src/routes/tarieven.tsx:L113 | neighbors=[tarieven.tsx]
 
 ## Instructions
 

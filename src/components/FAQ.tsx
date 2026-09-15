@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Plus } from "lucide-react";
 
@@ -22,12 +23,12 @@ export const faqItems: FaqItem[] = [
   {
     category: "Werkwijze",
     q: "Hoelang duurt een project?",
-    a: "Een standaard website staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van de omvang en hoe snel we content en feedback ontvangen. Een Pro-traject plan je in op 3–5 weken. Voor een spoedopdracht kunnen we vaak sneller schakelen.",
+    a: "Een standaard website van AIMI staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van de omvang en hoe snel we content en feedback ontvangen. Een Pro-traject plan je in op 3–5 weken. Voor een spoedopdracht kunnen we vaak sneller schakelen.",
   },
   {
     category: "Werkwijze",
     q: "Wat als ik geen content of teksten heb?",
-    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers vraag ernaar tijdens het intakegesprek.",
+    a: "Geen probleem. We helpen je met een basis copystructuur. Voor uitgebreide copywriting werken we samen met vaste tekstschrijvers — vraag ernaar tijdens het intakegesprek.",
   },
   {
     category: "Prijzen",
@@ -37,7 +38,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Werkwijze",
     q: "Wie is eigenaar van de website en de domeinnaam na oplevering?",
-    a: "Jij. Na oplevering ben je volledig eigenaar van de website, de broncode en de domeinnaam. Er zit geen lock-in of afhankelijkheid van AIMI in de overeenkomst je kunt op elk moment overstappen naar een andere partij, mocht je dat willen.",
+    a: "Jij. Na oplevering ben je volledig eigenaar van de website, de broncode en de domeinnaam. Er zit geen lock-in of afhankelijkheid van AIMI in de overeenkomst: je kunt op elk moment overstappen naar een andere partij, mocht je dat willen.",
   },
   {
     category: "Onderhoud & hosting",
@@ -57,7 +58,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Werkwijze",
     q: "Werken jullie ook voor bedrijven buiten Noord-Nederland?",
-    a: "Zeker. We zitten zelf in Veendam en werken veel voor ondernemers in Groningen, Drenthe en Friesland, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
+    a: "Zeker. AIMI zit zelf in Veendam en werkt veel voor ondernemers in Groningen, Drenthe en Friesland, maar we bouwen websites voor klanten in heel Nederland. Alles kan op afstand, en persoonlijk contact blijft altijd mogelijk.",
   },
   {
     category: "Prijzen",
@@ -67,17 +68,17 @@ export const faqItems: FaqItem[] = [
   {
     category: "Prijzen",
     q: "Wat kost een webshop laten maken?",
-    a: "Een webshop is maatwerk en start doorgaans hoger dan een reguliere website, omdat er betaalmethodes, producten en een beheeromgeving bij komen kijken. Je krijgt vooraf een heldere offerte op basis van jouw wensen en aantal producten.",
+    a: "Een webshop is bij AIMI maatwerk en start doorgaans hoger dan een reguliere website, omdat er betaalmethodes, producten en een beheeromgeving bij komen kijken. Je krijgt vooraf een heldere offerte op basis van jouw wensen en aantal producten.",
   },
   {
     category: "Prijzen",
     q: "Wat kost hosting en onderhoud?",
-    a: "Onze hosting start vanaf € 30 per maand, inclusief beveiliging, updates, back-ups en monitoring. Er zijn geen setup-kosten wanneer we een bestaande site overnemen.",
+    a: "Hosting bij AIMI start vanaf € 30 per maand, inclusief beveiliging, updates, back-ups en monitoring. Er zijn geen setup-kosten wanneer we een bestaande site overnemen.",
   },
   {
     category: "Techniek & SEO",
     q: "Is SEO inbegrepen?",
-    a: "De technische SEO-basis zit standaard in elk project: snelle laadtijden, nette structuur, meta-tags en mobielvriendelijk. Uitgebreidere SEO-campagnes bieden we los aan.",
+    a: "De technische SEO-basis zit bij AIMI standaard in elk project: snelle laadtijden, nette structuur, meta-tags en mobielvriendelijk. Uitgebreidere SEO-campagnes bieden we los aan.",
   },
   {
     category: "Techniek & SEO",
@@ -122,7 +123,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Onderhoud & hosting",
     q: "Waar draaien de servers?",
-    a: "We hosten op onze eigen VPS met Nederlandse servers. Zo houden we snelheid, beveiliging en beschikbaarheid volledig in eigen hand.",
+    a: "AIMI host op een eigen VPS met Nederlandse servers. Zo houden we snelheid, beveiliging en beschikbaarheid volledig in eigen hand.",
   },
   {
     category: "Onderhoud & hosting",
@@ -145,6 +146,24 @@ export const faqItems: FaqItem[] = [
     a: "Ja. We voeren eerst een technische audit uit op je bestaande website — ongeacht het platform — en leveren daarna gerichte performance-optimalisaties, met een meetbaar resultaat op zowel mobiel als desktop.",
   },
 ];
+
+/** SEO-audit 2026-09-15 (CQ-5/SCH-2): de homepage toonde alle 25 vragen als
+ * byte-identiek duplicaat van /faq, beide met eigen FAQPage-schema. De homepage
+ * toont nu deze samengestelde subset en linkt door naar /faq, dat de canonieke
+ * bron is (en als enige het FAQPage-schema draagt). */
+const HOMEPAGE_FAQ_QUESTIONS = [
+  "Wat kost een website laten maken?",
+  "Hoelang duurt een project?",
+  "Wie is eigenaar van de website en de domeinnaam na oplevering?",
+  "Wat kost hosting en onderhoud?",
+  "Wat als ik al een website heb?",
+  "Komt mijn website ook goed vindbaar in Google?",
+];
+
+export const homepageFaqItems: FaqItem[] = HOMEPAGE_FAQ_QUESTIONS.flatMap((q) => {
+  const item = faqItems.find((f) => f.q === q);
+  return item ? [item] : [];
+});
 
 /** Gegroepeerde, volledig zichtbare FAQ voor de /faq-pagina (GEO-audit
  * 2026-09-06, punt 10). Anders dan de accordeon op de homepage staan hier alle
@@ -230,7 +249,7 @@ export function FAQ() {
         </motion.h2>
 
         <div className="divide-y" style={{ borderColor: "#2a2b2b" }}>
-          {faqItems.map((item, i) => {
+          {homepageFaqItems.map((item, i) => {
             const isOpen = open === i;
             return (
               <div key={i} style={{ borderColor: "#2a2b2b" }}>
@@ -271,6 +290,16 @@ export function FAQ() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-10">
+          <Link
+            to="/faq"
+            className="text-base font-medium underline underline-offset-4 transition-colors"
+            style={{ color: "#fe2c02", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          >
+            Bekijk alle veelgestelde vragen →
+          </Link>
         </div>
       </div>
     </section>

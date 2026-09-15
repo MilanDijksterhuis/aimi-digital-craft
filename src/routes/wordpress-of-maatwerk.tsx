@@ -88,11 +88,11 @@ const faqs = [
   },
   {
     q: "Kan ik bij maatwerk zelf mijn teksten aanpassen?",
-    a: "Ja, als dat wordt ingebouwd. Wij vragen bij de start welke onderdelen je zelf wilt kunnen wijzigen en bouwen dat gericht. Vaak blijkt dat een beperkte set: teksten, prijzen, openingstijden en afbeeldingen. Alles aanpasbaar maken kost geld en levert in de praktijk zelden iets op.",
+    a: "Ja, als dat wordt ingebouwd. Bij AIMI vragen we bij de start welke onderdelen je zelf wilt kunnen wijzigen en bouwen dat gericht. Vaak blijkt dat een beperkte set: teksten, prijzen, openingstijden en afbeeldingen. Alles aanpasbaar maken kost geld en levert in de praktijk zelden iets op.",
   },
   {
     q: "Wat gebeurt er met maatwerk als jullie ermee stoppen?",
-    a: "Dat is een terechte vraag en je hoort hem te stellen aan iedereen die iets voor je bouwt. Je bent bij ons eigenaar van je site en je code; als je weg wilt, krijg je alles mee. Dat is precies waarom we netjes en overdraagbaar bouwen in plaats van met een eigen gesloten systeem te werken.",
+    a: "Dat is een terechte vraag en je hoort hem te stellen aan iedereen die iets voor je bouwt. Je bent bij AIMI eigenaar van je site en je code; als je weg wilt, krijg je alles mee. Dat is precies waarom we netjes en overdraagbaar bouwen in plaats van met een eigen gesloten systeem te werken.",
   },
   {
     q: "Wat kost WordPress op de lange termijn?",
@@ -100,20 +100,23 @@ const faqs = [
   },
   {
     q: "Wat bouwen jullie zelf?",
-    a: "Wij bouwen maatwerk, omdat we snelheid en beheersbaarheid belangrijk vinden en niet afhankelijk willen zijn van plugins van derden. Maar als tijdens het gesprek blijkt dat WordPress voor jouw situatie logischer is, zeggen we dat gewoon. Liever een eerlijk advies dan een klant die na een jaar spijt heeft.",
+    a: "Wij bouwen bij AIMI maatwerk, omdat we snelheid en beheersbaarheid belangrijk vinden en niet afhankelijk willen zijn van plugins van derden. Maar als tijdens het gesprek blijkt dat WordPress voor jouw situatie logischer is, zeggen we dat gewoon. Liever een eerlijk advies dan een klant die na een jaar spijt heeft.",
   },
 ];
 
 export const Route = createFileRoute("/wordpress-of-maatwerk")({
   head: () => ({
     meta: [
-      { title: "WordPress of maatwerk? Een eerlijke vergelijking — AIMI" },
+      // SEO-audit 2026-09-15 (SXO-10): de SERP voor "wordpress of maatwerk" toont
+      // alleen "maatwerk WordPress"-dienstpagina's; de vergelijkingsintentie leeft
+      // onder "wordpress vs maatwerk". Title/H1 geretarget naar de vs-variant.
+      { title: "WordPress vs maatwerk website: eerlijke vergelijking — AIMI" },
       {
         name: "description",
         content:
-          "WordPress of een maatwerk website? Een eerlijke vergelijking van kosten, snelheid, beheer, beveiliging en SEO — inclusief wanneer WordPress de betere keuze is.",
+          "WordPress vs een maatwerk website: eerlijke vergelijking van kosten, snelheid, beheer, beveiliging en SEO — inclusief wanneer WordPress de betere keuze is.",
       },
-      { property: "og:title", content: "WordPress of maatwerk? Een eerlijke vergelijking" },
+      { property: "og:title", content: "WordPress vs maatwerk website: een eerlijke vergelijking" },
       {
         property: "og:description",
         content: "Kosten, snelheid, beheer, beveiliging en SEO naast elkaar. Inclusief wanneer WordPress beter past.",
@@ -122,7 +125,7 @@ export const Route = createFileRoute("/wordpress-of-maatwerk")({
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "WordPress of maatwerk? Een eerlijke vergelijking" },
+      { name: "twitter:title", content: "WordPress vs maatwerk website: een eerlijke vergelijking" },
       {
         name: "twitter:description",
         content: "Kosten, snelheid, beheer, beveiliging en SEO naast elkaar. Inclusief wanneer WordPress beter past.",
@@ -137,7 +140,7 @@ export const Route = createFileRoute("/wordpress-of-maatwerk")({
           "@context": "https://schema.org",
           "@type": "Article",
           "@id": `${URL}#article`,
-          headline: "WordPress of maatwerk? Een eerlijke vergelijking",
+          headline: "WordPress vs maatwerk website: een eerlijke vergelijking",
           description:
             "Een vergelijking van WordPress en maatwerk websites op kosten, snelheid, beheer, beveiliging, afhankelijkheid en SEO.",
           url: URL,
@@ -171,10 +174,10 @@ function VergelijkingPage() {
               className="max-w-3xl"
               style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}
             >
-              WordPress of maatwerk?
+              WordPress vs maatwerk website
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-relaxed" style={{ color: "#a4a9b2" }}>
-              Wij bouwen maatwerk, dus je mag dit stuk met gepaste argwaan lezen. Daarom hebben we er ook in gezet
+              Wij bouwen bij AIMI maatwerk, dus je mag dit stuk met gepaste argwaan lezen. Daarom hebben we er ook in gezet
               wanneer{" "}
               <a
                 href="https://wordpress.org/"
@@ -195,7 +198,10 @@ function VergelijkingPage() {
             <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
               De vergelijking op een rij
             </h2>
-            <div className="mt-8" style={{ overflowX: "auto" }}>
+            <p className="md:hidden mt-6 text-xs" style={{ color: "#868b94" }}>
+              Schuif de tabel opzij voor de volledige vergelijking →
+            </p>
+            <div className="mt-8 max-md:mt-3" style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", minWidth: "680px", borderCollapse: "collapse", fontSize: "14.5px" }}>
                 <caption className="text-left pb-4 text-[14px]" style={{ color: "#868b94" }}>
                   WordPress en maatwerk vergeleken op de punten die in de praktijk het verschil maken.

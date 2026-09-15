@@ -1,108 +1,97 @@
-# Full SEO Audit — aimi-development.nl
+# SEO Audit — aimi-development.nl
 
-**Date:** 2026-09-04 (herzien na doorvoeren fixes)
-**Pages crawled:** 48 / 48 in sitemap (100%)
-**Business type:** Service Area Business — web agency, Veendam (GR), serving Noord-Nederland + NL
-**Previous audit:** 2026-09-02
-
----
-
-## SEO Health Score: 82 / 100
-
-> **Herzien 2026-09-04.** De code-fixes zijn doorgevoerd (score 79 → 82) en vier
-> findings zijn ingetrokken na verificatie tegen de broncode. Zie
-> **[WAT-IK-AL-DEED.md](WAT-IK-AL-DEED.md)** voor de wijzigingen en correcties, en
-> **[JOUW-TAKEN.md](JOUW-TAKEN.md)** voor wat er nog van de eigenaar moet komen.
->
-> Ingetrokken: OP-4 (dubbele encoding — fout in de crawler van deze audit),
-> IMG-1 en PERF-5 (lazy loading — er is één afbeelding, de LCP-hero),
-> IMG-4 (lege alt — correct decoratief gebruik).
-> Afgezwakt: PERF-3 (de homepage gebruikt die chunks echt) en GEO-2
-> (`founder`-entiteiten bestaan al).
-
-| Categorie | Weging | Was | Nu |
-|---|---|---|---|
-| Technical SEO | 22% | 78 | 78 |
-| Content Quality | 23% | 76 | **78** |
-| On-Page SEO | 20% | 90 | **96** |
-| Schema / Structured Data | 10% | 82 | **86** |
-| Performance (CWV) | 10% | 58 | 58 |
-| AI Search Readiness | 10% | 80 | **84** |
-| Images | 5% | 85 | **95** |
-| **Totaal** | | **79** | **82** |
-
-Technical en Performance blijven staan tot de nginx-wijziging live is — dat is
-taak 1 en 2 in [JOUW-TAKEN.md](JOUW-TAKEN.md) en brengt de score naar ongeveer 87.
+**Datum:** 15 september 2026
+**Scope:** volledige site, 48 pagina's (100% van de sitemap gecrawld)
+**Methode:** 9 gespecialiseerde analyses (technisch, content, schema, performance, visueel/mobiel, GEO/AI, lokaal, SXO, backlinks) + on-page analyse over alle 48 pagina's. Lighthouse 12.8.2 lab-metingen (geen CrUX/GSC-velddata — geen Google API-key geconfigureerd).
+**Bedrijfstype:** service area business — webdesignbureau (Veendam), werkgebied Noord-Nederland.
 
 ---
 
-## Executive summary
+## Gezondheidsscore: 80 / 100
 
-This is a **well-built site**. The technical fundamentals are close to flawless in a way that is genuinely rare: 48/48 pages carry correct self-referencing canonicals, exactly one `<h1>`, `lang="nl"`, a viewport, complete Open Graph and Twitter tags. There are no duplicate titles, no duplicate descriptions, no missing descriptions, no accidental `noindex`, no redirect chains, no broken pages, and no orphans. The security header set — CSP with `object-src 'none'`, HSTS, Permissions-Policy — is better configured than most commercial sites.
+| Categorie | Gewicht | Score |
+|---|---|---|
+| Technical SEO | 22% | **90** |
+| Content Quality | 23% | **55** |
+| On-Page SEO | 20% | **92** |
+| Schema / Structured Data | 10% | **87** |
+| Performance (CWV, lab) | 10% | **74** |
+| AI Search Readiness (GEO) | 10% | **82** |
+| Images | 5% | **92** |
+| *Aanvullend (buiten weging):* | | |
+| *Local SEO* | — | *44* |
+| *Visual / Mobile UX* | — | *70* |
+| *SXO (5-keyword gap)* | — | *63* |
+| *Backlinks* | — | *onvoldoende data* |
 
-The programmatic pages are the standout. Thirty city and branch pages average over 1,000 words each with only **7.7% heading overlap** between cities, and **249 unique FAQ questions** across the site. That is real writing at scale, not a find-and-replace template — the failure mode that sinks most location-page strategies is simply not present here. The schema work shows the same care: stable `@id` entities, `parentOrganization` linking, and — notably — a refusal to fabricate a `PostalAddress` for the 14 cities where there is no office.
+Vorige audit (6 sep 2026): 81. De score is stabiel; performance verbeterde fors (58 → 74, compressie/caching opgelost), content scoort strenger door correctie op echte main-content-woordaantallen (crawl-tellingen bleken ~1,7× geïnflateerd door nav/footer).
 
-So the score is not held back by sloppiness. It is held back by **three specific things**, and two of them are not code problems at all.
-
-**First, a server misconfiguration is wasting most of the site's speed advantage.** nginx serves every `/assets/*.js` and `*.css` file **completely uncompressed**. The main bundle ships **881 KB where 248 KB would do**. Across the homepage that is roughly **1.2 MB transferred instead of ~330 KB** — about 870 KB wasted on every uncached visit. The server itself is fast (46 ms median TTFB) and the LCP image and font are properly preloaded; all that work is then undone at the transfer layer. One nginx directive recovers it, with no code change and no regression risk.
-
-**Second, the site has no KvK or BTW number anywhere.** Zero hits across 48 pages. For a Dutch business this is a legal requirement under the Handelsregisterwet, not merely an SEO nicety — and it is simultaneously the cheapest trust signal available. The related gap: no postal address is visible anywhere on-page (it exists only inside Veendam's JSON-LD), and the primary `ProfessionalService` entity — a `LocalBusiness` subtype — declares no `address` at all.
-
-**Third, the site sells websites but never shows one.** There is no portfolio, no case study, no before/after, and review language appears on exactly one page in 48. There is no `aggregateRating` because there are no reviews to mark up. For a web agency this is the central conversion gap, and reviews are also among the strongest map-pack ranking factors — so it costs rankings and conversions at the same time.
-
-One structural note worth flagging: **every page links to every other page** (48 inbound links each, 49 outbound). Navigation and footer expose the whole site everywhere, so internal link equity is distributed perfectly evenly — which means it communicates no hierarchy. `/tarieven` receives exactly as much internal support as `/algemene-voorwaarden`.
-
-### Top 5 critical & high-priority issues
-
-1. **Static assets served uncompressed** — 881 KB main bundle vs 248 KB gzipped; ~870 KB wasted per visit *(Critical, server config)*
-2. **No KvK / BTW number on the site** — legal requirement + primary trust signal *(High)*
-3. **No portfolio, case studies or reviews** — the core proof gap for an agency *(High)*
-4. **IndexNow key file 404s** — the whole IndexNow setup is inert; route is written but undeployed *(High)*
-5. **Fonts and the LCP hero image have no `Cache-Control`** — re-fetched on every repeat visit *(High)*
-
-### Top 5 quick wins
-
-1. **Enable gzip/brotli for JS+CSS in nginx** — one directive, ~870 KB saved per visit, 15 minutes
-2. **Deploy the IndexNow route** — already written locally, just needs committing and deploying
-3. **Add `Cache-Control` for `woff2` and `webp`** — same nginx block as #1
-4. **Add KvK + BTW + postal address to the footer** — one component, fixes a legal gap and appears on all 48 pages
-5. **Shorten 4 over-length titles** — `/seo` (70 chars), `/`, `/tarieven`, `/website-laten-vernieuwen`
+**Het patroon in één zin:** de site is technisch vrijwel af — het gat zit in *bewijs en zichtbaarheid buiten de site*: geen cases/reviews/portfolio, geen KvK/adres, geen citaties, onzichtbaar Bedrijfsprofiel.
 
 ---
 
-## Category detail
+## Top 5 kritieke bevindingen
 
-Full findings per category are in [`findings/`](findings/):
+1. **Nul bewijs van geleverd werk** — geen cases, portfolio, klantnamen, testimonials of reviews op alle 48 pagina's. Grootste E-E-A-T- en conversiegat; concurrenten in dezelfde SERP's tonen 3–5 benoemde cases en reviewaantallen. (CQ-1, SXO-6/8)
+2. **KvK, BTW en straatadres ontbreken overal** — ook op de juridische pagina's; wettelijk verplicht in NL en blokkeert directory-citaties. De velden in `src/lib/seo.ts` zijn voorbereid maar leeg; footer en schema renderen ze automatisch zodra gevuld. (CQ-2, SCH-1/4)
+3. **Cookiebanner valt op mobiel half buiten beeld, site-breed** — `src/components/CookieBanner.tsx:67` mist `-translate-x-1/2`. (VIS-1)
+4. **LCP 3,5–4,3 s (mobiel lab), 83–86% renderuitstel door JS** — hero start op `opacity:0` tot Framer Motion hydrateert; Radix+Framer laden op elke pagina (~141 KB unused JS). Netwerk en afbeeldingen zijn al optimaal. (TECH-1, PERF-1)
+5. **Lokale zichtbaarheid vrijwel nul** — Google Bedrijfsprofiel komt niet op bij merkzoekopdracht, nul off-site reviews (Trustpilot/Klantenvertellen 404), nul externe citaties, domein onbekend in Common Crawl. (Local, Backlinks)
 
-| File | Covers |
-|---|---|
-| [technical.md](findings/technical.md) | Compression, caching, IndexNow, redirects, security headers |
-| [content.md](findings/content.md) | E-E-A-T, KvK/BTW, authorship, duplication analysis |
-| [onpage.md](findings/onpage.md) | Titles, descriptions, canonicals, headings |
-| [schema.md](findings/schema.md) | Entity graph, LocalBusiness modelling, coverage |
-| [performance.md](findings/performance.md) | Bundle size, modulepreload, LCP path |
-| [geo.md](findings/geo.md) | llms.txt, AI crawlers, citability |
-| [images.md](findings/images.md) | Alt text, dimensions, formats, lazy loading |
-| [sitemap.md](findings/sitemap.md) | Sitemap validity, internal link architecture |
-| [local.md](findings/local.md) | NAP, SAB modelling, citations, reviews |
-| [sxo.md](findings/sxo.md) | Intent match, proof, conversion path |
-| [backlinks.md](findings/backlinks.md) | Authority signals (no API credentials — unscored) |
+## Top 5 quick wins
+
+1. `seo.ts`-velden vullen (adres, postcode, KvK, BTW) + KvK/BTW op /algemene-voorwaarden — één datafix lost vier findings op.
+2. Cookiebanner: één CSS-klasse toevoegen.
+3. Brotli aanzetten in nginx (nu alleen gzip) — ~60–90 KB/pagina, pure serverconfig.
+4. `/wordpress-of-maatwerk` title/H1 retargeten naar "WordPress **vs** maatwerk" — de SERP voor de huidige zoekterm toont uitsluitend "maatwerk WordPress"-dienstpagina's; de vergelijkingsintentie leeft onder de vs-variant. Content is al goed. (SXO-10)
+5. Vanaf-prijs tonen op /webshop-laten-maken — nu de enige prijsloze pagina in een prijs-verankerde SERP. (SXO-9)
 
 ---
 
-## What was verified
+## Per categorie
 
-- 48/48 sitemap URLs fetched and parsed (titles, meta, canonicals, headings, JSON-LD, images, links, TTFB, transfer size)
-- robots.txt, llms.txt, sitemap.xml, IndexNow key file, favicon, og-image
-- Response headers for HTML, JS, CSS, WebP and WOFF2
-- `www`/`http` redirect behaviour and 404 handling
-- Compression measured by re-compressing the live bundle locally
-- Pairwise content-similarity and heading-overlap analysis across the 30 programmatic pages
-- Full internal link graph (inbound/outbound per URL)
+### Technical SEO — 90/100
+Vrijwel foutloos: robots.txt correct (AI-crawlers toegestaan, scrapers geblokkeerd), sitemap valide (48/48 canoniek), 0 canonical-mismatches, redirects en 404-afhandeling correct, security headers op 100% van de pagina's, IndexNow in de deploy-keten, volledige SSR, mediane TTFB 122 ms.
+Aandachtspunten: hero op `opacity:0` tot hydratie (High, zie performance), ~21 modulepreloads incl. niet-kritieke chunks, CSP `unsafe-inline`, kleinigheden (dubbele headers, nginx-versie zichtbaar, /CONTACT geeft 200 i.p.v. 301). → `findings/technical.md`
 
-## Limitations
+### Content Quality — 55/100
+Sterk: branche- en stadspagina's zijn écht per pagina geschreven (similariteit 0,29–0,38 — geen doorway-spam), prijstransparantie is een trust-asset, FAQ-antwoorden zijn citeerbaar.
+Zwak: **geen enkel klantbewijs site-breed** (High); kernpagina's dunner dan long-tail (echte telling: /over-ons 223 woorden, /contact 76, /website-laten-maken 474 vs ~690 op branchepagina's); homepage-FAQ is byte-identiek duplicaat van /faq incl. dubbel schema; 30 pagina's delen een identiek 6-secties-skelet (oogt programmatisch); geen freshness-signalen. → `findings/content.md`
 
-- **No field data.** No Google Search Console, CrUX or GA4 credentials configured — CWV figures are lab/transfer-level, not real-user.
-- **No backlink data.** No Moz, Bing Webmaster or DataForSEO credentials — the authority category is unscored.
-- **No GBP data.** Google Business Profile completeness, review velocity and geo-grid rank were not directly measurable.
-- **Live site audited.** The working tree has uncommitted changes (`seo.ts`, `server.ts`, `og-image.png`, the IndexNow route) not yet reflected on the live site.
+### On-Page SEO — 92/100
+48/48 unieke titles en descriptions, exact één H1 per pagina, geen orphan-pagina's, footer linkt alle stads- en branchepagina's, schone URL-structuur. Klein: juridische titles te kort; contextuele stad×branche-kruislinks ontbreken. → eigen analyse + `crawl-data.json`
+
+### Schema — 87/100
+Nette geconsolideerde entity-graph (Organization/ProfessionalService/WebSite via `ORG_ID`), volledige Offer/prijs-structuur op /tarieven, correcte areaServed-discipline, geen verzonnen ratings. Ontbreekt: adres/geo/openingstijden in de Organization-entity (data, geen code), meer `sameAs`, KvK/BTW, WebPage-schema op /over-ons (éénregelig). → `findings/schema.md`
+
+### Performance — 74/100 (lab)
+LCP /: 4,33 s · /website-laten-maken: 3,69 s · /tarieven: 3,54 s (mobiel, throttled). CLS uitstekend (≤0,002), TTFB uitstekend, fonts en afbeeldingen al optimaal. Het knelpunt is uitsluitend main-thread JS (Framer Motion + Radix). Fixes: CSS-animaties above-fold, code-splitting, Brotli, Cache-Control op HTML. → `findings/performance.md` + `lighthouse-runs/`
+
+### AI Search Readiness — 82/100
+llms.txt aanwezig en goed; /tarieven en /faq vrijwel ideaal citeerbaar; volledige SSR. Verbeterpunt: merknaam ontbreekt in de citeerbare passages (3/25 FAQ-antwoorden noemen AIMI; /wordpress-of-maatwerk nergens) en de externe brand-voetafdruk is vrijwel nul. → `findings/geo.md`
+
+### Images — 92/100
+0 afbeeldingen zonder afmetingen, responsive webp + preload op hero's, decoratieve afbeeldingen correct gemarkeerd. Eén punt: de gedeelde voorbeelden-slideshow toont generieke stockmockups op 23 pagina's. → `findings/visual.md`
+
+### Local SEO — 44/100 (aanvullend)
+De zwakste plek, en vrijwel volledig *off-site*: GBP onzichtbaar voor merkzoekopdracht, geen adres, nul reviews, geen KvK, nul citaties. On-site is het juist goed: consistente NAP, correcte LocalBusiness/Service-schema-discipline, gedifferentieerde stadspagina's. → `findings/local.md`
+
+### Visual / Mobile UX — 70/100 (aanvullend)
+Cookiebanner-bug (High), tikdoelen < 44 px, tabel-scroll zonder hint, 14 px tekst op /contact. Sterke basis: geen overflow, geen CLS, CTA boven de vouw. Screenshots: `screenshots/`. → `findings/visual.md`
+
+### SXO — 63/100 (aanvullend)
+4/5 keywords: paginatype klopt met wat Google beloont, maar het *bewijs*- en *prijs*-gat kost posities. 1/5 (wordpress-of-maatwerk): verkeerde zoekvariant getarget. Kanttekening: SERP-sampling op titel/snippet-niveau, geen GSC-data — verifieer vóór de title-wijziging. → `findings/sxo.md`
+
+### Backlinks — onvoldoende data (aanvullend)
+Domein niet aanwezig in Common Crawl (verwacht voor een jong domein). Geprioriteerd NL-linkplan opgesteld: basiscitaties → regionale verenigingen/branchegidsen → klant-colofonlinks → website-checker als open-source linkable asset. → `findings/backlinks.md`
+
+---
+
+## Beperkingen
+
+- Geen Google API-key / Search Console-koppeling: alle CWV-cijfers zijn lab-data, geen velddata; indexatiestatus en querydata konden niet worden gecheckt. Aanrader: GSC + `GOOGLE_API_KEY` configureren vóór de volgende audit.
+- Geen Moz/Bing/DataForSEO-keys: backlink-autoriteit niet meetbaar.
+- GBP-details (categorie, uren, reviews) zitten achter Googles consent-wall — alleen via het dashboard te verifiëren.
+- SERP-analyses zijn ongepersonaliseerde snapshots, geen rank-tracking.
+
+Zie `ACTION-PLAN.md` voor het gefaseerde plan.
