@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260714090000_roles_permissions_module_public_roles": "public.roles" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L9 | neighbors=[20260714090000_roles_permissions_module…, public.user_custom_roles]
 - "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_bans": "public.rate_limit_bans" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L20 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
 - "migrations_20260717150000_sec5_durable_rate_limit_public_rate_limit_hits": "public.rate_limit_hits" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L13 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
 - "migrations_20260717150000_sec5_durable_rate_limit_v_count": "v_count" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L57 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.check_rate_limit()]
@@ -56,7 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_autobedrijf_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-autobedrijf.tsx:L57 | neighbors=[website-laten-maken-autobedrijf.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_autorijschool_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L57 | neighbors=[website-laten-maken-autorijschool.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_bloemist_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-bloemist.tsx:L57 | neighbors=[website-laten-maken-bloemist.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_boekhouder_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-boekhouder.tsx:L57 | neighbors=[website-laten-maken-boekhouder.tsx, routeTree.gen.ts]
 
 ## Instructions
 

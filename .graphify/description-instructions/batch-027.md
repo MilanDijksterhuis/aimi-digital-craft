@@ -17,6 +17,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_cookiebanner_saveprefs": "savePrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L21 | neighbors=[CookieBanner.tsx]
+- "components_faq_faq_categories": "FAQ_CATEGORIES" | kind=code-symbol | source=src/components/FAQ.tsx:L10 | neighbors=[FAQ.tsx]
+- "components_faq_faqcategory": "FaqCategory" | kind=code-symbol | source=src/components/FAQ.tsx:L18 | neighbors=[FAQ.tsx]
+- "components_faq_faqitem": "FaqItem" | kind=code-symbol | source=src/components/FAQ.tsx:L20 | neighbors=[FAQ.tsx]
 - "components_faq_homepage_faq_questions": "HOMEPAGE_FAQ_QUESTIONS" | kind=code-symbol | source=src/components/FAQ.tsx:L154 | neighbors=[FAQ.tsx]
 - "components_faq_homepagefaqitems": "homepageFaqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L163 | neighbors=[FAQ.tsx]
 - "components_faq_items": "items" | kind=code-symbol | source=src/components/FAQ.tsx:L5 | neighbors=[FAQ.tsx]
@@ -53,10 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_locationpagev2_faqsection": "FaqSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L208 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_local_services": "LOCAL_SERVICES" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L27 | neighbors=[LocationPageV2.tsx]
 - "components_locationpagev2_locationsectionid": "LocationSectionId" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L22 | neighbors=[LocationPageV2.tsx]
-- "components_locationpagev2_sectionrenderers": "sectionRenderers" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L241 | neighbors=[LocationPageV2.tsx]
-- "components_locationpagev2_workflowsection": "WorkflowSection()" | kind=code-symbol | source=src/components/LocationPageV2.tsx:L124 | neighbors=[LocationPageV2.tsx]
-- "components_nav_links": "links" | kind=code-symbol | source=src/components/Nav.tsx:L37 | neighbors=[Nav.tsx]
-- "components_nav_mobilemenu": "MobileMenu()" | kind=code-symbol | source=src/components/Nav.tsx:L180 | neighbors=[Nav.tsx]
 
 ## Instructions
 

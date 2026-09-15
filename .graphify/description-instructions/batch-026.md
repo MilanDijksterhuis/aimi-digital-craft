@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_server_serversection": "ServerSection" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L249 | neighbors=[server.tsx]
 - "authenticated_server_serversidebar": "ServerSidebar()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L251 | neighbors=[server.tsx]
 - "authenticated_server_skeletoncard": "SkeletonCard()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L72 | neighbors=[server.tsx]
 - "authenticated_server_status_dot": "STATUS_DOT" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L58 | neighbors=[server.tsx]
@@ -27,6 +28,9 @@ one-sentence description — no prose, no markdown fences.
 - "components_analyticsloader_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L6 | neighbors=[AnalyticsLoader.tsx]
 - "components_analyticsloader_loadtrackjs": "loadTrackJs()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L17 | neighbors=[AnalyticsLoader.tsx]
 - "components_analyticsloader_readprefs": "readPrefs()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L8 | neighbors=[AnalyticsLoader.tsx]
+- "components_answerblock_facts": "facts" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L19 | neighbors=[AnswerBlock.tsx]
+- "components_answerblock_prices": "prices" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L19 | neighbors=[AnswerBlock.tsx]
+- "components_answerblock_w": "W" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L17 | neighbors=[AnswerBlock.tsx]
 - "components_branchpage_approachsection": "ApproachSection()" | kind=code-symbol | source=src/components/BranchPage.tsx:L71 | neighbors=[BranchPage.tsx]
 - "components_branchpage_branchsectionid": "BranchSectionId" | kind=code-symbol | source=src/components/BranchPage.tsx:L22 | neighbors=[BranchPage.tsx]
 - "components_branchpage_faqsection": "FaqSection()" | kind=code-symbol | source=src/components/BranchPage.tsx:L106 | neighbors=[BranchPage.tsx]
@@ -53,10 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_contact_mode": "Mode" | kind=code-symbol | source=src/components/Contact.tsx:L9 | neighbors=[Contact.tsx]
 - "components_cookiebanner_cookieprefs": "CookiePrefs" | kind=code-symbol | source=src/components/CookieBanner.tsx:L4 | neighbors=[CookieBanner.tsx]
 - "components_cookiebanner_loadprefs": "loadPrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L12 | neighbors=[CookieBanner.tsx]
-- "components_cookiebanner_saveprefs": "savePrefs()" | kind=code-symbol | source=src/components/CookieBanner.tsx:L21 | neighbors=[CookieBanner.tsx]
-- "components_faq_faq_categories": "FAQ_CATEGORIES" | kind=code-symbol | source=src/components/FAQ.tsx:L10 | neighbors=[FAQ.tsx]
-- "components_faq_faqcategory": "FaqCategory" | kind=code-symbol | source=src/components/FAQ.tsx:L18 | neighbors=[FAQ.tsx]
-- "components_faq_faqitem": "FaqItem" | kind=code-symbol | source=src/components/FAQ.tsx:L20 | neighbors=[FAQ.tsx]
 
 ## Instructions
 

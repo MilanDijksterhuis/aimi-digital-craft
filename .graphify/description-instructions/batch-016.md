@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "telegram_webhook": "webhook.ts" | kind=code-symbol | source=src/routes/api/telegram/webhook.ts:L1 | neighbors=[2b1d78f telegram, routeTree.gen.ts, Route]
 - "ui_checkbox": "checkbox.tsx" | kind=code-symbol | source=src/components/ui/checkbox.tsx:L1 | neighbors=[utils.ts, cn(), Checkbox]
 - "ui_hover_card": "hover-card.tsx" | kind=code-symbol | source=src/components/ui/hover-card.tsx:L1 | neighbors=[utils.ts, cn(), HoverCardContent]
 - "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
@@ -48,7 +49,7 @@ one-sentence description — no prose, no markdown fences.
 - "components_about_about": "About()" | kind=code-symbol | source=src/components/About.tsx:L4 | neighbors=[About.tsx, index.tsx]
 - "components_adminchatpanel_adminchatpanel": "AdminChatPanel()" | kind=code-symbol | source=src/components/AdminChatPanel.tsx:L27 | neighbors=[admin.tsx, AdminChatPanel.tsx]
 - "components_analyticsloader_analyticsloader": "AnalyticsLoader()" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L27 | neighbors=[AnalyticsLoader.tsx, __root.tsx]
-- "components_answerblock_answerblock": "AnswerBlock()" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L8 | neighbors=[AnswerBlock.tsx, index.tsx]
+- "components_answerblock_answerblock": "AnswerBlock()" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L16 | neighbors=[AnswerBlock.tsx, index.tsx]
 - "components_berichtentab_berichtentab": "BerichtenTab()" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L11 | neighbors=[admin.tsx, BerichtenTab.tsx]
 - "components_callbackagenda_adddays": "addDays()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L40 | neighbors=[CallbackAgenda.tsx, startOfWeek()]
 - "components_callbackagenda_callbackitem": "CallbackItem()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L275 | neighbors=[CallbackAgenda.tsx, fmtTime()]
@@ -56,7 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_callbackagenda_fmttime": "fmtTime()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L53 | neighbors=[CallbackAgenda.tsx, CallbackItem()]
 - "components_callbackagenda_istoday": "isToday()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L51 | neighbors=[CallbackAgenda.tsx, sameDay()]
 - "components_callbackschedulemodal_callbackscheduleform": "CallbackScheduleForm()" | kind=code-symbol | source=src/components/CallbackScheduleModal.tsx:L17 | neighbors=[CallbackScheduleModal.tsx, LeadsPanel.tsx]
-- "components_chatwidget_chatwidget": "ChatWidget()" | kind=code-symbol | source=src/components/ChatWidget.tsx:L15 | neighbors=[portal.tsx, ChatWidget.tsx]
 
 ## Instructions
 

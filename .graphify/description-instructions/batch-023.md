@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_accounts_accountid_onboarding_status_label": "ONBOARDING_STATUS_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L94 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_onboardingtab": "OnboardingTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L500 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L283 | neighbors=[admin.accounts.$accountId.tsx]
 - "authenticated_admin_accounts_accountid_projectscard": "ProjectsCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.$accountId.tsx:L263 | neighbors=[admin.accounts.$accountId.tsx]
@@ -56,7 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_instellingen_recipientspanel": "RecipientsPanel()" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L36 | neighbors=[admin.instellingen.tsx]
 - "authenticated_admin_instellingen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.instellingen.tsx:L16 | neighbors=[admin.instellingen.tsx]
 - "authenticated_admin_leads_leadspage": "LeadsPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L23 | neighbors=[admin.leads.tsx]
-- "authenticated_admin_leads_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L8 | neighbors=[admin.leads.tsx]
 
 ## Instructions
 

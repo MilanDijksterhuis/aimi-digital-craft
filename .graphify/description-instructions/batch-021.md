@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_website_laten_maken_boekhouder_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-boekhouder.tsx:L57 | neighbors=[website-laten-maken-boekhouder.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_cateringbedrijf_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-cateringbedrijf.tsx:L57 | neighbors=[website-laten-maken-cateringbedrijf.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_coevorden_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-coevorden.tsx:L86 | neighbors=[website-laten-maken-coevorden.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_drachten_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L55 | neighbors=[website-laten-maken-drachten.tsx, routeTree.gen.ts]
@@ -56,7 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "src_server_iscatastrophicssrerrorbody": "isCatastrophicSsrErrorBody()" | kind=code-symbol | source=src/server.ts:L57 | neighbors=[server.ts, normalizeCatastrophicSsrResponse()]
 - "src_server_ishttps": "isHttps()" | kind=code-symbol | source=src/server.ts:L141 | neighbors=[server.ts, applySecurityHeaders()]
 - "src_server_pickencoding": "pickEncoding()" | kind=code-symbol | source=src/server.ts:L197 | neighbors=[server.ts, compressStaticAsset()]
-- "src_server_ratelimitedresponse": "rateLimitedResponse()" | kind=code-symbol | source=src/server.ts:L103 | neighbors=[server.ts, applyRateLimit()]
 
 ## Instructions
 

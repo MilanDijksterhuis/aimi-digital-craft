@@ -17,6 +17,7 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_leads_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L8 | neighbors=[admin.leads.tsx]
 - "authenticated_admin_leads_sectionkey": "SectionKey" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L21 | neighbors=[admin.leads.tsx]
 - "authenticated_admin_leads_sections": "SECTIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L17 | neighbors=[admin.leads.tsx]
 - "authenticated_admin_metriccard": "MetricCard()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L305 | neighbors=[admin.tsx]
@@ -56,7 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_rollen_roleid_adminroledetailpage": "AdminRoleDetailPage()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L48 | neighbors=[admin.rollen.$roleId.tsx]
 - "authenticated_admin_rollen_roleid_all_permissions": "ALL_PERMISSIONS" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L24 | neighbors=[admin.rollen.$roleId.tsx]
 - "authenticated_admin_rollen_roleid_overzichttab": "OverzichtTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L183 | neighbors=[admin.rollen.$roleId.tsx]
-- "authenticated_admin_rollen_roleid_permissiestab": "PermissiesTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.$roleId.tsx:L218 | neighbors=[admin.rollen.$roleId.tsx]
 
 ## Instructions
 

@@ -17,6 +17,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260717180000_perf3_project_last_activity_public_project_last_activity": "public.project_last_activity()" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L9 | neighbors=[20260717180000_perf3_project_last_activ…]
+- "migrations_20260823120000_website_checker_public_cleanup_old_website_checks": "public.cleanup_old_website_checks()" | kind=code-symbol | source=supabase/migrations/20260823120000_website_checker.sql:L27 | neighbors=[20260823120000_website_checker.sql]
+- "migrations_20260823120000_website_checker_public_website_checks": "public.website_checks" | kind=code-symbol | source=supabase/migrations/20260823120000_website_checker.sql:L8 | neighbors=[20260823120000_website_checker.sql]
+- "public_site_error_body": "Body" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L6 | neighbors=[site-error.ts]
 - "public_site_error_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L12 | neighbors=[site-error.ts]
 - "public_site_ping_body": "Body" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L6 | neighbors=[site-ping.ts]
 - "public_site_ping_cors": "cors" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L12 | neighbors=[site-ping.ts]
@@ -53,10 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_privacybeleid_privacypage": "PrivacyPage()" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L28 | neighbors=[privacybeleid.tsx]
 - "routes_root_errorcomponent": "ErrorComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L59 | neighbors=[__root.tsx]
 - "routes_root_notfoundcomponent": "NotFoundComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L29 | neighbors=[__root.tsx]
-- "routes_root_rootcomponent": "RootComponent()" | kind=code-symbol | source=src/routes/__root.tsx:L294 | neighbors=[__root.tsx]
-- "routes_root_rootshell": "RootShell()" | kind=code-symbol | source=src/routes/__root.tsx:L277 | neighbors=[__root.tsx]
-- "routes_seo_faqs": "faqs" | kind=code-symbol | source=src/routes/seo.tsx:L84 | neighbors=[seo.tsx]
-- "routes_seo_included": "included" | kind=code-symbol | source=src/routes/seo.tsx:L29 | neighbors=[seo.tsx]
 
 ## Instructions
 

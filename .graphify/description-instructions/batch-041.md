@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "scripts_indexnow_submit_main": "main()" | kind=code-symbol | source=scripts/indexnow-submit.mjs:L11 | neighbors=[indexnow-submit.mjs]
+- "scripts_set_telegram_webhook_main": "main()" | kind=code-symbol | source=scripts/set-telegram-webhook.ts:L23 | neighbors=[set-telegram-webhook.ts]
+- "scripts_visual_audit": "visual_audit.py" | kind=code-symbol | source=aimi-development.nl-audit/scripts/visual_audit.py:L1 | neighbors=[cc405f4 pagina updates]
+- "src_routetree_gen_algemenevoorwaardenroute": "AlgemeneVoorwaardenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L361 | neighbors=[routeTree.gen.ts]
+- "src_routetree_gen_apipublichooksexpireaccountsroute": "ApiPublicHooksExpireAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L445 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_apipublicsiteerrorroute": "ApiPublicSiteErrorRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L405 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_apipublicsitepingroute": "ApiPublicSitePingRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L400 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_apitelegramwebhookroute": "ApiTelegramWebhookRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L395 | neighbors=[routeTree.gen.ts]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "src_routetree_gen_authenticatedroutewithchildren": "AuthenticatedRouteWithChildren" | kind=code-symbol | source=src/routeTree.gen.ts:L1602 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_authenticatedserverroute": "AuthenticatedServerRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L375 | neighbors=[routeTree.gen.ts]
 - "src_routetree_gen_b03bb73bce86422c6a74b3cfc829f2dddottxtroute": "B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L355 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_branchesroute": "BranchesRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L350 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_casesroute": "CasesRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L116 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_contactroute": "ContactRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L345 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_faqroute": "FaqRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L340 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_fileroutesbyfullpath": "FileRoutesByFullPath" | kind=code-symbol | source=src/routeTree.gen.ts:L482 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 
