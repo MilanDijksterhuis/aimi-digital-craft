@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
-import { FAQ, faqItems } from "@/components/FAQ";
+import { FaqGrouped, faqItems } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { UpdatedOn } from "@/components/UpdatedOn";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, faqJsonLd, webPageJsonLd } from "@/lib/seo";
 
 const faqs = faqItems;
 
@@ -33,7 +34,16 @@ export const Route = createFileRoute("/faq")({
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/faq` }],
-    scripts: [breadcrumbJsonLd([["Home", "/"], ["FAQ", "/faq"]]), faqJsonLd(faqs)],
+    scripts: [
+      breadcrumbJsonLd([["Home", "/"], ["FAQ", "/faq"]]),
+      faqJsonLd(faqs),
+      webPageJsonLd({
+        path: "/faq",
+        name: "Veelgestelde vragen over websites laten maken — AIMI",
+        description:
+          "Antwoorden op veelgestelde vragen over websites laten maken, prijzen, werkwijze, techniek, webshops en onderhoud bij AIMI.",
+      }),
+    ],
   }),
   component: FaqPage,
 });
@@ -74,9 +84,10 @@ function FaqPage() {
               </Link>
               .
             </p>
+            <UpdatedOn path="/faq" style={{ marginTop: "20px" }} />
           </div>
         </div>
-        <FAQ />
+        <FaqGrouped />
       </main>
       <Footer />
       <CookieBanner />

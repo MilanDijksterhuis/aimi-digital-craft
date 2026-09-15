@@ -26,6 +26,9 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a4fa2cf4d68d63e3b7ed9217a876e7fff63b058b": "a4fa2cf Work in progress" | kind=Commit | source=git | neighbors=[3d42113 Kleurproblemen opgeholzen, main, 204f17a Changes, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a8375281beebe589a5e4a6f040eeead6fae497ab": "a837528 bug fixes" | kind=Commit | source=git | neighbors=[6500c48 bug fixes, main, 23bb181 sec, monitoring.shared.ts, tmp-main-merge, tmp-revert-main] | lang=pt
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ad950dd3bd93400aa56c67e7a37c7fad5176f47c": "ad950dd Changes" | kind=Commit | source=git | neighbors=[41d8eb5 Changes, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b51540025e5419b4dfc6532611f3be55b93cd511": "b515400 Redesign: warm licht thema, ink blauw accent, Syne headings" | kind=Commit | source=git | neighbors=[main, 1a66af6 Verbeter layout en visueel ritme, Hero.tsx, b6f9658 Redesign: donker editorial them…, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b574d276dc1489e682651698a4f2f10e5f5cc2ac": "b574d27 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, b7f53d6 Changes, d48443c Changes, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b7f53d69bb6adf8cd388a415864d0313e42e9634": "b7f53d6 Changes" | kind=Commit | source=git | neighbors=[b574d27 Changes, portal.tsx, main, 00d6931 Changes, tmp-main-merge, tmp-revert-main] | lang=en
@@ -63,9 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_idletimeout": "IdleTimeout.tsx" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L1 | neighbors=[9a2689c code fixes, ACTIVITY_EVENTS, IdleTimeout(), alert-dialog.tsx, AlertDialogAction, AlertDialogContent] | lang=en
 - "components_processtimeline": "ProcessTimeline.tsx" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L1 | neighbors=[129b916 manier van werken, 6262799 fixes, 85a6666 SEO en robot, 8fdd571 SEO, 9a2689c code fixes, ecdbe8e fixes] | lang=en
 - "hooks_use_permissions": "use-permissions.tsx" | kind=code-symbol | source=src/hooks/use-permissions.tsx:L1 | neighbors=[admin.tsx, admin.leads.tsx, server.tsx, 81a87ed commit, BerichtenTab.tsx, DeletedChangesTab.tsx] | lang=en
-- "lib_callbacks": "callbacks.ts" | kind=code-symbol | source=src/lib/callbacks.ts:L1 | neighbors=[f958216 leads functions, CallbackAgenda.tsx, CallbackScheduleModal.tsx, AGENDA_COLOR_CLASSES, AgendaColor, CALLBACK_OUTCOMES] | lang=en
-- "lib_csv": "csv.ts" | kind=code-symbol | source=src/lib/csv.ts:L1 | neighbors=[74ecdc1 code fixes, c480d2e leads, LeadsPanel.tsx, CsvParseResult, detectDelimiter(), HEADER_ALIASES] | lang=en
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf": "20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L1 | neighbors=[auth.users, on_auth_user_created, public.change_attachments, public.change_comments, public.change_requests, public.customer_costs] | lang=en
 
 ## Instructions
 

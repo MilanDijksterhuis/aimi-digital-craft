@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_admin_functions_ensureleadsaccess": "ensureLeadsAccess()" | kind=code-symbol | source=src/lib/admin.functions.ts:L3464 | neighbors=[admin.functions.ts, ensureRoles()]
+- "lib_admin_functions_ensurestaff": "ensureStaff()" | kind=code-symbol | source=src/lib/admin.functions.ts:L42 | neighbors=[admin.functions.ts, ensureRoles()]
+- "lib_admin_functions_ensuresuperadmin": "ensureSuperAdmin()" | kind=code-symbol | source=src/lib/admin.functions.ts:L38 | neighbors=[admin.functions.ts, ensureRoles()]
+- "lib_admin_functions_generateduerecurringtaskinstances": "generateDueRecurringTaskInstances()" | kind=code-symbol | source=src/lib/admin.functions.ts:L2140 | neighbors=[admin.functions.ts, nextRecurrenceDueDate()]
+- "lib_admin_functions_getroles": "getRoles()" | kind=code-symbol | source=src/lib/admin.functions.ts:L21 | neighbors=[admin.functions.ts, ensureRoles()]
+- "lib_admin_functions_nextrecurrenceduedate": "nextRecurrenceDueDate()" | kind=code-symbol | source=src/lib/admin.functions.ts:L2128 | neighbors=[admin.functions.ts, generateDueRecurringTaskInstances()]
 - "lib_admin_server_admincreatecustomer": "adminCreateCustomer()" | kind=code-symbol | source=src/lib/admin.server.ts:L11 | neighbors=[admin.server.ts, generateTempPassword()]
 - "lib_admin_server_admininvitestaffmember": "adminInviteStaffMember()" | kind=code-symbol | source=src/lib/admin.server.ts:L265 | neighbors=[admin.server.ts, genTempPw()]
 - "lib_admin_server_generatetemppassword": "generateTempPassword()" | kind=code-symbol | source=src/lib/admin.server.ts:L3 | neighbors=[admin.server.ts, adminCreateCustomer()]
@@ -49,14 +55,8 @@ one-sentence description — no prose, no markdown fences.
 - "lib_rbac_staff_guard_roles": "STAFF_GUARD_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L40 | neighbors=[auth-guards.server.ts, rbac.ts]
 - "lib_rbac_super_admin_roles": "SUPER_ADMIN_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L39 | neighbors=[auth-guards.server.ts, rbac.ts]
 - "lib_seo_address": "ADDRESS" | kind=code-symbol | source=src/lib/seo.ts:L42 | neighbors=[Footer.tsx, seo.ts]
-- "lib_seo_postaladdress": "postalAddress()" | kind=code-symbol | source=src/lib/seo.ts:L56 | neighbors=[seo.ts, businessIdentityJsonLd()]
-- "lib_status_change_templates": "CHANGE_TEMPLATES" | kind=code-symbol | source=src/lib/status.ts:L88 | neighbors=[portal.tsx, status.ts]
-- "lib_telegram_server_bottoken": "botToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L23 | neighbors=[telegram.server.ts, sendTelegramMessage()]
-- "lib_telegram_server_botusername": "botUsername()" | kind=code-symbol | source=src/lib/telegram.server.ts:L29 | neighbors=[telegram.server.ts, generateLinkToken()]
-- "lib_telegram_server_generateandsendmfacode": "generateAndSendMfaCode()" | kind=code-symbol | source=src/lib/telegram.server.ts:L212 | neighbors=[telegram.server.ts, sendTelegramMessage()]
-- "lib_telegram_server_generatelinktoken": "generateLinkToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L86 | neighbors=[telegram.server.ts, botUsername()]
-- "lib_telegram_server_handletelegramwebhook": "handleTelegramWebhook()" | kind=code-symbol | source=src/lib/telegram.server.ts:L140 | neighbors=[telegram.server.ts, safeSend()]
-- "lib_website_checker_server_incidr": "inCidr()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L27 | neighbors=[website-checker.server.ts, ipToLong()]
+- "lib_seo_page_dates": "PAGE_DATES" | kind=code-symbol | source=src/lib/seo.ts:L107 | neighbors=[seo.ts, sitemap[.]xml.tsx]
+- "lib_seo_pagelastmod": "pageLastmod()" | kind=code-symbol | source=src/lib/seo.ts:L173 | neighbors=[seo.ts, webPageJsonLd()]
 
 ## Instructions
 

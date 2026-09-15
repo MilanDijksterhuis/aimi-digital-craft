@@ -15,3 +15,8 @@ Rules:
 Werkregels:
 Werk altijd lokaal in dit VS code project maak geen nieuwe worktrees aan.
 ik push zelf naar github van mijn lokale code -> git add . -> git commit -m "" -> git push
+
+## Design-regels
+
+- Geen grote genummerde kopjes/cijfers (01, 02, 03...) als visueel element in feature- of contentlijsten. Dit voelt als generieke AI-template-opmaak. Gebruik in plaats daarvan editorial patronen zonder nummering: bv. een accentbalkje, alleen typografie, of iconen.
+- Vermijd generieke "AI slop": drie/vier identieke bordered cards in een grid, cirkel-iconen met nummers, standaard accordion-FAQ-look voor features. Kijk bij twijfel naar de redesign-existing-projects skill audit-checklist.

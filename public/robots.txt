@@ -38,6 +38,17 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl voedt veel open modellen en is een indirecte AI-zichtbaarheidsbron.
+# Bewust toegestaan (GEO-audit 2026-09-06, punt 3).
+User-agent: CCBot
+Allow: /
+
 # Scrapers
 User-agent: Bytespider
 Disallow: /

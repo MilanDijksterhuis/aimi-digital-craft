@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SITE_URL, OG_IMAGE_URL, faqJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, faqJsonLd, webPageJsonLd } from "@/lib/seo";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
+import { AnswerBlock } from "@/components/AnswerBlock";
 import { Services } from "@/components/Services";
 import { About } from "@/components/About";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
@@ -47,7 +48,17 @@ export const Route = createFileRoute("/")({
     ],
     // FAQPage-schema hoort alleen bij content die ook echt op de pagina staat
     // (Google-richtlijn) — zie <FAQ /> hieronder in de component.
-    scripts: [faqJsonLd(faqItems)],
+    scripts: [
+      faqJsonLd(faqItems),
+      // GEO-audit 2026-09-06 (punt 9): WebPage-node met dateModified + about,
+      // zodat AI-machines zien dat de homepage actueel is en waar hij over gaat.
+      webPageJsonLd({
+        path: "/",
+        name: "AIMI — Webdesignbureau uit Veendam",
+        description:
+          "AIMI Development is een webdesignbureau uit Veendam dat websites en webshops ontwerpt, bouwt en host voor ondernemers in Noord-Nederland. Vaste prijzen vanaf € 499.",
+      }),
+    ],
   }),
   component: Index,
 });
@@ -58,6 +69,7 @@ function Index() {
       <Nav />
       <main id="main-content">
         <Hero />
+        <AnswerBlock />
         <Services />
         <ProcessTimeline />
         <About />

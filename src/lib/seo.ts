@@ -86,6 +86,148 @@ export const PRICE_VALID_UNTIL = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000
   .toISOString()
   .slice(0, 10);
 
+/* ---------------------------------------------------------------------------
+ * Versheidssignalen (GEO-audit 2026-09-06, punt 8.1 — zwaarstwegende ingreep).
+ *
+ * AI-antwoordmachines (met name Google AI Mode) citeren content die aantoonbaar
+ * actueel is fors vaker. De sitemap hield de laatste-wijzigingsdatum per pagina
+ * al bij, maar die datum stond nergens in de pagina zelf. `PAGE_DATES` is nu de
+ * ENIGE bron: zowel de sitemap (`lastmod`), het WebPage-schema (`dateModified`)
+ * als de zichtbare "Bijgewerkt op"-regel lezen hieruit, zodat de drie nooit uit
+ * elkaar lopen. Datum bijwerken = één regel hier aanpassen.
+ * ------------------------------------------------------------------------- */
+
+/** Startdatum van de site: `datePublished`-ondergrens voor pagina's die geen
+ * eigen publicatiedatum hebben. Geen jaartal verzinnen — sluit aan op
+ * ACTIVE_SINCE_YEAR. */
+export const SITE_PUBLISHED = "2025-01-01";
+
+/** Laatste-wijzigingsdatum per pad (ISO). Vult de sitemap én het schema.
+ * Bewust een platte, gesorteerde lijst zodat hij makkelijk te onderhouden is. */
+export const PAGE_DATES: Record<string, string> = {
+  // Kernpagina's
+  "/": "2026-09-06",
+
+  // Dienstenpagina's
+  "/website-laten-maken": "2026-09-06",
+  "/webshop-laten-maken": "2026-08-20",
+  "/onderhoud-hosting": "2026-08-20",
+  "/website-laten-vernieuwen": "2026-09-04",
+  "/seo": "2026-09-06",
+  "/tarieven": "2026-09-06",
+
+  // Informatief / oriënterend
+  "/wordpress-of-maatwerk": "2026-08-22",
+  "/website-checker": "2026-09-03",
+
+  // Branchepagina's
+  "/branches": "2026-09-04",
+  "/website-laten-maken-kapsalon": "2026-08-21",
+  "/website-laten-maken-nagelstudio": "2026-08-21",
+  "/website-laten-maken-schoonheidssalon": "2026-08-21",
+  "/website-laten-maken-pedicure": "2026-08-21",
+  "/website-laten-maken-hovenier": "2026-08-21",
+  "/website-laten-maken-klusbedrijf": "2026-09-04",
+  "/website-laten-maken-schilder": "2026-09-04",
+  "/website-laten-maken-loodgieter": "2026-08-21",
+  "/website-laten-maken-autobedrijf": "2026-08-22",
+  "/website-laten-maken-autorijschool": "2026-09-04",
+  "/website-laten-maken-makelaar": "2026-08-22",
+  "/website-laten-maken-boekhouder": "2026-08-22",
+  "/website-laten-maken-restaurant": "2026-08-22",
+  "/website-laten-maken-cateringbedrijf": "2026-08-22",
+  "/website-laten-maken-bloemist": "2026-08-22",
+
+  // Lokale landingspagina's
+  "/webdesign": "2026-08-21",
+  "/website-laten-maken-veendam": "2026-09-06",
+  "/website-laten-maken-hoogeveen": "2026-08-21",
+  "/website-laten-maken-groningen": "2026-08-21",
+  "/website-laten-maken-assen": "2026-09-04",
+  "/website-laten-maken-hoogezand": "2026-08-21",
+  "/website-laten-maken-stadskanaal": "2026-08-21",
+  "/website-laten-maken-emmen": "2026-08-21",
+  "/website-laten-maken-winschoten": "2026-08-21",
+  "/website-laten-maken-roden": "2026-09-04",
+  "/website-laten-maken-coevorden": "2026-08-21",
+  "/website-laten-maken-meppel": "2026-08-21",
+  "/website-laten-maken-leeuwarden": "2026-08-21",
+  "/website-laten-maken-drachten": "2026-08-21",
+  "/website-laten-maken-heerenveen": "2026-08-21",
+  "/website-laten-maken-sneek": "2026-08-21",
+
+  // Overige publieke pagina's
+  "/werkwijze": "2026-08-20",
+  "/meer-diensten": "2026-08-20",
+  "/over-ons": "2026-08-20",
+  "/faq": "2026-09-06",
+  "/contact": "2026-09-04",
+
+  // Juridisch
+  "/privacybeleid": "2026-09-04",
+  "/algemene-voorwaarden": "2026-09-04",
+};
+
+/** Laatste-wijzigingsdatum voor een pad; valt terug op vandaag als een pad
+ * (nog) niet in PAGE_DATES staat, zodat een nieuwe pagina nooit dateloos is. */
+export const pageLastmod = (path: string): string =>
+  PAGE_DATES[path] ?? new Date().toISOString().slice(0, 10);
+
+const NL_MONTHS = [
+  "januari",
+  "februari",
+  "maart",
+  "april",
+  "mei",
+  "juni",
+  "juli",
+  "augustus",
+  "september",
+  "oktober",
+  "november",
+  "december",
+];
+
+/** ISO-datum → "6 september 2026" voor de zichtbare "Bijgewerkt op"-regel.
+ * Bewust geen `toLocaleDateString`: dat hangt af van de server-locale en zou
+ * SSR/client kunnen laten afwijken. */
+export const formatDateNL = (iso: string): string => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${NL_MONTHS[m - 1]} ${y}`;
+};
+
+/** WebPage-schema (GEO-audit 2026-09-06, punt 9): maakt per pagina expliciet
+ * waar hij óver gaat (`about` → de organisatie-entiteit) en wanneer hij voor het
+ * laatst is bijgewerkt. `dateModified` is het versheidssignaal; `about`/
+ * `isPartOf` geven AI Mode entiteitsduiding. Wordt in de body gerenderd — JSON-LD
+ * is overal in de HTML geldig en crawlers lezen het.
+ *
+ * `datePublished` valt terug op SITE_PUBLISHED; geef een echte publicatiedatum
+ * mee zodra die bekend is (bv. voor blog/artikelen). */
+export function webPageJsonLd(opts: {
+  path: string;
+  name: string;
+  description: string;
+  datePublished?: string;
+}): LdScript {
+  const url = `${SITE_URL}${opts.path}`;
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: opts.name,
+    description: opts.description,
+    inLanguage: "nl-NL",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    primaryImageOfPage: OG_IMAGE_URL,
+    datePublished: opts.datePublished ?? SITE_PUBLISHED,
+    dateModified: pageLastmod(opts.path),
+  });
+}
+
 type LdScript = { type: "application/ld+json"; children: string };
 
 const ld = (obj: unknown): LdScript => ({

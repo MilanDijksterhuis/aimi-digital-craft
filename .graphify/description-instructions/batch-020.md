@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "public_site_error_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L18 | neighbors=[site-error.ts, routeTree.gen.ts]
+- "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
+- "routes_algemene_voorwaarden_route": "Route" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L5 | neighbors=[algemene-voorwaarden.tsx, routeTree.gen.ts]
+- "routes_authenticated_route": "Route" | kind=code-symbol | source=src/routes/_authenticated.tsx:L12 | neighbors=[_authenticated.tsx, routeTree.gen.ts]
+- "routes_branches_route": "Route" | kind=code-symbol | source=src/routes/branches.tsx:L30 | neighbors=[branches.tsx, routeTree.gen.ts]
+- "routes_contact_route": "Route" | kind=code-symbol | source=src/routes/contact.tsx:L10 | neighbors=[contact.tsx, routeTree.gen.ts]
+- "routes_faq_route": "Route" | kind=code-symbol | source=src/routes/faq.tsx:L11 | neighbors=[faq.tsx, routeTree.gen.ts]
+- "routes_index_route": "Route" | kind=code-symbol | source=src/routes/index.tsx:L16 | neighbors=[index.tsx, routeTree.gen.ts]
 - "routes_login_route": "Route" | kind=code-symbol | source=src/routes/login.tsx:L8 | neighbors=[login.tsx, routeTree.gen.ts]
 - "routes_meer_diensten_build": "build()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L126 | neighbors=[meer-diensten.tsx, MeerDiensten()]
 - "routes_meer_diensten_fadeup": "fadeUp()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L74 | neighbors=[meer-diensten.tsx, MeerDiensten()]
@@ -28,7 +36,7 @@ one-sentence description — no prose, no markdown fences.
 - "routes_privacybeleid_route": "Route" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L5 | neighbors=[privacybeleid.tsx, routeTree.gen.ts]
 - "routes_root_route": "Route" | kind=code-symbol | source=src/routes/__root.tsx:L114 | neighbors=[__root.tsx, routeTree.gen.ts]
 - "routes_seo_route": "Route" | kind=code-symbol | source=src/routes/seo.tsx:L119 | neighbors=[seo.tsx, routeTree.gen.ts]
-- "routes_tarieven_route": "Route" | kind=code-symbol | source=src/routes/tarieven.tsx:L175 | neighbors=[tarieven.tsx, routeTree.gen.ts]
+- "routes_tarieven_route": "Route" | kind=code-symbol | source=src/routes/tarieven.tsx:L177 | neighbors=[tarieven.tsx, routeTree.gen.ts]
 - "routes_track_js": "track[.]js.tsx" | kind=code-symbol | source=src/routes/track[.]js.tsx:L1 | neighbors=[cors, Route]
 - "routes_webdesign_route": "Route" | kind=code-symbol | source=src/routes/webdesign.tsx:L31 | neighbors=[webdesign.tsx, routeTree.gen.ts]
 - "routes_webshop_laten_maken_route": "Route" | kind=code-symbol | source=src/routes/webshop-laten-maken.tsx:L77 | neighbors=[webshop-laten-maken.tsx, routeTree.gen.ts]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_emmen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-emmen.tsx:L52 | neighbors=[website-laten-maken-emmen.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_groningen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L50 | neighbors=[website-laten-maken-groningen.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_heerenveen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L56 | neighbors=[website-laten-maken-heerenveen.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_hoogeveen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-hoogeveen.tsx:L87 | neighbors=[website-laten-maken-hoogeveen.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_hoogezand_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-hoogezand.tsx:L51 | neighbors=[website-laten-maken-hoogezand.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_hovenier_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L57 | neighbors=[website-laten-maken-hovenier.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_kapsalon_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-kapsalon.tsx:L57 | neighbors=[website-laten-maken-kapsalon.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_klusbedrijf_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L58 | neighbors=[website-laten-maken-klusbedrijf.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_leeuwarden_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-leeuwarden.tsx:L56 | neighbors=[website-laten-maken-leeuwarden.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_loodgieter_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-loodgieter.tsx:L57 | neighbors=[website-laten-maken-loodgieter.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_makelaar_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-makelaar.tsx:L93 | neighbors=[website-laten-maken-makelaar.tsx, routeTree.gen.ts]
 
 ## Instructions
 

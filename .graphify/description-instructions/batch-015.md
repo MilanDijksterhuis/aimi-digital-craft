@@ -17,6 +17,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_website_checker_server_asserthttpurl": "assertHttpUrl()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L117 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
+- "lib_website_checker_server_fetchtext": "fetchText()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L234 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
+- "lib_website_checker_server_isblockedip": "isBlockedIp()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L64 | neighbors=[website-checker.server.ts, isBlockedIpv4(), isBlockedIpv6()]
+- "lib_website_checker_server_isblockedipv4": "isBlockedIpv4()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L48 | neighbors=[website-checker.server.ts, isBlockedIp(), isBlockedIpv6()]
 - "lib_website_checker_server_isblockedipv6": "isBlockedIpv6()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L52 | neighbors=[website-checker.server.ts, isBlockedIp(), isBlockedIpv4()]
 - "lib_website_checker_server_ssrfblockederror": "SsrfBlockedError" | kind=code-symbol | source=src/lib/website-checker.server.ts:L68 | neighbors=[website-checker.server.ts, safeLookup(), .constructor()]
 - "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_change_requests": "public.change_requests" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L28 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, change_requests_touch, auth.users]
@@ -35,6 +39,7 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260717150000_sec5_durable_rate_limit_public_check_rate_limit": "public.check_rate_limit()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L41 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.rate_limit_hits, v_count]
 - "migrations_20260717150000_sec5_durable_rate_limit_public_record_strike": "public.record_strike()" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L90 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.rate_limit_bans, v_strikes]
 - "migrations_20260823120000_website_checker": "20260823120000_website_checker.sql" | kind=code-symbol | source=supabase/migrations/20260823120000_website_checker.sql:L1 | neighbors=[dda7a04 web tester, public.cleanup_old_website_checks(), public.website_checks]
+- "routes_b03bb73bce86422c6a74b3cfc829f2dd_txt": "b03bb73bce86422c6a74b3cfc829f2dd[.]txt.tsx" | kind=code-symbol | source=src/routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt.tsx:L1 | neighbors=[d38d9ab Add IndexNow key route, seo.ts, Route]
 - "routes_meer_diensten_buildleaves": "buildLeaves()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L279 | neighbors=[meer-diensten.tsx, rng(), MeerDiensten()]
 - "routes_website_checker_websitecheckerpage": "WebsiteCheckerPage()" | kind=code-symbol | source=src/routes/website-checker.tsx:L146 | neighbors=[website-checker.tsx, isLikelyValidUrl(), usePrefersReducedMotion()]
 - "src_server_applyratelimit": "applyRateLimit()" | kind=code-symbol | source=src/server.ts:L290 | neighbors=[server.ts, rateLimitedResponse(), fetch()]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
 - "ui_progress": "progress.tsx" | kind=code-symbol | source=src/components/ui/progress.tsx:L1 | neighbors=[utils.ts, cn(), Progress]
 - "ui_slider": "slider.tsx" | kind=code-symbol | source=src/components/ui/slider.tsx:L1 | neighbors=[utils.ts, cn(), Slider]
-- "ui_sonner": "sonner.tsx" | kind=code-symbol | source=src/components/ui/sonner.tsx:L1 | neighbors=[__root.tsx, Toaster(), ToasterProps]
-- "ui_switch": "switch.tsx" | kind=code-symbol | source=src/components/ui/switch.tsx:L1 | neighbors=[utils.ts, cn(), Switch]
-- "ui_textarea": "textarea.tsx" | kind=code-symbol | source=src/components/ui/textarea.tsx:L1 | neighbors=[utils.ts, cn(), Textarea]
-- "authenticated_account_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L7 | neighbors=[account.tsx, routeTree.gen.ts]
-- "authenticated_admin_accounts_accountslistsection": "AccountsListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L264 | neighbors=[admin.accounts.tsx, accountStatus()]
 
 ## Instructions
 

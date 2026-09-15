@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_seo_postaladdress": "postalAddress()" | kind=code-symbol | source=src/lib/seo.ts:L56 | neighbors=[seo.ts, businessIdentityJsonLd()]
+- "lib_status_change_templates": "CHANGE_TEMPLATES" | kind=code-symbol | source=src/lib/status.ts:L88 | neighbors=[portal.tsx, status.ts]
+- "lib_telegram_server_bottoken": "botToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L23 | neighbors=[telegram.server.ts, sendTelegramMessage()]
+- "lib_telegram_server_botusername": "botUsername()" | kind=code-symbol | source=src/lib/telegram.server.ts:L29 | neighbors=[telegram.server.ts, generateLinkToken()]
+- "lib_telegram_server_generateandsendmfacode": "generateAndSendMfaCode()" | kind=code-symbol | source=src/lib/telegram.server.ts:L212 | neighbors=[telegram.server.ts, sendTelegramMessage()]
+- "lib_telegram_server_generatelinktoken": "generateLinkToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L86 | neighbors=[telegram.server.ts, botUsername()]
+- "lib_telegram_server_handletelegramwebhook": "handleTelegramWebhook()" | kind=code-symbol | source=src/lib/telegram.server.ts:L140 | neighbors=[telegram.server.ts, safeSend()]
+- "lib_website_checker_server_incidr": "inCidr()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L27 | neighbors=[website-checker.server.ts, ipToLong()]
 - "lib_website_checker_server_iptolong": "ipToLong()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L23 | neighbors=[website-checker.server.ts, inCidr()]
 - "lib_website_checker_server_safelookup": "safeLookup()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L78 | neighbors=[website-checker.server.ts, SsrfBlockedError]
 - "lib_website_checker_server_safetext": "safeText()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L227 | neighbors=[website-checker.server.ts, runWebsiteCheck()]
@@ -49,14 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260717150000_sec5_durable_rate_limit_v_strikes": "v_strikes" | kind=code-symbol | source=supabase/migrations/20260717150000_sec5_durable_rate_limit.sql:L103 | neighbors=[20260717150000_sec5_durable_rate_limit.…, public.record_strike()]
 - "migrations_20260717170000_perf2_site_ping_counts": "20260717170000_perf2_site_ping_counts.sql" | kind=code-symbol | source=supabase/migrations/20260717170000_perf2_site_ping_counts.sql:L1 | neighbors=[7dbbf18 perf fixes, public.site_ping_counts()]
 - "migrations_20260717180000_perf3_project_last_activity": "20260717180000_perf3_project_last_activity.sql" | kind=code-symbol | source=supabase/migrations/20260717180000_perf3_project_last_activity.sql:L1 | neighbors=[7dbbf18 perf fixes, public.project_last_activity()]
-- "public_site_error_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-error.ts:L18 | neighbors=[site-error.ts, routeTree.gen.ts]
-- "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
-- "routes_algemene_voorwaarden_route": "Route" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L5 | neighbors=[algemene-voorwaarden.tsx, routeTree.gen.ts]
-- "routes_authenticated_route": "Route" | kind=code-symbol | source=src/routes/_authenticated.tsx:L12 | neighbors=[_authenticated.tsx, routeTree.gen.ts]
-- "routes_branches_route": "Route" | kind=code-symbol | source=src/routes/branches.tsx:L30 | neighbors=[branches.tsx, routeTree.gen.ts]
-- "routes_contact_route": "Route" | kind=code-symbol | source=src/routes/contact.tsx:L10 | neighbors=[contact.tsx, routeTree.gen.ts]
-- "routes_faq_route": "Route" | kind=code-symbol | source=src/routes/faq.tsx:L10 | neighbors=[faq.tsx, routeTree.gen.ts]
-- "routes_index_route": "Route" | kind=code-symbol | source=src/routes/index.tsx:L15 | neighbors=[index.tsx, routeTree.gen.ts]
 
 ## Instructions
 

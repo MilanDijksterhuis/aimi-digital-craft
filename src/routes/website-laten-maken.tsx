@@ -109,7 +109,7 @@ export const Route = createFileRoute("/website-laten-maken")({
   component: () => (
     <>
       <RedDiagonalBackground />
-      <ServicePage data={data} />
+      <ServicePage data={data} path="/website-laten-maken" />
     </>
   ),
 });

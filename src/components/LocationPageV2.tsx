@@ -5,6 +5,8 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TrustStrip } from "@/components/TrustStrip";
 import { ExampleSlideshow, GENERIC_EXAMPLES } from "@/components/ExampleSlideshow";
+import { UpdatedOn } from "@/components/UpdatedOn";
+import { webPageJsonLd } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * Uitgebreide lokale landingspagina, opvolger van LocationLanding.tsx.
@@ -127,28 +129,77 @@ function WorkflowSection({ data }: { data: LocationPageData }) {
       >
         {data.workflowHeading}
       </h2>
-      <ol style={{ marginTop: "22px", display: "grid", gap: "18px" }}>
-        {data.workflowSteps.map((s, i) => (
-          <li key={s.title} style={{ display: "flex", gap: "16px" }}>
-            <span style={{ color: RED, fontWeight: 700, fontSize: "13px", minWidth: "22px" }}>
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <div style={{ fontWeight: 600, fontSize: "14.5px" }}>{s.title}</div>
-              <div
+      {/* Verbonden verticale tijdlijn i.p.v. "01/02"-tekstmarkers: zelfde
+          visuele taal als de genummerde cirkels in de "Zo werkt het"-tijdlijn
+          op /website-laten-maken. Verticaal omdat het aantal stappen per stad
+          varieert (5 tot 7), dat schaalt niet netjes in een horizontale rij. */}
+      <ol style={{ marginTop: "30px" }}>
+        {data.workflowSteps.map((s, i) => {
+          const isLast = i === data.workflowSteps.length - 1;
+          return (
+            <li
+              key={s.title}
+              style={{
+                position: "relative",
+                display: "flex",
+                gap: "20px",
+                paddingBottom: isLast ? 0 : "30px",
+              }}
+            >
+              {!isLast && (
+                <span
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    left: "14px",
+                    top: "30px",
+                    bottom: 0,
+                    width: "1px",
+                    background:
+                      "linear-gradient(to bottom, rgba(254,44,2,0.35), rgba(255,255,255,0.08))",
+                  }}
+                />
+              )}
+              <span
+                aria-hidden
                 style={{
-                  marginTop: "4px",
-                  fontSize: "13.5px",
-                  lineHeight: 1.65,
-                  color: "#b6b6bd",
-                  maxWidth: "60ch",
+                  position: "relative",
+                  zIndex: 1,
+                  flex: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "9999px",
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  color: RED,
+                  border: "1px solid rgba(254,44,2,0.5)",
+                  background: BG,
                 }}
               >
-                {s.desc}
+                {i + 1}
+              </span>
+              <div style={{ paddingTop: "3px" }}>
+                {/* H3 i.p.v. div: geeft crawlers/AI expliciete substructuur
+                    onder de workflow-H2. */}
+                <h3 style={{ margin: 0, fontWeight: 600, fontSize: "14.5px" }}>{s.title}</h3>
+                <div
+                  style={{
+                    marginTop: "6px",
+                    fontSize: "13.5px",
+                    lineHeight: 1.65,
+                    color: "#b6b6bd",
+                    maxWidth: "60ch",
+                  }}
+                >
+                  {s.desc}
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
@@ -197,11 +248,29 @@ const sectionRenderers: Record<LocationSectionId, (data: LocationPageData) => Re
 export function LocationPageV2({ data }: { data: LocationPageData }) {
   const { city, intro, related, kicker } = data;
   // Alle 15 plaatsnamen zijn één woord en komen exact overeen met hun slug.
-  // Deze waarde dient alleen als React-key: de laatste kruimel is geen link.
+  // Deze waarde dient als React-key én als pad voor het WebPage-schema en de
+  // "Bijgewerkt op"-datum (die uit PAGE_DATES komt).
   const slug = `/website-laten-maken-${city.toLowerCase()}`;
+
+  // GEO-audit 2026-09-06 (punt 10): definitiezin met harde cijfers vóór het
+  // narratieve verhaal. Dit is de zinsvorm die AI-antwoordmachines als
+  // definitie oppikken bij "website laten maken in {stad}".
+  const definitie = `Een website laten maken in ${city} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in ${city} en omgeving.`;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
+      {/* WebPage-schema met dateModified — versheids- en entiteitssignaal voor
+          AI-machines. JSON-LD is overal in de HTML geldig; crawlers lezen het. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: webPageJsonLd({
+            path: slug,
+            name: `Website laten maken in ${city} | AIMI Webdesign`,
+            description: definitie,
+          }).children,
+        }}
+      />
       <Nav />
 
       <main id="main-content">
@@ -230,7 +299,7 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
               </div>
               <h1
                 style={{
-                  margin: "14px 0 18px",
+                  margin: "14px 0 14px",
                   fontSize: "clamp(22px, 3.4vw, 34px)",
                   fontWeight: 700,
                   letterSpacing: "-0.02em",
@@ -239,7 +308,29 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
               >
                 {data.h1 ?? `Website laten maken in ${city}`}
               </h1>
-              <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "60ch" }}>
+              <UpdatedOn path={slug} style={{ marginBottom: "16px" }} />
+              {/* Definitiezin met cijfers, vóór het narratieve intro (GEO-audit
+                  2026-09-06 punt 10). */}
+              <p
+                style={{
+                  fontSize: "15.5px",
+                  lineHeight: 1.7,
+                  color: "#efeff1",
+                  maxWidth: "60ch",
+                  fontWeight: 500,
+                }}
+              >
+                {definitie}
+              </p>
+              <p
+                style={{
+                  marginTop: "14px",
+                  fontSize: "15px",
+                  lineHeight: 1.7,
+                  color: "#b6b6bd",
+                  maxWidth: "60ch",
+                }}
+              >
                 {intro}
               </p>
               {/* SEO-audit 2026-09-02 (sxo.md SXO-1): checkbaar vertrouwenssignaal
@@ -329,12 +420,9 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
                 <li key={s.href}>
                   <a
                     href={s.href}
+                    className="block h-full rounded-xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[rgba(254,44,2,0.35)] hover:-translate-y-0.5"
                     style={{
-                      display: "block",
-                      height: "100%",
-                      padding: "16px 18px",
-                      border: "1px solid rgba(255,255,255,0.12)",
-                      borderRadius: "6px",
+                      padding: "18px",
                       color: "#efeff1",
                       textDecoration: "none",
                     }}

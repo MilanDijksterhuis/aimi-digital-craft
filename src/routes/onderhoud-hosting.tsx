@@ -100,7 +100,7 @@ export const Route = createFileRoute("/onderhoud-hosting")({
   component: () => (
     <>
       <RedDiagonalBackground />
-      <ServicePage data={data} />
+      <ServicePage data={data} path="/onderhoud-hosting" />
     </>
   ),
 });

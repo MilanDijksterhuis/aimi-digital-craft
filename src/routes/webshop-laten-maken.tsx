@@ -108,7 +108,7 @@ export const Route = createFileRoute("/webshop-laten-maken")({
   component: () => (
     <>
       <RedDiagonalBackground />
-      <ServicePage data={data} />
+      <ServicePage data={data} path="/webshop-laten-maken" />
     </>
   ),
 });

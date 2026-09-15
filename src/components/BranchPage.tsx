@@ -5,6 +5,8 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TrustStrip } from "@/components/TrustStrip";
 import { ExampleSlideshow, GENERIC_EXAMPLES } from "@/components/ExampleSlideshow";
+import { UpdatedOn } from "@/components/UpdatedOn";
+import { webPageJsonLd } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare branchepagina ("Website laten maken voor je [branche]").
@@ -148,9 +150,23 @@ const sectionRenderers: Record<BranchSectionId, (data: BranchPageData) => ReactE
 
 export function BranchPage({ data }: { data: BranchPageData }) {
   const { branch, intro, related, kicker } = data;
+  // Alle brancheslugs zijn /website-laten-maken-{branch}; pad voor het
+  // WebPage-schema en de "Bijgewerkt op"-datum uit PAGE_DATES.
+  const slug = `/website-laten-maken-${branch}`;
+  const definitie = `Een website laten maken voor je ${branch} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt, ook voor ondernemers in de branche ${branch}.`;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: webPageJsonLd({
+            path: slug,
+            name: data.h1 ?? `Website laten maken voor je ${branch} | AIMI`,
+            description: definitie,
+          }).children,
+        }}
+      />
       <Nav />
 
       <main id="main-content">
@@ -188,7 +204,27 @@ export function BranchPage({ data }: { data: BranchPageData }) {
               >
                 {data.h1 ?? `Website laten maken voor je ${branch}`}
               </h1>
-              <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "60ch" }}>
+              <UpdatedOn path={slug} style={{ marginBottom: "16px" }} />
+              <p
+                style={{
+                  fontSize: "15.5px",
+                  lineHeight: 1.7,
+                  color: "#efeff1",
+                  maxWidth: "60ch",
+                  fontWeight: 500,
+                }}
+              >
+                {definitie}
+              </p>
+              <p
+                style={{
+                  marginTop: "14px",
+                  fontSize: "15px",
+                  lineHeight: 1.7,
+                  color: "#b6b6bd",
+                  maxWidth: "60ch",
+                }}
+              >
                 {intro}
               </p>
               {/* SEO-audit 2026-09-02 (sxo.md SXO-4): checkbaar vertrouwenssignaal

@@ -4,6 +4,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { UpdatedOn } from "@/components/UpdatedOn";
 import {
   SITE_URL,
   OG_IMAGE_URL,
@@ -11,6 +12,7 @@ import {
   PRICE_VALID_UNTIL,
   breadcrumbJsonLd,
   faqJsonLd,
+  webPageJsonLd,
 } from "@/lib/seo";
 
 const URL = `${SITE_URL}/tarieven`;
@@ -248,6 +250,12 @@ export const Route = createFileRoute("/tarieven")({
         }),
       },
       faqJsonLd(faqs),
+      webPageJsonLd({
+        path: "/tarieven",
+        name: "Wat kost een website laten maken? Tarieven vanaf € 499",
+        description:
+          "Vaste prijzen voor een website laten maken: vanaf € 499 eenmalig en € 30 per maand voor hosting en onderhoud.",
+      }),
     ],
   }),
   component: TarievenPage,
@@ -273,6 +281,7 @@ function TarievenPage() {
             <div className="text-[13px] font-medium mb-4" style={{ color: RED }}>
               Tarieven
             </div>
+            <UpdatedOn path="/tarieven" style={{ marginBottom: "12px" }} />
             <h1
               className="text-white max-w-3xl"
               style={{

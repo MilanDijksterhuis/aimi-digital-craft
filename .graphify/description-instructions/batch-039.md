@@ -17,6 +17,21 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_tarieven_faqs": "faqs" | kind=code-symbol | source=src/routes/tarieven.tsx:L146 | neighbors=[tarieven.tsx]
+- "routes_tarieven_included": "included" | kind=code-symbol | source=src/routes/tarieven.tsx:L97 | neighbors=[tarieven.tsx]
+- "routes_tarieven_notincluded": "notIncluded" | kind=code-symbol | source=src/routes/tarieven.tsx:L106 | neighbors=[tarieven.tsx]
+- "routes_tarieven_recurring": "recurring" | kind=code-symbol | source=src/routes/tarieven.tsx:L80 | neighbors=[tarieven.tsx]
+- "routes_tarieven_tarievenpage": "TarievenPage()" | kind=code-symbol | source=src/routes/tarieven.tsx:L264 | neighbors=[tarieven.tsx]
+- "routes_tarieven_tier": "Tier" | kind=code-symbol | source=src/routes/tarieven.tsx:L23 | neighbors=[tarieven.tsx]
+- "routes_tarieven_tiers": "tiers" | kind=code-symbol | source=src/routes/tarieven.tsx:L33 | neighbors=[tarieven.tsx]
+- "routes_track_js_cors": "cors" | kind=code-symbol | source=src/routes/track[.]js.tsx:L3 | neighbors=[track[.]js.tsx]
+- "routes_track_js_route": "Route" | kind=code-symbol | source=src/routes/track[.]js.tsx:L11 | neighbors=[track[.]js.tsx]
+- "routes_webdesign_locations": "locations" | kind=code-symbol | source=src/routes/webdesign.tsx:L13 | neighbors=[webdesign.tsx]
+- "routes_webshop_laten_maken_data": "data" | kind=code-symbol | source=src/routes/webshop-laten-maken.tsx:L8 | neighbors=[webshop-laten-maken.tsx]
+- "routes_webshop_laten_maken_faqs": "faqs" | kind=code-symbol | source=src/routes/webshop-laten-maken.tsx:L7 | neighbors=[webshop-laten-maken.tsx]
+- "routes_website_checker_buildcheckmap": "buildCheckMap()" | kind=code-symbol | source=src/routes/website-checker.tsx:L125 | neighbors=[website-checker.tsx]
+- "routes_website_checker_categorybar": "CategoryBar()" | kind=code-symbol | source=src/routes/website-checker.tsx:L404 | neighbors=[website-checker.tsx]
+- "routes_website_checker_checkssection": "ChecksSection()" | kind=code-symbol | source=src/routes/website-checker.tsx:L493 | neighbors=[website-checker.tsx]
 - "routes_website_checker_closingblock": "ClosingBlock()" | kind=code-symbol | source=src/routes/website-checker.tsx:L585 | neighbors=[website-checker.tsx]
 - "routes_website_checker_ctacontactform": "CtaContactForm()" | kind=code-symbol | source=src/routes/website-checker.tsx:L625 | neighbors=[website-checker.tsx]
 - "routes_website_checker_example": "EXAMPLE" | kind=code-symbol | source=src/routes/website-checker.tsx:L104 | neighbors=[website-checker.tsx]
@@ -42,21 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_hovenier_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L7 | neighbors=[website-laten-maken-hovenier.tsx]
 - "routes_website_laten_maken_kapsalon_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-kapsalon.tsx:L7 | neighbors=[website-laten-maken-kapsalon.tsx]
 - "routes_website_laten_maken_klusbedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L7 | neighbors=[website-laten-maken-klusbedrijf.tsx]
-- "routes_website_laten_maken_leeuwarden_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-leeuwarden.tsx:L10 | neighbors=[website-laten-maken-leeuwarden.tsx]
-- "routes_website_laten_maken_loodgieter_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-loodgieter.tsx:L7 | neighbors=[website-laten-maken-loodgieter.tsx]
-- "routes_website_laten_maken_makelaar_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-makelaar.tsx:L7 | neighbors=[website-laten-maken-makelaar.tsx]
-- "routes_website_laten_maken_meppel_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-meppel.tsx:L11 | neighbors=[website-laten-maken-meppel.tsx]
-- "routes_website_laten_maken_nagelstudio_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-nagelstudio.tsx:L7 | neighbors=[website-laten-maken-nagelstudio.tsx]
-- "routes_website_laten_maken_pedicure_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-pedicure.tsx:L7 | neighbors=[website-laten-maken-pedicure.tsx]
-- "routes_website_laten_maken_restaurant_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-restaurant.tsx:L7 | neighbors=[website-laten-maken-restaurant.tsx]
-- "routes_website_laten_maken_roden_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-roden.tsx:L11 | neighbors=[website-laten-maken-roden.tsx]
-- "routes_website_laten_maken_schilder_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-schilder.tsx:L7 | neighbors=[website-laten-maken-schilder.tsx]
-- "routes_website_laten_maken_schoonheidssalon_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-schoonheidssalon.tsx:L7 | neighbors=[website-laten-maken-schoonheidssalon.tsx]
-- "routes_website_laten_maken_sneek_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-sneek.tsx:L10 | neighbors=[website-laten-maken-sneek.tsx]
-- "routes_website_laten_maken_stadskanaal_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-stadskanaal.tsx:L8 | neighbors=[website-laten-maken-stadskanaal.tsx]
-- "routes_website_laten_maken_veendam_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-veendam.tsx:L21 | neighbors=[website-laten-maken-veendam.tsx]
-- "routes_website_laten_maken_winschoten_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-winschoten.tsx:L8 | neighbors=[website-laten-maken-winschoten.tsx]
-- "routes_website_laten_vernieuwen_faqs": "faqs" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L70 | neighbors=[website-laten-vernieuwen.tsx]
 
 ## Instructions
 

@@ -14,7 +14,7 @@ import {
 const CITY = "Veendam";
 const PATH = "/website-laten-maken-veendam";
 const URL = `${SITE_URL}${PATH}`;
-const TITLE = "Website laten maken in Veendam | AIMI Webdesign";
+const TITLE = "Website laten maken in Veendam — lokaal webdesign | AIMI";
 const DESCRIPTION =
   "Webdesigner in Veendam nodig? AIMI zit hier zelf gevestigd en bouwt snelle websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vanaf € 499.";
 
@@ -98,6 +98,7 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      { name: "robots", content: "index, follow" },
       { name: "geo.region", content: "NL-GR" },
       { name: "geo.placename", content: "Veendam" },
       { name: "geo.position", content: "53.1042;6.8778" },

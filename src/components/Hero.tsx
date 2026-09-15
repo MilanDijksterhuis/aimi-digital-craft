@@ -71,12 +71,14 @@ export function Hero() {
             hydrateerde. Nu een gewone <p> die al zichtbaar staat in de
             SSR-HTML — geen JS-gated vertraging meer op het LCP-element. */}
         <p
-          className="mt-8 max-w-lg text-base leading-relaxed"
-          style={{ color: "rgba(255,255,255,0.72)" }}
+          className="mt-8 max-w-xl text-base leading-relaxed"
+          style={{ color: "rgba(255,255,255,0.78)" }}
         >
-          Wij ontwerpen, bouwen en hosten websites met als focus voor kleine ondernemers die net
-          begonnen zijn. Onze focus ligt op lage kosten, hoge kwaliteit en een snelle oplevering. Zo
-          kan jij je focussen op wat echt belangrijk is.
+          <strong style={{ color: "#fff", fontWeight: 600 }}>AIMI Development</strong> is een
+          webdesignbureau in Veendam (Groningen) dat websites en webshops bouwt voor ondernemers in
+          Noord-Nederland — vanaf € 499 eenmalig plus € 30 per maand voor hosting en onderhoud. Wij
+          ontwerpen, bouwen en hosten zelf, met focus op lage kosten, hoge kwaliteit en snelle
+          oplevering.
         </p>
 
         <motion.div

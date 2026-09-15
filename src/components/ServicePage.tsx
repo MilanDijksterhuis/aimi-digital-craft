@@ -6,6 +6,8 @@ import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ExampleSlideshow, type ServiceExample } from "@/components/ExampleSlideshow";
+import { UpdatedOn } from "@/components/UpdatedOn";
+import { webPageJsonLd } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare dienst-/contentpagina in de AIMI-huisstijl (donker + rood).
@@ -34,7 +36,7 @@ export type ServicePageData = {
   examples?: ServiceExample[];
 };
 
-export function ServicePage({ data }: { data: ServicePageData }) {
+export function ServicePage({ data, path }: { data: ServicePageData; path?: string }) {
   const {
     kicker,
     h1,
@@ -48,7 +50,14 @@ export function ServicePage({ data }: { data: ServicePageData }) {
     ctaText,
     examples,
   } = data;
-  const [openOffering, setOpenOffering] = useState<number | null>(null);
+  const [openOfferings, setOpenOfferings] = useState<Set<number>>(new Set());
+  const toggleOffering = (i: number) =>
+    setOpenOfferings((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
 
   return (
     <div
@@ -75,6 +84,17 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           ].join(","),
         }}
       />
+
+      {/* WebPage-schema met dateModified (GEO-audit 2026-09-06). Alleen als de
+          route een pad meegeeft. */}
+      {path && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: webPageJsonLd({ path, name: h1, description: intro }).children,
+          }}
+        />
+      )}
 
       <div style={{ position: "relative", zIndex: 1 }}>
         <Nav />
@@ -121,6 +141,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               >
                 {h1}
               </h1>
+              {path && <UpdatedOn path={path} style={{ marginBottom: "14px" }} />}
               <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "62ch" }}>
                 {intro}
               </p>
@@ -165,8 +186,8 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             )}
           </section>
 
-          {/* Wat je krijgt — uitklapbare kaarten */}
-          <section style={{ marginTop: "64px" }}>
+          {/* Wat je krijgt — uitklapbare vakken, geen genummerde kopjes */}
+          <section style={{ marginTop: "76px" }}>
             <h2
               style={{
                 fontSize: "clamp(17px, 2.3vw, 22px)",
@@ -179,106 +200,107 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <p style={{ marginTop: "10px", fontSize: "13px", color: "#7d7d85" }}>
               Klik op een onderdeel voor meer uitleg.
             </p>
-            <div
-              style={{
-                marginTop: "26px",
-                display: "grid",
-                gap: "16px",
-                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                alignItems: "start",
-              }}
-            >
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
               {offerings.map((o, i) => {
-                const isOpen = openOffering === i;
+                const isOpen = openOfferings.has(i);
                 return (
-                  /* A-57: dit was een klikbare motion.div zonder role, tabIndex of
-                   keyboard-handler. Nu het standaard accordion-patroon: de knop
-                   zit ín de heading (een <h3> mag niet binnen een <button>), met
-                   aria-expanded en aria-controls. */
-                  <motion.div
+                  <div
                     key={o.title}
-                    whileHover={{ y: -3, borderColor: "rgba(254,44,2,0.35)" }}
-                    transition={{ duration: 0.18 }}
-                    style={{
-                      padding: "22px",
-                      borderRadius: "6px",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      background: isOpen ? "rgba(254,44,2,0.05)" : "rgba(255,255,255,0.02)",
-                    }}
+                    className={`rounded-2xl border p-7 transition-all duration-300 ${
+                      isOpen
+                        ? "border-[rgba(254,44,2,0.4)] bg-[rgba(254,44,2,0.05)]"
+                        : "border-white/10 bg-white/[0.02] hover:border-[rgba(254,44,2,0.3)] hover:-translate-y-0.5"
+                    }`}
                   >
-                    <h3 style={{ fontSize: "16px", fontWeight: 600, margin: 0 }}>
-                      <button
-                        type="button"
-                        onClick={() => setOpenOffering(isOpen ? null : i)}
-                        aria-expanded={isOpen}
-                        aria-controls={`offering-panel-${i}`}
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          justifyContent: "space-between",
-                          gap: "12px",
-                          width: "100%",
-                          marginBottom: "8px",
-                          padding: 0,
-                          font: "inherit",
-                          color: "inherit",
-                          textAlign: "left",
-                          background: "none",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
+                    <button
+                      type="button"
+                      onClick={() => toggleOffering(i)}
+                      aria-expanded={isOpen}
+                      aria-controls={`offering-panel-${i}`}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: "16px",
+                        width: "100%",
+                        padding: 0,
+                        font: "inherit",
+                        color: "inherit",
+                        textAlign: "left",
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <div>
+                        <h3 style={{ fontSize: "17px", fontWeight: 700, letterSpacing: "-0.01em" }}>
+                          {o.title}
+                        </h3>
+                        <p style={{ marginTop: "8px", fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>
+                          {o.desc}
+                        </p>
+                      </div>
+                      <motion.span
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        style={{ flex: "none", marginTop: "4px", color: isOpen ? RED : "#a4a9b2" }}
                       >
-                        <span>{o.title}</span>
-                        <motion.span
-                          animate={{ rotate: isOpen ? 45 : 0 }}
-                          transition={{ duration: 0.2 }}
-                          style={{
-                            flex: "none",
-                            color: isOpen ? RED : "#a4a9b2",
-                            marginTop: "2px",
-                          }}
-                        >
-                          <Plus className="w-4 h-4" strokeWidth={1.5} />
-                        </motion.span>
-                      </button>
-                    </h3>
-                    <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>
-                      {o.desc}
-                    </p>
+                        <Plus className="w-5 h-5" strokeWidth={1.5} />
+                      </motion.span>
+                    </button>
                     <motion.div
                       id={`offering-panel-${i}`}
                       initial={false}
                       animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       style={{ overflow: "hidden" }}
                     >
                       <ul
                         style={{
-                          margin: "16px 0 2px",
-                          paddingLeft: "18px",
+                          margin: "20px 0 0",
+                          paddingTop: "18px",
+                          borderTop: "1px solid rgba(255,255,255,0.1)",
                           display: "flex",
                           flexDirection: "column",
-                          gap: "8px",
+                          gap: "10px",
                         }}
                       >
                         {o.details.map((d) => (
                           <li
                             key={d}
-                            style={{ fontSize: "13px", lineHeight: 1.6, color: "#b6b6bd" }}
+                            style={{
+                              position: "relative",
+                              paddingLeft: "16px",
+                              fontSize: "13px",
+                              lineHeight: 1.6,
+                              color: "#b6b6bd",
+                            }}
                           >
+                            <span
+                              aria-hidden
+                              style={{
+                                position: "absolute",
+                                left: 0,
+                                top: "7px",
+                                width: "4px",
+                                height: "4px",
+                                borderRadius: "9999px",
+                                background: RED,
+                              }}
+                            />
                             {d}
                           </li>
                         ))}
                       </ul>
                     </motion.div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
           </section>
 
-          {/* Proces — genummerde stappenkaarten */}
-          <section style={{ marginTop: "64px" }}>
+          {/* Proces — verbonden stappenlijn i.p.v. losse kaarten */}
+          <section style={{ marginTop: "76px" }}>
             <h2
               style={{
                 fontSize: "clamp(17px, 2.3vw, 22px)",
@@ -288,49 +310,51 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             >
               Zo werkt het
             </h2>
-            <div
-              style={{
-                marginTop: "26px",
-                display: "grid",
-                gap: "16px",
-                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              }}
-            >
-              {steps.map((s, i) => (
-                <div
-                  key={s.title}
-                  style={{
-                    position: "relative",
-                    padding: "24px 22px 22px",
-                    borderRadius: "8px",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    background: "rgba(255,255,255,0.02)",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "30px",
-                      height: "30px",
-                      borderRadius: "9999px",
-                      marginBottom: "16px",
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      color: RED,
-                      border: `1px solid rgba(254,44,2,0.4)`,
-                      background: "rgba(254,44,2,0.08)",
-                    }}
-                  >
-                    {i + 1}
+            <div style={{ marginTop: "38px", position: "relative" }}>
+              <div
+                aria-hidden
+                className="hidden md:block"
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  left: `calc(100% / ${steps.length * 2})`,
+                  right: `calc(100% / ${steps.length * 2})`,
+                  height: "1px",
+                  background:
+                    "linear-gradient(to right, rgba(254,44,2,0.4), rgba(255,255,255,0.08))",
+                }}
+              />
+              <div className="grid gap-y-10 gap-x-6 md:grid-cols-4">
+                {steps.map((s, i) => (
+                  <div key={s.title} style={{ position: "relative" }}>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "9999px",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: RED,
+                        border: `1px solid rgba(254,44,2,0.5)`,
+                        background: BG,
+                        position: "relative",
+                        zIndex: 1,
+                      }}
+                    >
+                      {i + 1}
+                    </div>
+                    <h3 style={{ fontSize: "15.5px", fontWeight: 600, margin: "18px 0 8px" }}>
+                      {s.title}
+                    </h3>
+                    <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>
+                      {s.desc}
+                    </p>
                   </div>
-                  <h3 style={{ fontSize: "15.5px", fontWeight: 600, marginBottom: "8px" }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>{s.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
