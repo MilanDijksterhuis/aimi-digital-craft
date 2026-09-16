@@ -1,4 +1,4 @@
-# Node Description Batch 9 of 50
+# Node Description Batch 9 of 52
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,7 +26,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "components_processtimeline": "ProcessTimeline.tsx" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L1 | neighbors=[129b916 manier van werken, 6262799 fixes, 85a6666 SEO en robot, 8fdd571 SEO, 9a2689c code fixes, ecdbe8e fixes] | lang=en
+- "components_answerblock": "AnswerBlock.tsx" | kind=code-symbol | source=src/components/AnswerBlock.tsx:L1 | neighbors=[6e488ba fixes, dca01f9 pagina updates, e84aa2e hoofdpagina, AnswerBlock(), HOOGEVEEN, VEENDAM] | lang=en
+- "components_chatwidget": "ChatWidget.tsx" | kind=code-symbol | source=src/components/ChatWidget.tsx:L1 | neighbors=[portal.tsx, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, 9a2689c code fixes, f2eb4fe Fix root cause: catch Supabase …, fc7da2d animaties en paginas] | lang=en
+- "components_deletedchangestab": "DeletedChangesTab.tsx" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L1 | neighbors=[admin.tsx, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, 9a2689c code fixes, ConfirmDialog.tsx, useConfirm()] | lang=en
+- "components_idletimeout": "IdleTimeout.tsx" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L1 | neighbors=[9a2689c code fixes, ACTIVITY_EVENTS, IdleTimeout(), alert-dialog.tsx, AlertDialogAction, AlertDialogContent] | lang=en
 - "hooks_use_permissions": "use-permissions.tsx" | kind=code-symbol | source=src/hooks/use-permissions.tsx:L1 | neighbors=[admin.tsx, admin.leads.tsx, server.tsx, 81a87ed commit, BerichtenTab.tsx, DeletedChangesTab.tsx] | lang=en
 - "lib_callbacks": "callbacks.ts" | kind=code-symbol | source=src/lib/callbacks.ts:L1 | neighbors=[f958216 leads functions, CallbackAgenda.tsx, CallbackScheduleModal.tsx, AGENDA_COLOR_CLASSES, AgendaColor, CALLBACK_OUTCOMES] | lang=en
 - "lib_csv": "csv.ts" | kind=code-symbol | source=src/lib/csv.ts:L1 | neighbors=[74ecdc1 code fixes, c480d2e leads, LeadsPanel.tsx, CsvParseResult, detectDelimiter(), HEADER_ALIASES] | lang=en
@@ -63,9 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a8b31df30e0052d246cfb047819739257dac82e9": "a8b31df Changes" | kind=Commit | source=git | neighbors=[admin.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=pt
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ae858bb1d86994963f4ba6ccba2a4eeecbd971c8": "ae858bb Changes" | kind=Commit | source=git | neighbors=[95b5275 Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b0eef5e760ef12f76b52b2003143bc255855db8f": "b0eef5e Changes" | kind=Commit | source=git | neighbors=[3650c07 Changes, admin.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b7647ca231efaa0b8334732ace2c362ff251c985": "b7647ca Changes" | kind=Commit | source=git | neighbors=[5d704cb Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b927a97079509c58c6fc410856844221c543a1de": "b927a97 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=pt
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c5322995bd96d20508a21e6e7af970b4453b2cc9": "c532299 Changes" | kind=Commit | source=git | neighbors=[978e288 Changes, main, ec62d9f Changes, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
 
 ## Instructions
 

@@ -1,4 +1,4 @@
-# Node Description Batch 12 of 50
+# Node Description Batch 12 of 52
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,9 +26,19 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_calendar": "calendar.tsx" | kind=code-symbol | source=src/components/ui/calendar.tsx:L1 | neighbors=[utils.ts, cn(), button.tsx, Button, buttonVariants, Calendar()] | lang=en
+- "ui_toggle_group": "toggle-group.tsx" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L1 | neighbors=[utils.ts, cn(), toggle.tsx, ToggleGroup, ToggleGroupContext, ToggleGroupItem] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7443b546e0a688432fbc4ac3a4954aa1e9ebbb55": "7443b54 Fix root cause: catch Supabase Realtime WebSocket crashes" | kind=Commit | source=git | neighbors=[admin.tsx, admin.accounts.tsx, worktree-replicated-fluttering-whisper, AdminChatPanel.tsx, ChatWidget.tsx, 99bd8ac Surface site_errors in the acco…] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a2681a9e5aba53942b6b04ef7a01b7dd2aadfac9": "a2681a9 ewa" | kind=Commit | source=git | neighbors=[81a87ed commit, main, 2fcc9a3 fixes, admin.functions.ts, worktree-replicated-fluttering-whisper, seo-verbetering] | lang=pt
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@bbc9d80c493eedf605f2e81d53384f621534a44f": "bbc9d80 Surface site_errors in the account Activiteit tab" | kind=Commit | source=git | neighbors=[2189780 fixes, admin.accounts.$accountId.tsx, main, 02d6137 fixes, accounts.server.ts, seo-verbetering] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@e0f6b72edcd68b79f746996f621cc1662c12c128": "e0f6b72 feat(seo): interne links op lokale landingspagina's" | kind=Commit | source=git | neighbors=[9965896 feat(seo): contact- en cases-pa…, main, fa2ea52 feat(seo): nav + uitgebreide fo…, LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx] | lang=nl
+- "components_analyticsloader": "AnalyticsLoader.tsx" | kind=code-symbol | source=src/components/AnalyticsLoader.tsx:L1 | neighbors=[8fdd571 SEO, AnalyticsLoader(), CookiePrefs, loadTrackJs(), readPrefs(), __root.tsx] | lang=en
 - "components_updatedon_updatedon": "UpdatedOn()" | kind=code-symbol | source=src/components/UpdatedOn.tsx:L7 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, ServicePage.tsx, UpdatedOn.tsx, faq.tsx, tarieven.tsx] | lang=en
+- "components_work": "Work.tsx" | kind=code-symbol | source=src/components/Work.tsx:L1 | neighbors=[6e488ba fixes, ecdbe8e fixes, projects, Work(), 98edc37 Changes, ab14295 Design overhauled, A11y-bar weg] | lang=en
 - "design_handoff_meer_diensten_support_collectprops": "collectProps()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L415 | neighbors=[support.js, compileAttr(), kebabToCamel(), walkComponent(), walkElement(), walkXImport()] | lang=en
 - "design_handoff_meer_diensten_support_compileattr": "compileAttr()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L401 | neighbors=[support.js, collectProps(), walkComponent(), walkFor(), walkIf(), walkXImport()] | lang=en
+- "kaart_hoogeveen_en_veendam_support_collectprops": "collectProps()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L415 | neighbors=[support.js, compileAttr(), kebabToCamel(), walkComponent(), walkElement(), walkXImport()] | lang=en
+- "kaart_hoogeveen_en_veendam_support_compileattr": "compileAttr()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L401 | neighbors=[support.js, collectProps(), walkComponent(), walkFor(), walkIf(), walkXImport()] | lang=en
 - "lib_admin_functions_ensureroles": "ensureRoles()" | kind=code-symbol | source=src/lib/admin.functions.ts:L26 | neighbors=[admin.functions.ts, ensureAdmin(), ensureLeadsAccess(), getRoles(), ensureStaff(), ensureSuperAdmin()] | lang=en
 - "lib_email_server": "email.server.ts" | kind=code-symbol | source=src/lib/email.server.ts:L1 | neighbors=[5bc9ff0 google authenticatoin, a3773ee sec fixes, b83b044 Revert: verwijder Google OAuth …, escapeHtml(), sendWelcomeEmail(), transporter] | lang=en
 - "lib_status_priority_label": "PRIORITY_LABEL" | kind=code-symbol | source=src/lib/status.ts:L35 | neighbors=[admin.changes.tsx, admin.changes.$changeId.tsx, admin.projecten.$projectId.tsx, portal.tsx, portal.projecten.$projectId.tsx, status.ts] | lang=en
@@ -56,16 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c91431841e3bb2cda79c964b746be4f73336dbfc": "c914318 ewa" | kind=Commit | source=git | neighbors=[500f718 Merge branch 'main' of https://…, main, 4c90153 Merge branch 'main' of https://…, worktree-replicated-fluttering-whisper, seo-verbetering] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@cf5e1212ec15a8789acaa64d5e380fe76b95c72e": "cf5e121 Catch getSession() network errors in the auth route guard" | kind=Commit | source=git | neighbors=[1713634 fixes, main, 8e663f1 fixes, _authenticated.tsx, seo-verbetering] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d2da4c97008ae99fb598665045fea1b89db39a76": "d2da4c9 Log root error boundary crashes to site_errors for visibility" | kind=Commit | source=git | neighbors=[8e663f1 fixes, main, b75b00d fixes, __root.tsx, seo-verbetering] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d38d9ab3d106b833295f59fd31ca4d775b3ee14a": "d38d9ab Add IndexNow key route" | kind=Commit | source=git | neighbors=[aabf034 SEO, main, 59bb970 eyoo, b03bb73bce86422c6a74b3cfc829f2dd[.]txt.…, indexnow-submit.mjs] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ec1f3228cec9a33d761d219ab621cf344e07acd0": "ec1f322 feat(ui): Diensten-dropdown in nav + tijdlijn zonder nummers + sfeer-ac…" | kind=Commit | source=git | neighbors=[2d81f50 feat(seo): vervang /cases door …, main, 04c01f8 SEO, Nav.tsx, ServicePage.tsx] | lang=nl
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fa2ea52f59de7d272b890bac4dfe7ad4b8edade2": "fa2ea52 feat(seo): nav + uitgebreide footer met interne links (geen orphan page…" | kind=Commit | source=git | neighbors=[e0f6b72 feat(seo): interne links op lok…, main, ef44acd feat(seo): sitemap + llms.txt a…, Footer.tsx, Nav.tsx] | lang=nl
-- "components_exampleslideshow_wellness_examples": "WELLNESS_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L165 | neighbors=[ExampleSlideshow.tsx, website-laten-maken-kapsalon.tsx, website-laten-maken-nagelstudio.tsx, website-laten-maken-pedicure.tsx, website-laten-maken-schoonheidssalon.tsx] | lang=en
-- "components_services_services": "services" | kind=code-symbol | source=src/components/Services.tsx:L4 | neighbors=[LocationLanding.tsx, Services.tsx, index.tsx, webdesign.tsx, LocationPageV2.tsx] | lang=en
-- "components_truststrip": "TrustStrip.tsx" | kind=code-symbol | source=src/components/TrustStrip.tsx:L1 | neighbors=[aabf034 SEO, BranchPage.tsx, LocationPageV2.tsx, TrustStrip(), seo.ts] | lang=en
-- "components_work": "Work.tsx" | kind=code-symbol | source=src/components/Work.tsx:L1 | neighbors=[ecdbe8e fixes, projects, Work(), 98edc37 Changes, ab14295 Design overhauled, A11y-bar weg] | lang=en
-- "design_handoff_meer_diensten_support_boot": "boot()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L150 | neighbors=[support.js, getReact(), getReactDOM(), parseDcDocument(), rootNameForDocument()] | lang=en
-- "design_handoff_meer_diensten_support_resolve": "resolve()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L205 | neighbors=[support.js, loadReactUmd(), findTopLevelEquality(), parensWrapWhole(), resolvePath()] | lang=en
-- "design_handoff_meer_diensten_support_walkcomponent": "walkComponent()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L661 | neighbors=[support.js, walk(), collectProps(), compileAttr(), walkChildren()] | lang=en
 
 ## Instructions
 

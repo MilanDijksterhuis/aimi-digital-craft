@@ -48,6 +48,7 @@ const links = [
   { label: "Tarieven", href: "/tarieven" },
   { label: "Werkwijze", href: "/werkwijze" },
   { label: "Over ons", href: "/over-ons" },
+  { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];

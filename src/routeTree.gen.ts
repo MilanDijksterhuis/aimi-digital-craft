@@ -58,10 +58,12 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BranchesRouteImport } from './routes/branches'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as B03bb73bce86422c6a74b3cfc829f2ddDottxtRouteImport } from './routes/b03bb73bce86422c6a74b3cfc829f2dd[.]txt'
 import { Route as AlgemeneVoorwaardenRouteImport } from './routes/algemene-voorwaarden'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as AuthenticatedServerRouteImport } from './routes/_authenticated/server'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated/portal'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -352,6 +354,11 @@ const BranchesRoute = BranchesRouteImport.update({
   path: '/branches',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute =
   B03bb73bce86422c6a74b3cfc829f2ddDottxtRouteImport.update({
     id: '/b03bb73bce86422c6a74b3cfc829f2dd.txt',
@@ -370,6 +377,11 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedServerRoute = AuthenticatedServerRouteImport.update({
@@ -483,6 +495,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
+  '/blog': typeof BlogRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -536,6 +549,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/server': typeof AuthenticatedServerRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
@@ -556,6 +570,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
+  '/blog': typeof BlogRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -609,6 +624,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/portal': typeof AuthenticatedPortalRouteWithChildren
   '/server': typeof AuthenticatedServerRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
@@ -631,6 +647,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/algemene-voorwaarden': typeof AlgemeneVoorwaardenRoute
   '/b03bb73bce86422c6a74b3cfc829f2dd.txt': typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
+  '/blog': typeof BlogRoute
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -684,6 +701,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/portal': typeof AuthenticatedPortalRouteWithChildren
   '/_authenticated/server': typeof AuthenticatedServerRoute
+  '/blog_/$slug': typeof BlogSlugRoute
   '/_authenticated/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
   '/_authenticated/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/_authenticated/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
@@ -706,6 +724,7 @@ export interface FileRouteTypes {
     | '/'
     | '/algemene-voorwaarden'
     | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+    | '/blog'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -759,6 +778,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/server'
+    | '/blog/$slug'
     | '/admin/accounts'
     | '/admin/changes'
     | '/admin/instellingen'
@@ -779,6 +799,7 @@ export interface FileRouteTypes {
     | '/'
     | '/algemene-voorwaarden'
     | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+    | '/blog'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -832,6 +853,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/server'
+    | '/blog/$slug'
     | '/admin/accounts'
     | '/admin/changes'
     | '/admin/instellingen'
@@ -853,6 +875,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/algemene-voorwaarden'
     | '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
+    | '/blog'
     | '/branches'
     | '/contact'
     | '/faq'
@@ -906,6 +929,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/_authenticated/server'
+    | '/blog_/$slug'
     | '/_authenticated/admin/accounts'
     | '/_authenticated/admin/changes'
     | '/_authenticated/admin/instellingen'
@@ -928,6 +952,7 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AlgemeneVoorwaardenRoute: typeof AlgemeneVoorwaardenRoute
   B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute: typeof B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute
+  BlogRoute: typeof BlogRoute
   BranchesRoute: typeof BranchesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
@@ -977,6 +1002,7 @@ export interface RootRouteChildren {
   WebsiteLatenVernieuwenRoute: typeof WebsiteLatenVernieuwenRoute
   WerkwijzeRoute: typeof WerkwijzeRoute
   WordpressOfMaatwerkRoute: typeof WordpressOfMaatwerkRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   ApiPublicSiteErrorRoute: typeof ApiPublicSiteErrorRoute
   ApiPublicSitePingRoute: typeof ApiPublicSitePingRoute
   ApiTelegramWebhookRoute: typeof ApiTelegramWebhookRoute
@@ -1328,6 +1354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BranchesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/b03bb73bce86422c6a74b3cfc829f2dd.txt': {
       id: '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
       path: '/b03bb73bce86422c6a74b3cfc829f2dd.txt'
@@ -1354,6 +1387,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/server': {
@@ -1609,6 +1649,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlgemeneVoorwaardenRoute: AlgemeneVoorwaardenRoute,
   B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute:
     B03bb73bce86422c6a74b3cfc829f2ddDottxtRoute,
+  BlogRoute: BlogRoute,
   BranchesRoute: BranchesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
@@ -1659,6 +1700,7 @@ const rootRouteChildren: RootRouteChildren = {
   WebsiteLatenVernieuwenRoute: WebsiteLatenVernieuwenRoute,
   WerkwijzeRoute: WerkwijzeRoute,
   WordpressOfMaatwerkRoute: WordpressOfMaatwerkRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ApiPublicSiteErrorRoute: ApiPublicSiteErrorRoute,
   ApiPublicSitePingRoute: ApiPublicSitePingRoute,
   ApiTelegramWebhookRoute: ApiTelegramWebhookRoute,

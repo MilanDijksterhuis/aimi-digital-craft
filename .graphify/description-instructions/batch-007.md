@@ -1,4 +1,4 @@
-# Node Description Batch 8 of 50
+# Node Description Batch 8 of 52
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -9,9 +9,6 @@ your JSON answer to the answer file.
 You are documenting nodes in a knowledge graph.
 For each entry below, write ONE concise factual plain-language sentence
 describing what it is or does. Use only the provided context.
-For a code symbol (kind=code-symbol — a function, class, or constant),
-describe what the function/symbol does based on its name, source location
-and neighbors — e.g. "Resolves the configured ontology profile from graphify.yaml.".
 For an entity node (any other kind — e.g. a person, place, event, object),
 describe what the entity is and its role, grounded in its type, its
 relations (neighbors) and the provided citations/evidence — e.g.
@@ -26,6 +23,9 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@99450d7635f335cbc90f6cc2f7db94f8eea736bd": "99450d7 Fix typo in Hero component text 2" | kind=Commit | source=git | neighbors=[38037d9 Update Hero.tsx, main, 37c0d11 Dock tokens toegevoegd & emojis…, Hero.tsx, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9c4f5d59d7aaee8742a75ce6ef4159e4cd297482": "9c4f5d5 nummers verwijderd" | kind=Commit | source=git | neighbors=[6aba49e euro teken, main, 423b3f1 cashing, Services.tsx, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9f689f765315a425413d8b8e88445aebcf7c9a5c": "9f689f7 tracking voor user M" | kind=Commit | source=git | neighbors=[129b916 manier van werken, main, 8c0bb37 nieuwe featues, __root.tsx, tmp-main-merge, tmp-revert-main] | lang=nl
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a11075959148ee41dbd0fd64057e80ac25a771e7": "a110759 Work in progress" | kind=Commit | source=git | neighbors=[0b21971 Changes weergave verbeterd, main, f3ee883 Lovable update, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a4fa2cf4d68d63e3b7ed9217a876e7fff63b058b": "a4fa2cf Work in progress" | kind=Commit | source=git | neighbors=[3d42113 Kleurproblemen opgeholzen, main, 204f17a Changes, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a8375281beebe589a5e4a6f040eeead6fae497ab": "a837528 bug fixes" | kind=Commit | source=git | neighbors=[6500c48 bug fixes, main, 23bb181 sec, monitoring.shared.ts, tmp-main-merge, tmp-revert-main] | lang=pt
@@ -63,9 +63,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fd049dcd858567e6a8441126f9959c5616dcdb9e": "fd049dc Changes" | kind=Commit | source=git | neighbors=[f32700a Changes, main, d42e3c5 Logo toegevoegd aan site, Nav.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fe54e439bab146978cab37d3da8487cace37b71c": "fe54e43 Code edited in Lovable Code Editor" | kind=Commit | source=git | neighbors=[273dbce Code edited in Lovable Code Edi…, main, 1dfd3b7 Code edited in Lovable Code Edi…, Hero.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fe58e74f4e11df12e00354190618fb071148ee4d": "fe58e74 Update vite.config.ts" | kind=Commit | source=git | neighbors=[260e9c9 Change Supabase project credent…, main, e0af60e Update package.json, vite.config.ts, tmp-main-merge, tmp-revert-main] | lang=en
-- "components_chatwidget": "ChatWidget.tsx" | kind=code-symbol | source=src/components/ChatWidget.tsx:L1 | neighbors=[portal.tsx, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, 9a2689c code fixes, f2eb4fe Fix root cause: catch Supabase …, fc7da2d animaties en paginas] | lang=en
-- "components_deletedchangestab": "DeletedChangesTab.tsx" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L1 | neighbors=[admin.tsx, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, 9a2689c code fixes, ConfirmDialog.tsx, useConfirm()] | lang=en
-- "components_idletimeout": "IdleTimeout.tsx" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L1 | neighbors=[9a2689c code fixes, ACTIVITY_EVENTS, IdleTimeout(), alert-dialog.tsx, AlertDialogAction, AlertDialogContent] | lang=en
 
 ## Instructions
 

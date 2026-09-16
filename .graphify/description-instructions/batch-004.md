@@ -1,4 +1,4 @@
-# Node Description Batch 5 of 50
+# Node Description Batch 5 of 52
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,11 +26,15 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_algemene_voorwaarden": "algemene-voorwaarden.tsx" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 6e488ba fixes, 8fdd571 SEO] | lang=en
+- "routes_privacybeleid": "privacybeleid.tsx" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 6e488ba fixes, 8fdd571 SEO] | lang=en
+- "routes_website_laten_maken_drachten": "website-laten-maken-drachten.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
+- "routes_website_laten_maken_emmen": "website-laten-maken-emmen.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-emmen.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
+- "routes_website_laten_maken_groningen": "website-laten-maken-groningen.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_heerenveen": "website-laten-maken-heerenveen.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_hoogezand": "website-laten-maken-hoogezand.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-hoogezand.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_klusbedrijf": "website-laten-maken-klusbedrijf.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-klusbedrijf.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage()] | lang=en
 - "routes_website_laten_maken_leeuwarden": "website-laten-maken-leeuwarden.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-leeuwarden.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
-- "routes_website_laten_maken_meppel": "website-laten-maken-meppel.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-meppel.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_schilder": "website-laten-maken-schilder.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-schilder.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage()] | lang=en
 - "routes_website_laten_maken_sneek": "website-laten-maken-sneek.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-sneek.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
 - "routes_website_laten_maken_stadskanaal": "website-laten-maken-stadskanaal.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-stadskanaal.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
@@ -51,9 +55,9 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b9ed97e9721c5bdc7e7a8e961909212a0b9cd1a5": "b9ed97e Gebruik getSession() voor auth check zodat sessies persistent blijven" | kind=Commit | source=git | neighbors=[692d231 Update .gitignore to include .e…, main, de7fb47 Wijzig prijzen: Starter €499, P…, Pricing.tsx, _authenticated.tsx, routeTree.gen.ts] | lang=nl
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@e33fd2d65d3b43ea54a47e29bace710b10e6e172": "e33fd2d tekst vergroten en cookies" | kind=Commit | source=git | neighbors=[423b3f1 cashing, main, ab23069 admin en klantportaal wijziging…, CookieBanner.tsx, Nav.tsx, index.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f958216b3ca515ca3d0d8c9e854052ef349135db": "f958216 leads functions" | kind=Commit | source=git | neighbors=[9a2689c code fixes, admin.tsx, admin.leads.tsx, main, 85a6666 SEO en robot, CallbackAgenda.tsx] | lang=en
+- "components_exampleslideshow": "ExampleSlideshow.tsx" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L1 | neighbors=[6e488ba fixes, aabf034 SEO, BranchPage.tsx, ExampleSlideshow(), GENERIC_EXAMPLES, ServiceExample] | lang=en
 - "public_site_ping": "site-ping.ts" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, 8c0bb37 nieuwe featues, 9be6953 bug fixes, a3773ee sec fixes, abdbfe4 bug fixes 2] | lang=en
-- "routes_algemene_voorwaarden": "algemene-voorwaarden.tsx" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 8fdd571 SEO, cc405f4 pagina updates] | lang=en
-- "routes_privacybeleid": "privacybeleid.tsx" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 8fdd571 SEO, cc405f4 pagina updates] | lang=en
+- "routes_login": "login.tsx" | kind=code-symbol | source=src/routes/login.tsx:L1 | neighbors=[04c01f8 SEO, 2b1d78f telegram, 36d8ccb new pages, 6b21362 Catch login network errors inst…, 6e488ba fixes, 8fdd571 SEO] | lang=en
 - "routes_website_laten_maken_autorijschool": "website-laten-maken-autorijschool.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, BranchPage.tsx, BranchPage(), BranchPageData] | lang=en
 - "routes_website_laten_maken_hovenier": "website-laten-maken-hovenier.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage(), BranchPageData] | lang=en
 - "supabase_client": "client.ts" | kind=code-symbol | source=src/integrations/supabase/client.ts:L1 | neighbors=[admin.tsx, admin.accounts.tsx, portal.tsx, AdminChatPanel.tsx, ChatWidget.tsx, use-auth.tsx] | lang=en
@@ -62,10 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_skeleton_skeleton": "Skeleton()" | kind=code-symbol | source=src/components/ui/skeleton.tsx:L3 | neighbors=[admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx, admin.projecten.tsx] | lang=en
 - "authenticated_admin_leads": "admin.leads.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L1 | neighbors=[LeadsPage(), Route, SectionKey, SECTIONS, CallbackAgenda.tsx, CallbackAgenda()] | lang=en
 - "authenticated_admin_rollen": "admin.rollen.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L1 | neighbors=[AdminRollenPage(), NewRoleSection(), ROLE_LABEL, RolesListSection(), RollenSidebar(), Route] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@05a6c9e9f8bcd3a34d63acabb3f20f7bd384cf6e": "05a6c9e Verbeter admin changes-tab layout en voeg verwijder-knop toe; verwijder…" | kind=Commit | source=git | neighbors=[admin.tsx, main, 692d231 Update .gitignore to include .e…, Nav.tsx, ca832db Add .env to .gitignore., tmp-main-merge] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@0cfedfb33503f3a3e63bd888bbab4ada9af28813": "0cfedfb Changes" | kind=Commit | source=git | neighbors=[main, 451efd4 Changes, Nav.tsx, routeTree.gen.ts, tmp-main-merge, tmp-revert-main] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@12764e3bf99b323d2b4c9395e4c221eef081bac5": "12764e3 Security: fix IDOR vulnerability in attachment URL generation" | kind=Commit | source=git | neighbors=[main, 5f47f6d animaties, admin.functions.ts, portal.functions.ts, b83b044 Revert: verwijder Google OAuth …, tmp-main-merge] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@129b9165ad3dff3db206b50fe9994206e2a0d1c2": "129b916 manier van werken" | kind=Commit | source=git | neighbors=[main, 9f689f7 tracking voor user M, ProcessTimeline.tsx, index.tsx, e2cd310 Ip blocker, tmp-main-merge] | lang=nl
 
 ## Instructions
 

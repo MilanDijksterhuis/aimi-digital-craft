@@ -163,6 +163,19 @@ export const PAGE_DATES: Record<string, string> = {
   "/faq": "2026-09-06",
   "/contact": "2026-09-04",
 
+  // Blog
+  "/blog": "2026-09-16",
+  "/blog/wordpress-site-gehackt": "2026-09-16",
+  "/blog/core-web-vitals-website-snelheid": "2026-09-16",
+  "/blog/vps-hosting-kleine-bedrijven": "2026-09-16",
+  "/blog/gratis-website-checker-uitleg": "2026-09-16",
+  "/blog/google-business-profile-fouten": "2026-09-16",
+  "/blog/mooi-versus-converteert": "2026-09-16",
+  "/blog/onderhoudskosten-na-livegang": "2026-09-16",
+  "/blog/webshop-vs-gewone-website": "2026-09-16",
+  "/blog/verouderde-websites-groningen-drenthe": "2026-09-16",
+  "/blog/checklist-nieuwe-website": "2026-09-16",
+
   // Juridisch
   "/privacybeleid": "2026-09-04",
   "/algemene-voorwaarden": "2026-09-04",

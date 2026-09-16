@@ -1,4 +1,6 @@
-import type { ReactElement } from "react";
+import { useState, type ReactElement } from "react";
+import { motion } from "motion/react";
+import { Plus } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -102,6 +104,8 @@ function ApproachSection({ data }: { data: BranchPageData }) {
 }
 
 function FaqSection({ data }: { data: BranchPageData }) {
+  const [open, setOpen] = useState<number | null>(null);
+
   return (
     <section style={{ marginTop: "64px" }}>
       <h2
@@ -109,26 +113,65 @@ function FaqSection({ data }: { data: BranchPageData }) {
       >
         Veelgestelde vragen
       </h2>
-      <div style={{ marginTop: "22px", display: "grid", gap: "16px" }}>
-        {data.faqs.map((f) => (
-          <div
-            key={f.q}
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "16px" }}
-          >
-            <div style={{ fontWeight: 600, fontSize: "14.5px" }}>{f.q}</div>
+      <div style={{ marginTop: "22px" }}>
+        {data.faqs.map((f, i) => {
+          const isOpen = open === i;
+          return (
             <div
-              style={{
-                marginTop: "8px",
-                fontSize: "13.5px",
-                lineHeight: 1.65,
-                color: "#b6b6bd",
-                maxWidth: "62ch",
-              }}
+              key={f.q}
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
             >
-              {f.a}
+              <h3 style={{ margin: 0 }}>
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`branch-faq-answer-${i}`}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "16px",
+                    padding: "16px 0",
+                    textAlign: "left",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "inherit",
+                  }}
+                >
+                  <span style={{ fontWeight: 600, fontSize: "14.5px" }}>{f.q}</span>
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ flexShrink: 0, color: isOpen ? RED : "#b6b6bd" }}
+                  >
+                    <Plus size={18} strokeWidth={1.5} />
+                  </motion.span>
+                </button>
+              </h3>
+              <motion.div
+                id={`branch-faq-answer-${i}`}
+                initial={false}
+                animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                transition={{ duration: 0.22, ease: "easeInOut" }}
+                style={{ overflow: "hidden" }}
+              >
+                <div
+                  style={{
+                    paddingBottom: "16px",
+                    fontSize: "13.5px",
+                    lineHeight: 1.65,
+                    color: "#b6b6bd",
+                    maxWidth: "62ch",
+                  }}
+                >
+                  {f.a}
+                </div>
+              </motion.div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
@@ -189,7 +232,7 @@ export function BranchPage({
 
       <main id="main-content">
         <div className="mx-auto max-w-5xl px-6 pt-32">
-          <section className="grid md:grid-cols-[1fr_1.1fr] gap-12 items-center">
+          <section className="grid md:grid-cols-[1fr_1.1fr] gap-12 items-start">
             <div>
               {/* A-29: spiegelt de BreadcrumbList-markup uit de route-head. */}
               <Breadcrumbs

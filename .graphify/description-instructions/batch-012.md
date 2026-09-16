@@ -1,4 +1,4 @@
-# Node Description Batch 13 of 50
+# Node Description Batch 13 of 52
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,18 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d38d9ab3d106b833295f59fd31ca4d775b3ee14a": "d38d9ab Add IndexNow key route" | kind=Commit | source=git | neighbors=[aabf034 SEO, main, 59bb970 eyoo, b03bb73bce86422c6a74b3cfc829f2dd[.]txt.…, indexnow-submit.mjs] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ec1f3228cec9a33d761d219ab621cf344e07acd0": "ec1f322 feat(ui): Diensten-dropdown in nav + tijdlijn zonder nummers + sfeer-ac…" | kind=Commit | source=git | neighbors=[2d81f50 feat(seo): vervang /cases door …, main, 04c01f8 SEO, Nav.tsx, ServicePage.tsx] | lang=nl
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fa2ea52f59de7d272b890bac4dfe7ad4b8edade2": "fa2ea52 feat(seo): nav + uitgebreide footer met interne links (geen orphan page…" | kind=Commit | source=git | neighbors=[e0f6b72 feat(seo): interne links op lok…, main, ef44acd feat(seo): sitemap + llms.txt a…, Footer.tsx, Nav.tsx] | lang=nl
+- "components_exampleslideshow_wellness_examples": "WELLNESS_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L165 | neighbors=[ExampleSlideshow.tsx, website-laten-maken-kapsalon.tsx, website-laten-maken-nagelstudio.tsx, website-laten-maken-pedicure.tsx, website-laten-maken-schoonheidssalon.tsx] | lang=en
+- "components_services_services": "services" | kind=code-symbol | source=src/components/Services.tsx:L4 | neighbors=[LocationLanding.tsx, Services.tsx, index.tsx, webdesign.tsx, LocationPageV2.tsx] | lang=en
+- "components_truststrip": "TrustStrip.tsx" | kind=code-symbol | source=src/components/TrustStrip.tsx:L1 | neighbors=[aabf034 SEO, BranchPage.tsx, LocationPageV2.tsx, TrustStrip(), seo.ts] | lang=en
+- "design_handoff_meer_diensten_support_boot": "boot()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L150 | neighbors=[support.js, getReact(), getReactDOM(), parseDcDocument(), rootNameForDocument()] | lang=en
+- "design_handoff_meer_diensten_support_resolve": "resolve()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L205 | neighbors=[support.js, loadReactUmd(), findTopLevelEquality(), parensWrapWhole(), resolvePath()] | lang=en
+- "design_handoff_meer_diensten_support_walkcomponent": "walkComponent()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L661 | neighbors=[support.js, walk(), collectProps(), compileAttr(), walkChildren()] | lang=en
+- "kaart_hoogeveen_en_veendam_support_boot": "boot()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L150 | neighbors=[support.js, getReact(), getReactDOM(), parseDcDocument(), rootNameForDocument()] | lang=en
+- "kaart_hoogeveen_en_veendam_support_resolve": "resolve()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L205 | neighbors=[support.js, loadReactUmd(), findTopLevelEquality(), parensWrapWhole(), resolvePath()] | lang=en
+- "kaart_hoogeveen_en_veendam_support_walkcomponent": "walkComponent()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L661 | neighbors=[support.js, walk(), collectProps(), compileAttr(), walkChildren()] | lang=en
 - "lib_auth_guards_server_ensureroles": "ensureRoles()" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L16 | neighbors=[auth-guards.server.ts, ensureAdmin(), getRoles(), ensureStaff(), ensureSuperAdmin()] | lang=en
 - "lib_project_status_isprojectoverdue": "isProjectOverdue()" | kind=code-symbol | source=src/lib/project-status.ts:L59 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, portal.tsx, portal.projecten.$projectId.tsx, project-status.ts] | lang=en
 - "lib_project_status_project_status_color": "PROJECT_STATUS_COLOR" | kind=code-symbol | source=src/lib/project-status.ts:L25 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, portal.tsx, portal.projecten.$projectId.tsx, project-status.ts] | lang=en
@@ -54,18 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6da1e20bfd1f2cb2370175d7b9210012fceb1a05": "6da1e20 Log root error boundary crashes to site_errors for visibility" | kind=Commit | source=git | neighbors=[4b4ebd9 Catch getSession() network erro…, worktree-replicated-fluttering-whisper, dbd0657 Log server-side (SSR) crashes t…, __root.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7f807c8281cf450804bce42b07393edff688e971": "7f807c8 Catch login network errors instead of crashing to the error boundary" | kind=Commit | source=git | neighbors=[3901302 Fix mojibake in admin dashboard…, worktree-replicated-fluttering-whisper, 4b4ebd9 Catch getSession() network erro…, login.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@8af95bcfd566602bd86d896d3b01f7973a4f78ef": "8af95bc backlink" | kind=Commit | source=git | neighbors=[59bb970 eyoo, main, dca01f9 pagina updates, over-ons.tsx] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@8e663f1fb8f305df3e159fb27cfb8773e7b58adc": "8e663f1 fixes" | kind=Commit | source=git | neighbors=[main, d2da4c9 Log root error boundary crashes…, cf5e121 Catch getSession() network erro…, seo-verbetering] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9965896be37eddc1db3ae92b5d7a76b354441697": "9965896 feat(seo): contact- en cases-pagina met LocalBusiness/Breadcrumb schema" | kind=Commit | source=git | neighbors=[main, e0f6b72 feat(seo): interne links op lok…, contact.tsx, f207e52 feat(seo): dienstenpagina's web…] | lang=nl
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@9c1fa0674c96765d2d6ee5f3d42b0024f5e29034": "9c1fa06 perf fixes" | kind=Commit | source=git | neighbors=[3417a43 fixes, main, 74ecdc1 code fixes, seo-verbetering] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@b75b00da213fa0ede37fa8482e1f43dc4a6a9b04": "b75b00d fixes" | kind=Commit | source=git | neighbors=[main, 5d1e827 Log server-side (SSR) crashes t…, d2da4c9 Log root error boundary crashes…, seo-verbetering] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c27ffd9d2912cb3ef331a0a5e858cd6ea4c0c764": "c27ffd9 fixes" | kind=Commit | source=git | neighbors=[main, a3773ee sec fixes, f2eb4fe Fix root cause: catch Supabase …, seo-verbetering] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@dbd0657ea193395ad36e71a78cfe0b953fc87956": "dbd0657 Log server-side (SSR) crashes to site_errors too" | kind=Commit | source=git | neighbors=[6da1e20 Log root error boundary crashes…, worktree-replicated-fluttering-whisper, 99bd8ac Surface site_errors in the acco…, server.ts] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ef44acdc4cbe4becaa41d27890af2e3744393916": "ef44acd feat(seo): sitemap + llms.txt aangevuld met alle nieuwe pagina's" | kind=Commit | source=git | neighbors=[main, 7a63e47 chore: graphify graph bijgewerkt, sitemap[.]xml.tsx, fa2ea52 feat(seo): nav + uitgebreide fo…] | lang=nl
-- "components_callbackagenda_callbackagenda": "CallbackAgenda()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L62 | neighbors=[admin.leads.tsx, CallbackAgenda.tsx, fmtDayLabel(), startOfWeek()] | lang=en
-- "components_callbackagenda_startofweek": "startOfWeek()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L45 | neighbors=[CallbackAgenda.tsx, CallbackAgenda(), addDays(), startOfDay()] | lang=en
-- "components_exampleslideshow_exampleslideshow": "ExampleSlideshow()" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L12 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx, ServicePage.tsx] | lang=en
-- "components_processtimeline_processtimeline": "ProcessTimeline()" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L48 | neighbors=[LocationLanding.tsx, ProcessTimeline.tsx, index.tsx, LocationPageV2.tsx] | lang=en
-- "components_rodeachtergrond_reddiagonalbackground": "RedDiagonalBackground()" | kind=code-symbol | source=src/components/rodeachtergrond.tsx:L4 | neighbors=[rodeachtergrond.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx, website-laten-maken.tsx] | lang=en
 
 ## Instructions
 

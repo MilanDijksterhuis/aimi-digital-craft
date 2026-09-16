@@ -97,7 +97,7 @@ export const Route = createFileRoute("/website-laten-maken-pedicure")({
       imageAspectRatio="909 / 2160"
       imageWidth={909}
       imageHeight={2160}
-      imageMaxWidth="360px"
+      imageMaxWidth="460px"
     />
   ),
 });
