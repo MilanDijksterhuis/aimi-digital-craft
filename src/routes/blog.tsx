@@ -4,9 +4,27 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
-import { sortedBlogPosts, estimateReadTime } from "@/lib/blog-posts";
+import { estimateReadTime } from "@/lib/markdown";
+import { supabase } from "@/integrations/supabase/client";
+
+type BlogListItem = {
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content: string;
+  published_at: string | null;
+};
 
 export const Route = createFileRoute("/blog")({
+  loader: async (): Promise<{ posts: BlogListItem[] }> => {
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("slug, title, excerpt, content, published_at")
+      .eq("status", "published")
+      .lte("published_at", new Date().toISOString())
+      .order("published_at", { ascending: false });
+    return { posts: data ?? [] };
+  },
   head: () => ({
     meta: [
       { title: "Blog | AIMI Web Agency Veendam & Hoogeveen" },
@@ -25,12 +43,18 @@ export const Route = createFileRoute("/blog")({
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Blog: AIMI" },
-      { name: "twitter:description", content: "Artikelen over webdesign, SEO en online groei van AIMI." },
+      {
+        name: "twitter:description",
+        content: "Artikelen over webdesign, SEO en online groei van AIMI.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
     scripts: [
-      breadcrumbJsonLd([["Home", "/"], ["Blog", "/blog"]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Blog", "/blog"],
+      ]),
       webPageJsonLd({
         path: "/blog",
         name: "Blog: AIMI webdesignbureau Veendam",
@@ -43,7 +67,7 @@ export const Route = createFileRoute("/blog")({
 });
 
 function Blog() {
-  const posts = sortedBlogPosts();
+  const { posts } = Route.useLoaderData();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -54,7 +78,10 @@ function Blog() {
             <Link
               to="/"
               className="text-sm transition-colors"
-              style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+              style={{
+                color: "#a4a9b2",
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+              }}
             >
               ← Terug naar home
             </Link>
@@ -64,7 +91,11 @@ function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="mt-10 mb-3 text-sm font-medium"
-              style={{ color: "#fe2c02", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", letterSpacing: "0.05em" }}
+              style={{
+                color: "#fe2c02",
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                letterSpacing: "0.05em",
+              }}
             >
               Blog
             </motion.p>
@@ -74,7 +105,12 @@ function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-white max-w-3xl"
-              style={{ fontSize: "2.2rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.05 }}
+              style={{
+                fontSize: "2.2rem",
+                fontWeight: 300,
+                letterSpacing: "-0.03em",
+                lineHeight: 1.05,
+              }}
             >
               Artikelen over webdesign, SEO en online groei.
             </motion.h1>
@@ -86,8 +122,8 @@ function Blog() {
               className="mt-6 max-w-2xl text-sm leading-relaxed"
               style={{ color: "#a4a9b2" }}
             >
-              Praktische inzichten uit ons eigen werk, voor kleine bedrijven en
-              zelfstandigen die meer uit hun website willen halen.
+              Praktische inzichten uit ons eigen werk, voor kleine bedrijven en zelfstandigen die
+              meer uit hun website willen halen.
             </motion.p>
           </div>
         </section>
@@ -103,9 +139,8 @@ function Blog() {
                 className="max-w-xl"
               >
                 <p className="text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>
-                  Binnenkort delen we hier onze eerste artikelen. Heb je een
-                  vraag over webdesign of SEO waar je nu al antwoord op wilt?
-                  Neem gerust{" "}
+                  Binnenkort delen we hier onze eerste artikelen. Heb je een vraag over webdesign of
+                  SEO waar je nu al antwoord op wilt? Neem gerust{" "}
                   <a
                     href="/#contact"
                     className="underline underline-offset-4 transition-colors hover:text-white"
@@ -144,15 +179,26 @@ function Blog() {
                         >
                           {post.title}
                         </h2>
-                        <p className="text-sm mt-2 max-w-2xl leading-relaxed" style={{ color: "#a4a9b2" }}>
-                          {post.description}
+                        <p
+                          className="text-sm mt-2 max-w-2xl leading-relaxed"
+                          style={{ color: "#a4a9b2" }}
+                        >
+                          {post.excerpt}
                         </p>
                       </div>
                       <div
                         className="text-xs whitespace-nowrap md:text-right"
-                        style={{ color: "#868b94", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                        style={{
+                          color: "#868b94",
+                          fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                        }}
                       >
-                        {new Date(post.date).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })}
+                        {post.published_at &&
+                          new Date(post.published_at).toLocaleDateString("nl-NL", {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric",
+                          })}
                         <br />
                         {estimateReadTime(post.content)}
                       </div>

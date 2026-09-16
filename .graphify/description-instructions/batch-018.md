@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_hero_hero": "Hero()" | kind=code-symbol | source=src/components/Hero.tsx:L16 | neighbors=[Hero.tsx, index.tsx]
+- "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]
+- "components_leadspanel_initials": "initials()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L75 | neighbors=[LeadsPanel.tsx, LeadDetail()]
+- "components_leadspanel_reltime": "relTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L102 | neighbors=[LeadsPanel.tsx, LeadDetail()]
+- "components_onboardingwizard_onboardingwizard": "OnboardingWizard()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L43 | neighbors=[admin.accounts.$accountId.tsx, OnboardingWizard.tsx]
 - "components_portalonboardingtour_portalonboardingtour": "PortalOnboardingTour()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L46 | neighbors=[portal.tsx, PortalOnboardingTour.tsx]
 - "components_portaltutorial_portaltutorial": "PortalTutorial()" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L51 | neighbors=[portal.tsx, PortalTutorial.tsx]
 - "components_pricing_pricing": "Pricing()" | kind=code-symbol | source=src/components/Pricing.tsx:L36 | neighbors=[Pricing.tsx, index.tsx]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "hooks_use_mobile": "use-mobile.tsx" | kind=code-symbol | source=src/hooks/use-mobile.tsx:L1 | neighbors=[useIsMobile(), sidebar.tsx]
 - "hooks_use_mobile_useismobile": "useIsMobile()" | kind=code-symbol | source=src/hooks/use-mobile.tsx:L5 | neighbors=[use-mobile.tsx, sidebar.tsx]
 - "kaart_hoogeveen_en_veendam_support_cdnscriptfor": "cdnScriptFor()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1149 | neighbors=[support.js, loadReactUmd()]
-- "kaart_hoogeveen_en_veendam_support_contentkey": "contentKey()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L771 | neighbors=[support.js, walkElement()]
-- "kaart_hoogeveen_en_veendam_support_createexternalmodules": "createExternalModules()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1171 | neighbors=[support.js, createRuntime()]
-- "kaart_hoogeveen_en_veendam_support_createhelmetmanager": "createHelmetManager()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1366 | neighbors=[support.js, createRuntime()]
-- "kaart_hoogeveen_en_veendam_support_createpseudosheet": "createPseudoSheet()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1567 | neighbors=[support.js, createRuntime()]
-- "kaart_hoogeveen_en_veendam_support_createregistry": "createRegistry()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1592 | neighbors=[support.js, createRuntime()]
 
 ## Instructions
 

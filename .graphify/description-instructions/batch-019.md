@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "kaart_hoogeveen_en_veendam_support_contentkey": "contentKey()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L771 | neighbors=[support.js, walkElement()]
+- "kaart_hoogeveen_en_veendam_support_createexternalmodules": "createExternalModules()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1171 | neighbors=[support.js, createRuntime()]
+- "kaart_hoogeveen_en_veendam_support_createhelmetmanager": "createHelmetManager()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1366 | neighbors=[support.js, createRuntime()]
+- "kaart_hoogeveen_en_veendam_support_createpseudosheet": "createPseudoSheet()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1567 | neighbors=[support.js, createRuntime()]
+- "kaart_hoogeveen_en_veendam_support_createregistry": "createRegistry()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1592 | neighbors=[support.js, createRuntime()]
 - "kaart_hoogeveen_en_veendam_support_createstreamtracker": "createStreamTracker()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L1792 | neighbors=[support.js, init()]
 - "kaart_hoogeveen_en_veendam_support_dcnamefrompath": "dcNameFromPath()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L75 | neighbors=[support.js, rootNameForDocument()]
 - "kaart_hoogeveen_en_veendam_support_encodecamelattrs": "encodeCamelAttrs()" | kind=code-symbol | source=Kaart Hoogeveen en Veendam/support.js:L366 | neighbors=[support.js, encodeCase()]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_callbacks_agenda_color_classes": "AGENDA_COLOR_CLASSES" | kind=code-symbol | source=src/lib/callbacks.ts:L47 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
 - "lib_callbacks_agendacolor": "AgendaColor" | kind=code-symbol | source=src/lib/callbacks.ts:L38 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
 - "lib_callbacks_callback_outcomes": "CALLBACK_OUTCOMES" | kind=code-symbol | source=src/lib/callbacks.ts:L25 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
-- "lib_callbacks_callback_reasons": "CALLBACK_REASONS" | kind=code-symbol | source=src/lib/callbacks.ts:L7 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
-- "lib_callbacks_callback_status_label": "CALLBACK_STATUS_LABEL" | kind=code-symbol | source=src/lib/callbacks.ts:L16 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
-- "lib_callbacks_callbackstatus": "CallbackStatus" | kind=code-symbol | source=src/lib/callbacks.ts:L14 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
-- "lib_callbacks_suggestcallbackdate": "suggestCallbackDate()" | kind=code-symbol | source=src/lib/callbacks.ts:L75 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
-- "lib_csv_detectdelimiter": "detectDelimiter()" | kind=code-symbol | source=src/lib/csv.ts:L4 | neighbors=[csv.ts, parseCsv()]
 
 ## Instructions
 

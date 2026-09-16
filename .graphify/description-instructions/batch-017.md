@@ -17,6 +17,11 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_popover": "popover.tsx" | kind=code-symbol | source=src/components/ui/popover.tsx:L1 | neighbors=[utils.ts, cn(), PopoverContent]
+- "ui_progress": "progress.tsx" | kind=code-symbol | source=src/components/ui/progress.tsx:L1 | neighbors=[utils.ts, cn(), Progress]
+- "ui_slider": "slider.tsx" | kind=code-symbol | source=src/components/ui/slider.tsx:L1 | neighbors=[utils.ts, cn(), Slider]
+- "ui_sonner": "sonner.tsx" | kind=code-symbol | source=src/components/ui/sonner.tsx:L1 | neighbors=[__root.tsx, Toaster(), ToasterProps]
+- "ui_switch": "switch.tsx" | kind=code-symbol | source=src/components/ui/switch.tsx:L1 | neighbors=[utils.ts, cn(), Switch]
 - "ui_textarea": "textarea.tsx" | kind=code-symbol | source=src/components/ui/textarea.tsx:L1 | neighbors=[utils.ts, cn(), Textarea]
 - "authenticated_account_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L7 | neighbors=[account.tsx, routeTree.gen.ts]
 - "authenticated_admin_accounts_accountslistsection": "AccountsListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.accounts.tsx:L264 | neighbors=[admin.accounts.tsx, accountStatus()]
@@ -25,7 +30,7 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_changes_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.changes.tsx:L12 | neighbors=[admin.changes.tsx, routeTree.gen.ts]
 - "authenticated_admin_projecten_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L41 | neighbors=[admin.projecten.tsx, routeTree.gen.ts]
 - "authenticated_admin_rollen_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L20 | neighbors=[admin.rollen.tsx, routeTree.gen.ts]
-- "authenticated_admin_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L64 | neighbors=[admin.tsx, routeTree.gen.ts]
+- "authenticated_admin_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L87 | neighbors=[admin.tsx, routeTree.gen.ts]
 - "authenticated_portal_matchesfilter": "matchesFilter()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L106 | neighbors=[portal.tsx, mapStatus()]
 - "authenticated_portal_projecten_projectid_monitoringsection": "MonitoringSection()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L80 | neighbors=[portal.projecten.$projectId.tsx, timeAgo()]
 - "authenticated_portal_projecten_projectid_timeago": "timeAgo()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L27 | neighbors=[portal.projecten.$projectId.tsx, MonitoringSection()]
@@ -52,11 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_confirmdialog_confirmprovider": "ConfirmProvider()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L58 | neighbors=[ConfirmDialog.tsx, __root.tsx]
 - "components_deletedchangestab_deletedchangestab": "DeletedChangesTab()" | kind=code-symbol | source=src/components/DeletedChangesTab.tsx:L12 | neighbors=[admin.tsx, DeletedChangesTab.tsx]
 - "components_faq_faqgrouped": "FaqGrouped()" | kind=code-symbol | source=src/components/FAQ.tsx:L172 | neighbors=[FAQ.tsx, faq.tsx]
-- "components_hero_hero": "Hero()" | kind=code-symbol | source=src/components/Hero.tsx:L16 | neighbors=[Hero.tsx, index.tsx]
-- "components_idletimeout_idletimeout": "IdleTimeout()" | kind=code-symbol | source=src/components/IdleTimeout.tsx:L21 | neighbors=[IdleTimeout.tsx, _authenticated.tsx]
-- "components_leadspanel_initials": "initials()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L75 | neighbors=[LeadsPanel.tsx, LeadDetail()]
-- "components_leadspanel_reltime": "relTime()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L102 | neighbors=[LeadsPanel.tsx, LeadDetail()]
-- "components_onboardingwizard_onboardingwizard": "OnboardingWizard()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L43 | neighbors=[admin.accounts.$accountId.tsx, OnboardingWizard.tsx]
 
 ## Instructions
 

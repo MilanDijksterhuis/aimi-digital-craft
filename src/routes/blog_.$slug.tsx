@@ -4,39 +4,64 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
-import { getBlogPost, estimateReadTime } from "@/lib/blog-posts";
-import { MarkdownBody } from "@/lib/markdown";
+import { MarkdownBody, estimateReadTime } from "@/lib/markdown";
+import { supabase } from "@/integrations/supabase/client";
+
+type BlogPostDetail = {
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content: string;
+  published_at: string | null;
+  featured_image_url: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
+};
 
 export const Route = createFileRoute("/blog_/$slug")({
-  loader: ({ params }) => {
-    const post = getBlogPost(params.slug);
+  loader: async ({ params }): Promise<BlogPostDetail> => {
+    const { data: post } = await supabase
+      .from("blog_posts")
+      .select(
+        "slug, title, excerpt, content, published_at, featured_image_url, seo_title, seo_description",
+      )
+      .eq("slug", params.slug)
+      .eq("status", "published")
+      .lte("published_at", new Date().toISOString())
+      .maybeSingle();
     if (!post) throw notFound();
     return post;
   },
   head: ({ loaderData: post }) => {
     if (!post) return {};
+    const description = post.seo_description || post.excerpt || "";
+    const title = post.seo_title || post.title;
     return {
       meta: [
-        { title: `${post.title} | AIMI Blog` },
-        { name: "description", content: post.description },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.description },
+        { title: `${title} | AIMI Blog` },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:url", content: `${SITE_URL}/blog/${post.slug}` },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: OG_IMAGE_URL },
+        { property: "og:image", content: post.featured_image_url || OG_IMAGE_URL },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: post.title },
-        { name: "twitter:description", content: post.description },
-        { name: "twitter:image", content: OG_IMAGE_URL },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: post.featured_image_url || OG_IMAGE_URL },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/blog/${post.slug}` }],
       scripts: [
-        breadcrumbJsonLd([["Home", "/"], ["Blog", "/blog"], [post.title, `/blog/${post.slug}`]]),
+        breadcrumbJsonLd([
+          ["Home", "/"],
+          ["Blog", "/blog"],
+          [post.title, `/blog/${post.slug}`],
+        ]),
         webPageJsonLd({
           path: `/blog/${post.slug}`,
           name: post.title,
-          description: post.description,
-          datePublished: post.date,
+          description,
+          datePublished: post.published_at ?? undefined,
         }),
       ],
     };
@@ -56,7 +81,10 @@ function BlogPost() {
             <Link
               to="/blog"
               className="text-sm transition-colors"
-              style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+              style={{
+                color: "#a4a9b2",
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+              }}
             >
               ← Terug naar blog
             </Link>
@@ -66,9 +94,17 @@ function BlogPost() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="mt-10 mb-3 text-xs"
-              style={{ color: "#868b94", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+              style={{
+                color: "#868b94",
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+              }}
             >
-              {new Date(post.date).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })}
+              {post.published_at &&
+                new Date(post.published_at).toLocaleDateString("nl-NL", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               {" · "}
               {estimateReadTime(post.content)}
             </motion.p>
@@ -78,7 +114,12 @@ function BlogPost() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-white"
-              style={{ fontSize: "2.2rem", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.1 }}
+              style={{
+                fontSize: "2.2rem",
+                fontWeight: 300,
+                letterSpacing: "-0.03em",
+                lineHeight: 1.1,
+              }}
             >
               {post.title}
             </motion.h1>
@@ -86,7 +127,19 @@ function BlogPost() {
         </section>
 
         <section className="py-16" style={{ background: "#1a1a1a" }}>
-          <div className="mx-auto max-w-3xl px-6 space-y-6 text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>
+          {post.featured_image_url && (
+            <div className="mx-auto max-w-3xl px-6 mb-10">
+              <img
+                src={post.featured_image_url}
+                alt=""
+                className="w-full rounded-xl object-cover"
+              />
+            </div>
+          )}
+          <div
+            className="mx-auto max-w-3xl px-6 space-y-6 text-sm leading-relaxed"
+            style={{ color: "#a4a9b2" }}
+          >
             <MarkdownBody content={post.content} />
           </div>
 
@@ -98,7 +151,11 @@ function BlogPost() {
               <div>
                 <h2
                   className="text-white mb-2"
-                  style={{ fontSize: "1.1rem", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif", fontWeight: 500 }}
+                  style={{
+                    fontSize: "1.1rem",
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                    fontWeight: 500,
+                  }}
                 >
                   Benieuwd hoe jouw website ervoor staat?
                 </h2>

@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_website_laten_maken_schoonheidssalon_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-schoonheidssalon.tsx:L58 | neighbors=[website-laten-maken-schoonheidssalon.tsx, routeTree.gen.ts]
+- "routes_website_laten_maken_sneek_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-sneek.tsx:L56 | neighbors=[website-laten-maken-sneek.tsx, routeTree.gen.ts]
+- "routes_website_laten_maken_stadskanaal_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-stadskanaal.tsx:L51 | neighbors=[website-laten-maken-stadskanaal.tsx, routeTree.gen.ts]
+- "routes_website_laten_maken_veendam_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-veendam.tsx:L96 | neighbors=[website-laten-maken-veendam.tsx, routeTree.gen.ts]
+- "routes_website_laten_maken_winschoten_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-winschoten.tsx:L50 | neighbors=[website-laten-maken-winschoten.tsx, routeTree.gen.ts]
+- "routes_website_laten_vernieuwen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L101 | neighbors=[website-laten-vernieuwen.tsx, routeTree.gen.ts]
+- "routes_werkwijze_route": "Route" | kind=code-symbol | source=src/routes/werkwijze.tsx:L49 | neighbors=[werkwijze.tsx, routeTree.gen.ts]
 - "routes_wordpress_of_maatwerk_route": "Route" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L107 | neighbors=[wordpress-of-maatwerk.tsx, routeTree.gen.ts]
 - "scripts_indexnow_submit": "indexnow-submit.mjs" | kind=code-symbol | source=scripts/indexnow-submit.mjs:L1 | neighbors=[d38d9ab Add IndexNow key route, main()]
 - "scripts_set_telegram_webhook": "set-telegram-webhook.ts" | kind=code-symbol | source=scripts/set-telegram-webhook.ts:L1 | neighbors=[2b1d78f telegram, main()]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_separator_separator": "Separator" | kind=code-symbol | source=src/components/ui/separator.tsx:L6 | neighbors=[separator.tsx, sidebar.tsx]
 - "ui_sheet_sheetcontent": "SheetContent" | kind=code-symbol | source=src/components/ui/sheet.tsx:L57 | neighbors=[sheet.tsx, sidebar.tsx]
 - "ui_sheet_sheetdescription": "SheetDescription" | kind=code-symbol | source=src/components/ui/sheet.tsx:L99 | neighbors=[sheet.tsx, sidebar.tsx]
-- "ui_sheet_sheetheader": "SheetHeader()" | kind=code-symbol | source=src/components/ui/sheet.tsx:L74 | neighbors=[sheet.tsx, sidebar.tsx]
-- "ui_sheet_sheettitle": "SheetTitle" | kind=code-symbol | source=src/components/ui/sheet.tsx:L87 | neighbors=[sheet.tsx, sidebar.tsx]
-- "ui_sonner_toaster": "Toaster()" | kind=code-symbol | source=src/components/ui/sonner.tsx:L5 | neighbors=[__root.tsx, sonner.tsx]
-- "ui_toggle_togglevariants": "toggleVariants" | kind=code-symbol | source=src/components/ui/toggle.tsx:L7 | neighbors=[toggle.tsx, toggle-group.tsx]
-- "ui_tooltip_tooltipcontent": "TooltipContent" | kind=code-symbol | source=src/components/ui/tooltip.tsx:L14 | neighbors=[sidebar.tsx, tooltip.tsx]
-- "authenticated_account_accountpage": "AccountPage()" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L12 | neighbors=[account.tsx]
-- "authenticated_admin_aanvragentab": "AanvragenTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L454 | neighbors=[admin.tsx]
 
 ## Instructions
 

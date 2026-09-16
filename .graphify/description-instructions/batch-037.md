@@ -17,6 +17,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_monitoring_shared_fetchpingrows": "fetchPingRows()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L131 | neighbors=[monitoring.shared.ts]
+- "lib_monitoring_shared_monitoringstats": "MonitoringStats" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L80 | neighbors=[monitoring.shared.ts]
+- "lib_portal_functions_assertownproject": "assertOwnProject()" | kind=code-symbol | source=src/lib/portal.functions.ts:L558 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_cancelmychange": "cancelMyChange" | kind=code-symbol | source=src/lib/portal.functions.ts:L290 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_getattachmenturl": "getAttachmentUrl" | kind=code-symbol | source=src/lib/portal.functions.ts:L517 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_getmydashboard": "getMyDashboard" | kind=code-symbol | source=src/lib/portal.functions.ts:L8 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_loglogin": "logLogin" | kind=code-symbol | source=src/lib/portal.functions.ts:L226 | neighbors=[portal.functions.ts]
+- "lib_portal_functions_markallnotificationsread": "markAllNotificationsRead" | kind=code-symbol | source=src/lib/portal.functions.ts:L461 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_marknotificationread": "markNotificationRead" | kind=code-symbol | source=src/lib/portal.functions.ts:L447 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_portalcompleteonboarding": "portalCompleteOnboarding" | kind=code-symbol | source=src/lib/portal.functions.ts:L189 | neighbors=[portal.functions.ts]
 - "lib_portal_functions_portalcompletetutorial": "portalCompleteTutorial" | kind=code-symbol | source=src/lib/portal.functions.ts:L214 | neighbors=[portal.functions.ts]
@@ -47,16 +55,8 @@ one-sentence description — no prose, no markdown fences.
 - "lib_rbac_approle": "AppRole" | kind=code-symbol | source=src/lib/rbac.ts:L2 | neighbors=[rbac.ts]
 - "lib_rbac_isstaffrole": "isStaffRole()" | kind=code-symbol | source=src/lib/rbac.ts:L30 | neighbors=[rbac.ts]
 - "lib_rbac_staff_roles": "STAFF_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L21 | neighbors=[rbac.ts]
-- "lib_seo_default_area_served": "DEFAULT_AREA_SERVED" | kind=code-symbol | source=src/lib/seo.ts:L239 | neighbors=[seo.ts]
-- "lib_seo_ldscript": "LdScript" | kind=code-symbol | source=src/lib/seo.ts:L231 | neighbors=[seo.ts]
-- "lib_seo_nl_months": "NL_MONTHS" | kind=code-symbol | source=src/lib/seo.ts:L176 | neighbors=[seo.ts]
-- "lib_status_simple_categories": "SIMPLE_CATEGORIES" | kind=code-symbol | source=src/lib/status.ts:L73 | neighbors=[status.ts]
-- "lib_status_status_flow": "STATUS_FLOW" | kind=code-symbol | source=src/lib/status.ts:L13 | neighbors=[status.ts]
-- "lib_telegram_functions_admincreaterecipient": "adminCreateRecipient" | kind=code-symbol | source=src/lib/telegram.functions.ts:L125 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admindeleterecipient": "adminDeleteRecipient" | kind=code-symbol | source=src/lib/telegram.functions.ts:L193 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingeneraterecipientlink": "adminGenerateRecipientLink" | kind=code-symbol | source=src/lib/telegram.functions.ts:L142 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingeneratetelegramlink": "adminGenerateTelegramLink" | kind=code-symbol | source=src/lib/telegram.functions.ts:L13 | neighbors=[telegram.functions.ts]
-- "lib_telegram_functions_admingettelegramstatus": "adminGetTelegramStatus" | kind=code-symbol | source=src/lib/telegram.functions.ts:L25 | neighbors=[telegram.functions.ts]
+- "lib_seo_default_area_served": "DEFAULT_AREA_SERVED" | kind=code-symbol | source=src/lib/seo.ts:L252 | neighbors=[seo.ts]
+- "lib_seo_ldscript": "LdScript" | kind=code-symbol | source=src/lib/seo.ts:L244 | neighbors=[seo.ts]
 
 ## Instructions
 

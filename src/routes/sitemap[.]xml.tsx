@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { PAGE_DATES } from "@/lib/seo";
+import { supabase } from "@/integrations/supabase/client";
 
 const BASE_URL = import.meta.env.VITE_SITE_URL ?? "https://aimi-development.nl";
 
@@ -10,10 +11,11 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         // lastmod = datum van de laatste inhoudelijke wijziging per pagina. Sinds
         // GEO-audit 2026-09-06 (punt 8.1) is `PAGE_DATES` in src/lib/seo.ts de
-        // enige bron: de sitemap, het WebPage-schema (`dateModified`) en de
-        // zichtbare "Bijgewerkt op"-regel lezen alle drie hieruit, zodat ze nooit
-        // uit elkaar lopen. Geen changefreq/priority: Google negeert die sinds 2023.
-        const urls = Object.entries(PAGE_DATES).map(([path, lastmod]) =>
+        // enige bron voor de statische pagina's: de sitemap, het WebPage-schema
+        // (`dateModified`) en de zichtbare "Bijgewerkt op"-regel lezen alle drie
+        // hieruit, zodat ze nooit uit elkaar lopen. Geen changefreq/priority:
+        // Google negeert die sinds 2023.
+        const staticUrls = Object.entries(PAGE_DATES).map(([path, lastmod]) =>
           [
             `  <url>`,
             `    <loc>${BASE_URL}${path}</loc>`,
@@ -21,6 +23,25 @@ export const Route = createFileRoute("/sitemap.xml")({
             `  </url>`,
           ].join("\n"),
         );
+
+        // Blogposts komen uit de blog_posts-tabel (blog-CMS module) i.p.v.
+        // PAGE_DATES, want die lijst groeit/verandert onafhankelijk van een
+        // code-deploy zodra admins in /admin/blog publiceren.
+        const { data: posts } = await supabase
+          .from("blog_posts")
+          .select("slug, updated_at")
+          .eq("status", "published")
+          .lte("published_at", new Date().toISOString());
+        const blogUrls = (posts ?? []).map((p) =>
+          [
+            `  <url>`,
+            `    <loc>${BASE_URL}/blog/${p.slug}</loc>`,
+            `    <lastmod>${p.updated_at.slice(0, 10)}</lastmod>`,
+            `  </url>`,
+          ].join("\n"),
+        );
+
+        const urls = [...staticUrls, ...blogUrls];
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
           `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,

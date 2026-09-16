@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_portal_stat": "Stat()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L775 | neighbors=[portal.tsx]
+- "authenticated_portal_status_style": "STATUS_STYLE" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L76 | neighbors=[portal.tsx]
+- "authenticated_portal_statusbadge": "StatusBadge()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L803 | neighbors=[portal.tsx]
+- "authenticated_portal_statuskey": "StatusKey" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L65 | neighbors=[portal.tsx]
+- "authenticated_portal_steps": "STEPS" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L85 | neighbors=[portal.tsx]
+- "authenticated_portal_uptimechart": "UptimeChart()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1171 | neighbors=[portal.tsx]
+- "authenticated_portal_websitetab": "WebsiteTab()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1198 | neighbors=[portal.tsx]
 - "authenticated_server_disk_days_options": "DISK_DAYS_OPTIONS" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L314 | neighbors=[server.tsx]
 - "authenticated_server_downloadcsv": "downloadCsv()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L168 | neighbors=[server.tsx]
 - "authenticated_server_errorbox": "ErrorBox()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L82 | neighbors=[server.tsx]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "components_branchpage_faqsection": "FaqSection()" | kind=code-symbol | source=src/components/BranchPage.tsx:L106 | neighbors=[BranchPage.tsx]
 - "components_branchpage_sectionrenderers": "sectionRenderers" | kind=code-symbol | source=src/components/BranchPage.tsx:L180 | neighbors=[BranchPage.tsx]
 - "components_branchpage_textsection": "TextSection()" | kind=code-symbol | source=src/components/BranchPage.tsx:L47 | neighbors=[BranchPage.tsx]
-- "components_breadcrumbs_crumb": "Crumb" | kind=code-symbol | source=src/components/Breadcrumbs.tsx:L13 | neighbors=[Breadcrumbs.tsx]
-- "components_callbackagenda_callbackdetailmodal": "CallbackDetailModal()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L404 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_dayview": "DayView()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L306 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_fmtdayshort": "fmtDayShort()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L57 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_todayoverview": "TodayOverview()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L230 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_viewmode": "ViewMode" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L60 | neighbors=[CallbackAgenda.tsx]
-- "components_callbackagenda_weekview": "WeekView()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L361 | neighbors=[CallbackAgenda.tsx]
 
 ## Instructions
 

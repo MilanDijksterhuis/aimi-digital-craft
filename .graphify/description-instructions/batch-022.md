@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_over_ons_route": "Route" | kind=code-symbol | source=src/routes/over-ons.tsx:L34 | neighbors=[over-ons.tsx, routeTree.gen.ts]
+- "routes_privacybeleid_route": "Route" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L5 | neighbors=[privacybeleid.tsx, routeTree.gen.ts]
+- "routes_root_route": "Route" | kind=code-symbol | source=src/routes/__root.tsx:L114 | neighbors=[__root.tsx, routeTree.gen.ts]
+- "routes_seo_route": "Route" | kind=code-symbol | source=src/routes/seo.tsx:L119 | neighbors=[seo.tsx, routeTree.gen.ts]
+- "routes_tarieven_route": "Route" | kind=code-symbol | source=src/routes/tarieven.tsx:L177 | neighbors=[tarieven.tsx, routeTree.gen.ts]
+- "routes_track_js": "track[.]js.tsx" | kind=code-symbol | source=src/routes/track[.]js.tsx:L1 | neighbors=[cors, Route]
+- "routes_webdesign_route": "Route" | kind=code-symbol | source=src/routes/webdesign.tsx:L31 | neighbors=[webdesign.tsx, routeTree.gen.ts]
 - "routes_webshop_laten_maken_route": "Route" | kind=code-symbol | source=src/routes/webshop-laten-maken.tsx:L77 | neighbors=[webshop-laten-maken.tsx, routeTree.gen.ts]
 - "routes_website_checker_getfindings": "getFindings()" | kind=code-symbol | source=src/routes/website-checker.tsx:L136 | neighbors=[website-checker.tsx, ReportCard()]
 - "routes_website_checker_islikelyvalidurl": "isLikelyValidUrl()" | kind=code-symbol | source=src/routes/website-checker.tsx:L53 | neighbors=[website-checker.tsx, WebsiteCheckerPage()]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_maken_roden_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-roden.tsx:L86 | neighbors=[website-laten-maken-roden.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken.tsx:L78 | neighbors=[website-laten-maken.tsx, routeTree.gen.ts]
 - "routes_website_laten_maken_schilder_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-schilder.tsx:L58 | neighbors=[website-laten-maken-schilder.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_schoonheidssalon_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-schoonheidssalon.tsx:L58 | neighbors=[website-laten-maken-schoonheidssalon.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_sneek_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-sneek.tsx:L56 | neighbors=[website-laten-maken-sneek.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_stadskanaal_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-stadskanaal.tsx:L51 | neighbors=[website-laten-maken-stadskanaal.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_veendam_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-veendam.tsx:L96 | neighbors=[website-laten-maken-veendam.tsx, routeTree.gen.ts]
-- "routes_website_laten_maken_winschoten_route": "Route" | kind=code-symbol | source=src/routes/website-laten-maken-winschoten.tsx:L50 | neighbors=[website-laten-maken-winschoten.tsx, routeTree.gen.ts]
-- "routes_website_laten_vernieuwen_route": "Route" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L101 | neighbors=[website-laten-vernieuwen.tsx, routeTree.gen.ts]
-- "routes_werkwijze_route": "Route" | kind=code-symbol | source=src/routes/werkwijze.tsx:L49 | neighbors=[werkwijze.tsx, routeTree.gen.ts]
 
 ## Instructions
 

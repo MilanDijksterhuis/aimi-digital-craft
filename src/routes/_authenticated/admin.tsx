@@ -3,11 +3,34 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState, useMemo, useEffect } from "react";
 import {
-  BarChart2, Users, GitPullRequest, Inbox, MessageSquare, Calendar,
-  MessagesSquare, UserCheck, Trash2, Key, Link2,
-  ChevronDown, ArrowUp, ArrowDown, Users2, Bell, Archive,
-  AlertTriangle, Shield, ChevronLeft, RefreshCw, CheckCircle, XCircle,
-  Clock, Activity, Target, Settings,
+  BarChart2,
+  Users,
+  GitPullRequest,
+  Inbox,
+  MessageSquare,
+  Calendar,
+  MessagesSquare,
+  UserCheck,
+  Trash2,
+  Key,
+  Link2,
+  ChevronDown,
+  ArrowUp,
+  ArrowDown,
+  Users2,
+  Bell,
+  Archive,
+  AlertTriangle,
+  Shield,
+  ChevronLeft,
+  RefreshCw,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Activity,
+  Target,
+  Settings,
+  Newspaper,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -81,21 +104,38 @@ function AdminPage() {
   });
 
   type TabKey =
-    | "dashboard" | "accounts" | "password_resets"
-    | "changes" | "archived" | "berichten" | "aanvragen" | "notifications"
-    | "website_links" | "alerts" | "role_permissions" | "team" | "afspraken"
-    | "chat" | "deleted";
+    | "dashboard"
+    | "accounts"
+    | "password_resets"
+    | "changes"
+    | "archived"
+    | "berichten"
+    | "aanvragen"
+    | "notifications"
+    | "website_links"
+    | "alerts"
+    | "role_permissions"
+    | "team"
+    | "afspraken"
+    | "chat"
+    | "deleted";
   const [tab, setTab] = useState<TabKey>("dashboard");
   const perms = usePermissions();
 
   // Pending counts for sidebar badges
   const listResets = useServerFn(adminListPasswordResets);
   const resetsQ = useQuery({ queryKey: ["admin-password-resets"], queryFn: () => listResets({}) });
-  const pendingResets = (resetsQ.data?.items ?? []).filter((r: any) => r.status === "pending").length;
+  const pendingResets = (resetsQ.data?.items ?? []).filter(
+    (r: any) => r.status === "pending",
+  ).length;
 
   // New-activity tracking via localStorage
   const [adminSeen, setAdminSeen] = useState<Record<string, number>>(() => {
-    try { return JSON.parse(localStorage.getItem("aimi_admin_seen") ?? "{}"); } catch { return {}; }
+    try {
+      return JSON.parse(localStorage.getItem("aimi_admin_seen") ?? "{}");
+    } catch {
+      return {};
+    }
   });
   const markAdminTabSeen = (tabKey: string) => {
     const updated = { ...adminSeen, [tabKey]: Date.now() };
@@ -121,7 +161,9 @@ function AdminPage() {
       <div className="space-y-4">
         <Skeleton className="h-10 w-40" />
         <div className="grid sm:grid-cols-3 gap-4">
-          {[1,2,3].map(i => <Skeleton key={i} className="h-28 rounded-lg" />)}
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-28 rounded-lg" />
+          ))}
         </div>
         <TableSkeleton cols={5} />
       </div>
@@ -160,42 +202,108 @@ function AdminPage() {
   const lastSeenBerichten = adminSeen["berichten"] ?? 0;
   const newBerichten = data.requests.reduce((acc: number, r: any) => {
     const comments: any[] = r.change_comments ?? [];
-    return acc + comments.filter(
-      (c) => customerIds.has(c.author_id) && new Date(c.created_at).getTime() > lastSeenBerichten,
-    ).length;
+    return (
+      acc +
+      comments.filter(
+        (c) => customerIds.has(c.author_id) && new Date(c.created_at).getTime() > lastSeenBerichten,
+      ).length
+    );
   }, 0);
 
-  const groups: { label: string; items: { key: TabKey; label: string; icon: any; badge?: number; alert?: boolean; href?: string }[] }[] = [
+  const groups: {
+    label: string;
+    items: {
+      key: TabKey;
+      label: string;
+      icon: any;
+      badge?: number;
+      alert?: boolean;
+      href?: string;
+    }[];
+  }[] = [
     { label: "Overzicht", items: [{ key: "dashboard", label: "Dashboard", icon: BarChart2 }] },
-    { label: "Klanten & accounts", items: [
-      { key: "accounts" as TabKey, label: "Accounts", icon: Users2, href: "/admin/accounts" },
-      { key: "password_resets", label: "Wachtwoord reset verzoeken", icon: Key, badge: pendingResets },
-    ]},
-    { label: "Werk", items: [
-      { key: "changes" as TabKey, label: `Changes (${data.requests.length})`, icon: GitPullRequest, alert: newChanges > 0, badge: newChanges || undefined, href: "/admin/changes" },
-      { key: "archived", label: "Gearchiveerd", icon: Archive },
-      { key: "berichten", label: "Berichten", icon: MessageSquare, alert: newBerichten > 0, badge: newBerichten || undefined },
-      { key: "aanvragen", label: `Aanvragen (${data.pendingPurchases.length})`, icon: Inbox, badge: data.pendingPurchases.length || undefined },
-    ]},
-    { label: "Beheer", items: [
-      { key: "notifications", label: "Notificaties", icon: Bell },
-      { key: "projecten" as TabKey, label: "Projecten", icon: Link2, href: "/admin/projecten" },
-      { key: "alerts", label: "Alerts", icon: AlertTriangle },
-      ...(perms.isSuperAdmin ? [{ key: "role_permissions" as TabKey, label: "Rollen & Permissies", icon: Shield, href: "/admin/rollen" }] : []),
-      { key: "team", label: "Team", icon: UserCheck },
-      { key: "afspraken", label: "Afspraken", icon: Calendar },
-      { key: "instellingen" as TabKey, label: "Instellingen", icon: Settings, href: "/admin/instellingen" },
-      { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
-    ]},
+    {
+      label: "Klanten & accounts",
+      items: [
+        { key: "accounts" as TabKey, label: "Accounts", icon: Users2, href: "/admin/accounts" },
+        {
+          key: "password_resets",
+          label: "Wachtwoord reset verzoeken",
+          icon: Key,
+          badge: pendingResets,
+        },
+      ],
+    },
+    {
+      label: "Werk",
+      items: [
+        {
+          key: "changes" as TabKey,
+          label: `Changes (${data.requests.length})`,
+          icon: GitPullRequest,
+          alert: newChanges > 0,
+          badge: newChanges || undefined,
+          href: "/admin/changes",
+        },
+        { key: "archived", label: "Gearchiveerd", icon: Archive },
+        {
+          key: "berichten",
+          label: "Berichten",
+          icon: MessageSquare,
+          alert: newBerichten > 0,
+          badge: newBerichten || undefined,
+        },
+        {
+          key: "aanvragen",
+          label: `Aanvragen (${data.pendingPurchases.length})`,
+          icon: Inbox,
+          badge: data.pendingPurchases.length || undefined,
+        },
+      ],
+    },
+    {
+      label: "Beheer",
+      items: [
+        { key: "notifications", label: "Notificaties", icon: Bell },
+        { key: "projecten" as TabKey, label: "Projecten", icon: Link2, href: "/admin/projecten" },
+        { key: "blog" as TabKey, label: "Blog", icon: Newspaper, href: "/admin/blog" },
+        { key: "alerts", label: "Alerts", icon: AlertTriangle },
+        ...(perms.isSuperAdmin
+          ? [
+              {
+                key: "role_permissions" as TabKey,
+                label: "Rollen & Permissies",
+                icon: Shield,
+                href: "/admin/rollen",
+              },
+            ]
+          : []),
+        { key: "team", label: "Team", icon: UserCheck },
+        { key: "afspraken", label: "Afspraken", icon: Calendar },
+        {
+          key: "instellingen" as TabKey,
+          label: "Instellingen",
+          icon: Settings,
+          href: "/admin/instellingen",
+        },
+        { key: "server" as TabKey, label: "Server monitoring", icon: Activity, href: "/server" },
+      ],
+    },
     ...(perms.can("leads_view")
-      ? [{ label: "Sales", items: [
-          { key: "leads" as TabKey, label: "Leads", icon: Target, href: "/admin/leads" },
-        ] }]
+      ? [
+          {
+            label: "Sales",
+            items: [{ key: "leads" as TabKey, label: "Leads", icon: Target, href: "/admin/leads" }],
+          },
+        ]
       : []),
-    { label: "Overig", items: [
-      { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
-      { key: "deleted", label: "Verwijderd", icon: Trash2 },
-    ]},
+    {
+      label: "Overig",
+      items: [
+        { key: "chat", label: "Chat", icon: MessagesSquare, badge: unreadChatCount || undefined },
+        { key: "deleted", label: "Verwijderd", icon: Trash2 },
+      ],
+    },
   ];
 
   return (
@@ -209,10 +317,49 @@ function AdminPage() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
-        <AdminSidebar groups={groups} active={tab} setActive={(k) => { setTab(k); markAdminTabSeen(k); }} />
+        <AdminSidebar
+          groups={groups}
+          active={tab}
+          setActive={(k) => {
+            setTab(k);
+            markAdminTabSeen(k);
+          }}
+        />
 
         <div className="flex-1 min-w-0">
-          {tab === "dashboard" && <Dashboard metrics={data.metrics} openChanges={data.requests.filter((r: any) => r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced").length} pendingTotal={pendingResets} onGoChanges={() => { setTab("changes"); markAdminTabSeen("changes"); }} onGoPending={() => setTab("password_resets")} recentRequests={data.requests.filter((r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000))} recentComments={data.requests.flatMap((r: any) => (r.change_comments ?? []).filter((c: any) => customerIds.has(c.author_id) && new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).map((c: any) => ({ ...c, requestTitle: r.title })))} onGoBerichten={() => { setTab("berichten"); markAdminTabSeen("berichten"); }} />}
+          {tab === "dashboard" && (
+            <Dashboard
+              metrics={data.metrics}
+              openChanges={
+                data.requests.filter(
+                  (r: any) =>
+                    r.status !== "done" && r.status !== "rejected" && r.status !== "invoiced",
+                ).length
+              }
+              pendingTotal={pendingResets}
+              onGoChanges={() => {
+                setTab("changes");
+                markAdminTabSeen("changes");
+              }}
+              onGoPending={() => setTab("password_resets")}
+              recentRequests={data.requests.filter(
+                (r: any) => new Date(r.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000),
+              )}
+              recentComments={data.requests.flatMap((r: any) =>
+                (r.change_comments ?? [])
+                  .filter(
+                    (c: any) =>
+                      customerIds.has(c.author_id) &&
+                      new Date(c.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000),
+                  )
+                  .map((c: any) => ({ ...c, requestTitle: r.title })),
+              )}
+              onGoBerichten={() => {
+                setTab("berichten");
+                markAdminTabSeen("berichten");
+              }}
+            />
+          )}
           {tab === "notifications" && <NotificationsPanel />}
           {tab === "password_resets" && <PasswordResetsPanel />}
           {tab === "archived" && <ArchivedChangesPanel />}
@@ -224,16 +371,29 @@ function AdminPage() {
           {tab === "deleted" && <DeletedChangesTab />}
           {tab === "alerts" && <AlertsPanel />}
         </div>
-
       </div>
     </div>
   );
 }
 
-function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPending, recentRequests, recentComments, onGoBerichten }: {
-  metrics: any; openChanges: number; pendingTotal: number;
-  onGoChanges: () => void; onGoPending: () => void; onGoBerichten: () => void;
-  recentRequests: any[]; recentComments: any[];
+function Dashboard({
+  metrics,
+  openChanges,
+  pendingTotal,
+  onGoChanges,
+  onGoPending,
+  recentRequests,
+  recentComments,
+  onGoBerichten,
+}: {
+  metrics: any;
+  openChanges: number;
+  pendingTotal: number;
+  onGoChanges: () => void;
+  onGoPending: () => void;
+  onGoBerichten: () => void;
+  recentRequests: any[];
+  recentComments: any[];
 }) {
   const max = Math.max(1, ...metrics.months.map((m: any) => m.count));
   const hasNew = recentRequests.length > 0 || recentComments.length > 0;
@@ -246,12 +406,24 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
           </h3>
           {recentRequests.length > 0 && (
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">Nieuwe changes ({recentRequests.length})</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">
+                Nieuwe changes ({recentRequests.length})
+              </p>
               <ul className="space-y-1">
                 {recentRequests.slice(0, 5).map((r: any) => (
                   <li key={r.id} className="flex items-center justify-between text-sm">
-                    <button onClick={onGoChanges} className="text-left hover:text-primary truncate max-w-[70%]">{r.title}</button>
-                    <span className="text-xs text-muted-foreground shrink-0">{new Date(r.created_at).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" })}</span>
+                    <button
+                      onClick={onGoChanges}
+                      className="text-left hover:text-primary truncate max-w-[70%]"
+                    >
+                      {r.title}
+                    </button>
+                    <span className="text-xs text-muted-foreground shrink-0">
+                      {new Date(r.created_at).toLocaleTimeString("nl-NL", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -259,12 +431,24 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
           )}
           {recentComments.length > 0 && (
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">Nieuwe berichten van klanten ({recentComments.length})</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1.5">
+                Nieuwe berichten van klanten ({recentComments.length})
+              </p>
               <ul className="space-y-1">
                 {recentComments.slice(0, 5).map((c: any) => (
                   <li key={c.id} className="flex items-center justify-between text-sm">
-                    <button onClick={onGoBerichten} className="text-left hover:text-primary truncate max-w-[70%]">{c.requestTitle}: {c.body?.slice(0, 60)}</button>
-                    <span className="text-xs text-muted-foreground shrink-0">{new Date(c.created_at).toLocaleTimeString("nl-NL", { hour: "2-digit", minute: "2-digit" })}</span>
+                    <button
+                      onClick={onGoBerichten}
+                      className="text-left hover:text-primary truncate max-w-[70%]"
+                    >
+                      {c.requestTitle}: {c.body?.slice(0, 60)}
+                    </button>
+                    <span className="text-xs text-muted-foreground shrink-0">
+                      {new Date(c.created_at).toLocaleTimeString("nl-NL", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -273,17 +457,54 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
         </div>
       )}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard icon={Users} label="Klanten" value={metrics.totalCustomers} sub="Totaal aantal accounts" trend={0} />
-        <MetricCard icon={UserCheck} label="Actief (30d)" value={metrics.activeCount} sub="Inlog in afgelopen 30 dagen" trend={0} />
-        <MetricCard icon={GitPullRequest} label="Totaal changes" value={metrics.totalRequests} sub="Sinds start" trend={0} />
-        <MetricCard icon={BarChart2} label="Gem. responstijd" value={metrics.avgResponseHours ?? "—"} sub="Uren tot afronding" trend={0} />
+        <MetricCard
+          icon={Users}
+          label="Klanten"
+          value={metrics.totalCustomers}
+          sub="Totaal aantal accounts"
+          trend={0}
+        />
+        <MetricCard
+          icon={UserCheck}
+          label="Actief (30d)"
+          value={metrics.activeCount}
+          sub="Inlog in afgelopen 30 dagen"
+          trend={0}
+        />
+        <MetricCard
+          icon={GitPullRequest}
+          label="Totaal changes"
+          value={metrics.totalRequests}
+          sub="Sinds start"
+          trend={0}
+        />
+        <MetricCard
+          icon={BarChart2}
+          label="Gem. responstijd"
+          value={metrics.avgResponseHours ?? "—"}
+          sub="Uren tot afronding"
+          trend={0}
+        />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <button onClick={onGoChanges} className="text-left">
-          <MetricCard icon={GitPullRequest} label="Openstaande changes" value={openChanges} sub="Bekijk changes →" trend={0} />
+          <MetricCard
+            icon={GitPullRequest}
+            label="Openstaande changes"
+            value={openChanges}
+            sub="Bekijk changes →"
+            trend={0}
+          />
         </button>
         <button onClick={onGoPending} className="text-left">
-          <MetricCard icon={Inbox} label="Pending verzoeken" value={pendingTotal} sub="Wachtwoord reset-verzoeken" trend={0} highlight={pendingTotal > 0} />
+          <MetricCard
+            icon={Inbox}
+            label="Pending verzoeken"
+            value={pendingTotal}
+            sub="Wachtwoord reset-verzoeken"
+            trend={0}
+            highlight={pendingTotal > 0}
+          />
         </button>
       </div>
       <div className="rounded-lg border border-border bg-card p-6">
@@ -291,7 +512,10 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
         <div className="flex items-end gap-2 h-32">
           {metrics.months.map((m: any) => (
             <div key={m.label} className="flex-1 flex flex-col items-center gap-1">
-              <div className="w-full bg-primary rounded-t" style={{ height: `${(m.count / max) * 100}%`, minHeight: m.count ? 4 : 0 }} />
+              <div
+                className="w-full bg-primary rounded-t"
+                style={{ height: `${(m.count / max) * 100}%`, minHeight: m.count ? 4 : 0 }}
+              />
               <span className="text-xs text-muted-foreground">{m.label.slice(5)}</span>
               <span className="text-xs font-semibold">{m.count}</span>
             </div>
@@ -302,19 +526,39 @@ function Dashboard({ metrics, openChanges, pendingTotal, onGoChanges, onGoPendin
   );
 }
 
-function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon: any; label: string; value: any; sub: string; trend: number; highlight?: boolean }) {
+function MetricCard({
+  icon: Icon,
+  label,
+  value,
+  sub,
+  trend,
+  highlight,
+}: {
+  icon: any;
+  label: string;
+  value: any;
+  sub: string;
+  trend: number;
+  highlight?: boolean;
+}) {
   const TrendIcon = trend >= 0 ? ArrowUp : ArrowDown;
-  const trendColor = trend > 0 ? "text-emerald-600" : trend < 0 ? "text-destructive" : "text-muted-foreground";
+  const trendColor =
+    trend > 0 ? "text-emerald-600" : trend < 0 ? "text-destructive" : "text-muted-foreground";
   return (
-    <div className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${highlight ? "border-amber-500/60 bg-amber-500/5 hover:border-amber-500" : "border-border bg-card"}`}>
+    <div
+      className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${highlight ? "border-amber-500/60 bg-amber-500/5 hover:border-amber-500" : "border-border bg-card"}`}
+    >
       <div className="flex items-center justify-between">
         <Icon className="w-4 h-4 text-primary transition-transform duration-200 ease-out group-hover:scale-110" />
         <span className={`text-xs inline-flex items-center gap-0.5 ${trendColor}`}>
-          <TrendIcon className="w-3 h-3" />{Math.abs(trend)}%
+          <TrendIcon className="w-3 h-3" />
+          {Math.abs(trend)}%
         </span>
       </div>
       <p className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className="mt-1 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">{value}</p>
+      <p className="mt-1 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">
+        {value}
+      </p>
       <p className="mt-1 text-xs text-muted-foreground">{sub}</p>
     </div>
   );
@@ -322,17 +566,38 @@ function MetricCard({ icon: Icon, label, value, sub, trend, highlight }: { icon:
 
 function Card({ label, value, accent }: { label: string; value: any; accent?: boolean }) {
   return (
-    <div className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}>
+    <div
+      className={`group rounded-lg border p-5 transition-all duration-200 ease-out cursor-default hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/5 hover:border-primary/40 ${accent ? "border-primary/40 bg-primary/5" : "border-border bg-card"}`}
+    >
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className="mt-2 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">{value}</p>
+      <p className="mt-2 font-display text-2xl font-bold transition-colors duration-200 group-hover:text-primary">
+        {value}
+      </p>
     </div>
   );
 }
 
-function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: string; setActive: (k: any) => void }) {
-  const [open, setOpen] = useState<Record<string, boolean>>({ Overzicht: true, Klanten: true, Werk: true, Beheer: true, Overig: true });
+function AdminSidebar({
+  groups,
+  active,
+  setActive,
+}: {
+  groups: any[];
+  active: string;
+  setActive: (k: any) => void;
+}) {
+  const [open, setOpen] = useState<Record<string, boolean>>({
+    Overzicht: true,
+    Klanten: true,
+    Werk: true,
+    Beheer: true,
+    Overig: true,
+  });
   return (
-    <nav aria-label="Admin secties" className="md:w-60 md:shrink-0 md:border-r border-border md:pr-4">
+    <nav
+      aria-label="Admin secties"
+      className="md:w-60 md:shrink-0 md:border-r border-border md:pr-4"
+    >
       {groups.map((g) => {
         const isOpen = open[g.label] ?? true;
         return (
@@ -344,7 +609,9 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
               style={{ letterSpacing: "0.1em" }}
             >
               <span>{g.label}</span>
-              <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? "" : "-rotate-90"}`} />
+              <ChevronDown
+                className={`w-3 h-3 transition-transform ${isOpen ? "" : "-rotate-90"}`}
+              />
             </button>
             {isOpen && (
               <ul className="mt-1 space-y-0.5">
@@ -358,8 +625,12 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                           to={it.href}
                           className="w-full flex items-center gap-2 px-2 py-1.5 text-sm transition-colors"
                           style={{ borderLeft: "2px solid transparent", paddingLeft: "8px" }}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--primary)"; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = ""; }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLElement).style.color = "var(--primary)";
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLElement).style.color = "";
+                          }}
                         >
                           <Icon className="w-4 h-4 shrink-0" />
                           <span className="truncate">{it.label}</span>
@@ -369,12 +640,19 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                           onClick={() => setActive(it.key)}
                           className="w-full flex items-center justify-between gap-2 px-2 py-1.5 text-sm transition-colors"
                           style={{
-                            borderLeft: isActive ? "2px solid var(--primary)" : "2px solid transparent",
+                            borderLeft: isActive
+                              ? "2px solid var(--primary)"
+                              : "2px solid transparent",
                             color: isActive ? "var(--primary)" : undefined,
                             paddingLeft: "8px",
                           }}
-                          onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "var(--primary)"; }}
-                          onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = ""; }}
+                          onMouseEnter={(e) => {
+                            if (!isActive)
+                              (e.currentTarget as HTMLButtonElement).style.color = "var(--primary)";
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!isActive) (e.currentTarget as HTMLButtonElement).style.color = "";
+                          }}
                         >
                           <span className="flex items-center gap-2 min-w-0">
                             <Icon className="w-4 h-4 shrink-0" />
@@ -382,7 +660,8 @@ function AdminSidebar({ groups, active, setActive }: { groups: any[]; active: st
                           </span>
                           {it.alert && it.badge > 0 ? (
                             <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-primary text-white flex items-center gap-0.5">
-                              <span>!</span><span>{it.badge}</span>
+                              <span>!</span>
+                              <span>{it.badge}</span>
                             </span>
                           ) : it.badge > 0 ? (
                             <span className="text-[10px] font-semibold rounded-full px-1.5 py-0.5 bg-destructive text-destructive-foreground">
@@ -407,19 +686,31 @@ function PasswordResetsPanel() {
   const list = useServerFn(adminListPasswordResets);
   const mark = useServerFn(adminMarkPasswordResetHandled);
   const qc = useQueryClient();
-  const { data, isLoading } = useQuery({ queryKey: ["admin-password-resets"], queryFn: () => list({}) });
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-password-resets"],
+    queryFn: () => list({}),
+  });
   const markM = useMutation({
     mutationFn: (id: string) => mark({ data: { id } }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-password-resets"] }); toast.success("Gemarkeerd als afgehandeld."); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-password-resets"] });
+      toast.success("Gemarkeerd als afgehandeld.");
+    },
   });
   const [view, setView] = useState<"pending" | "handled">("pending");
   if (isLoading) return <TableSkeleton cols={5} />;
-  const items = (data?.items ?? []).filter((r: any) => view === "pending" ? r.status === "pending" : r.status !== "pending");
+  const items = (data?.items ?? []).filter((r: any) =>
+    view === "pending" ? r.status === "pending" : r.status !== "pending",
+  );
   return (
     <div className="space-y-4">
       <div className="flex gap-2">
-        {(["pending", "handled"] as const).map(v => (
-          <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 text-sm rounded-md border ${view === v ? "bg-foreground text-background border-foreground" : "border-border"}`}>
+        {(["pending", "handled"] as const).map((v) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`px-3 py-1.5 text-sm rounded-md border ${view === v ? "bg-foreground text-background border-foreground" : "border-border"}`}
+          >
             {v === "pending" ? "Open" : "Afgehandeld"}
           </button>
         ))}
@@ -427,7 +718,13 @@ function PasswordResetsPanel() {
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full text-sm">
           <thead className="bg-muted/30 text-muted-foreground">
-            <tr><th className="text-left p-3">Naam</th><th className="text-left p-3">E-mail</th><th className="text-left p-3">Aangevraagd</th><th className="text-left p-3">Status</th><th className="p-3"></th></tr>
+            <tr>
+              <th className="text-left p-3">Naam</th>
+              <th className="text-left p-3">E-mail</th>
+              <th className="text-left p-3">Aangevraagd</th>
+              <th className="text-left p-3">Status</th>
+              <th className="p-3"></th>
+            </tr>
           </thead>
           <tbody>
             {items.map((r: any) => (
@@ -438,12 +735,23 @@ function PasswordResetsPanel() {
                 <td className="p-3">{r.status}</td>
                 <td className="p-3 text-right">
                   {r.status === "pending" && (
-                    <button onClick={() => markM.mutate(r.id)} className="text-xs text-primary hover:underline">Markeer als afgehandeld</button>
+                    <button
+                      onClick={() => markM.mutate(r.id)}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      Markeer als afgehandeld
+                    </button>
                   )}
                 </td>
               </tr>
             ))}
-            {items.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted-foreground">Geen verzoeken.</td></tr>}
+            {items.length === 0 && (
+              <tr>
+                <td colSpan={5} className="p-6 text-center text-muted-foreground">
+                  Geen verzoeken.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -469,8 +777,8 @@ function AanvragenTab({ data, qc }: any) {
   return (
     <div className="space-y-3">
       <p className="text-sm text-muted-foreground">
-        Klanten die extra changes hebben aangevraagd. Stuur de factuur handmatig en klik
-        daarna op <strong>Toekennen</strong> zodat de klant de changes kan gebruiken.
+        Klanten die extra changes hebben aangevraagd. Stuur de factuur handmatig en klik daarna op{" "}
+        <strong>Toekennen</strong> zodat de klant de changes kan gebruiken.
       </p>
       {data.pendingPurchases.map((p: any) => {
         const c = data.customers.find((c: any) => c.id === p.user_id) ?? {};
@@ -645,7 +953,10 @@ function AfsprakenTab({ customers, qc }: any) {
               >
                 <div className="text-sm">
                   <p className="font-semibold">
-                    <span className="text-xs uppercase tracking-[0.08em] text-muted-foreground mr-2">{kindIcon}</span>{a.title}
+                    <span className="text-xs uppercase tracking-[0.08em] text-muted-foreground mr-2">
+                      {kindIcon}
+                    </span>
+                    {a.title}
                   </p>
                   <p className="text-muted-foreground">
                     {c?.full_name || c?.email || a.user_id} Â·{" "}
@@ -654,14 +965,9 @@ function AfsprakenTab({ customers, qc }: any) {
                   {a.location && (
                     <p className="text-xs text-muted-foreground mt-1">Locatie: {a.location}</p>
                   )}
-                  {a.notes && (
-                    <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>
-                  )}
+                  {a.notes && <p className="text-xs mt-1 whitespace-pre-wrap">{a.notes}</p>}
                 </div>
-                <button
-                  onClick={() => delM.mutate(a.id)}
-                  className="text-destructive text-xs"
-                >
+                <button onClick={() => delM.mutate(a.id)} className="text-destructive text-xs">
                   Verwijder
                 </button>
               </div>
@@ -692,21 +998,33 @@ function NotificationsBell({ onOpen }: { onOpen: () => void }) {
     try {
       ch = supabase
         .channel("admin-notifs-realtime")
-        .on("postgres_changes", { event: "*", schema: "public", table: "admin_notifications" }, () => {
-          qc.invalidateQueries({ queryKey: ["admin-notifs"] });
-        })
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "admin_notifications" },
+          () => {
+            qc.invalidateQueries({ queryKey: ["admin-notifs"] });
+          },
+        )
         .subscribe();
     } catch (e) {
       console.warn("Realtime niet beschikbaar:", e);
     }
-    return () => { if (ch) supabase.removeChannel(ch); };
+    return () => {
+      if (ch) supabase.removeChannel(ch);
+    };
   }, [qc]);
   const unread = (data?.items ?? []).filter((n: any) => !n.is_read).length;
   return (
-    <button onClick={onOpen} className="relative rounded-full border border-border bg-card p-2 hover:bg-accent" aria-label="Notificaties">
+    <button
+      onClick={onOpen}
+      className="relative rounded-full border border-border bg-card p-2 hover:bg-accent"
+      aria-label="Notificaties"
+    >
       <Bell className="w-4 h-4" />
       {unread > 0 && (
-        <span className="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[10px] font-semibold flex items-center justify-center">{unread}</span>
+        <span className="absolute -top-1 -right-1 min-w-4 h-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[10px] font-semibold flex items-center justify-center">
+          {unread}
+        </span>
       )}
     </button>
   );
@@ -719,8 +1037,17 @@ function NotificationsPanel() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({ queryKey: ["admin-notifs"], queryFn: () => list({}) });
   const inv = () => qc.invalidateQueries({ queryKey: ["admin-notifs"] });
-  const readM = useMutation({ mutationFn: (id: string) => markRead({ data: { id } }), onSuccess: inv });
-  const allM = useMutation({ mutationFn: () => markAll({}), onSuccess: () => { inv(); toast.success("Alles gelezen."); } });
+  const readM = useMutation({
+    mutationFn: (id: string) => markRead({ data: { id } }),
+    onSuccess: inv,
+  });
+  const allM = useMutation({
+    mutationFn: () => markAll({}),
+    onSuccess: () => {
+      inv();
+      toast.success("Alles gelezen.");
+    },
+  });
 
   if (isLoading) return <TableSkeleton cols={3} />;
   const items = data?.items ?? [];
@@ -728,22 +1055,38 @@ function NotificationsPanel() {
     <div className="space-y-3">
       <div className="flex justify-between items-center">
         <h2 className="font-display text-xl font-semibold">Notificaties</h2>
-        <button onClick={() => allM.mutate()} className="text-xs text-primary hover:underline">Alles markeren als gelezen</button>
+        <button onClick={() => allM.mutate()} className="text-xs text-primary hover:underline">
+          Alles markeren als gelezen
+        </button>
       </div>
       <ul className="space-y-2">
         {items.map((n: any) => (
-          <li key={n.id} className={`rounded-lg border p-3 ${n.is_read ? "border-border bg-card" : "border-primary/40 bg-primary/5"}`}>
+          <li
+            key={n.id}
+            className={`rounded-lg border p-3 ${n.is_read ? "border-border bg-card" : "border-primary/40 bg-primary/5"}`}
+          >
             <div className="flex justify-between gap-3">
               <div>
                 <p className="text-sm font-medium">{n.title}</p>
                 <p className="text-xs text-muted-foreground mt-1">{n.message}</p>
-                <p className="text-xs text-muted-foreground mt-1">{new Date(n.created_at).toLocaleString("nl-NL")}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {new Date(n.created_at).toLocaleString("nl-NL")}
+                </p>
               </div>
-              {!n.is_read && <button onClick={() => readM.mutate(n.id)} className="text-xs text-primary hover:underline shrink-0">Gelezen</button>}
+              {!n.is_read && (
+                <button
+                  onClick={() => readM.mutate(n.id)}
+                  className="text-xs text-primary hover:underline shrink-0"
+                >
+                  Gelezen
+                </button>
+              )}
             </div>
           </li>
         ))}
-        {items.length === 0 && <li className="text-muted-foreground text-sm">Geen notificaties.</li>}
+        {items.length === 0 && (
+          <li className="text-muted-foreground text-sm">Geen notificaties.</li>
+        )}
       </ul>
     </div>
   );
@@ -757,28 +1100,55 @@ function ArchivedChangesPanel() {
   const unarch = useServerFn(adminUnarchiveChange);
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({ queryKey: ["admin-archived"], queryFn: () => list({}) });
-  const inv = () => { qc.invalidateQueries({ queryKey: ["admin-archived"] }); qc.invalidateQueries({ queryKey: ["admin-overview"] }); };
-  const unM = useMutation({ mutationFn: (id: string) => unarch({ data: { id } }), onSuccess: () => { inv(); toast.success("Hersteld."); } });
+  const inv = () => {
+    qc.invalidateQueries({ queryKey: ["admin-archived"] });
+    qc.invalidateQueries({ queryKey: ["admin-overview"] });
+  };
+  const unM = useMutation({
+    mutationFn: (id: string) => unarch({ data: { id } }),
+    onSuccess: () => {
+      inv();
+      toast.success("Hersteld.");
+    },
+  });
   if (isLoading) return <TableSkeleton cols={4} />;
   const items = data?.items ?? [];
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
       <table className="w-full text-sm">
         <thead className="bg-muted/30 text-muted-foreground">
-          <tr><th className="text-left p-3">#</th><th className="text-left p-3">Titel</th><th className="text-left p-3">Gearchiveerd</th><th className="p-3"></th></tr>
+          <tr>
+            <th className="text-left p-3">#</th>
+            <th className="text-left p-3">Titel</th>
+            <th className="text-left p-3">Gearchiveerd</th>
+            <th className="p-3"></th>
+          </tr>
         </thead>
         <tbody>
           {items.map((r: any) => (
             <tr key={r.id} className="border-t border-border">
               <td className="p-3">{r.request_number ?? "—"}</td>
               <td className="p-3">{r.title}</td>
-              <td className="p-3">{r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "—"}</td>
+              <td className="p-3">
+                {r.archived_at ? new Date(r.archived_at).toLocaleString("nl-NL") : "—"}
+              </td>
               <td className="p-3 text-right">
-                <button onClick={() => unM.mutate(r.id)} className="text-xs text-primary hover:underline">Herstel</button>
+                <button
+                  onClick={() => unM.mutate(r.id)}
+                  className="text-xs text-primary hover:underline"
+                >
+                  Herstel
+                </button>
               </td>
             </tr>
           ))}
-          {items.length === 0 && <tr><td colSpan={4} className="p-6 text-center text-muted-foreground">Geen gearchiveerde changes.</td></tr>}
+          {items.length === 0 && (
+            <tr>
+              <td colSpan={4} className="p-6 text-center text-muted-foreground">
+                Geen gearchiveerde changes.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
@@ -803,11 +1173,17 @@ function AlertsPanel() {
 
   const snoozeM = useMutation({
     mutationFn: ({ id, hours }: { id: string; hours: number }) => snooze({ data: { id, hours } }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-all-alerts"] }); toast.success("Alert gesnoozed."); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-all-alerts"] });
+      toast.success("Alert gesnoozed.");
+    },
   });
   const seenM = useMutation({
     mutationFn: (id: string) => markSeen({ data: { id } }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-all-alerts"] }); toast.success("Alert gearchiveerd."); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-all-alerts"] });
+      toast.success("Alert gearchiveerd.");
+    },
   });
 
   if (isLoading) return <TableSkeleton cols={4} />;
@@ -818,7 +1194,9 @@ function AlertsPanel() {
   const items = view === "active" ? active : archived;
 
   const severityColor = (s: string) =>
-    s === "critical" ? "text-destructive bg-destructive/10 border-destructive/30" : "text-amber-500 bg-amber-500/10 border-amber-500/30";
+    s === "critical"
+      ? "text-destructive bg-destructive/10 border-destructive/30"
+      : "text-amber-500 bg-amber-500/10 border-amber-500/30";
 
   const typeIcon = (t: string) => {
     if (t === "ssl") return <Shield className="w-3.5 h-3.5" />;
@@ -830,8 +1208,12 @@ function AlertsPanel() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
-          {(["active", "archived"] as const).map(v => (
-            <button key={v} onClick={() => setView(v)} className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${view === v ? "bg-foreground text-background border-foreground" : "border-border hover:border-foreground/40"}`}>
+          {(["active", "archived"] as const).map((v) => (
+            <button
+              key={v}
+              onClick={() => setView(v)}
+              className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${view === v ? "bg-foreground text-background border-foreground" : "border-border hover:border-foreground/40"}`}
+            >
               {v === "active" ? `Actief (${active.length})` : `Archief (${archived.length})`}
             </button>
           ))}
@@ -853,11 +1235,13 @@ function AlertsPanel() {
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{a.message}</p>
                     <p className="text-xs opacity-70 mt-0.5">
-                      {a.customer_name || a.customer_email || a.user_id} Â· {new Date(a.created_at).toLocaleString("nl-NL")}
+                      {a.customer_name || a.customer_email || a.user_id} Â·{" "}
+                      {new Date(a.created_at).toLocaleString("nl-NL")}
                     </p>
                     {a.snoozed_until && new Date(a.snoozed_until) > new Date() && (
                       <p className="text-xs opacity-60 mt-0.5 flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> Gesnoozed tot {new Date(a.snoozed_until).toLocaleString("nl-NL")}
+                        <Clock className="w-3 h-3" /> Gesnoozed tot{" "}
+                        {new Date(a.snoozed_until).toLocaleString("nl-NL")}
                       </p>
                     )}
                   </div>
@@ -869,14 +1253,21 @@ function AlertsPanel() {
                         <Clock className="w-3 h-3" /> Snooze
                       </button>
                       <div className="absolute right-0 top-full mt-1 hidden group-hover:flex flex-col bg-card border border-border rounded-md shadow-lg z-10 min-w-[120px]">
-                        {[1, 4, 24].map(h => (
-                          <button key={h} onClick={() => snoozeM.mutate({ id: a.id, hours: h })} className="text-left px-3 py-1.5 text-xs hover:bg-muted transition-colors">
+                        {[1, 4, 24].map((h) => (
+                          <button
+                            key={h}
+                            onClick={() => snoozeM.mutate({ id: a.id, hours: h })}
+                            className="text-left px-3 py-1.5 text-xs hover:bg-muted transition-colors"
+                          >
                             {h === 1 ? "1 uur" : h === 4 ? "4 uur" : "24 uur"}
                           </button>
                         ))}
                       </div>
                     </div>
-                    <button onClick={() => seenM.mutate(a.id)} className="text-xs px-2 py-1 rounded border border-current/30 hover:bg-current/10 transition-colors whitespace-nowrap flex items-center gap-1">
+                    <button
+                      onClick={() => seenM.mutate(a.id)}
+                      className="text-xs px-2 py-1 rounded border border-current/30 hover:bg-current/10 transition-colors whitespace-nowrap flex items-center gap-1"
+                    >
                       <CheckCircle className="w-3 h-3" /> Gezien
                     </button>
                   </div>
@@ -889,4 +1280,3 @@ function AlertsPanel() {
     </div>
   );
 }
-

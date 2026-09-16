@@ -26,6 +26,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@eccff4fd07b9b0fb4c6ce64f572f9d83c20650d2": "eccff4f bug fixes 2" | kind=Commit | source=git | neighbors=[9be6953 bug fixes, main, 775e9f5 bug fixes, admin.functions.ts, monitoring.shared.ts, portal.functions.ts] | lang=en
+- "lib_contact_functions": "contact.functions.ts" | kind=code-symbol | source=src/lib/contact.functions.ts:L1 | neighbors=[2b1d78f telegram, 74ecdc1 code fixes, a3773ee sec fixes, fc7da2d animaties en paginas, adminDeleteContactSubmission, adminListContactSubmissions] | lang=en
+- "lib_telegram_server": "telegram.server.ts" | kind=code-symbol | source=src/lib/telegram.server.ts:L1 | neighbors=[2b1d78f telegram, dda7a04 web tester, fc7da2d animaties en paginas, botToken(), botUsername(), generateAndSendMfaCode()] | lang=en
+- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f": "20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L1 | neighbors=[auth.users, change_requests_touch, on_auth_user_created, profiles_touch, public.available_credits(), public.change_requests] | lang=en
 - "routes_algemene_voorwaarden": "algemene-voorwaarden.tsx" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 6e488ba fixes, 8fdd571 SEO] | lang=en
 - "routes_privacybeleid": "privacybeleid.tsx" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L1 | neighbors=[00e2564 voorwaaren en privacy, 04c01f8 SEO, 36d8ccb new pages, 59bb970 eyoo, 6e488ba fixes, 8fdd571 SEO] | lang=en
 - "routes_website_laten_maken_drachten": "website-laten-maken-drachten.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, LocationPageV2.tsx, LocationPageData, LocationPageV2()] | lang=en
@@ -56,16 +60,12 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@e33fd2d65d3b43ea54a47e29bace710b10e6e172": "e33fd2d tekst vergroten en cookies" | kind=Commit | source=git | neighbors=[423b3f1 cashing, main, ab23069 admin en klantportaal wijziging…, CookieBanner.tsx, Nav.tsx, index.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f958216b3ca515ca3d0d8c9e854052ef349135db": "f958216 leads functions" | kind=Commit | source=git | neighbors=[9a2689c code fixes, admin.tsx, admin.leads.tsx, main, 85a6666 SEO en robot, CallbackAgenda.tsx] | lang=en
 - "components_exampleslideshow": "ExampleSlideshow.tsx" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L1 | neighbors=[6e488ba fixes, aabf034 SEO, BranchPage.tsx, ExampleSlideshow(), GENERIC_EXAMPLES, ServiceExample] | lang=en
+- "components_processtimeline": "ProcessTimeline.tsx" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L1 | neighbors=[129b916 manier van werken, 6262799 fixes, 6e488ba fixes, 85a6666 SEO en robot, 8fdd571 SEO, 9a2689c code fixes] | lang=en
 - "public_site_ping": "site-ping.ts" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, 8c0bb37 nieuwe featues, 9be6953 bug fixes, a3773ee sec fixes, abdbfe4 bug fixes 2] | lang=en
 - "routes_login": "login.tsx" | kind=code-symbol | source=src/routes/login.tsx:L1 | neighbors=[04c01f8 SEO, 2b1d78f telegram, 36d8ccb new pages, 6b21362 Catch login network errors inst…, 6e488ba fixes, 8fdd571 SEO] | lang=en
 - "routes_website_laten_maken_autorijschool": "website-laten-maken-autorijschool.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L1 | neighbors=[36d8ccb new pages, 59bb970 eyoo, aabf034 SEO, BranchPage.tsx, BranchPage(), BranchPageData] | lang=en
 - "routes_website_laten_maken_hovenier": "website-laten-maken-hovenier.tsx" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L1 | neighbors=[36d8ccb new pages, aabf034 SEO, c27f4c8 new, BranchPage.tsx, BranchPage(), BranchPageData] | lang=en
-- "supabase_client": "client.ts" | kind=code-symbol | source=src/integrations/supabase/client.ts:L1 | neighbors=[admin.tsx, admin.accounts.tsx, portal.tsx, AdminChatPanel.tsx, ChatWidget.tsx, use-auth.tsx] | lang=en
-- "ui_command": "command.tsx" | kind=code-symbol | source=src/components/ui/command.tsx:L1 | neighbors=[utils.ts, cn(), Command, CommandDialog(), CommandEmpty, CommandGroup] | lang=en
-- "ui_pagination": "pagination.tsx" | kind=code-symbol | source=src/components/ui/pagination.tsx:L1 | neighbors=[utils.ts, cn(), button.tsx, ButtonProps, buttonVariants, Pagination()] | lang=en
-- "ui_skeleton_skeleton": "Skeleton()" | kind=code-symbol | source=src/components/ui/skeleton.tsx:L3 | neighbors=[admin.tsx, admin.accounts.tsx, admin.accounts.$accountId.tsx, admin.changes.tsx, admin.changes.$changeId.tsx, admin.projecten.tsx] | lang=en
-- "authenticated_admin_leads": "admin.leads.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.leads.tsx:L1 | neighbors=[LeadsPage(), Route, SectionKey, SECTIONS, CallbackAgenda.tsx, CallbackAgenda()] | lang=en
-- "authenticated_admin_rollen": "admin.rollen.tsx" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L1 | neighbors=[AdminRollenPage(), NewRoleSection(), ROLE_LABEL, RolesListSection(), RollenSidebar(), Route] | lang=en
+- "supabase_client_supabase": "supabase" | kind=code-symbol | source=src/integrations/supabase/client.ts:L34 | neighbors=[admin.tsx, admin.accounts.tsx, portal.tsx, AdminChatPanel.tsx, ChatWidget.tsx, use-auth.tsx] | lang=en
 
 ## Instructions
 

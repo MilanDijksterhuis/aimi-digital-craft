@@ -17,6 +17,27 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_sidebar_sidebarseparator": "SidebarSeparator" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L377 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebartrigger": "SidebarTrigger" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L260 | neighbors=[sidebar.tsx]
+- "ui_sidebar_usesidebar": "useSidebar()" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L40 | neighbors=[sidebar.tsx]
+- "ui_slider_slider": "Slider" | kind=code-symbol | source=src/components/ui/slider.tsx:L6 | neighbors=[slider.tsx]
+- "ui_sonner_toasterprops": "ToasterProps" | kind=code-symbol | source=src/components/ui/sonner.tsx:L3 | neighbors=[sonner.tsx]
+- "ui_switch_switch": "Switch" | kind=code-symbol | source=src/components/ui/switch.tsx:L6 | neighbors=[switch.tsx]
+- "ui_table_table": "Table" | kind=code-symbol | source=src/components/ui/table.tsx:L5 | neighbors=[table.tsx]
+- "ui_table_tablebody": "TableBody" | kind=code-symbol | source=src/components/ui/table.tsx:L22 | neighbors=[table.tsx]
+- "ui_table_tablecaption": "TableCaption" | kind=code-symbol | source=src/components/ui/table.tsx:L86 | neighbors=[table.tsx]
+- "ui_table_tablecell": "TableCell" | kind=code-symbol | source=src/components/ui/table.tsx:L71 | neighbors=[table.tsx]
+- "ui_table_tablefooter": "TableFooter" | kind=code-symbol | source=src/components/ui/table.tsx:L30 | neighbors=[table.tsx]
+- "ui_table_tablehead": "TableHead" | kind=code-symbol | source=src/components/ui/table.tsx:L56 | neighbors=[table.tsx]
+- "ui_table_tableheader": "TableHeader" | kind=code-symbol | source=src/components/ui/table.tsx:L14 | neighbors=[table.tsx]
+- "ui_table_tablerow": "TableRow" | kind=code-symbol | source=src/components/ui/table.tsx:L42 | neighbors=[table.tsx]
+- "ui_textarea_textarea": "Textarea" | kind=code-symbol | source=src/components/ui/textarea.tsx:L5 | neighbors=[textarea.tsx]
+- "ui_toggle_group_togglegroup": "ToggleGroup" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L15 | neighbors=[toggle-group.tsx]
+- "ui_toggle_group_togglegroupcontext": "ToggleGroupContext" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L10 | neighbors=[toggle-group.tsx]
+- "ui_toggle_group_togglegroupitem": "ToggleGroupItem" | kind=code-symbol | source=src/components/ui/toggle-group.tsx:L31 | neighbors=[toggle-group.tsx]
+- "ui_toggle_toggle": "Toggle" | kind=code-symbol | source=src/components/ui/toggle.tsx:L29 | neighbors=[toggle.tsx]
+- "vite_config_manualchunks": "manualChunks()" | kind=code-symbol | source=vite.config.ts:L17 | neighbors=[vite.config.ts]
+- "migrations_20260523183958_4e926af8_8fa7_4dc2_9067_5b7dd7cd2ec1": "20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql" | kind=code-symbol | source=supabase/migrations/20260523183958_4e926af8-8fa7-4dc2-9067-5b7dd7cd2ec1.sql:L1
 - "migrations_20260523211545_420d64f5_a49b_4927_acc4_a86c972115a1": "20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql" | kind=code-symbol | source=supabase/migrations/20260523211545_420d64f5-a49b-4927-acc4-a86c972115a1.sql:L1
 - "migrations_20260523221752_c080e1a1_411c_4668_a60e_b2cc7a356a1d": "20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql" | kind=code-symbol | source=supabase/migrations/20260523221752_c080e1a1-411c-4668-a60e-b2cc7a356a1d.sql:L1
 - "migrations_20260523223714_ac0e82da_3a19_4ef9_a41e_91e875e01193": "20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql" | kind=code-symbol | source=supabase/migrations/20260523223714_ac0e82da-3a19-4ef9-a41e-91e875e01193.sql:L1

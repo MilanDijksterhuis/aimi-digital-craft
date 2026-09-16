@@ -17,9 +17,15 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_callbacks_callback_reasons": "CALLBACK_REASONS" | kind=code-symbol | source=src/lib/callbacks.ts:L7 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
+- "lib_callbacks_callback_status_label": "CALLBACK_STATUS_LABEL" | kind=code-symbol | source=src/lib/callbacks.ts:L16 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_callbackstatus": "CallbackStatus" | kind=code-symbol | source=src/lib/callbacks.ts:L14 | neighbors=[CallbackAgenda.tsx, callbacks.ts]
+- "lib_callbacks_suggestcallbackdate": "suggestCallbackDate()" | kind=code-symbol | source=src/lib/callbacks.ts:L75 | neighbors=[CallbackScheduleModal.tsx, callbacks.ts]
+- "lib_csv_detectdelimiter": "detectDelimiter()" | kind=code-symbol | source=src/lib/csv.ts:L4 | neighbors=[csv.ts, parseCsv()]
 - "lib_email_server_escapehtml": "escapeHtml()" | kind=code-symbol | source=src/lib/email.server.ts:L6 | neighbors=[email.server.ts, sendWelcomeEmail()]
 - "lib_email_server_sendwelcomeemail": "sendWelcomeEmail()" | kind=code-symbol | source=src/lib/email.server.ts:L25 | neighbors=[email.server.ts, escapeHtml()]
 - "lib_error_capture_consumelastcapturederror": "consumeLastCapturedError()" | kind=code-symbol | source=src/lib/error-capture.ts:L18 | neighbors=[error-capture.ts, server.ts]
+- "lib_markdown_markdownbody": "MarkdownBody()" | kind=code-symbol | source=src/lib/markdown.tsx:L73 | neighbors=[markdown.tsx, blog_.$slug.tsx]
 - "lib_monitoring_shared_isprivateorreservedip": "isPrivateOrReservedIp()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L28 | neighbors=[monitoring.shared.ts, assertPublicHost()]
 - "lib_monitoring_shared_measureresponsetime": "measureResponseTime()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L40 | neighbors=[monitoring.shared.ts, assertPublicHost()]
 - "lib_permissions_server_ensurepermission": "ensurePermission()" | kind=code-symbol | source=src/lib/permissions.server.ts:L78 | neighbors=[permissions.server.ts, getEffectivePermissions()]
@@ -33,10 +39,10 @@ one-sentence description — no prose, no markdown fences.
 - "lib_rbac_staff_guard_roles": "STAFF_GUARD_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L40 | neighbors=[auth-guards.server.ts, rbac.ts]
 - "lib_rbac_super_admin_roles": "SUPER_ADMIN_ROLES" | kind=code-symbol | source=src/lib/rbac.ts:L39 | neighbors=[auth-guards.server.ts, rbac.ts]
 - "lib_seo_address": "ADDRESS" | kind=code-symbol | source=src/lib/seo.ts:L42 | neighbors=[Footer.tsx, seo.ts]
-- "lib_seo_formatdatenl": "formatDateNL()" | kind=code-symbol | source=src/lib/seo.ts:L194 | neighbors=[UpdatedOn.tsx, seo.ts]
+- "lib_seo_formatdatenl": "formatDateNL()" | kind=code-symbol | source=src/lib/seo.ts:L207 | neighbors=[UpdatedOn.tsx, seo.ts]
 - "lib_seo_page_dates": "PAGE_DATES" | kind=code-symbol | source=src/lib/seo.ts:L107 | neighbors=[seo.ts, sitemap[.]xml.tsx]
 - "lib_seo_postaladdress": "postalAddress()" | kind=code-symbol | source=src/lib/seo.ts:L56 | neighbors=[seo.ts, businessIdentityJsonLd()]
-- "lib_status_change_templates": "CHANGE_TEMPLATES" | kind=code-symbol | source=src/lib/status.ts:L88 | neighbors=[portal.tsx, status.ts]
+- "lib_status_change_templates": "CHANGE_TEMPLATES" | kind=code-symbol | source=src/lib/status.ts:L102 | neighbors=[portal.tsx, status.ts]
 - "lib_telegram_server_bottoken": "botToken()" | kind=code-symbol | source=src/lib/telegram.server.ts:L23 | neighbors=[telegram.server.ts, sendTelegramMessage()]
 - "lib_telegram_server_botusername": "botUsername()" | kind=code-symbol | source=src/lib/telegram.server.ts:L29 | neighbors=[telegram.server.ts, generateLinkToken()]
 - "lib_telegram_server_generateandsendmfacode": "generateAndSendMfaCode()" | kind=code-symbol | source=src/lib/telegram.server.ts:L212 | neighbors=[telegram.server.ts, sendTelegramMessage()]
@@ -51,12 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_profiles_touch": "profiles_touch" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L120 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, public.profiles]
 - "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_extra_credits": "public.extra_credits" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L42 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, auth.users]
 - "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_notifications": "public.notifications" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L53 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, auth.users]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_purchase_requests": "public.purchase_requests" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L64 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, auth.users]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_auth_users": "auth.users" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L154 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, on_auth_user_created]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_on_auth_user_created": "on_auth_user_created" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L153 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, auth.users]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_attachments": "public.change_attachments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L29 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_comments": "public.change_comments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L56 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_profiles": "public.profiles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L138 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
 
 ## Instructions
 

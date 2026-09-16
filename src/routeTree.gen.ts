@@ -76,12 +76,14 @@ import { Route as AuthenticatedAdminProjectenRouteImport } from './routes/_authe
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminInstellingenRouteImport } from './routes/_authenticated/admin.instellingen'
 import { Route as AuthenticatedAdminChangesRouteImport } from './routes/_authenticated/admin.changes'
+import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin.blog'
 import { Route as AuthenticatedAdminAccountsRouteImport } from './routes/_authenticated/admin.accounts'
 import { Route as ApiPublicHooksExpireAccountsRouteImport } from './routes/api/public/hooks/expire-accounts'
 import { Route as AuthenticatedPortalProjectenProjectIdRouteImport } from './routes/_authenticated/portal.projecten.$projectId'
 import { Route as AuthenticatedAdminRollenRoleIdRouteImport } from './routes/_authenticated/admin.rollen.$roleId'
 import { Route as AuthenticatedAdminProjectenProjectIdRouteImport } from './routes/_authenticated/admin.projecten.$projectId'
 import { Route as AuthenticatedAdminChangesChangeIdRouteImport } from './routes/_authenticated/admin.changes.$changeId'
+import { Route as AuthenticatedAdminBlogPostIdRouteImport } from './routes/_authenticated/admin.blog.$postId'
 import { Route as AuthenticatedAdminAccountsAccountIdRouteImport } from './routes/_authenticated/admin.accounts.$accountId'
 
 const WordpressOfMaatwerkRoute = WordpressOfMaatwerkRouteImport.update({
@@ -448,6 +450,11 @@ const AuthenticatedAdminChangesRoute =
     path: '/changes',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminBlogRoute = AuthenticatedAdminBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminAccountsRoute =
   AuthenticatedAdminAccountsRouteImport.update({
     id: '/accounts',
@@ -483,6 +490,12 @@ const AuthenticatedAdminChangesChangeIdRoute =
     id: '/$changeId',
     path: '/$changeId',
     getParentRoute: () => AuthenticatedAdminChangesRoute,
+  } as any)
+const AuthenticatedAdminBlogPostIdRoute =
+  AuthenticatedAdminBlogPostIdRouteImport.update({
+    id: '/$postId',
+    path: '/$postId',
+    getParentRoute: () => AuthenticatedAdminBlogRoute,
   } as any)
 const AuthenticatedAdminAccountsAccountIdRoute =
   AuthenticatedAdminAccountsAccountIdRouteImport.update({
@@ -551,6 +564,7 @@ export interface FileRoutesByFullPath {
   '/server': typeof AuthenticatedServerRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -560,6 +574,7 @@ export interface FileRoutesByFullPath {
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/admin/blog/$postId': typeof AuthenticatedAdminBlogPostIdRoute
   '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
   '/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
@@ -626,6 +641,7 @@ export interface FileRoutesByTo {
   '/server': typeof AuthenticatedServerRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -635,6 +651,7 @@ export interface FileRoutesByTo {
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/admin/blog/$postId': typeof AuthenticatedAdminBlogPostIdRoute
   '/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
   '/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
@@ -703,6 +720,7 @@ export interface FileRoutesById {
   '/_authenticated/server': typeof AuthenticatedServerRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/_authenticated/admin/accounts': typeof AuthenticatedAdminAccountsRouteWithChildren
+  '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRouteWithChildren
   '/_authenticated/admin/changes': typeof AuthenticatedAdminChangesRouteWithChildren
   '/_authenticated/admin/instellingen': typeof AuthenticatedAdminInstellingenRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
@@ -712,6 +730,7 @@ export interface FileRoutesById {
   '/api/public/site-ping': typeof ApiPublicSitePingRoute
   '/api/telegram/webhook': typeof ApiTelegramWebhookRoute
   '/_authenticated/admin/accounts/$accountId': typeof AuthenticatedAdminAccountsAccountIdRoute
+  '/_authenticated/admin/blog/$postId': typeof AuthenticatedAdminBlogPostIdRoute
   '/_authenticated/admin/changes/$changeId': typeof AuthenticatedAdminChangesChangeIdRoute
   '/_authenticated/admin/projecten/$projectId': typeof AuthenticatedAdminProjectenProjectIdRoute
   '/_authenticated/admin/rollen/$roleId': typeof AuthenticatedAdminRollenRoleIdRoute
@@ -780,6 +799,7 @@ export interface FileRouteTypes {
     | '/server'
     | '/blog/$slug'
     | '/admin/accounts'
+    | '/admin/blog'
     | '/admin/changes'
     | '/admin/instellingen'
     | '/admin/leads'
@@ -789,6 +809,7 @@ export interface FileRouteTypes {
     | '/api/public/site-ping'
     | '/api/telegram/webhook'
     | '/admin/accounts/$accountId'
+    | '/admin/blog/$postId'
     | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
     | '/admin/rollen/$roleId'
@@ -855,6 +876,7 @@ export interface FileRouteTypes {
     | '/server'
     | '/blog/$slug'
     | '/admin/accounts'
+    | '/admin/blog'
     | '/admin/changes'
     | '/admin/instellingen'
     | '/admin/leads'
@@ -864,6 +886,7 @@ export interface FileRouteTypes {
     | '/api/public/site-ping'
     | '/api/telegram/webhook'
     | '/admin/accounts/$accountId'
+    | '/admin/blog/$postId'
     | '/admin/changes/$changeId'
     | '/admin/projecten/$projectId'
     | '/admin/rollen/$roleId'
@@ -931,6 +954,7 @@ export interface FileRouteTypes {
     | '/_authenticated/server'
     | '/blog_/$slug'
     | '/_authenticated/admin/accounts'
+    | '/_authenticated/admin/blog'
     | '/_authenticated/admin/changes'
     | '/_authenticated/admin/instellingen'
     | '/_authenticated/admin/leads'
@@ -940,6 +964,7 @@ export interface FileRouteTypes {
     | '/api/public/site-ping'
     | '/api/telegram/webhook'
     | '/_authenticated/admin/accounts/$accountId'
+    | '/_authenticated/admin/blog/$postId'
     | '/_authenticated/admin/changes/$changeId'
     | '/_authenticated/admin/projecten/$projectId'
     | '/_authenticated/admin/rollen/$roleId'
@@ -1480,6 +1505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminChangesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/blog': {
+      id: '/_authenticated/admin/blog'
+      path: '/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AuthenticatedAdminBlogRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/accounts': {
       id: '/_authenticated/admin/accounts'
       path: '/accounts'
@@ -1522,6 +1554,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminChangesChangeIdRouteImport
       parentRoute: typeof AuthenticatedAdminChangesRoute
     }
+    '/_authenticated/admin/blog/$postId': {
+      id: '/_authenticated/admin/blog/$postId'
+      path: '/$postId'
+      fullPath: '/admin/blog/$postId'
+      preLoaderRoute: typeof AuthenticatedAdminBlogPostIdRouteImport
+      parentRoute: typeof AuthenticatedAdminBlogRoute
+    }
     '/_authenticated/admin/accounts/$accountId': {
       id: '/_authenticated/admin/accounts/$accountId'
       path: '/$accountId'
@@ -1545,6 +1584,20 @@ const AuthenticatedAdminAccountsRouteChildren: AuthenticatedAdminAccountsRouteCh
 const AuthenticatedAdminAccountsRouteWithChildren =
   AuthenticatedAdminAccountsRoute._addFileChildren(
     AuthenticatedAdminAccountsRouteChildren,
+  )
+
+interface AuthenticatedAdminBlogRouteChildren {
+  AuthenticatedAdminBlogPostIdRoute: typeof AuthenticatedAdminBlogPostIdRoute
+}
+
+const AuthenticatedAdminBlogRouteChildren: AuthenticatedAdminBlogRouteChildren =
+  {
+    AuthenticatedAdminBlogPostIdRoute: AuthenticatedAdminBlogPostIdRoute,
+  }
+
+const AuthenticatedAdminBlogRouteWithChildren =
+  AuthenticatedAdminBlogRoute._addFileChildren(
+    AuthenticatedAdminBlogRouteChildren,
   )
 
 interface AuthenticatedAdminChangesRouteChildren {
@@ -1593,6 +1646,7 @@ const AuthenticatedAdminRollenRouteWithChildren =
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAccountsRoute: typeof AuthenticatedAdminAccountsRouteWithChildren
+  AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRouteWithChildren
   AuthenticatedAdminChangesRoute: typeof AuthenticatedAdminChangesRouteWithChildren
   AuthenticatedAdminInstellingenRoute: typeof AuthenticatedAdminInstellingenRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
@@ -1602,6 +1656,7 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAccountsRoute: AuthenticatedAdminAccountsRouteWithChildren,
+  AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRouteWithChildren,
   AuthenticatedAdminChangesRoute: AuthenticatedAdminChangesRouteWithChildren,
   AuthenticatedAdminInstellingenRoute: AuthenticatedAdminInstellingenRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,

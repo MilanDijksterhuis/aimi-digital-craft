@@ -62,6 +62,14 @@ function parseInline(text: string, keyPrefix: string): ReactNode[] {
   return nodes;
 }
 
+/** Schatting van de leestijd op basis van woordaantal (±200 wpm), zodat dit
+ * niet los van de content handmatig bijgehouden hoeft te worden. */
+export const estimateReadTime = (content: string): string => {
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} min leestijd`;
+};
+
 export function MarkdownBody({ content }: { content: string }) {
   const blocks = content
     .split(/\n{2,}/)

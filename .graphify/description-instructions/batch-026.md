@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "authenticated_admin_projecten_projectid_recurrence_label": "RECURRENCE_LABEL" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L714 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L59 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_settingstab": "SettingsTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L521 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_taskstab": "TasksTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L716 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectid_timetab": "TimeTab()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.$projectId.tsx:L857 | neighbors=[admin.projecten.$projectId.tsx]
+- "authenticated_admin_projecten_projectslistsection": "ProjectsListSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L348 | neighbors=[admin.projecten.tsx]
+- "authenticated_admin_projecten_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L69 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_statssection": "StatsSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L214 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L46 | neighbors=[admin.projecten.tsx]
 - "authenticated_admin_projecten_templatessection": "TemplatesSection()" | kind=code-symbol | source=src/routes/_authenticated/admin.projecten.tsx:L810 | neighbors=[admin.projecten.tsx]
@@ -38,7 +45,7 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_admin_rollen_section": "Section" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L46 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_staff_base_roles": "STAFF_BASE_ROLES" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L10 | neighbors=[admin.rollen.tsx]
 - "authenticated_admin_rollen_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.rollen.tsx:L25 | neighbors=[admin.rollen.tsx]
-- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L43 | neighbors=[admin.tsx]
+- "authenticated_admin_tableskeleton": "TableSkeleton()" | kind=code-symbol | source=src/routes/_authenticated/admin.tsx:L66 | neighbors=[admin.tsx]
 - "authenticated_portal_allowed_attachment_mime": "ALLOWED_ATTACHMENT_MIME" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L37 | neighbors=[portal.tsx]
 - "authenticated_portal_emptychanges": "EmptyChanges()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L784 | neighbors=[portal.tsx]
 - "authenticated_portal_filter_label": "FILTER_LABEL" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L98 | neighbors=[portal.tsx]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "authenticated_portal_projecten_projectid_projectswitcher": "ProjectSwitcher()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L63 | neighbors=[portal.projecten.$projectId.tsx]
 - "authenticated_portal_projecten_projectid_route": "Route" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L22 | neighbors=[portal.projecten.$projectId.tsx]
 - "authenticated_portal_projecten_projectid_uptimechart": "UptimeChart()" | kind=code-symbol | source=src/routes/_authenticated/portal.projecten.$projectId.tsx:L36 | neighbors=[portal.projecten.$projectId.tsx]
-- "authenticated_portal_stat": "Stat()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L775 | neighbors=[portal.tsx]
-- "authenticated_portal_status_style": "STATUS_STYLE" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L76 | neighbors=[portal.tsx]
-- "authenticated_portal_statusbadge": "StatusBadge()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L803 | neighbors=[portal.tsx]
-- "authenticated_portal_statuskey": "StatusKey" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L65 | neighbors=[portal.tsx]
-- "authenticated_portal_steps": "STEPS" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L85 | neighbors=[portal.tsx]
-- "authenticated_portal_uptimechart": "UptimeChart()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1171 | neighbors=[portal.tsx]
-- "authenticated_portal_websitetab": "WebsiteTab()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L1198 | neighbors=[portal.tsx]
 
 ## Instructions
 

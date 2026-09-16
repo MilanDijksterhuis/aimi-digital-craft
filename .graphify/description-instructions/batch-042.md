@@ -17,6 +17,21 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "routes_website_checker_hero_categories": "HERO_CATEGORIES" | kind=code-symbol | source=src/routes/website-checker.tsx:L112 | neighbors=[website-checker.tsx]
+- "routes_website_checker_skeletonbody": "SkeletonBody()" | kind=code-symbol | source=src/routes/website-checker.tsx:L424 | neighbors=[website-checker.tsx]
+- "routes_website_laten_maken_assen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-assen.tsx:L8 | neighbors=[website-laten-maken-assen.tsx]
+- "routes_website_laten_maken_autobedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-autobedrijf.tsx:L7 | neighbors=[website-laten-maken-autobedrijf.tsx]
+- "routes_website_laten_maken_autorijschool_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-autorijschool.tsx:L7 | neighbors=[website-laten-maken-autorijschool.tsx]
+- "routes_website_laten_maken_bloemist_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-bloemist.tsx:L7 | neighbors=[website-laten-maken-bloemist.tsx]
+- "routes_website_laten_maken_boekhouder_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-boekhouder.tsx:L7 | neighbors=[website-laten-maken-boekhouder.tsx]
+- "routes_website_laten_maken_cateringbedrijf_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-cateringbedrijf.tsx:L7 | neighbors=[website-laten-maken-cateringbedrijf.tsx]
+- "routes_website_laten_maken_coevorden_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-coevorden.tsx:L11 | neighbors=[website-laten-maken-coevorden.tsx]
+- "routes_website_laten_maken_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken.tsx:L8 | neighbors=[website-laten-maken.tsx]
+- "routes_website_laten_maken_drachten_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-drachten.tsx:L10 | neighbors=[website-laten-maken-drachten.tsx]
+- "routes_website_laten_maken_emmen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-emmen.tsx:L8 | neighbors=[website-laten-maken-emmen.tsx]
+- "routes_website_laten_maken_faqs": "faqs" | kind=code-symbol | source=src/routes/website-laten-maken.tsx:L7 | neighbors=[website-laten-maken.tsx]
+- "routes_website_laten_maken_groningen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-groningen.tsx:L8 | neighbors=[website-laten-maken-groningen.tsx]
+- "routes_website_laten_maken_heerenveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-heerenveen.tsx:L10 | neighbors=[website-laten-maken-heerenveen.tsx]
 - "routes_website_laten_maken_hoogeveen_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogeveen.tsx:L12 | neighbors=[website-laten-maken-hoogeveen.tsx]
 - "routes_website_laten_maken_hoogezand_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hoogezand.tsx:L8 | neighbors=[website-laten-maken-hoogezand.tsx]
 - "routes_website_laten_maken_hovenier_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-hovenier.tsx:L7 | neighbors=[website-laten-maken-hovenier.tsx]
@@ -42,21 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_website_laten_vernieuwen_steps": "steps" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L54 | neighbors=[website-laten-vernieuwen.tsx]
 - "routes_website_laten_vernieuwen_vernieuwenpage": "VernieuwenPage()" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L143 | neighbors=[website-laten-vernieuwen.tsx]
 - "routes_werkwijze_principles": "principles" | kind=code-symbol | source=src/routes/werkwijze.tsx:L36 | neighbors=[werkwijze.tsx]
-- "routes_werkwijze_standards": "standards" | kind=code-symbol | source=src/routes/werkwijze.tsx:L43 | neighbors=[werkwijze.tsx]
-- "routes_werkwijze_steps": "steps" | kind=code-symbol | source=src/routes/werkwijze.tsx:L13 | neighbors=[werkwijze.tsx]
-- "routes_werkwijze_werkwijzepage": "WerkwijzePage()" | kind=code-symbol | source=src/routes/werkwijze.tsx:L74 | neighbors=[werkwijze.tsx]
-- "routes_wordpress_of_maatwerk_choosecustom": "chooseCustom" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L73 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_choosewp": "chooseWp" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L66 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_comparison": "comparison" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L23 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_faqs": "faqs" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L80 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_row": "Row" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L21 | neighbors=[wordpress-of-maatwerk.tsx]
-- "routes_wordpress_of_maatwerk_vergelijkingpage": "VergelijkingPage()" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L161 | neighbors=[wordpress-of-maatwerk.tsx]
-- "scripts_indexnow_submit_main": "main()" | kind=code-symbol | source=scripts/indexnow-submit.mjs:L11 | neighbors=[indexnow-submit.mjs]
-- "scripts_set_telegram_webhook_main": "main()" | kind=code-symbol | source=scripts/set-telegram-webhook.ts:L23 | neighbors=[set-telegram-webhook.ts]
-- "scripts_visual_audit": "visual_audit.py" | kind=code-symbol | source=aimi-development.nl-audit/scripts/visual_audit.py:L1 | neighbors=[cc405f4 pagina updates]
-- "src_routetree_gen_algemenevoorwaardenroute": "AlgemeneVoorwaardenRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L361 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublichooksexpireaccountsroute": "ApiPublicHooksExpireAccountsRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L445 | neighbors=[routeTree.gen.ts]
-- "src_routetree_gen_apipublicsiteerrorroute": "ApiPublicSiteErrorRoute" | kind=code-symbol | source=src/routeTree.gen.ts:L405 | neighbors=[routeTree.gen.ts]
 
 ## Instructions
 

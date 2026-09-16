@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "components_onboardingwizard_stepcompany": "StepCompany()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L308 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepcontact": "StepContact()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L322 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepcontacts": "StepContacts()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L355 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepproject": "StepProject()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L343 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_stepsummary": "StepSummary()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L378 | neighbors=[OnboardingWizard.tsx]
+- "components_onboardingwizard_welcomescreen": "WelcomeScreen()" | kind=code-symbol | source=src/components/OnboardingWizard.tsx:L223 | neighbors=[OnboardingWizard.tsx]
+- "components_portalonboardingtour_contactblock": "ContactBlock" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L12 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_contacts": "Contacts" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L13 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_donescreen": "DoneScreen()" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L245 | neighbors=[PortalOnboardingTour.tsx]
 - "components_portalonboardingtour_fadevariants": "fadeVariants" | kind=code-symbol | source=src/components/PortalOnboardingTour.tsx:L40 | neighbors=[PortalOnboardingTour.tsx]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "design_handoff_meer_diensten_support_componentwillunmount": "componentWillUnmount()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L835 | neighbors=[support.js]
 - "design_handoff_meer_diensten_support_constructor": "constructor()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L818 | neighbors=[support.js]
 - "design_handoff_meer_diensten_support_forceupdate": "forceUpdate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L828 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_hiderawtemplate": "hideRawTemplate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1818 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_hinttomin": "hintToMin()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L883 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_placeholder": "Placeholder()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L862 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_renderdeckkids": "renderDeckKids()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L543 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_rendervals": "renderVals()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L838 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_resolvedottedpath": "resolveDottedPath()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1161 | neighbors=[support.js]
-- "design_handoff_meer_diensten_support_setstate": "setState()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L825 | neighbors=[support.js]
 
 ## Instructions
 

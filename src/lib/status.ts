@@ -68,6 +68,20 @@ export const CATEGORY_LABEL: Record<string, string> = {
 
 export const CATEGORY_KEYS = Object.keys(CATEGORY_LABEL);
 
+// ---------------- Blog CMS ----------------
+
+export const BLOG_STATUS_LABEL: Record<string, string> = {
+  draft: "Concept",
+  scheduled: "Gepland",
+  published: "Gepubliceerd",
+};
+
+export const BLOG_STATUS_COLOR: Record<string, string> = {
+  draft: "bg-muted text-muted-foreground",
+  scheduled: "bg-amber-500/20 text-amber-600",
+  published: "bg-emerald-500/20 text-emerald-600",
+};
+
 // Eenvoudige changes (max ±15 min werk) → tellen mee tegen gratis quotum.
 // Uitgebreide changes → €20 per change.
 export const SIMPLE_CATEGORIES = new Set(["text", "styling", "media", "accessibility"]);

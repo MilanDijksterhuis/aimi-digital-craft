@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_admin_functions_adminlistappointments": "adminListAppointments" | kind=code-symbol | source=src/lib/admin.functions.ts:L895 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistcallbacks": "adminListCallbacks" | kind=code-symbol | source=src/lib/admin.functions.ts:L3765 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistchanges": "adminListChanges" | kind=code-symbol | source=src/lib/admin.functions.ts:L522 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistcontactmoments": "adminListContactMoments" | kind=code-symbol | source=src/lib/admin.functions.ts:L976 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistdeletedchanges": "adminListDeletedChanges" | kind=code-symbol | source=src/lib/admin.functions.ts:L1329 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistleads": "adminListLeads" | kind=code-symbol | source=src/lib/admin.functions.ts:L3483 | neighbors=[admin.functions.ts]
+- "lib_admin_functions_adminlistloginevents": "adminListLoginEvents" | kind=code-symbol | source=src/lib/admin.functions.ts:L1029 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminlistmilestonedependencies": "adminListMilestoneDependencies" | kind=code-symbol | source=src/lib/admin.functions.ts:L2449 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminlistpasswordresets": "adminListPasswordResets" | kind=code-symbol | source=src/lib/admin.functions.ts:L1404 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminlistprojectchangerequests": "adminListProjectChangeRequests" | kind=code-symbol | source=src/lib/admin.functions.ts:L2771 | neighbors=[admin.functions.ts]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions_adminsetrolepermission": "adminSetRolePermission" | kind=code-symbol | source=src/lib/admin.functions.ts:L3152 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminsetselfonboarding": "adminSetSelfOnboarding" | kind=code-symbol | source=src/lib/admin.functions.ts:L299 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_adminsettutorialenabled": "adminSetTutorialEnabled" | kind=code-symbol | source=src/lib/admin.functions.ts:L322 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminsnoozealert": "adminSnoozeAlert" | kind=code-symbol | source=src/lib/admin.functions.ts:L3113 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminsoftdeletechange": "adminSoftDeleteChange" | kind=code-symbol | source=src/lib/admin.functions.ts:L1261 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminsynccustomermonitoring": "adminSyncCustomerMonitoring" | kind=code-symbol | source=src/lib/admin.functions.ts:L2891 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admintoggleonboardingitem": "adminToggleOnboardingItem" | kind=code-symbol | source=src/lib/admin.functions.ts:L816 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admintogglerequestpaid": "adminToggleRequestPaid" | kind=code-symbol | source=src/lib/admin.functions.ts:L560 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminupdatecallback": "adminUpdateCallback" | kind=code-symbol | source=src/lib/admin.functions.ts:L3867 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_adminupdatecustomer": "adminUpdateCustomer" | kind=code-symbol | source=src/lib/admin.functions.ts:L102 | neighbors=[admin.functions.ts]
 
 ## Instructions
 

@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_accounts_functions_adminsetaccessexpiry": "adminSetAccessExpiry" | kind=code-symbol | source=src/lib/accounts.functions.ts:L114 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_adminsetaccounttags": "adminSetAccountTags" | kind=code-symbol | source=src/lib/accounts.functions.ts:L96 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_adminsetblocked": "adminSetBlocked" | kind=code-symbol | source=src/lib/accounts.functions.ts:L78 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_adminunarchivechange": "adminUnarchiveChange" | kind=code-symbol | source=src/lib/accounts.functions.ts:L241 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_checkmyaccess": "checkMyAccess" | kind=code-symbol | source=src/lib/accounts.functions.ts:L16 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_pinglastseen": "pingLastSeen" | kind=code-symbol | source=src/lib/accounts.functions.ts:L8 | neighbors=[accounts.functions.ts]
+- "lib_accounts_functions_super": "SUPER" | kind=code-symbol | source=src/lib/accounts.functions.ts:L7 | neighbors=[accounts.functions.ts]
 - "lib_accounts_server_admingetaccountdetailimpl": "adminGetAccountDetailImpl()" | kind=code-symbol | source=src/lib/accounts.server.ts:L24 | neighbors=[accounts.server.ts]
 - "lib_accounts_server_adminharddeleteuserimpl": "adminHardDeleteUserImpl()" | kind=code-symbol | source=src/lib/accounts.server.ts:L65 | neighbors=[accounts.server.ts]
 - "lib_accounts_server_adminlistallaccountsimpl": "adminListAllAccountsImpl()" | kind=code-symbol | source=src/lib/accounts.server.ts:L3 | neighbors=[accounts.server.ts]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_admin_functions_admincreateprojectmilestone": "adminCreateProjectMilestone" | kind=code-symbol | source=src/lib/admin.functions.ts:L1827 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admincreateprojectnote": "adminCreateProjectNote" | kind=code-symbol | source=src/lib/admin.functions.ts:L1953 | neighbors=[admin.functions.ts]
 - "lib_admin_functions_admincreateprojecttask": "adminCreateProjectTask" | kind=code-symbol | source=src/lib/admin.functions.ts:L2219 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admincreateprojecttemplate": "adminCreateProjectTemplate" | kind=code-symbol | source=src/lib/admin.functions.ts:L2551 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admincreateprojecttimeentry": "adminCreateProjectTimeEntry" | kind=code-symbol | source=src/lib/admin.functions.ts:L2347 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admincreatesnippet": "adminCreateSnippet" | kind=code-symbol | source=src/lib/admin.functions.ts:L842 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admindeleteappointment": "adminDeleteAppointment" | kind=code-symbol | source=src/lib/admin.functions.ts:L943 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admindeletecallback": "adminDeleteCallback" | kind=code-symbol | source=src/lib/admin.functions.ts:L3964 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admindeletecontactmoment": "adminDeleteContactMoment" | kind=code-symbol | source=src/lib/admin.functions.ts:L1017 | neighbors=[admin.functions.ts]
-- "lib_admin_functions_admindeletecost": "adminDeleteCost" | kind=code-symbol | source=src/lib/admin.functions.ts:L780 | neighbors=[admin.functions.ts]
 
 ## Instructions
 

@@ -17,6 +17,12 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_purchase_requests": "public.purchase_requests" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L64 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, auth.users]
+- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_auth_users": "auth.users" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L154 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, on_auth_user_created]
+- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_on_auth_user_created": "on_auth_user_created" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L153 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, auth.users]
+- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_attachments": "public.change_attachments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L29 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
+- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_comments": "public.change_comments" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L56 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_requests]
+- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_profiles": "public.profiles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L138 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
 - "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_user_roles": "public.user_roles" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L146 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.handle_new_user()]
 - "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_touch_chat_last_message": "public.touch_chat_last_message()" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L99 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chats]
 - "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_trg_touch_chat_last_message": "trg_touch_chat_last_message" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L110 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chat_messages]
@@ -39,6 +45,7 @@ one-sentence description — no prose, no markdown fences.
 - "public_site_ping_route": "Route" | kind=code-symbol | source=src/routes/api/public/site-ping.ts:L18 | neighbors=[site-ping.ts, routeTree.gen.ts]
 - "routes_algemene_voorwaarden_route": "Route" | kind=code-symbol | source=src/routes/algemene-voorwaarden.tsx:L5 | neighbors=[algemene-voorwaarden.tsx, routeTree.gen.ts]
 - "routes_authenticated_route": "Route" | kind=code-symbol | source=src/routes/_authenticated.tsx:L12 | neighbors=[_authenticated.tsx, routeTree.gen.ts]
+- "routes_blog_route": "Route" | kind=code-symbol | source=src/routes/blog.tsx:L18 | neighbors=[blog.tsx, routeTree.gen.ts]
 - "routes_branches_route": "Route" | kind=code-symbol | source=src/routes/branches.tsx:L71 | neighbors=[branches.tsx, routeTree.gen.ts]
 - "routes_contact_route": "Route" | kind=code-symbol | source=src/routes/contact.tsx:L10 | neighbors=[contact.tsx, routeTree.gen.ts]
 - "routes_faq_route": "Route" | kind=code-symbol | source=src/routes/faq.tsx:L11 | neighbors=[faq.tsx, routeTree.gen.ts]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "routes_meer_diensten_rng": "rng()" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L107 | neighbors=[meer-diensten.tsx, buildLeaves()]
 - "routes_meer_diensten_route": "Route" | kind=code-symbol | source=src/routes/meer-diensten.tsx:L83 | neighbors=[meer-diensten.tsx, routeTree.gen.ts]
 - "routes_onderhoud_hosting_route": "Route" | kind=code-symbol | source=src/routes/onderhoud-hosting.tsx:L64 | neighbors=[onderhoud-hosting.tsx, routeTree.gen.ts]
-- "routes_over_ons_route": "Route" | kind=code-symbol | source=src/routes/over-ons.tsx:L34 | neighbors=[over-ons.tsx, routeTree.gen.ts]
-- "routes_privacybeleid_route": "Route" | kind=code-symbol | source=src/routes/privacybeleid.tsx:L5 | neighbors=[privacybeleid.tsx, routeTree.gen.ts]
-- "routes_root_route": "Route" | kind=code-symbol | source=src/routes/__root.tsx:L114 | neighbors=[__root.tsx, routeTree.gen.ts]
-- "routes_seo_route": "Route" | kind=code-symbol | source=src/routes/seo.tsx:L119 | neighbors=[seo.tsx, routeTree.gen.ts]
-- "routes_tarieven_route": "Route" | kind=code-symbol | source=src/routes/tarieven.tsx:L177 | neighbors=[tarieven.tsx, routeTree.gen.ts]
-- "routes_track_js": "track[.]js.tsx" | kind=code-symbol | source=src/routes/track[.]js.tsx:L1 | neighbors=[cors, Route]
-- "routes_webdesign_route": "Route" | kind=code-symbol | source=src/routes/webdesign.tsx:L31 | neighbors=[webdesign.tsx, routeTree.gen.ts]
 
 ## Instructions
 

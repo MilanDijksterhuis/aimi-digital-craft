@@ -17,6 +17,13 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "design_handoff_meer_diensten_support_hiderawtemplate": "hideRawTemplate()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1818 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_hinttomin": "hintToMin()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L883 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_placeholder": "Placeholder()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L862 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_renderdeckkids": "renderDeckKids()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L543 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_rendervals": "renderVals()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L838 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_resolvedottedpath": "resolveDottedPath()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L1161 | neighbors=[support.js]
+- "design_handoff_meer_diensten_support_setstate": "setState()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L825 | neighbors=[support.js]
 - "design_handoff_meer_diensten_support_shallowequal": "shallowEqual()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L854 | neighbors=[support.js]
 - "design_handoff_meer_diensten_support_warnunresolved": "warnUnresolved()" | kind=code-symbol | source=Geanimeerde achtergronden voor website/design_handoff_meer_diensten/support.js:L563 | neighbors=[support.js]
 - "eslint_config": "eslint.config.js" | kind=code-symbol | source=eslint.config.js:L1 | neighbors=[74ecdc1 code fixes]
@@ -50,13 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "lib_accounts_functions_adminlistnotifications": "adminListNotifications" | kind=code-symbol | source=src/lib/accounts.functions.ts:L193 | neighbors=[accounts.functions.ts]
 - "lib_accounts_functions_adminmarkallnotificationsread": "adminMarkAllNotificationsRead" | kind=code-symbol | source=src/lib/accounts.functions.ts:L217 | neighbors=[accounts.functions.ts]
 - "lib_accounts_functions_adminmarknotificationread": "adminMarkNotificationRead" | kind=code-symbol | source=src/lib/accounts.functions.ts:L207 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_adminsetaccessexpiry": "adminSetAccessExpiry" | kind=code-symbol | source=src/lib/accounts.functions.ts:L114 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_adminsetaccounttags": "adminSetAccountTags" | kind=code-symbol | source=src/lib/accounts.functions.ts:L96 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_adminsetblocked": "adminSetBlocked" | kind=code-symbol | source=src/lib/accounts.functions.ts:L78 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_adminunarchivechange": "adminUnarchiveChange" | kind=code-symbol | source=src/lib/accounts.functions.ts:L241 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_checkmyaccess": "checkMyAccess" | kind=code-symbol | source=src/lib/accounts.functions.ts:L16 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_pinglastseen": "pingLastSeen" | kind=code-symbol | source=src/lib/accounts.functions.ts:L8 | neighbors=[accounts.functions.ts]
-- "lib_accounts_functions_super": "SUPER" | kind=code-symbol | source=src/lib/accounts.functions.ts:L7 | neighbors=[accounts.functions.ts]
 
 ## Instructions
 
