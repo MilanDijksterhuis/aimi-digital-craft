@@ -231,7 +231,7 @@ export function BranchPage({
       <Nav />
 
       <main id="main-content">
-        <div className="mx-auto max-w-5xl px-6 pt-32">
+        <div className="mx-auto max-w-6xl px-6 pt-32">
           <section className="grid md:grid-cols-[1fr_1.1fr] gap-12 items-start">
             <div>
               {/* A-29: spiegelt de BreadcrumbList-markup uit de route-head. */}
@@ -335,7 +335,7 @@ export function BranchPage({
           </section>
         </div>
 
-        <div className="mx-auto max-w-5xl px-6 pb-24">
+        <div className="mx-auto max-w-6xl px-6 pb-24">
           {data.sectionOrder.map((id) => sectionRenderers[id](data))}
 
           {related && related.length > 0 && (
@@ -374,10 +374,8 @@ export function BranchPage({
           <section
             style={{
               marginTop: "64px",
-              padding: "34px",
-              borderRadius: "8px",
-              border: "1px solid rgba(254,44,2,0.3)",
-              background: "rgba(254,44,2,0.06)",
+              padding: "48px 0 0",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
               textAlign: "center",
             }}
           >

@@ -99,7 +99,7 @@ export function ServicePage({ data, path }: { data: ServicePageData; path?: stri
       <div style={{ position: "relative", zIndex: 1 }}>
         <Nav />
 
-        <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16">
+        <main id="main-content" className="mx-auto max-w-6xl px-6 pt-28 pb-16">
           {/* Hero */}
           <section
             className={
@@ -445,10 +445,8 @@ export function ServicePage({ data, path }: { data: ServicePageData; path?: stri
           <section
             style={{
               marginTop: "56px",
-              padding: "34px",
-              borderRadius: "8px",
-              border: "1px solid rgba(254,44,2,0.3)",
-              background: "rgba(254,44,2,0.06)",
+              padding: "48px 0 0",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
               textAlign: "center",
             }}
           >

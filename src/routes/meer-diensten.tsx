@@ -148,7 +148,7 @@ function MeerDiensten() {
     >
       <Nav />
 
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16" style={{ position: "relative", zIndex: 1 }}>
+      <main id="main-content" className="mx-auto max-w-6xl px-6 pt-28 pb-16" style={{ position: "relative", zIndex: 1 }}>
         {/* Hero */}
         <section>
           <motion.div
@@ -377,10 +377,8 @@ function MeerDiensten() {
           {...fadeUp()}
           style={{
             marginTop: "64px",
-            padding: "34px",
-            borderRadius: "14px",
-            border: "1px solid rgba(254,44,2,0.3)",
-            background: "rgba(254,44,2,0.06)",
+            padding: "48px 0 0",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
             textAlign: "center",
           }}
         >

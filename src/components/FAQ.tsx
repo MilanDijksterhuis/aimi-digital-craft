@@ -165,56 +165,124 @@ export const homepageFaqItems: FaqItem[] = HOMEPAGE_FAQ_QUESTIONS.flatMap((q) =>
   return item ? [item] : [];
 });
 
-/** Gegroepeerde, volledig zichtbare FAQ voor de /faq-pagina (GEO-audit
- * 2026-09-06, punt 10). Anders dan de accordeon op de homepage staan hier alle
- * antwoorden direct in de HTML, onder thematische H2's met elke vraag als H3 —
- * de vorm die AI-antwoordmachines het makkelijkst kunnen citeren. */
+function categorySlug(cat: string): string {
+  return cat
+    .toLowerCase()
+    .replace(/&/g, "en")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function FaqAccordionRow({ item, id }: { item: FaqItem; id: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div style={{ borderColor: "#2a2b2b" }} className="border-b last:border-b-0">
+      <h3 className="m-0">
+        <button
+          onClick={() => setIsOpen((v) => !v)}
+          aria-expanded={isOpen}
+          aria-controls={`faq-panel-${id}`}
+          className="w-full flex items-center justify-between gap-6 py-5 text-left"
+        >
+          <span
+            className="text-base font-medium text-white"
+            style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          >
+            {item.q}
+          </span>
+          <motion.span
+            animate={{ rotate: isOpen ? 45 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="shrink-0"
+            style={{ color: isOpen ? "#fe2c02" : "#a4a9b2" }}
+          >
+            <Plus className="w-5 h-5" strokeWidth={1.5} />
+          </motion.span>
+        </button>
+      </h3>
+      <motion.div
+        id={`faq-panel-${id}`}
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.22, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <p
+          className="pb-5 text-base leading-relaxed max-w-3xl"
+          style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+        >
+          {item.a}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+/** Gegroepeerde FAQ voor de /faq-pagina. Categorieën staan links als
+ * sprongnavigatie, elke vraag is los uitklapbaar zodat de pagina overzichtelijk
+ * blijft ondanks het grote aantal vragen. De volledige tekst blijft in de HTML
+ * staan (alleen visueel ingeklapt) en de FAQPage JSON-LD (`faqJsonLd`) draagt
+ * los daarvan alle antwoorden aan voor AI-antwoordmachines. */
 export function FaqGrouped() {
   return (
     <section id="faq" className="py-12" style={{ background: "#1a1a1a" }}>
-      <div className="mx-auto max-w-3xl px-6 space-y-14">
-        {FAQ_CATEGORIES.map((cat) => {
-          const items = faqItems.filter((f) => f.category === cat);
-          if (items.length === 0) return null;
-          return (
-            <div key={cat}>
-              <h2
-                className="text-white mb-6"
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                  fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)",
-                  fontWeight: 600,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {cat}
-              </h2>
-              <div className="divide-y" style={{ borderColor: "#2a2b2b" }}>
-                {items.map((item) => (
-                  <div key={item.q} className="py-5" style={{ borderColor: "#2a2b2b" }}>
-                    <h3
-                      className="text-white mb-2 text-base font-medium"
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                      }}
-                    >
-                      {item.q}
-                    </h3>
-                    <p
-                      className="text-base leading-relaxed"
-                      style={{
-                        color: "#a4a9b2",
-                        fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
-                      }}
-                    >
-                      {item.a}
-                    </p>
-                  </div>
-                ))}
+      <div className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[220px_1fr] lg:gap-16">
+        <nav
+          aria-label="Categorieën"
+          className="hidden lg:block sticky self-start"
+          style={{ top: "8rem" }}
+        >
+          <p
+            className="text-xs font-medium mb-4 uppercase"
+            style={{ color: "#868b94", letterSpacing: "0.08em", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+          >
+            Onderwerpen
+          </p>
+          <ul className="space-y-3">
+            {FAQ_CATEGORIES.map((cat) => (
+              <li key={cat}>
+                <a
+                  href={`#${categorySlug(cat)}`}
+                  className="text-sm transition-colors hover:text-white"
+                  style={{ color: "#a4a9b2", fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
+                >
+                  {cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="space-y-14 min-w-0">
+          {FAQ_CATEGORIES.map((cat) => {
+            const items = faqItems.filter((f) => f.category === cat);
+            if (items.length === 0) return null;
+            const slug = categorySlug(cat);
+            return (
+              <div key={cat} id={slug} style={{ scrollMarginTop: "8rem" }}>
+                <h2
+                  className="text-white mb-2"
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                    fontSize: "clamp(1.3rem, 2.5vw, 1.6rem)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {cat}
+                </h2>
+                <p className="text-sm mb-4" style={{ color: "#868b94" }}>
+                  {items.length} {items.length === 1 ? "vraag" : "vragen"}
+                </p>
+                <div>
+                  {items.map((item, i) => (
+                    <FaqAccordionRow key={item.q} item={item} id={`${slug}-${i}`} />
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { ClipboardList, Paintbrush, Code2, Rocket } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -71,11 +72,58 @@ export const Route = createFileRoute("/werkwijze")({
   component: WerkwijzePage,
 });
 
+function WerkwijzeVideo() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        width: "100%",
+        aspectRatio: "16 / 9",
+        borderRadius: "8px",
+        overflow: "hidden",
+        background: "#000",
+        border: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      {inView && (
+        <video
+          src="/videos/werkwijze.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+      )}
+    </div>
+  );
+}
+
 function WerkwijzePage() {
   return (
     <div style={{ background: "#1a1a1a", color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
       <Nav />
-      <main id="main-content" className="mx-auto max-w-5xl px-6 pt-28 pb-16">
+      <main id="main-content" className="mx-auto max-w-6xl px-6 pt-28 pb-16">
         <a href="/" style={{ fontSize: "13px", color: "#a4a9b2", textDecoration: "none" }}>
           ← Terug naar home
         </a>
@@ -85,47 +133,44 @@ function WerkwijzePage() {
         <h1 style={{ margin: "14px 0 18px", fontSize: "clamp(22px, 3.4vw, 34px)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
           Zo bouwen wij jouw website
         </h1>
-        <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "62ch" }}>
-          Een goede website laten maken begint bij een goede aanpak. Bij AIMI werk je van begin tot
-          eind direct met de twee developers die je site bouwen: Aidan &amp; Milan. Geen
-          bureaupolitiek, geen tussenlagen, geen verrassingen, wel een helder webdesign-traject en
-          vaste prijzen. Van de eerste kennismaking tot de livegang van je website of webshop, en ook
-          daarna blijf je altijd rechtstreeks in contact met de mensen die je project bouwen.
-          Hieronder lees je precies hoe ons ontwikkelproces eruitziet en wat je in elke fase kunt
-          verwachten.
-        </p>
+        <div style={{ display: "grid", gap: "32px 40px", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", alignItems: "start" }}>
+          <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#b6b6bd", maxWidth: "70ch" }}>
+            Een goede website laten maken begint bij een goede aanpak. Bij AIMI werk je van begin tot
+            eind direct met de twee developers die je site bouwen: Aidan &amp; Milan. Geen
+            bureaupolitiek, geen tussenlagen, geen verrassingen, wel een helder webdesign-traject en
+            vaste prijzen. Van de eerste kennismaking tot de livegang van je website of webshop, en ook
+            daarna blijf je altijd rechtstreeks in contact met de mensen die je project bouwen.
+            Hieronder lees je precies hoe ons ontwikkelproces eruitziet en wat je in elke fase kunt
+            verwachten.
+          </p>
+          <WerkwijzeVideo />
+        </div>
 
         {/* Proces */}
-        <section style={{ marginTop: "64px" }}>
+        <section style={{ marginTop: "72px" }}>
           <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Van idee naar livegang</h2>
-          <div style={{ marginTop: "30px" }}>
-            {steps.map((s, i) => {
+          <div style={{ marginTop: "34px", display: "grid", gap: "40px 32px", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+            {steps.map((s) => {
               const Icon = s.icon;
-              const last = i === steps.length - 1;
               return (
-                <div key={s.title} style={{ display: "flex", gap: "18px" }}>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: "none" }}>
-                    <div
-                      style={{
-                        width: "38px",
-                        height: "38px",
-                        borderRadius: "10px",
-                        background: "rgba(254,44,2,0.1)",
-                        border: "1px solid rgba(254,44,2,0.22)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Icon size={17} color={RED} strokeWidth={1.75} />
-                    </div>
-                    {!last && <div style={{ flex: 1, width: "1px", background: "rgba(255,255,255,0.14)", marginTop: "8px" }} />}
+                <div key={s.title}>
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      background: "rgba(254,44,2,0.1)",
+                      border: "1px solid rgba(254,44,2,0.22)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "18px",
+                    }}
+                  >
+                    <Icon size={18} color={RED} strokeWidth={1.75} />
                   </div>
-                  <div style={{ paddingBottom: last ? 0 : "28px" }}>
-                    <h3 style={{ fontSize: "15.5px", fontWeight: 600, marginBottom: "6px", marginTop: "6px" }}>{s.title}</h3>
-                    <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2", maxWidth: "58ch" }}>{s.desc}</p>
-                  </div>
+                  <h3 style={{ fontSize: "15.5px", fontWeight: 600, marginBottom: "8px" }}>{s.title}</h3>
+                  <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>{s.desc}</p>
                 </div>
               );
             })}
@@ -133,11 +178,11 @@ function WerkwijzePage() {
         </section>
 
         {/* Principes */}
-        <section style={{ marginTop: "64px" }}>
+        <section style={{ marginTop: "72px" }}>
           <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Waar we voor staan</h2>
-          <div style={{ marginTop: "26px", display: "grid", gap: "16px", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
+          <div style={{ marginTop: "30px", display: "grid", gap: "18px", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
             {principles.map((p) => (
-              <div key={p.title} style={{ padding: "22px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+              <div key={p.title} style={{ padding: "24px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
                 <h3 style={{ fontSize: "16px", fontWeight: 600, marginBottom: "8px" }}>{p.title}</h3>
                 <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>{p.desc}</p>
               </div>
@@ -146,12 +191,11 @@ function WerkwijzePage() {
         </section>
 
         {/* Kwaliteitsstandaard */}
-        <section style={{ marginTop: "64px" }}>
+        <section style={{ marginTop: "72px" }}>
           <h2 style={{ fontSize: "clamp(17px, 2.3vw, 22px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Wat elke site standaard meekrijgt</h2>
-          <div style={{ marginTop: "26px", display: "grid", gap: "16px", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+          <div style={{ marginTop: "26px", display: "grid", gap: "28px", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
             {standards.map((s) => (
               <div key={s.title}>
-                <div style={{ width: "9px", height: "9px", background: RED, transform: "rotate(45deg)", marginBottom: "14px" }} />
                 <h3 style={{ fontSize: "15px", fontWeight: 600, marginBottom: "7px" }}>{s.title}</h3>
                 <p style={{ fontSize: "13.5px", lineHeight: 1.6, color: "#9a9aa2" }}>{s.desc}</p>
               </div>
@@ -176,7 +220,7 @@ function WerkwijzePage() {
         </section>
 
         {/* CTA */}
-        <section style={{ marginTop: "56px", padding: "34px", borderRadius: "8px", border: "1px solid rgba(254,44,2,0.3)", background: "rgba(254,44,2,0.06)", textAlign: "center" }}>
+        <section style={{ marginTop: "56px", paddingTop: "40px", borderTop: "1px solid rgba(255,255,255,0.08)", textAlign: "center" }}>
           <h2 style={{ fontSize: "clamp(19px, 3vw, 24px)", fontWeight: 700, letterSpacing: "-0.02em" }}>Klaar om te beginnen?</h2>
           <p style={{ margin: "12px auto 20px", fontSize: "14px", color: "#b6b6bd", maxWidth: "52ch" }}>
             Vertel ons kort over je plannen. Je krijgt binnen één werkdag een reactie en een vrijblijvende offerte.

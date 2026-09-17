@@ -1912,3 +1912,345 @@ Wil je weten hoe je organische vindbaarheid er nu voor staat? Doe de gratis webs
   $n61sd$Ads leveren direct verkeer maar kosten per klik, SEO bouwt blijvend op. Lees wanneer je voor welke kiest en waarom een combinatie vaak het slimst is.$n61sd$,
   $n61fk$google ads of seo$n61fk$
 );
+
+-- 62. lokaal-beter-gevonden-google
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n62t$Hoe word ik lokaal beter gevonden in Google?$n62t$,
+  'lokaal-beter-gevonden-google',
+  $n62e$Lokale vindbaarheid begint bij een compleet en actueel Google Business Profile, aangevuld met reviews, kloppende bedrijfsgegevens en content die inspeelt op je regio. Ook lokale zoekwoorden op je website tellen mee. We leggen uit welke stappen je zet om in je eigen plaats en regio bovenaan te verschijnen bij lokale zoekopdrachten.$n62e$,
+  $n62c$# Hoe word ik lokaal beter gevonden in Google?
+
+Voor de meeste lokale bedrijven komt het grootste deel van de klanten uit de eigen omgeving. Dan wil je bovenaan staan als iemand in jouw regio zoekt naar wat je aanbiedt. Lokaal beter gevonden worden is goed te beïnvloeden, en vaak zelfs zonder groot budget. We zetten de belangrijkste stappen op een rij.
+
+## Begin bij je Google Business Profile
+
+Dit is verreweg de belangrijkste factor voor lokale vindbaarheid. Als iemand zoekt op "kapper in de buurt" of "loodgieter Assen", toont Google een kaartje met lokale bedrijven, nog vóór de gewone resultaten. Daar wil je in staan.
+
+- **Maak je profiel compleet**: naam, adres, telefoonnummer, openingstijden, website, categorie, alles ingevuld en kloppend
+- **Kies de juiste categorie**: specifiek ("elektricien"), niet algemeen ("bedrijf")
+- **Voeg foto's toe**: van je pand, team en werk; profielen met foto's krijgen meer aandacht
+- **Houd het actueel**: pas openingstijden aan rond feestdagen, plaats af en toe een update
+
+## Verzamel en beheer reviews
+
+Reviews zijn een sterk signaal voor zowel Google als voor potentiële klanten. Vraag tevreden klanten actief om een review, maak het ze makkelijk met een directe link, en reageer op de reviews die binnenkomen, ook op de kritische. Een bedrijf met veel recente, positieve reviews springt eruit in de lokale resultaten.
+
+## Zorg voor consistente bedrijfsgegevens
+
+Je naam, adres en telefoonnummer moeten overal exact hetzelfde zijn: op je website, in je Google Business Profile, en in andere gidsen waar je vermeld staat. Inconsistente gegevens (bijvoorbeeld een oud adres dat ergens nog rondslingert) verwarren Google en verzwakken je lokale vindbaarheid.
+
+## Maak je website lokaal relevant
+
+- Benoem je werkgebied natuurlijk in je teksten ("we werken in heel Groningen en Drenthe")
+- Gebruik lokale zoekwoorden waar dat logisch is, zonder te overdrijven
+- Overweeg relevante, inhoudelijke pagina's per gebied als je meerdere plaatsen bedient, maar vermijd dunne plaatsnaam-pagina's die alleen de plaats verwisselen
+
+## Sta vermeld in relevante lokale gidsen
+
+Vermeldingen in betrouwbare bedrijvengidsen en op relevante lokale platformen versterken je aanwezigheid. Zorg ook hier voor consistente gegevens. Kwaliteit boven kwantiteit: een paar relevante vermeldingen zijn beter dan tientallen op willekeurige, dubieuze sites.
+
+## Zorg dat je website de klik opvangt
+
+Lokale vindbaarheid brengt bezoekers naar je site. Is die site vervolgens traag, verouderd of onduidelijk, dan haakt de bezoeker alsnog af. Lokale SEO en een goede website werken samen: het een zonder het ander levert weinig op.
+
+## Waarom lokaal juist kansen biedt
+
+Het goede nieuws voor lokale bedrijven: de concurrentie op lokaal niveau is vaak minder scherp dan op landelijke zoekwoorden. Je hoeft niet te concurreren met het hele land, alleen met de andere bedrijven in jouw plaats of regio. Dat maakt goede lokale posities voor veel bedrijven realistisch haalbaar.
+
+## Onze aanpak
+
+Bij AIMI zijn we zelf gevestigd in Groningen/Drenthe en kennen we de regio. We pakken lokale vindbaarheid aan met een sterke basis in je Google Business Profile, echte lokale relevantie op je website, en een site die de bezoeker vervolgens overtuigt. Geen trucjes, wel resultaat dat standhoudt.
+
+Lees ook: [je Google Bedrijfsprofiel](/blog/google-business-profile-fouten) en [vindbaar in meerdere plaatsen](/blog/lokale-seo-meerdere-plaatsen).
+
+Wil je weten hoe lokaal vindbaar je nu bent? Doe de gratis website-checker.$n62c$,
+  'scheduled', '2027-02-19T09:00:00Z',
+  $n62st$Hoe word ik lokaal beter gevonden in Google?$n62st$,
+  $n62sd$Lokale vindbaarheid begint bij je Google Business Profile en reviews. Lees welke stappen je in je regio bovenaan zetten bij lokale zoekopdrachten.$n62sd$,
+  $n62fk$lokaal beter gevonden google$n62fk$
+);
+
+-- 63. wat-zijn-backlinks
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n63t$Wat zijn backlinks en heb ik ze echt nodig?$n63t$,
+  'wat-zijn-backlinks',
+  $n63e$Backlinks zijn links van andere websites naar die van jou; Google ziet ze als een stem van vertrouwen. Kwalitatieve, relevante backlinks helpen je hoger te ranken, maar gekochte of spammy links werken juist averechts. We leggen uit wat backlinks zijn, waarom kwaliteit boven aantal gaat en of je er als klein bedrijf actief op moet inzetten.$n63e$,
+  $n63c$# Wat zijn backlinks en heb ik ze echt nodig?
+
+In SEO-verhalen duiken backlinks vaak op als iets heel belangrijks. Maar wat zijn het precies, en heb je ze als klein bedrijf echt nodig? Het korte antwoord: ze helpen, maar de manier waarop je ermee omgaat bepaalt of ze je vooruithelpen of juist schaden. We leggen het rustig uit.
+
+## Wat backlinks zijn
+
+Een backlink is een link van een andere website naar die van jou. Als een andere site naar jouw pagina verwijst, ziet Google dat als een soort aanbeveling: blijkbaar vindt die site jouw content de moeite waard om naar te linken. Hoe meer relevante, betrouwbare sites naar je linken, hoe meer gezag je opbouwt in de ogen van zoekmachines.
+
+Je kunt het vergelijken met mond-tot-mondreclame: als veel gerespecteerde mensen jouw bedrijf aanbevelen, wint je reputatie. Backlinks werken online op een vergelijkbare manier.
+
+## Waarom ze meetellen
+
+Backlinks zijn een van de factoren die zoekmachines gebruiken om te bepalen hoe betrouwbaar en gezaghebbend een site is. Twee vergelijkbare websites met vergelijkbare content: die met meer kwalitatieve backlinks scoort vaak beter. Ze dragen bij aan je autoriteit, en daarmee aan je posities.
+
+## Kwaliteit gaat boven kwantiteit
+
+Dit is de belangrijkste les. Eén link van een relevante, betrouwbare website is meer waard dan honderd links van dubieuze, irrelevante sites. Sterker nog: massaal verzamelde, kunstmatige links kunnen je juist schaden. Zoekmachines zijn goed geworden in het herkennen van nep-links, en straffen sites die het spel proberen te bespelen.
+
+## Wat je vooral niet moet doen
+
+- **Backlinks kopen**: diensten die "honderden links" beloven, leveren bijna altijd waardeloze of schadelijke links. Blijf hier weg van.
+- **Links ruilen op grote schaal**: overdreven, kunstmatige linkruil valt op en werkt averechts.
+- **Vertrouwen op trucjes**: elke aanpak die probeert het systeem te bespelen in plaats van echte waarde te bieden, is op termijn een risico.
+
+## Hoe je op een eerlijke manier backlinks krijgt
+
+- **Maak content die het waard is om naar te linken**: goede, informatieve artikelen worden vanzelf soms geciteerd of gedeeld
+- **Zorg voor vermeldingen in relevante, betrouwbare bedrijvengidsen**
+- **Werk samen met partners, leveranciers of lokale organisaties** die natuurlijk naar je kunnen linken
+- **Deel je kennis** waar dat past, bijvoorbeeld via een gastartikel op een relevante site
+
+## Heb je ze echt nodig?
+
+Voor een klein, lokaal bedrijf zijn backlinks minder allesbepalend dan voor een site die op zeer competitieve, landelijke zoekwoorden wil scoren. Een paar relevante, natuurlijke links helpen, maar je hoeft er geen obsessie van te maken. Begin met een gezonde site en goede content; een deel van de links volgt daar vanzelf uit. Zeker lokaal weegt je Google Business Profile vaak zwaarder.
+
+## Focus op de basis eerst
+
+Voordat je energie steekt in het najagen van backlinks, zorg dat je fundament staat: een snelle, veilige site met goede content. Backlinks versterken een sterke basis, maar ze kunnen een zwakke basis niet compenseren.
+
+## Onze aanpak
+
+Bij AIMI richten we ons op een gezonde technische basis en waardevolle content, want dat is het fundament waar autoriteit op rust. We zijn strikt in het vermijden van gekochte of kunstmatige links, omdat die uiteindelijk meer risico dan winst opleveren.
+
+Lees ook: [domeinautoriteit](/blog/domeinautoriteit-verhogen) en [zelf aan SEO werken](/blog/hoger-in-google-zonder-specialist).
+
+Wil je weten hoe je site er nu voor staat? Doe de gratis website-checker.$n63c$,
+  'scheduled', '2027-02-22T09:00:00Z',
+  $n63st$Wat zijn backlinks en heb je ze echt nodig?$n63st$,
+  $n63sd$Backlinks zijn links van andere sites naar jou, een stem van vertrouwen voor Google. Lees wat ze zijn, waarom kwaliteit telt en of jij ze nodig hebt.$n63sd$,
+  $n63fk$wat zijn backlinks$n63fk$
+);
+
+-- 64. is-mijn-website-avg-proof
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n64t$Is mijn website AVG-proof? (wat moet er geregeld zijn)$n64t$,
+  'is-mijn-website-avg-proof',
+  $n64e$Een AVG-proof website heeft minimaal een correcte cookiebanner die pas na toestemming trackt, een duidelijke privacyverklaring, een geldig SSL-certificaat en zorgvuldige omgang met formuliergegevens. Dit is geen juridisch advies, maar een praktisch overzicht van wat er minimaal geregeld moet zijn om aan de basisregels te voldoen en vertrouwen te wekken.$n64e$,
+  $n64c$# Is mijn website AVG-proof? (wat moet er geregeld zijn)
+
+De AVG (de Europese privacywetgeving) geldt ook voor jouw website, hoe klein je bedrijf ook is. Veel ondernemers weten niet zeker of hun site voldoet, en dat is begrijpelijk. We zetten op een rij wat er minimaal geregeld moet zijn. Let op: dit is geen juridisch advies, maar een praktisch overzicht van de basis.
+
+## Wat de AVG in de kern vraagt
+
+De AVG draait om zorgvuldig omgaan met persoonsgegevens van je bezoekers en klanten: gegevens die je verzamelt via formulieren, cookies, of andere manieren. Je moet transparant zijn over wat je verzamelt en waarom, en toestemming vragen waar dat nodig is.
+
+## De basis die geregeld moet zijn
+
+**Een correcte cookiebanner**
+Als je niet-noodzakelijke cookies gebruikt (zoals analytics of tracking), moet je toestemming vragen vóórdat die geplaatst worden. De banner moet een even makkelijke manier bieden om te weigeren als om te accepteren. Cookies plaatsen voordat iemand kiest, of alleen een "accepteren"-knop tonen, voldoet niet.
+
+**Een privacyverklaring**
+Een pagina waarop je uitlegt welke gegevens je verzamelt, waarom, hoe lang je ze bewaart, en met wie je ze eventueel deelt. Ook moeten bezoekers weten hoe ze hun rechten kunnen uitoefenen (zoals inzage of verwijdering van hun gegevens).
+
+**Een geldig SSL-certificaat**
+Gegevens die via je site worden verstuurd (bijvoorbeeld via een contactformulier) moeten versleuteld zijn. Een geldig SSL-certificaat (het slotje en https in de adresbalk) is hiervoor de basis.
+
+**Zorgvuldige omgang met formuliergegevens**
+Gegevens die mensen via een formulier achterlaten, moeten veilig verwerkt en niet langer bewaard worden dan nodig. Vraag ook niet meer gegevens dan je daadwerkelijk nodig hebt.
+
+## Veelgemaakte fouten
+
+- Cookies (zoals analytics) die al geplaatst worden voordat de bezoeker toestemming heeft gegeven
+- Een cookiebanner met alleen "accepteren" en geen gelijkwaardige weiger-optie
+- Voorgevinkte vakjes voor toestemming (dat geldt niet als geldige toestemming)
+- Geen of een onvindbare privacyverklaring
+- Formulieren zonder SSL, waardoor gegevens onbeveiligd verstuurd worden
+
+## Waarom dit meer is dan een verplicht vinkje
+
+Naast dat het wettelijk moet, speelt vertrouwen een rol. Een slordige of misleidende omgang met privacy geeft bezoekers het gevoel dat je niet zorgvuldig bent. Een nette, transparante aanpak draagt juist bij aan een professionele, betrouwbare indruk. Privacy goed regelen is dus niet alleen een plicht, maar ook een kans.
+
+## Hoe je checkt of je site voldoet
+
+Loop de basis langs: heb je een correcte cookiebanner, een vindbare privacyverklaring, een geldig SSL-certificaat, en ga je zorgvuldig om met formuliergegevens? Twijfel je over de juridische details, raadpleeg dan iemand met verstand van privacywetgeving; de exacte eisen kunnen per situatie verschillen.
+
+## Onze aanpak
+
+Bij AIMI zorgen we dat nieuwe websites standaard voorzien zijn van de basis: een correcte cookiebanner, een privacyverklaring en een geldig SSL-certificaat, met zorgvuldige omgang met formuliergegevens. We claimen geen juridisch advies te geven, maar we bouwen wel met deze basiszaken in gedachten in plaats van ze als bijzaak te behandelen.
+
+Lees ook: [cookiebanners en AVG](/blog/cookiebanners-en-avg) en [een geldig SSL-certificaat](/blog/ssl-certificaat-niet-veilig).
+
+Wil je weten of jouw huidige site de privacybasis op orde heeft? Doe de gratis website-checker.$n64c$,
+  'scheduled', '2027-02-25T09:00:00Z',
+  $n64st$Is mijn website AVG-proof? Dit moet geregeld zijn$n64st$,
+  $n64sd$Een AVG-proof site heeft een correcte cookiebanner, privacyverklaring en SSL. Lees wat er minimaal geregeld moet zijn om aan de basisregels te voldoen.$n64sd$,
+  $n64fk$website avg proof$n64fk$
+);
+
+-- 65. teksten-voor-google-en-bezoekers
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n65t$Hoe schrijf ik teksten waar Google én bezoekers blij van worden?$n65t$,
+  'teksten-voor-google-en-bezoekers',
+  $n65e$Goede webteksten beantwoorden de vraag van de bezoeker meteen, in normale taal, en gebruiken de woorden die mensen echt intypen, zonder in trucjes of keyword-stuffing te vervallen. Zet de vraag in het kopje en het antwoord er direct onder. Zo bedien je zowel de lezer als de zoekmachine. We delen concrete schrijftips.$n65e$,
+  $n65c$# Hoe schrijf ik teksten waar Google én bezoekers blij van worden?
+
+Er bestaat een hardnekkig misverstand dat je moet kiezen: schrijven voor Google (met trucjes en zoekwoorden) óf schrijven voor mensen. In werkelijkheid is dat een valse tegenstelling. De beste webteksten dienen beide tegelijk, want Google wil precies hetzelfde als je bezoeker: een helder antwoord op de vraag. We delen concrete schrijftips.
+
+## Het uitgangspunt: schrijf voor mensen
+
+Google wordt steeds beter in het beoordelen of content daadwerkelijk waardevol is voor de lezer. Teksten volproppen met zoekwoorden werkt allang niet meer, sterker nog, het schaadt je. Schrijf dus in de eerste plaats voor de mens die je pagina leest. Als die tevreden is, is Google dat meestal ook.
+
+## Concrete schrijftips
+
+**Beantwoord de vraag meteen**
+Mensen (en Google) houden van een direct antwoord. Zet de vraag in een kopje en geef er direct onder een helder antwoord. Ga daarna pas de diepte in. Laat de lezer niet eerst door drie alinea's inleiding ploegen.
+
+**Gebruik de woorden die mensen echt intypen**
+Schrijf zoals je doelgroep praat en zoekt. Als klanten zoeken op "website laten maken" en jij schrijft consequent over "digitale propositie-ontwikkeling", loop je die mensen mis. Sluit aan bij hun taal, niet bij jargon.
+
+**Schrijf in normale taal**
+Korte zinnen, gewone woorden, geen opgeblazen bedrijfstaal. "Wij ontzorgen u met innovatieve totaaloplossingen" zegt niets. "Wij bouwen je website en houden hem daarna bij" wel. Duidelijkheid wint van deftigheid.
+
+**Gebruik een logische structuur**
+Kopjes en tussenkopjes helpen zowel de lezer (die scant) als Google (dat de structuur leest). Verdeel je tekst in behapbare stukken met duidelijke koppen die vertellen wat er komt.
+
+**Maak het scanbaar**
+Weinig mensen lezen een webpagina woord voor woord. Ze scannen. Korte alinea's, duidelijke koppen en waar nuttig een opsomming maken je tekst toegankelijk voor wie snel het antwoord zoekt.
+
+**Wees concreet**
+Vage beloftes overtuigen niemand. Concrete voorbeelden, echte details en heldere uitleg maken je tekst geloofwaardig en waardevol, voor de lezer en voor Google.
+
+## Wat je moet vermijden
+
+- **Keyword stuffing**: hetzelfde zoekwoord overal geforceerd inproppen. Onleesbaar, en het werkt averechts.
+- **Dunne content**: pagina's die veel woorden bevatten maar niets zeggen. Google prikt hier doorheen.
+- **Kopiëren of klakkeloos AI-genereren zonder redactie**: unieke, doordachte content wint van generieke tekst.
+- **Alleen voor de zoekmachine schrijven**: als een echt mens je tekst niet prettig leest, doe je iets fout.
+
+## De rol van AI
+
+AI kan een prima startpunt zijn voor een tekst, maar ongeredigeerde AI-output publiceren schaadt je meer dan het helpt. Gebruik het als hulpmiddel, maar herschrijf, controleer en verrijk de tekst met je eigen kennis en toon. De mens moet altijd de laatste hand hebben.
+
+## Onze aanpak
+
+Bij AIMI schrijven we teksten die de vraag van de bezoeker echt beantwoorden, in normale taal, afgestemd op de woorden die mensen intypen. Geen trucjes, geen jargon, geen ongeredigeerde AI-brij, maar content die zowel je lezer als Google waardeert.
+
+Lees ook: [teksten vóór het ontwerp](/blog/teksten-voor-ontwerp) en [AI-content zonder redactie](/blog/ai-content-zonder-redactie-seo).
+
+Wil je weten hoe de teksten op jouw site scoren? Doe de gratis website-checker.$n65c$,
+  'scheduled', '2027-02-28T09:00:00Z',
+  $n65st$Teksten schrijven waar Google én bezoekers blij van worden$n65st$,
+  $n65sd$Goede webteksten beantwoorden de vraag meteen, in de woorden die mensen intypen. Lees concrete schrijftips die zowel bezoekers als Google bedienen.$n65sd$,
+  $n65fk$teksten schrijven voor google$n65fk$
+);
+
+-- 66. verschil-goedkope-dure-website
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n66t$Wat is het verschil tussen een goedkope en een dure website?$n66t$,
+  'verschil-goedkope-dure-website',
+  $n66e$Het prijsverschil zit zelden in het aantal pagina's, maar in de fundering: strategie, uniek ontwerp, technische kwaliteit, snelheid, SEO-basis en eigenaarschap. Een goedkope template-site oogt soms prima, maar levert vaak minder op en zit je later in de weg. We leggen uit wat je precies extra krijgt als je meer investeert.$n66e$,
+  $n66c$# Wat is het verschil tussen een goedkope en een dure website?
+
+Je ziet websites aangeboden voor een paar honderd euro, en je ziet offertes van vele duizenden. Voor iets wat toch "gewoon een website" is. Waar zit dat verschil dan in? Het eerlijke antwoord: het verschil zit vooral in wat je niet ziet. We leggen uit waar je geld wel of niet naartoe gaat.
+
+## Wat je aan de buitenkant ziet, is maar het topje
+
+Twee websites kunnen er op het eerste gezicht vergelijkbaar uitzien, terwijl de een een tiende kost van de ander. Dat komt doordat het zichtbare deel (het uiterlijk) maar een klein deel van het werk is. Het echte verschil zit onder de motorkap, in zaken die je pas merkt na verloop van tijd.
+
+## Waar het verschil in zit
+
+**Uniek ontwerp versus standaard template**
+Een goedkope site gebruikt vaak een kant-en-klaar sjabloon dat duizenden anderen ook gebruiken. Een duurdere site heeft een ontwerp dat past bij jouw merk en je onderscheidt van de rest.
+
+**Schone code versus in elkaar geklikt**
+Goedkope sites worden vaak snel in elkaar gezet met tientallen plugins gestapeld op elkaar. Dat werkt in het begin, maar wordt traag, kwetsbaar en lastig te onderhouden. Kwalitatieve sites hebben schone, lichte code die snel en veilig is en meegroeit.
+
+**Vindbaarheid wel of niet ingebouwd**
+Bij een goedkope site is SEO vaak een bijzaak of ontbreekt het volledig. Bij een serieuze site is de technische basis voor vindbaarheid ingebouwd: correcte instellingen, snelheid, structuur. Een site die niet gevonden wordt, levert geen klanten op, hoe goedkoop hij ook was.
+
+**Strategie versus zomaar bouwen**
+Een goede site begint met nadenken: wie is je klant, wat moet de site bereiken, welke actie moet de bezoeker ondernemen? Goedkope sites slaan dit over en leveren een mooi plaatje zonder richting.
+
+**Eigendom en nazorg**
+Bij een serieuze partij ben jij eigenaar van je site en domein, en is er onderhoud geregeld. Bij goedkope opties zit je soms vast aan de aanbieder, of sta je er na oplevering helemaal alleen voor.
+
+**Snelheid en veiligheid**
+Goedkope hosting en zware code maken een site traag en kwetsbaar. Kwalitatieve sites draaien op goede hosting met aandacht voor beveiliging, wat je terugziet in prestaties en gemoedsrust.
+
+## Wanneer is goedkoop prima?
+
+Eerlijk is eerlijk: niet iedereen heeft een dure site nodig. Start je net, heb je alleen een simpele online aanwezigheid nodig als visitekaartje, en verwacht je er geen klanten uit te halen, dan kan een goedkope oplossing volstaan als tijdelijke stap. Het wordt pas een probleem als je site klanten móet opleveren en de goedkope oplossing dat niet kan.
+
+## Waarom goedkoop vaak duurkoop is
+
+Een goedkope site die na een jaar traag, onvindbaar en aan vervanging toe is, kost je uiteindelijk meer: in gemiste klanten én in een nieuwe site die je alsnog moet laten bouwen. Wat je vooraf bespaart, betaal je later dubbel terug. Kwaliteit die meegaat is meestal de voordeligste keuze op de lange termijn.
+
+## Onze aanpak
+
+Bij AIMI zijn we transparant over waar je geld naartoe gaat. We bouwen op eigen infrastructuur met schone code, met vindbaarheid en veiligheid ingebouwd, gericht op een site die jaren meegaat. Geen goedkoop plaatje zonder fundament, maar ook geen onnodige toeters en bellen: kwaliteit die past bij wat jij nodig hebt.
+
+Lees ook: [wat een website kost](/blog/opbouw-website-prijs) en [gratis websitebouwers](/blog/gratis-website-bouwers-kosten).
+
+Benieuwd wat bij jouw situatie past? Neem contact op voor een eerlijk gesprek.$n66c$,
+  'scheduled', '2027-03-03T09:00:00Z',
+  $n66st$Verschil tussen een goedkope en een dure website$n66st$,
+  $n66sd$Het prijsverschil zit in de fundering, niet in het aantal pagina's. Lees wat je extra krijgt bij een duurdere website en wanneer goedkoop duur wordt.$n66sd$,
+  $n66fk$verschil goedkope en dure website$n66fk$
+);
+
+-- 67. vindbaar-in-ai-zoekmachines
+INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
+VALUES (
+  $n67t$Hoe zorg ik dat mijn website in ChatGPT en AI-zoekmachines verschijnt?$n67t$,
+  'vindbaar-in-ai-zoekmachines',
+  $n67e$AI-zoekmachines zoals ChatGPT halen antwoorden uit heldere, goed gestructureerde content. Je vergroot je kans om geciteerd te worden door vragen direct te beantwoorden, korte samenvattingen toe te voegen, structured data te gebruiken en autoriteit op te bouwen. We leggen uit wat GEO (Generative Engine Optimization) is en hoe je erop inspeelt.$n67e$,
+  $n67c$# Hoe zorg ik dat mijn website in ChatGPT en AI-zoekmachines verschijnt?
+
+Steeds meer mensen zoeken niet meer alleen via Google, maar stellen hun vragen aan AI-assistenten zoals ChatGPT, of gebruiken de AI-overzichten die bovenaan Google verschijnen. Dat roept een nieuwe vraag op: hoe zorg je dat jouw bedrijf genoemd wordt in die AI-antwoorden? Dit terrein is nieuw, maar er zijn al duidelijke lijnen te trekken.
+
+## Wat er verandert in hoe mensen zoeken
+
+Waar iemand vroeger "beste webbureau Groningen" intypte en op een lijstje blauwe links klikte, vraagt hij nu steeds vaker aan een AI: "welk webbureau in Groningen kun je aanraden?" De AI geeft dan een samengevat antwoord, soms met enkele bedrijven erin genoemd. Voor bedrijven ontstaat zo een nieuwe manier om gevonden (of gemist) te worden. Dit wordt ook wel GEO genoemd: optimalisatie voor generatieve AI-zoekmachines.
+
+## Hoe AI-zoekmachines aan hun informatie komen
+
+AI-assistenten baseren hun antwoorden deels op wat ze op het web vinden. Ze halen informatie uit betrouwbare, goed gestructureerde bronnen en vatten die samen. Dat betekent dat veel van wat werkt voor gewone SEO, óók werkt voor AI-vindbaarheid. Het fundament is grotendeels hetzelfde, met een paar accenten die extra belangrijk worden.
+
+## Wat je kunt doen om genoemd te worden
+
+**Zorg dat je überhaupt goed vindbaar bent**
+AI-zoekmachines putten uit het web. Sta je nergens, dan kan een AI je ook niet noemen. Een sterke SEO-basis is dus het vertrekpunt, geen aparte wereld.
+
+**Beantwoord vragen helder en direct**
+AI's citeren graag bronnen die een vraag duidelijk en beknopt beantwoorden. Content die een concrete vraag in normale taal beantwoordt (precies waar een goede blog om draait) heeft meer kans om opgepikt te worden. Zet de vraag in een kopje en het antwoord er direct onder.
+
+**Wees concreet, feitelijk en betrouwbaar**
+AI-systemen hechten aan informatie die feitelijk en verifieerbaar is. Vage marketingtaal wordt zelden geciteerd; heldere, concrete en kloppende informatie wel.
+
+**Zorg voor een gezonde technische structuur**
+Goed gestructureerde content, met logische koppen en waar passend gestructureerde data (schema markup), is makkelijker voor machines om te begrijpen en samen te vatten.
+
+**Bouw aan herkenbaarheid en consistentie**
+Word je op meerdere betrouwbare plekken op een consistente manier genoemd (je eigen site, gidsen, reviews), dan versterkt dat het beeld dat AI-systemen van je bedrijf vormen.
+
+## Wat je vooral niet moet doen
+
+Er bestaat geen trucje om jezelf de AI in te forceren, en pogingen daartoe (nep-content, misleidende informatie) werken averechts en schaden je betrouwbaarheid. Zoals bij SEO geldt: echte waarde bieden wint van het systeem proberen te bespelen.
+
+## Blijf realistisch: het veld is nog jong
+
+AI-zoeken ontwikkelt zich razendsnel, en niemand kent het exacte recept. Wees dus sceptisch bij wie "gegarandeerde AI-vindbaarheid" belooft. Wat vaststaat: een betrouwbare, goed vindbare, helder schrijvende website is de beste voorbereiding op hoe zoeken ook evolueert. Wie de basis op orde heeft, staat sterk, nu en straks.
+
+## Onze aanpak
+
+Bij AIMI bouwen we sites met een sterke, toekomstbestendige basis: goed vindbaar, helder gestructureerd en met content die vragen echt beantwoordt. Precies de eigenschappen die zowel klassieke zoekmachines als nieuwe AI-zoekmachines waarderen. We volgen de ontwikkelingen op de voet, zodat je voorbereid bent op hoe mensen morgen zoeken.
+
+Lees ook: [structured data](/blog/structured-data-schema-markup) en [helder schrijven](/blog/teksten-voor-google-en-bezoekers).
+
+Wil je weten hoe toekomstbestendig jouw site nu is? Doe de gratis website-checker.$n67c$,
+  'scheduled', '2027-03-06T09:00:00Z',
+  $n67st$Hoe kom ik in ChatGPT en AI-zoekmachines?$n67st$,
+  $n67sd$AI-zoekmachines citeren heldere, gestructureerde content. Lees wat GEO is en hoe je je website vindbaar maakt in ChatGPT en andere AI-zoekmachines.$n67sd$,
+  $n67fk$vindbaar in ai zoekmachines chatgpt$n67fk$
+);

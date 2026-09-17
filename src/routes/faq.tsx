@@ -54,7 +54,7 @@ function FaqPage() {
       <Nav />
       <main id="main-content">
         <div className="pt-32 pb-8" style={{ background: "#1a1a1a" }}>
-          <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-6xl px-6">
             <Link
               to="/"
               className="text-sm transition-colors"
@@ -63,7 +63,7 @@ function FaqPage() {
               ← Terug naar home
             </Link>
             <h1
-              className="mt-6 text-white"
+              className="mt-6 text-white max-w-3xl"
               style={{
                 fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                 fontSize: "clamp(2.2rem, 4.5vw, 3rem)",
@@ -73,7 +73,7 @@ function FaqPage() {
             >
               Veelgestelde vragen over websites laten maken
             </h1>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: "#a4a9b2" }}>
+            <p className="mt-4 text-base leading-relaxed max-w-2xl" style={{ color: "#a4a9b2" }}>
               Antwoorden op de vragen die we het vaakst krijgen over prijzen, doorlooptijd,{" "}
               <Link to="/onderhoud-hosting" style={{ color: "#fe2c02" }}>
                 hosting

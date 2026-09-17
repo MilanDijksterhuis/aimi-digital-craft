@@ -235,7 +235,7 @@ function SeoPage() {
         </section>
 
         <section className="py-16">
-          <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-4xl px-6">
             <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
               Wat we niet beloven
             </h2>
@@ -257,15 +257,32 @@ function SeoPage() {
         </section>
 
         <section className="py-16" style={{ background: "#161717" }}>
-          <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-4xl px-6">
             <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
               Hoe een SEO-traject verloopt
             </h2>
             <ol className="mt-10 grid gap-6">
               {steps.map((s, i) => (
                 <li key={s.title} className="flex gap-5">
-                  <span style={{ color: RED, fontWeight: 700, fontSize: "13px", minWidth: "24px", marginTop: "3px" }}>
-                    {String(i + 1).padStart(2, "0")}
+                  <span
+                    aria-hidden
+                    style={{
+                      flex: "none",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "9999px",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: RED,
+                      border: "1px solid rgba(254,44,2,0.5)",
+                      background: "#161717",
+                      marginTop: "3px",
+                    }}
+                  >
+                    {i + 1}
                   </span>
                   <div>
                     <h3 style={{ fontSize: "15.5px", fontWeight: 600 }}>{s.title}</h3>
@@ -280,7 +297,7 @@ function SeoPage() {
         </section>
 
         <section className="py-16">
-          <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-4xl px-6">
             <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
               Veelgestelde vragen over SEO
             </h2>
@@ -330,7 +347,7 @@ function SeoPage() {
         </section>
 
         <section className="py-20">
-          <div className="mx-auto max-w-3xl px-6 text-center">
+          <div className="mx-auto max-w-4xl px-6 text-center">
             <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, letterSpacing: "-0.02em" }}>
               Benieuwd waar je nu staat?
             </h2>
