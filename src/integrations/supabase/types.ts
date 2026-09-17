@@ -117,46 +117,73 @@ export type Database = {
       blog_posts: {
         Row: {
           author_id: string | null;
+          canonical_url: string | null;
           content: string;
           created_at: string;
           excerpt: string | null;
+          faq_items: Json;
+          featured_image_alt: string | null;
           featured_image_url: string | null;
+          focus_keyword: string | null;
           id: string;
+          noindex: boolean;
+          og_description: string | null;
+          og_image_url: string | null;
+          og_title: string | null;
           published_at: string | null;
           seo_description: string | null;
           seo_title: string | null;
           slug: string;
           status: Database["public"]["Enums"]["blog_post_status"];
+          tags: string[];
           title: string;
           updated_at: string;
         };
         Insert: {
           author_id?: string | null;
+          canonical_url?: string | null;
           content?: string;
           created_at?: string;
           excerpt?: string | null;
+          faq_items?: Json;
+          featured_image_alt?: string | null;
           featured_image_url?: string | null;
+          focus_keyword?: string | null;
           id?: string;
+          noindex?: boolean;
+          og_description?: string | null;
+          og_image_url?: string | null;
+          og_title?: string | null;
           published_at?: string | null;
           seo_description?: string | null;
           seo_title?: string | null;
           slug: string;
           status?: Database["public"]["Enums"]["blog_post_status"];
+          tags?: string[];
           title: string;
           updated_at?: string;
         };
         Update: {
           author_id?: string | null;
+          canonical_url?: string | null;
           content?: string;
           created_at?: string;
           excerpt?: string | null;
+          faq_items?: Json;
+          featured_image_alt?: string | null;
           featured_image_url?: string | null;
+          focus_keyword?: string | null;
           id?: string;
+          noindex?: boolean;
+          og_description?: string | null;
+          og_image_url?: string | null;
+          og_title?: string | null;
           published_at?: string | null;
           seo_description?: string | null;
           seo_title?: string | null;
           slug?: string;
           status?: Database["public"]["Enums"]["blog_post_status"];
+          tags?: string[];
           title?: string;
           updated_at?: string;
         };
@@ -661,6 +688,51 @@ export type Database = {
           user_name?: string | null;
         };
         Relationships: [];
+      };
+      post_links: {
+        Row: {
+          anchor_text: string;
+          created_at: string;
+          from_post_id: string;
+          id: string;
+          to_page_path: string | null;
+          to_post_id: string | null;
+          to_post_slug: string | null;
+        };
+        Insert: {
+          anchor_text: string;
+          created_at?: string;
+          from_post_id: string;
+          id?: string;
+          to_page_path?: string | null;
+          to_post_id?: string | null;
+          to_post_slug?: string | null;
+        };
+        Update: {
+          anchor_text?: string;
+          created_at?: string;
+          from_post_id?: string;
+          id?: string;
+          to_page_path?: string | null;
+          to_post_id?: string | null;
+          to_post_slug?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "post_links_from_post_id_fkey";
+            columns: ["from_post_id"];
+            isOneToOne: false;
+            referencedRelation: "blog_posts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "post_links_to_post_id_fkey";
+            columns: ["to_post_id"];
+            isOneToOne: false;
+            referencedRelation: "blog_posts";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       profiles: {
         Row: {
@@ -1200,6 +1272,30 @@ export type Database = {
           id?: string;
           status?: string;
           user_id?: string;
+        };
+        Relationships: [];
+      };
+      redirects: {
+        Row: {
+          created_at: string;
+          created_by: string | null;
+          from_path: string;
+          id: string;
+          to_path: string;
+        };
+        Insert: {
+          created_at?: string;
+          created_by?: string | null;
+          from_path: string;
+          id?: string;
+          to_path: string;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string | null;
+          from_path?: string;
+          id?: string;
+          to_path?: string;
         };
         Relationships: [];
       };

@@ -326,6 +326,35 @@ export function offeringsJsonLd(opts: {
   });
 }
 
+/** BlogPosting-schema voor een blogpost. Alleen velden die daadwerkelijk op
+ * de pagina staan (titel, datums, afbeelding) — geen verzonnen auteursnaam:
+ * zolang er geen aparte auteursnaam-registratie is, is de Organization de
+ * (juiste, want feitelijke) publisher/auteur. */
+export function articleJsonLd(opts: {
+  path: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+  imageUrl?: string | null;
+}): LdScript {
+  const url = `${SITE_URL}${opts.path}`;
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${url}#webpage` },
+    headline: opts.headline,
+    description: opts.description,
+    image: opts.imageUrl || OG_IMAGE_URL,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    inLanguage: "nl-NL",
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+  });
+}
+
 /** FAQPage-schema; kan rich results in Google opleveren. */
 export function faqJsonLd(faqs: { q: string; a: string }[]): LdScript {
   return ld({

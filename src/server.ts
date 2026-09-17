@@ -403,10 +403,50 @@ function redirectTrailingSlash(request: Request): Response | null {
   return new Response(null, { status: 301, headers: { Location: url.toString() } });
 }
 
+// Redirect-beheer (CMS: /admin/blog, tabel `redirects`): een korte in-memory
+// cache voorkomt een database-roundtrip op elke request. 60s TTL is ruim
+// genoeg om nieuwe/gewijzigde redirects snel live te laten gaan zonder de
+// hot path te belasten; bij een DB-fout valt dit terug op de laatst bekende
+// cache (of geen redirects) i.p.v. de hele site te laten crashen.
+let redirectCache: Map<string, string> | null = null;
+let redirectCacheExpiresAt = 0;
+const REDIRECT_CACHE_TTL_MS = 60_000;
+
+async function getRedirectMap(): Promise<Map<string, string>> {
+  if (redirectCache && Date.now() < redirectCacheExpiresAt) return redirectCache;
+  try {
+    const { supabaseAdmin } = await import("./integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin.from("redirects").select("from_path, to_path");
+    if (error) throw error;
+    redirectCache = new Map((data ?? []).map((r) => [r.from_path, r.to_path]));
+    redirectCacheExpiresAt = Date.now() + REDIRECT_CACHE_TTL_MS;
+  } catch (err) {
+    console.error("[redirects] kon redirect-tabel niet laden:", err);
+    if (!redirectCache) redirectCache = new Map();
+  }
+  return redirectCache;
+}
+
+async function checkRedirect(request: Request): Promise<Response | null> {
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+  const url = new URL(request.url);
+  if (url.pathname.startsWith("/api/")) return null;
+
+  const map = await getRedirectMap();
+  const target = map.get(url.pathname);
+  if (!target) return null;
+
+  url.pathname = target;
+  return new Response(null, { status: 301, headers: { Location: url.toString() } });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     const slashRedirect = redirectTrailingSlash(request);
     if (slashRedirect) return applySecurityHeaders(slashRedirect, request);
+
+    const managedRedirect = await checkRedirect(request);
+    if (managedRedirect) return applySecurityHeaders(managedRedirect, request);
 
     const limited = await applyRateLimit(request);
     if (limited) return applySecurityHeaders(limited, request);

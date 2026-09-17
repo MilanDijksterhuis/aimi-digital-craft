@@ -3,10 +3,11 @@ import { Link } from "@tanstack/react-router";
 
 /** Kleine markdown-renderer voor blogcontent (geen dependency nodig voor een
  * beperkte set constructies: ## kopjes, alinea's, bullet/genummerde lijsten,
- * **vet**, *cursief* en [links](/pad). Interne links (beginnen met "/")
- * gebruiken de router-Link, externe links openen in een nieuw tabblad. */
+ * **vet**, *cursief*, [links](/pad) en ![alt](/pad) afbeeldingen. Interne
+ * links (beginnen met "/") gebruiken de router-Link, externe links openen in
+ * een nieuw tabblad. */
 
-const INLINE_RE = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+const INLINE_RE = /!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
 
 function parseInline(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -21,7 +22,18 @@ function parseInline(text: string, keyPrefix: string): ReactNode[] {
     }
     const key = `${keyPrefix}-${i++}`;
     if (match[1] !== undefined) {
-      const href = match[2];
+      // ![alt](src)
+      nodes.push(
+        <img
+          key={key}
+          src={match[2]}
+          alt={match[1]}
+          loading="lazy"
+          className="w-full rounded-lg"
+        />,
+      );
+    } else if (match[3] !== undefined) {
+      const href = match[4];
       if (href.startsWith("/")) {
         nodes.push(
           <Link
@@ -30,7 +42,7 @@ function parseInline(text: string, keyPrefix: string): ReactNode[] {
             className="underline underline-offset-4 transition-colors hover:text-white"
             style={{ color: "#a4a9b2" }}
           >
-            {match[1]}
+            {match[3]}
           </Link>,
         );
       } else {
@@ -43,18 +55,18 @@ function parseInline(text: string, keyPrefix: string): ReactNode[] {
             className="underline underline-offset-4 transition-colors hover:text-white"
             style={{ color: "#a4a9b2" }}
           >
-            {match[1]}
+            {match[3]}
           </a>,
         );
       }
-    } else if (match[3] !== undefined) {
+    } else if (match[5] !== undefined) {
       nodes.push(
         <strong key={key} className="font-medium" style={{ color: "#ffffff" }}>
-          {match[3]}
+          {match[5]}
         </strong>,
       );
-    } else if (match[4] !== undefined) {
-      nodes.push(<em key={key}>{match[4]}</em>);
+    } else if (match[6] !== undefined) {
+      nodes.push(<em key={key}>{match[6]}</em>);
     }
     lastIndex = INLINE_RE.lastIndex;
   }

@@ -3,7 +3,14 @@ import { motion } from "motion/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  OG_IMAGE_URL,
+  breadcrumbJsonLd,
+  webPageJsonLd,
+  articleJsonLd,
+  faqJsonLd,
+} from "@/lib/seo";
 import { MarkdownBody, estimateReadTime } from "@/lib/markdown";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -13,9 +20,17 @@ type BlogPostDetail = {
   excerpt: string | null;
   content: string;
   published_at: string | null;
+  updated_at: string;
   featured_image_url: string | null;
+  featured_image_alt: string | null;
   seo_title: string | null;
   seo_description: string | null;
+  og_title: string | null;
+  og_description: string | null;
+  og_image_url: string | null;
+  noindex: boolean;
+  canonical_url: string | null;
+  faq_items: { q: string; a: string }[];
 };
 
 export const Route = createFileRoute("/blog_/$slug")({
@@ -23,34 +38,41 @@ export const Route = createFileRoute("/blog_/$slug")({
     const { data: post } = await supabase
       .from("blog_posts")
       .select(
-        "slug, title, excerpt, content, published_at, featured_image_url, seo_title, seo_description",
+        "slug, title, excerpt, content, published_at, updated_at, featured_image_url, featured_image_alt, seo_title, seo_description, og_title, og_description, og_image_url, noindex, canonical_url, faq_items",
       )
       .eq("slug", params.slug)
       .eq("status", "published")
       .lte("published_at", new Date().toISOString())
       .maybeSingle();
     if (!post) throw notFound();
-    return post;
+    return post as BlogPostDetail;
   },
   head: ({ loaderData: post }) => {
     if (!post) return {};
     const description = post.seo_description || post.excerpt || "";
     const title = post.seo_title || post.title;
+    const ogTitle = post.og_title || title;
+    const ogDescription = post.og_description || description;
+    const ogImage = post.og_image_url || post.featured_image_url || OG_IMAGE_URL;
+    const canonical = post.canonical_url || `${SITE_URL}/blog/${post.slug}`;
+    const faqs = (post.faq_items ?? []).filter((f) => f.q.trim() && f.a.trim());
+
     return {
       meta: [
         { title: `${title} | AIMI Blog` },
         { name: "description", content: description },
-        { property: "og:title", content: title },
-        { property: "og:description", content: description },
+        ...(post.noindex ? [{ name: "robots", content: "noindex, follow" }] : []),
+        { property: "og:title", content: ogTitle },
+        { property: "og:description", content: ogDescription },
         { property: "og:url", content: `${SITE_URL}/blog/${post.slug}` },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: post.featured_image_url || OG_IMAGE_URL },
+        { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: title },
-        { name: "twitter:description", content: description },
-        { name: "twitter:image", content: post.featured_image_url || OG_IMAGE_URL },
+        { name: "twitter:title", content: ogTitle },
+        { name: "twitter:description", content: ogDescription },
+        { name: "twitter:image", content: ogImage },
       ],
-      links: [{ rel: "canonical", href: `${SITE_URL}/blog/${post.slug}` }],
+      links: [{ rel: "canonical", href: canonical }],
       scripts: [
         breadcrumbJsonLd([
           ["Home", "/"],
@@ -63,6 +85,15 @@ export const Route = createFileRoute("/blog_/$slug")({
           description,
           datePublished: post.published_at ?? undefined,
         }),
+        articleJsonLd({
+          path: `/blog/${post.slug}`,
+          headline: post.title,
+          description,
+          datePublished: post.published_at ?? post.updated_at,
+          dateModified: post.updated_at,
+          imageUrl: post.featured_image_url,
+        }),
+        ...(faqs.length > 0 ? [faqJsonLd(faqs)] : []),
       ],
     };
   },
@@ -131,7 +162,7 @@ function BlogPost() {
             <div className="mx-auto max-w-3xl px-6 mb-10">
               <img
                 src={post.featured_image_url}
-                alt=""
+                alt={post.featured_image_alt ?? ""}
                 className="w-full rounded-xl object-cover"
               />
             </div>
@@ -142,6 +173,36 @@ function BlogPost() {
           >
             <MarkdownBody content={post.content} />
           </div>
+
+          {post.faq_items.filter((f) => f.q.trim() && f.a.trim()).length > 0 && (
+            <div className="mx-auto max-w-3xl px-6 mt-16 space-y-6">
+              <h2
+                className="text-white"
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                  fontSize: "1.4rem",
+                  fontWeight: 400,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Veelgestelde vragen
+              </h2>
+              <div className="space-y-5">
+                {post.faq_items
+                  .filter((f) => f.q.trim() && f.a.trim())
+                  .map((f, i) => (
+                    <div key={i}>
+                      <h3 className="text-white font-medium mb-1" style={{ fontSize: "1rem" }}>
+                        {f.q}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: "#a4a9b2" }}>
+                        {f.a}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
 
           <div className="mx-auto max-w-3xl px-6 mt-16">
             <div

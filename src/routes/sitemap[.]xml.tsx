@@ -29,8 +29,9 @@ export const Route = createFileRoute("/sitemap.xml")({
         // code-deploy zodra admins in /admin/blog publiceren.
         const { data: posts } = await supabase
           .from("blog_posts")
-          .select("slug, updated_at")
+          .select("slug, updated_at, noindex")
           .eq("status", "published")
+          .eq("noindex", false)
           .lte("published_at", new Date().toISOString());
         const blogUrls = (posts ?? []).map((p) =>
           [

@@ -4,7 +4,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChevronLeft } from "lucide-react";
 import { adminGetBlogPost, adminUpdateBlogPost } from "@/lib/blog.functions";
-import { BlogPostForm, type BlogPostFormPayload } from "@/components/BlogPostForm";
+import {
+  BlogPostForm,
+  type BlogPostFormPayload,
+  type BlogPostFaqItem,
+} from "@/components/BlogPostForm";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const Route = createFileRoute("/_authenticated/admin/blog/$postId")({
@@ -58,16 +62,26 @@ function AdminBlogPostDetailPage() {
             <p className="text-muted-foreground text-sm">/blog/{data?.post.slug}</p>
           </div>
           <BlogPostForm
+            postId={postId}
             initial={{
               title: data?.post.title,
               slug: data?.post.slug,
               excerpt: data?.post.excerpt,
               content: data?.post.content,
               featured_image_url: data?.post.featured_image_url,
+              featured_image_alt: data?.post.featured_image_alt,
               status: data?.post.status,
               published_at: data?.post.published_at,
               seo_title: data?.post.seo_title,
               seo_description: data?.post.seo_description,
+              og_title: data?.post.og_title,
+              og_description: data?.post.og_description,
+              og_image_url: data?.post.og_image_url,
+              noindex: data?.post.noindex,
+              canonical_url: data?.post.canonical_url,
+              focus_keyword: data?.post.focus_keyword,
+              tags: data?.post.tags,
+              faq_items: data?.post.faq_items as BlogPostFaqItem[] | undefined,
             }}
             onSave={(payload) => updateM.mutate(payload)}
             saving={updateM.isPending}

@@ -3,7 +3,15 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
-import { ChevronLeft, LayoutGrid, PlusCircle, Copy, Trash2 } from "lucide-react";
+import {
+  ChevronLeft,
+  LayoutGrid,
+  PlusCircle,
+  Copy,
+  Trash2,
+  CalendarDays,
+  Link2,
+} from "lucide-react";
 import {
   adminListBlogPosts,
   adminCreateBlogPost,
@@ -11,10 +19,16 @@ import {
   adminDuplicateBlogPost,
   adminBulkDeleteBlogPosts,
   adminBulkSetBlogPostStatus,
+  adminBulkScheduleBlogPosts,
+  adminBulkShiftBlogPosts,
 } from "@/lib/blog.functions";
 import { BLOG_STATUS_LABEL, BLOG_STATUS_COLOR } from "@/lib/status";
 import { BlogPostForm, type BlogPostFormPayload } from "@/components/BlogPostForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BlogCalendar } from "@/components/BlogCalendar";
+import { RedirectsPanel } from "@/components/RedirectsPanel";
+import { BulkScheduleDialog } from "@/components/BulkScheduleDialog";
+import type { BulkScheduleOptions } from "@/lib/blog-schedule";
 
 export const Route = createFileRoute("/_authenticated/admin/blog")({
   head: () => ({
@@ -44,7 +58,7 @@ function TableSkeleton({ rows = 6, cols = 5 }: { rows?: number; cols?: number })
   );
 }
 
-type Section = "alle" | "nieuw";
+type Section = "alle" | "nieuw" | "kalender" | "redirects";
 
 function AdminBlogPage() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -74,7 +88,11 @@ function AdminBlogPage() {
       <div className="flex flex-col md:flex-row gap-6">
         <BlogSidebar section={section} onSection={setSection} />
         <div className="flex-1 min-w-0">
-          {isLoading ? (
+          {section === "kalender" ? (
+            <BlogCalendar />
+          ) : section === "redirects" ? (
+            <RedirectsPanel />
+          ) : isLoading ? (
             <TableSkeleton />
           ) : section === "nieuw" ? (
             <NewPostSection onCreated={() => setSection("alle")} />
@@ -97,11 +115,17 @@ function BlogSidebar({
   const groups = [
     {
       label: "Overzicht",
-      items: [{ key: "alle" as Section, label: "Alle posts", icon: LayoutGrid }],
+      items: [
+        { key: "alle" as Section, label: "Alle posts", icon: LayoutGrid },
+        { key: "kalender" as Section, label: "Kalender", icon: CalendarDays },
+      ],
     },
     {
       label: "Beheer",
-      items: [{ key: "nieuw" as Section, label: "Nieuwe post", icon: PlusCircle }],
+      items: [
+        { key: "nieuw" as Section, label: "Nieuwe post", icon: PlusCircle },
+        { key: "redirects" as Section, label: "Redirects", icon: Link2 },
+      ],
     },
   ];
   return (
@@ -156,6 +180,8 @@ function PostsListSection({ data }: { data: any }) {
   const duplicateFn = useServerFn(adminDuplicateBlogPost);
   const bulkDeleteFn = useServerFn(adminBulkDeleteBlogPosts);
   const bulkStatusFn = useServerFn(adminBulkSetBlogPostStatus);
+  const bulkScheduleFn = useServerFn(adminBulkScheduleBlogPosts);
+  const bulkShiftFn = useServerFn(adminBulkShiftBlogPosts);
 
   const deleteM = useMutation({
     mutationFn: (id: string) => deleteFn({ data: { id } }),
@@ -192,10 +218,31 @@ function PostsListSection({ data }: { data: any }) {
     },
     onError: (e: any) => toast.error(e.message),
   });
+  const bulkScheduleM = useMutation({
+    mutationFn: (vars: { ids: string[]; options: BulkScheduleOptions }) =>
+      bulkScheduleFn({ data: vars }),
+    onSuccess: (res) => {
+      inv();
+      setSelected(new Set());
+      setBulkScheduleOpen(false);
+      toast.success(`${res.scheduled.length} post(s) ingepland.`);
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const bulkShiftM = useMutation({
+    mutationFn: (vars: { ids: string[]; shiftDays: number }) => bulkShiftFn({ data: vars }),
+    onSuccess: () => {
+      inv();
+      setSelected(new Set());
+      toast.success("Geplande posts verschoven.");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
 
   const [tab, setTab] = useState<TabKey>("alle");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [bulkScheduleOpen, setBulkScheduleOpen] = useState(false);
 
   const allPosts: any[] = data?.posts ?? [];
   const counts: Record<TabKey, number> = {
@@ -210,6 +257,11 @@ function PostsListSection({ data }: { data: any }) {
     const q = search.toLowerCase();
     items = items.filter((p) => p.title.toLowerCase().includes(q));
   }
+
+  const selectedDraftPosts = allPosts.filter((p) => selected.has(p.id) && p.status === "draft");
+  const selectedScheduledIds = allPosts
+    .filter((p) => selected.has(p.id) && p.status === "scheduled")
+    .map((p) => p.id);
 
   const toggle = (id: string) => {
     const next = new Set(selected);
@@ -248,6 +300,34 @@ function PostsListSection({ data }: { data: any }) {
         {selected.size > 0 && (
           <div className="flex items-center gap-2 ml-auto text-xs">
             <span className="text-muted-foreground">{selected.size} geselecteerd</span>
+            {selectedDraftPosts.length > 0 && (
+              <button
+                onClick={() => setBulkScheduleOpen(true)}
+                className="text-primary hover:underline"
+              >
+                Plannen ({selectedDraftPosts.length})
+              </button>
+            )}
+            {selectedScheduledIds.length > 0 && (
+              <button
+                onClick={() => {
+                  const raw = window.prompt(
+                    "Aantal dagen opschuiven (negatief getal = eerder plannen):",
+                    "2",
+                  );
+                  if (raw === null) return;
+                  const shiftDays = parseInt(raw, 10);
+                  if (Number.isNaN(shiftDays)) {
+                    toast.error("Ongeldig aantal dagen.");
+                    return;
+                  }
+                  bulkShiftM.mutate({ ids: selectedScheduledIds, shiftDays });
+                }}
+                className="text-primary hover:underline"
+              >
+                Herplannen ({selectedScheduledIds.length})
+              </button>
+            )}
             <button
               onClick={() => bulkStatusM.mutate({ ids: Array.from(selected), status: "published" })}
               className="text-primary hover:underline"
@@ -272,6 +352,14 @@ function PostsListSection({ data }: { data: any }) {
           </div>
         )}
       </div>
+
+      <BulkScheduleDialog
+        open={bulkScheduleOpen}
+        onOpenChange={setBulkScheduleOpen}
+        posts={selectedDraftPosts}
+        confirming={bulkScheduleM.isPending}
+        onConfirm={(orderedIds, options) => bulkScheduleM.mutate({ ids: orderedIds, options })}
+      />
 
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full text-sm">
