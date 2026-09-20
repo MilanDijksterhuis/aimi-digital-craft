@@ -107,7 +107,7 @@ export const Route = createFileRoute("/website-laten-vernieuwen")({
         content:
           "Website laten vernieuwen zonder je posities in Google te verliezen. We zeggen eerlijk of opknappen genoeg is of dat opnieuw bouwen goedkoper uitpakt.",
       },
-      { property: "og:title", content: "Website laten vernieuwen: AIMI" },
+      { property: "og:title", content: "Website laten vernieuwen | AIMI" },
       {
         property: "og:description",
         content: "Oude website opknappen of opnieuw bouwen? Met behoud van je URL's, teksten en posities.",
@@ -116,7 +116,7 @@ export const Route = createFileRoute("/website-laten-vernieuwen")({
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Website laten vernieuwen: AIMI" },
+      { name: "twitter:title", content: "Website laten vernieuwen | AIMI" },
       {
         name: "twitter:description",
         content: "Oude website opknappen of opnieuw bouwen? Met behoud van je URL's, teksten en posities.",

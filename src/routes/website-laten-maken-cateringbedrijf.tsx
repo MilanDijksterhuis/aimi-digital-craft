@@ -57,7 +57,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-cateringbedrijf")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je cateringbedrijf | AIMI" },
+      { title: "Cateringbedrijf-website laten maken — vanaf € 499 | AIMI" },
       { name: "description", content: "Website voor je cateringbedrijf met een aanvraagformulier dat bruikbare offerteaanvragen oplevert, heldere formules en richtprijzen." },
       { property: "og:title", content: "Website laten maken voor je cateringbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte." },

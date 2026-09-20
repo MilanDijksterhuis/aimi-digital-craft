@@ -15,14 +15,18 @@ export const Route = createFileRoute("/sitemap.xml")({
         // (`dateModified`) en de zichtbare "Bijgewerkt op"-regel lezen alle drie
         // hieruit, zodat ze nooit uit elkaar lopen. Geen changefreq/priority:
         // Google negeert die sinds 2023.
-        const staticUrls = Object.entries(PAGE_DATES).map(([path, lastmod]) =>
-          [
-            `  <url>`,
-            `    <loc>${BASE_URL}${path}</loc>`,
-            `    <lastmod>${lastmod}</lastmod>`,
-            `  </url>`,
-          ].join("\n"),
-        );
+        // Individuele blogposts komen hieronder uit de database (zie blogUrls).
+        // /blog zelf (de indexpagina) staat wel in PAGE_DATES en blijft hier staan.
+        const staticUrls = Object.entries(PAGE_DATES)
+          .filter(([path]) => !path.startsWith("/blog/"))
+          .map(([path, lastmod]) =>
+            [
+              `  <url>`,
+              `    <loc>${BASE_URL}${path}</loc>`,
+              `    <lastmod>${lastmod}</lastmod>`,
+              `  </url>`,
+            ].join("\n"),
+          );
 
         // Blogposts komen uit de blog_posts-tabel (blog-CMS module) i.p.v.
         // PAGE_DATES, want die lijst groeit/verandert onafhankelijk van een

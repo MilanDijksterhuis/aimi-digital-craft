@@ -83,13 +83,13 @@ const fadeUp = (delay = 0) => ({
 export const Route = createFileRoute("/meer-diensten")({
   head: () => ({
     meta: [
-      { title: "Meer diensten | Hosting, performance & SEO: AIMI" },
+      { title: "Meer diensten | Hosting, performance & SEO | AIMI" },
       {
         name: "description",
         content:
           "Losse diensten van AIMI: hosting, performance-optimalisatie en SEO. Voor wie al een website heeft en alleen die diensten los nodig heeft.",
       },
-      { property: "og:title", content: "Meer diensten: AIMI" },
+      { property: "og:title", content: "Meer diensten | AIMI" },
       {
         property: "og:description",
         content: "Hosting, performance en SEO ook los af te nemen.",
@@ -98,7 +98,7 @@ export const Route = createFileRoute("/meer-diensten")({
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Meer diensten: AIMI" },
+      { name: "twitter:title", content: "Meer diensten | AIMI" },
       { name: "twitter:description", content: "Hosting, performance en SEO ook los af te nemen." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

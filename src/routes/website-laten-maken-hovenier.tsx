@@ -57,8 +57,8 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-hovenier")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je hoveniersbedrijf | AIMI" },
-      { name: "description", content: "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud." },
+      { title: "Hovenier-website laten maken — aanleg & onderhoud | AIMI" },
+      { name: "description", content: "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, vanaf € 499." },
       { property: "og:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
       { property: "og:type", content: "website" },

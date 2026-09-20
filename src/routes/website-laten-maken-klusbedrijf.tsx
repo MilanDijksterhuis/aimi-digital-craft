@@ -58,7 +58,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je klusbedrijf | AIMI" },
+      { title: "Klusbedrijf-website laten maken — vanaf € 499 | AIMI" },
       { name: "description", content: "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerteaanvraag met foto-upload en techniek die ook op de bouwplaats snel laadt." },
       { property: "og:title", content: "Website laten maken voor je klusbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon." },

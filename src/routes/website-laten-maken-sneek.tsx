@@ -50,8 +50,8 @@ const data: LocationPageData = {
   sectionOrder: ["context", "faq", "businessTypes", "workflow"],
 };
 
-const TITLE = "Website laten maken in Sneek | AIMI";
-const DESCRIPTION = "Ondernemer in Sneek? AIMI bouwt snelle websites die ook tijdens de Sneekweek en drukke seizoenen stabiel en vindbaar blijven.";
+const TITLE = "Website laten maken in Sneek — ook in de Sneekweek | AIMI";
+const DESCRIPTION = "Ondernemer in Sneek? AIMI bouwt snelle websites die ook tijdens de Sneekweek en drukke seizoenen stabiel en vindbaar blijven. Vraag een offerte aan.";
 
 export const Route = createFileRoute("/website-laten-maken-sneek")({
   head: () => ({

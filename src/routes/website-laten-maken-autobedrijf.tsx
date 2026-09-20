@@ -57,8 +57,8 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-autobedrijf")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je autobedrijf | AIMI" },
-      { name: "description", content: "Website voor je autobedrijf met een actuele occasionvoorraad, een eigen ingang voor de werkplaats en snelle foto's op mobiel." },
+      { title: "Autobedrijf-website laten maken — occasions | AIMI" },
+      { name: "description", content: "Website voor je autobedrijf met een actuele occasionvoorraad, een eigen ingang voor de werkplaats en snelle foto's op mobiel. Gebouwd door AIMI." },
       { property: "og:title", content: "Website laten maken voor je autobedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor autobedrijven: doorzoekbare occasionvoorraad, werkplaatsafspraken en snelle laadtijden." },
       { property: "og:type", content: "website" },

@@ -57,7 +57,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-boekhouder")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je administratiekantoor | AIMI" },
+      { title: "Website voor je administratiekantoor — vanaf € 499 | AIMI" },
       { name: "description", content: "Website voor je boekhoud- of administratiekantoor: opgesplitst per type ondernemer, met heldere prijsindicaties en een uitgelegde overstap." },
       { property: "og:title", content: "Website laten maken voor je administratiekantoor | AIMI" },
       { property: "og:description", content: "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel." },

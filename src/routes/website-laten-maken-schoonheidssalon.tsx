@@ -58,10 +58,10 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je schoonheidssalon | AIMI" },
+      { title: "Schoonheidssalon-website laten maken | AIMI" },
       {
         name: "description",
-        content: "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd door AIMI.",
+        content: "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, vanaf € 499.",
       },
       { property: "og:title", content: "Website laten maken voor je schoonheidssalon | AIMI" },
       { property: "og:description", content: "Behandelmenu met uitleg, intake vooraf en eenvoudig herhaalafspraken maken." },

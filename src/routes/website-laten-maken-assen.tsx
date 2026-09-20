@@ -50,7 +50,7 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-assen")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Assen | AIMI" },
+      { title: "Website laten maken in Assen — vanaf € 499 | AIMI" },
       {
         name: "description",
         content:

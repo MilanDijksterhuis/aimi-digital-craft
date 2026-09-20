@@ -50,11 +50,11 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-winschoten")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Winschoten | AIMI" },
+      { title: "Website laten maken in Winschoten — eigen hosting | AIMI" },
       {
         name: "description",
         content:
-          "AIMI ontwikkelt professionele websites voor winkels en dienstverleners in Winschoten, met eigen hosting en persoonlijk beheer.",
+          "AIMI ontwikkelt professionele websites voor winkels en dienstverleners in Winschoten, met eigen hosting en persoonlijk beheer. Vraag een offerte aan.",
       },
       { name: "geo.region", content: "NL-GR" },
       { name: "geo.placename", content: "Winschoten" },

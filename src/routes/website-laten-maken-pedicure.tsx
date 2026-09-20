@@ -58,7 +58,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-pedicure")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je pedicurepraktijk | AIMI" },
+      { title: "Pedicure-website laten maken — vanaf € 499 | AIMI" },
       {
         name: "description",
         content: "Vertrouwenwekkende, leesbare website voor je pedicurepraktijk, met onderscheid tussen regulier en medisch pedicure. AIMI bouwt en host.",

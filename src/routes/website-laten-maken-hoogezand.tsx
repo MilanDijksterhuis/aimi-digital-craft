@@ -51,11 +51,11 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-hoogezand")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Hoogezand | AIMI" },
+      { title: "Website laten maken in Hoogezand — vanuit Veendam | AIMI" },
       {
         name: "description",
         content:
-          "Ondernemer in Hoogezand? AIMI, gevestigd in buurgemeente Veendam, bouwt snelle websites met eigen techniek en persoonlijk contact.",
+          "Ondernemer in Hoogezand? AIMI, gevestigd in buurgemeente Veendam, bouwt snelle websites met eigen techniek en persoonlijk contact. Vraag een offerte aan.",
       },
       { name: "geo.region", content: "NL-GR" },
       { name: "geo.placename", content: "Hoogezand" },

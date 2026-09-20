@@ -49,8 +49,8 @@ const data: LocationPageData = {
   sectionOrder: ["businessTypes", "context", "faq", "workflow"],
 };
 
-const TITLE = "Website laten maken in Drachten | AIMI";
-const DESCRIPTION = "Website nodig voor je technische bedrijf in Drachten? AIMI bouwt snelle, heldere websites met eigen hosting en servermonitoring.";
+const TITLE = "Website laten maken in Drachten — eigen hosting | AIMI";
+const DESCRIPTION = "Website nodig voor je technische bedrijf in Drachten? AIMI bouwt snelle, heldere websites met eigen hosting en servermonitoring. Vraag een offerte aan.";
 
 export const Route = createFileRoute("/website-laten-maken-drachten")({
   head: () => ({

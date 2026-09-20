@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { PHONE_DISPLAY, PHONE_E164, ACTIVE_SINCE_YEAR, ADDRESS, KVK, VAT_ID } from "@/lib/seo";
+import { PHONE_DISPLAY, PHONE_E164, EMAIL, ACTIVE_SINCE_YEAR, ADDRESS, KVK, VAT_ID } from "@/lib/seo";
 
 const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 
@@ -32,6 +32,7 @@ const columns: { heading: string; links: { label: string; to: string }[] }[] = [
       { label: "Over ons", to: "/over-ons" },
       { label: "Werkwijze", to: "/werkwijze" },
       { label: "WordPress of maatwerk", to: "/wordpress-of-maatwerk" },
+      { label: "Blog", to: "/blog" },
       { label: "FAQ", to: "/faq" },
       { label: "Contact", to: "/contact" },
     ],
@@ -44,66 +45,6 @@ const columns: { heading: string; links: { label: string; to: string }[] }[] = [
     ],
   },
 ];
-
-/* A-30: de footer linkte 2 van de 15 plaatsen en 0 van de 8 branches, waardoor
-   de hele long tail op één hublink + related-chips leunde. Deze twee rijen geven
-   elke landingspagina een interne link vanaf álle 36 publieke pagina's. */
-const cities: { label: string; to: string }[] = [
-  ["Veendam", "veendam"],
-  ["Hoogeveen", "hoogeveen"],
-  ["Groningen", "groningen"],
-  ["Assen", "assen"],
-  ["Hoogezand", "hoogezand"],
-  ["Stadskanaal", "stadskanaal"],
-  ["Emmen", "emmen"],
-  ["Winschoten", "winschoten"],
-  ["Roden", "roden"],
-  ["Coevorden", "coevorden"],
-  ["Meppel", "meppel"],
-  ["Leeuwarden", "leeuwarden"],
-  ["Drachten", "drachten"],
-  ["Heerenveen", "heerenveen"],
-  ["Sneek", "sneek"],
-].map(([label, slug]) => ({ label, to: `/website-laten-maken-${slug}` }));
-
-const branches: { label: string; to: string }[] = [
-  ["Kapsalon", "kapsalon"],
-  ["Nagelstudio", "nagelstudio"],
-  ["Schoonheidssalon", "schoonheidssalon"],
-  ["Pedicure", "pedicure"],
-  ["Hoveniersbedrijf", "hovenier"],
-  ["Klusbedrijf", "klusbedrijf"],
-  ["Schildersbedrijf", "schilder"],
-  ["Loodgietersbedrijf", "loodgieter"],
-  ["Autobedrijf", "autobedrijf"],
-  ["Autorijschool", "autorijschool"],
-  ["Makelaarskantoor", "makelaar"],
-  ["Administratiekantoor", "boekhouder"],
-  ["Restaurant", "restaurant"],
-  ["Cateringbedrijf", "cateringbedrijf"],
-  ["Bloemenwinkel", "bloemist"],
-].map(([label, slug]) => ({ label, to: `/website-laten-maken-${slug}` }));
-
-function LinkRow({ heading, items }: { heading: string; items: { label: string; to: string }[] }) {
-  return (
-    <nav aria-label={heading}>
-      <div className="text-white text-sm font-medium mb-3">{heading}</div>
-      <ul className="flex flex-wrap gap-x-4 gap-y-2">
-        {items.map((l) => (
-          <li key={l.to}>
-            <Link
-              to={l.to}
-              className="text-xs transition-colors hover:text-white inline-block py-1"
-              style={{ color: "#a4a9b2" }}
-            >
-              {l.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
 
 export function Footer() {
   const hasAddress = Boolean(ADDRESS.streetAddress && ADDRESS.postalCode);
@@ -122,21 +63,27 @@ export function Footer() {
         >
           <a
             href={`tel:${PHONE_E164}`}
-            className="transition-colors hover:text-white inline-block py-1"
+            className="transition-colors hover:text-white inline-block py-2"
             style={{ color: "#a4a9b2" }}
           >
             {PHONE_DISPLAY}
           </a>
           <a
-            href="mailto:sales@aimi-development.nl"
-            className="transition-colors hover:text-white inline-block py-1"
+            href={`mailto:${EMAIL}`}
+            className="transition-colors hover:text-white inline-block py-2"
             style={{ color: "#a4a9b2" }}
           >
-            sales@aimi-development.nl
+            {EMAIL}
           </a>
           <span>Veendam, actief sinds {ACTIVE_SINCE_YEAR}</span>
         </div>
 
+        {/* SEO-audit 2026-09-20 (B5-1): voorheen linkte deze footer ook nog
+            eens 15 stad- en 15 branchepagina's vanaf élke pagina (52 links
+            totaal), waardoor de belangrijkste dienstpagina's evenveel
+            footer-gewicht kregen als de verste long tail. Die 30 links staan
+            nu alleen nog op de hubpagina's zelf (/webdesign, /branches),
+            waar ze thematisch horen. */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           {columns.map((col) => (
             <nav key={col.heading} aria-label={col.heading}>
@@ -146,7 +93,7 @@ export function Footer() {
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className="text-xs transition-colors hover:text-white inline-block py-1"
+                      className="text-xs transition-colors hover:text-white inline-block py-2"
                       style={{ color: "#a4a9b2" }}
                     >
                       {l.label}
@@ -156,11 +103,6 @@ export function Footer() {
               </ul>
             </nav>
           ))}
-        </div>
-
-        <div className="mt-12 pt-8 grid gap-8" style={{ borderTop: "1px solid #2a2b2b" }}>
-          <LinkRow heading="Website laten maken in" items={cities} />
-          <LinkRow heading="Website laten maken voor je" items={branches} />
         </div>
 
         {/* Bedrijfsgegevens — SEO-audit 2026-09-04 (content.md CQ-1, local.md

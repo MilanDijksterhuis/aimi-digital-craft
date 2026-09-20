@@ -57,7 +57,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-autorijschool")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je autorijschool | AIMI" },
+      { title: "Autorijschool-website laten maken — pakketten | AIMI" },
       { name: "description", content: "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Vanaf € 499." },
       { property: "og:title", content: "Website laten maken voor je autorijschool | AIMI" },
       { property: "og:description", content: "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven." },

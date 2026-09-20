@@ -57,8 +57,8 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-loodgieter")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je loodgietersbedrijf | AIMI" },
-      { name: "description", content: "Snelle website voor je loodgietersbedrijf met telefoonnummer voorop, spoedmelding bovenaan en razendsnelle mobiele laadtijd." },
+      { title: "Loodgieter-website laten maken — spoedservice | AIMI" },
+      { name: "description", content: "Snelle website voor je loodgietersbedrijf met telefoonnummer voorop, spoedmelding bovenaan en razendsnelle mobiele laadtijd. Vraag een offerte aan bij AIMI." },
       { property: "og:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
       { property: "og:type", content: "website" },

@@ -52,11 +52,11 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-emmen")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Emmen | AIMI" },
+      { title: "Website laten maken in Emmen — industrie & toerisme | AIMI" },
       {
         name: "description",
         content:
-          "Voor bedrijven in Emmen: AIMI ontwikkelt snelle websites met eigen hosting, gericht op industrie, toerisme en lokaal MKB.",
+          "Voor bedrijven in Emmen: AIMI ontwikkelt snelle websites met eigen hosting, gericht op industrie, toerisme en lokaal MKB. Vaste prijs vanaf € 499.",
       },
       { name: "geo.region", content: "NL-DR" },
       { name: "geo.placename", content: "Emmen" },

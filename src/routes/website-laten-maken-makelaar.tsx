@@ -93,7 +93,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-makelaar")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je makelaarskantoor | AIMI" },
+      { title: "Makelaars-website laten maken — vanaf € 499 | AIMI" },
       {
         name: "description",
         content:

@@ -135,6 +135,10 @@ const SECURITY_HEADERS: Record<string, string> = {
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'",
+    // SEO-audit 2026-09-20 (B10-2): het contactformulier post al alleen naar
+    // een server function op dezelfde origin, dus dit verandert niets aan
+    // het gedrag — het is een gratis hardening-regel tegen form-hijacking.
+    "form-action 'self'",
   ].join("; "),
 };
 
@@ -383,34 +387,17 @@ async function fixNotFoundTitle(response: Response): Promise<Response> {
   }
 }
 
-/**
- * Trailing slash: /contact/ hoort permanent naar /contact te wijzen.
- * Productie gaf hier een 307 (tijdelijk). Een 307 vertelt Google dat de
- * situatie kan veranderen, dus consolideert hij de signalen niet en blijft hij
- * beide vormen crawlen. Voor een canonieke URL-vorm hoort dat een 301 te zijn.
- *
- * Alleen voor GET/HEAD op niet-API-paden: een 301 op een POST zou de methode
- * omzetten naar GET en het formulier stilzwijgend slopen.
- */
-function redirectTrailingSlash(request: Request): Response | null {
-  if (request.method !== "GET" && request.method !== "HEAD") return null;
-
-  const url = new URL(request.url);
-  if (url.pathname === "/" || !url.pathname.endsWith("/")) return null;
-  if (url.pathname.startsWith("/api/")) return null;
-
-  url.pathname = url.pathname.replace(/\/+$/, "");
-  return new Response(null, { status: 301, headers: { Location: url.toString() } });
-}
-
 // Redirect-beheer (CMS: /admin/blog, tabel `redirects`): een korte in-memory
-// cache voorkomt een database-roundtrip op elke request. 60s TTL is ruim
-// genoeg om nieuwe/gewijzigde redirects snel live te laten gaan zonder de
-// hot path te belasten; bij een DB-fout valt dit terug op de laatst bekende
-// cache (of geen redirects) i.p.v. de hele site te laten crashen.
+// cache voorkomt een database-roundtrip op elke request. SEO-audit
+// 2026-09-20 (B8, TTFB): stond op 60s, wat op een koude cache een
+// Supabase-roundtrip op de hot path van élke request forceerde na elke
+// minuut. 5 minuten is nog steeds snel genoeg om een nieuwe/gewijzigde
+// redirect live te laten gaan, maar raakt de DB veel minder vaak. Bij een
+// DB-fout valt dit terug op de laatst bekende cache (of geen redirects)
+// i.p.v. de hele site te laten crashen.
 let redirectCache: Map<string, string> | null = null;
 let redirectCacheExpiresAt = 0;
-const REDIRECT_CACHE_TTL_MS = 60_000;
+const REDIRECT_CACHE_TTL_MS = 5 * 60_000;
 
 async function getRedirectMap(): Promise<Map<string, string>> {
   if (redirectCache && Date.now() < redirectCacheExpiresAt) return redirectCache;
@@ -427,26 +414,44 @@ async function getRedirectMap(): Promise<Map<string, string>> {
   return redirectCache;
 }
 
-async function checkRedirect(request: Request): Promise<Response | null> {
+/**
+ * Trailing slash (/contact/ -> /contact) en de CMS-redirecttabel in één stap.
+ *
+ * SEO-audit 2026-09-20 (B2-4): eerst los redirectTrailingSlash() en dan
+ * checkRedirect() draaien gaf op /blog/oude-slug/ een keten van twee 301's
+ * (eerst naar /blog/oude-slug, dan pas naar /blog/nieuwe-slug). Door het pad
+ * eerst te normaliseren en dáárna in de redirecttabel op te zoeken, geeft elke
+ * request hooguit één 301.
+ *
+ * Alleen voor GET/HEAD op niet-API-paden: een 301 op een POST zou de methode
+ * omzetten naar GET en het formulier stilzwijgend slopen.
+ */
+async function resolveRedirect(request: Request): Promise<Response | null> {
   if (request.method !== "GET" && request.method !== "HEAD") return null;
   const url = new URL(request.url);
   if (url.pathname.startsWith("/api/")) return null;
 
-  const map = await getRedirectMap();
-  const target = map.get(url.pathname);
-  if (!target) return null;
+  const normalizedPath = url.pathname === "/" ? url.pathname : url.pathname.replace(/\/+$/, "");
 
-  url.pathname = target;
-  return new Response(null, { status: 301, headers: { Location: url.toString() } });
+  const map = await getRedirectMap();
+  const target = map.get(normalizedPath);
+  if (target) {
+    url.pathname = target;
+    return new Response(null, { status: 301, headers: { Location: url.toString() } });
+  }
+
+  if (normalizedPath !== url.pathname) {
+    url.pathname = normalizedPath;
+    return new Response(null, { status: 301, headers: { Location: url.toString() } });
+  }
+
+  return null;
 }
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
-    const slashRedirect = redirectTrailingSlash(request);
-    if (slashRedirect) return applySecurityHeaders(slashRedirect, request);
-
-    const managedRedirect = await checkRedirect(request);
-    if (managedRedirect) return applySecurityHeaders(managedRedirect, request);
+    const redirect = await resolveRedirect(request);
+    if (redirect) return applySecurityHeaders(redirect, request);
 
     const limited = await applyRateLimit(request);
     if (limited) return applySecurityHeaders(limited, request);

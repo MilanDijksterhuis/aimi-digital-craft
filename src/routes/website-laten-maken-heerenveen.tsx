@@ -50,8 +50,8 @@ const data: LocationPageData = {
   sectionOrder: ["workflow", "context", "businessTypes", "faq"],
 };
 
-const TITLE = "Website laten maken in Heerenveen | AIMI";
-const DESCRIPTION = "AIMI bouwt snelle, professionele websites voor ondernemers in Heerenveen, met eigen hosting, monitoring en persoonlijk contact.";
+const TITLE = "Website laten maken in Heerenveen — vanaf € 499 | AIMI";
+const DESCRIPTION = "AIMI bouwt snelle, professionele websites voor ondernemers in Heerenveen, met eigen hosting, monitoring en persoonlijk contact. Vraag een offerte aan.";
 
 export const Route = createFileRoute("/website-laten-maken-heerenveen")({
   head: () => ({

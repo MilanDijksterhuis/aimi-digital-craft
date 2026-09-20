@@ -36,7 +36,7 @@ function NotFoundComponent() {
           root-default ("AIMI — Webdesign Noord-Nederland") droeg. Een crawler
           die geen JS uitvoert zag dus een homepagetitel op een 404. React 19
           hoist dit <title>-element server-side naar de head. */}
-      <title>Pagina niet gevonden: AIMI</title>
+      <title>Pagina niet gevonden | AIMI</title>
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina niet gevonden</h2>
@@ -166,14 +166,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": ["Organization", "ProfessionalService"],
           "@id": ORG_ID,
-          name: "AIMI",
-          // "AIMI" alleen is een dubbelzinnige naam: er bestaan meerdere
-          // organisaties met dezelfde afkorting. Meerdere alternateNames plus
-          // knowsAbout geven zoekmachines en AI-assistenten houvast om déze
-          // entiteit te onderscheiden. Zodra er profielen zijn (Google
-          // Bedrijfsprofiel, LinkedIn, KvK) hoort daar een `sameAs` bij — dat
-          // is het sterkste disambiguatiesignaal dat er is.
-          alternateName: ["AIMI Development", "AIMI Web Agency"],
+          // SEO-audit 2026-09-20 (B6-4): het domein (aimi-development.nl) en
+          // het Google Bedrijfsprofiel zeggen allebei "AIMI Development" —
+          // dat is nu ook de primaire naam hier, met "AIMI" als kortere
+          // alternateName. Dat sluit aan op het sterkste disambiguatiesignaal
+          // dat er is (domein + GBP) i.p.v. het dubbelzinnige "AIMI" alleen.
+          name: "AIMI Development",
+          alternateName: ["AIMI", "AIMI Web Agency"],
           url: SITE_URL,
           logo: LOGO_URL,
           image: LOGO_URL,
@@ -208,9 +207,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             { "@type": "City", name: "Veendam" },
             { "@type": "Country", name: "Nederland" },
           ],
+          // SEO-audit 2026-09-20 (B6-2): eigen @id per persoon, zodat ze
+          // herbruikbare entiteiten zijn i.p.v. alleen namen binnen dit ene
+          // Organization-blok. Nog geen per-post auteurschap (articleJsonLd
+          // blijft de Organization als auteur gebruiken) — er is geen
+          // registratie van wie welke post schreef, en een gegokte toewijzing
+          // zou een verzonnen feit zijn.
           founder: [
-            { "@type": "Person", name: "Aidan" },
-            { "@type": "Person", name: "Milan" },
+            { "@type": "Person", "@id": `${SITE_URL}/#person-aidan`, name: "Aidan", worksFor: { "@id": ORG_ID } },
+            { "@type": "Person", "@id": `${SITE_URL}/#person-milan`, name: "Milan", worksFor: { "@id": ORG_ID } },
           ],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
@@ -245,7 +250,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "WebSite",
           "@id": `${SITE_URL}/#website`,
           url: SITE_URL,
-          name: "AIMI",
+          name: "AIMI Development",
+          alternateName: "AIMI",
           inLanguage: "nl-NL",
           publisher: { "@id": ORG_ID },
         }),

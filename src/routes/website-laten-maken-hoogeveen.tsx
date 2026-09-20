@@ -5,7 +5,7 @@ import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed
 const CITY = "Hoogeveen";
 const PATH = "/website-laten-maken-hoogeveen";
 const URL = `${SITE_URL}${PATH}`;
-const TITLE = "Website laten maken in Hoogeveen | AIMI Webdesign";
+const TITLE = "Webdesigner in Hoogeveen — vanaf € 499 | AIMI";
 const DESCRIPTION =
   "Zoek je een webdesigner in Hoogeveen? AIMI bouwt en host snelle websites voor ondernemers in Zuid-Drenthe. Persoonlijk contact, vanaf € 499.";
 

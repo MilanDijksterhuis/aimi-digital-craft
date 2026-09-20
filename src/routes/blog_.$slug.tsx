@@ -1,5 +1,4 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion } from "motion/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
@@ -13,6 +12,8 @@ import {
 } from "@/lib/seo";
 import { MarkdownBody, estimateReadTime } from "@/lib/markdown";
 import { supabase } from "@/integrations/supabase/client";
+
+type RelatedPost = { slug: string; title: string; anchorText: string };
 
 type BlogPostDetail = {
   slug: string;
@@ -31,6 +32,7 @@ type BlogPostDetail = {
   noindex: boolean;
   canonical_url: string | null;
   faq_items: { q: string; a: string }[];
+  relatedPosts: RelatedPost[];
 };
 
 export const Route = createFileRoute("/blog_/$slug")({
@@ -38,14 +40,47 @@ export const Route = createFileRoute("/blog_/$slug")({
     const { data: post } = await supabase
       .from("blog_posts")
       .select(
-        "slug, title, excerpt, content, published_at, updated_at, featured_image_url, featured_image_alt, seo_title, seo_description, og_title, og_description, og_image_url, noindex, canonical_url, faq_items",
+        "id, slug, title, excerpt, content, published_at, updated_at, featured_image_url, featured_image_alt, seo_title, seo_description, og_title, og_description, og_image_url, noindex, canonical_url, faq_items",
       )
       .eq("slug", params.slug)
       .eq("status", "published")
       .lte("published_at", new Date().toISOString())
       .maybeSingle();
     if (!post) throw notFound();
-    return post as BlogPostDetail;
+
+    // SEO-audit 2026-09-20 (B4-8/B5-2): post_links werd al gevuld bij het
+    // opslaan van een post, maar nooit publiek getoond (BlogPostLinksPanel is
+    // admin-only) — de blog was daardoor onderling slecht verbonden. Haalt
+    // hier alleen links op die naar een andere blogpost wijzen (to_post_slug),
+    // niet de link-naar-dienstpagina's (to_page_path staan al inline in de
+    // markdown-content zelf).
+    const { data: links } = await supabase
+      .from("post_links")
+      .select("to_post_slug, anchor_text")
+      .eq("from_post_id", post.id)
+      .not("to_post_slug", "is", null)
+      .limit(3);
+
+    let relatedPosts: RelatedPost[] = [];
+    const relatedSlugs = (links ?? []).map((l) => l.to_post_slug).filter((s): s is string => !!s);
+    if (relatedSlugs.length > 0) {
+      const { data: relatedRows } = await supabase
+        .from("blog_posts")
+        .select("slug, title")
+        .in("slug", relatedSlugs)
+        .eq("status", "published")
+        .lte("published_at", new Date().toISOString());
+      const titleBySlug = new Map((relatedRows ?? []).map((r) => [r.slug, r.title]));
+      relatedPosts = (links ?? [])
+        .filter((l) => l.to_post_slug && titleBySlug.has(l.to_post_slug))
+        .map((l) => ({
+          slug: l.to_post_slug as string,
+          title: titleBySlug.get(l.to_post_slug as string) as string,
+          anchorText: l.anchor_text,
+        }));
+    }
+
+    return { ...post, relatedPosts } as unknown as BlogPostDetail;
   },
   head: ({ loaderData: post }) => {
     if (!post) return {};
@@ -120,14 +155,15 @@ function BlogPost() {
               ← Terug naar blog
             </Link>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="mt-10 mb-3 text-xs"
+            {/* SEO-audit 2026-09-20 (B3-1): CSS-entrance i.p.v. framer-motion
+                initial={{opacity:0}} — dit is de LCP-kandidaat van de pagina,
+                die mag niet wachten op JS-hydration. Zelfde patroon als Hero.tsx. */}
+            <p
+              className="mt-10 mb-3 text-xs anim-fade-up"
               style={{
                 color: "#868b94",
                 fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                animationDelay: "0.05s",
               }}
             >
               {post.published_at &&
@@ -138,32 +174,38 @@ function BlogPost() {
                 })}
               {" · "}
               {estimateReadTime(post.content)}
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-white"
+            <h1
+              className="text-white anim-fade-up"
               style={{
                 fontSize: "2.2rem",
                 fontWeight: 300,
                 letterSpacing: "-0.03em",
                 lineHeight: 1.1,
+                animationDelay: "0.1s",
               }}
             >
               {post.title}
-            </motion.h1>
+            </h1>
           </div>
         </section>
 
         <section className="py-16" style={{ background: "#1a1a1a" }}>
           {post.featured_image_url && (
             <div className="mx-auto max-w-3xl px-6 mb-10">
+              {/* SEO-audit 2026-09-20 (B4-6): geen width/height-kolom in
+                  blog_posts, dus geen echte intrinsieke dimensies beschikbaar.
+                  aspect-ratio reserveert wel de ruimte vóór het laden (voorkomt
+                  CLS), en fetchPriority="high" is terecht: dit is vaak de
+                  LCP-afbeelding van de pagina, dus geen loading="lazy". */}
               <img
                 src={post.featured_image_url}
-                alt={post.featured_image_alt ?? ""}
+                alt={post.featured_image_alt || post.title}
                 className="w-full rounded-xl object-cover"
+                style={{ aspectRatio: "16 / 9" }}
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
           )}
@@ -201,6 +243,39 @@ function BlogPost() {
                     </div>
                   ))}
               </div>
+            </div>
+          )}
+
+          {post.relatedPosts.length > 0 && (
+            <div className="mx-auto max-w-3xl px-6 mt-16">
+              <h2
+                className="text-white mb-5"
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                  fontSize: "1.4rem",
+                  fontWeight: 400,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Lees ook
+              </h2>
+              <ul className="flex flex-col divide-y" style={{ borderColor: "#2a2b2b" }}>
+                {post.relatedPosts.map((r) => (
+                  <li key={r.slug}>
+                    <Link
+                      to="/blog/$slug"
+                      params={{ slug: r.slug }}
+                      className="group flex items-baseline justify-between gap-3 py-4 transition-colors"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <span className="text-sm text-white group-hover:underline">{r.title}</span>
+                      <span className="text-xs shrink-0" style={{ color: "#868b94" }}>
+                        →
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

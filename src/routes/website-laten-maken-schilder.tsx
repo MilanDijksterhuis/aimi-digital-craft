@@ -58,7 +58,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-schilder")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je schildersbedrijf | AIMI" },
+      { title: "Schildersbedrijf-website laten maken | AIMI" },
       { name: "description", content: "Website voor je schildersbedrijf: duidelijk onderscheid tussen binnen- en buitenwerk, projectfoto's die je werk verkopen en een offerteformulier op maat." },
       { property: "og:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },

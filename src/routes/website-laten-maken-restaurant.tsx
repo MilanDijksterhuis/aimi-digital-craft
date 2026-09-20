@@ -57,7 +57,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-restaurant")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je restaurant | AIMI" },
+      { title: "Restaurant-website laten maken — reserveringen | AIMI" },
       { name: "description", content: "Website voor je restaurant met openingstijden, een leesbare menukaart en reserveren binnen een paar tikken. Snel op mobiel, zelf te beheren." },
       { property: "og:title", content: "Website laten maken voor je restaurant | AIMI" },
       { property: "og:description", content: "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken." },

@@ -50,7 +50,7 @@ const data: LocationPageData = {
   sectionOrder: ["context", "workflow", "businessTypes", "faq"],
 };
 
-const TITLE = "Website laten maken in Leeuwarden | AIMI";
+const TITLE = "Website laten maken in Leeuwarden — eigen hosting | AIMI";
 const DESCRIPTION = "Professioneel webdesign voor Leeuwarden: snelle websites op maat voor culturele organisaties, horeca en het brede Friese MKB, gebouwd door AIMI.";
 
 export const Route = createFileRoute("/website-laten-maken-leeuwarden")({

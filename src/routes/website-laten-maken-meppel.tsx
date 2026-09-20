@@ -4,9 +4,9 @@ import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed
 
 const CITY = "Meppel";
 const URL = `${SITE_URL}/website-laten-maken-meppel`;
-const TITLE = "Website laten maken in Meppel | AIMI";
+const TITLE = "Website laten maken in Meppel — logistiek & mkb | AIMI";
 const DESCRIPTION =
-  "Snelle, professionele website nodig in Meppel? AIMI bouwt en host websites voor bedrijven in logistiek, grafische sector en mkb.";
+  "Snelle, professionele website nodig in Meppel? AIMI bouwt en host websites voor bedrijven in logistiek, grafische sector en mkb. Vraag een offerte aan.";
 
 const data: LocationPageData = {
   city: CITY,

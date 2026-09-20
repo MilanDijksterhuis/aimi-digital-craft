@@ -51,11 +51,11 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-stadskanaal")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Stadskanaal | AIMI" },
+      { title: "Website laten maken in Stadskanaal — vaste prijs | AIMI" },
       {
         name: "description",
         content:
-          "Webdesigner in Stadskanaal? AIMI bouwt snelle, professionele websites met eigen techniek en hosting voor ondernemers in de regio.",
+          "Webdesigner in Stadskanaal? AIMI bouwt snelle, professionele websites met eigen techniek en hosting voor ondernemers in de regio. Vraag een offerte aan.",
       },
       { name: "geo.region", content: "NL-GR" },
       { name: "geo.placename", content: "Stadskanaal" },

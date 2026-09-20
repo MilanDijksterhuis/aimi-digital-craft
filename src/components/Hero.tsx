@@ -62,6 +62,20 @@ export function Hero() {
           Websites die écht
           <br />
           werken.
+          {/* SEO-audit 2026-09-20 (B4-4): de H1 zelf bevatte geen enkel
+              zoekwoord. Kleinere subregel i.p.v. de merkzin te herschrijven,
+              zodat de visuele hiërarchie intact blijft. */}
+          <span
+            className="block mt-2"
+            style={{
+              fontSize: "clamp(1rem, 1.6vw, 1.25rem)",
+              fontWeight: 500,
+              color: "rgba(255,255,255,0.75)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Webdesign uit Veendam voor ondernemers in Noord-Nederland.
+          </span>
         </h1>
 
         {/* Performance-audit 2026-09-02: dit is de gemeten LCP-element

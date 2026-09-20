@@ -1,6 +1,14 @@
-# AIMI
+import { createFileRoute } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 
-> Laatst bijgewerkt: 2026-09-06
+/* SEO-audit 2026-09-20 (B11-1): llms.txt stond als statisch bestand in
+ * public/, terwijl de blogposts uit de DB komen — de 10 live posts (juist de
+ * content die zich het best leent voor AI-citatie) stonden er daardoor nooit
+ * in. Nu een route die dezelfde statische secties bevat, plus een live
+ * "## Blog"-sectie uit de blog_posts-tabel. public/llms.txt is verwijderd
+ * (een statisch bestand in public/ zou deze route anders overschaduwen). */
+
+const STATIC_SECTIONS = `# AIMI
 
 > Web agency van Aidan & Milan. Wij ontwerpen, bouwen en hosten snelle, professionele websites en webshops voor ondernemers — met focus op de regio Veendam (Groningen) en Hoogeveen (Drenthe), en klanten door heel Nederland.
 
@@ -75,3 +83,43 @@
 
 - E-mail: sales@aimi-development.nl
 - Regio: Veendam, Hoogeveen, Groningen, Drenthe, Friesland en heel Nederland
+`;
+
+export const Route = createFileRoute("/llms.txt")({
+  server: {
+    handlers: {
+      GET: async () => {
+        const { data: posts } = await supabase
+          .from("blog_posts")
+          .select("slug, title, excerpt")
+          .eq("status", "published")
+          .eq("noindex", false)
+          .lte("published_at", new Date().toISOString())
+          .order("published_at", { ascending: false });
+
+        const blogSection =
+          (posts ?? []).length > 0
+            ? [
+                "\n## Blog\n",
+                "- [Blog](/blog): Artikelen over webdesign, SEO en online groei.",
+                ...(posts ?? []).map(
+                  (p) => `- [${p.title}](/blog/${p.slug}): ${p.excerpt ?? ""}`.trimEnd(),
+                ),
+              ].join("\n") + "\n"
+            : "";
+
+        const body = STATIC_SECTIONS.replace(
+          "> Web agency van Aidan & Milan.",
+          `> Laatst bijgewerkt: ${new Date().toISOString().slice(0, 10)}\n\n> Web agency van Aidan & Milan.`,
+        ) + blogSection;
+
+        return new Response(body, {
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "Cache-Control": "public, max-age=3600",
+          },
+        });
+      },
+    },
+  },
+});

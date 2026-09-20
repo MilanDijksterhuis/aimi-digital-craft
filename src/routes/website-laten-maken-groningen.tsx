@@ -50,7 +50,7 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-groningen")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Groningen | AIMI" },
+      { title: "Webdesigner in Groningen, de studentenstad | AIMI" },
       {
         name: "description",
         content:

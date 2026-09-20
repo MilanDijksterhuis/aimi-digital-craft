@@ -4,9 +4,9 @@ import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed
 
 const CITY = "Coevorden";
 const URL = `${SITE_URL}/website-laten-maken-coevorden`;
-const TITLE = "Website laten maken in Coevorden | AIMI";
+const TITLE = "Website laten maken in Coevorden — ook voor Duitsland | AIMI";
 const DESCRIPTION =
-  "Professioneel webdesign in Coevorden, ook geschikt voor de Duitse markt. Snel, technisch solide en zelf gehost door AIMI.";
+  "Professioneel webdesign in Coevorden, ook geschikt voor de Duitse markt. Snel, technisch solide en zelf gehost door AIMI, vanaf € 499. Vraag een offerte aan.";
 
 const data: LocationPageData = {
   city: CITY,

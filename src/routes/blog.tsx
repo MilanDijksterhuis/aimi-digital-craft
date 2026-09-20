@@ -11,11 +11,16 @@ type BlogListItem = {
   slug: string;
   title: string;
   excerpt: string | null;
-  content: string;
+  readTime: string;
   published_at: string | null;
 };
 
 export const Route = createFileRoute("/blog")({
+  // SEO-audit 2026-09-20 (A1-3): `content` wordt alleen server-side gebruikt
+  // om de leestijd te berekenen. Vroeger stond de volledige posttekst van
+  // élke post daardoor ook in de SSR-payload van /blog (dubbel: HTML +
+  // hydration-JSON). `readTime` wordt nu in de loader berekend en alleen dát
+  // gaat naar de client — `content` verlaat de server nooit.
   loader: async (): Promise<{ posts: BlogListItem[] }> => {
     const { data } = await supabase
       .from("blog_posts")
@@ -23,29 +28,35 @@ export const Route = createFileRoute("/blog")({
       .eq("status", "published")
       .lte("published_at", new Date().toISOString())
       .order("published_at", { ascending: false });
-    return { posts: data ?? [] };
+    const posts = (data ?? []).map(({ content, ...post }) => ({
+      ...post,
+      readTime: estimateReadTime(content),
+    }));
+    return { posts };
   },
   head: () => ({
     meta: [
-      { title: "Blog | AIMI Web Agency Veendam & Hoogeveen" },
+      // SEO-audit 2026-09-20 (B4-3): "Blog" vooraan is geen zoekwoord en de
+      // description liet SERP-ruimte liggen (107 tekens, geen CTA).
+      { title: "Webdesign- en SEO-blog voor ondernemers | AIMI" },
       {
         name: "description",
         content:
-          "Artikelen over webdesign, SEO en online groei voor kleine bedrijven en zelfstandigen, geschreven door AIMI.",
+          "Praktische artikelen over webdesign, SEO en online groei voor kleine bedrijven en zelfstandigen in Groningen en Drenthe, geschreven door AIMI.",
       },
-      { property: "og:title", content: "Blog: AIMI" },
+      { property: "og:title", content: "Webdesign- en SEO-blog voor ondernemers | AIMI" },
       {
         property: "og:description",
-        content: "Artikelen over webdesign, SEO en online groei van AIMI.",
+        content: "Praktische artikelen over webdesign, SEO en online groei, geschreven door AIMI.",
       },
       { property: "og:url", content: `${SITE_URL}/blog` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Blog: AIMI" },
+      { name: "twitter:title", content: "Webdesign- en SEO-blog voor ondernemers | AIMI" },
       {
         name: "twitter:description",
-        content: "Artikelen over webdesign, SEO en online groei van AIMI.",
+        content: "Praktische artikelen over webdesign, SEO en online groei, geschreven door AIMI.",
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
@@ -57,7 +68,7 @@ export const Route = createFileRoute("/blog")({
       ]),
       webPageJsonLd({
         path: "/blog",
-        name: "Blog: AIMI webdesignbureau Veendam",
+        name: "Webdesign- en SEO-blog | AIMI webdesignbureau Veendam",
         description:
           "Artikelen over webdesign, SEO en online groei voor kleine bedrijven en zelfstandigen, geschreven door AIMI.",
       }),
@@ -86,45 +97,41 @@ function Blog() {
               ← Terug naar home
             </Link>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="mt-10 mb-3 text-sm font-medium"
+            {/* SEO-audit 2026-09-20 (B3-1): CSS-entrance i.p.v. framer-motion
+                initial={{opacity:0}}, zelfde reden als Hero.tsx — anders is de
+                H1 onzichtbaar tot JS gehydrateerd is. */}
+            <p
+              className="mt-10 mb-3 text-sm font-medium anim-fade-up"
               style={{
                 color: "#fe2c02",
                 fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
                 letterSpacing: "0.05em",
+                animationDelay: "0.05s",
               }}
             >
               Blog
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-white max-w-3xl"
+            <h1
+              className="text-white max-w-3xl anim-fade-up"
               style={{
                 fontSize: "2.2rem",
                 fontWeight: 300,
                 letterSpacing: "-0.03em",
                 lineHeight: 1.05,
+                animationDelay: "0.1s",
               }}
             >
               Artikelen over webdesign, SEO en online groei.
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.18 }}
-              className="mt-6 max-w-2xl text-sm leading-relaxed"
-              style={{ color: "#a4a9b2" }}
+            <p
+              className="mt-6 max-w-2xl text-sm leading-relaxed anim-fade-up"
+              style={{ color: "#a4a9b2", animationDelay: "0.18s" }}
             >
               Praktische inzichten uit ons eigen werk, voor kleine bedrijven en zelfstandigen die
               meer uit hun website willen halen.
-            </motion.p>
+            </p>
           </div>
         </section>
 
@@ -200,7 +207,7 @@ function Blog() {
                             year: "numeric",
                           })}
                         <br />
-                        {estimateReadTime(post.content)}
+                        {post.readTime}
                       </div>
                     </Link>
                   </motion.div>

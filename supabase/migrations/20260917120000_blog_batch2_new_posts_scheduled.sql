@@ -1550,11 +1550,12 @@ Wil je weten waar je nu staat en wat realistisch is voor jouw situatie? Doe de g
   $n55fk$hoe lang duurt seo$n55fk$
 );
 
--- 56. wordpress-of-maatwerk
+-- 56. wordpress-of-maatwerk-verschil (LET OP: NIET 'wordpress-of-maatwerk' -
+-- die slug botst met de statische pagina /wordpress-of-maatwerk, zie SEO-audit A2-1)
 INSERT INTO public.blog_posts (title, slug, excerpt, content, status, published_at, seo_title, seo_description, focus_keyword)
 VALUES (
   $n56t$WordPress of maatwerk: wat is beter voor mijn bedrijf?$n56t$,
-  'wordpress-of-maatwerk',
+  'wordpress-of-maatwerk-verschil',
   $n56e$WordPress is snel en betaalbaar op te zetten, maar leunt op plugins en vraagt meer onderhoud en beveiliging. Maatwerk is duurder in aanschaf, maar sneller, veiliger en volledig afgestemd op jouw wensen. Welke past, hangt af van je budget, wensen en groeiplannen. We zetten de voor- en nadelen eerlijk naast elkaar.$n56e$,
   $n56c$# WordPress of maatwerk: wat is beter voor mijn bedrijf?
 

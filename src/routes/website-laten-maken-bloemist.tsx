@@ -57,7 +57,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-bloemist")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je bloemenwinkel | AIMI" },
+      { title: "Bloemenwinkel-website laten maken — bezorging | AIMI" },
       { name: "description", content: "Website of webshop voor je bloemenwinkel: online bestellen met bezorgdatum, een eigen pagina voor rouwwerk en grip op je piekdagen." },
       { property: "og:title", content: "Website laten maken voor je bloemenwinkel | AIMI" },
       { property: "og:description", content: "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar." },

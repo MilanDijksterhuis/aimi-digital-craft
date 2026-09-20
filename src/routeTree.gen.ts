@@ -55,6 +55,8 @@ import { Route as OverOnsRouteImport } from './routes/over-ons'
 import { Route as OnderhoudHostingRouteImport } from './routes/onderhoud-hosting'
 import { Route as MeerDienstenRouteImport } from './routes/meer-diensten'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BranchesRouteImport } from './routes/branches'
@@ -341,6 +343,16 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsFullDottxtRoute = LlmsFullDottxtRouteImport.update({
+  id: '/llms-full.txt',
+  path: '/llms-full.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -512,6 +524,8 @@ export interface FileRoutesByFullPath {
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
   '/onderhoud-hosting': typeof OnderhoudHostingRoute
@@ -589,6 +603,8 @@ export interface FileRoutesByTo {
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
   '/onderhoud-hosting': typeof OnderhoudHostingRoute
@@ -668,6 +684,8 @@ export interface FileRoutesById {
   '/branches': typeof BranchesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/llms-full.txt': typeof LlmsFullDottxtRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/meer-diensten': typeof MeerDienstenRoute
   '/onderhoud-hosting': typeof OnderhoudHostingRoute
@@ -747,6 +765,8 @@ export interface FileRouteTypes {
     | '/branches'
     | '/contact'
     | '/faq'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/login'
     | '/meer-diensten'
     | '/onderhoud-hosting'
@@ -824,6 +844,8 @@ export interface FileRouteTypes {
     | '/branches'
     | '/contact'
     | '/faq'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/login'
     | '/meer-diensten'
     | '/onderhoud-hosting'
@@ -902,6 +924,8 @@ export interface FileRouteTypes {
     | '/branches'
     | '/contact'
     | '/faq'
+    | '/llms-full.txt'
+    | '/llms.txt'
     | '/login'
     | '/meer-diensten'
     | '/onderhoud-hosting'
@@ -981,6 +1005,8 @@ export interface RootRouteChildren {
   BranchesRoute: typeof BranchesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
+  LlmsFullDottxtRoute: typeof LlmsFullDottxtRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   LoginRoute: typeof LoginRoute
   MeerDienstenRoute: typeof MeerDienstenRoute
   OnderhoudHostingRoute: typeof OnderhoudHostingRoute
@@ -1358,6 +1384,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms-full.txt': {
+      id: '/llms-full.txt'
+      path: '/llms-full.txt'
+      fullPath: '/llms-full.txt'
+      preLoaderRoute: typeof LlmsFullDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq': {
       id: '/faq'
       path: '/faq'
@@ -1708,6 +1748,8 @@ const rootRouteChildren: RootRouteChildren = {
   BranchesRoute: BranchesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
+  LlmsFullDottxtRoute: LlmsFullDottxtRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   LoginRoute: LoginRoute,
   MeerDienstenRoute: MeerDienstenRoute,
   OnderhoudHostingRoute: OnderhoudHostingRoute,

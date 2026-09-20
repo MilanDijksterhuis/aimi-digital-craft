@@ -28,19 +28,19 @@ const RED = "#ff3b21";
 export const Route = createFileRoute("/website-checker")({
   head: () => ({
     meta: [
-      { title: "Gratis Website Check | Score jouw site in 10 seconden: AIMI" },
+      { title: "Gratis Website Check | Score jouw site in 10 seconden | AIMI" },
       {
         name: "description",
         content:
           "Check gratis en direct hoe jouw website scoort op techniek, SEO, snelheid en mobielvriendelijkheid. Geen account nodig, resultaat binnen enkele seconden.",
       },
-      { property: "og:title", content: "Gratis Website Check: AIMI" },
+      { property: "og:title", content: "Gratis Website Check | AIMI" },
       { property: "og:description", content: "Score jouw website op techniek, SEO, snelheid en mobiel. Gratis en direct." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: PAGE_URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Gratis Website Check: AIMI" },
+      { name: "twitter:title", content: "Gratis Website Check | AIMI" },
       { name: "twitter:description", content: "Score jouw website op techniek, SEO, snelheid en mobiel. Gratis en direct." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

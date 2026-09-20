@@ -64,19 +64,19 @@ const data: ServicePageData = {
 export const Route = createFileRoute("/onderhoud-hosting")({
   head: () => ({
     meta: [
-      { title: "Onderhoud & hosting | Vanaf € 30 p/m: AIMI" },
+      { title: "Onderhoud & hosting | Vanaf € 30 p/m | AIMI" },
       {
         name: "description",
         content:
           "Website hosting en onderhoud door AIMI. Snelle Nederlandse hosting, SSL, updates, back-ups en 24/7 monitoring vanaf € 30 per maand.",
       },
-      { property: "og:title", content: "Onderhoud & hosting: AIMI" },
+      { property: "og:title", content: "Onderhoud & hosting | AIMI" },
       { property: "og:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Onderhoud & hosting: AIMI" },
+      { name: "twitter:title", content: "Onderhoud & hosting | AIMI" },
       { name: "twitter:description", content: "Snelle Nederlandse hosting, updates, back-ups en 24/7 monitoring vanaf € 30 per maand." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],

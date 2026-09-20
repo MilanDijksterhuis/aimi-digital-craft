@@ -29,7 +29,9 @@ function parseInline(text: string, keyPrefix: string): ReactNode[] {
           src={match[2]}
           alt={match[1]}
           loading="lazy"
+          decoding="async"
           className="w-full rounded-lg"
+          style={{ aspectRatio: "16 / 9" }}
         />,
       );
     } else if (match[3] !== undefined) {
@@ -92,6 +94,42 @@ export function MarkdownBody({ content }: { content: string }) {
     <>
       {blocks.map((block, bi) => {
         const lines = block.split("\n").map((l) => l.trim());
+
+        // SEO-audit 2026-09-20 (B4-5): #### en ### moeten vóór ## gecheckt
+        // worden, anders matcht de ## check ook op de langere prefixen.
+        if (block.startsWith("#### ")) {
+          return (
+            <h4
+              key={bi}
+              className="text-white pt-3"
+              style={{
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                fontSize: "1.05rem",
+                fontWeight: 500,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {parseInline(block.slice(5), `h4-${bi}`)}
+            </h4>
+          );
+        }
+
+        if (block.startsWith("### ")) {
+          return (
+            <h3
+              key={bi}
+              className="text-white pt-4"
+              style={{
+                fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
+                fontSize: "1.2rem",
+                fontWeight: 500,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {parseInline(block.slice(4), `h3-${bi}`)}
+            </h3>
+          );
+        }
 
         if (block.startsWith("## ")) {
           return (

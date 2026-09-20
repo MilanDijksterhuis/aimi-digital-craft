@@ -58,7 +58,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-nagelstudio")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je nagelstudio | AIMI" },
+      { title: "Nagelstudio-website laten maken — booking | AIMI" },
       {
         name: "description",
         content: "Snelle website voor je nagelstudio met een visueel portfolio, online boeken en prijzen per behandeling. Gebouwd en gehost door AIMI.",

@@ -58,7 +58,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-kapsalon")({
   head: () => ({
     meta: [
-      { title: "Website laten maken voor je kapsalon | AIMI" },
+      { title: "Kapsalon-website laten maken? Zo ziet dat eruit | AIMI" },
       {
         name: "description",
         content: "Website voor je kapsalon met online afspraken, prijslijst en teamfoto's. AIMI bouwt en host snelle websites voor kappers in Noord-Nederland.",
