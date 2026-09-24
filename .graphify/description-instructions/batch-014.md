@@ -1,4 +1,4 @@
-# Node Description Batch 15 of 52
+# Node Description Batch 15 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -12,58 +12,51 @@ describing what it is or does. Use only the provided context.
 For a code symbol (kind=code-symbol — a function, class, or constant),
 describe what the function/symbol does based on its name, source location
 and neighbors — e.g. "Resolves the configured ontology profile from graphify.yaml.".
-For an entity node (any other kind — e.g. a person, place, event, object),
-describe what the entity is and its role, grounded in its type, its
-relations (neighbors) and the provided citations/evidence — e.g.
-"Lady Carfax, a wealthy heiress who disappears en route to Lausanne.".
-Ground entity descriptions in the citations/evidence when present; do not
-speculate beyond the context, so a node with no supporting context may be
-left out of the reply.
-Write every description in Portuguese (pt). Do not switch languages.
+Write every description in English (en). Do not switch languages.
 No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "ui_input": "input.tsx" | kind=code-symbol | source=src/components/ui/input.tsx:L1 | neighbors=[utils.ts, cn(), Input, sidebar.tsx]
-- "ui_radio_group": "radio-group.tsx" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L1 | neighbors=[utils.ts, cn(), RadioGroup, RadioGroupItem]
-- "ui_resizable": "resizable.tsx" | kind=code-symbol | source=src/components/ui/resizable.tsx:L1 | neighbors=[utils.ts, cn(), ResizableHandle(), ResizablePanelGroup()]
-- "ui_scroll_area": "scroll-area.tsx" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L1 | neighbors=[utils.ts, cn(), ScrollArea, ScrollBar]
-- "ui_separator": "separator.tsx" | kind=code-symbol | source=src/components/ui/separator.tsx:L1 | neighbors=[utils.ts, cn(), Separator, sidebar.tsx]
-- "ui_tooltip": "tooltip.tsx" | kind=code-symbol | source=src/components/ui/tooltip.tsx:L1 | neighbors=[sidebar.tsx, utils.ts, cn(), TooltipContent]
-- "authenticated_portal_changecard": "ChangeCard()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L880 | neighbors=[portal.tsx, mapStatus(), stepIndex()]
-- "authenticated_portal_mapstatus": "mapStatus()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L67 | neighbors=[portal.tsx, ChangeCard(), matchesFilter()]
-- "authenticated_portal_stepindex": "stepIndex()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L86 | neighbors=[portal.tsx, ChangeCard(), Stepper()]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@032ba882dcdd184c58fcd324caaaa455bba861e3": "032ba88 SEO" | kind=Commit | source=git | neighbors=[main, 2d81f50 feat(seo): vervang /cases door …, 7a63e47 chore: graphify graph bijgewerkt]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7a63e4743d57a1f4b9255081ebc9c8871897b99d": "7a63e47 chore: graphify graph bijgewerkt" | kind=Commit | source=git | neighbors=[main, 032ba88 SEO, ef44acd feat(seo): sitemap + llms.txt a…]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7a80ccf33e842e1845ab2661fcfb4bfa5d93c8f6": "7a80ccf docs(seo): volledige SEO-audit 2026-09-20 (root cause dip + site-breed)" | kind=Commit | source=git | neighbors=[main, e543723 Merge pull request #1 from Mila…, f80d1a3 blur]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a903820d8d2f9a723af2516050fdd67634743e19": "a903820 Fix Rules of Hooks violation crashing admin Projecten tab" | kind=Commit | source=git | neighbors=[39d363a server basic, admin.tsx, worktree-fix-admin-projects-hooks]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c4498f5f1a1f0788e92e4dfda2feffb1cfc073f5": "c4498f5 Changes" | kind=Commit | source=git | neighbors=[worktree-curious-wibbling-narwhal, b29ceec Fixed weak PRNG and RLS, 20260523231640_f0c31578-aa3c-4810-a448-…]
-- "components_blogpostform_blogpostformpayload": "BlogPostFormPayload" | kind=code-symbol | source=src/components/BlogPostForm.tsx:L24 | neighbors=[admin.blog.tsx, admin.blog.$postId.tsx, BlogPostForm.tsx]
-- "components_blogpostlinkspanel": "BlogPostLinksPanel.tsx" | kind=code-symbol | source=src/components/BlogPostLinksPanel.tsx:L1 | neighbors=[1727351 blog, BlogPostForm.tsx, BlogPostLinksPanel()]
-- "components_callbackagenda_sameday": "sameDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L50 | neighbors=[CallbackAgenda.tsx, isToday(), startOfDay()]
-- "components_callbackagenda_startofday": "startOfDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L39 | neighbors=[CallbackAgenda.tsx, sameDay(), startOfWeek()]
-- "components_contact_contact": "Contact()" | kind=code-symbol | source=src/components/Contact.tsx:L11 | neighbors=[Contact.tsx, contact.tsx, index.tsx]
-- "components_exampleslideshow_generic_examples": "GENERIC_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L151 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx]
-- "components_exampleslideshow_serviceexample": "ServiceExample" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L6 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, ServicePage.tsx]
-- "components_faq_faq": "FAQ()" | kind=code-symbol | source=src/components/FAQ.tsx:L291 | neighbors=[FAQ.tsx, index.tsx, faq.tsx]
-- "components_faq_faqitems": "faqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L22 | neighbors=[FAQ.tsx, faq.tsx, index.tsx]
-- "components_leadspanel_leaddetail": "LeadDetail()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L620 | neighbors=[LeadsPanel.tsx, initials(), relTime()]
-- "components_leadspanel_leadspanel": "LeadsPanel()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L157 | neighbors=[admin.leads.tsx, LeadsPanel.tsx, admin.tsx]
-- "components_locationlanding_locationdata": "LocationData" | kind=code-symbol | source=src/components/LocationLanding.tsx:L18 | neighbors=[LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx]
-- "components_locationlanding_locationlanding": "LocationLanding()" | kind=code-symbol | source=src/components/LocationLanding.tsx:L27 | neighbors=[LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx]
-- "components_redirectspanel": "RedirectsPanel.tsx" | kind=code-symbol | source=src/components/RedirectsPanel.tsx:L1 | neighbors=[admin.blog.tsx, 1727351 blog, RedirectsPanel()]
-- "components_telegrammfacard": "TelegramMfaCard.tsx" | kind=code-symbol | source=src/components/TelegramMfaCard.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, 2b1d78f telegram, TelegramMfaCard()]
-- "components_truststrip_truststrip": "TrustStrip()" | kind=code-symbol | source=src/components/TrustStrip.tsx:L8 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, TrustStrip.tsx]
-- "hooks_use_form_draft": "use-form-draft.ts" | kind=code-symbol | source=src/hooks/use-form-draft.ts:L1 | neighbors=[portal.tsx, 9a2689c code fixes, useFormDraft()]
-- "lib_accounts_functions_getroles": "getRoles()" | kind=code-symbol | source=src/lib/accounts.functions.ts:L9 | neighbors=[accounts.functions.ts, ensureAdmin(), ensureSuper()]
-- "lib_blog_links_extractinternallinks": "extractInternalLinks()" | kind=code-symbol | source=src/lib/blog-links.ts:L12 | neighbors=[blog-links.ts, hasInternalLink(), blog.server.ts]
-- "lib_blog_links_hasinternallink": "hasInternalLink()" | kind=code-symbol | source=src/lib/blog-links.ts:L25 | neighbors=[BlogPostForm.tsx, blog-links.ts, extractInternalLinks()]
-- "lib_blog_schedule_adddays": "addDays()" | kind=code-symbol | source=src/lib/blog-schedule.ts:L14 | neighbors=[blog-schedule.ts, computeScheduleDates(), rollToWorkday()]
-- "lib_blog_schedule_rolltoworkday": "rollToWorkday()" | kind=code-symbol | source=src/lib/blog-schedule.ts:L21 | neighbors=[blog-schedule.ts, computeScheduleDates(), addDays()]
-- "lib_blog_server_assertuniqueslug": "assertUniqueSlug()" | kind=code-symbol | source=src/lib/blog.server.ts:L8 | neighbors=[blog.server.ts, adminCreateBlogPostImpl(), adminUpdateBlogPostImpl()]
-- "lib_blog_server_resolvestatusfields": "resolveStatusFields()" | kind=code-symbol | source=src/lib/blog.server.ts:L128 | neighbors=[blog.server.ts, adminCreateBlogPostImpl(), adminUpdateBlogPostImpl()]
-- "lib_callbacks_todatetimelocalvalue": "toDatetimeLocalValue()" | kind=code-symbol | source=src/lib/callbacks.ts:L82 | neighbors=[CallbackAgenda.tsx, CallbackScheduleModal.tsx, callbacks.ts]
-- "lib_csv_parsecsv": "parseCsv()" | kind=code-symbol | source=src/lib/csv.ts:L30 | neighbors=[csv.ts, detectDelimiter(), parseLeadsCsv()]
+- "components_callbackagenda_callbackagenda": "CallbackAgenda()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L62 | neighbors=[admin.leads.tsx, CallbackAgenda.tsx, fmtDayLabel(), startOfWeek()]
+- "components_callbackagenda_startofweek": "startOfWeek()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L45 | neighbors=[CallbackAgenda.tsx, CallbackAgenda(), addDays(), startOfDay()]
+- "components_exampleslideshow_exampleslideshow": "ExampleSlideshow()" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L12 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx, ServicePage.tsx]
+- "components_processtimeline_processtimeline": "ProcessTimeline()" | kind=code-symbol | source=src/components/ProcessTimeline.tsx:L48 | neighbors=[LocationLanding.tsx, ProcessTimeline.tsx, index.tsx, LocationPageV2.tsx]
+- "components_rodeachtergrond_reddiagonalbackground": "RedDiagonalBackground()" | kind=code-symbol | source=src/components/rodeachtergrond.tsx:L4 | neighbors=[rodeachtergrond.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx, website-laten-maken.tsx]
+- "components_servicepage_servicepage": "ServicePage()" | kind=code-symbol | source=src/components/ServicePage.tsx:L39 | neighbors=[ServicePage.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx, website-laten-maken.tsx]
+- "components_servicepage_servicepagedata": "ServicePageData" | kind=code-symbol | source=src/components/ServicePage.tsx:L25 | neighbors=[ServicePage.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx, website-laten-maken.tsx]
+- "design_handoff_meer_diensten_support_getreact": "getReact()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L9 | neighbors=[support.js, boot(), createComponentFactory(), evalDcLogic()]
+- "design_handoff_meer_diensten_support_loadreactumd": "loadReactUmd()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L1838 | neighbors=[support.js, cdnScriptFor(), loadScript(), resolve()]
+- "design_handoff_meer_diensten_support_rootnamefordocument": "rootNameForDocument()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L133 | neighbors=[support.js, boot(), dcNameFromPath(), safeDecode()]
+- "design_handoff_meer_diensten_support_walkfor": "walkFor()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L611 | neighbors=[support.js, walk(), compileAttr(), walkChildren()]
+- "design_handoff_meer_diensten_support_walkif": "walkIf()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L646 | neighbors=[support.js, walk(), compileAttr(), walkChildren()]
+- "kaart_hoogeveen_veendam_support_getreact": "getReact()" | kind=code-symbol | source=design/kaart-hoogeveen-veendam/support.js:L9 | neighbors=[support.js, boot(), createComponentFactory(), evalDcLogic()]
+- "kaart_hoogeveen_veendam_support_loadreactumd": "loadReactUmd()" | kind=code-symbol | source=design/kaart-hoogeveen-veendam/support.js:L1838 | neighbors=[support.js, cdnScriptFor(), loadScript(), resolve()]
+- "kaart_hoogeveen_veendam_support_rootnamefordocument": "rootNameForDocument()" | kind=code-symbol | source=design/kaart-hoogeveen-veendam/support.js:L133 | neighbors=[support.js, boot(), dcNameFromPath(), safeDecode()]
+- "kaart_hoogeveen_veendam_support_walkfor": "walkFor()" | kind=code-symbol | source=design/kaart-hoogeveen-veendam/support.js:L611 | neighbors=[support.js, walk(), compileAttr(), walkChildren()]
+- "kaart_hoogeveen_veendam_support_walkif": "walkIf()" | kind=code-symbol | source=design/kaart-hoogeveen-veendam/support.js:L646 | neighbors=[support.js, walk(), compileAttr(), walkChildren()]
+- "lib_blog_schedule_bulkscheduleoptions": "BulkScheduleOptions" | kind=code-symbol | source=src/lib/blog-schedule.ts:L5 | neighbors=[admin.blog.tsx, BulkScheduleDialog.tsx, blog-schedule.ts, blog.server.ts]
+- "lib_blog_server_admincreateblogpostimpl": "adminCreateBlogPostImpl()" | kind=code-symbol | source=src/lib/blog.server.ts:L143 | neighbors=[blog.server.ts, assertUniqueSlug(), resolveStatusFields(), syncPostLinks()]
+- "lib_blog_server_syncpostlinks": "syncPostLinks()" | kind=code-symbol | source=src/lib/blog.server.ts:L60 | neighbors=[blog.server.ts, adminCreateBlogPostImpl(), adminDuplicateBlogPostImpl(), adminUpdateBlogPostImpl()]
+- "lib_project_status_project_priority_color": "PROJECT_PRIORITY_COLOR" | kind=code-symbol | source=src/lib/project-status.ts:L52 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, portal.projecten.$projectId.tsx, project-status.ts]
+- "lib_project_status_project_priority_label": "PROJECT_PRIORITY_LABEL" | kind=code-symbol | source=src/lib/project-status.ts:L38 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, portal.projecten.$projectId.tsx, project-status.ts]
+- "lib_rbac_can": "can()" | kind=code-symbol | source=src/lib/rbac.ts:L70 | neighbors=[use-permissions.tsx, permissions.server.ts, rbac.ts, admin.functions.ts]
+- "lib_rbac_permissionaction": "PermissionAction" | kind=code-symbol | source=src/lib/rbac.ts:L127 | neighbors=[use-permissions.tsx, permissions.server.ts, rbac.ts, admin.functions.ts]
+- "lib_redirects_server": "redirects.server.ts" | kind=code-symbol | source=src/lib/redirects.server.ts:L1 | neighbors=[1727351 blog, adminCreateRedirectImpl(), adminDeleteRedirectImpl(), adminListRedirectsImpl()]
+- "lib_slug": "slug.ts" | kind=code-symbol | source=src/lib/slug.ts:L1 | neighbors=[6ccd4dc CMS, BlogPostForm.tsx, blog.server.ts, slugify()]
+- "lib_status_category_label": "CATEGORY_LABEL" | kind=code-symbol | source=src/lib/status.ts:L58 | neighbors=[admin.changes.tsx, admin.changes.$changeId.tsx, portal.tsx, status.ts]
+- "lib_status_iscategoryfree": "isCategoryFree()" | kind=code-symbol | source=src/lib/status.ts:L89 | neighbors=[portal.tsx, portal.functions.ts, status.ts, priceForChange()]
+- "lib_telegram_server_sendtelegrammessage": "sendTelegramMessage()" | kind=code-symbol | source=src/lib/telegram.server.ts:L44 | neighbors=[telegram.server.ts, generateAndSendMfaCode(), safeSend(), botToken()]
+- "lib_website_checker_server_fetchsafely": "fetchSafely()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L136 | neighbors=[website-checker.server.ts, assertHttpUrl(), fetchText(), runWebsiteCheck()]
+- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_profiles": "public.profiles" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L15 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, profiles_touch, public.handle_new_user(), auth.users]
+- "migrations_20260523213826_e88fd443_0f7e_4ead_ab91_f3d19f723017": "20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql" | kind=code-symbol | source=supabase/migrations/20260523213826_e88fd443-0f7e-4ead-ab91-f3d19f723017.sql:L1 | neighbors=[public.client_contacts, public.login_events, public.site_errors, public.site_pings]
+- "migrations_20260524095411_23164716_fa8a_4889_832b_f72b78c962ad": "20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql" | kind=code-symbol | source=supabase/migrations/20260524095411_23164716-fa8a-4889-832b-f72b78c962ad.sql:L1 | neighbors=[public.extra_change_requests, public.password_reset_requests, 28e88cb Changes, fcbe345 Admin sidebar en panels aangepa…]
+- "migrations_20260713130000_project_expansion_phase2_public_project_task_time_entries": "public.project_task_time_entries" | kind=code-symbol | source=supabase/migrations/20260713130000_project_expansion_phase2.sql:L42 | neighbors=[20260713130000_project_expansion_phase2…, auth.users, public.project_tasks, public.projects]
+- "migrations_20260714090000_roles_permissions_module": "20260714090000_roles_permissions_module.sql" | kind=code-symbol | source=supabase/migrations/20260714090000_roles_permissions_module.sql:L1 | neighbors=[81a87ed commit, auth.users, public.roles, public.user_custom_roles]
+- "routes_llms_full_txt": "llms-full[.]txt.tsx" | kind=code-symbol | source=src/routes/llms-full[.]txt.tsx:L1 | neighbors=[4a960c6 SEO, Route, client.ts, supabase]
+- "routes_website_checker_reportcard": "ReportCard()" | kind=code-symbol | source=src/routes/website-checker.tsx:L332 | neighbors=[website-checker.tsx, getFindings(), scoreVerdict(), useCountUp()]
+- "src_server_applysecurityheaders": "applySecurityHeaders()" | kind=code-symbol | source=src/server.ts:L275 | neighbors=[server.ts, applyAssetCaching(), isHttps(), fetch()]
+- "supabase_auth_attacher": "auth-attacher.ts" | kind=code-symbol | source=src/integrations/supabase/auth-attacher.ts:L1 | neighbors=[start.ts, attachSupabaseAuth, client.ts, supabase]
+- "supabase_client_server": "client.server.ts" | kind=code-symbol | source=src/integrations/supabase/client.server.ts:L1 | neighbors=[createSupabaseAdminClient(), supabaseAdmin, types.ts, Database]
 
 ## Instructions
 

@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo werken we het uit",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken welke diensten je aanbiedt, van spoedreparaties tot installaties, en hoe belangrijk spoed is binnen je bedrijf." },
-    { title: "Telefoonnummer voorop", desc: "We ontwerpen de pagina met het telefoonnummer als grootste, meest opvallende element, bereikbaar zonder scrollen." },
-    { title: "Snelheid op mobiel", desc: "We bouwen de site licht en snel, met prioriteit voor laadtijd op mobiele verbindingen, omdat spoedzoekers zelden op wifi zitten." },
-    { title: "Spoed bovenaan", desc: "We plaatsen spoedgevallen en storingsdienst boven reguliere diensten, zodat de urgentie meteen duidelijk is." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, zodat de site ook tijdens piekmomenten bereikbaar blijft." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken welke diensten je aanbiedt, van spoedreparaties tot installaties, en hoe belangrijk spoed is binnen je bedrijf.",
+    },
+    {
+      title: "Telefoonnummer voorop",
+      desc: "We ontwerpen de pagina met het telefoonnummer als grootste, meest opvallende element, bereikbaar zonder scrollen.",
+    },
+    {
+      title: "Snelheid op mobiel",
+      desc: "We bouwen de site licht en snel, met prioriteit voor laadtijd op mobiele verbindingen, omdat spoedzoekers zelden op wifi zitten.",
+    },
+    {
+      title: "Spoed bovenaan",
+      desc: "We plaatsen spoedgevallen en storingsdienst boven reguliere diensten, zodat de urgentie meteen duidelijk is.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, zodat de site ook tijdens piekmomenten bereikbaar blijft.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een loodgietersbedrijf",
   pricingBody: [
@@ -42,14 +57,38 @@ const data: BranchPageData = {
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste loodgietersbedrijven is een compacte, snelle site met nadruk op spoedcontact voldoende; wie meerdere diensten apart wil uitlichten, kiest vaak voor een uitgebreider pakket. Dat bespreken we altijd vooraf, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [
-    { q: "Staat het telefoonnummer altijd bovenaan zichtbaar?", a: "Ja, bij een loodgieterswebsite plaatsen we het telefoonnummer standaard bovenaan en aantikbaar, op elk schermformaat." },
-    { q: "Is de website snel genoeg voor iemand met een lekkage die snel zoekt?", a: "Snelheid op mobiel is bij een loodgieterswebsite een randvoorwaarde. We bouwen de site licht en testen expliciet op mobiele laadtijden." },
-    { q: "Kan spoed apart getoond worden van regulier onderhoud?", a: "Ja, we plaatsen spoedgevallen en storingsdienst bovenaan, boven reguliere diensten zoals installatie en onderhoud." },
-    { q: "Hoeveel kost een website voor mijn loodgietersbedrijf?", a: "De prijs hangt af van de gewenste functionaliteit, bijvoorbeeld of spoedcontact en storingsdienst apart uitgelicht moeten worden. Bekijk onze tarievenpagina als startpunt of vraag een offerte aan." },
-    { q: "Blijft de website ook bereikbaar tijdens drukte, bijvoorbeeld bij vorst?", a: "We hosten op eigen infrastructuur met servermonitoring, zodat de site ook op piekmomenten bereikbaar blijft." },
-    { q: "Werken jullie in een specifieke regio?", a: "We werken voor loodgietersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Kan het telefoonnummer met één tik gebeld worden op mobiel?", a: "Ja, het nummer is een aantikbare bel-link. Iemand met een lekkage belt zo direct vanaf de zoekresultaten, zonder eerst een nummer over te typen." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn loodgietersbedrijf?", a: "Een standaard website met spoedmelding en dienstenoverzicht staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
+    {
+      q: "Staat het telefoonnummer altijd bovenaan zichtbaar?",
+      a: "Ja, bij een loodgieterswebsite plaatsen we het telefoonnummer standaard bovenaan en aantikbaar, op elk schermformaat.",
+    },
+    {
+      q: "Is de website snel genoeg voor iemand met een lekkage die snel zoekt?",
+      a: "Snelheid op mobiel is bij een loodgieterswebsite een randvoorwaarde. We bouwen de site licht en testen expliciet op mobiele laadtijden.",
+    },
+    {
+      q: "Kan spoed apart getoond worden van regulier onderhoud?",
+      a: "Ja, we plaatsen spoedgevallen en storingsdienst bovenaan, boven reguliere diensten zoals installatie en onderhoud.",
+    },
+    {
+      q: "Hoeveel kost een website voor mijn loodgietersbedrijf?",
+      a: "De prijs hangt af van de gewenste functionaliteit, bijvoorbeeld of spoedcontact en storingsdienst apart uitgelicht moeten worden. Bekijk onze tarievenpagina als startpunt of vraag een offerte aan.",
+    },
+    {
+      q: "Blijft de website ook bereikbaar tijdens drukte, bijvoorbeeld bij vorst?",
+      a: "We hosten op eigen infrastructuur met servermonitoring, zodat de site ook op piekmomenten bereikbaar blijft.",
+    },
+    {
+      q: "Werken jullie in een specifieke regio?",
+      a: "We werken voor loodgietersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt.",
+    },
+    {
+      q: "Kan het telefoonnummer met één tik gebeld worden op mobiel?",
+      a: "Ja, het nummer is een aantikbare bel-link. Iemand met een lekkage belt zo direct vanaf de zoekresultaten, zonder eerst een nummer over te typen.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn loodgietersbedrijf?",
+      a: "Een standaard website met spoedmelding en dienstenoverzicht staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,15 +103,27 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
   head: () => ({
     meta: [
       { title: "Loodgieter-website laten maken — spoedservice | AIMI" },
-      { name: "description", content: "Snelle website voor je loodgieters- of installatiebedrijf met telefoonnummer voorop, spoedmelding bovenaan en snelle mobiele laadtijd. Vraag een offerte aan bij AIMI." },
+      {
+        name: "description",
+        content:
+          "Snelle website voor je loodgieters- of installatiebedrijf met telefoonnummer voorop, spoedmelding bovenaan en snelle mobiele laadtijd. Vraag een offerte aan bij AIMI.",
+      },
       { property: "og:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
-      { property: "og:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
@@ -80,11 +131,16 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
       serviceJsonLd({
         name: "Website laten maken voor je loodgietersbedrijf",
         serviceType: "Webdesign voor loodgieters",
-        description: "Snelle websites op maat voor loodgieters- en installatiebedrijven, met nadruk op spoedcontact, telefoonnummer en eigen hosting.",
+        description:
+          "Snelle websites op maat voor loodgieters- en installatiebedrijven, met nadruk op spoedcontact, telefoonnummer en eigen hosting.",
         url: URL,
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgietersbedrijf", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je loodgietersbedrijf", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

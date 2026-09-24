@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TrustStrip } from "@/components/TrustStrip";
 import { ExampleSlideshow, GENERIC_EXAMPLES } from "@/components/ExampleSlideshow";
 import { UpdatedOn } from "@/components/UpdatedOn";
-import { webPageJsonLd } from "@/lib/seo";
+import { webPageJsonLd, cityOgImage } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * Uitgebreide lokale landingspagina, opvolger van LocationLanding.tsx.
@@ -50,6 +50,11 @@ const LOCAL_SERVICES: { label: string; href: string; desc: string }[] = [
 export type LocationPageData = {
   city: string;
   region: string;
+  /** Per stad geschreven definitiezin (met harde prijzen) boven het narratieve
+   * intro. Zonder waarde valt hij terug op een generiek template; per stad een
+   * eigen zin voorkomt dat dit above-the-fold blok op alle 15 pagina's
+   * woord-voor-woord identiek is (AI-citatie + doorway-signaal). */
+  definitie?: string;
   /** A-9: standaard "Website laten maken in {city}". Die template stond
    * identiek op alle 15 plaatspagina's, wat samen met het gedeelde
    * boilerplate-blok het doorway-patroon versterkte. Pagina's kunnen nu een
@@ -255,7 +260,9 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
   // GEO-audit 2026-09-06 (punt 10): definitiezin met harde cijfers vóór het
   // narratieve verhaal. Dit is de zinsvorm die AI-antwoordmachines als
   // definitie oppikken bij "website laten maken in {stad}".
-  const definitie = `Een website laten maken in ${city} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in ${city} en omgeving.`;
+  const definitie =
+    data.definitie ??
+    `Een website laten maken in ${city} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in ${city} en omgeving.`;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
@@ -268,6 +275,7 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
             path: slug,
             name: `Website laten maken in ${city} | AIMI Webdesign`,
             description: definitie,
+            imageUrl: cityOgImage(city),
           }).children,
         }}
       />

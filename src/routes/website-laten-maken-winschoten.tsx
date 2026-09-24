@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Winschoten";
 const URL = `${SITE_URL}/website-laten-maken-winschoten`;
@@ -9,17 +16,38 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken voor ondernemers in Winschoten",
   region: "Groningen",
+
+  definitie:
+    "Bij AIMI laat je in Winschoten een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor eigen Nederlandse hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor winkels en dienstverleners in Winschoten en de Oldambt-regio.",
   kicker: "Webdesign Winschoten",
   intro:
     "Ondernemer in Winschoten en toe aan een professionele website? AIMI ontwerpt en bouwt snelle, overzichtelijke websites voor winkels en dienstverleners in de hoofdplaats van Oldambt, inclusief eigen hosting en persoonlijk beheer.",
   workflowHeading: "Hoe we jouw website in Winschoten opleveren",
   workflowSteps: [
-    { title: "Kennismaking", desc: "We bespreken je bedrijf, klanten en wat je met de website wilt bereiken." },
-    { title: "Ontwerp", desc: "We maken een ontwerp dat aansluit bij jouw winkel of dienst, met een duidelijke opbouw en heldere navigatie." },
-    { title: "Bouw", desc: "De website wordt technisch opgebouwd met focus op snelheid, zodat bezoekers niet afhaken." },
-    { title: "Testfase", desc: "Voor livegang testen we de website grondig op verschillende apparaten en schermformaten." },
-    { title: "Livegang", desc: "We zetten de site live en controleren of alles correct functioneert, van formulieren tot navigatie." },
-    { title: "Hosting en beheer", desc: "Na oplevering draait de website op onze eigen hosting, met servermonitoring en toegang tot een klantenportaal." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken je bedrijf, klanten en wat je met de website wilt bereiken.",
+    },
+    {
+      title: "Ontwerp",
+      desc: "We maken een ontwerp dat aansluit bij jouw winkel of dienst, met een duidelijke opbouw en heldere navigatie.",
+    },
+    {
+      title: "Bouw",
+      desc: "De website wordt technisch opgebouwd met focus op snelheid, zodat bezoekers niet afhaken.",
+    },
+    {
+      title: "Testfase",
+      desc: "Voor livegang testen we de website grondig op verschillende apparaten en schermformaten.",
+    },
+    {
+      title: "Livegang",
+      desc: "We zetten de site live en controleren of alles correct functioneert, van formulieren tot navigatie.",
+    },
+    {
+      title: "Hosting en beheer",
+      desc: "Na oplevering draait de website op onze eigen hosting, met servermonitoring en toegang tot een klantenportaal.",
+    },
   ],
   contextHeading: "Website laten maken in Winschoten: lokale detailhandel online",
   contextBody: [
@@ -30,12 +58,30 @@ const data: LocationPageData = {
   businessTypesBody:
     "We werken voor winkeliers en detailhandelaren in het centrum van Winschoten die hun assortiment ook online zichtbaar willen maken, voor dienstverleners die duidelijk willen communiceren wat ze bieden, en voor kleinere ondernemers die een professionele visitekaartje-website nodig hebben. Of het nu gaat om een eenvoudige informatieve website of een webshop naast de fysieke winkel, we sluiten aan bij wat past bij jouw bedrijf en de manier waarop klanten in en rond Winschoten naar producten en diensten zoeken.",
   faqs: [
-    { q: "Waarom is een website belangrijk voor een winkel in het centrum van Winschoten?", a: "Veel klanten oriënteren zich online voordat ze naar de winkelstraat komen. Een duidelijke, snelle website helpt om die eerste indruk goed te maken en klanten daadwerkelijk naar de winkel te trekken." },
-    { q: "Kan AIMI een webshop bouwen naast mijn fysieke winkel in Winschoten?", a: "Ja, we bouwen webshops die aansluiten op het assortiment en de uitstraling van je fysieke winkel, zodat beide kanalen elkaar versterken." },
-    { q: "Wat kost een website laten maken in Winschoten?", a: "De kosten hangen af van de gewenste functionaliteit. We bespreken dit altijd vooraf, zodat je precies weet wat je kunt verwachten." },
-    { q: "Hoe snel is mijn website klaar?", a: "Dat hangt af van de omvang van het project. Na de kennismaking geven we een reële inschatting van de doorlooptijd." },
-    { q: "Blijft AIMI ook na livegang bereikbaar?", a: "Ja, via het klantenportaal en persoonlijk contact blijven we beschikbaar voor vragen, updates of aanpassingen." },
-    { q: "Hoe zorgt AIMI dat mijn website snel blijft laden?", a: "We gebruiken eigen techniek en hosting die specifiek is gericht op snelheid, met actieve servermonitoring om problemen vroeg te signaleren." },
+    {
+      q: "Waarom is een website belangrijk voor een winkel in het centrum van Winschoten?",
+      a: "Veel klanten oriënteren zich online voordat ze naar de winkelstraat komen. Een duidelijke, snelle website helpt om die eerste indruk goed te maken en klanten daadwerkelijk naar de winkel te trekken.",
+    },
+    {
+      q: "Kan AIMI een webshop bouwen naast mijn fysieke winkel in Winschoten?",
+      a: "Ja, we bouwen webshops die aansluiten op het assortiment en de uitstraling van je fysieke winkel, zodat beide kanalen elkaar versterken.",
+    },
+    {
+      q: "Wat kost een website laten maken in Winschoten?",
+      a: "De kosten hangen af van de gewenste functionaliteit. We bespreken dit altijd vooraf, zodat je precies weet wat je kunt verwachten.",
+    },
+    {
+      q: "Hoe snel is mijn website klaar?",
+      a: "Dat hangt af van de omvang van het project. Na de kennismaking geven we een reële inschatting van de doorlooptijd.",
+    },
+    {
+      q: "Blijft AIMI ook na livegang bereikbaar?",
+      a: "Ja, via het klantenportaal en persoonlijk contact blijven we beschikbaar voor vragen, updates of aanpassingen.",
+    },
+    {
+      q: "Hoe zorgt AIMI dat mijn website snel blijft laden?",
+      a: "We gebruiken eigen techniek en hosting die specifiek is gericht op snelheid, met actieve servermonitoring om problemen vroeg te signaleren.",
+    },
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
@@ -61,18 +107,20 @@ export const Route = createFileRoute("/website-laten-maken-winschoten")({
       { property: "og:title", content: "Website laten maken in Winschoten | AIMI" },
       {
         property: "og:description",
-        content: "Snelle, professionele websites en webshops voor ondernemers in Winschoten en omgeving.",
+        content:
+          "Snelle, professionele websites en webshops voor ondernemers in Winschoten en omgeving.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken in Winschoten | AIMI" },
       {
         name: "twitter:description",
-        content: "Snelle, professionele websites en webshops voor ondernemers in Winschoten en omgeving.",
+        content:
+          "Snelle, professionele websites en webshops voor ondernemers in Winschoten en omgeving.",
       },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

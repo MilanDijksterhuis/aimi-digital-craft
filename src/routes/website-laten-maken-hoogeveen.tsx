@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Hoogeveen";
 const PATH = "/website-laten-maken-hoogeveen";
@@ -13,6 +20,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Webdesign in Hoogeveen, van ontwerp tot hosting",
   region: "Drenthe",
+
+  definitie:
+    "Een website laten maken in Hoogeveen kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat het hele traject verzorgt, van ontwerp tot Nederlandse hosting, voor ondernemers in Hoogeveen.",
   kicker: "Webdesign in Hoogeveen",
   intro:
     "Hoogeveen is een van de grotere kernen van Drenthe en fungeert als verzorgingscentrum voor een flink gebied eromheen. AIMI ontwerpt, bouwt en host websites voor ondernemers die het hier van die regiofunctie moeten hebben: goed vindbaar voor mensen uit de wijde omgeving, en snel genoeg om ze niet kwijt te raken voordat de pagina geladen is.",
@@ -78,7 +88,10 @@ const data: LocationPageData = {
     { label: "Webdesign per regio", href: "/webdesign" },
     { label: "Website laten maken Meppel", href: "/website-laten-maken-meppel" },
     { label: "Website laten maken Emmen", href: "/website-laten-maken-emmen" },
-    { label: "Website laten maken schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
+    {
+      label: "Website laten maken schoonheidssalon",
+      href: "/website-laten-maken-schoonheidssalon",
+    },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["businessTypes", "context", "workflow", "faq"],
@@ -95,11 +108,11 @@ export const Route = createFileRoute("/website-laten-maken-hoogeveen")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

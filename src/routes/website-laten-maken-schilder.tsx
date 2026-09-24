@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo werken we het uit",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken de verhouding tussen binnen- en buitenschilderwerk in je bedrijf, en welke projecten het beste laten zien wat je kunt." },
-    { title: "Structuur en foto's", desc: "We richten een heldere indeling in met een fotogalerij van afgewerkte projecten, gescheiden naar type werk." },
-    { title: "Werkwijze en materialen", desc: "We schrijven een kort, concreet stuk over hoe je te werk gaat en met welke materialen, om vertrouwen te wekken bij nieuwe klanten." },
-    { title: "Offerteformulier", desc: "We bouwen een offerteformulier dat vraagt naar het type werk en de oppervlakte, zodat je gericht kunt reageren." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, en beheer je via het klantenportaal zelf nieuwe projectfoto's." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken de verhouding tussen binnen- en buitenschilderwerk in je bedrijf, en welke projecten het beste laten zien wat je kunt.",
+    },
+    {
+      title: "Structuur en foto's",
+      desc: "We richten een heldere indeling in met een fotogalerij van afgewerkte projecten, gescheiden naar type werk.",
+    },
+    {
+      title: "Werkwijze en materialen",
+      desc: "We schrijven een kort, concreet stuk over hoe je te werk gaat en met welke materialen, om vertrouwen te wekken bij nieuwe klanten.",
+    },
+    {
+      title: "Offerteformulier",
+      desc: "We bouwen een offerteformulier dat vraagt naar het type werk en de oppervlakte, zodat je gericht kunt reageren.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, en beheer je via het klantenportaal zelf nieuwe projectfoto's.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een schildersbedrijf",
   pricingBody: [
@@ -42,14 +57,38 @@ const data: BranchPageData = {
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste schildersbedrijven is een site met een aantal vaste pagina's en een goed gevulde fotogalerij voldoende; wie binnen- en buitenwerk allebei breed wil uitlichten, kiest vaak voor een groter pakket. Dat bespreken we altijd vooraf, zodat er geen verrassingen ontstaan.",
   ],
   faqs: [
-    { q: "Kan de website onderscheid maken tussen binnen- en buitenschilderwerk?", a: "Ja, we richten dat standaard als aparte onderdelen in, zodat bezoekers meteen bij de juiste informatie en offerteknop uitkomen." },
-    { q: "Ik maak regelmatig nieuwe projecten af, kan de galerij meegroeien?", a: "Ja, dat regel je via het klantenportaal: je dient een aanvraag in en wij verwerken de nieuwe foto's, zonder dat je zelf hoeft te programmeren." },
-    { q: "Kan de offerteaanvraag rekening houden met oppervlakte?", a: "Ja, we richten het formulier zo in dat bezoekers een indicatie van de oppervlakte kunnen doorgeven, zodat je gerichter kunt reageren." },
-    { q: "Hoeveel kost een website voor mijn schildersbedrijf?", a: "De prijs verschilt per project, bijvoorbeeld door het aantal pagina's en of je materiaal- en werkwijze-uitleg opneemt. Bekijk de tarievenpagina als startpunt of vraag een offerte aan." },
-    { q: "Kan ik uitleggen welke verf en materialen ik gebruik?", a: "Zeker, we nemen een kort stuk over werkwijze en materialen op, wat bij veel klanten vertrouwen wekt voordat ze contact opnemen." },
-    { q: "Werken jullie in een specifieke regio?", a: "We werken voor schildersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Kan ik ook zakelijk werk zoals VvE's en onderhoudsplannen tonen?", a: "Ja. Voor VvE's, vastgoedbeheerders en terugkerend onderhoud richten we een apart onderdeel in met eigen tekst en een eigen aanvraag, los van het particuliere werk. Zo zien opdrachtgevers meteen dat je meerjarig onderhoud en grotere trajecten aankunt." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn schildersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
+    {
+      q: "Kan de website onderscheid maken tussen binnen- en buitenschilderwerk?",
+      a: "Ja, we richten dat standaard als aparte onderdelen in, zodat bezoekers meteen bij de juiste informatie en offerteknop uitkomen.",
+    },
+    {
+      q: "Ik maak regelmatig nieuwe projecten af, kan de galerij meegroeien?",
+      a: "Ja, dat regel je via het klantenportaal: je dient een aanvraag in en wij verwerken de nieuwe foto's, zonder dat je zelf hoeft te programmeren.",
+    },
+    {
+      q: "Kan de offerteaanvraag rekening houden met oppervlakte?",
+      a: "Ja, we richten het formulier zo in dat bezoekers een indicatie van de oppervlakte kunnen doorgeven, zodat je gerichter kunt reageren.",
+    },
+    {
+      q: "Hoeveel kost een website voor mijn schildersbedrijf?",
+      a: "De prijs verschilt per project, bijvoorbeeld door het aantal pagina's en of je materiaal- en werkwijze-uitleg opneemt. Bekijk de tarievenpagina als startpunt of vraag een offerte aan.",
+    },
+    {
+      q: "Kan ik uitleggen welke verf en materialen ik gebruik?",
+      a: "Zeker, we nemen een kort stuk over werkwijze en materialen op, wat bij veel klanten vertrouwen wekt voordat ze contact opnemen.",
+    },
+    {
+      q: "Werken jullie in een specifieke regio?",
+      a: "We werken voor schildersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt.",
+    },
+    {
+      q: "Kan ik ook zakelijk werk zoals VvE's en onderhoudsplannen tonen?",
+      a: "Ja. Voor VvE's, vastgoedbeheerders en terugkerend onderhoud richten we een apart onderdeel in met eigen tekst en een eigen aanvraag, los van het particuliere werk. Zo zien opdrachtgevers meteen dat je meerjarig onderhoud en grotere trajecten aankunt.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn schildersbedrijf?",
+      a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -65,27 +104,44 @@ export const Route = createFileRoute("/website-laten-maken-schilder")({
   head: () => ({
     meta: [
       { title: "Website schildersbedrijf laten maken | AIMI" },
-      { name: "description", content: "Website voor je schildersbedrijf: duidelijk onderscheid tussen binnen- en buitenwerk, projectfoto's die je werk verkopen en een offerteformulier op maat." },
+      {
+        name: "description",
+        content:
+          "Website voor je schildersbedrijf: duidelijk onderscheid tussen binnen- en buitenwerk, projectfoto's die je werk verkopen en een offerteformulier op maat.",
+      },
       { property: "og:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
-      { property: "og:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je schildersbedrijf",
-        description: "Websites op maat voor schildersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
+        description:
+          "Websites op maat voor schildersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
         url: URL,
         serviceType: "Webdesign voor schilders",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schildersbedrijf", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je schildersbedrijf", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

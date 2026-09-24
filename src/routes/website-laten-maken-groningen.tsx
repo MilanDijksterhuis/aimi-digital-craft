@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Groningen";
 const URL = `${SITE_URL}/website-laten-maken-groningen`;
@@ -9,6 +16,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken in Groningen",
   region: "Groningen",
+
+  definitie:
+    "Een website laten maken in Groningen kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers die in de drukke Groningse markt willen opvallen.",
   kicker: "Webdesign in Groningen",
   intro:
     "Groningen is een stad vol starters en groeiende ondernemingen, van horeca in de Folkingestraat tot dienstverleners rond de Grote Markt. AIMI bouwt snelle, professionele websites voor ondernemers in Groningen die willen opvallen tussen de vele webdesignbureaus die de stad rijk is.",
@@ -23,19 +33,52 @@ const data: LocationPageData = {
     "We werken voor uiteenlopende ondernemers in Groningen: van startende zzp'ers die net de stap zetten naar eigen bedrijf, tot horecaondernemingen in de binnenstad die een menukaart, reserveringsknop en actuele openingstijden overzichtelijk willen tonen. Ook dienstverleners zoals coaches, adviseurs en kleine praktijken kiezen voor een professioneel webdesign in Groningen om serieus over te komen bij nieuwe klanten. Juist in een studentenstad met veel korte-termijn ondernemingen is het belangrijk dat een website meteen vertrouwen wekt: duidelijke informatie, een werkend contactformulier en een pagina die ook op een telefoon goed oogt, want een groot deel van de bezoekers in Groningen surft onderweg tussen de universiteit, de binnenstad en huis.",
   workflowHeading: "Zo werken we samen aan jouw website in Groningen",
   workflowSteps: [
-    { title: "Kennismaking en doelen", desc: "We bespreken telefonisch of via video wat je onderneming in Groningen nodig heeft: meer aanvragen, een online kaart, een boekingssysteem of simpelweg een professionele uitstraling." },
-    { title: "Ontwerp op maat", desc: "We ontwerpen een pagina die past bij je merk, zonder generiek sjabloon. Geen twee websites die we opleveren zien er hetzelfde uit." },
-    { title: "Techniek en snelheid", desc: "De website wordt gebouwd op eigen techniek, geoptimaliseerd voor snelle laadtijden, ook op mobiel, wat in een drukke markt als Groningen het verschil maakt." },
-    { title: "Livegang en controle", desc: "Voor livegang testen we de site op verschillende schermen en browsers, zodat er geen verrassingen zijn zodra klanten in Groningen de site bezoeken." },
-    { title: "Beheer en servermonitoring", desc: "Na oplevering hosten we de website op eigen infrastructuur met servermonitoring, en via het klantenportaal houd je zelf grip op updates en aanvragen." },
+    {
+      title: "Kennismaking en doelen",
+      desc: "We bespreken telefonisch of via video wat je onderneming in Groningen nodig heeft: meer aanvragen, een online kaart, een boekingssysteem of simpelweg een professionele uitstraling.",
+    },
+    {
+      title: "Ontwerp op maat",
+      desc: "We ontwerpen een pagina die past bij je merk, zonder generiek sjabloon. Geen twee websites die we opleveren zien er hetzelfde uit.",
+    },
+    {
+      title: "Techniek en snelheid",
+      desc: "De website wordt gebouwd op eigen techniek, geoptimaliseerd voor snelle laadtijden, ook op mobiel, wat in een drukke markt als Groningen het verschil maakt.",
+    },
+    {
+      title: "Livegang en controle",
+      desc: "Voor livegang testen we de site op verschillende schermen en browsers, zodat er geen verrassingen zijn zodra klanten in Groningen de site bezoeken.",
+    },
+    {
+      title: "Beheer en servermonitoring",
+      desc: "Na oplevering hosten we de website op eigen infrastructuur met servermonitoring, en via het klantenportaal houd je zelf grip op updates en aanvragen.",
+    },
   ],
   faqs: [
-    { q: "Waarom is er zoveel concurrentie tussen webdesigners in Groningen?", a: "Groningen is een studentenstad met veel starters, wat ook zorgt voor veel aanbod aan webdesign. Wij onderscheiden ons door een beperkt aantal projecten tegelijk aan te nemen, zodat elke klant in Groningen persoonlijk contact en maatwerk krijgt in plaats van een sjabloon." },
-    { q: "Kan ik als startende zzp'er in Groningen ook terecht bij AIMI?", a: "Zeker. We werken regelmatig met startende ondernemers die hun eerste professionele website laten maken. We denken mee over wat op dat moment het beste past bij je budget en fase." },
-    { q: "Hoe lang duurt het om een website te laten maken in Groningen?", a: "Dat hangt af van de omvang van het project, maar na de kennismaking en het aanleveren van content werken we toe naar een realistische opleverdatum, die we vooraf met je afstemmen." },
-    { q: "Wordt mijn website ook gevonden in Google?", a: "We bouwen elke website met aandacht voor techniek en structuur die zoekmachines goed kunnen lezen, zodat je vindbaarheid in Groningen en omgeving een stevige basis heeft." },
-    { q: "Kan ik zelf tekst en foto's aanpassen na livegang?", a: "Via het klantenportaal houd je overzicht over je website en kun je aanvragen indienen voor aanpassingen, zonder dat je zelf hoeft te programmeren." },
-    { q: "Bieden jullie ook hosting aan voor Groningse bedrijven?", a: "Ja, we hosten websites op eigen servers met monitoring, zodat je niet afhankelijk bent van losse externe hostingpartijen en er snel geschakeld kan worden bij storingen." },
+    {
+      q: "Waarom is er zoveel concurrentie tussen webdesigners in Groningen?",
+      a: "Groningen is een studentenstad met veel starters, wat ook zorgt voor veel aanbod aan webdesign. Wij onderscheiden ons door een beperkt aantal projecten tegelijk aan te nemen, zodat elke klant in Groningen persoonlijk contact en maatwerk krijgt in plaats van een sjabloon.",
+    },
+    {
+      q: "Kan ik als startende zzp'er in Groningen ook terecht bij AIMI?",
+      a: "Zeker. We werken regelmatig met startende ondernemers die hun eerste professionele website laten maken. We denken mee over wat op dat moment het beste past bij je budget en fase.",
+    },
+    {
+      q: "Hoe lang duurt het om een website te laten maken in Groningen?",
+      a: "Dat hangt af van de omvang van het project, maar na de kennismaking en het aanleveren van content werken we toe naar een realistische opleverdatum, die we vooraf met je afstemmen.",
+    },
+    {
+      q: "Wordt mijn website ook gevonden in Google?",
+      a: "We bouwen elke website met aandacht voor techniek en structuur die zoekmachines goed kunnen lezen, zodat je vindbaarheid in Groningen en omgeving een stevige basis heeft.",
+    },
+    {
+      q: "Kan ik zelf tekst en foto's aanpassen na livegang?",
+      a: "Via het klantenportaal houd je overzicht over je website en kun je aanvragen indienen voor aanpassingen, zonder dat je zelf hoeft te programmeren.",
+    },
+    {
+      q: "Bieden jullie ook hosting aan voor Groningse bedrijven?",
+      a: "Ja, we hosten websites op eigen servers met monitoring, zodat je niet afhankelijk bent van losse externe hostingpartijen en er snel geschakeld kan worden bij storingen.",
+    },
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
@@ -61,24 +104,27 @@ export const Route = createFileRoute("/website-laten-maken-groningen")({
       { property: "og:title", content: "Website laten maken in Groningen | AIMI" },
       {
         property: "og:description",
-        content: "Snelle, professionele websites voor ondernemers in Groningen. Maatwerk, geen sjablonen.",
+        content:
+          "Snelle, professionele websites voor ondernemers in Groningen. Maatwerk, geen sjablonen.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken in Groningen | AIMI" },
       {
         name: "twitter:description",
-        content: "Snelle, professionele websites voor ondernemers in Groningen. Maatwerk, geen sjablonen.",
+        content:
+          "Snelle, professionele websites voor ondernemers in Groningen. Maatwerk, geen sjablonen.",
       },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken in Groningen",
-        description: "Webdesign en websites op maat voor ondernemers in Groningen, inclusief hosting en beheer.",
+        description:
+          "Webdesign en websites op maat voor ondernemers in Groningen, inclusief hosting en beheer.",
         url: URL,
         serviceType: "Webdesign",
         areaServed: cityAreaServed("Groningen", "Groningen"),

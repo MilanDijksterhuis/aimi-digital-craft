@@ -1,4 +1,4 @@
-# Node Description Batch 11 of 52
+# Node Description Batch 11 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_tabs": "tabs.tsx" | kind=code-symbol | source=src/components/ui/tabs.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.changes.$changeId.tsx, admin.projecten.$projectId.tsx, admin.rollen.$roleId.tsx, portal.projecten.$projectId.tsx, utils.ts] | lang=en
+- "vite_config": "vite.config.ts" | kind=code-symbol | source=vite.config.ts:L1 | neighbors=[332d0c8 Fix: externalize googleapis/nod…, 4510b3f perf fixes, 7dbbf18 perf fixes, 821a216 Update vite.config.ts, 85a6666 SEO en robot, 9d0b477 perf fixes] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3ee5ecb08528968ff2c00c4da8885489b010b85d": "3ee5ecb Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@bc99d995fc54a93c71b1e81777475cd6b33cc03b": "bc99d99 achtegrond" | kind=Commit | source=git | neighbors=[04c01f8 SEO, main, 8fdd571 SEO, rodeachtergrond.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f207e52c87c9713fff8c4ac51f4a9efb667aa9d1": "f207e52 feat(seo): dienstenpagina's website/webshop/hosting met unieke content …" | kind=Commit | source=git | neighbors=[b48bbc0 chore: snapshot lokale SEO-pagi…, main, 9965896 feat(seo): contact- en cases-pa…, ServicePage.tsx, seo.ts, onderhoud-hosting.tsx] | lang=nl
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@fcf1ee779f8b822cf8ee26742bdcf20c8a46286e": "fcf1ee7 Changes" | kind=Commit | source=git | neighbors=[68ae2dd Changes, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
 - "components_breadcrumbs": "Breadcrumbs.tsx" | kind=code-symbol | source=src/components/Breadcrumbs.tsx:L1 | neighbors=[36d8ccb new pages, BranchPage.tsx, Breadcrumbs(), Crumb, LocationPageV2.tsx, ServicePage.tsx] | lang=en
@@ -48,9 +52,11 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c67cd437297dbe69b158dc12c4801a2807f5d640": "c67cd43 Changes" | kind=Commit | source=git | neighbors=[8a81dd1 Fixed security issues, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f2eb4fee5708d1ae2198a43a0ef81a988ec315f0": "f2eb4fe Fix root cause: catch Supabase Realtime WebSocket crashes" | kind=Commit | source=git | neighbors=[02d6137 fixes, admin.tsx, admin.accounts.tsx, main, c27ffd9 fixes, AdminChatPanel.tsx] | lang=en
 - "components_blogcalendar": "BlogCalendar.tsx" | kind=code-symbol | source=src/components/BlogCalendar.tsx:L1 | neighbors=[admin.blog.tsx, 1727351 blog, BlogCalendar(), DayCell(), DraggablePost(), PostLite] | lang=en
+- "components_branchlinks": "BranchLinks.tsx" | kind=code-symbol | source=src/components/BranchLinks.tsx:L1 | neighbors=[13e217a SEO, BranchLinks(), shortLabel(), branches.tsx, brancheGroups, index.tsx] | lang=en
 - "components_confirmdialog_useconfirm": "useConfirm()" | kind=code-symbol | source=src/components/ConfirmDialog.tsx:L48 | neighbors=[admin.accounts.$accountId.tsx, admin.projecten.tsx, admin.projecten.$projectId.tsx, BerichtenTab.tsx, CallbackAgenda.tsx, ConfirmDialog.tsx] | lang=en
 - "components_teamtab": "TeamTab.tsx" | kind=code-symbol | source=src/components/TeamTab.tsx:L1 | neighbors=[admin.tsx, 6bf533b pushes, c480d2e leads, TeamTab(), use-permissions.tsx, usePermissions()] | lang=en
 - "hooks_expire_accounts": "expire-accounts.ts" | kind=code-symbol | source=src/routes/api/public/hooks/expire-accounts.ts:L1 | neighbors=[23bb181 sec, 2d50590 wip: lokale wijzigingen voor pu…, isAuthorized(), Route, timingSafeStringEqual(), routeTree.gen.ts] | lang=en
+- "legacy_migrations_supabase_migration": "supabase-migration.sql" | kind=code-symbol | source=supabase/legacy-migrations/supabase-migration.sql:L1 | neighbors=[dns_checks, monitoring_alerts, profiles, project_members, projects, role_permissions] | lang=en
 - "lib_blog_links": "blog-links.ts" | kind=code-symbol | source=src/lib/blog-links.ts:L1 | neighbors=[1727351 blog, BlogPostForm.tsx, countBodyImagesWithoutAlt(), extractInternalLinks(), hasInternalLink(), insertMarkdownLink()] | lang=en
 - "lib_blog_schedule": "blog-schedule.ts" | kind=code-symbol | source=src/lib/blog-schedule.ts:L1 | neighbors=[admin.blog.tsx, 1727351 blog, BulkScheduleDialog.tsx, addDays(), BulkScheduleOptions, computeScheduleDates()] | lang=en
 - "lib_seo_howtojsonld": "howToJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L89 | neighbors=[seo.ts, ld(), onderhoud-hosting.tsx, seo.tsx, webshop-laten-maken.tsx, website-laten-maken.tsx] | lang=en
@@ -60,12 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_card": "card.tsx" | kind=code-symbol | source=src/components/ui/card.tsx:L1 | neighbors=[utils.ts, cn(), Card, CardContent, CardDescription, CardFooter] | lang=en
 - "authenticated_account": "account.tsx" | kind=code-symbol | source=src/routes/_authenticated/account.tsx:L1 | neighbors=[AccountPage(), Route, 37c0d11 Dock tokens toegevoegd & emojis…, 97e70ec Changes, routeTree.gen.ts, 9784613 4 nieuwe portal-paginaën toegev…] | lang=en
 - "authenticated_server_serverpage": "ServerPage()" | kind=code-symbol | source=src/routes/_authenticated/server.tsx:L320 | neighbors=[server.tsx, formatServerAge(), formatSslDate(), formatUptime(), na(), safeJsonParse()] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@04564c5bc0439aedd94852a88644fb7ece2445c8": "04564c5 fixes" | kind=Commit | source=git | neighbors=[main, 36d8ccb new pages, FAQ.tsx, Footer.tsx, index.tsx, __root.tsx] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7ca6d63814f8da2c3cafd2efe19f73faf8637fd0": "7ca6d63 Changes" | kind=Commit | source=git | neighbors=[tmp-main-merge, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal, 8a81dd1 Fixed security issues, 20260523231942_fb4587f4-15b7-4604-9d1a-…] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f7b9fd5f37bf8a80154dd8335ab2d76ee2408e67": "f7b9fd5 Merge branch 'main' of https://github.com/MilanDijksterhuis/aimi-digita…" | kind=Commit | source=git | neighbors=[3901302 Fix mojibake in admin dashboard…, ee6f2e6 fixes, admin.tsx, main, 6b21362 Catch login network errors inst…, server.ts] | lang=en
-- "components_berichtentab": "BerichtenTab.tsx" | kind=code-symbol | source=src/components/BerichtenTab.tsx:L1 | neighbors=[admin.tsx, 9a2689c code fixes, BerichtenTab(), ConfirmDialog.tsx, useConfirm(), use-permissions.tsx] | lang=en
-- "components_breadcrumbs_breadcrumbs": "Breadcrumbs()" | kind=code-symbol | source=src/components/Breadcrumbs.tsx:L15 | neighbors=[BranchPage.tsx, Breadcrumbs.tsx, LocationPageV2.tsx, ServicePage.tsx, seo.tsx, website-laten-vernieuwen.tsx] | lang=en
-- "components_portaltutorial": "PortalTutorial.tsx" | kind=code-symbol | source=src/components/PortalTutorial.tsx:L1 | neighbors=[portal.tsx, ee6f2e6 fixes, fadeVariants, PortalTutorial(), ProgressDots(), Slide] | lang=en
 
 ## Instructions
 

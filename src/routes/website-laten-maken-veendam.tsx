@@ -3,7 +3,7 @@ import { LocationPageV2, type LocationPageData } from "@/components/LocationPage
 import {
   SITE_URL,
   ORG_ID,
-  OG_IMAGE_URL,
+  cityOgImage,
   LOGO_URL,
   localBusinessId,
   breadcrumbJsonLd,
@@ -22,6 +22,8 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken in Veendam",
   region: "Groningen",
+  definitie:
+    "Een website laten maken in Veendam kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is als webdesignbureau in Veendam zelf gevestigd en bouwt sites op maat voor lokale ondernemers, met korte lijnen en persoonlijk contact.",
   kicker: "Webdesign vanuit Veendam",
   intro:
     "AIMI is gevestigd in Veendam. Dat maakt deze pagina anders dan de rest: voor ondernemers hier zijn we geen bureau op afstand, maar een partij uit dezelfde plaats. We ontwerpen, bouwen en hosten websites en webshops voor Veendammer ondernemers, en een kop koffie om de plannen door te nemen is letterlijk om de hoek.",
@@ -107,11 +109,11 @@ export const Route = createFileRoute("/website-laten-maken-veendam")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

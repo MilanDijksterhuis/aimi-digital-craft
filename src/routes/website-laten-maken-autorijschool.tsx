@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken je pakketten, of je ook theorie aanbiedt en wat je onderscheidt van de andere rijscholen in je plaats." },
-    { title: "Prijzen helder maken", desc: "We zetten de pakketten om in een overzicht dat in één oogopslag te vergelijken is, inclusief wat er niet bij inbegrepen zit." },
-    { title: "Vertrouwen opbouwen", desc: "We geven ervaringen van leerlingen en informatie over de instructeurs een vaste plek, met ruimte om die later uit te breiden." },
-    { title: "Aanmelden vereenvoudigen", desc: "We bouwen een kort inschrijfformulier dat genoeg vraagt om te kunnen inplannen, en niet meer dan dat." },
-    { title: "Livegang en beheer", desc: "Na livegang kun je zelf prijzen en beschikbaarheid bijwerken; wij verzorgen hosting, back-ups en monitoring." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken je pakketten, of je ook theorie aanbiedt en wat je onderscheidt van de andere rijscholen in je plaats.",
+    },
+    {
+      title: "Prijzen helder maken",
+      desc: "We zetten de pakketten om in een overzicht dat in één oogopslag te vergelijken is, inclusief wat er niet bij inbegrepen zit.",
+    },
+    {
+      title: "Vertrouwen opbouwen",
+      desc: "We geven ervaringen van leerlingen en informatie over de instructeurs een vaste plek, met ruimte om die later uit te breiden.",
+    },
+    {
+      title: "Aanmelden vereenvoudigen",
+      desc: "We bouwen een kort inschrijfformulier dat genoeg vraagt om te kunnen inplannen, en niet meer dan dat.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang kun je zelf prijzen en beschikbaarheid bijwerken; wij verzorgen hosting, back-ups en monitoring.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een rijschool",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Wil je daarnaast een gekoppelde lesagenda of een online betaalmogelijkheid voor pakketten, dan wordt het maatwerk en krijg je daar vooraf een aparte prijs voor. Op de tarievenpagina zie je waar we beginnen; wat jouw rijschool nodig heeft bespreken we in het kennismakingsgesprek.",
   ],
   faqs: [
-    { q: "Moet ik mijn prijzen echt op de website zetten?", a: "Wij raden het sterk aan. Leerlingen vergelijken rijscholen naast elkaar, en een school zonder prijzen valt bij dat vergelijken meestal af. Duidelijkheid over wat er wel en niet bij zit levert bovendien betere gesprekken op." },
-    { q: "Kan ik zelf mijn pakketten en prijzen aanpassen?", a: "Ja. Prijzen wijzigen bij rijscholen regelmatig, dus dat moet je zelf kunnen doen zonder ons erbij te halen. Dat richten we in via het klantenportaal." },
-    { q: "Kunnen leerlingen zich online inschrijven?", a: "Ja, met een kort formulier dat de gegevens verzamelt die je nodig hebt om te kunnen inplannen. Je krijgt de aanmelding per e-mail binnen en neemt zelf contact op." },
-    { q: "Kan mijn lesagenda gekoppeld worden?", a: "Dat kan, maar het is maatwerk en niet voor elke rijschool nodig. Veel scholen zijn beter af met een eenvoudig aanmeldformulier en hun eigen planning. We bespreken vooraf wat in jouw situatie zinvol is." },
-    { q: "Kan ik ervaringen van leerlingen tonen?", a: "Ja, daar maken we een vaste plek voor. Belangrijk: gebruik echte reacties van echte leerlingen. Verzonnen ervaringen zijn niet alleen misleidend, ze vallen bezoekers ook op." },
-    { q: "Werken jullie ook voor rijscholen buiten Noord-Nederland?", a: "Ja. We zitten zelf in Veendam, maar het hele traject kan op afstand. Het werkgebied dat we op je site vermelden richten we in op de plaatsen waar jij daadwerkelijk lesgeeft." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn rijschool?", a: "Een standaard website met pakketten en een inschrijfformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je lespakketten en teksten ontvangen." },
+    {
+      q: "Moet ik mijn prijzen echt op de website zetten?",
+      a: "Wij raden het sterk aan. Leerlingen vergelijken rijscholen naast elkaar, en een school zonder prijzen valt bij dat vergelijken meestal af. Duidelijkheid over wat er wel en niet bij zit levert bovendien betere gesprekken op.",
+    },
+    {
+      q: "Kan ik zelf mijn pakketten en prijzen aanpassen?",
+      a: "Ja. Prijzen wijzigen bij rijscholen regelmatig, dus dat moet je zelf kunnen doen zonder ons erbij te halen. Dat richten we in via het klantenportaal.",
+    },
+    {
+      q: "Kunnen leerlingen zich online inschrijven?",
+      a: "Ja, met een kort formulier dat de gegevens verzamelt die je nodig hebt om te kunnen inplannen. Je krijgt de aanmelding per e-mail binnen en neemt zelf contact op.",
+    },
+    {
+      q: "Kan mijn lesagenda gekoppeld worden?",
+      a: "Dat kan, maar het is maatwerk en niet voor elke rijschool nodig. Veel scholen zijn beter af met een eenvoudig aanmeldformulier en hun eigen planning. We bespreken vooraf wat in jouw situatie zinvol is.",
+    },
+    {
+      q: "Kan ik ervaringen van leerlingen tonen?",
+      a: "Ja, daar maken we een vaste plek voor. Belangrijk: gebruik echte reacties van echte leerlingen. Verzonnen ervaringen zijn niet alleen misleidend, ze vallen bezoekers ook op.",
+    },
+    {
+      q: "Werken jullie ook voor rijscholen buiten Noord-Nederland?",
+      a: "Ja. We zitten zelf in Veendam, maar het hele traject kan op afstand. Het werkgebied dat we op je site vermelden richten we in op de plaatsen waar jij daadwerkelijk lesgeeft.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn rijschool?",
+      a: "Een standaard website met pakketten en een inschrijfformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je lespakketten en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-autorijschool")({
   head: () => ({
     meta: [
       { title: "Website autorijschool laten maken — pakketten | AIMI" },
-      { name: "description", content: "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Vanaf € 499." },
+      {
+        name: "description",
+        content:
+          "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Vanaf € 499.",
+      },
       { property: "og:title", content: "Website laten maken voor je autorijschool | AIMI" },
-      { property: "og:description", content: "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je autorijschool | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je autorijschool",
-        description: "Websites op maat voor rijscholen, met heldere pakketprijzen, leerlingervaringen en online inschrijven.",
+        description:
+          "Websites op maat voor rijscholen, met heldere pakketprijzen, leerlingervaringen en online inschrijven.",
         url: URL,
         serviceType: "Webdesign voor rijscholen",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je autorijschool", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je autorijschool", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

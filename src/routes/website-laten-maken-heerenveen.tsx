@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Heerenveen";
 const REGION = "Friesland";
@@ -11,6 +18,8 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken in Heerenveen",
   region: REGION,
+  definitie:
+    "Bij AIMI laat je in Heerenveen een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle, professionele sites bouwt voor het brede MKB in Heerenveen en de rest van Friesland.",
   kicker: "Webdesign in Heerenveen",
   intro:
     "Heerenveen is een plaats met een uitgesproken identiteit, sterk verbonden met sport en een actief lokaal bedrijfsleven. AIMI bouwt websites voor ondernemers in Heerenveen die net zo scherp voor de dag willen komen als de reputatie van hun eigen plaats, met snelheid, duidelijkheid en een technisch stevige basis.",
@@ -25,20 +34,56 @@ const data: LocationPageData = {
     "We bouwen websites voor uiteenlopende ondernemers in Heerenveen: sportgerelateerde bedrijven en verenigingen die hun activiteiten en aanbod overzichtelijk willen presenteren, horecaondernemers die bezoekers snel willen informeren, retailers die hun assortiment online zichtbaar willen maken, en dienstverleners die geloofwaardigheid en professionaliteit willen uitstralen. Voor elke branche geldt dat de website is afgestemd op hoe klanten in Heerenveen daadwerkelijk zoeken en beslissen.",
   workflowHeading: "Ons proces voor een nieuwe website in Heerenveen",
   workflowSteps: [
-    { title: "Kennismaking", desc: "We bespreken je onderneming, doelgroep en wat je met de website wilt bereiken." },
-    { title: "Ontwerp", desc: "We stellen een ontwerp op dat past bij jouw branche en de manier waarop je klanten in Heerenveen worden aangesproken." },
-    { title: "Bouw", desc: "De website wordt technisch gebouwd met focus op snelheid, betrouwbaarheid en vindbaarheid in zoekmachines." },
-    { title: "Testen", desc: "Voor livegang controleren we de werking op alle apparaten en onder verschillende omstandigheden, inclusief drukte." },
-    { title: "Livegang en beheer", desc: "Na livegang hosten en monitoren we de website zelf, met een klantenportaal voor inzicht en updates." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken je onderneming, doelgroep en wat je met de website wilt bereiken.",
+    },
+    {
+      title: "Ontwerp",
+      desc: "We stellen een ontwerp op dat past bij jouw branche en de manier waarop je klanten in Heerenveen worden aangesproken.",
+    },
+    {
+      title: "Bouw",
+      desc: "De website wordt technisch gebouwd met focus op snelheid, betrouwbaarheid en vindbaarheid in zoekmachines.",
+    },
+    {
+      title: "Testen",
+      desc: "Voor livegang controleren we de werking op alle apparaten en onder verschillende omstandigheden, inclusief drukte.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang hosten en monitoren we de website zelf, met een klantenportaal voor inzicht en updates.",
+    },
   ],
   faqs: [
-    { q: "Wat kost een website laten maken in Heerenveen?", a: "Dat hangt af van de omvang van je project. Na een kort gesprek over je wensen stellen we een concrete offerte op, zonder verborgen kosten." },
-    { q: "Blijft de website ook snel tijdens drukke periodes rond evenementen?", a: "Ja, we hosten op eigen, gemonitorde infrastructuur en bouwen met performance als uitgangspunt, zodat de website ook bij piekmomenten stabiel blijft." },
-    { q: "Bouwt AIMI ook websites voor sportgerelateerde bedrijven in Heerenveen?", a: "Ja, we hebben ervaring met het overzichtelijk presenteren van activiteiten, aanbod en informatie voor een sportief publiek." },
-    { q: "Kan ik zelf inhoud aanpassen na livegang?", a: "Ja, je krijgt toegang tot een beheeromgeving waarmee je zelf teksten en beeld kunt bijwerken." },
-    { q: "Werken jullie ook met horecaondernemers in Heerenveen?", a: "Zeker, we bouwen websites waarop bezoekers snel openingstijden, menukaarten en contactgegevens vinden." },
-    { q: "Hoeveel tijd kost het om een nieuwe website te krijgen?", a: "De doorlooptijd verschilt per project; na de intake geven we een realistische inschatting van de planning." },
-    { q: "Zorgen jullie ook voor hosting en onderhoud?", a: "Ja, hosting, servermonitoring en onderhoud zijn standaard onderdeel van onze dienstverlening." },
+    {
+      q: "Wat kost een website laten maken in Heerenveen?",
+      a: "Dat hangt af van de omvang van je project. Na een kort gesprek over je wensen stellen we een concrete offerte op, zonder verborgen kosten.",
+    },
+    {
+      q: "Blijft de website ook snel tijdens drukke periodes rond evenementen?",
+      a: "Ja, we hosten op eigen, gemonitorde infrastructuur en bouwen met performance als uitgangspunt, zodat de website ook bij piekmomenten stabiel blijft.",
+    },
+    {
+      q: "Bouwt AIMI ook websites voor sportgerelateerde bedrijven in Heerenveen?",
+      a: "Ja, we hebben ervaring met het overzichtelijk presenteren van activiteiten, aanbod en informatie voor een sportief publiek.",
+    },
+    {
+      q: "Kan ik zelf inhoud aanpassen na livegang?",
+      a: "Ja, je krijgt toegang tot een beheeromgeving waarmee je zelf teksten en beeld kunt bijwerken.",
+    },
+    {
+      q: "Werken jullie ook met horecaondernemers in Heerenveen?",
+      a: "Zeker, we bouwen websites waarop bezoekers snel openingstijden, menukaarten en contactgegevens vinden.",
+    },
+    {
+      q: "Hoeveel tijd kost het om een nieuwe website te krijgen?",
+      a: "De doorlooptijd verschilt per project; na de intake geven we een realistische inschatting van de planning.",
+    },
+    {
+      q: "Zorgen jullie ook voor hosting en onderhoud?",
+      a: "Ja, hosting, servermonitoring en onderhoud zijn standaard onderdeel van onze dienstverlening.",
+    },
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
@@ -51,7 +96,8 @@ const data: LocationPageData = {
 };
 
 const TITLE = "Website laten maken in Heerenveen — vanaf € 499 | AIMI";
-const DESCRIPTION = "AIMI bouwt snelle, professionele websites voor ondernemers in Heerenveen, met eigen hosting, monitoring en persoonlijk contact. Vraag een offerte aan.";
+const DESCRIPTION =
+  "AIMI bouwt snelle, professionele websites voor ondernemers in Heerenveen, met eigen hosting, monitoring en persoonlijk contact. Vraag een offerte aan.";
 
 export const Route = createFileRoute("/website-laten-maken-heerenveen")({
   head: () => ({
@@ -67,11 +113,11 @@ export const Route = createFileRoute("/website-laten-maken-heerenveen")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

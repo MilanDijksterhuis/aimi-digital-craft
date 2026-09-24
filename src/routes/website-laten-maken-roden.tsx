@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Roden";
 const URL = `${SITE_URL}/website-laten-maken-roden`;
@@ -12,6 +19,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Webdesigner in Roden, dicht bij de stad Groningen",
   region: "Drenthe",
+
+  definitie:
+    "Een website laten maken in Roden kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in Roden, op een steenworp van de stad Groningen.",
   kicker: "Webdesign in Roden",
   intro:
     "Op zoek naar een webdesigner in Roden? AIMI ontwerpt, bouwt en host snelle, professionele websites voor ondernemers in Roden en de rest van gemeente Noordenveld. Persoonlijk contact, korte lijnen en een website die daadwerkelijk nieuwe klanten oplevert via Google.",
@@ -94,11 +104,11 @@ export const Route = createFileRoute("/website-laten-maken-roden")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

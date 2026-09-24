@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken het type zaak, of je met reserveringen werkt en welke informatie je gasten het vaakst bellen om te vragen." },
-    { title: "De kern vooropzetten", desc: "Openingstijden, kaart en reserveren krijgen de eerste plek, zodat de meest gestelde vragen direct beantwoord zijn." },
-    { title: "Menukaart als echte pagina", desc: "We zetten de kaart om in leesbare tekst in plaats van een PDF, zodat hij op mobiel prettig leest en vindbaar is." },
-    { title: "Beeld en snelheid", desc: "We optimaliseren je sfeer- en gerechtfoto's zodat de site snel blijft, ook op een mobiele verbinding." },
-    { title: "Livegang en beheer", desc: "Na livegang pas je zelf kaart, prijzen en afwijkende openingstijden aan; wij verzorgen hosting en monitoring." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken het type zaak, of je met reserveringen werkt en welke informatie je gasten het vaakst bellen om te vragen.",
+    },
+    {
+      title: "De kern vooropzetten",
+      desc: "Openingstijden, kaart en reserveren krijgen de eerste plek, zodat de meest gestelde vragen direct beantwoord zijn.",
+    },
+    {
+      title: "Menukaart als echte pagina",
+      desc: "We zetten de kaart om in leesbare tekst in plaats van een PDF, zodat hij op mobiel prettig leest en vindbaar is.",
+    },
+    {
+      title: "Beeld en snelheid",
+      desc: "We optimaliseren je sfeer- en gerechtfoto's zodat de site snel blijft, ook op een mobiele verbinding.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang pas je zelf kaart, prijzen en afwijkende openingstijden aan; wij verzorgen hosting en monitoring.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een restaurant",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Heb je meerdere vestigingen, een aparte lunchkaart en dinerkaart, een zaal voor groepen of een cadeaubonnenverkoop, dan groeit het naar maatwerk. We bespreken dat vooraf en zetten er een vaste prijs op. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [
-    { q: "Kan ik mijn menukaart zelf aanpassen?", a: "Ja, en dat is bij horeca essentieel. Kaarten en prijzen wijzigen te vaak om daar telkens iemand voor te moeten bellen. Via het klantenportaal pas je gerechten, prijzen en openingstijden zelf aan." },
-    { q: "Mag ik mijn kaart als PDF gebruiken?", a: "Het kan, maar we raden het af. Een PDF leest slecht op een telefoon en zoekmachines kunnen de gerechten er nauwelijks uit halen. Als echte pagina is je kaart beter leesbaar én beter vindbaar. Een downloadbare PDF ernaast kan altijd nog." },
-    { q: "Kan mijn reserveringssysteem worden ingebouwd?", a: "Meestal wel. De meeste reserveringssystemen bieden een blok dat we in je eigen vormgeving kunnen plaatsen, zodat het geen los element wordt. We kijken bij de kennismaking naar het systeem dat je gebruikt." },
-    { q: "Heb ik nog een website nodig als ik actief ben op social media?", a: "Ja. Op social media heb je geen grip op je vindbaarheid en geen eigendom van je informatie. Mensen die in Google zoeken naar eten in jouw plaats, vinden daar je socials meestal niet. Je site is de plek waar jij bepaalt wat er staat." },
-    { q: "Hoe zorgen jullie dat de site snel blijft met veel foto's?", a: "We verkleinen en converteren afbeeldingen automatisch naar moderne formaten en laden ze pas in wanneer ze nodig zijn. Zo blijft de zaak er goed uitzien zonder dat de pagina traag wordt." },
-    { q: "Kunnen jullie ook afhaal of bezorging inbouwen?", a: "Dat kan, maar dan wordt het een webshop-achtig traject met betalingen en bestelbeheer. Dat is maatwerk en bespreken we apart, omdat het qua omvang echt iets anders is dan een informatieve horecasite." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn restaurant?", a: "Een standaard website met menukaart en reserveren staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we de menukaart, foto's en teksten ontvangen." },
+    {
+      q: "Kan ik mijn menukaart zelf aanpassen?",
+      a: "Ja, en dat is bij horeca essentieel. Kaarten en prijzen wijzigen te vaak om daar telkens iemand voor te moeten bellen. Via het klantenportaal pas je gerechten, prijzen en openingstijden zelf aan.",
+    },
+    {
+      q: "Mag ik mijn kaart als PDF gebruiken?",
+      a: "Het kan, maar we raden het af. Een PDF leest slecht op een telefoon en zoekmachines kunnen de gerechten er nauwelijks uit halen. Als echte pagina is je kaart beter leesbaar én beter vindbaar. Een downloadbare PDF ernaast kan altijd nog.",
+    },
+    {
+      q: "Kan mijn reserveringssysteem worden ingebouwd?",
+      a: "Meestal wel. De meeste reserveringssystemen bieden een blok dat we in je eigen vormgeving kunnen plaatsen, zodat het geen los element wordt. We kijken bij de kennismaking naar het systeem dat je gebruikt.",
+    },
+    {
+      q: "Heb ik nog een website nodig als ik actief ben op social media?",
+      a: "Ja. Op social media heb je geen grip op je vindbaarheid en geen eigendom van je informatie. Mensen die in Google zoeken naar eten in jouw plaats, vinden daar je socials meestal niet. Je site is de plek waar jij bepaalt wat er staat.",
+    },
+    {
+      q: "Hoe zorgen jullie dat de site snel blijft met veel foto's?",
+      a: "We verkleinen en converteren afbeeldingen automatisch naar moderne formaten en laden ze pas in wanneer ze nodig zijn. Zo blijft de zaak er goed uitzien zonder dat de pagina traag wordt.",
+    },
+    {
+      q: "Kunnen jullie ook afhaal of bezorging inbouwen?",
+      a: "Dat kan, maar dan wordt het een webshop-achtig traject met betalingen en bestelbeheer. Dat is maatwerk en bespreken we apart, omdat het qua omvang echt iets anders is dan een informatieve horecasite.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn restaurant?",
+      a: "Een standaard website met menukaart en reserveren staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we de menukaart, foto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-restaurant")({
   head: () => ({
     meta: [
       { title: "Website restaurant laten maken — reserveren | AIMI" },
-      { name: "description", content: "Website voor je restaurant met openingstijden, een leesbare menukaart en reserveren binnen een paar tikken. Snel op mobiel, zelf te beheren." },
+      {
+        name: "description",
+        content:
+          "Website voor je restaurant met openingstijden, een leesbare menukaart en reserveren binnen een paar tikken. Snel op mobiel, zelf te beheren.",
+      },
       { property: "og:title", content: "Website laten maken voor je restaurant | AIMI" },
-      { property: "og:description", content: "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je restaurant | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je restaurant",
-        description: "Websites op maat voor restaurants en horeca, met openingstijden, een leesbare menukaart en reserveren.",
+        description:
+          "Websites op maat voor restaurants en horeca, met openingstijden, een leesbare menukaart en reserveren.",
         url: URL,
         serviceType: "Webdesign voor horeca",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je restaurant", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je restaurant", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

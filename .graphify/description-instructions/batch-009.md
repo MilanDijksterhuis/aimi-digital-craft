@@ -1,4 +1,4 @@
-# Node Description Batch 10 of 52
+# Node Description Batch 10 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3650c07d53450b3415e2cb1851b84def4d8d01a5": "3650c07 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3b65b5f4c51b80d08860b192ea29b51657c0d5b2": "3b65b5f Changes" | kind=Commit | source=git | neighbors=[main, 020d807 Changes, 94c1dcf Work in progress, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3ca59a09c52ac7cff9951384b0b83e8e9681f8d6": "3ca59a0 Changes" | kind=Commit | source=git | neighbors=[15acc2a Changes, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=pt
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@43d815cc6fb948727d167c26c906741fc53c55b4": "43d815c Changes" | kind=Commit | source=git | neighbors=[tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal, worktree-replicated-fluttering-whisper] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@47ef3dd3470ae956daaef44cd73a0c0fa5e66d19": "47ef3dd Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@54af09cc33691a723eded23ead375d8b253f464b": "54af09c Remove .env from tracking" | kind=Commit | source=git | neighbors=[main, 332d0c8 Fix: externalize googleapis/nod…, 5bc9ff0 google authenticatoin, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@5d704cb11898aeb9c55b1fcdf669d25eb9b8e9a7": "5d704cb Changes" | kind=Commit | source=git | neighbors=[47ef3dd Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
@@ -59,13 +63,9 @@ one-sentence description — no prose, no markdown fences.
 - "lib_accounts_server": "accounts.server.ts" | kind=code-symbol | source=src/lib/accounts.server.ts:L1 | neighbors=[7dbbf18 perf fixes, 81a87ed commit, bbc9d80 Surface site_errors in the acco…, adminGetAccountDetailImpl(), adminHardDeleteUserImpl(), adminListAllAccountsImpl()] | lang=en
 - "lib_auth_guards_server": "auth-guards.server.ts" | kind=code-symbol | source=src/lib/auth-guards.server.ts:L1 | neighbors=[74ecdc1 code fixes, ensureAdmin(), ensureRoles(), ensureStaff(), ensureSuperAdmin(), getRoles()] | lang=en
 - "lib_markdown": "markdown.tsx" | kind=code-symbol | source=src/lib/markdown.tsx:L1 | neighbors=[1727351 blog, 4a960c6 SEO, 6ccd4dc CMS, b5c2a22 blog, BlogPostForm.tsx, estimateReadTime()] | lang=en
-- "lib_seo_ld": "ld()" | kind=code-symbol | source=src/lib/seo.ts:L257 | neighbors=[seo.ts, articleJsonLd(), breadcrumbJsonLd(), contactPageJsonLd(), faqJsonLd(), itemListJsonLd()] | lang=en
+- "lib_seo_ld": "ld()" | kind=code-symbol | source=src/lib/seo.ts:L259 | neighbors=[seo.ts, articleJsonLd(), breadcrumbJsonLd(), contactPageJsonLd(), faqJsonLd(), itemListJsonLd()] | lang=en
 - "ui_dialog": "dialog.tsx" | kind=code-symbol | source=src/components/ui/dialog.tsx:L1 | neighbors=[BulkScheduleDialog.tsx, command.tsx, utils.ts, cn(), DialogContent, DialogDescription] | lang=en
 - "ui_table": "table.tsx" | kind=code-symbol | source=src/components/ui/table.tsx:L1 | neighbors=[utils.ts, cn(), Table, TableBody, TableCaption, TableCell] | lang=en
-- "ui_tabs": "tabs.tsx" | kind=code-symbol | source=src/components/ui/tabs.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, admin.changes.$changeId.tsx, admin.projecten.$projectId.tsx, admin.rollen.$roleId.tsx, portal.projecten.$projectId.tsx, utils.ts] | lang=en
-- "vite_config": "vite.config.ts" | kind=code-symbol | source=vite.config.ts:L1 | neighbors=[332d0c8 Fix: externalize googleapis/nod…, 4510b3f perf fixes, 7dbbf18 perf fixes, 821a216 Update vite.config.ts, 85a6666 SEO en robot, 9d0b477 perf fixes] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3ee5ecb08528968ff2c00c4da8885489b010b85d": "3ee5ecb Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@bc99d995fc54a93c71b1e81777475cd6b33cc03b": "bc99d99 achtegrond" | kind=Commit | source=git | neighbors=[04c01f8 SEO, main, 8fdd571 SEO, rodeachtergrond.tsx, onderhoud-hosting.tsx, webshop-laten-maken.tsx] | lang=en
 
 ## Instructions
 

@@ -1,4 +1,4 @@
-# Node Description Batch 7 of 52
+# Node Description Batch 7 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -24,6 +24,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f3ee883eef32769a34d16321043945b714697e5e": "f3ee883 Lovable update" | kind=Commit | source=git | neighbors=[0b21971 Changes weergave verbeterd, a110759 Work in progress, main, ba3edce Update pricing for Starter and …, routeTree.gen.ts, tmp-main-merge]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f67dba7f88adfcf5248c028b5d59f4b7d1e63573": "f67dba7 rate limiting" | kind=Commit | source=git | neighbors=[5f47f6d animaties, main, e2cd310 Ip blocker, rate-limit.ts, server.ts, tmp-main-merge]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@f958216b3ca515ca3d0d8c9e854052ef349135db": "f958216 leads functions" | kind=Commit | source=git | neighbors=[9a2689c code fixes, admin.tsx, admin.leads.tsx, main, 85a6666 SEO en robot, CallbackAgenda.tsx]
+- "lib_monitoring_shared": "monitoring.shared.ts" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L1 | neighbors=[2d50590 wip: lokale wijzigingen voor pu…, 74ecdc1 code fixes, 9be6953 bug fixes, a837528 bug fixes, eccff4f bug fixes 2, assertPublicHost()]
 - "lib_seo_webpagejsonld": "webPageJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L231 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, ServicePage.tsx, seo.ts, ld(), pageLastmod()]
 - "ui_chart": "chart.tsx" | kind=code-symbol | source=src/components/ui/chart.tsx:L1 | neighbors=[utils.ts, cn(), ChartConfig, ChartContainer, ChartContext, ChartContextProps]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@00d6931ace05801b13d3c6fec4d7f388c641b02f": "00d6931 Changes" | kind=Commit | source=git | neighbors=[admin.tsx, main, 21355f6 Changes, b7f53d6 Changes, tmp-main-merge, tmp-revert-main]
@@ -60,10 +64,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6500c48efcae343190db74799e66a0f73c02a01d": "6500c48 bug fixes" | kind=Commit | source=git | neighbors=[admin.tsx, main, a837528 bug fixes, 8913689 bug fixes, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@67a9525143d21bbc619344a77d509c75f51bffab": "67a9525 Code edited in Lovable Code Editor" | kind=Commit | source=git | neighbors=[0bb1900 Code edited in Lovable Code Edi…, main, 4c798fc Code edited in Lovable Code Edi…, Hero.tsx, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@67f2077f6a443bea802409866b5a18d624de4379": "67f2077 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, 0d60453 Changes, 7f63a6a Changes, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6aba49e339aeb7cb3c0f78fc88b53033a077b52b": "6aba49e euro teken" | kind=Commit | source=git | neighbors=[main, 9c4f5d5 nummers verwijderd, Services.tsx, c431436 footer tekst weer anders, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6f2c51c7da6ab34b463fbf6c5d34838d31c8c590": "6f2c51c Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@74760114bda82b5a65d9b053293d97d3ac5a585b": "7476011 Changes" | kind=Commit | source=git | neighbors=[482bba9 Work in progress, main, 7d64543 Changes, Nav.tsx, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7732f7bb914e4cd8a6626e70c291b9c85d5445c0": "7732f7b Changes" | kind=Commit | source=git | neighbors=[main, 6381715 Changes, routeTree.gen.ts, 9ed5748 Changes, tmp-main-merge, tmp-revert-main]
 
 ## Instructions
 

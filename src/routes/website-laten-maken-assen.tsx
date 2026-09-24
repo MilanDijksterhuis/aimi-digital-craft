@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Assen";
 const URL = `${SITE_URL}/website-laten-maken-assen`;
@@ -9,6 +16,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Webdesigner in Assen voor ondernemers in Drenthe",
   region: "Drenthe",
+
+  definitie:
+    "Een website laten maken in Assen kost bij AIMI € 499 tot € 749 eenmalig, met € 30 per maand voor hosting en onderhoud. Als webdesignbureau uit het nabijgelegen Veendam bouwt AIMI sites op maat voor zakelijke dienstverleners in de provinciehoofdstad van Drenthe.",
   kicker: "Webdesign in Assen",
   intro:
     "Als provinciehoofdstad van Drenthe combineert Assen bestuurlijke en zakelijke dienstverlening met een stad die rond het TT-circuit ook flink wat evenementenbezoek trekt. AIMI bouwt professionele websites voor ondernemers in Assen die hun online uitstraling willen laten aansluiten op dat brede publiek.",
@@ -23,19 +33,52 @@ const data: LocationPageData = {
   ],
   workflowHeading: "De stappen naar jouw nieuwe website in Assen",
   workflowSteps: [
-    { title: "Intake op maat", desc: "We bespreken wat je organisatie in Assen nodig heeft, of dat nu structurele zakelijke dienstverlening is of een site die pieken rond evenementen aankan." },
-    { title: "Ontwerp en structuur", desc: "We werken een ontwerp uit dat past bij een professionele, zakelijke uitstraling, met heldere navigatie naar diensten en contactmogelijkheden." },
-    { title: "Bouw met eigen techniek", desc: "De website wordt gebouwd zonder zware plugins of trage bouwpakketten, zodat de laadsnelheid ook onder drukte op peil blijft." },
-    { title: "Testen en opleveren", desc: "We controleren de site grondig op verschillende apparaten voordat deze live gaat, zodat er geen technische verrassingen zijn." },
-    { title: "Hosting en klantenportaal", desc: "Na livegang hosten we de website op eigen servers met monitoring, en beheer je aanvragen eenvoudig via het klantenportaal." },
+    {
+      title: "Intake op maat",
+      desc: "We bespreken wat je organisatie in Assen nodig heeft, of dat nu structurele zakelijke dienstverlening is of een site die pieken rond evenementen aankan.",
+    },
+    {
+      title: "Ontwerp en structuur",
+      desc: "We werken een ontwerp uit dat past bij een professionele, zakelijke uitstraling, met heldere navigatie naar diensten en contactmogelijkheden.",
+    },
+    {
+      title: "Bouw met eigen techniek",
+      desc: "De website wordt gebouwd zonder zware plugins of trage bouwpakketten, zodat de laadsnelheid ook onder drukte op peil blijft.",
+    },
+    {
+      title: "Testen en opleveren",
+      desc: "We controleren de site grondig op verschillende apparaten voordat deze live gaat, zodat er geen technische verrassingen zijn.",
+    },
+    {
+      title: "Hosting en klantenportaal",
+      desc: "Na livegang hosten we de website op eigen servers met monitoring, en beheer je aanvragen eenvoudig via het klantenportaal.",
+    },
   ],
   faqs: [
-    { q: "Kan mijn website tegen drukte rond de TT in Assen?", a: "We bouwen websites op eigen techniek die stabiel presteert, ook als het bezoekersaantal tijdelijk sterk oploopt rond evenementen bij het TT-circuit." },
-    { q: "Is AIMI geschikt voor zakelijke dienstverleners in Assen?", a: "Ja, we werken regelmatig voor adviesbureaus en kleinere kantoren die een professionele, betrouwbare website nodig hebben die aansluit bij hun doelgroep." },
-    { q: "Wat kost een website laten maken in Assen?", a: "De tarieven verschillen per project. Bekijk de tarieven op onze website of vraag vrijblijvend een offerte aan, dan denken we mee over wat past bij jouw situatie." },
-    { q: "Hoe zorgen jullie dat mijn site snel blijft laden?", a: "We gebruiken geen zware sjablonen of overbodige plugins en bouwen de techniek zelf, wat resulteert in een merkbaar snellere website dan bij veel bouwpakketten." },
-    { q: "Kan ik na oplevering zelf iets aanpassen aan de website?", a: "Via het klantenportaal houd je overzicht en kun je aanpassingen aanvragen, zonder dat je daarvoor zelf hoeft te programmeren." },
-    { q: "Bieden jullie ook hosting en onderhoud in Assen aan?", a: "Ja, we hosten op eigen infrastructuur met servermonitoring, zodat storingen snel worden opgemerkt en verholpen." },
+    {
+      q: "Kan mijn website tegen drukte rond de TT in Assen?",
+      a: "We bouwen websites op eigen techniek die stabiel presteert, ook als het bezoekersaantal tijdelijk sterk oploopt rond evenementen bij het TT-circuit.",
+    },
+    {
+      q: "Is AIMI geschikt voor zakelijke dienstverleners in Assen?",
+      a: "Ja, we werken regelmatig voor adviesbureaus en kleinere kantoren die een professionele, betrouwbare website nodig hebben die aansluit bij hun doelgroep.",
+    },
+    {
+      q: "Wat kost een website laten maken in Assen?",
+      a: "De tarieven verschillen per project. Bekijk de tarieven op onze website of vraag vrijblijvend een offerte aan, dan denken we mee over wat past bij jouw situatie.",
+    },
+    {
+      q: "Hoe zorgen jullie dat mijn site snel blijft laden?",
+      a: "We gebruiken geen zware sjablonen of overbodige plugins en bouwen de techniek zelf, wat resulteert in een merkbaar snellere website dan bij veel bouwpakketten.",
+    },
+    {
+      q: "Kan ik na oplevering zelf iets aanpassen aan de website?",
+      a: "Via het klantenportaal houd je overzicht en kun je aanpassingen aanvragen, zonder dat je daarvoor zelf hoeft te programmeren.",
+    },
+    {
+      q: "Bieden jullie ook hosting en onderhoud in Assen aan?",
+      a: "Ja, we hosten op eigen infrastructuur met servermonitoring, zodat storingen snel worden opgemerkt en verholpen.",
+    },
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
@@ -65,20 +108,21 @@ export const Route = createFileRoute("/website-laten-maken-assen")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken in Assen | AIMI" },
       {
         name: "twitter:description",
         content: "Professionele, snelle websites voor ondernemers en dienstverleners in Assen.",
       },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken in Assen",
-        description: "Webdesign en websites op maat voor ondernemers in Assen, inclusief hosting en beheer.",
+        description:
+          "Webdesign en websites op maat voor ondernemers in Assen, inclusief hosting en beheer.",
         url: URL,
         serviceType: "Webdesign",
         areaServed: cityAreaServed("Assen", "Drenthe"),

@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken welk deel van je hoveniersbedrijf het meeste aandacht verdient: aanleg, onderhoud, of allebei, en wat voor soort klanten je wilt aantrekken." },
-    { title: "Structuur en foto's", desc: "We bepalen samen welke projecten en foto's het beste laten zien wat je kunt, en bouwen een indeling die aanleg en onderhoud helder scheidt." },
-    { title: "Techniek en snelheid", desc: "De site wordt gebouwd op eigen techniek, met aandacht voor snelle laadtijden van fotogalerijen, ook op een mobiele verbinding buiten." },
-    { title: "Offerteformulier", desc: "We richten een offerteformulier in dat compact genoeg is om ingevuld te worden, maar compleet genoeg om er direct mee te kunnen reageren." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, en via het klantenportaal kun je zelf nieuwe projectfoto's en teksten laten aanpassen." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken welk deel van je hoveniersbedrijf het meeste aandacht verdient: aanleg, onderhoud, of allebei, en wat voor soort klanten je wilt aantrekken.",
+    },
+    {
+      title: "Structuur en foto's",
+      desc: "We bepalen samen welke projecten en foto's het beste laten zien wat je kunt, en bouwen een indeling die aanleg en onderhoud helder scheidt.",
+    },
+    {
+      title: "Techniek en snelheid",
+      desc: "De site wordt gebouwd op eigen techniek, met aandacht voor snelle laadtijden van fotogalerijen, ook op een mobiele verbinding buiten.",
+    },
+    {
+      title: "Offerteformulier",
+      desc: "We richten een offerteformulier in dat compact genoeg is om ingevuld te worden, maar compleet genoeg om er direct mee te kunnen reageren.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, en via het klantenportaal kun je zelf nieuwe projectfoto's en teksten laten aanpassen.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een hoveniersbedrijf",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Onze tarieven staan overzichtelijk op de pricing-pagina als startpunt. Voor de meeste hoveniersbedrijven is een site met een aantal vaste pagina's, een projectgalerij en een offerteformulier voldoende; wie meerdere specialismen apart wil uitlichten of een uitgebreidere fotobibliotheek wil, kiest vaak voor een groter pakket. We bespreken dat altijd vooraf, zodat er geen verrassingen zijn.",
   ],
   faqs: [
-    { q: "Kan ik zelf nieuwe projectfoto's toevoegen na livegang?", a: "Ja, via het klantenportaal kun je aanvragen indienen om foto's van nieuwe projecten toe te voegen aan je galerij, zonder dat je zelf hoeft te programmeren." },
-    { q: "Kan de website onderscheid maken tussen aanleg en onderhoud?", a: "Ja, we richten dat standaard als aparte onderdelen in, met eigen tekst en een eigen offertepad, zodat bezoekers meteen snappen wat ze bij je kunnen halen." },
-    { q: "Werkt de offerteaanvraag ook met foto's van de tuin?", a: "Dat kunnen we inbouwen: bezoekers kunnen dan een foto van hun tuin meesturen, zodat jij met meer context kunt reageren op een aanvraag." },
-    { q: "Hoeveel kost een website voor mijn hoveniersbedrijf?", a: "Dat hangt af van de omvang van het project. Vraag via het offerteformulier een vrijblijvende inschatting aan, of bekijk onze tarievenpagina als startpunt." },
-    { q: "Werken jullie alleen in één regio?", a: "We werken voor hoveniersbedrijven in Noord-Nederland, maar de website zelf richten we in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Kan de site met de seizoenen meebewegen?", a: "Ja. Voorjaar en najaar zijn drukke periodes met andere vragen dan de winter. We richten de site zo in dat je zelf de dienst die op dat moment past bovenaan kunt zetten, bijvoorbeeld aanleg in het voorjaar en onderhoud of winterklaar maken later in het jaar." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn hoveniersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
+    {
+      q: "Kan ik zelf nieuwe projectfoto's toevoegen na livegang?",
+      a: "Ja, via het klantenportaal kun je aanvragen indienen om foto's van nieuwe projecten toe te voegen aan je galerij, zonder dat je zelf hoeft te programmeren.",
+    },
+    {
+      q: "Kan de website onderscheid maken tussen aanleg en onderhoud?",
+      a: "Ja, we richten dat standaard als aparte onderdelen in, met eigen tekst en een eigen offertepad, zodat bezoekers meteen snappen wat ze bij je kunnen halen.",
+    },
+    {
+      q: "Werkt de offerteaanvraag ook met foto's van de tuin?",
+      a: "Dat kunnen we inbouwen: bezoekers kunnen dan een foto van hun tuin meesturen, zodat jij met meer context kunt reageren op een aanvraag.",
+    },
+    {
+      q: "Hoeveel kost een website voor mijn hoveniersbedrijf?",
+      a: "Dat hangt af van de omvang van het project. Vraag via het offerteformulier een vrijblijvende inschatting aan, of bekijk onze tarievenpagina als startpunt.",
+    },
+    {
+      q: "Werken jullie alleen in één regio?",
+      a: "We werken voor hoveniersbedrijven in Noord-Nederland, maar de website zelf richten we in op het werkgebied dat voor jouw bedrijf klopt.",
+    },
+    {
+      q: "Kan de site met de seizoenen meebewegen?",
+      a: "Ja. Voorjaar en najaar zijn drukke periodes met andere vragen dan de winter. We richten de site zo in dat je zelf de dienst die op dat moment past bovenaan kunt zetten, bijvoorbeeld aanleg in het voorjaar en onderhoud of winterklaar maken later in het jaar.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn hoveniersbedrijf?",
+      a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-hovenier")({
   head: () => ({
     meta: [
       { title: "Website hovenier laten maken — aanleg & onderhoud | AIMI" },
-      { name: "description", content: "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, vanaf € 499." },
+      {
+        name: "description",
+        content:
+          "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, vanaf € 499.",
+      },
       { property: "og:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
-      { property: "og:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je hoveniersbedrijf",
-        description: "Websites op maat voor hoveniersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
+        description:
+          "Websites op maat voor hoveniersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
         url: URL,
         serviceType: "Webdesign voor hoveniers",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hoveniersbedrijf", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je hoveniersbedrijf", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

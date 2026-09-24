@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo werken we het uit",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken welke klussen je het liefst doet en welk type klant je wilt aantrekken, van particulier onderhoud tot grotere verbouwingen." },
-    { title: "Mobiel-first ontwerp", desc: "We ontwerpen eerst voor het telefoonscherm, omdat de meeste bezoekers van klusbedrijf-websites vanaf mobiel zoeken." },
-    { title: "Specialismen overzichtelijk", desc: "We structureren je diensten in heldere categorieën, zodat bezoekers snel zien of hun klus bij je past." },
-    { title: "Offerte met foto-upload", desc: "We bouwen een offerteformulier waarin een foto van de klus meegestuurd kan worden, zodat je vooraf een goed beeld hebt." },
-    { title: "Livegang en beheer", desc: "Na livegang hosten we de website op eigen infrastructuur met servermonitoring, en via het klantenportaal beheer je zelf aanvragen en teksten." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken welke klussen je het liefst doet en welk type klant je wilt aantrekken, van particulier onderhoud tot grotere verbouwingen.",
+    },
+    {
+      title: "Mobiel-first ontwerp",
+      desc: "We ontwerpen eerst voor het telefoonscherm, omdat de meeste bezoekers van klusbedrijf-websites vanaf mobiel zoeken.",
+    },
+    {
+      title: "Specialismen overzichtelijk",
+      desc: "We structureren je diensten in heldere categorieën, zodat bezoekers snel zien of hun klus bij je past.",
+    },
+    {
+      title: "Offerte met foto-upload",
+      desc: "We bouwen een offerteformulier waarin een foto van de klus meegestuurd kan worden, zodat je vooraf een goed beeld hebt.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang hosten we de website op eigen infrastructuur met servermonitoring, en via het klantenportaal beheer je zelf aanvragen en teksten.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een klusbedrijf",
   pricingBody: [
@@ -42,14 +57,38 @@ const data: BranchPageData = {
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste klusbedrijven volstaat een site met een handvol pagina's, een duidelijk overzicht van specialismen en een offerteformulier met foto-upload; wie meerdere aparte diensten breed wil uitlichten, kiest vaak voor een uitgebreider pakket. We stemmen dat altijd vooraf met je af, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [
-    { q: "Kunnen klanten een foto van hun klus meesturen bij een aanvraag?", a: "Ja, we bouwen het offerteformulier standaard met de mogelijkheid om een foto te uploaden, zodat jij vooraf een goed beeld hebt van de klus." },
-    { q: "Is de website ook echt snel op mobiel?", a: "Snelheid op mobiel is voor een klusbedrijf-website een randvoorwaarde. We bouwen op eigen techniek en testen expliciet op mobiele laadtijden." },
-    { q: "Kan ik meerdere specialismen apart laten zien?", a: "Ja, we richten een overzicht in waarin je specialismen los van elkaar zichtbaar zijn, zodat bezoekers snel zien of hun klus bij je past." },
-    { q: "Hoeveel kost een website voor mijn klusbedrijf?", a: "Dat is afhankelijk van het aantal pagina's en of je een uitgebreid offerteformulier met foto-upload wilt. Bekijk de tarievenpagina voor een indicatie of vraag direct een offerte aan." },
-    { q: "Wat als ik na livegang teksten wil aanpassen?", a: "Via het klantenportaal kun je aanvragen indienen voor tekstuele of visuele aanpassingen, zonder dat je zelf hoeft te programmeren." },
-    { q: "Werken jullie landelijk of in een bepaalde regio?", a: "We werken voor klusbedrijven in Noord-Nederland, maar richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Ik doe vooral één vak. Is een klusbedrijf-site dan wel de juiste?", a: "Als je breed inzetbaar bent, past een klusbedrijf-site goed. Zit je zwaartepunt op één vak, bijvoorbeeld loodgieterswerk of schilderwerk, dan trekt een pagina die specifiek op dat vak is gericht vaak gerichtere aanvragen. We hebben daar aparte branchepagina's voor; bij de kennismaking kijken we wat in jouw geval het sterkst werkt." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn klusbedrijf?", a: "Een standaard website met dienstenoverzicht en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
+    {
+      q: "Kunnen klanten een foto van hun klus meesturen bij een aanvraag?",
+      a: "Ja, we bouwen het offerteformulier standaard met de mogelijkheid om een foto te uploaden, zodat jij vooraf een goed beeld hebt van de klus.",
+    },
+    {
+      q: "Is de website ook echt snel op mobiel?",
+      a: "Snelheid op mobiel is voor een klusbedrijf-website een randvoorwaarde. We bouwen op eigen techniek en testen expliciet op mobiele laadtijden.",
+    },
+    {
+      q: "Kan ik meerdere specialismen apart laten zien?",
+      a: "Ja, we richten een overzicht in waarin je specialismen los van elkaar zichtbaar zijn, zodat bezoekers snel zien of hun klus bij je past.",
+    },
+    {
+      q: "Hoeveel kost een website voor mijn klusbedrijf?",
+      a: "Dat is afhankelijk van het aantal pagina's en of je een uitgebreid offerteformulier met foto-upload wilt. Bekijk de tarievenpagina voor een indicatie of vraag direct een offerte aan.",
+    },
+    {
+      q: "Wat als ik na livegang teksten wil aanpassen?",
+      a: "Via het klantenportaal kun je aanvragen indienen voor tekstuele of visuele aanpassingen, zonder dat je zelf hoeft te programmeren.",
+    },
+    {
+      q: "Werken jullie landelijk of in een bepaalde regio?",
+      a: "We werken voor klusbedrijven in Noord-Nederland, maar richten de website in op het werkgebied dat voor jouw bedrijf klopt.",
+    },
+    {
+      q: "Ik doe vooral één vak. Is een klusbedrijf-site dan wel de juiste?",
+      a: "Als je breed inzetbaar bent, past een klusbedrijf-site goed. Zit je zwaartepunt op één vak, bijvoorbeeld loodgieterswerk of schilderwerk, dan trekt een pagina die specifiek op dat vak is gericht vaak gerichtere aanvragen. We hebben daar aparte branchepagina's voor; bij de kennismaking kijken we wat in jouw geval het sterkst werkt.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn klusbedrijf?",
+      a: "Een standaard website met dienstenoverzicht en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -65,27 +104,44 @@ export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
   head: () => ({
     meta: [
       { title: "Website klusbedrijf laten maken — vanaf € 499 | AIMI" },
-      { name: "description", content: "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerteaanvraag met foto-upload en techniek die ook op de bouwplaats snel laadt." },
+      {
+        name: "description",
+        content:
+          "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerteaanvraag met foto-upload en techniek die ook op de bouwplaats snel laadt.",
+      },
       { property: "og:title", content: "Website laten maken voor je klusbedrijf | AIMI" },
-      { property: "og:description", content: "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je klusbedrijf | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je klusbedrijf",
-        description: "Mobiel-first websites voor klusbedrijven, met offerteformulier, foto-upload en eigen hosting.",
+        description:
+          "Mobiel-first websites voor klusbedrijven, met offerteformulier, foto-upload en eigen hosting.",
         url: URL,
         serviceType: "Webdesign voor klusbedrijven",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je klusbedrijf", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je klusbedrijf", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

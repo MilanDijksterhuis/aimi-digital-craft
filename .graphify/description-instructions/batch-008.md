@@ -1,4 +1,4 @@
-# Node Description Batch 9 of 52
+# Node Description Batch 9 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -26,6 +26,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@dd0d069a00855388fe798fd1a7e55830918bdd32": "dd0d069 Changes" | kind=Commit | source=git | neighbors=[c3627b5 Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@de7fb47ac4177863fbdc73035a7c3f4a467c0c5d": "de7fb47 Wijzig prijzen: Starter €499, Pro €750" | kind=Commit | source=git | neighbors=[b9ed97e Gebruik getSession() voor auth …, main, cdd7702 Voeg FAQ toe, Hosting Only serv…, Pricing.tsx, tmp-main-merge, tmp-revert-main] | lang=nl
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@df16e8400059578ecde8314c62d9c152270ef7f2": "df16e84 Changes" | kind=Commit | source=git | neighbors=[5820182 Changes, main, 0332090 Changes, index.tsx, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@df1c05d06f132dd79cdfebb551facd0c7e456743": "df1c05d Changes" | kind=Commit | source=git | neighbors=[282fc41 Changes, main, 7eafc83 Changes, Contact.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@e810b38d7162721ad9ed35ac36ed8e01719f88d6": "e810b38 Changes" | kind=Commit | source=git | neighbors=[ad950dd Changes, admin.tsx, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@e8bc1c3ebcf8f44588939a9dbf466b7357b20b90": "e8bc1c3 Changes" | kind=Commit | source=git | neighbors=[408d241 Changes, main, fc5a347 Changes, index.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@ea845f437b1bba262dea3e254841e2164363ec6b": "ea845f4 Changes" | kind=Commit | source=git | neighbors=[dd0d069 Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
@@ -62,10 +66,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@204f17ad5afdc3852c25f15b43b940b6aef210ce": "204f17a Changes" | kind=Commit | source=git | neighbors=[main, 79f7d0a Changes, a4fa2cf Work in progress, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=pt
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@260e9c978539c62213fcdc3fdcfca62f7ddf5a15": "260e9c9 Change Supabase project credentials in .env" | kind=Commit | source=git | neighbors=[main, fe58e74 Update vite.config.ts, be0f1fb Lovable update, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@27cb157f5430c73e002efd82ccf760288f226429": "27cb157 Work in progress" | kind=Commit | source=git | neighbors=[main, be0f1fb Lovable update, 825b6d5 Logo teruggezet naar vorige ver…, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3650c07d53450b3415e2cb1851b84def4d8d01a5": "3650c07 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3b65b5f4c51b80d08860b192ea29b51657c0d5b2": "3b65b5f Changes" | kind=Commit | source=git | neighbors=[main, 020d807 Changes, 94c1dcf Work in progress, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@3ca59a09c52ac7cff9951384b0b83e8e9681f8d6": "3ca59a0 Changes" | kind=Commit | source=git | neighbors=[15acc2a Changes, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=pt
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@43d815cc6fb948727d167c26c906741fc53c55b4": "43d815c Changes" | kind=Commit | source=git | neighbors=[tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal, worktree-replicated-fluttering-whisper] | lang=en
 
 ## Instructions
 

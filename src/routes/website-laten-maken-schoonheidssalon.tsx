@@ -31,11 +31,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken welke behandelingen je aanbiedt, of je met een intakeformulier werkt en hoe klanten nu afspraken maken." },
-    { title: "Ontwerp met rust en verzorging", desc: "We ontwerpen een pagina met een rustige, verzorgde uitstraling die past bij een schoonheidssalon, zonder drukte of afleiding." },
-    { title: "Behandelmenu en intake", desc: "We werken het behandelmenu uit met duidelijke uitleg per behandeling en bouwen een online intakeformulier in." },
-    { title: "Boeken, cadeaubonnen en herhaalafspraken", desc: "We richten online boeken in en denken mee over cadeaubonnen en een eenvoudige manier om herhaalafspraken te maken." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, en beheer je aanpassingen via het klantenportaal." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken welke behandelingen je aanbiedt, of je met een intakeformulier werkt en hoe klanten nu afspraken maken.",
+    },
+    {
+      title: "Ontwerp met rust en verzorging",
+      desc: "We ontwerpen een pagina met een rustige, verzorgde uitstraling die past bij een schoonheidssalon, zonder drukte of afleiding.",
+    },
+    {
+      title: "Behandelmenu en intake",
+      desc: "We werken het behandelmenu uit met duidelijke uitleg per behandeling en bouwen een online intakeformulier in.",
+    },
+    {
+      title: "Boeken, cadeaubonnen en herhaalafspraken",
+      desc: "We richten online boeken in en denken mee over cadeaubonnen en een eenvoudige manier om herhaalafspraken te maken.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, en beheer je aanpassingen via het klantenportaal.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een schoonheidssalon",
   pricingBody: [
@@ -43,13 +58,34 @@ const data: BranchPageData = {
     "Tijdens de kennismaking bepalen we samen welke onderdelen jouw schoonheidssalon nodig heeft, zodat de offerte precies aansluit op je behandelmenu en werkwijze.",
   ],
   faqs: [
-    { q: "Kan ik een intakeformulier op mijn website laten zetten?", a: "Ja, we bouwen een online intakeformulier waarmee klanten vooraf gegevens kunnen invullen, zodat je voorbereid aan een eerste behandeling begint." },
-    { q: "Kan de website mensen herinneren aan een herhaalafspraak?", a: "Via een gekoppeld boekingssysteem kunnen klanten eenvoudig een vervolgafspraak inplannen; we denken mee over de beste opzet daarvoor bij jouw salon." },
-    { q: "Kan ik cadeaubonnen verkopen via de website?", a: "We denken mee over een werkwijze voor cadeaubonnen die past bij jouw salon en eventueel bij het boekingssysteem dat je gebruikt." },
-    { q: "Kan elke behandeling een eigen uitleg krijgen op de website?", a: "Ja, we werken het behandelmenu uit met een korte, heldere uitleg per behandeling, zodat nieuwe klanten weten wat ze kunnen verwachten." },
-    { q: "Past de uitstraling van de website bij mijn salon?", a: "We ontwerpen op maat, met een rustige en verzorgde uitstraling die aansluit bij hoe jouw schoonheidssalon zich wil presenteren, zonder standaardsjabloon." },
-    { q: "Wat kost een website voor een schoonheidssalon laten maken?", a: "Dat hangt af van de omvang van het behandelmenu en de gewenste functionaliteit. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn schoonheidssalon?", a: "Een standaard website met behandelmenu en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en informatie over je behandelingen ontvangen." },
+    {
+      q: "Kan ik een intakeformulier op mijn website laten zetten?",
+      a: "Ja, we bouwen een online intakeformulier waarmee klanten vooraf gegevens kunnen invullen, zodat je voorbereid aan een eerste behandeling begint.",
+    },
+    {
+      q: "Kan de website mensen herinneren aan een herhaalafspraak?",
+      a: "Via een gekoppeld boekingssysteem kunnen klanten eenvoudig een vervolgafspraak inplannen; we denken mee over de beste opzet daarvoor bij jouw salon.",
+    },
+    {
+      q: "Kan ik cadeaubonnen verkopen via de website?",
+      a: "We denken mee over een werkwijze voor cadeaubonnen die past bij jouw salon en eventueel bij het boekingssysteem dat je gebruikt.",
+    },
+    {
+      q: "Kan elke behandeling een eigen uitleg krijgen op de website?",
+      a: "Ja, we werken het behandelmenu uit met een korte, heldere uitleg per behandeling, zodat nieuwe klanten weten wat ze kunnen verwachten.",
+    },
+    {
+      q: "Past de uitstraling van de website bij mijn salon?",
+      a: "We ontwerpen op maat, met een rustige en verzorgde uitstraling die aansluit bij hoe jouw schoonheidssalon zich wil presenteren, zonder standaardsjabloon.",
+    },
+    {
+      q: "Wat kost een website voor een schoonheidssalon laten maken?",
+      a: "Dat hangt af van de omvang van het behandelmenu en de gewenste functionaliteit. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn schoonheidssalon?",
+      a: "Een standaard website met behandelmenu en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en informatie over je behandelingen ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -67,23 +103,31 @@ export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
       { title: "Website schoonheidssalon laten maken | AIMI" },
       {
         name: "description",
-        content: "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, vanaf € 499.",
+        content:
+          "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, vanaf € 499.",
       },
       { property: "og:title", content: "Website laten maken voor je schoonheidssalon | AIMI" },
-      { property: "og:description", content: "Behandelmenu met uitleg, intake vooraf en eenvoudig herhaalafspraken maken." },
+      {
+        property: "og:description",
+        content: "Behandelmenu met uitleg, intake vooraf en eenvoudig herhaalafspraken maken.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je schoonheidssalon | AIMI" },
-      { name: "twitter:description", content: "Behandelmenu met uitleg, intake vooraf en eenvoudig herhaalafspraken maken." },
+      {
+        name: "twitter:description",
+        content: "Behandelmenu met uitleg, intake vooraf en eenvoudig herhaalafspraken maken.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je schoonheidssalon",
-        description: "Websites op maat voor schoonheidssalons, met behandelmenu, intakeformulier en boekingsmogelijkheden, gebouwd en gehost door AIMI.",
+        description:
+          "Websites op maat voor schoonheidssalons, met behandelmenu, intakeformulier en boekingsmogelijkheden, gebouwd en gehost door AIMI.",
         url: URL,
         serviceType: "Webdesign voor schoonheidssalons",
         areaServed: null,

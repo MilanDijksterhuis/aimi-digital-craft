@@ -1,4 +1,4 @@
-# Node Description Batch 8 of 52
+# Node Description Batch 8 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -23,6 +23,10 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6aba49e339aeb7cb3c0f78fc88b53033a077b52b": "6aba49e euro teken" | kind=Commit | source=git | neighbors=[main, 9c4f5d5 nummers verwijderd, Services.tsx, c431436 footer tekst weer anders, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6f2c51c7da6ab34b463fbf6c5d34838d31c8c590": "6f2c51c Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@74760114bda82b5a65d9b053293d97d3ac5a585b": "7476011 Changes" | kind=Commit | source=git | neighbors=[482bba9 Work in progress, main, 7d64543 Changes, Nav.tsx, tmp-main-merge, tmp-revert-main] | lang=en
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7732f7bb914e4cd8a6626e70c291b9c85d5445c0": "7732f7b Changes" | kind=Commit | source=git | neighbors=[main, 6381715 Changes, routeTree.gen.ts, 9ed5748 Changes, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@775e9f5ade29396638b669763dd9e2938a490829": "775e9f5 bug fixes" | kind=Commit | source=git | neighbors=[admin.tsx, main, 8913689 bug fixes, eccff4f bug fixes 2, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7eafc83159788365bcd3f3c518f802b28c24c585": "7eafc83 Changes" | kind=Commit | source=git | neighbors=[main, 952880b Changes, Contact.tsx, df1c05d Changes, tmp-main-merge, tmp-revert-main] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7f63a6a9df9ae5260bdfbc003566b5c7fcd4666f": "7f63a6a Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, 67f2077 Changes, 952880b Changes, tmp-main-merge, tmp-revert-main] | lang=pt
@@ -59,10 +63,6 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d60b2ed6e48b7353a4f5988e6692c98802a7c22e": "d60b2ed Changes" | kind=Commit | source=git | neighbors=[c748c89 Changes, admin.tsx, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@d8e3e57568c02bdb8e19081bda20fdae1f2c8805": "d8e3e57 Work in progress" | kind=Commit | source=git | neighbors=[cf4ac91 Alle fases toegevoegd & cron re…, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@dc274b55adda1324d8263ecea51661df941faa46": "dc274b5 Changes" | kind=Commit | source=git | neighbors=[main, c07aca6 Changes, Contact.tsx, 9d59757 Afspraakpagina toegevoegd, tmp-main-merge, tmp-revert-main] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@dd0d069a00855388fe798fd1a7e55830918bdd32": "dd0d069 Changes" | kind=Commit | source=git | neighbors=[c3627b5 Changes, portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@de7fb47ac4177863fbdc73035a7c3f4a467c0c5d": "de7fb47 Wijzig prijzen: Starter €499, Pro €750" | kind=Commit | source=git | neighbors=[b9ed97e Gebruik getSession() voor auth …, main, cdd7702 Voeg FAQ toe, Hosting Only serv…, Pricing.tsx, tmp-main-merge, tmp-revert-main] | lang=nl
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@df16e8400059578ecde8314c62d9c152270ef7f2": "df16e84 Changes" | kind=Commit | source=git | neighbors=[5820182 Changes, main, 0332090 Changes, index.tsx, tmp-main-merge, tmp-revert-main] | lang=en
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@df1c05d06f132dd79cdfebb551facd0c7e456743": "df1c05d Changes" | kind=Commit | source=git | neighbors=[282fc41 Changes, main, 7eafc83 Changes, Contact.tsx, tmp-main-merge, tmp-revert-main] | lang=en
 
 ## Instructions
 

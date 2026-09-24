@@ -31,11 +31,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken hoeveel foto's er zijn van eerder werk, welke behandelingen je aanbiedt en of er al een boekingssysteem in gebruik is." },
-    { title: "Ontwerp rond het portfolio", desc: "We ontwerpen de website zodat het portfolio met nailart de aandacht krijgt, met een indeling die makkelijk te doorbladeren is." },
-    { title: "Snelheid ondanks veel beeld", desc: "Alle foto's worden geoptimaliseerd en op de juiste manier geladen, zodat de site ook met een uitgebreid portfolio snel blijft." },
-    { title: "Boeken en cadeaubonnen", desc: "We koppelen een boekingssysteem en denken mee over een werkwijze voor cadeaubonnen, passend bij je huidige aanpak." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, en kun je via het klantenportaal aanpassingen aanvragen." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken hoeveel foto's er zijn van eerder werk, welke behandelingen je aanbiedt en of er al een boekingssysteem in gebruik is.",
+    },
+    {
+      title: "Ontwerp rond het portfolio",
+      desc: "We ontwerpen de website zodat het portfolio met nailart de aandacht krijgt, met een indeling die makkelijk te doorbladeren is.",
+    },
+    {
+      title: "Snelheid ondanks veel beeld",
+      desc: "Alle foto's worden geoptimaliseerd en op de juiste manier geladen, zodat de site ook met een uitgebreid portfolio snel blijft.",
+    },
+    {
+      title: "Boeken en cadeaubonnen",
+      desc: "We koppelen een boekingssysteem en denken mee over een werkwijze voor cadeaubonnen, passend bij je huidige aanpak.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, en kun je via het klantenportaal aanpassingen aanvragen.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een nagelstudio",
   pricingBody: [
@@ -43,13 +58,34 @@ const data: BranchPageData = {
     "In een kort kennismakingsgesprek kijken we samen welke onderdelen voor jouw nagelstudio nodig zijn, zodat je een offerte krijgt die aansluit op wat je website daadwerkelijk moet doen.",
   ],
   faqs: [
-    { q: "Kan mijn website veel foto's van nailart tonen zonder traag te worden?", a: "Ja, we optimaliseren alle afbeeldingen bij oplevering, zodat een uitgebreid portfolio toch snel blijft laden, ook op mobiel." },
-    { q: "Kan ik cadeaubonnen aanbieden via de website?", a: "We denken mee over een werkwijze voor cadeaubonnen die past bij jouw studio, van een simpele aanvraagpagina tot een koppeling met een boekingssysteem dat dit ondersteunt." },
-    { q: "Kunnen klanten zelf een behandeling met duur en prijs kiezen bij het boeken?", a: "Ja, we koppelen een boekingssysteem waarin behandelingen met hun duur en prijs overzichtelijk staan, zodat een klant vooraf weet wat ze kiest." },
-    { q: "Hoeveel foto's kan ik in mijn portfolio zetten?", a: "Er is geen harde limiet; we richten de galerij zo in dat ook een groot portfolio overzichtelijk en snel blijft, bijvoorbeeld met categorieën per stijl." },
-    { q: "Werken jullie alleen met nagelstudio's in de grote steden?", a: "We werken voor nagelstudio's in heel Noord-Nederland, ongeacht de grootte van de studio." },
-    { q: "Wat kost een website voor een nagelstudio laten maken?", a: "Dat is afhankelijk van de gewenste functionaliteit, zoals online boeken en het aantal foto's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn nagelstudio?", a: "Een standaard website met portfolio en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
+    {
+      q: "Kan mijn website veel foto's van nailart tonen zonder traag te worden?",
+      a: "Ja, we optimaliseren alle afbeeldingen bij oplevering, zodat een uitgebreid portfolio toch snel blijft laden, ook op mobiel.",
+    },
+    {
+      q: "Kan ik cadeaubonnen aanbieden via de website?",
+      a: "We denken mee over een werkwijze voor cadeaubonnen die past bij jouw studio, van een simpele aanvraagpagina tot een koppeling met een boekingssysteem dat dit ondersteunt.",
+    },
+    {
+      q: "Kunnen klanten zelf een behandeling met duur en prijs kiezen bij het boeken?",
+      a: "Ja, we koppelen een boekingssysteem waarin behandelingen met hun duur en prijs overzichtelijk staan, zodat een klant vooraf weet wat ze kiest.",
+    },
+    {
+      q: "Hoeveel foto's kan ik in mijn portfolio zetten?",
+      a: "Er is geen harde limiet; we richten de galerij zo in dat ook een groot portfolio overzichtelijk en snel blijft, bijvoorbeeld met categorieën per stijl.",
+    },
+    {
+      q: "Werken jullie alleen met nagelstudio's in de grote steden?",
+      a: "We werken voor nagelstudio's in heel Noord-Nederland, ongeacht de grootte van de studio.",
+    },
+    {
+      q: "Wat kost een website voor een nagelstudio laten maken?",
+      a: "Dat is afhankelijk van de gewenste functionaliteit, zoals online boeken en het aantal foto's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn nagelstudio?",
+      a: "Een standaard website met portfolio en online boeken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -67,23 +103,31 @@ export const Route = createFileRoute("/website-laten-maken-nagelstudio")({
       { title: "Website nagelstudio laten maken — online boeken | AIMI" },
       {
         name: "description",
-        content: "Snelle website voor je nagelstudio met een visueel portfolio, online boeken en prijzen per behandeling. Gebouwd en gehost door AIMI.",
+        content:
+          "Snelle website voor je nagelstudio met een visueel portfolio, online boeken en prijzen per behandeling. Gebouwd en gehost door AIMI.",
       },
       { property: "og:title", content: "Website laten maken voor je nagelstudio | AIMI" },
-      { property: "og:description", content: "Portfolio van je nailart, snel op mobiel, met online boeken en cadeaubonnen." },
+      {
+        property: "og:description",
+        content: "Portfolio van je nailart, snel op mobiel, met online boeken en cadeaubonnen.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je nagelstudio | AIMI" },
-      { name: "twitter:description", content: "Portfolio van je nailart, snel op mobiel, met online boeken en cadeaubonnen." },
+      {
+        name: "twitter:description",
+        content: "Portfolio van je nailart, snel op mobiel, met online boeken en cadeaubonnen.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je nagelstudio",
-        description: "Websites op maat voor nagelstudio's, met visueel portfolio, online boeken en cadeaubonnen, gebouwd en gehost door AIMI.",
+        description:
+          "Websites op maat voor nagelstudio's, met visueel portfolio, online boeken en cadeaubonnen, gebouwd en gehost door AIMI.",
         url: URL,
         serviceType: "Webdesign voor nagelstudio's",
         areaServed: null,

@@ -31,11 +31,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken of je regulier en/of medisch pedicure aanbiedt, of je geregistreerd bent en hoe klanten nu een afspraak maken." },
-    { title: "Ontwerp voor leesbaarheid", desc: "We ontwerpen met grote, leesbare tekst en voldoende contrast, passend bij een doelgroep die vaak wat ouder is." },
-    { title: "Onderscheid en informatie", desc: "We maken het verschil tussen regulier en medisch pedicure duidelijk, inclusief informatie over registratie en vergoeding waar van toepassing." },
-    { title: "Eenvoudig een afspraak maken", desc: "We houden het afsprakenformulier of de boekingsknop simpel, met zo min mogelijk stappen." },
-    { title: "Livegang en beheer", desc: "Zodra de site live staat, draait hij op onze eigen, gemonitorde hosting. Wijzigingen vraag je eenvoudig aan via het klantenportaal." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken of je regulier en/of medisch pedicure aanbiedt, of je geregistreerd bent en hoe klanten nu een afspraak maken.",
+    },
+    {
+      title: "Ontwerp voor leesbaarheid",
+      desc: "We ontwerpen met grote, leesbare tekst en voldoende contrast, passend bij een doelgroep die vaak wat ouder is.",
+    },
+    {
+      title: "Onderscheid en informatie",
+      desc: "We maken het verschil tussen regulier en medisch pedicure duidelijk, inclusief informatie over registratie en vergoeding waar van toepassing.",
+    },
+    {
+      title: "Eenvoudig een afspraak maken",
+      desc: "We houden het afsprakenformulier of de boekingsknop simpel, met zo min mogelijk stappen.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Zodra de site live staat, draait hij op onze eigen, gemonitorde hosting. Wijzigingen vraag je eenvoudig aan via het klantenportaal.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een pedicurepraktijk",
   pricingBody: [
@@ -43,13 +58,34 @@ const data: BranchPageData = {
     "In een kennismakingsgesprek bepalen we samen welke onderdelen jouw praktijk nodig heeft, zodat de offerte aansluit op je daadwerkelijke aanbod.",
   ],
   faqs: [
-    { q: "Kan de website duidelijk maken welke behandeling vergoed kan worden?", a: "Ja, we nemen informatie over registratie en vergoeding voor medisch pedicure duidelijk op, zodat een klant vooraf weet waar hij of zij aan toe is." },
-    { q: "Is de website ook prettig te gebruiken voor oudere klanten?", a: "We ontwerpen met grote, leesbare tekst en voldoende contrast, en houden het afspraken maken eenvoudig, met de doelgroep van een pedicurepraktijk in gedachten." },
-    { q: "Kunnen klanten met diabetes of reuma zien dat ze bij mij terechtkunnen?", a: "Ja, dat zetten we vooraan. Voor medisch pedicure maken we duidelijk voor welke klachten je behandelt en of je geregistreerd bent, zodat iemand met diabetes of reuma meteen ziet dat de praktijk daar geschikt voor is." },
-    { q: "Kan ik zowel regulier als medisch pedicure op één website tonen?", a: "Ja, we maken het onderscheid tussen beide duidelijk zichtbaar, zodat een bezoeker meteen ziet welke behandeling bij zijn of haar situatie past." },
-    { q: "Kan ik afspraken eenvoudig laten binnenkomen zonder ingewikkeld systeem?", a: "We houden het afsprakenformulier of de boekingsknop bewust simpel, met zo min mogelijk stappen, passend bij een brede doelgroep." },
-    { q: "Wat kost een website voor een pedicurepraktijk laten maken?", a: "Dat hangt af van de gewenste functionaliteit en het aantal pagina's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn pedicurepraktijk?", a: "Een standaard website met behandelmenu en online afspraken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en informatie over je behandelingen ontvangen." },
+    {
+      q: "Kan de website duidelijk maken welke behandeling vergoed kan worden?",
+      a: "Ja, we nemen informatie over registratie en vergoeding voor medisch pedicure duidelijk op, zodat een klant vooraf weet waar hij of zij aan toe is.",
+    },
+    {
+      q: "Is de website ook prettig te gebruiken voor oudere klanten?",
+      a: "We ontwerpen met grote, leesbare tekst en voldoende contrast, en houden het afspraken maken eenvoudig, met de doelgroep van een pedicurepraktijk in gedachten.",
+    },
+    {
+      q: "Kunnen klanten met diabetes of reuma zien dat ze bij mij terechtkunnen?",
+      a: "Ja, dat zetten we vooraan. Voor medisch pedicure maken we duidelijk voor welke klachten je behandelt en of je geregistreerd bent, zodat iemand met diabetes of reuma meteen ziet dat de praktijk daar geschikt voor is.",
+    },
+    {
+      q: "Kan ik zowel regulier als medisch pedicure op één website tonen?",
+      a: "Ja, we maken het onderscheid tussen beide duidelijk zichtbaar, zodat een bezoeker meteen ziet welke behandeling bij zijn of haar situatie past.",
+    },
+    {
+      q: "Kan ik afspraken eenvoudig laten binnenkomen zonder ingewikkeld systeem?",
+      a: "We houden het afsprakenformulier of de boekingsknop bewust simpel, met zo min mogelijk stappen, passend bij een brede doelgroep.",
+    },
+    {
+      q: "Wat kost een website voor een pedicurepraktijk laten maken?",
+      a: "Dat hangt af van de gewenste functionaliteit en het aantal pagina's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn pedicurepraktijk?",
+      a: "Een standaard website met behandelmenu en online afspraken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en informatie over je behandelingen ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -67,23 +103,33 @@ export const Route = createFileRoute("/website-laten-maken-pedicure")({
       { title: "Website pedicure laten maken — vanaf € 499 | AIMI" },
       {
         name: "description",
-        content: "Vertrouwenwekkende, leesbare website voor je pedicurepraktijk, met onderscheid tussen regulier en medisch pedicure. AIMI bouwt en host.",
+        content:
+          "Vertrouwenwekkende, leesbare website voor je pedicurepraktijk, met onderscheid tussen regulier en medisch pedicure. AIMI bouwt en host.",
       },
       { property: "og:title", content: "Website laten maken voor je pedicurepraktijk | AIMI" },
-      { property: "og:description", content: "Duidelijk, leesbaar en eenvoudig een afspraak maken, met aandacht voor medisch pedicure en vergoeding." },
+      {
+        property: "og:description",
+        content:
+          "Duidelijk, leesbaar en eenvoudig een afspraak maken, met aandacht voor medisch pedicure en vergoeding.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je pedicurepraktijk | AIMI" },
-      { name: "twitter:description", content: "Duidelijk, leesbaar en eenvoudig een afspraak maken, met aandacht voor medisch pedicure en vergoeding." },
+      {
+        name: "twitter:description",
+        content:
+          "Duidelijk, leesbaar en eenvoudig een afspraak maken, met aandacht voor medisch pedicure en vergoeding.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je pedicurepraktijk",
-        description: "Websites op maat voor pedicurepraktijken, met onderscheid tussen regulier en medisch pedicure, gebouwd en gehost door AIMI.",
+        description:
+          "Websites op maat voor pedicurepraktijken, met onderscheid tussen regulier en medisch pedicure, gebouwd en gehost door AIMI.",
         url: URL,
         serviceType: "Webdesign voor pedicurepraktijken",
         areaServed: null,

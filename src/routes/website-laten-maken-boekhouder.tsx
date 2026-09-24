@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken op welk type ondernemer je je richt, welke diensten je aanbiedt en met welke software je werkt." },
-    { title: "Diensten opsplitsen", desc: "We geven de verschillende doelgroepen een eigen pad, zodat een zzp'er en een bv-eigenaar allebei het juiste verhaal lezen." },
-    { title: "Prijzen en verwachtingen", desc: "We zetten prijsindicaties en de verdeling van taken helder neer, inclusief wat de klant zelf moet aanleveren." },
-    { title: "Overstap wegnemen", desc: "We bouwen een pagina die precies uitlegt hoe overstappen van een andere boekhouder verloopt." },
-    { title: "Livegang en beheer", desc: "Na livegang kun je tarieven en teksten zelf bijwerken; wij verzorgen hosting, back-ups en monitoring." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken op welk type ondernemer je je richt, welke diensten je aanbiedt en met welke software je werkt.",
+    },
+    {
+      title: "Diensten opsplitsen",
+      desc: "We geven de verschillende doelgroepen een eigen pad, zodat een zzp'er en een bv-eigenaar allebei het juiste verhaal lezen.",
+    },
+    {
+      title: "Prijzen en verwachtingen",
+      desc: "We zetten prijsindicaties en de verdeling van taken helder neer, inclusief wat de klant zelf moet aanleveren.",
+    },
+    {
+      title: "Overstap wegnemen",
+      desc: "We bouwen een pagina die precies uitlegt hoe overstappen van een andere boekhouder verloopt.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang kun je tarieven en teksten zelf bijwerken; wij verzorgen hosting, back-ups en monitoring.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een administratiekantoor",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Wil je daarnaast een beveiligde omgeving waarin klanten stukken kunnen aanleveren, dan wordt het maatwerk. Dat is technisch goed te doen, maar vraagt extra aandacht voor beveiliging en bewaartermijnen, en dat prijzen we apart. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [
-    { q: "Moet ik tarieven op mijn website zetten?", a: "Een vanaf-prijs per type klant helpt vrijwel altijd. Veel ondernemers gaan er zonder prijsinformatie van uit dat het duur is en klikken door. Je hoeft geen volledige prijslijst te publiceren, wel een richting." },
-    { q: "Kan ik een beveiligde omgeving krijgen waar klanten stukken uploaden?", a: "Dat kan, als maatwerk. We kijken dan expliciet naar wie toegang heeft, hoe lang bestanden bewaard blijven en hoe ze beveiligd worden opgeslagen. Voor veel kantoren is het overigens niet nodig, omdat hun boekhoudsoftware dat al biedt." },
-    { q: "Kan de site koppelen met mijn boekhoudsoftware?", a: "Meestal is dat niet nodig: klanten werken direct in de software zelf. Wel verwijzen we er duidelijk naar, zodat bestaande klanten snel op de juiste plek belanden in plaats van jou te bellen." },
-    { q: "Hoe help ik bezoekers over de drempel van het overstappen?", a: "Door het proces expliciet te beschrijven: dat het ook midden in het jaar kan, wat je van de vorige boekhouder nodig hebt en hoeveel werk het de klant zelf kost. Die pagina is bij boekhouders vaak de best gelezen pagina van de site." },
-    { q: "Kan ik zelf teksten en bedragen aanpassen?", a: "Ja. In deze branche veranderen tarieven en regels jaarlijks, dus je moet dat zelf kunnen bijwerken zonder ons erbij te halen. Dat richten we in via het klantenportaal." },
-    { q: "Werken jullie ook voor kantoren buiten de regio?", a: "Ja. We zitten in Veendam en werken veel in Noord-Nederland, maar het traject verloopt volledig op afstand. Het werkgebied op je site stemmen we af op waar jij klanten wilt hebben." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn boekhoudkantoor?", a: "Een standaard website met dienstenoverzicht en tarieven staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en gegevens per doelgroep ontvangen." },
+    {
+      q: "Moet ik tarieven op mijn website zetten?",
+      a: "Een vanaf-prijs per type klant helpt vrijwel altijd. Veel ondernemers gaan er zonder prijsinformatie van uit dat het duur is en klikken door. Je hoeft geen volledige prijslijst te publiceren, wel een richting.",
+    },
+    {
+      q: "Kan ik een beveiligde omgeving krijgen waar klanten stukken uploaden?",
+      a: "Dat kan, als maatwerk. We kijken dan expliciet naar wie toegang heeft, hoe lang bestanden bewaard blijven en hoe ze beveiligd worden opgeslagen. Voor veel kantoren is het overigens niet nodig, omdat hun boekhoudsoftware dat al biedt.",
+    },
+    {
+      q: "Kan de site koppelen met mijn boekhoudsoftware?",
+      a: "Meestal is dat niet nodig: klanten werken direct in de software zelf. Wel verwijzen we er duidelijk naar, zodat bestaande klanten snel op de juiste plek belanden in plaats van jou te bellen.",
+    },
+    {
+      q: "Hoe help ik bezoekers over de drempel van het overstappen?",
+      a: "Door het proces expliciet te beschrijven: dat het ook midden in het jaar kan, wat je van de vorige boekhouder nodig hebt en hoeveel werk het de klant zelf kost. Die pagina is bij boekhouders vaak de best gelezen pagina van de site.",
+    },
+    {
+      q: "Kan ik zelf teksten en bedragen aanpassen?",
+      a: "Ja. In deze branche veranderen tarieven en regels jaarlijks, dus je moet dat zelf kunnen bijwerken zonder ons erbij te halen. Dat richten we in via het klantenportaal.",
+    },
+    {
+      q: "Werken jullie ook voor kantoren buiten de regio?",
+      a: "Ja. We zitten in Veendam en werken veel in Noord-Nederland, maar het traject verloopt volledig op afstand. Het werkgebied op je site stemmen we af op waar jij klanten wilt hebben.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn boekhoudkantoor?",
+      a: "Een standaard website met dienstenoverzicht en tarieven staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we teksten en gegevens per doelgroep ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-boekhouder")({
   head: () => ({
     meta: [
       { title: "Website boekhouder of administratiekantoor laten maken | AIMI" },
-      { name: "description", content: "Website voor je boekhoud- of administratiekantoor: opgesplitst per type ondernemer, met heldere prijsindicaties en een uitgelegde overstap." },
+      {
+        name: "description",
+        content:
+          "Website voor je boekhoud- of administratiekantoor: opgesplitst per type ondernemer, met heldere prijsindicaties en een uitgelegde overstap.",
+      },
       { property: "og:title", content: "Website laten maken voor je administratiekantoor | AIMI" },
-      { property: "og:description", content: "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je administratiekantoor | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je administratiekantoor",
-        description: "Websites op maat voor boekhouders en administratiekantoren, opgesplitst per doelgroep en met heldere tarieven.",
+        description:
+          "Websites op maat voor boekhouders en administratiekantoren, opgesplitst per doelgroep en met heldere tarieven.",
         url: URL,
         serviceType: "Webdesign voor boekhouders",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je administratiekantoor", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je administratiekantoor", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Emmen";
 const URL = `${SITE_URL}/website-laten-maken-emmen`;
@@ -9,6 +16,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Webdesign in Emmen dat klanten oplevert",
   region: "Drenthe",
+
+  definitie:
+    "In Emmen bouwt AIMI websites op maat voor € 499 tot € 749 eenmalig, met € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam en werkt voor zowel de industrie als de toeristische ondernemers rond Emmen.",
   kicker: "Webdesign Emmen",
   intro:
     "AIMI bouwt professionele, snelle websites voor ondernemers in en rond Emmen, de grootste stad van Drenthe. Van industrie en logistiek tot toerisme en lokale dienstverlening: een website die past bij jouw bedrijf en klaar is voor groei.",
@@ -22,22 +32,64 @@ const data: LocationPageData = {
     "We bouwen websites voor uiteenlopende ondernemers in Emmen: van bedrijven in de industrie en logistiek die vooral zakelijke klanten bereiken, tot horeca- en vrijetijdsondernemers die profiteren van het toerisme in de regio. Ook voor het brede MKB in de omliggende dorpen, van ambachtslieden tot lokale dienstverleners, ontwikkelen we websites die duidelijk maken wat een bedrijf te bieden heeft. Steeds met dezelfde uitgangspunten: een snelle, overzichtelijke website die goed werkt op mobiel en die bijdraagt aan vindbaarheid in Google, zowel voor zoekopdrachten binnen Emmen als in de wijdere regio.",
   workflowHeading: "De stappen naar jouw nieuwe website",
   workflowSteps: [
-    { title: "Kennismaking", desc: "We inventariseren je doelen, doelgroep en de plek die je bedrijf inneemt in Emmen of de regio." },
-    { title: "Ontwerp", desc: "Op basis daarvan maken we een ontwerp dat past bij de sector waarin je actief bent, van industrieel zakelijk tot toeristisch aantrekkelijk." },
-    { title: "Ontwikkeling", desc: "De website wordt gebouwd met eigen techniek, met nadruk op laadsnelheid en stabiliteit." },
-    { title: "Testen", desc: "Voor livegang controleren we functionaliteit, weergave en snelheid op verschillende apparaten." },
-    { title: "Livegang", desc: "We zetten de website live en zorgen dat alles direct correct werkt, inclusief eventuele koppelingen." },
-    { title: "Hosting en monitoring", desc: "Na livegang draait je site op onze eigen hosting, met servermonitoring die de prestaties in de gaten houdt." },
-    { title: "Doorlopend contact", desc: "Via het klantenportaal houden we korte lijnen voor vragen, updates of uitbreidingen." },
+    {
+      title: "Kennismaking",
+      desc: "We inventariseren je doelen, doelgroep en de plek die je bedrijf inneemt in Emmen of de regio.",
+    },
+    {
+      title: "Ontwerp",
+      desc: "Op basis daarvan maken we een ontwerp dat past bij de sector waarin je actief bent, van industrieel zakelijk tot toeristisch aantrekkelijk.",
+    },
+    {
+      title: "Ontwikkeling",
+      desc: "De website wordt gebouwd met eigen techniek, met nadruk op laadsnelheid en stabiliteit.",
+    },
+    {
+      title: "Testen",
+      desc: "Voor livegang controleren we functionaliteit, weergave en snelheid op verschillende apparaten.",
+    },
+    {
+      title: "Livegang",
+      desc: "We zetten de website live en zorgen dat alles direct correct werkt, inclusief eventuele koppelingen.",
+    },
+    {
+      title: "Hosting en monitoring",
+      desc: "Na livegang draait je site op onze eigen hosting, met servermonitoring die de prestaties in de gaten houdt.",
+    },
+    {
+      title: "Doorlopend contact",
+      desc: "Via het klantenportaal houden we korte lijnen voor vragen, updates of uitbreidingen.",
+    },
   ],
   faqs: [
-    { q: "Bouwt AIMI ook websites voor toeristische bedrijven in Emmen?", a: "Ja, we ontwikkelen visueel aantrekkelijke websites voor horeca en vrijetijdsondernemers die inspelen op de toeristische aantrekkingskracht van Emmen." },
-    { q: "Kan AIMI een website maken voor een industrieel of logistiek bedrijf?", a: "Zeker. We bouwen zakelijke, heldere websites die precies communiceren wat een bedrijf in de industrie of logistiek te bieden heeft aan zakelijke klanten." },
-    { q: "Wat kost een website laten maken in Emmen?", a: "Dat hangt af van de gewenste functionaliteit. We bespreken dit vooraf, zodat er geen verrassingen zijn." },
-    { q: "Werkt AIMI ook voor bedrijven in de dorpen rond Emmen?", a: "Ja, een groot deel van onze klanten in de regio komt uit de dorpen rond Emmen, waar veel actief MKB zit." },
-    { q: "Hoe zorgt AIMI voor een snelle website?", a: "We gebruiken eigen techniek en eigen hosting, specifiek gericht op korte laadtijden, wat ook bijdraagt aan een betere positie in Google." },
-    { q: "Kan ik na livegang nog aanpassingen laten doen?", a: "Ja, via het klantenportaal blijf je eenvoudig in contact voor updates, aanpassingen of uitbreidingen van je website." },
-    { q: "Blijft mijn website in de gaten gehouden na oplevering?", a: "Ja, we gebruiken actieve servermonitoring zodat technische problemen vroeg worden opgemerkt en opgelost." },
+    {
+      q: "Bouwt AIMI ook websites voor toeristische bedrijven in Emmen?",
+      a: "Ja, we ontwikkelen visueel aantrekkelijke websites voor horeca en vrijetijdsondernemers die inspelen op de toeristische aantrekkingskracht van Emmen.",
+    },
+    {
+      q: "Kan AIMI een website maken voor een industrieel of logistiek bedrijf?",
+      a: "Zeker. We bouwen zakelijke, heldere websites die precies communiceren wat een bedrijf in de industrie of logistiek te bieden heeft aan zakelijke klanten.",
+    },
+    {
+      q: "Wat kost een website laten maken in Emmen?",
+      a: "Dat hangt af van de gewenste functionaliteit. We bespreken dit vooraf, zodat er geen verrassingen zijn.",
+    },
+    {
+      q: "Werkt AIMI ook voor bedrijven in de dorpen rond Emmen?",
+      a: "Ja, een groot deel van onze klanten in de regio komt uit de dorpen rond Emmen, waar veel actief MKB zit.",
+    },
+    {
+      q: "Hoe zorgt AIMI voor een snelle website?",
+      a: "We gebruiken eigen techniek en eigen hosting, specifiek gericht op korte laadtijden, wat ook bijdraagt aan een betere positie in Google.",
+    },
+    {
+      q: "Kan ik na livegang nog aanpassingen laten doen?",
+      a: "Ja, via het klantenportaal blijf je eenvoudig in contact voor updates, aanpassingen of uitbreidingen van je website.",
+    },
+    {
+      q: "Blijft mijn website in de gaten gehouden na oplevering?",
+      a: "Ja, we gebruiken actieve servermonitoring zodat technische problemen vroeg worden opgemerkt en opgelost.",
+    },
   ],
   related: [
     { label: "Webdesign per regio", href: "/webdesign" },
@@ -63,18 +115,20 @@ export const Route = createFileRoute("/website-laten-maken-emmen")({
       { property: "og:title", content: "Website laten maken in Emmen | AIMI" },
       {
         property: "og:description",
-        content: "Snelle, professionele websites en webshops voor ondernemers in Emmen en omgeving.",
+        content:
+          "Snelle, professionele websites en webshops voor ondernemers in Emmen en omgeving.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken in Emmen | AIMI" },
       {
         name: "twitter:description",
-        content: "Snelle, professionele websites en webshops voor ondernemers in Emmen en omgeving.",
+        content:
+          "Snelle, professionele websites en webshops voor ondernemers in Emmen en omgeving.",
       },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

@@ -48,7 +48,7 @@ export const ADDRESS = {
 };
 
 /** Handelsregisternummer (8 cijfers). Wettelijk verplicht op de website. */
-export const KVK = "";
+export const KVK = "99842726";
 /** BTW-identificatienummer, formaat NL123456789B01. Wettelijk verplicht. */
 export const VAT_ID = "";
 
@@ -140,21 +140,21 @@ export const PAGE_DATES: Record<string, string> = {
 
   // Lokale landingspagina's
   "/webdesign": "2026-08-21",
-  "/website-laten-maken-veendam": "2026-09-06",
-  "/website-laten-maken-hoogeveen": "2026-08-21",
-  "/website-laten-maken-groningen": "2026-08-21",
-  "/website-laten-maken-assen": "2026-09-04",
-  "/website-laten-maken-hoogezand": "2026-08-21",
-  "/website-laten-maken-stadskanaal": "2026-08-21",
-  "/website-laten-maken-emmen": "2026-08-21",
-  "/website-laten-maken-winschoten": "2026-08-21",
-  "/website-laten-maken-roden": "2026-09-04",
-  "/website-laten-maken-coevorden": "2026-08-21",
-  "/website-laten-maken-meppel": "2026-08-21",
-  "/website-laten-maken-leeuwarden": "2026-08-21",
-  "/website-laten-maken-drachten": "2026-08-21",
-  "/website-laten-maken-heerenveen": "2026-08-21",
-  "/website-laten-maken-sneek": "2026-08-21",
+  "/website-laten-maken-veendam": "2026-09-24",
+  "/website-laten-maken-hoogeveen": "2026-09-24",
+  "/website-laten-maken-groningen": "2026-09-24",
+  "/website-laten-maken-assen": "2026-09-24",
+  "/website-laten-maken-hoogezand": "2026-09-24",
+  "/website-laten-maken-stadskanaal": "2026-09-24",
+  "/website-laten-maken-emmen": "2026-09-24",
+  "/website-laten-maken-winschoten": "2026-09-24",
+  "/website-laten-maken-roden": "2026-09-24",
+  "/website-laten-maken-coevorden": "2026-09-24",
+  "/website-laten-maken-meppel": "2026-09-24",
+  "/website-laten-maken-leeuwarden": "2026-09-24",
+  "/website-laten-maken-drachten": "2026-09-24",
+  "/website-laten-maken-heerenveen": "2026-09-24",
+  "/website-laten-maken-sneek": "2026-09-24",
 
   // Overige publieke pagina's
   "/werkwijze": "2026-08-20",
@@ -233,6 +233,8 @@ export function webPageJsonLd(opts: {
   name: string;
   description: string;
   datePublished?: string;
+  /** Per-pagina previewafbeelding; valt terug op OG_IMAGE_URL. */
+  imageUrl?: string;
 }): LdScript {
   const url = `${SITE_URL}${opts.path}`;
   return ld({
@@ -246,7 +248,7 @@ export function webPageJsonLd(opts: {
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
-    primaryImageOfPage: OG_IMAGE_URL,
+    primaryImageOfPage: opts.imageUrl ?? OG_IMAGE_URL,
     datePublished: opts.datePublished ?? SITE_PUBLISHED,
     dateModified: pageLastmod(opts.path),
   });
@@ -268,11 +270,42 @@ const DEFAULT_AREA_SERVED = [
   { "@type": "Country", name: "Nederland" },
 ];
 
+/** Coördinaten (WGS84, stadscentrum) per stad met een eigen locatiepagina.
+ * Uitsluitend om de City-entiteit in `areaServed` geografisch te verankeren —
+ * dit is NADRUKKELIJK geen vestigingsadres (AIMI zit in Veendam), dus het
+ * hangt aan het werkgebied, niet aan de organisatie-entiteit. */
+export const CITY_GEO: Record<string, { latitude: number; longitude: number }> = {
+  Assen: { latitude: 52.9925, longitude: 6.5649 },
+  Coevorden: { latitude: 52.6614, longitude: 6.7414 },
+  Drachten: { latitude: 53.1122, longitude: 6.0989 },
+  Emmen: { latitude: 52.785, longitude: 6.8977 },
+  Groningen: { latitude: 53.2194, longitude: 6.5665 },
+  Heerenveen: { latitude: 52.9597, longitude: 5.9195 },
+  Hoogeveen: { latitude: 52.7225, longitude: 6.4756 },
+  Hoogezand: { latitude: 53.1636, longitude: 6.7625 },
+  Leeuwarden: { latitude: 53.2012, longitude: 5.7999 },
+  Meppel: { latitude: 52.6957, longitude: 6.1934 },
+  Roden: { latitude: 53.1394, longitude: 6.4267 },
+  Sneek: { latitude: 53.0324, longitude: 5.658 },
+  Stadskanaal: { latitude: 52.9897, longitude: 6.9542 },
+  Veendam: { latitude: 53.1042, longitude: 6.8778 },
+  Winschoten: { latitude: 53.1447, longitude: 7.0344 },
+};
+
+/** Per-stad OG-/social-previewafbeelding (1200×630), gegenereerd door
+ * scripts/generate-og-cities.mjs naar public/og/. */
+export const cityOgImage = (city: string) =>
+  `${SITE_URL}/og/website-laten-maken-${city.toLowerCase()}.png`;
+
 /** Werkgebied voor één plaats: gebruikt door de locatiepagina's, zodat elke
  * stadspagina zijn eigen plaats + provincie claimt in plaats van het generieke
- * lijstje. */
+ * lijstje. Voegt geo-coördinaten toe zodra de stad in CITY_GEO staat. */
 export const cityAreaServed = (city: string, region: string) => [
-  { "@type": "City", name: city },
+  {
+    "@type": "City",
+    name: city,
+    ...(CITY_GEO[city] ? { geo: { "@type": "GeoCoordinates", ...CITY_GEO[city] } } : {}),
+  },
   { "@type": "AdministrativeArea", name: region },
 ];
 

@@ -1,4 +1,4 @@
-# Node Description Batch 48 of 52
+# Node Description Batch 48 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -12,51 +12,58 @@ describing what it is or does. Use only the provided context.
 For a code symbol (kind=code-symbol — a function, class, or constant),
 describe what the function/symbol does based on its name, source location
 and neighbors — e.g. "Resolves the configured ontology profile from graphify.yaml.".
+For an entity node (any other kind — e.g. a person, place, event, object),
+describe what the entity is and its role, grounded in its type, its
+relations (neighbors) and the provided citations/evidence — e.g.
+"Lady Carfax, a wealthy heiress who disappears en route to Lausanne.".
+Ground entity descriptions in the citations/evidence when present; do not
+speculate beyond the context, so a node with no supporting context may be
+left out of the reply.
 Write every description in English (en). Do not switch languages.
 No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "ui_accordion_accordionitem": "AccordionItem" | kind=code-symbol | source=src/components/ui/accordion.tsx:L9 | neighbors=[accordion.tsx]
-- "ui_accordion_accordiontrigger": "AccordionTrigger" | kind=code-symbol | source=src/components/ui/accordion.tsx:L17 | neighbors=[accordion.tsx]
-- "ui_alert_alert": "Alert" | kind=code-symbol | source=src/components/ui/alert.tsx:L22 | neighbors=[alert.tsx]
-- "ui_alert_alertdescription": "AlertDescription" | kind=code-symbol | source=src/components/ui/alert.tsx:L41 | neighbors=[alert.tsx]
-- "ui_alert_alerttitle": "AlertTitle" | kind=code-symbol | source=src/components/ui/alert.tsx:L30 | neighbors=[alert.tsx]
-- "ui_alert_alertvariants": "alertVariants" | kind=code-symbol | source=src/components/ui/alert.tsx:L6 | neighbors=[alert.tsx]
-- "ui_alert_dialog_alertdialogoverlay": "AlertDialogOverlay" | kind=code-symbol | source=src/components/ui/alert-dialog.tsx:L13 | neighbors=[alert-dialog.tsx]
-- "ui_avatar_avatar": "Avatar" | kind=code-symbol | source=src/components/ui/avatar.tsx:L8 | neighbors=[avatar.tsx]
-- "ui_avatar_avatarfallback": "AvatarFallback" | kind=code-symbol | source=src/components/ui/avatar.tsx:L32 | neighbors=[avatar.tsx]
-- "ui_avatar_avatarimage": "AvatarImage" | kind=code-symbol | source=src/components/ui/avatar.tsx:L20 | neighbors=[avatar.tsx]
-- "ui_badge_badgeprops": "BadgeProps" | kind=code-symbol | source=src/components/ui/badge.tsx:L25 | neighbors=[badge.tsx]
-- "ui_breadcrumb_breadcrumb": "Breadcrumb" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L7 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbellipsis": "BreadcrumbEllipsis()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L80 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbitem": "BreadcrumbItem" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L29 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumblink": "BreadcrumbLink" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L36 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumblist": "BreadcrumbList" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L15 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbpage": "BreadcrumbPage" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L54 | neighbors=[breadcrumb.tsx]
-- "ui_breadcrumb_breadcrumbseparator": "BreadcrumbSeparator()" | kind=code-symbol | source=src/components/ui/breadcrumb.tsx:L68 | neighbors=[breadcrumb.tsx]
-- "ui_calendar_calendar": "Calendar()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L10 | neighbors=[calendar.tsx]
-- "ui_calendar_calendardaybutton": "CalendarDayButton()" | kind=code-symbol | source=src/components/ui/calendar.tsx:L139 | neighbors=[calendar.tsx]
-- "ui_card_card": "Card" | kind=code-symbol | source=src/components/ui/card.tsx:L5 | neighbors=[card.tsx]
-- "ui_card_cardcontent": "CardContent" | kind=code-symbol | source=src/components/ui/card.tsx:L41 | neighbors=[card.tsx]
-- "ui_card_carddescription": "CardDescription" | kind=code-symbol | source=src/components/ui/card.tsx:L34 | neighbors=[card.tsx]
-- "ui_card_cardfooter": "CardFooter" | kind=code-symbol | source=src/components/ui/card.tsx:L48 | neighbors=[card.tsx]
-- "ui_card_cardheader": "CardHeader" | kind=code-symbol | source=src/components/ui/card.tsx:L16 | neighbors=[card.tsx]
-- "ui_card_cardtitle": "CardTitle" | kind=code-symbol | source=src/components/ui/card.tsx:L23 | neighbors=[card.tsx]
-- "ui_carousel_carousel": "Carousel" | kind=code-symbol | source=src/components/ui/carousel.tsx:L41 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselapi": "CarouselApi" | kind=code-symbol | source=src/components/ui/carousel.tsx:L8 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselcontent": "CarouselContent" | kind=code-symbol | source=src/components/ui/carousel.tsx:L135 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselcontext": "CarouselContext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L29 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselcontextprops": "CarouselContextProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L20 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselitem": "CarouselItem" | kind=code-symbol | source=src/components/ui/carousel.tsx:L156 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselnext": "CarouselNext" | kind=code-symbol | source=src/components/ui/carousel.tsx:L205 | neighbors=[carousel.tsx]
-- "ui_carousel_carouseloptions": "CarouselOptions" | kind=code-symbol | source=src/components/ui/carousel.tsx:L10 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselplugin": "CarouselPlugin" | kind=code-symbol | source=src/components/ui/carousel.tsx:L11 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselprevious": "CarouselPrevious" | kind=code-symbol | source=src/components/ui/carousel.tsx:L177 | neighbors=[carousel.tsx]
-- "ui_carousel_carouselprops": "CarouselProps" | kind=code-symbol | source=src/components/ui/carousel.tsx:L13 | neighbors=[carousel.tsx]
-- "ui_carousel_usecarousel": "useCarousel()" | kind=code-symbol | source=src/components/ui/carousel.tsx:L31 | neighbors=[carousel.tsx]
-- "ui_carousel_usecarouselparameters": "UseCarouselParameters" | kind=code-symbol | source=src/components/ui/carousel.tsx:L9 | neighbors=[carousel.tsx]
-- "ui_chart_chartconfig": "ChartConfig" | kind=code-symbol | source=src/components/ui/chart.tsx:L9 | neighbors=[chart.tsx]
+- "routes_website_laten_maken_winschoten_data": "data" | kind=code-symbol | source=src/routes/website-laten-maken-winschoten.tsx:L15 | neighbors=[website-laten-maken-winschoten.tsx]
+- "routes_website_laten_vernieuwen_faqs": "faqs" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L70 | neighbors=[website-laten-vernieuwen.tsx]
+- "routes_website_laten_vernieuwen_preserved": "preserved" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L62 | neighbors=[website-laten-vernieuwen.tsx]
+- "routes_website_laten_vernieuwen_signals": "signals" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L27 | neighbors=[website-laten-vernieuwen.tsx]
+- "routes_website_laten_vernieuwen_steps": "steps" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L54 | neighbors=[website-laten-vernieuwen.tsx]
+- "routes_website_laten_vernieuwen_vernieuwenpage": "VernieuwenPage()" | kind=code-symbol | source=src/routes/website-laten-vernieuwen.tsx:L143 | neighbors=[website-laten-vernieuwen.tsx]
+- "routes_werkwijze_principles": "principles" | kind=code-symbol | source=src/routes/werkwijze.tsx:L37 | neighbors=[werkwijze.tsx]
+- "routes_werkwijze_standards": "standards" | kind=code-symbol | source=src/routes/werkwijze.tsx:L44 | neighbors=[werkwijze.tsx]
+- "routes_werkwijze_steps": "steps" | kind=code-symbol | source=src/routes/werkwijze.tsx:L14 | neighbors=[werkwijze.tsx]
+- "routes_werkwijze_werkwijzepage": "WerkwijzePage()" | kind=code-symbol | source=src/routes/werkwijze.tsx:L122 | neighbors=[werkwijze.tsx]
+- "routes_werkwijze_werkwijzevideo": "WerkwijzeVideo()" | kind=code-symbol | source=src/routes/werkwijze.tsx:L75 | neighbors=[werkwijze.tsx]
+- "routes_wordpress_of_maatwerk_choosecustom": "chooseCustom" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L73 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_choosewp": "chooseWp" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L66 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_comparison": "comparison" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L23 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_faqs": "faqs" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L80 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_row": "Row" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L21 | neighbors=[wordpress-of-maatwerk.tsx]
+- "routes_wordpress_of_maatwerk_vergelijkingpage": "VergelijkingPage()" | kind=code-symbol | source=src/routes/wordpress-of-maatwerk.tsx:L161 | neighbors=[wordpress-of-maatwerk.tsx]
+- "scripts_check_seo_invariants_byfullpathmatch": "byFullPathMatch" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L57 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_dupes": "dupes" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L51 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_errors": "errors" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L20 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_exclude_exact": "EXCLUDE_EXACT" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L68 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_migrationfiles": "migrationFiles" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L96 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_migrationsdir": "migrationsDir" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L95 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_pagedatesmatch": "pageDatesMatch" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L29 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_pagedatesset": "pageDatesSet" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L82 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_private_prefixes": "PRIVATE_PREFIXES" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L67 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_publicstaticroutes": "publicStaticRoutes" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L74 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_readsource": "readSource()" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L22 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_root": "ROOT" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L19 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_routetreesrc": "routeTreeSrc" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L56 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_seosrc": "seoSrc" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L28 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_sitemapsrc": "sitemapSrc" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L42 | neighbors=[check-seo-invariants.mjs]
+- "scripts_check_seo_invariants_staticroutepaths": "staticRoutePaths" | kind=code-symbol | source=scripts/check-seo-invariants.mjs:L94 | neighbors=[check-seo-invariants.mjs]
+- "scripts_crawl_extract_handle_data": ".handle_data()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L130 | neighbors=[Extract]
+- "scripts_crawl_extract_handle_endtag": ".handle_endtag()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L116 | neighbors=[Extract]
+- "scripts_crawl_extract_handle_starttag": ".handle_starttag()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L75 | neighbors=[Extract]
+- "scripts_crawl_extract_init": ".__init__()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L54 | neighbors=[Extract]
+- "scripts_crawl_fetch": "fetch()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L16 | neighbors=[crawl.py]
+- "scripts_crawl_main": "main()" | kind=code-symbol | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L220 | neighbors=[crawl.py]
+- "scripts_crawl_rationale_1": "Crawl sitemap URLs and extract on-page SEO signals into crawl-data.json." | kind=entity | source=audits/aimi-development.nl-audit-2026-09-21/scripts/crawl.py:L1 | neighbors=[crawl.py]
 
 ## Instructions
 

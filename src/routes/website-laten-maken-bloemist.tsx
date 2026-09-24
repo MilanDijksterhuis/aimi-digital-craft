@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken de verhouding tussen winkelverkoop, bezorging en rouwwerk, en hoe groot je piekdagen zijn." },
-    { title: "Aanbod afbakenen", desc: "We bepalen een beperkte, goed te onderhouden set boeketten in duidelijke prijsklassen in plaats van een onhoudbare catalogus." },
-    { title: "Rouwwerk apart inrichten", desc: "Rouwwerk krijgt een eigen pagina met eigen toon, levertijden en de mogelijkheid een persoonlijke tekst door te geven." },
-    { title: "Capaciteit en bezorggebied", desc: "We bouwen in dat je bezorgdagen kunt sluiten of maximeren, en zetten je bezorggebied vooraan in het bestelproces." },
-    { title: "Livegang en beheer", desc: "Na livegang beheer je zelf boeketten, prijzen en bezorgdagen; wij verzorgen hosting, back-ups en monitoring." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken de verhouding tussen winkelverkoop, bezorging en rouwwerk, en hoe groot je piekdagen zijn.",
+    },
+    {
+      title: "Aanbod afbakenen",
+      desc: "We bepalen een beperkte, goed te onderhouden set boeketten in duidelijke prijsklassen in plaats van een onhoudbare catalogus.",
+    },
+    {
+      title: "Rouwwerk apart inrichten",
+      desc: "Rouwwerk krijgt een eigen pagina met eigen toon, levertijden en de mogelijkheid een persoonlijke tekst door te geven.",
+    },
+    {
+      title: "Capaciteit en bezorggebied",
+      desc: "We bouwen in dat je bezorgdagen kunt sluiten of maximeren, en zetten je bezorggebied vooraan in het bestelproces.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang beheer je zelf boeketten, prijzen en bezorgdagen; wij verzorgen hosting, back-ups en monitoring.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een bloemenwinkel",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Wil je daadwerkelijk online laten bestellen en afrekenen, met bezorgdatum, kaartje en beschikbaarheid per dag, dan is het een webshoptraject. Dat is maatwerk, omdat betalingen, bezorglogica en voorraad meespelen. We bekijken samen wat je nodig hebt en geven daarna een vaste prijs.",
   ],
   faqs: [
-    { q: "Heb ik een volledige webshop nodig?", a: "Niet per se. Veel bloemisten draaien prima op een informatieve site met telefonische en WhatsApp-bestellingen. Een webshop loont zodra je structureel online bestellingen wilt binnenhalen, vooral rond de piekdagen." },
-    { q: "Kan ik bezorgdagen dichtzetten als ik vol zit?", a: "Ja, en dat is voor bloemisten een van de belangrijkste functies. Je kunt per dag sluiten of een maximum aantal bezorgingen instellen, zodat je rond Moederdag geen bestellingen aanneemt die je niet kunt rijden." },
-    { q: "Hoe ga ik om met rouwwerk op mijn site?", a: "Dat verdient een eigen pagina met een rustiger toon, duidelijke levertijden en de mogelijkheid om een persoonlijke tekst en de locatie van de uitvaart door te geven. Het hoort niet tussen de feestdagenaanbiedingen te staan." },
-    { q: "Hoeveel boeketten moet ik online zetten?", a: "Minder dan de meeste mensen denken. Een beperkte set in een paar duidelijke prijsklassen is makkelijker te onderhouden, makkelijker te kiezen en voorkomt dat er producten online staan die je niet meer maakt." },
-    { q: "Kan ik mijn bezorggebied instellen?", a: "Ja. We zetten je bezorggebied vooraan in het proces, bijvoorbeeld met een postcodecontrole, zodat niemand pas bij het afrekenen ontdekt dat je zijn adres niet bezorgt." },
-    { q: "Kan ik zelf seizoensaanbod wisselen?", a: "Ja, via het klantenportaal. Bij bloemen verandert het aanbod continu, dus je moet boeketten en prijzen zelf kunnen aanpassen zonder ons daarvoor nodig te hebben." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn bloemenwinkel?", a: "Een standaard website met assortiment en bezorginformatie staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je boeketfoto's en teksten ontvangen." },
+    {
+      q: "Heb ik een volledige webshop nodig?",
+      a: "Niet per se. Veel bloemisten draaien prima op een informatieve site met telefonische en WhatsApp-bestellingen. Een webshop loont zodra je structureel online bestellingen wilt binnenhalen, vooral rond de piekdagen.",
+    },
+    {
+      q: "Kan ik bezorgdagen dichtzetten als ik vol zit?",
+      a: "Ja, en dat is voor bloemisten een van de belangrijkste functies. Je kunt per dag sluiten of een maximum aantal bezorgingen instellen, zodat je rond Moederdag geen bestellingen aanneemt die je niet kunt rijden.",
+    },
+    {
+      q: "Hoe ga ik om met rouwwerk op mijn site?",
+      a: "Dat verdient een eigen pagina met een rustiger toon, duidelijke levertijden en de mogelijkheid om een persoonlijke tekst en de locatie van de uitvaart door te geven. Het hoort niet tussen de feestdagenaanbiedingen te staan.",
+    },
+    {
+      q: "Hoeveel boeketten moet ik online zetten?",
+      a: "Minder dan de meeste mensen denken. Een beperkte set in een paar duidelijke prijsklassen is makkelijker te onderhouden, makkelijker te kiezen en voorkomt dat er producten online staan die je niet meer maakt.",
+    },
+    {
+      q: "Kan ik mijn bezorggebied instellen?",
+      a: "Ja. We zetten je bezorggebied vooraan in het proces, bijvoorbeeld met een postcodecontrole, zodat niemand pas bij het afrekenen ontdekt dat je zijn adres niet bezorgt.",
+    },
+    {
+      q: "Kan ik zelf seizoensaanbod wisselen?",
+      a: "Ja, via het klantenportaal. Bij bloemen verandert het aanbod continu, dus je moet boeketten en prijzen zelf kunnen aanpassen zonder ons daarvoor nodig te hebben.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn bloemenwinkel?",
+      a: "Een standaard website met assortiment en bezorginformatie staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je boeketfoto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-bloemist")({
   head: () => ({
     meta: [
       { title: "Website bloemist laten maken — bestellen & bezorgen | AIMI" },
-      { name: "description", content: "Website of webshop voor je bloemist of bloemenwinkel: online bestellen met bezorgdatum, een eigen pagina voor rouwwerk en grip op je piekdagen." },
+      {
+        name: "description",
+        content:
+          "Website of webshop voor je bloemist of bloemenwinkel: online bestellen met bezorgdatum, een eigen pagina voor rouwwerk en grip op je piekdagen.",
+      },
       { property: "og:title", content: "Website laten maken voor je bloemenwinkel | AIMI" },
-      { property: "og:description", content: "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je bloemenwinkel | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je bloemenwinkel",
-        description: "Websites en webshops op maat voor bloemisten, met bezorging, rouwwerk en beschikbaarheid per dag.",
+        description:
+          "Websites en webshops op maat voor bloemisten, met bezorging, rouwwerk en beschikbaarheid per dag.",
         url: URL,
         serviceType: "Webdesign voor bloemisten",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je bloemenwinkel", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je bloemenwinkel", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

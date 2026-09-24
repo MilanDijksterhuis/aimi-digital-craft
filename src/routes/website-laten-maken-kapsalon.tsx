@@ -31,11 +31,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken hoeveel stylisten er zijn, of je al een boekingssysteem gebruikt en welke behandelingen en prijzen er getoond moeten worden." },
-    { title: "Ontwerp op maat", desc: "We ontwerpen een pagina die past bij de sfeer van je salon, met ruimte voor foto's van eigen werk in plaats van generieke stockbeelden." },
-    { title: "Techniek en snelheid", desc: "Afbeeldingen worden geoptimaliseerd zodat de website ook met veel foto's snel blijft laden, juist belangrijk op mobiel." },
-    { title: "Koppeling boekingssysteem", desc: "Als je al een boekingssysteem gebruikt, koppelen we dat aan de website; gebruik je nog niets, dan denken we mee over een passende oplossing." },
-    { title: "Livegang en beheer", desc: "Na livegang host je de website bij AIMI met servermonitoring, en via het klantenportaal kun je aanvragen voor aanpassingen indienen." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken hoeveel stylisten er zijn, of je al een boekingssysteem gebruikt en welke behandelingen en prijzen er getoond moeten worden.",
+    },
+    {
+      title: "Ontwerp op maat",
+      desc: "We ontwerpen een pagina die past bij de sfeer van je salon, met ruimte voor foto's van eigen werk in plaats van generieke stockbeelden.",
+    },
+    {
+      title: "Techniek en snelheid",
+      desc: "Afbeeldingen worden geoptimaliseerd zodat de website ook met veel foto's snel blijft laden, juist belangrijk op mobiel.",
+    },
+    {
+      title: "Koppeling boekingssysteem",
+      desc: "Als je al een boekingssysteem gebruikt, koppelen we dat aan de website; gebruik je nog niets, dan denken we mee over een passende oplossing.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang host je de website bij AIMI met servermonitoring, en via het klantenportaal kun je aanvragen voor aanpassingen indienen.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een kapsalon",
   pricingBody: [
@@ -43,13 +58,34 @@ const data: BranchPageData = {
     "In een kennismakingsgesprek bepalen we samen welke onderdelen nodig zijn voor jouw salon, zodat de offerte aansluit op wat je echt gebruikt in plaats van op een standaardpakket.",
   ],
   faqs: [
-    { q: "Kan ik klanten online laten boeken via de website?", a: "Ja, we koppelen een boekingssysteem aan je website of adviseren een passende oplossing als je er nog geen hebt, zodat klanten zelf een tijdstip kunnen kiezen." },
-    { q: "Kan de website no-shows helpen verminderen?", a: "Een online boekingssysteem met automatische bevestiging en herinnering vooraf helpt klanten hun afspraak niet te vergeten, wat het aantal no-shows kan terugdringen." },
-    { q: "Kan ik zelf mijn prijslijst aanpassen?", a: "Via het klantenportaal kun je aanpassingen aan prijzen en teksten aanvragen, zonder dat je zelf hoeft te programmeren." },
-    { q: "Werken jullie ook met salons buiten de grote steden?", a: "We werken voor kapsalons in heel Noord-Nederland, van kleine dorpssalons tot salons met meerdere stylisten." },
-    { q: "Kan ik foto's van geknipt en gekleurd haar toevoegen zonder dat de site traag wordt?", a: "We optimaliseren alle afbeeldingen bij oplevering, zodat een pagina vol foto's toch snel blijft laden, ook op mobiel." },
-    { q: "Wat kost een website voor een kapsalon laten maken?", a: "Dat hangt af van de gewenste functionaliteit, zoals wel of geen boekingssysteem en het aantal pagina's. Bekijk de tarievenpagina voor een indicatie of vraag een offerte aan." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn kapsalon?", a: "Een standaard website met prijslijst en online afspraken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
+    {
+      q: "Kan ik klanten online laten boeken via de website?",
+      a: "Ja, we koppelen een boekingssysteem aan je website of adviseren een passende oplossing als je er nog geen hebt, zodat klanten zelf een tijdstip kunnen kiezen.",
+    },
+    {
+      q: "Kan de website no-shows helpen verminderen?",
+      a: "Een online boekingssysteem met automatische bevestiging en herinnering vooraf helpt klanten hun afspraak niet te vergeten, wat het aantal no-shows kan terugdringen.",
+    },
+    {
+      q: "Kan ik zelf mijn prijslijst aanpassen?",
+      a: "Via het klantenportaal kun je aanpassingen aan prijzen en teksten aanvragen, zonder dat je zelf hoeft te programmeren.",
+    },
+    {
+      q: "Werken jullie ook met salons buiten de grote steden?",
+      a: "We werken voor kapsalons in heel Noord-Nederland, van kleine dorpssalons tot salons met meerdere stylisten.",
+    },
+    {
+      q: "Kan ik foto's van geknipt en gekleurd haar toevoegen zonder dat de site traag wordt?",
+      a: "We optimaliseren alle afbeeldingen bij oplevering, zodat een pagina vol foto's toch snel blijft laden, ook op mobiel.",
+    },
+    {
+      q: "Wat kost een website voor een kapsalon laten maken?",
+      a: "Dat hangt af van de gewenste functionaliteit, zoals wel of geen boekingssysteem en het aantal pagina's. Bekijk de tarievenpagina voor een indicatie of vraag een offerte aan.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn kapsalon?",
+      a: "Een standaard website met prijslijst en online afspraken staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -67,23 +103,33 @@ export const Route = createFileRoute("/website-laten-maken-kapsalon")({
       { title: "Website kapsalon laten maken — online afspraken | AIMI" },
       {
         name: "description",
-        content: "Website voor je kapsalon of barbershop met online afspraken, prijslijst en foto's van je werk. AIMI bouwt en host snelle websites voor kappers.",
+        content:
+          "Website voor je kapsalon of barbershop met online afspraken, prijslijst en foto's van je werk. AIMI bouwt en host snelle websites voor kappers.",
       },
       { property: "og:title", content: "Website laten maken voor je kapsalon | AIMI" },
-      { property: "og:description", content: "Online boeken, prijslijst en foto's van je werk: een website die aansluit op hoe een kapsalon werkt." },
+      {
+        property: "og:description",
+        content:
+          "Online boeken, prijslijst en foto's van je werk: een website die aansluit op hoe een kapsalon werkt.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je kapsalon | AIMI" },
-      { name: "twitter:description", content: "Online boeken, prijslijst en foto's van je werk: een website die aansluit op hoe een kapsalon werkt." },
+      {
+        name: "twitter:description",
+        content:
+          "Online boeken, prijslijst en foto's van je werk: een website die aansluit op hoe een kapsalon werkt.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je kapsalon",
-        description: "Websites op maat voor kapsalons, met online afspraken, prijslijst en portfolio, gebouwd en gehost door AIMI.",
+        description:
+          "Websites op maat voor kapsalons, met online afspraken, prijslijst en portfolio, gebouwd en gehost door AIMI.",
         url: URL,
         serviceType: "Webdesign voor kapsalons",
         areaServed: null,

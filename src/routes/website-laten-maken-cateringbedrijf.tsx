@@ -30,11 +30,26 @@ const data: BranchPageData = {
   ],
   approachHeading: "Zo pakken we het aan",
   approachSteps: [
-    { title: "Kennismaking", desc: "We bespreken welk type catering je doet, van zakelijke lunches tot bruiloften, en welke klussen je het liefst binnenhaalt." },
-    { title: "Formules helder maken", desc: "We geven elke vorm van catering een eigen plek met eigen tekst, zodat bezoekers meteen zien of ze bij je passen." },
-    { title: "Aanvraagformulier bouwen", desc: "We richten het formulier zo in dat je gelegenheid, datum, aantal personen en locatie binnenkrijgt zonder mensen af te schrikken." },
-    { title: "Verwachtingen vastleggen", desc: "We zetten praktische zaken als personeel, servies, allergenen en boekingstermijn duidelijk op de site." },
-    { title: "Livegang en beheer", desc: "Na livegang beheer je zelf je formules, richtprijzen en drukke periodes; wij verzorgen hosting en monitoring." },
+    {
+      title: "Kennismaking",
+      desc: "We bespreken welk type catering je doet, van zakelijke lunches tot bruiloften, en welke klussen je het liefst binnenhaalt.",
+    },
+    {
+      title: "Formules helder maken",
+      desc: "We geven elke vorm van catering een eigen plek met eigen tekst, zodat bezoekers meteen zien of ze bij je passen.",
+    },
+    {
+      title: "Aanvraagformulier bouwen",
+      desc: "We richten het formulier zo in dat je gelegenheid, datum, aantal personen en locatie binnenkrijgt zonder mensen af te schrikken.",
+    },
+    {
+      title: "Verwachtingen vastleggen",
+      desc: "We zetten praktische zaken als personeel, servies, allergenen en boekingstermijn duidelijk op de site.",
+    },
+    {
+      title: "Livegang en beheer",
+      desc: "Na livegang beheer je zelf je formules, richtprijzen en drukke periodes; wij verzorgen hosting en monitoring.",
+    },
   ],
   pricingHeading: "Wat kost een website voor een cateringbedrijf",
   pricingBody: [
@@ -42,13 +57,34 @@ const data: BranchPageData = {
     "Wil je dat klanten online een vaste formule kunnen afrekenen, bijvoorbeeld standaard lunchpakketten voor bedrijven, dan schuift het richting een webshop en wordt het maatwerk. Dat prijzen we apart en spreken we vooraf af, zodat de kosten geen verrassing zijn.",
   ],
   faqs: [
-    { q: "Welke gegevens moet mijn aanvraagformulier uitvragen?", a: "In de praktijk red je het met vijf: type gelegenheid, datum, aantal personen, locatie en het gewenste soort bediening. Daarmee kun je vrijwel altijd een eerste inschatting maken zonder eerst te bellen." },
-    { q: "Moet ik prijzen vermelden als ik alles op maat doe?", a: "Een vanaf-bedrag per persoon per formule is bijna altijd verstandig. Het geeft mensen houvast en voorkomt dat je tijd steekt in offertes voor budgetten die niet aansluiten." },
-    { q: "Kan ik aangeven dat een periode volgeboekt is?", a: "Ja. We bouwen een plek in waar je zelf kunt melden dat bijvoorbeeld december vol zit of dat je een bepaalde minimale boekingstermijn hanteert. Dat scheelt je aanvragen die je toch moet afwijzen." },
-    { q: "Hoe ga ik om met allergenen en dieetwensen op de site?", a: "Zet op de site dat je ermee werkt en hoe je het uitvraagt, maar publiceer geen dichtgetimmerde allergenenlijst per gerecht als je met maatwerk werkt. Het is beter om dat per opdracht vast te leggen dan een lijst te hebben die veroudert." },
-    { q: "Kan ik zelf foto's van opdrachten toevoegen?", a: "Ja, via het klantenportaal. Vraag wel altijd toestemming aan de opdrachtgever voordat je foto's van een besloten gelegenheid publiceert, zeker bij bruiloften en uitvaarten." },
-    { q: "Kan ik zakelijke en particuliere catering op één site combineren?", a: "Dat kan prima, mits je ze duidelijk scheidt. Het zijn twee verschillende bezoekers met andere vragen en andere budgetten, dus ze krijgen elk een eigen pad in plaats van één gemengde pagina." },
-    { q: "Hoe lang duurt het bouwen van een website voor mijn cateringbedrijf?", a: "Een standaard website met menukaart en aanvraagformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je formules, foto's en teksten ontvangen." },
+    {
+      q: "Welke gegevens moet mijn aanvraagformulier uitvragen?",
+      a: "In de praktijk red je het met vijf: type gelegenheid, datum, aantal personen, locatie en het gewenste soort bediening. Daarmee kun je vrijwel altijd een eerste inschatting maken zonder eerst te bellen.",
+    },
+    {
+      q: "Moet ik prijzen vermelden als ik alles op maat doe?",
+      a: "Een vanaf-bedrag per persoon per formule is bijna altijd verstandig. Het geeft mensen houvast en voorkomt dat je tijd steekt in offertes voor budgetten die niet aansluiten.",
+    },
+    {
+      q: "Kan ik aangeven dat een periode volgeboekt is?",
+      a: "Ja. We bouwen een plek in waar je zelf kunt melden dat bijvoorbeeld december vol zit of dat je een bepaalde minimale boekingstermijn hanteert. Dat scheelt je aanvragen die je toch moet afwijzen.",
+    },
+    {
+      q: "Hoe ga ik om met allergenen en dieetwensen op de site?",
+      a: "Zet op de site dat je ermee werkt en hoe je het uitvraagt, maar publiceer geen dichtgetimmerde allergenenlijst per gerecht als je met maatwerk werkt. Het is beter om dat per opdracht vast te leggen dan een lijst te hebben die veroudert.",
+    },
+    {
+      q: "Kan ik zelf foto's van opdrachten toevoegen?",
+      a: "Ja, via het klantenportaal. Vraag wel altijd toestemming aan de opdrachtgever voordat je foto's van een besloten gelegenheid publiceert, zeker bij bruiloften en uitvaarten.",
+    },
+    {
+      q: "Kan ik zakelijke en particuliere catering op één site combineren?",
+      a: "Dat kan prima, mits je ze duidelijk scheidt. Het zijn twee verschillende bezoekers met andere vragen en andere budgetten, dus ze krijgen elk een eigen pad in plaats van één gemengde pagina.",
+    },
+    {
+      q: "Hoe lang duurt het bouwen van een website voor mijn cateringbedrijf?",
+      a: "Een standaard website met menukaart en aanvraagformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we je formules, foto's en teksten ontvangen.",
+    },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
@@ -64,27 +100,44 @@ export const Route = createFileRoute("/website-laten-maken-cateringbedrijf")({
   head: () => ({
     meta: [
       { title: "Website cateringbedrijf laten maken — offertes | AIMI" },
-      { name: "description", content: "Website voor je cateringbedrijf met een aanvraagformulier dat bruikbare offerteaanvragen oplevert, heldere formules en richtprijzen." },
+      {
+        name: "description",
+        content:
+          "Website voor je cateringbedrijf met een aanvraagformulier dat bruikbare offerteaanvragen oplevert, heldere formules en richtprijzen.",
+      },
       { property: "og:title", content: "Website laten maken voor je cateringbedrijf | AIMI" },
-      { property: "og:description", content: "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte." },
+      {
+        property: "og:description",
+        content:
+          "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken voor je cateringbedrijf | AIMI" },
-      { name: "twitter:description", content: "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte." },
+      {
+        name: "twitter:description",
+        content:
+          "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte.",
+      },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
       serviceJsonLd({
         name: "Website laten maken voor je cateringbedrijf",
-        description: "Websites op maat voor cateringbedrijven, met heldere formules, richtprijzen en een bruikbaar aanvraagformulier.",
+        description:
+          "Websites op maat voor cateringbedrijven, met heldere formules, richtprijzen en een bruikbaar aanvraagformulier.",
         url: URL,
         serviceType: "Webdesign voor cateraars",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je cateringbedrijf", PATH]]),
+      breadcrumbJsonLd([
+        ["Home", "/"],
+        ["Branches", "/branches"],
+        ["Website laten maken voor je cateringbedrijf", PATH],
+      ]),
       faqJsonLd(data.faqs),
     ],
   }),

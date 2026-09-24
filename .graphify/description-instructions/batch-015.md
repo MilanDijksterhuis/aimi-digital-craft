@@ -1,4 +1,4 @@
-# Node Description Batch 16 of 52
+# Node Description Batch 16 of 57
 
 Graphify is running in assistant/skill mode (no API key). You are the host
 assistant (Claude Code / Codex / Gemini CLI). Read the prompt below and write
@@ -12,51 +12,58 @@ describing what it is or does. Use only the provided context.
 For a code symbol (kind=code-symbol — a function, class, or constant),
 describe what the function/symbol does based on its name, source location
 and neighbors — e.g. "Resolves the configured ontology profile from graphify.yaml.".
-Write every description in English (en). Do not switch languages.
+For an entity node (any other kind — e.g. a person, place, event, object),
+describe what the entity is and its role, grounded in its type, its
+relations (neighbors) and the provided citations/evidence — e.g.
+"Lady Carfax, a wealthy heiress who disappears en route to Lausanne.".
+Ground entity descriptions in the citations/evidence when present; do not
+speculate beyond the context, so a node with no supporting context may be
+left out of the reply.
+Write every description in Portuguese (pt). Do not switch languages.
 No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
-- "lib_csv_parseleadscsv": "parseLeadsCsv()" | kind=code-symbol | source=src/lib/csv.ts:L111 | neighbors=[LeadsPanel.tsx, csv.ts, parseCsv()]
-- "lib_error_capture": "error-capture.ts" | kind=code-symbol | source=src/lib/error-capture.ts:L1 | neighbors=[consumeLastCapturedError(), record(), server.ts]
-- "lib_error_page": "error-page.ts" | kind=code-symbol | source=src/lib/error-page.ts:L1 | neighbors=[renderErrorPage(), server.ts, start.ts]
-- "lib_error_page_rendererrorpage": "renderErrorPage()" | kind=code-symbol | source=src/lib/error-page.ts:L1 | neighbors=[error-page.ts, server.ts, start.ts]
-- "lib_markdown_estimatereadtime": "estimateReadTime()" | kind=code-symbol | source=src/lib/markdown.tsx:L81 | neighbors=[markdown.tsx, blog.tsx, blog_.$slug.tsx]
-- "lib_markdown_markdownbody": "MarkdownBody()" | kind=code-symbol | source=src/lib/markdown.tsx:L87 | neighbors=[BlogPostForm.tsx, markdown.tsx, blog_.$slug.tsx]
-- "lib_monitoring_shared_assertpublichost": "assertPublicHost()" | kind=code-symbol | source=src/lib/monitoring.shared.ts:L4 | neighbors=[monitoring.shared.ts, isPrivateOrReservedIp(), measureResponseTime()]
-- "lib_project_status_project_priority_values": "PROJECT_PRIORITY_VALUES" | kind=code-symbol | source=src/lib/project-status.ts:L34 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, project-status.ts]
-- "lib_project_status_project_status_values": "PROJECT_STATUS_VALUES" | kind=code-symbol | source=src/lib/project-status.ts:L5 | neighbors=[admin.projecten.tsx, admin.projecten.$projectId.tsx, project-status.ts]
-- "lib_rate_limit_getclientip": "getClientIp()" | kind=code-symbol | source=src/lib/rate-limit.ts:L54 | neighbors=[rate-limit.ts, website-checker.functions.ts, server.ts]
-- "lib_seo_articlejsonld": "articleJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L365 | neighbors=[seo.ts, ld(), blog_.$slug.tsx]
-- "lib_seo_businessidentityjsonld": "businessIdentityJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L64 | neighbors=[seo.ts, postalAddress(), __root.tsx]
-- "lib_seo_contactpagejsonld": "contactPageJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L412 | neighbors=[seo.ts, ld(), contact.tsx]
-- "lib_seo_itemlistjsonld": "itemListJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L344 | neighbors=[seo.ts, ld(), branches.tsx]
-- "lib_seo_localbusinessid": "localBusinessId()" | kind=code-symbol | source=src/lib/seo.ts:L80 | neighbors=[seo.ts, website-laten-maken-veendam.tsx, website-laten-maken-hoogeveen.tsx]
-- "lib_seo_pagelastmod": "pageLastmod()" | kind=code-symbol | source=src/lib/seo.ts:L189 | neighbors=[UpdatedOn.tsx, seo.ts, webPageJsonLd()]
-- "lib_seo_price_valid_until": "PRICE_VALID_UNTIL" | kind=code-symbol | source=src/lib/seo.ts:L85 | neighbors=[seo.ts, __root.tsx, tarieven.tsx]
-- "lib_site_pages": "site-pages.ts" | kind=code-symbol | source=src/lib/site-pages.ts:L1 | neighbors=[1727351 blog, InternalLinkPicker.tsx, CORE_PAGES]
-- "lib_slug_slugify": "slugify()" | kind=code-symbol | source=src/lib/slug.ts:L4 | neighbors=[BlogPostForm.tsx, blog.server.ts, slug.ts]
-- "lib_status_blog_status_color": "BLOG_STATUS_COLOR" | kind=code-symbol | source=src/lib/status.ts:L79 | neighbors=[admin.blog.tsx, BlogCalendar.tsx, status.ts]
-- "lib_status_category_keys": "CATEGORY_KEYS" | kind=code-symbol | source=src/lib/status.ts:L69 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
-- "lib_status_priceforchange": "priceForChange()" | kind=code-symbol | source=src/lib/status.ts:L96 | neighbors=[portal.tsx, status.ts, isCategoryFree()]
-- "lib_status_priority_color": "PRIORITY_COLOR" | kind=code-symbol | source=src/lib/status.ts:L49 | neighbors=[admin.changes.tsx, admin.changes.$changeId.tsx, status.ts]
-- "lib_status_priority_weight": "PRIORITY_WEIGHT" | kind=code-symbol | source=src/lib/status.ts:L42 | neighbors=[admin.changes.tsx, portal.tsx, status.ts]
-- "lib_telegram_server_safesend": "safeSend()" | kind=code-symbol | source=src/lib/telegram.server.ts:L193 | neighbors=[telegram.server.ts, handleTelegramWebhook(), sendTelegramMessage()]
-- "lib_website_checker_server_asserthttpurl": "assertHttpUrl()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L117 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
-- "lib_website_checker_server_fetchtext": "fetchText()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L234 | neighbors=[website-checker.server.ts, fetchSafely(), runWebsiteCheck()]
-- "lib_website_checker_server_isblockedip": "isBlockedIp()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L64 | neighbors=[website-checker.server.ts, isBlockedIpv4(), isBlockedIpv6()]
-- "lib_website_checker_server_isblockedipv4": "isBlockedIpv4()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L48 | neighbors=[website-checker.server.ts, isBlockedIp(), isBlockedIpv6()]
-- "lib_website_checker_server_isblockedipv6": "isBlockedIpv6()" | kind=code-symbol | source=src/lib/website-checker.server.ts:L52 | neighbors=[website-checker.server.ts, isBlockedIp(), isBlockedIpv4()]
-- "lib_website_checker_server_ssrfblockederror": "SsrfBlockedError" | kind=code-symbol | source=src/lib/website-checker.server.ts:L68 | neighbors=[website-checker.server.ts, safeLookup(), .constructor()]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_change_requests": "public.change_requests" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L28 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, change_requests_touch, auth.users]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_handle_new_user": "public.handle_new_user()" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L95 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, public.profiles, public.user_roles]
-- "migrations_20260523183942_31ca9a16_7791_46e0_b5cb_1df22bf0e07f_public_user_roles": "public.user_roles" | kind=code-symbol | source=supabase/migrations/20260523183942_31ca9a16-7791-46e0-b5cb-1df22bf0e07f.sql:L5 | neighbors=[20260523183942_31ca9a16-7791-46e0-b5cb-…, public.handle_new_user(), auth.users]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_change_requests": "public.change_requests" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L31 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.change_attachments, public.change_comments]
-- "migrations_20260523190624_1b6c9585_e5a9_4c6a_a6fb_569a456bccaf_public_handle_new_user": "public.handle_new_user()" | kind=code-symbol | source=supabase/migrations/20260523190624_1b6c9585-e5a9-4c6a-a6fb-569a456bccaf.sql:L131 | neighbors=[20260523190624_1b6c9585-e5a9-4c6a-a6fb-…, public.profiles, public.user_roles]
-- "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_chat_messages": "public.chat_messages" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L12 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chats, trg_touch_chat_last_message]
-- "migrations_20260523221229_0bee5172_97fa_490f_8bd8_70dca65853cf_public_chats": "public.chats" | kind=code-symbol | source=supabase/migrations/20260523221229_0bee5172-97fa-490f-8bd8-70dca65853cf.sql:L2 | neighbors=[20260523221229_0bee5172-97fa-490f-8bd8-…, public.chat_messages, public.touch_chat_last_message()]
-- "migrations_20260524100732_01aa016d_d09a_439e_a7a9_6f5f2c3138e0": "20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql" | kind=code-symbol | source=supabase/migrations/20260524100732_01aa016d-d09a-439e-a7a9-6f5f2c3138e0.sql:L1 | neighbors=[public.is_super_admin(), 43d815c Changes, bf0cfa4 Fixed security scan issues]
-- "migrations_20260524104213_c69cd657_d923_41b6_a4eb_02eef1c9606c": "20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql" | kind=code-symbol | source=supabase/migrations/20260524104213_c69cd657-d923-41b6-a4eb-02eef1c9606c.sql:L1 | neighbors=[public.admin_notifications, 972c222 Fases 6-7 en Fase 1 voltooid, c3627b5 Changes]
+- "supabase_types_database": "Database" | kind=code-symbol | source=src/integrations/supabase/types.ts:L7 | neighbors=[auth-middleware.ts, client.ts, client.server.ts, types.ts]
+- "ui_button_button": "Button" | kind=code-symbol | source=src/components/ui/button.tsx:L39 | neighbors=[button.tsx, calendar.tsx, carousel.tsx, sidebar.tsx]
+- "ui_input": "input.tsx" | kind=code-symbol | source=src/components/ui/input.tsx:L1 | neighbors=[utils.ts, cn(), Input, sidebar.tsx]
+- "ui_radio_group": "radio-group.tsx" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L1 | neighbors=[utils.ts, cn(), RadioGroup, RadioGroupItem]
+- "ui_resizable": "resizable.tsx" | kind=code-symbol | source=src/components/ui/resizable.tsx:L1 | neighbors=[utils.ts, cn(), ResizableHandle(), ResizablePanelGroup()]
+- "ui_scroll_area": "scroll-area.tsx" | kind=code-symbol | source=src/components/ui/scroll-area.tsx:L1 | neighbors=[utils.ts, cn(), ScrollArea, ScrollBar]
+- "ui_separator": "separator.tsx" | kind=code-symbol | source=src/components/ui/separator.tsx:L1 | neighbors=[utils.ts, cn(), Separator, sidebar.tsx]
+- "ui_tooltip": "tooltip.tsx" | kind=code-symbol | source=src/components/ui/tooltip.tsx:L1 | neighbors=[sidebar.tsx, utils.ts, cn(), TooltipContent]
+- "authenticated_portal_changecard": "ChangeCard()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L880 | neighbors=[portal.tsx, mapStatus(), stepIndex()]
+- "authenticated_portal_mapstatus": "mapStatus()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L67 | neighbors=[portal.tsx, ChangeCard(), matchesFilter()]
+- "authenticated_portal_stepindex": "stepIndex()" | kind=code-symbol | source=src/routes/_authenticated/portal.tsx:L86 | neighbors=[portal.tsx, ChangeCard(), Stepper()]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@032ba882dcdd184c58fcd324caaaa455bba861e3": "032ba88 SEO" | kind=Commit | source=git | neighbors=[main, 2d81f50 feat(seo): vervang /cases door …, 7a63e47 chore: graphify graph bijgewerkt]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7a63e4743d57a1f4b9255081ebc9c8871897b99d": "7a63e47 chore: graphify graph bijgewerkt" | kind=Commit | source=git | neighbors=[main, 032ba88 SEO, ef44acd feat(seo): sitemap + llms.txt a…]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7a80ccf33e842e1845ab2661fcfb4bfa5d93c8f6": "7a80ccf docs(seo): volledige SEO-audit 2026-09-20 (root cause dip + site-breed)" | kind=Commit | source=git | neighbors=[main, e543723 Merge pull request #1 from Mila…, f80d1a3 blur]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@a903820d8d2f9a723af2516050fdd67634743e19": "a903820 Fix Rules of Hooks violation crashing admin Projecten tab" | kind=Commit | source=git | neighbors=[39d363a server basic, admin.tsx, worktree-fix-admin-projects-hooks]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@c4498f5f1a1f0788e92e4dfda2feffb1cfc073f5": "c4498f5 Changes" | kind=Commit | source=git | neighbors=[worktree-curious-wibbling-narwhal, b29ceec Fixed weak PRNG and RLS, 20260523231640_f0c31578-aa3c-4810-a448-…]
+- "components_blogpostform_blogpostformpayload": "BlogPostFormPayload" | kind=code-symbol | source=src/components/BlogPostForm.tsx:L24 | neighbors=[admin.blog.tsx, admin.blog.$postId.tsx, BlogPostForm.tsx]
+- "components_blogpostlinkspanel": "BlogPostLinksPanel.tsx" | kind=code-symbol | source=src/components/BlogPostLinksPanel.tsx:L1 | neighbors=[1727351 blog, BlogPostForm.tsx, BlogPostLinksPanel()]
+- "components_callbackagenda_sameday": "sameDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L50 | neighbors=[CallbackAgenda.tsx, isToday(), startOfDay()]
+- "components_callbackagenda_startofday": "startOfDay()" | kind=code-symbol | source=src/components/CallbackAgenda.tsx:L39 | neighbors=[CallbackAgenda.tsx, sameDay(), startOfWeek()]
+- "components_contact_contact": "Contact()" | kind=code-symbol | source=src/components/Contact.tsx:L11 | neighbors=[Contact.tsx, contact.tsx, index.tsx]
+- "components_exampleslideshow_generic_examples": "GENERIC_EXAMPLES" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L151 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, LocationPageV2.tsx]
+- "components_exampleslideshow_serviceexample": "ServiceExample" | kind=code-symbol | source=src/components/ExampleSlideshow.tsx:L6 | neighbors=[BranchPage.tsx, ExampleSlideshow.tsx, ServicePage.tsx]
+- "components_faq_faq": "FAQ()" | kind=code-symbol | source=src/components/FAQ.tsx:L291 | neighbors=[FAQ.tsx, index.tsx, faq.tsx]
+- "components_faq_faqitems": "faqItems" | kind=code-symbol | source=src/components/FAQ.tsx:L22 | neighbors=[FAQ.tsx, faq.tsx, index.tsx]
+- "components_leadspanel_leaddetail": "LeadDetail()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L620 | neighbors=[LeadsPanel.tsx, initials(), relTime()]
+- "components_leadspanel_leadspanel": "LeadsPanel()" | kind=code-symbol | source=src/components/LeadsPanel.tsx:L157 | neighbors=[admin.leads.tsx, LeadsPanel.tsx, admin.tsx]
+- "components_locationlanding_locationdata": "LocationData" | kind=code-symbol | source=src/components/LocationLanding.tsx:L18 | neighbors=[LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx]
+- "components_locationlanding_locationlanding": "LocationLanding()" | kind=code-symbol | source=src/components/LocationLanding.tsx:L27 | neighbors=[LocationLanding.tsx, website-laten-maken-hoogeveen.tsx, website-laten-maken-veendam.tsx]
+- "components_redirectspanel": "RedirectsPanel.tsx" | kind=code-symbol | source=src/components/RedirectsPanel.tsx:L1 | neighbors=[admin.blog.tsx, 1727351 blog, RedirectsPanel()]
+- "components_telegrammfacard": "TelegramMfaCard.tsx" | kind=code-symbol | source=src/components/TelegramMfaCard.tsx:L1 | neighbors=[admin.accounts.$accountId.tsx, 2b1d78f telegram, TelegramMfaCard()]
+- "components_truststrip_truststrip": "TrustStrip()" | kind=code-symbol | source=src/components/TrustStrip.tsx:L8 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, TrustStrip.tsx]
+- "design_handoff_meer_diensten_support_compiletemplate": "compileTemplate()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L467 | neighbors=[support.js, encodeCase(), walkChildren()]
+- "design_handoff_meer_diensten_support_createcomponentfactory": "createComponentFactory()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L888 | neighbors=[support.js, getReact(), createRuntime()]
+- "design_handoff_meer_diensten_support_csstoobj": "cssToObj()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L391 | neighbors=[support.js, kebabToCamel(), hostPositionStyle()]
+- "design_handoff_meer_diensten_support_encodecase": "encodeCase()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L372 | neighbors=[support.js, compileTemplate(), encodeCamelAttrs()]
+- "design_handoff_meer_diensten_support_importantify": "importantify()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L1542 | neighbors=[support.js, scanUnquotedUrl(), stripComments()]
+- "design_handoff_meer_diensten_support_init": "init()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L1848 | neighbors=[support.js, createRuntime(), createStreamTracker()]
+- "design_handoff_meer_diensten_support_isdeckmounttag": "isDeckMountTag()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L489 | neighbors=[support.js, walkElement(), walkXImport()]
+- "design_handoff_meer_diensten_support_kebabtocamel": "kebabToCamel()" | kind=code-symbol | source=design/geanimeerde-achtergronden/design_handoff_meer_diensten/support.js:L388 | neighbors=[support.js, collectProps(), cssToObj()]
 
 ## Instructions
 

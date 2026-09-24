@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationPageV2, type LocationPageData } from "@/components/LocationPageV2";
-import { SITE_URL, OG_IMAGE_URL, serviceJsonLd, breadcrumbJsonLd, cityAreaServed, faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  cityOgImage,
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  cityAreaServed,
+  faqJsonLd,
+} from "@/lib/seo";
 
 const CITY = "Meppel";
 const URL = `${SITE_URL}/website-laten-maken-meppel`;
@@ -12,6 +19,9 @@ const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken in Meppel",
   region: "Drenthe",
+
+  definitie:
+    "Bij AIMI laat je in Meppel een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle sites bouwt voor de logistiek en het MKB in Meppel en omgeving.",
   kicker: "Webdesign in Meppel",
   intro:
     "Meppel geldt van oudsher als poort naar Drenthe: een spoorknooppunt met sterke logistieke en grafische bedrijvigheid. AIMI ontwerpt, bouwt en host websites voor ondernemers in Meppel die net zo snel en betrouwbaar moeten werken als het knooppunt waar ze middenin zitten.",
@@ -98,11 +108,11 @@ export const Route = createFileRoute("/website-laten-maken-meppel")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
-      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image", content: cityOgImage(CITY) },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "twitter:image", content: OG_IMAGE_URL },
+      { name: "twitter:image", content: cityOgImage(CITY) },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
