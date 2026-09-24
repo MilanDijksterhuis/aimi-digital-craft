@@ -29,6 +29,17 @@ BASE_URL="${DEPLOY_BASE_URL:-https://aimi-development.nl}"
 echo "==> git pull"
 git pull
 
+# HTML-bestanden in assets/ breken de Nitro-build: Nitro bundelt alles onder
+# assets/ als server-asset en struikelt over inline <style> in losse .html-
+# werkbestanden. Design-handoffs/mockups horen in design/ (buiten de build).
+echo "==> check: geen HTML in assets/"
+if find assets -name "*.html" 2>/dev/null | grep -q .; then
+  echo "FOUT: HTML-bestanden in assets/ breken de Nitro-build:" >&2
+  find assets -name "*.html" 2>/dev/null >&2
+  echo "Verplaats ze naar design/ (buiten de build) en probeer opnieuw." >&2
+  exit 1
+fi
+
 echo "==> npm ci"
 npm ci
 

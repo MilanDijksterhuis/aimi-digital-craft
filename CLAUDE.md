@@ -16,6 +16,11 @@ Werkregels:
 Werk altijd lokaal in dit VS code project maak geen nieuwe worktrees aan.
 ik push zelf naar github van mijn lokale code -> git add . -> git commit -m "" -> git push
 
+## Build & assets
+
+- Geen HTML, design-handoffs of werkbestanden in `assets/`; die horen in `design/` (buiten de build). Nitro bundelt alles onder `assets/` als server-asset en breekt op losse `.html`-bestanden met inline `<style>`. Runtime-afbeeldingen staan in `src/assets/` (geïmporteerd) of `public/` (via URL).
+- `scripts/deploy.sh` faalt bewust vóór de build als er nog `.html` in `assets/` staat.
+
 ## Design-regels
 
 - Geen grote genummerde kopjes/cijfers (01, 02, 03...) als visueel element in feature- of contentlijsten. Dit voelt als generieke AI-template-opmaak. Gebruik in plaats daarvan editorial patronen zonder nummering: bv. een accentbalkje, alleen typografie, of iconen.
