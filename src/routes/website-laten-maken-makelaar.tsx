@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-makelaar`;
+const PATH = "/website-laten-maken-makelaar";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "makelaarskantoor",
+  path: PATH,
+  summary: [
+    "Een website voor je makelaarskantoor is er niet om huizen te zoeken — dat doen de grote platforms — maar om verkopers te overtuigen jóu de opdracht te geven.",
+    "AIMI bouwt die site op maat rond je verkochte woningen en een waardebepaling met lage drempel, en host hem zelf vanuit Veendam.",
+  ],
   h1: "Webdesign voor makelaars die opdrachten willen winnen",
   kicker: "Webdesign voor makelaars",
   intro:
@@ -47,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een makelaarskantoor",
   pricingBody: [
-    "Een eenvoudige website voor je makelaarskantoor met woningaanbod, zoekfilters en contactgegevens begint bij € 499 eenmalig (Starter). Met een gekoppeld woningaanbod met live filters zit je eerder in het Pro-traject vanaf € 749. Voor een zelfstandig makelaarskantoor is een meerpagina-site meestal precies goed: een sterke homepage, een pagina over verkopen, een pagina over jou of het team, een overzicht van verkochte woningen en een aanvraagformulier voor de waardebepaling. Dat valt doorgaans binnen ons Pro-pakket.",
+    "Een makelaarssite is zelden een één-pagina website: je hebt een sterke homepage, een pagina over verkopen, een pagina over jou of het team, een overzicht van verkochte woningen en een aanvraagformulier voor de waardebepaling. Zo'n meerpagina-site valt doorgaans in ons Pro-traject in plaats van in het instappakket. Het aanbod hoort er als etalage en bewijs te staan, niet als woningzoekmachine met live filters — daar concurreer je toch niet met de grote platforms.",
     "Wil je het actuele aanbod automatisch laten binnenkomen uit je bestaande vastgoedsysteem, dan is dat maatwerk en bepalen we de prijs nadat we weten welke koppeling jouw systeem aanbiedt. We spreken dat vooraf af, zodat je nooit achteraf een rekening krijgt die je niet zag aankomen.",
   ],
   faqs: [
@@ -65,7 +71,7 @@ const data: BranchPageData = {
     },
     {
       q: "Kan ik zelf verkochte woningen toevoegen?",
-      a: "Ja. Dat is juist belangrijk, want je referenties zijn je belangrijkste bewijs. Via het klantenportaal voeg je een woning met foto's toe zodra hij is overgedragen.",
+      a: "Ja. Dat is juist belangrijk, want je referenties zijn je belangrijkste bewijs. Daarvoor bouwen we een eenvoudig beheer in waarmee je een woning met foto's toevoegt zodra hij is overgedragen — maatwerk dat we per kantoor bouwen, los van het standaard klantenportaal voor wijzigingsverzoeken.",
     },
     {
       q: "Werkt zo'n site ook voor aankoopmakelaardij of taxaties?",
@@ -82,7 +88,7 @@ const data: BranchPageData = {
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Webdesign per regio", href: "/webdesign" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
@@ -93,7 +99,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-makelaar")({
   head: () => ({
     meta: [
-      { title: "Makelaars-website laten maken — vanaf € 499 | AIMI" },
+      { title: "Makelaarswebsite laten maken — verkopers overtuigen | AIMI" },
       {
         name: "description",
         content:
@@ -124,13 +130,13 @@ export const Route = createFileRoute("/website-laten-maken-makelaar")({
         description:
           "Websites op maat voor makelaarskantoren, gericht op het winnen van verkoopopdrachten.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor makelaars",
         areaServed: null,
       }),
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
-        ["Website laten maken voor je makelaarskantoor", "/website-laten-maken-makelaar"],
+        ["Website laten maken voor je makelaarskantoor", PATH],
       ]),
       faqJsonLd(data.faqs),
     ],

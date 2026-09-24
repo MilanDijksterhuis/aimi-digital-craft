@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-hovenier`;
+const PATH = "/website-laten-maken-hovenier";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "hoveniersbedrijf",
+  path: PATH,
+  summary: [
+    "Een website voor je hoveniersbedrijf laat je werk spreken: een galerij met aanleg en onderhoud, een duidelijk werkgebied en een offerteformulier dat het seizoen aankan.",
+    "AIMI bouwt de site op maat en host hem zelf vanuit Veendam, met een vaste prijs die je vooraf weet.",
+  ],
   h1: "Een website die je hovenierswerk laat spreken",
   kicker: "Webdesign voor hoveniers",
   intro:
@@ -41,13 +47,13 @@ const data: BranchPageData = {
     { q: "Werkt de offerteaanvraag ook met foto's van de tuin?", a: "Dat kunnen we inbouwen: bezoekers kunnen dan een foto van hun tuin meesturen, zodat jij met meer context kunt reageren op een aanvraag." },
     { q: "Hoeveel kost een website voor mijn hoveniersbedrijf?", a: "Dat hangt af van de omvang van het project. Vraag via het offerteformulier een vrijblijvende inschatting aan, of bekijk onze tarievenpagina als startpunt." },
     { q: "Werken jullie alleen in één regio?", a: "We werken voor hoveniersbedrijven in Noord-Nederland, maar de website zelf richten we in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Wordt de site ook gevonden op zoektermen als 'hovenier website laten maken'?", a: "We leggen een technisch gezonde basis neer (snelheid, structuur, duidelijke pagina's) waarmee zoekmachines de site goed kunnen doorgronden. Verdere groei in vindbaarheid volgt uit content en tijd." },
+    { q: "Kan de site met de seizoenen meebewegen?", a: "Ja. Voorjaar en najaar zijn drukke periodes met andere vragen dan de winter. We richten de site zo in dat je zelf de dienst die op dat moment past bovenaan kunt zetten, bijvoorbeeld aanleg in het voorjaar en onderhoud of winterklaar maken later in het jaar." },
     { q: "Hoe lang duurt het bouwen van een website voor mijn hoveniersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken schilder", href: "/website-laten-maken-schilder" },
     { label: "Webdesign", href: "/webdesign" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -57,7 +63,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-hovenier")({
   head: () => ({
     meta: [
-      { title: "Hovenier-website laten maken — aanleg & onderhoud | AIMI" },
+      { title: "Website hovenier laten maken — aanleg & onderhoud | AIMI" },
       { name: "description", content: "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, vanaf € 499." },
       { property: "og:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor hoveniersbedrijven: projectgalerij, offerteformulier en snelle techniek." },
@@ -75,10 +81,10 @@ export const Route = createFileRoute("/website-laten-maken-hovenier")({
         name: "Website laten maken voor je hoveniersbedrijf",
         description: "Websites op maat voor hoveniersbedrijven, met projectgalerij, offerteformulier en eigen hosting.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor hoveniers",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hoveniersbedrijf", "/website-laten-maken-hovenier"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je hoveniersbedrijf", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

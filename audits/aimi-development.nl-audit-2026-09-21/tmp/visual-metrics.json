@@ -1,0 +1,3796 @@
+{
+  "home_desktop": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "innerWidth": 1440,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 104,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Blog",
+        "w": 34,
+        "h": 50,
+        "x": 760,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 30,
+        "h": 50,
+        "x": 826,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "Portaal",
+        "w": 85,
+        "h": 40,
+        "x": 1147,
+        "y": 12
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 1245,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 181,
+        "h": 39,
+        "x": 535,
+        "y": 479
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 173,
+        "h": 39,
+        "x": 732,
+        "y": 479
+      },
+      {
+        "tag": "A",
+        "text": "Gratis website check! →",
+        "w": 157,
+        "h": 20,
+        "x": 641,
+        "y": 542
+      },
+      {
+        "tag": "A",
+        "text": "Meer over ons",
+        "w": 117,
+        "h": 20,
+        "x": 296,
+        "y": 1592
+      },
+      {
+        "tag": "A",
+        "text": "Meer over website laten maken",
+        "w": 246,
+        "h": 42,
+        "x": 668,
+        "y": 2401
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 159,
+        "h": 42,
+        "x": 926,
+        "y": 2401
+      },
+      {
+        "tag": "A",
+        "text": "Plan een gratis intake",
+        "w": 182,
+        "h": 42,
+        "x": 933,
+        "y": 3337
+      },
+      {
+        "tag": "A",
+        "text": "Bekijk alle tarieven en wat er precies b",
+        "w": 285,
+        "h": 18,
+        "x": 578,
+        "y": 3768
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 334,
+        "h": 42,
+        "x": 137,
+        "y": 4209
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 334,
+        "h": 40,
+        "x": 553,
+        "y": 4211
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 334,
+        "h": 42,
+        "x": 969,
+        "y": 4209
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 161,
+        "h": 42,
+        "x": 639,
+        "y": 4384
+      },
+      {
+        "tag": "A",
+        "text": "Bekijk alle veelgestelde vragen →",
+        "w": 251,
+        "h": 24,
+        "x": 360,
+        "y": 5244
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 93,
+        "h": 21,
+        "x": 700,
+        "y": 5742
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 104,
+        "y": 6357
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 198,
+        "y": 6357
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 104,
+        "y": 6458
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 104,
+        "y": 6493
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 104,
+        "y": 6528
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 104,
+        "y": 6563
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 104,
+        "y": 6598
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 104,
+        "y": 6633
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 104,
+        "y": 6668
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 104,
+        "y": 6703
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 424,
+        "y": 6458
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 175,
+        "h": 24,
+        "x": 424,
+        "y": 6493
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 188,
+        "h": 24,
+        "x": 424,
+        "y": 6528
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 181,
+        "h": 24,
+        "x": 424,
+        "y": 6563
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 744,
+        "y": 6458
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 744,
+        "y": 6493
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 744,
+        "y": 6528
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 744,
+        "y": 6563
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 744,
+        "y": 6598
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 1064,
+        "y": 6458
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 1064,
+        "y": 6493
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "SPAN",
+        "text": "vanaf €30/maand",
+        "ratio": 1,
+        "threshold": 4.5,
+        "fontSize": 10,
+        "color": "rgb(254, 44, 2)",
+        "bg": "rgb(254,44,2)",
+        "x": 260,
+        "y": 2289
+      },
+      {
+        "tag": "P",
+        "text": "Jouw rol",
+        "ratio": 1,
+        "threshold": 4.5,
+        "fontSize": 12,
+        "color": "rgb(254, 44, 2)",
+        "bg": "rgb(254,44,2)",
+        "x": 161,
+        "y": 3288
+      },
+      {
+        "tag": "P",
+        "text": "Stuur ons je content, logo en eventuele huisstijlg",
+        "ratio": 1.6,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(164, 169, 178)",
+        "bg": "rgb(254,44,2)",
+        "x": 161,
+        "y": 3308
+      },
+      {
+        "tag": "A",
+        "text": "Plan een gratis intake",
+        "ratio": 1,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(255,255,255)",
+        "x": 933,
+        "y": 3337
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0.0013,
+    "clsEntries": [
+      {
+        "value": 0.0013,
+        "time": 3873,
+        "sources": [
+          "undefined",
+          "NAV.hidden.md:flex.items-center.gap-8",
+          "DIV.flex.items-center.gap-3",
+          "A.relative.text-[15px].py-3"
+        ]
+      }
+    ],
+    "title": "AIMI: Webdesignbureau uit Veendam | Websites & webshops",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "website-laten-maken_desktop": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "innerWidth": 1440,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 104,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Blog",
+        "w": 34,
+        "h": 50,
+        "x": 760,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 30,
+        "h": 50,
+        "x": 826,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "Portaal",
+        "w": 85,
+        "h": 40,
+        "x": 1147,
+        "y": 12
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 1245,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 21,
+        "x": 168,
+        "y": 112
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 1",
+        "w": 32,
+        "h": 32,
+        "x": 942,
+        "y": 443
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 2",
+        "w": 32,
+        "h": 32,
+        "x": 974,
+        "y": 443
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 3",
+        "w": 32,
+        "h": 32,
+        "x": 1006,
+        "y": 443
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken →",
+        "w": 184,
+        "h": 42,
+        "x": 168,
+        "y": 1540
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting →",
+        "w": 180,
+        "h": 42,
+        "x": 362,
+        "y": 1540
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam →",
+        "w": 237,
+        "h": 42,
+        "x": 552,
+        "y": 1540
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen →",
+        "w": 251,
+        "h": 42,
+        "x": 799,
+        "y": 1540
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 104,
+        "y": 1964
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 198,
+        "y": 1964
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 104,
+        "y": 2065
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 104,
+        "y": 2100
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 104,
+        "y": 2135
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 104,
+        "y": 2170
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 104,
+        "y": 2205
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 104,
+        "y": 2240
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 104,
+        "y": 2275
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 104,
+        "y": 2310
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 424,
+        "y": 2065
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 175,
+        "h": 24,
+        "x": 424,
+        "y": 2100
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 188,
+        "h": 24,
+        "x": 424,
+        "y": 2135
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 181,
+        "h": 24,
+        "x": 424,
+        "y": 2170
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 744,
+        "y": 2065
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 744,
+        "y": 2100
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 744,
+        "y": 2135
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 744,
+        "y": 2170
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 744,
+        "y": 2205
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 1064,
+        "y": 2065
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 1064,
+        "y": 2100
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 104,
+        "y": 2448
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 175,
+        "y": 2448
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 258,
+        "y": 2448
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 335,
+        "y": 2448
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 385,
+        "y": 2448
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 468,
+        "y": 2448
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 168,
+        "y": 440
+      },
+      {
+        "tag": "P",
+        "text": "Klik op een onderdeel voor meer uitleg.",
+        "ratio": 4.26,
+        "threshold": 4.5,
+        "fontSize": 13,
+        "color": "rgb(125, 125, 133)",
+        "bg": "rgb(26,26,26)",
+        "x": 168,
+        "y": 601
+      },
+      {
+        "tag": "A",
+        "text": "Offerte aanvragen",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 1062,
+        "y": 1326
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 633,
+        "y": 1793
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Website laten maken | Professioneel & vanaf € 499: AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "tarieven_desktop": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "innerWidth": 1440,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 104,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Blog",
+        "w": 34,
+        "h": 50,
+        "x": 760,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 30,
+        "h": 50,
+        "x": 826,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "Portaal",
+        "w": 85,
+        "h": 40,
+        "x": 1147,
+        "y": 12
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 1245,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 16,
+        "x": 104,
+        "y": 131
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 542,
+        "h": 26,
+        "x": 137,
+        "y": 1791
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 542,
+        "h": 26,
+        "x": 761,
+        "y": 1791
+      },
+      {
+        "tag": "A",
+        "text": "volledige veelgestelde vragen",
+        "w": 214,
+        "h": 19,
+        "x": 541,
+        "y": 4270
+      },
+      {
+        "tag": "A",
+        "text": "hoe we werken",
+        "w": 106,
+        "h": 19,
+        "x": 808,
+        "y": 4270
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "w": 183,
+        "h": 42,
+        "x": 536,
+        "y": 4574
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 173,
+        "h": 42,
+        "x": 731,
+        "y": 4574
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 104,
+        "y": 4753
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 198,
+        "y": 4753
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 104,
+        "y": 4854
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 104,
+        "y": 4889
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 104,
+        "y": 4924
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 104,
+        "y": 4959
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 104,
+        "y": 4994
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 104,
+        "y": 5029
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 104,
+        "y": 5064
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 104,
+        "y": 5099
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 424,
+        "y": 4854
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 175,
+        "h": 24,
+        "x": 424,
+        "y": 4889
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 188,
+        "h": 24,
+        "x": 424,
+        "y": 4924
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 181,
+        "h": 24,
+        "x": 424,
+        "y": 4959
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 744,
+        "y": 4854
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 744,
+        "y": 4889
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 744,
+        "y": 4924
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 744,
+        "y": 4959
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 744,
+        "y": 4994
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 1064,
+        "y": 4854
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 1064,
+        "y": 4889
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 104,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 175,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 258,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 335,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 385,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 468,
+        "y": 5237
+      },
+      {
+        "tag": "A",
+        "text": "Emmen",
+        "w": 43,
+        "h": 24,
+        "x": 554,
+        "y": 5237
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "SPAN",
+        "text": "Meest gekozen",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 12,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 545,
+        "y": 790
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Wat kost een website laten maken? Tarieven vanaf € 499",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "contact_desktop": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "innerWidth": 1440,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 104,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Blog",
+        "w": 34,
+        "h": 50,
+        "x": 760,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 30,
+        "h": 50,
+        "x": 826,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "Portaal",
+        "w": 85,
+        "h": 40,
+        "x": 1147,
+        "y": 12
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 1245,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 93,
+        "h": 21,
+        "x": 700,
+        "y": 571
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 104,
+        "y": 989
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 198,
+        "y": 989
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 104,
+        "y": 1090
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 104,
+        "y": 1125
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 104,
+        "y": 1160
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 104,
+        "y": 1195
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 104,
+        "y": 1230
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 104,
+        "y": 1265
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 104,
+        "y": 1300
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 104,
+        "y": 1335
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 424,
+        "y": 1090
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 175,
+        "h": 24,
+        "x": 424,
+        "y": 1125
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 188,
+        "h": 24,
+        "x": 424,
+        "y": 1160
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 181,
+        "h": 24,
+        "x": 424,
+        "y": 1195
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 744,
+        "y": 1090
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 744,
+        "y": 1125
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 744,
+        "y": 1160
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 744,
+        "y": 1195
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 744,
+        "y": 1230
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 1064,
+        "y": 1090
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 1064,
+        "y": 1125
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 104,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 175,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 258,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 335,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 385,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 468,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Emmen",
+        "w": 43,
+        "h": 24,
+        "x": 554,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Winschoten",
+        "w": 68,
+        "h": 24,
+        "x": 613,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Roden",
+        "w": 37,
+        "h": 24,
+        "x": 697,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Coevorden",
+        "w": 65,
+        "h": 24,
+        "x": 751,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Meppel",
+        "w": 44,
+        "h": 24,
+        "x": 831,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Leeuwarden",
+        "w": 71,
+        "h": 24,
+        "x": 891,
+        "y": 1473
+      },
+      {
+        "tag": "A",
+        "text": "Drachten",
+        "w": 53,
+        "h": 24,
+        "x": 978,
+        "y": 1473
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Contact | Vraag een offerte aan: AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "website-laten-maken-groningen_desktop": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "innerWidth": 1440,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 104,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Blog",
+        "w": 34,
+        "h": 50,
+        "x": 760,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 30,
+        "h": 50,
+        "x": 826,
+        "y": 7
+      },
+      {
+        "tag": "A",
+        "text": "Portaal",
+        "w": 85,
+        "h": 40,
+        "x": 1147,
+        "y": 12
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 1245,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 21,
+        "x": 168,
+        "y": 128
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 129,
+        "h": 21,
+        "x": 227,
+        "y": 128
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 75,
+        "h": 22,
+        "x": 168,
+        "y": 631
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 1",
+        "w": 32,
+        "h": 32,
+        "x": 947,
+        "y": 567
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 2",
+        "w": 32,
+        "h": 32,
+        "x": 979,
+        "y": 567
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 3",
+        "w": 32,
+        "h": 32,
+        "x": 1011,
+        "y": 567
+      },
+      {
+        "tag": "A",
+        "text": "onze werkwijze",
+        "w": 95,
+        "h": 17,
+        "x": 429,
+        "y": 1075
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio →",
+        "w": 177,
+        "h": 42,
+        "x": 168,
+        "y": 3367
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Assen →",
+        "w": 215,
+        "h": 42,
+        "x": 357,
+        "y": 3367
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogezand →",
+        "w": 250,
+        "h": 42,
+        "x": 583,
+        "y": 3367
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken restaurant →",
+        "w": 241,
+        "h": 42,
+        "x": 846,
+        "y": 3367
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op →",
+        "w": 155,
+        "h": 42,
+        "x": 1098,
+        "y": 3367
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 104,
+        "y": 3832
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 198,
+        "y": 3832
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 104,
+        "y": 3933
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 104,
+        "y": 3968
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 104,
+        "y": 4003
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 104,
+        "y": 4038
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 104,
+        "y": 4073
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 104,
+        "y": 4108
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 104,
+        "y": 4143
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 104,
+        "y": 4178
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 424,
+        "y": 3933
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 175,
+        "h": 24,
+        "x": 424,
+        "y": 3968
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 188,
+        "h": 24,
+        "x": 424,
+        "y": 4003
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 181,
+        "h": 24,
+        "x": 424,
+        "y": 4038
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 744,
+        "y": 3933
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 744,
+        "y": 3968
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 744,
+        "y": 4003
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 744,
+        "y": 4038
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 744,
+        "y": 4073
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 1064,
+        "y": 3933
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 1064,
+        "y": 3968
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 104,
+        "y": 4316
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 175,
+        "y": 4316
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 168,
+        "y": 680
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Website laten maken in Groningen | AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "home_mobile": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 24,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 229,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Gratis website check! →",
+        "w": 157,
+        "h": 20,
+        "x": 116,
+        "y": 544
+      },
+      {
+        "tag": "A",
+        "text": "Meer over ons",
+        "w": 117,
+        "h": 20,
+        "x": 24,
+        "y": 1528
+      },
+      {
+        "tag": "A",
+        "text": "Meer over website laten maken",
+        "w": 246,
+        "h": 40,
+        "x": 48,
+        "y": 2848
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 159,
+        "h": 42,
+        "x": 48,
+        "y": 2900
+      },
+      {
+        "tag": "A",
+        "text": "Plan een gratis intake",
+        "w": 182,
+        "h": 42,
+        "x": 48,
+        "y": 4028
+      },
+      {
+        "tag": "A",
+        "text": "Bekijk alle tarieven en wat er precies b",
+        "w": 285,
+        "h": 18,
+        "x": 53,
+        "y": 4286
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 276,
+        "h": 42,
+        "x": 57,
+        "y": 4727
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 276,
+        "h": 40,
+        "x": 57,
+        "y": 5153
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "w": 276,
+        "h": 42,
+        "x": 57,
+        "y": 5596
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 161,
+        "h": 42,
+        "x": 114,
+        "y": 5791
+      },
+      {
+        "tag": "A",
+        "text": "Bekijk alle veelgestelde vragen →",
+        "w": 251,
+        "h": 24,
+        "x": 24,
+        "y": 6630
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 93,
+        "h": 21,
+        "x": 175,
+        "y": 6968
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 7642
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 118,
+        "y": 7642
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 24,
+        "y": 7767
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 24,
+        "y": 7802
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 24,
+        "y": 7837
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 24,
+        "y": 7872
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 24,
+        "y": 7907
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 7942
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 24,
+        "y": 7977
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 24,
+        "y": 8012
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 211,
+        "y": 7767
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 7801
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 7851
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 7901
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 24,
+        "y": 8105
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 24,
+        "y": 8140
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 24,
+        "y": 8175
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 24,
+        "y": 8210
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 8245
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 211,
+        "y": 8105
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 211,
+        "y": 8140
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 24,
+        "y": 8383
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 95,
+        "y": 8383
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 178,
+        "y": 8383
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 255,
+        "y": 8383
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 24,
+        "y": 8416
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "SPAN",
+        "text": "vanaf €30/maand",
+        "ratio": 1,
+        "threshold": 4.5,
+        "fontSize": 10,
+        "color": "rgb(254, 44, 2)",
+        "bg": "rgb(254,44,2)",
+        "x": 180,
+        "y": 2375
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "AIMI: Webdesignbureau uit Veendam | Websites & webshops",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "website-laten-maken_mobile": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 24,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 229,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 21,
+        "x": 24,
+        "y": 112
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 1",
+        "w": 32,
+        "h": 32,
+        "x": 147,
+        "y": 855
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 2",
+        "w": 32,
+        "h": 32,
+        "x": 179,
+        "y": 855
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 3",
+        "w": 32,
+        "h": 32,
+        "x": 211,
+        "y": 855
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken →",
+        "w": 184,
+        "h": 42,
+        "x": 24,
+        "y": 2811
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting →",
+        "w": 180,
+        "h": 42,
+        "x": 24,
+        "y": 2863
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam →",
+        "w": 237,
+        "h": 42,
+        "x": 24,
+        "y": 2915
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen →",
+        "w": 251,
+        "h": 42,
+        "x": 24,
+        "y": 2967
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 3386
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 118,
+        "y": 3386
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 24,
+        "y": 3511
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 24,
+        "y": 3546
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 24,
+        "y": 3581
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 24,
+        "y": 3616
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 24,
+        "y": 3651
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 3686
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 24,
+        "y": 3721
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 24,
+        "y": 3756
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 211,
+        "y": 3511
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 3545
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 3595
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 3645
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 24,
+        "y": 3849
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 24,
+        "y": 3884
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 24,
+        "y": 3919
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 24,
+        "y": 3954
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 3989
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 211,
+        "y": 3849
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 211,
+        "y": 3884
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 24,
+        "y": 4127
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 95,
+        "y": 4127
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 178,
+        "y": 4127
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 255,
+        "y": 4127
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 24,
+        "y": 4160
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 107,
+        "y": 4160
+      },
+      {
+        "tag": "A",
+        "text": "Emmen",
+        "w": 43,
+        "h": 24,
+        "x": 193,
+        "y": 4160
+      },
+      {
+        "tag": "A",
+        "text": "Winschoten",
+        "w": 68,
+        "h": 24,
+        "x": 252,
+        "y": 4160
+      },
+      {
+        "tag": "A",
+        "text": "Roden",
+        "w": 37,
+        "h": 24,
+        "x": 24,
+        "y": 4193
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 24,
+        "y": 478
+      },
+      {
+        "tag": "P",
+        "text": "Klik op een onderdeel voor meer uitleg.",
+        "ratio": 4.26,
+        "threshold": 4.5,
+        "fontSize": 13,
+        "color": "rgb(125, 125, 133)",
+        "bg": "rgb(26,26,26)",
+        "x": 24,
+        "y": 995
+      },
+      {
+        "tag": "A",
+        "text": "Offerte aanvragen",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 57,
+        "y": 2640
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 108,
+        "y": 3215
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Website laten maken | Professioneel & vanaf € 499: AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "tarieven_mobile": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [
+      {
+        "tag": "TABLE",
+        "cls": "w-full border-collapse text-[14.5px]",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "THEAD",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TH",
+        "cls": "text-left py-4 px-6 font-medium",
+        "right": 491,
+        "width": 187,
+        "x": 304
+      },
+      {
+        "tag": "TH",
+        "cls": "text-left py-4 pl-6 font-medium",
+        "right": 664,
+        "width": 173,
+        "x": 491
+      },
+      {
+        "tag": "TBODY",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 px-6 align-top",
+        "right": 491,
+        "width": 187,
+        "x": 304
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 pl-6 align-top",
+        "right": 664,
+        "width": 173,
+        "x": 491
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 px-6 align-top",
+        "right": 491,
+        "width": 187,
+        "x": 304
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 pl-6 align-top",
+        "right": 664,
+        "width": 173,
+        "x": 491
+      },
+      {
+        "tag": "TR",
+        "cls": "",
+        "right": 664,
+        "width": 640,
+        "x": 24
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 px-6 align-top",
+        "right": 491,
+        "width": 187,
+        "x": 304
+      },
+      {
+        "tag": "TD",
+        "cls": "py-4 pl-6 align-top",
+        "right": 664,
+        "width": 173,
+        "x": 491
+      }
+    ],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 24,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 229,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 16,
+        "x": 24,
+        "y": 131
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 276,
+        "h": 26,
+        "x": 57,
+        "y": 3183
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 276,
+        "h": 26,
+        "x": 57,
+        "y": 3481
+      },
+      {
+        "tag": "A",
+        "text": "hoe we werken",
+        "w": 106,
+        "h": 19,
+        "x": 222,
+        "y": 7467
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "w": 183,
+        "h": 42,
+        "x": 104,
+        "y": 7790
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 173,
+        "h": 42,
+        "x": 108,
+        "y": 7844
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 8023
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 118,
+        "y": 8023
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 24,
+        "y": 8148
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 24,
+        "y": 8183
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 24,
+        "y": 8218
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 24,
+        "y": 8253
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 24,
+        "y": 8288
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 8323
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 24,
+        "y": 8358
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 24,
+        "y": 8393
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 211,
+        "y": 8148
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 8182
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 8232
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 8282
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 24,
+        "y": 8486
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 24,
+        "y": 8521
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 24,
+        "y": 8556
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 24,
+        "y": 8591
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 8626
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 211,
+        "y": 8486
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 211,
+        "y": 8521
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 24,
+        "y": 8764
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 95,
+        "y": 8764
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 178,
+        "y": 8764
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 255,
+        "y": 8764
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 24,
+        "y": 8797
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 107,
+        "y": 8797
+      },
+      {
+        "tag": "A",
+        "text": "Emmen",
+        "w": 43,
+        "h": 24,
+        "x": 193,
+        "y": 8797
+      },
+      {
+        "tag": "A",
+        "text": "Winschoten",
+        "w": 68,
+        "h": 24,
+        "x": 252,
+        "y": 8797
+      },
+      {
+        "tag": "A",
+        "text": "Roden",
+        "w": 37,
+        "h": 24,
+        "x": 24,
+        "y": 8830
+      },
+      {
+        "tag": "A",
+        "text": "Coevorden",
+        "w": 65,
+        "h": 24,
+        "x": 77,
+        "y": 8830
+      },
+      {
+        "tag": "A",
+        "text": "Meppel",
+        "w": 44,
+        "h": 24,
+        "x": 158,
+        "y": 8830
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "SPAN",
+        "text": "Meest gekozen",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 12,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 49,
+        "y": 1521
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Wat kost een website laten maken? Tarieven vanaf € 499",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "contact_mobile": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 24,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 229,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 93,
+        "h": 21,
+        "x": 175,
+        "y": 708
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 1336
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 118,
+        "y": 1336
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 24,
+        "y": 1461
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 24,
+        "y": 1496
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 24,
+        "y": 1531
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 24,
+        "y": 1566
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 24,
+        "y": 1601
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 1636
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 24,
+        "y": 1671
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 24,
+        "y": 1706
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 211,
+        "y": 1461
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 1495
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 1545
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 1595
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 24,
+        "y": 1799
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 24,
+        "y": 1834
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 24,
+        "y": 1869
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 24,
+        "y": 1904
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 1939
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 211,
+        "y": 1799
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 211,
+        "y": 1834
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 24,
+        "y": 2077
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 95,
+        "y": 2077
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 178,
+        "y": 2077
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 255,
+        "y": 2077
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 24,
+        "y": 2110
+      },
+      {
+        "tag": "A",
+        "text": "Stadskanaal",
+        "w": 70,
+        "h": 24,
+        "x": 107,
+        "y": 2110
+      },
+      {
+        "tag": "A",
+        "text": "Emmen",
+        "w": 43,
+        "h": 24,
+        "x": 193,
+        "y": 2110
+      },
+      {
+        "tag": "A",
+        "text": "Winschoten",
+        "w": 68,
+        "h": 24,
+        "x": 252,
+        "y": 2110
+      },
+      {
+        "tag": "A",
+        "text": "Roden",
+        "w": 37,
+        "h": 24,
+        "x": 24,
+        "y": 2143
+      },
+      {
+        "tag": "A",
+        "text": "Coevorden",
+        "w": 65,
+        "h": 24,
+        "x": 77,
+        "y": 2143
+      },
+      {
+        "tag": "A",
+        "text": "Meppel",
+        "w": 44,
+        "h": 24,
+        "x": 158,
+        "y": 2143
+      },
+      {
+        "tag": "A",
+        "text": "Leeuwarden",
+        "w": 71,
+        "h": 24,
+        "x": 218,
+        "y": 2143
+      },
+      {
+        "tag": "A",
+        "text": "Drachten",
+        "w": 53,
+        "h": 24,
+        "x": 304,
+        "y": 2143
+      },
+      {
+        "tag": "A",
+        "text": "Heerenveen",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 2176
+      },
+      {
+        "tag": "A",
+        "text": "Sneek",
+        "w": 36,
+        "h": 24,
+        "x": 110,
+        "y": 2176
+      },
+      {
+        "tag": "A",
+        "text": "Kapsalon",
+        "w": 53,
+        "h": 24,
+        "x": 24,
+        "y": 2265
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Contact | Vraag een offerte aan: AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  },
+  "website-laten-maken-groningen_mobile": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "innerWidth": 390,
+    "hasHorizontalOverflow": false,
+    "overflowElements": [],
+    "tapTargets": [
+      {
+        "tag": "A",
+        "text": "AIMI.",
+        "w": 54,
+        "h": 33,
+        "x": 24,
+        "y": 16
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 91,
+        "h": 38,
+        "x": 229,
+        "y": 13
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 38,
+        "h": 21,
+        "x": 24,
+        "y": 128
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 129,
+        "h": 21,
+        "x": 83,
+        "y": 128
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 75,
+        "h": 22,
+        "x": 24,
+        "y": 770
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 1",
+        "w": 32,
+        "h": 32,
+        "x": 147,
+        "y": 1195
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 2",
+        "w": 32,
+        "h": 32,
+        "x": 179,
+        "y": 1195
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Toon voorbeeld 3",
+        "w": 32,
+        "h": 32,
+        "x": 211,
+        "y": 1195
+      },
+      {
+        "tag": "A",
+        "text": "onze werkwijze",
+        "w": 292,
+        "h": 40,
+        "x": 24,
+        "y": 1980
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio →",
+        "w": 177,
+        "h": 42,
+        "x": 24,
+        "y": 5594
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Assen →",
+        "w": 215,
+        "h": 42,
+        "x": 24,
+        "y": 5648
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogezand →",
+        "w": 250,
+        "h": 42,
+        "x": 24,
+        "y": 5702
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken restaurant →",
+        "w": 241,
+        "h": 42,
+        "x": 24,
+        "y": 5756
+      },
+      {
+        "tag": "A",
+        "text": "Neem contact op →",
+        "w": 155,
+        "h": 42,
+        "x": 24,
+        "y": 5811
+      },
+      {
+        "tag": "A",
+        "text": "06 11851093",
+        "w": 70,
+        "h": 24,
+        "x": 24,
+        "y": 6290
+      },
+      {
+        "tag": "A",
+        "text": "sales@aimi-development.nl",
+        "w": 160,
+        "h": 24,
+        "x": 118,
+        "y": 6290
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken",
+        "w": 118,
+        "h": 24,
+        "x": 24,
+        "y": 6415
+      },
+      {
+        "tag": "A",
+        "text": "Website laten vernieuwen",
+        "w": 145,
+        "h": 24,
+        "x": 24,
+        "y": 6450
+      },
+      {
+        "tag": "A",
+        "text": "Webshop laten maken",
+        "w": 126,
+        "h": 24,
+        "x": 24,
+        "y": 6485
+      },
+      {
+        "tag": "A",
+        "text": "SEO",
+        "w": 26,
+        "h": 24,
+        "x": 24,
+        "y": 6520
+      },
+      {
+        "tag": "A",
+        "text": "Onderhoud & hosting",
+        "w": 122,
+        "h": 24,
+        "x": 24,
+        "y": 6555
+      },
+      {
+        "tag": "A",
+        "text": "Tarieven",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 6590
+      },
+      {
+        "tag": "A",
+        "text": "Meer diensten",
+        "w": 81,
+        "h": 24,
+        "x": 24,
+        "y": 6625
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per branche",
+        "w": 137,
+        "h": 24,
+        "x": 24,
+        "y": 6660
+      },
+      {
+        "tag": "A",
+        "text": "Webdesign per regio",
+        "w": 119,
+        "h": 24,
+        "x": 211,
+        "y": 6415
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Veendam",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 6449
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Hoogeveen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 6499
+      },
+      {
+        "tag": "A",
+        "text": "Website laten maken Groningen",
+        "w": 155,
+        "h": 40,
+        "x": 211,
+        "y": 6549
+      },
+      {
+        "tag": "A",
+        "text": "Over ons",
+        "w": 51,
+        "h": 24,
+        "x": 24,
+        "y": 6753
+      },
+      {
+        "tag": "A",
+        "text": "Werkwijze",
+        "w": 57,
+        "h": 24,
+        "x": 24,
+        "y": 6788
+      },
+      {
+        "tag": "A",
+        "text": "WordPress of maatwerk",
+        "w": 136,
+        "h": 24,
+        "x": 24,
+        "y": 6823
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "w": 24,
+        "h": 24,
+        "x": 24,
+        "y": 6858
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 47,
+        "h": 24,
+        "x": 24,
+        "y": 6893
+      },
+      {
+        "tag": "A",
+        "text": "Privacybeleid",
+        "w": 77,
+        "h": 24,
+        "x": 211,
+        "y": 6753
+      },
+      {
+        "tag": "A",
+        "text": "Algemene voorwaarden",
+        "w": 136,
+        "h": 24,
+        "x": 211,
+        "y": 6788
+      },
+      {
+        "tag": "A",
+        "text": "Veendam",
+        "w": 55,
+        "h": 24,
+        "x": 24,
+        "y": 7031
+      },
+      {
+        "tag": "A",
+        "text": "Hoogeveen",
+        "w": 67,
+        "h": 24,
+        "x": 95,
+        "y": 7031
+      },
+      {
+        "tag": "A",
+        "text": "Groningen",
+        "w": 60,
+        "h": 24,
+        "x": 178,
+        "y": 7031
+      },
+      {
+        "tag": "A",
+        "text": "Assen",
+        "w": 34,
+        "h": 24,
+        "x": 255,
+        "y": 7031
+      },
+      {
+        "tag": "A",
+        "text": "Hoogezand",
+        "w": 67,
+        "h": 24,
+        "x": 24,
+        "y": 7064
+      }
+    ],
+    "lowContrast": [
+      {
+        "tag": "A",
+        "text": "Ga naar hoofdinhoud",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": -9999,
+        "y": 0
+      },
+      {
+        "tag": "A",
+        "text": "Vraag een offerte aan",
+        "ratio": 3.77,
+        "threshold": 4.5,
+        "fontSize": 14,
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgb(254,44,2)",
+        "x": 24,
+        "y": 818
+      }
+    ],
+    "imageBgText": [],
+    "cls": 0,
+    "clsEntries": [],
+    "title": "Website laten maken in Groningen | AIMI",
+    "console": [
+      "[warning] Inline speculation rules cannot currently be modified after they are processed. Instead, a new <script> element must be inserted."
+    ]
+  }
+}

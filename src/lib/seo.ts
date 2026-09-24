@@ -181,10 +181,21 @@ export const PAGE_DATES: Record<string, string> = {
   "/algemene-voorwaarden": "2026-09-04",
 };
 
-/** Laatste-wijzigingsdatum voor een pad; valt terug op vandaag als een pad
- * (nog) niet in PAGE_DATES staat, zodat een nieuwe pagina nooit dateloos is. */
-export const pageLastmod = (path: string): string =>
-  PAGE_DATES[path] ?? new Date().toISOString().slice(0, 10);
+/** Laatste-wijzigingsdatum voor een pad. Staat het pad niet in PAGE_DATES, dan
+ * viel dit vroeger stil terug op *vandaag* — waardoor de zichtbare "Bijgewerkt
+ * op" en `dateModified` elke dag meeschoven en niet meer met de sitemap klopten
+ * (SEO-audit 2026-09, P1-1). Nu waarschuwen we in dev en vallen we terug op
+ * SITE_PUBLISHED (een stabiele datum) i.p.v. een dagelijks wisselend signaal. */
+export const pageLastmod = (path: string): string => {
+  const known = PAGE_DATES[path];
+  if (known) return known;
+  if (import.meta.env?.DEV) {
+    console.warn(
+      `[seo] pageLastmod: geen datum voor "${path}" in PAGE_DATES — voeg het pad toe. Terugval op SITE_PUBLISHED.`,
+    );
+  }
+  return SITE_PUBLISHED;
+};
 
 const NL_MONTHS = [
   "januari",
@@ -322,6 +333,27 @@ export function offeringsJsonLd(opts: {
       position: i + 1,
       name: o.title,
       description: [o.desc, ...o.details].join(" "),
+    })),
+  });
+}
+
+/** ItemList van pagina's (SEO-audit 2026-09, P2-9): geschikt voor een hub die
+ * naar onderliggende pagina's linkt, zoals `/branches`. Elk item krijgt een
+ * `url`, zodat de lijst de zichtbare navigatiestructuur weerspiegelt in plaats
+ * van de hub als losse Service te presenteren. */
+export function itemListJsonLd(opts: {
+  name: string;
+  items: { name: string; url: string }[];
+}): LdScript {
+  return ld({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    itemListElement: opts.items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: it.url,
     })),
   });
 }

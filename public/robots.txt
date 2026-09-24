@@ -1,8 +1,13 @@
 # https://aimi-development.nl/robots.txt
 
+# SEO-audit 2026-09 (P2-7): een crawler volgt volgens RFC 9309 uitsluitend de
+# meest specifieke user-agent-groep. Een benoemde groep met alleen "Allow: /"
+# negeert daarom de Disallows onder "User-agent: *". Daarom herhalen we het
+# Disallow-blok in elke benoemde crawler-groep, zodat /portal, /admin, /api enz.
+# ook voor Googlebot, Bingbot en de AI-crawlers geblokkeerd blijven.
+
 User-agent: *
 Allow: /
-
 # Portaal & auth - geen SEO-waarde
 # SEO-audit 2026-09-20 (B2-2): "$"+"/" i.p.v. een kale prefix, zodat een
 # toekomstige publieke route die met dezelfde letters begint (bv.
@@ -20,43 +25,154 @@ Disallow: /track.js
 
 # /login blijft crawlbaar zodat Google de noindex-meta op die pagina kan lezen
 
-# AI-crawlers expliciet toegestaan (zoek + antwoord-engines)
+# AI-crawlers expliciet toegestaan (zoek + antwoord-engines). Elke groep herhaalt
+# het Disallow-blok, anders zou "Allow: /" de private paden vrijgeven.
 User-agent: GPTBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: Googlebot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: Bingbot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: Google-CloudVertexBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
 # Common Crawl voedt veel open modellen en is een indirecte AI-zichtbaarheidsbron.
 # Bewust toegestaan (GEO-audit 2026-09-06, punt 3).
 User-agent: CCBot
 Allow: /
+Disallow: /portal$
+Disallow: /portal/
+Disallow: /admin$
+Disallow: /admin/
+Disallow: /account$
+Disallow: /account/
+Disallow: /server$
+Disallow: /server/
+Disallow: /api/
+Disallow: /track.js
 
-# Scrapers
+# Scrapers - volledig geweerd
 User-agent: Bytespider
 Disallow: /
 

@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-autorijschool`;
+const PATH = "/website-laten-maken-autorijschool";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "autorijschool",
+  path: PATH,
+  summary: [
+    "Een website voor je rijschool moet leerlingen én ouders overtuigen: heldere lespakketten met prijzen, echte ervaringen, en een simpele manier om je in te schrijven.",
+    "AIMI bouwt die site op maat en host hem zelf vanuit Veendam. Wat het kost hangt af van of je alleen wilt tonen of ook een lesplanning wilt koppelen.",
+  ],
   h1: "Website laten maken voor je rijschool",
   kicker: "Webdesign voor rijscholen",
   intro:
@@ -48,7 +54,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken autobedrijf", href: "/website-laten-maken-autobedrijf" },
     { label: "Tarieven", href: "/tarieven" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "faq", "pricing"],
@@ -57,7 +63,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-autorijschool")({
   head: () => ({
     meta: [
-      { title: "Autorijschool-website laten maken — pakketten | AIMI" },
+      { title: "Website autorijschool laten maken — pakketten | AIMI" },
       { name: "description", content: "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Vanaf € 499." },
       { property: "og:title", content: "Website laten maken voor je autorijschool | AIMI" },
       { property: "og:description", content: "Webdesign voor rijscholen: duidelijke pakketten, vertrouwen opbouwen en makkelijk inschrijven." },
@@ -75,10 +81,10 @@ export const Route = createFileRoute("/website-laten-maken-autorijschool")({
         name: "Website laten maken voor je autorijschool",
         description: "Websites op maat voor rijscholen, met heldere pakketprijzen, leerlingervaringen en online inschrijven.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor rijscholen",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je autorijschool", "/website-laten-maken-autorijschool"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je autorijschool", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

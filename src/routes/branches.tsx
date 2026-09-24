@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
-import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
 
 const RED = "#fe2c02";
 const BG = "#1a1a1a";
@@ -35,7 +35,7 @@ export const brancheGroups: BrancheGroup[] = [
       { label: "Website laten maken voor je hoveniersbedrijf", href: "/website-laten-maken-hovenier", desc: "Voor- en na-foto's, offerteaanvraag, werkgebied" },
       { label: "Website laten maken voor je klusbedrijf", href: "/website-laten-maken-klusbedrijf", desc: "Offerte met foto-upload, mobiel-first" },
       { label: "Website laten maken voor je schildersbedrijf", href: "/website-laten-maken-schilder", desc: "Projectfoto's, offerteaanvraag, seizoensplanning" },
-      { label: "Website laten maken voor je loodgietersbedrijf", href: "/website-laten-maken-loodgieter", desc: "Telefoonnummer voorop, spoedgevallen, razendsnel op mobiel" },
+      { label: "Website laten maken voor je loodgietersbedrijf", href: "/website-laten-maken-loodgieter", desc: "Telefoonnummer voorop, spoedgevallen, snel op mobiel" },
     ],
   },
   {
@@ -88,13 +88,13 @@ export const Route = createFileRoute("/branches")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      serviceJsonLd({
+      // P2-9: de hub is een lijst van branchepagina's, geen losse Service.
+      // ItemList weerspiegelt de zichtbare navigatiestructuur.
+      itemListJsonLd({
         name: "Website laten maken per branche",
-        description: "Websites op maat voor specifieke vakgebieden, gebouwd en gehost door AIMI.",
-        url: URL,
-        serviceType: "Webdesign",
-        // Branches zijn niet regiogebonden: geen areaServed met plaatsnamen.
-        areaServed: null,
+        items: brancheGroups.flatMap((g) =>
+          g.items.map((b) => ({ name: b.label, url: `${SITE_URL}${b.href}` })),
+        ),
       }),
       breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"]]),
     ],
@@ -105,7 +105,11 @@ export const Route = createFileRoute("/branches")({
     // (motion height/opacity, Plus-icoon dat 45° roteert) als de FAQ-accordeon
     // op de homepage (zie FAQ.tsx), voor consistentie in het design.
     function BranchAccordion() {
-      const [openIds, setOpenIds] = useState<Set<string>>(new Set([brancheGroups[0].id]));
+      // P2-9: alle groepen standaard open, zodat alle branchelinks meteen
+      // zichtbaar zijn i.p.v. verstopt achter een dichtgeklapte accordeon.
+      const [openIds, setOpenIds] = useState<Set<string>>(
+        new Set(brancheGroups.map((g) => g.id)),
+      );
 
       const toggle = (id: string) => {
         setOpenIds((prev) => {

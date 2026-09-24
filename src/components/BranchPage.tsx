@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { TrustStrip } from "@/components/TrustStrip";
 import { ExampleSlideshow, GENERIC_EXAMPLES, type ServiceExample } from "@/components/ExampleSlideshow";
 import { UpdatedOn } from "@/components/UpdatedOn";
-import { webPageJsonLd } from "@/lib/seo";
+import { webPageJsonLd, PHONE_DISPLAY, PHONE_E164 } from "@/lib/seo";
 
 /* ---------------------------------------------------------------------------
  * Herbruikbare branchepagina ("Website laten maken voor je [branche]").
@@ -25,6 +25,17 @@ export type BranchSectionId = "needs" | "pitfalls" | "approach" | "pricing" | "f
 
 export type BranchPageData = {
   branch: string; // "kapsalon" — zoals gebruikt in de lopende tekst/H1
+  /** SEO-audit 2026-09: expliciete pagina-pad. Vroeger werd het pad afgeleid uit
+   * `branch` (`/website-laten-maken-${branch}`), maar `branch` is de lopende-
+   * tekstterm (bv. "loodgietersbedrijf"), niet de slug. Dat liet het WebPage-
+   * schema en de "Bijgewerkt op"-datum naar een niet-bestaande URL wijzen (P1-1).
+   * Altijd de echte route meegeven, bv. "/website-laten-maken-loodgieter". */
+  path: string;
+  /** SEO-audit 2026-09 (P1-2/P1-3): branche-eigen samenvatting van 2–3 zinnen,
+   * bovenaan de pagina. Vervangt het identieke, hardcoded definitieblok met een
+   * vaste prijsclaim (€ 499–749) dat op alle 15 pagina's gelijk was en soms de
+   * pagina zelf tegensprak. Geen prijs hardcoden hier — verwijs naar /tarieven. */
+  summary: string[];
   /** A-9: standaard "Website laten maken voor je {branch}". Zie de toelichting
    * in LocationPageV2 — identieke H1-templates over een hele set versterken het
    * doorway-patroon. */
@@ -44,7 +55,15 @@ export type BranchPageData = {
   sectionOrder: BranchSectionId[];
 };
 
-function TextSection({ heading, body }: { heading: string; body: string[] }) {
+function TextSection({
+  heading,
+  body,
+  children,
+}: {
+  heading: string;
+  body: string[];
+  children?: ReactElement;
+}) {
   return (
     <section style={{ marginTop: "64px" }}>
       <h2
@@ -57,7 +76,7 @@ function TextSection({ heading, body }: { heading: string; body: string[] }) {
           key={i}
           style={{
             marginTop: i === 0 ? "18px" : "14px",
-            fontSize: "14.5px",
+            fontSize: "16px",
             lineHeight: 1.75,
             color: "#b6b6bd",
             maxWidth: "68ch",
@@ -66,6 +85,7 @@ function TextSection({ heading, body }: { heading: string; body: string[] }) {
           {p}
         </p>
       ))}
+      {children}
     </section>
   );
 }
@@ -84,11 +104,11 @@ function ApproachSection({ data }: { data: BranchPageData }) {
             key={s.title}
             style={{ paddingLeft: "16px", borderLeft: `2px solid ${RED}` }}
           >
-            <div style={{ fontWeight: 600, fontSize: "14.5px" }}>{s.title}</div>
+            <div style={{ fontWeight: 600, fontSize: "16px" }}>{s.title}</div>
             <div
               style={{
                 marginTop: "4px",
-                fontSize: "13.5px",
+                fontSize: "15px",
                 lineHeight: 1.65,
                 color: "#b6b6bd",
                 maxWidth: "60ch",
@@ -140,7 +160,7 @@ function FaqSection({ data }: { data: BranchPageData }) {
                     color: "inherit",
                   }}
                 >
-                  <span style={{ fontWeight: 600, fontSize: "14.5px" }}>{f.q}</span>
+                  <span style={{ fontWeight: 600, fontSize: "16px" }}>{f.q}</span>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
@@ -160,7 +180,7 @@ function FaqSection({ data }: { data: BranchPageData }) {
                 <div
                   style={{
                     paddingBottom: "16px",
-                    fontSize: "13.5px",
+                    fontSize: "15px",
                     lineHeight: 1.65,
                     color: "#b6b6bd",
                     maxWidth: "62ch",
@@ -177,15 +197,35 @@ function FaqSection({ data }: { data: BranchPageData }) {
   );
 }
 
+function PricingSection({ data }: { data: BranchPageData }) {
+  return (
+    <TextSection heading={data.pricingHeading} body={data.pricingBody}>
+      {/* P2-4: echte contextuele link naar /tarieven i.p.v. losse
+          "tarievenpagina"-verwijzingen in platte tekst. */}
+      <a
+        href="/tarieven"
+        style={{
+          display: "inline-block",
+          marginTop: "18px",
+          fontSize: "15px",
+          fontWeight: 600,
+          color: RED,
+          textDecoration: "none",
+        }}
+      >
+        Bekijk onze tarieven →
+      </a>
+    </TextSection>
+  );
+}
+
 const sectionRenderers: Record<BranchSectionId, (data: BranchPageData) => ReactElement> = {
   needs: (data) => <TextSection key="needs" heading={data.needsHeading} body={data.needsBody} />,
   pitfalls: (data) => (
     <TextSection key="pitfalls" heading={data.pitfallsHeading} body={data.pitfallsBody} />
   ),
   approach: (data) => <ApproachSection key="approach" data={data} />,
-  pricing: (data) => (
-    <TextSection key="pricing" heading={data.pricingHeading} body={data.pricingBody} />
-  ),
+  pricing: (data) => <PricingSection key="pricing" data={data} />,
   faq: (data) => <FaqSection key="faq" data={data} />,
 };
 
@@ -210,11 +250,13 @@ export function BranchPage({
   imageHeight?: number;
   imageMaxWidth?: string;
 }) {
-  const { branch, intro, related, kicker } = data;
-  // Alle brancheslugs zijn /website-laten-maken-{branch}; pad voor het
-  // WebPage-schema en de "Bijgewerkt op"-datum uit PAGE_DATES.
-  const slug = `/website-laten-maken-${branch}`;
-  const definitie = `Een website laten maken voor je ${branch} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt, ook voor ondernemers in de branche ${branch}.`;
+  const { branch, path, summary, intro, related, kicker } = data;
+  // Expliciet pad uit de route (P1-1). Voedt zowel het WebPage-schema als de
+  // "Bijgewerkt op"-datum uit PAGE_DATES; nooit meer afgeleid uit `branch`.
+  const slug = path;
+  // Branche-context meegeven aan het contactformulier zodat de offerteaanvraag
+  // meteen weet om welke branche het gaat (P2-5).
+  const contactHref = `/contact?branche=${encodeURIComponent(branch)}`;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>
@@ -224,7 +266,7 @@ export function BranchPage({
           __html: webPageJsonLd({
             path: slug,
             name: data.h1 ?? `Website laten maken voor je ${branch} | AIMI`,
-            description: definitie,
+            description: summary.join(" "),
           }).children,
         }}
       />
@@ -266,21 +308,25 @@ export function BranchPage({
                 {data.h1 ?? `Website laten maken voor je ${branch}`}
               </h1>
               <UpdatedOn path={slug} style={{ marginBottom: "16px" }} />
-              <p
-                style={{
-                  fontSize: "15.5px",
-                  lineHeight: 1.7,
-                  color: "#efeff1",
-                  maxWidth: "60ch",
-                  fontWeight: 500,
-                }}
-              >
-                {definitie}
-              </p>
+              {summary.map((p, i) => (
+                <p
+                  key={i}
+                  style={{
+                    marginTop: i === 0 ? 0 : "12px",
+                    fontSize: "16px",
+                    lineHeight: 1.7,
+                    color: "#efeff1",
+                    maxWidth: "60ch",
+                    fontWeight: 500,
+                  }}
+                >
+                  {p}
+                </p>
+              ))}
               <p
                 style={{
                   marginTop: "14px",
-                  fontSize: "15px",
+                  fontSize: "16px",
                   lineHeight: 1.7,
                   color: "#b6b6bd",
                   maxWidth: "60ch",
@@ -293,28 +339,44 @@ export function BranchPage({
               <TrustStrip areaLabel="Noord-Nederland, heel het land op afstand" />
               <div style={{ marginTop: "26px", display: "flex", flexWrap: "wrap", gap: "12px" }}>
                 <a
-                  href="/contact"
+                  href={contactHref}
                   style={{
-                    padding: "12px 22px",
+                    padding: "13px 22px",
                     background: RED,
                     color: "#fff",
                     borderRadius: "4px",
                     fontWeight: 600,
-                    fontSize: "14px",
+                    fontSize: "15px",
                     textDecoration: "none",
                   }}
                 >
                   Vraag een offerte aan
                 </a>
+                {/* Secundaire tel-CTA (P2-5): juist branches als loodgieter zoeken
+                    mobiel en willen kunnen bellen. */}
+                <a
+                  href={`tel:${PHONE_E164}`}
+                  style={{
+                    padding: "13px 22px",
+                    border: `1px solid ${RED}`,
+                    color: "#efeff1",
+                    borderRadius: "4px",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                    textDecoration: "none",
+                  }}
+                >
+                  Bel {PHONE_DISPLAY}
+                </a>
                 <a
                   href="/tarieven"
                   style={{
-                    padding: "12px 22px",
+                    padding: "13px 22px",
                     border: "1px solid rgba(255,255,255,0.18)",
                     color: "#efeff1",
                     borderRadius: "4px",
                     fontWeight: 600,
-                    fontSize: "14px",
+                    fontSize: "15px",
                     textDecoration: "none",
                   }}
                 >
@@ -356,10 +418,13 @@ export function BranchPage({
                     key={l.href}
                     href={l.href}
                     style={{
-                      padding: "9px 16px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      minHeight: "44px",
+                      padding: "10px 18px",
                       border: "1px solid rgba(255,255,255,0.14)",
                       borderRadius: "9999px",
-                      fontSize: "13px",
+                      fontSize: "14px",
                       color: "#efeff1",
                       textDecoration: "none",
                     }}
@@ -400,7 +465,7 @@ export function BranchPage({
               vrijblijvende offerte.
             </p>
             <a
-              href="/contact"
+              href={contactHref}
               style={{
                 display: "inline-block",
                 padding: "13px 28px",
@@ -408,7 +473,7 @@ export function BranchPage({
                 color: "#fff",
                 borderRadius: "4px",
                 fontWeight: 600,
-                fontSize: "14px",
+                fontSize: "15px",
                 textDecoration: "none",
               }}
             >
@@ -417,6 +482,49 @@ export function BranchPage({
           </section>
         </div>
       </main>
+
+      {/* Sticky mobiele CTA-balk (P2-5, §16): bellen of offerte binnen duimbereik,
+          alleen op smalle schermen. */}
+      <div className="branch-sticky-cta">
+        <a href={`tel:${PHONE_E164}`} className="branch-sticky-cta__btn branch-sticky-cta__btn--ghost">
+          Bel direct
+        </a>
+        <a href={contactHref} className="branch-sticky-cta__btn branch-sticky-cta__btn--solid">
+          Vraag offerte aan
+        </a>
+      </div>
+      <style>{`
+        .branch-sticky-cta { display: none; }
+        @media (max-width: 767px) {
+          .branch-sticky-cta {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 40;
+            display: flex;
+            gap: 10px;
+            padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+            background: rgba(26,26,26,0.92);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+          }
+          .branch-sticky-cta__btn {
+            flex: 1;
+            text-align: center;
+            padding: 13px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            min-height: 46px;
+            line-height: 20px;
+          }
+          .branch-sticky-cta__btn--solid { background: ${RED}; color: #fff; }
+          .branch-sticky-cta__btn--ghost { border: 1px solid ${RED}; color: #efeff1; }
+          main { padding-bottom: 72px; }
+        }
+      `}</style>
 
       <Footer />
       <CookieBanner />

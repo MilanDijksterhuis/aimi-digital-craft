@@ -3,14 +3,20 @@ import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { WELLNESS_EXAMPLES } from "@/components/ExampleSlideshow";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-pedicure`;
+const PATH = "/website-laten-maken-pedicure";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "pedicurepraktijk",
+  path: PATH,
+  summary: [
+    "Wie een pedicure zoekt, wil weten of je de juiste behandeling biedt — regulier of medisch — en of een deel vergoed kan worden.",
+    "Een website voor je pedicurepraktijk maakt dat meteen duidelijk, met leesbare tekst en een simpele afspraak. AIMI bouwt hem op maat en host hem zelf vanuit Veendam.",
+  ],
   h1: "Website laten maken voor je pedicurepraktijk",
   kicker: "Webdesign voor pedicurepraktijken",
   intro:
-    "We spreken hier bewust van een pedicurepraktijk in plaats van pedicure, omdat dat laatste woord zowel de behandelaar als de behandeling kan betekenen. AIMI bouwt websites voor pedicurepraktijken die vertrouwen wekken bij een vaak oudere doelgroep, met grote leesbare tekst en eenvoudig afspraken maken.",
+    "Iemand die een pedicure zoekt, wil vaak eerst één ding weten: kom ik hier terecht met mijn klacht, en wordt het misschien vergoed? Zeker bij diabetes of reuma zoekt men gericht naar medisch pedicure. Een website voor je pedicurepraktijk beantwoordt die vraag meteen — met grote, leesbare tekst en een eenvoudige manier om een afspraak te maken, passend bij een vaak wat oudere doelgroep.",
   needsHeading: "Wat een website voor een pedicurepraktijk moet kunnen",
   needsBody: [
     "Een pedicurepraktijk bedient vaak twee soorten klanten: mensen die voor regulier voetonderhoud komen, en mensen die medisch pedicure nodig hebben, bijvoorbeeld bij diabetes of reuma. Een website moet dat onderscheid duidelijk maken, zodat een bezoeker meteen ziet welke behandeling bij zijn of haar situatie past, in plaats van dat verschil pas telefonisch te ontdekken.",
@@ -34,12 +40,12 @@ const data: BranchPageData = {
   pricingHeading: "Wat kost een website voor een pedicurepraktijk",
   pricingBody: [
     "Een eenvoudige website voor je pedicurepraktijk met behandelmenu, prijslijst en afspraakmogelijkheid begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een pedicurepraktijk hangt onder meer af van of je alleen regulier pedicure aanbiedt of ook medisch pedicure met bijbehorende informatie over registratie en vergoeding, en van het aantal pagina's dat nodig is om dat helder uit te leggen. Een eenvoudige site met contactgegevens en afspraakmogelijkheid vraagt minder werk dan een site die ook uitgebreid ingaat op medische indicaties.",
-    "Bekijk de knop 'Bekijk tarieven' hierboven voor onze actuele bedragen. In een kennismakingsgesprek bepalen we samen welke onderdelen jouw praktijk nodig heeft, zodat de offerte aansluit op je daadwerkelijke aanbod.",
+    "In een kennismakingsgesprek bepalen we samen welke onderdelen jouw praktijk nodig heeft, zodat de offerte aansluit op je daadwerkelijke aanbod.",
   ],
   faqs: [
     { q: "Kan de website duidelijk maken welke behandeling vergoed kan worden?", a: "Ja, we nemen informatie over registratie en vergoeding voor medisch pedicure duidelijk op, zodat een klant vooraf weet waar hij of zij aan toe is." },
     { q: "Is de website ook prettig te gebruiken voor oudere klanten?", a: "We ontwerpen met grote, leesbare tekst en voldoende contrast, en houden het afspraken maken eenvoudig, met de doelgroep van een pedicurepraktijk in gedachten." },
-    { q: "Wat is het verschil tussen pedicure als behandeling en een pedicurepraktijk als bedrijf op de website?", a: "We gebruiken bewust de term pedicurepraktijk om verwarring te voorkomen tussen de behandelaar, de behandeling en de praktijk zelf, zodat de website eenduidig is." },
+    { q: "Kunnen klanten met diabetes of reuma zien dat ze bij mij terechtkunnen?", a: "Ja, dat zetten we vooraan. Voor medisch pedicure maken we duidelijk voor welke klachten je behandelt en of je geregistreerd bent, zodat iemand met diabetes of reuma meteen ziet dat de praktijk daar geschikt voor is." },
     { q: "Kan ik zowel regulier als medisch pedicure op één website tonen?", a: "Ja, we maken het onderscheid tussen beide duidelijk zichtbaar, zodat een bezoeker meteen ziet welke behandeling bij zijn of haar situatie past." },
     { q: "Kan ik afspraken eenvoudig laten binnenkomen zonder ingewikkeld systeem?", a: "We houden het afsprakenformulier of de boekingsknop bewust simpel, met zo min mogelijk stappen, passend bij een brede doelgroep." },
     { q: "Wat kost een website voor een pedicurepraktijk laten maken?", a: "Dat hangt af van de gewenste functionaliteit en het aantal pagina's. Bekijk de tarievenpagina of vraag een offerte aan voor een indicatie." },
@@ -48,7 +54,7 @@ const data: BranchPageData = {
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website voor je nagelstudio", href: "/website-laten-maken-nagelstudio" },
     { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -58,7 +64,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-pedicure")({
   head: () => ({
     meta: [
-      { title: "Pedicure-website laten maken — vanaf € 499 | AIMI" },
+      { title: "Website pedicure laten maken — vanaf € 499 | AIMI" },
       {
         name: "description",
         content: "Vertrouwenwekkende, leesbare website voor je pedicurepraktijk, met onderscheid tussen regulier en medisch pedicure. AIMI bouwt en host.",
@@ -85,7 +91,7 @@ export const Route = createFileRoute("/website-laten-maken-pedicure")({
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
-        ["Website laten maken voor je pedicurepraktijk", "/website-laten-maken-pedicure"],
+        ["Website laten maken voor je pedicurepraktijk", PATH],
       ]),
       faqJsonLd(data.faqs),
     ],

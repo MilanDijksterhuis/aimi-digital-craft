@@ -3,10 +3,16 @@ import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { WELLNESS_EXAMPLES } from "@/components/ExampleSlideshow";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-kapsalon`;
+const PATH = "/website-laten-maken-kapsalon";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "kapsalon",
+  path: PATH,
+  summary: [
+    "Een website voor je kapsalon of barbershop draait om drie dingen: online een afspraak kunnen maken, een actuele prijslijst, en foto's van je werk.",
+    "AIMI bouwt die site op maat en host hem zelf vanuit Veendam — snel op mobiel, zodat klanten tussendoor makkelijk boeken. Wat het kost hangt af van of er een boekingssysteem aan gekoppeld wordt.",
+  ],
   h1: "Website laten maken voor je kapsalon",
   kicker: "Webdesign voor kapsalons",
   intro:
@@ -34,7 +40,7 @@ const data: BranchPageData = {
   pricingHeading: "Wat kost een website voor een kapsalon",
   pricingBody: [
     "Een eenvoudige website voor je kapsalon met prijslijst, team en openingstijden begint bij € 499 eenmalig (Starter). Met een online afsprakenmodule zit je eerder in het Pro-traject vanaf € 749. De uiteindelijke prijs voor een website voor je kapsalon hangt af van de scope: een eenvoudige site met prijslijst, team en contactgegevens is minder omvangrijk dan een site met een gekoppeld boekingssysteem, meertalige content of een uitgebreide portfolio-pagina per stylist. Ook het aantal pagina's en of er al bruikbare foto's zijn, of dat er nog fotografie nodig is, speelt mee.",
-    "Onze tarieven staan overzichtelijk op de website; bekijk de knop 'Bekijk tarieven' hierboven voor de actuele bedragen. In een kennismakingsgesprek bepalen we samen welke onderdelen nodig zijn voor jouw salon, zodat de offerte aansluit op wat je echt gebruikt in plaats van op een standaardpakket.",
+    "In een kennismakingsgesprek bepalen we samen welke onderdelen nodig zijn voor jouw salon, zodat de offerte aansluit op wat je echt gebruikt in plaats van op een standaardpakket.",
   ],
   faqs: [
     { q: "Kan ik klanten online laten boeken via de website?", a: "Ja, we koppelen een boekingssysteem aan je website of adviseren een passende oplossing als je er nog geen hebt, zodat klanten zelf een tijdstip kunnen kiezen." },
@@ -49,7 +55,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je nagelstudio", href: "/website-laten-maken-nagelstudio" },
     { label: "Website voor je schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "pricing", "faq"],
@@ -58,10 +64,10 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-kapsalon")({
   head: () => ({
     meta: [
-      { title: "Kapsalon-website laten maken? Zo ziet dat eruit | AIMI" },
+      { title: "Website kapsalon laten maken — online afspraken | AIMI" },
       {
         name: "description",
-        content: "Website voor je kapsalon met online afspraken, prijslijst en teamfoto's. AIMI bouwt en host snelle websites voor kappers in Noord-Nederland.",
+        content: "Website voor je kapsalon of barbershop met online afspraken, prijslijst en foto's van je werk. AIMI bouwt en host snelle websites voor kappers.",
       },
       { property: "og:title", content: "Website laten maken voor je kapsalon | AIMI" },
       { property: "og:description", content: "Online boeken, prijslijst en foto's van je werk: een website die aansluit op hoe een kapsalon werkt." },

@@ -2,11 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-bloemist`;
+const PATH = "/website-laten-maken-bloemist";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "bloemenwinkel",
-  h1: "Een website voor je bloemenwinkel die ook bestellingen aanneemt",
+  path: PATH,
+  summary: [
+    "Een website voor je bloemist of bloemenwinkel neemt bestellingen aan met een bezorgdatum, houdt rouwwerk apart en geeft je grip op piekdagen als Moederdag en Valentijn.",
+    "AIMI bouwt de site of webshop op maat en host hem zelf vanuit Veendam. Wat het kost hangt af van of je alleen wilt tonen of ook online wilt verkopen.",
+  ],
+  h1: "Een website voor je bloemist die ook bestellingen aanneemt",
   kicker: "Webdesign voor bloemisten",
   intro:
     "Een bloemist heeft een website nodig die tegen pieken kan. Het grootste deel van het jaar is het rustig, en dan komen Moederdag, Valentijnsdag en de feestdagen, waarop je in een paar dagen een flink deel van je omzet draait. Daarnaast loopt er het hele jaar door een tweede stroom die weinig met piekdagen te maken heeft: rouwwerk, dat om een heel andere benadering vraagt.",
@@ -47,7 +53,7 @@ const data: BranchPageData = {
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -57,8 +63,8 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-bloemist")({
   head: () => ({
     meta: [
-      { title: "Bloemenwinkel-website laten maken — bezorging | AIMI" },
-      { name: "description", content: "Website of webshop voor je bloemenwinkel: online bestellen met bezorgdatum, een eigen pagina voor rouwwerk en grip op je piekdagen." },
+      { title: "Website bloemist laten maken — bestellen & bezorgen | AIMI" },
+      { name: "description", content: "Website of webshop voor je bloemist of bloemenwinkel: online bestellen met bezorgdatum, een eigen pagina voor rouwwerk en grip op je piekdagen." },
       { property: "og:title", content: "Website laten maken voor je bloemenwinkel | AIMI" },
       { property: "og:description", content: "Webdesign voor bloemisten: bestellen en bezorgen, rouwwerk apart, en beschikbaarheid per dag instelbaar." },
       { property: "og:type", content: "website" },
@@ -75,10 +81,10 @@ export const Route = createFileRoute("/website-laten-maken-bloemist")({
         name: "Website laten maken voor je bloemenwinkel",
         description: "Websites en webshops op maat voor bloemisten, met bezorging, rouwwerk en beschikbaarheid per dag.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor bloemisten",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je bloemenwinkel", "/website-laten-maken-bloemist"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je bloemenwinkel", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { UpdatedOn } from "@/components/UpdatedOn";
+import { BranchLinks } from "@/components/BranchLinks";
 import {
   SITE_URL,
   OG_IMAGE_URL,
@@ -669,6 +670,8 @@ function TarievenPage() {
             </div>
           </div>
         </section>
+
+        <BranchLinks heading="Welk pakket past bij jouw branche?" />
       </main>
 
       <Footer />

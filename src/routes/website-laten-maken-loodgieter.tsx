@@ -1,11 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
-import { SITE_URL, OG_IMAGE_URL, ORG_ID, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-loodgieter`;
+const PATH = "/website-laten-maken-loodgieter";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "loodgietersbedrijf",
+  path: PATH,
+  summary: [
+    "Wie een loodgieter zoekt, doet dat vaak met spoed. Een website voor je loodgieters- of installatiebedrijf zet daarom het telefoonnummer voorop en laadt ook op een matige mobiele verbinding meteen.",
+    "AIMI bouwt die site licht en snel op maat en host hem zelf vanuit Veendam met servermonitoring. Wat het kost hangt af van hoeveel diensten je apart wilt uitlichten.",
+  ],
   h1: "Een website waarmee je loodgietersbedrijf gebeld wordt",
   kicker: "Webdesign voor loodgieters",
   intro:
@@ -42,13 +48,13 @@ const data: BranchPageData = {
     { q: "Hoeveel kost een website voor mijn loodgietersbedrijf?", a: "De prijs hangt af van de gewenste functionaliteit, bijvoorbeeld of spoedcontact en storingsdienst apart uitgelicht moeten worden. Bekijk onze tarievenpagina als startpunt of vraag een offerte aan." },
     { q: "Blijft de website ook bereikbaar tijdens drukte, bijvoorbeeld bij vorst?", a: "We hosten op eigen infrastructuur met servermonitoring, zodat de site ook op piekmomenten bereikbaar blijft." },
     { q: "Werken jullie in een specifieke regio?", a: "We werken voor loodgietersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Wordt mijn bedrijf gevonden op zoektermen als 'loodgieter website laten maken'?", a: "Snelheid en een schone technische structuur vormen de basis waarop zoekmachines vertrouwen. Voor een storingsdienst is dat extra belangrijk, omdat mensen tijdens een lekkage snel op mobiel zoeken." },
+    { q: "Kan het telefoonnummer met één tik gebeld worden op mobiel?", a: "Ja, het nummer is een aantikbare bel-link. Iemand met een lekkage belt zo direct vanaf de zoekresultaten, zonder eerst een nummer over te typen." },
     { q: "Hoe lang duurt het bouwen van een website voor mijn loodgietersbedrijf?", a: "Een standaard website met spoedmelding en dienstenoverzicht staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Onderhoud en hosting", href: "/onderhoud-hosting" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -58,7 +64,7 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
   head: () => ({
     meta: [
       { title: "Loodgieter-website laten maken — spoedservice | AIMI" },
-      { name: "description", content: "Snelle website voor je loodgietersbedrijf met telefoonnummer voorop, spoedmelding bovenaan en razendsnelle mobiele laadtijd. Vraag een offerte aan bij AIMI." },
+      { name: "description", content: "Snelle website voor je loodgieters- of installatiebedrijf met telefoonnummer voorop, spoedmelding bovenaan en snelle mobiele laadtijd. Vraag een offerte aan bij AIMI." },
       { property: "og:title", content: "Website laten maken voor je loodgietersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor loodgietersbedrijven, gebouwd voor snelheid en spoedcontact op mobiel." },
       { property: "og:type", content: "website" },
@@ -71,19 +77,14 @@ export const Route = createFileRoute("/website-laten-maken-loodgieter")({
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Website laten maken voor je loodgietersbedrijf",
-          serviceType: "Webdesign",
-          description: "Snelle websites op maat voor loodgietersbedrijven, met nadruk op spoedcontact, telefoonnummer en eigen hosting.",
-          url: URL,
-          provider: { "@id": ORG_ID },
-        }),
-      },
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgietersbedrijf", "/website-laten-maken-loodgieter"]]),
+      serviceJsonLd({
+        name: "Website laten maken voor je loodgietersbedrijf",
+        serviceType: "Webdesign voor loodgieters",
+        description: "Snelle websites op maat voor loodgieters- en installatiebedrijven, met nadruk op spoedcontact, telefoonnummer en eigen hosting.",
+        url: URL,
+        areaServed: null,
+      }),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je loodgietersbedrijf", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

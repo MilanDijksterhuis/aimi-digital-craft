@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-schilder`;
+const PATH = "/website-laten-maken-schilder";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "schildersbedrijf",
+  path: PATH,
+  summary: [
+    "Een website voor je schildersbedrijf laat binnen- en buitenwerk zien in een projectgalerij en maakt een offerteaanvraag met foto's van de klus simpel.",
+    "AIMI bouwt de site op maat en host hem zelf vanuit Veendam, met een vaste prijs die je vooraf weet.",
+  ],
   h1: "Webdesign voor je schildersbedrijf",
   kicker: "Webdesign voor schilders",
   intro:
@@ -42,7 +48,7 @@ const data: BranchPageData = {
     { q: "Hoeveel kost een website voor mijn schildersbedrijf?", a: "De prijs verschilt per project, bijvoorbeeld door het aantal pagina's en of je materiaal- en werkwijze-uitleg opneemt. Bekijk de tarievenpagina als startpunt of vraag een offerte aan." },
     { q: "Kan ik uitleggen welke verf en materialen ik gebruik?", a: "Zeker, we nemen een kort stuk over werkwijze en materialen op, wat bij veel klanten vertrouwen wekt voordat ze contact opnemen." },
     { q: "Werken jullie in een specifieke regio?", a: "We werken voor schildersbedrijven in Noord-Nederland, en richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Wordt mijn schildersbedrijf gevonden op zoektermen als 'schilder website laten maken'?", a: "De technische basis (snelheid, structuur, leesbare pagina's) leggen we goed neer, zodat zoekmachines de site kunnen doorgronden. Vindbaarheid bouw je daarna verder op met content en tijd." },
+    { q: "Kan ik ook zakelijk werk zoals VvE's en onderhoudsplannen tonen?", a: "Ja. Voor VvE's, vastgoedbeheerders en terugkerend onderhoud richten we een apart onderdeel in met eigen tekst en een eigen aanvraag, los van het particuliere werk. Zo zien opdrachtgevers meteen dat je meerjarig onderhoud en grotere trajecten aankunt." },
     { q: "Hoe lang duurt het bouwen van een website voor mijn schildersbedrijf?", a: "Een standaard website met projectgalerij en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we projectfoto's en teksten ontvangen." },
   ],
   related: [
@@ -50,7 +56,7 @@ const data: BranchPageData = {
     { label: "Website laten maken klusbedrijf", href: "/website-laten-maken-klusbedrijf" },
     { label: "Website laten maken hovenier", href: "/website-laten-maken-hovenier" },
     { label: "Webdesign", href: "/webdesign" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
   ],
   sectionOrder: ["needs", "pricing", "pitfalls", "approach", "faq"],
 };
@@ -58,7 +64,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-schilder")({
   head: () => ({
     meta: [
-      { title: "Schildersbedrijf-website laten maken | AIMI" },
+      { title: "Website schildersbedrijf laten maken | AIMI" },
       { name: "description", content: "Website voor je schildersbedrijf: duidelijk onderscheid tussen binnen- en buitenwerk, projectfoto's die je werk verkopen en een offerteformulier op maat." },
       { property: "og:title", content: "Website laten maken voor je schildersbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor schildersbedrijven, met fotogalerij, werkwijze en offerteaanvraag." },
@@ -79,7 +85,7 @@ export const Route = createFileRoute("/website-laten-maken-schilder")({
         serviceType: "Webdesign voor schilders",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schildersbedrijf", "/website-laten-maken-schilder"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je schildersbedrijf", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

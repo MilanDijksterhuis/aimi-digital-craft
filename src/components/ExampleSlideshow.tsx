@@ -81,6 +81,9 @@ export function ExampleSlideshow({
           width={width}
           height={height}
           loading={index === 0 ? "eager" : "lazy"}
+          // P3-5: de eerste slide is een LCP-kandidaat; markeer hem als
+          // high-priority zodat de browser hem eerder ophaalt.
+          fetchPriority={index === 0 ? "high" : "auto"}
           decoding="async"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -115,8 +118,8 @@ export function ExampleSlideshow({
               aria-label={`Toon voorbeeld ${i + 1}`}
               aria-current={i === index}
               style={{
-                width: "32px",
-                height: "32px",
+                width: "44px",
+                height: "44px",
                 display: "grid",
                 placeItems: "center",
                 background: "none",

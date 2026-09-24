@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { Nav } from "@/components/Nav";
@@ -36,7 +36,17 @@ export type ServicePageData = {
   examples?: ServiceExample[];
 };
 
-export function ServicePage({ data, path }: { data: ServicePageData; path?: string }) {
+export function ServicePage({
+  data,
+  path,
+  children,
+}: {
+  data: ServicePageData;
+  path?: string;
+  /** Optioneel extra blok, gerenderd tussen "Ook interessant" en de CTA.
+   * Gebruikt door /website-laten-maken voor de branche-links (P1-5). */
+  children?: ReactNode;
+}) {
   const {
     kicker,
     h1,
@@ -440,6 +450,8 @@ export function ServicePage({ data, path }: { data: ServicePageData; path?: stri
               </div>
             </section>
           )}
+
+          {children}
 
           {/* CTA */}
           <section

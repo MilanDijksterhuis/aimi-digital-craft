@@ -9,6 +9,9 @@ your JSON answer to the answer file.
 You are documenting nodes in a knowledge graph.
 For each entry below, write ONE concise factual plain-language sentence
 describing what it is or does. Use only the provided context.
+For a code symbol (kind=code-symbol — a function, class, or constant),
+describe what the function/symbol does based on its name, source location
+and neighbors — e.g. "Resolves the configured ontology profile from graphify.yaml.".
 For an entity node (any other kind — e.g. a person, place, event, object),
 describe what the entity is and its role, grounded in its type, its
 relations (neighbors) and the provided citations/evidence — e.g.
@@ -21,6 +24,14 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "lib_seo_webpagejsonld": "webPageJsonLd()" | kind=code-symbol | source=src/lib/seo.ts:L231 | neighbors=[BranchPage.tsx, LocationPageV2.tsx, ServicePage.tsx, seo.ts, ld(), pageLastmod()]
+- "ui_chart": "chart.tsx" | kind=code-symbol | source=src/components/ui/chart.tsx:L1 | neighbors=[utils.ts, cn(), ChartConfig, ChartContainer, ChartContext, ChartContextProps]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@00d6931ace05801b13d3c6fec4d7f388c641b02f": "00d6931 Changes" | kind=Commit | source=git | neighbors=[admin.tsx, main, 21355f6 Changes, b7f53d6 Changes, tmp-main-merge, tmp-revert-main]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@020d80731071e5c7f54dd6dd5701fbd383ad65d8": "020d807 Changes" | kind=Commit | source=git | neighbors=[main, 408d241 Changes, routeTree.gen.ts, 3b65b5f Changes, tmp-main-merge, tmp-revert-main]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@0332090312971f581f0e392fbbd7d768b13f6ca5": "0332090 Changes" | kind=Commit | source=git | neighbors=[main, d7e04a1 Home-Afspraak weggehaald, Contact.tsx, df16e84 Changes, tmp-main-merge, tmp-revert-main]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@0d60453d8dfca04517b429e4b75eea63ff987c86": "0d60453 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, f9e4bcf Changes, 67f2077 Changes, tmp-main-merge, tmp-revert-main]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@0e9729e471af9b784f795955bb2564f1b4be2643": "0e9729e Changes" | kind=Commit | source=git | neighbors=[admin.tsx, main, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@1a55bd1691dc3a0ec581b39588228848124ec64b": "1a55bd1 Fix formatting in FAQ answers" | kind=Commit | source=git | neighbors=[main, 85ad012 Cinematisch redesign: forest he…, FAQ.tsx, 735e902 Verwijder alle section-label ey…, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@1dfd3b7b52dd448a5042242aa3d28dcf88bb0524": "1dfd3b7 Code edited in Lovable Code Editor" | kind=Commit | source=git | neighbors=[main, 36052ff Code edited in Lovable Code Edi…, Hero.tsx, fe54e43 Code edited in Lovable Code Edi…, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@1e3899b0e601c7853ccd697d87413040cba446aa": "1e3899b Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@21355f690be1ec24108a6387d344f78b0ca8afe3": "21355f6 Changes" | kind=Commit | source=git | neighbors=[00d6931 Changes, admin.tsx, main, 3d42113 Kleurproblemen opgeholzen, tmp-main-merge, tmp-revert-main]
@@ -46,21 +57,13 @@ one-sentence description — no prose, no markdown fences.
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@5e76ecd684c6305f5108aa0d63152ad671d67aed": "5e76ecd Changes" | kind=Commit | source=git | neighbors=[main, 422202c Made the requested updates, routeTree.gen.ts, 930fc24 Changes, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@5f47f6dfb8f37161d6e09214e75b59ab8bad1823": "5f47f6d animaties" | kind=Commit | source=git | neighbors=[12764e3 Security: fix IDOR vulnerabilit…, main, f67dba7 rate limiting, Services.tsx, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6381715b39428afac8520ff81a8fb92227f2895a": "6381715 Changes" | kind=Commit | source=git | neighbors=[main, 3e100e8 Fixed security findings, 20260610172053_c69c4c4e-eb62-440d-a0ce-…, 7732f7b Changes, tmp-main-merge, tmp-revert-main]
+- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6500c48efcae343190db74799e66a0f73c02a01d": "6500c48 bug fixes" | kind=Commit | source=git | neighbors=[admin.tsx, main, a837528 bug fixes, 8913689 bug fixes, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@67a9525143d21bbc619344a77d509c75f51bffab": "67a9525 Code edited in Lovable Code Editor" | kind=Commit | source=git | neighbors=[0bb1900 Code edited in Lovable Code Edi…, main, 4c798fc Code edited in Lovable Code Edi…, Hero.tsx, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@67f2077f6a443bea802409866b5a18d624de4379": "67f2077 Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, 0d60453 Changes, 7f63a6a Changes, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6aba49e339aeb7cb3c0f78fc88b53033a077b52b": "6aba49e euro teken" | kind=Commit | source=git | neighbors=[main, 9c4f5d5 nummers verwijderd, Services.tsx, c431436 footer tekst weer anders, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@6f2c51c7da6ab34b463fbf6c5d34838d31c8c590": "6f2c51c Changes" | kind=Commit | source=git | neighbors=[portal.tsx, tmp-main-merge, tmp-revert-main, worktree-curious-wibbling-narwhal, worktree-fix-admin-projects-hooks, worktree-floofy-conjuring-petal]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@74760114bda82b5a65d9b053293d97d3ac5a585b": "7476011 Changes" | kind=Commit | source=git | neighbors=[482bba9 Work in progress, main, 7d64543 Changes, Nav.tsx, tmp-main-merge, tmp-revert-main]
 - "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7732f7bb914e4cd8a6626e70c291b9c85d5445c0": "7732f7b Changes" | kind=Commit | source=git | neighbors=[main, 6381715 Changes, routeTree.gen.ts, 9ed5748 Changes, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@775e9f5ade29396638b669763dd9e2938a490829": "775e9f5 bug fixes" | kind=Commit | source=git | neighbors=[admin.tsx, main, 8913689 bug fixes, eccff4f bug fixes 2, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7eafc83159788365bcd3f3c518f802b28c24c585": "7eafc83 Changes" | kind=Commit | source=git | neighbors=[main, 952880b Changes, Contact.tsx, df1c05d Changes, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@7f63a6a9df9ae5260bdfbc003566b5c7fcd4666f": "7f63a6a Changes" | kind=Commit | source=git | neighbors=[portal.tsx, main, 67f2077 Changes, 952880b Changes, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@821a2164edf167eb2c92b46d07ff0c7bda38aedd": "821a216 Update vite.config.ts" | kind=Commit | source=git | neighbors=[main, 7842118 Prijs wijzing 499, vite.config.ts, ee1b8ae Change start script from bun to…, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@86b3111542493b56b2d7409decee7ed75bcb2ba2": "86b3111 Changes" | kind=Commit | source=git | neighbors=[779aebc Nieuwe Lottielab-look toegepast, portal.tsx, main, 2770cdb Changes, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@879bad8a91a2c6c3d6b30208817c3b4d18496823": "879bad8 Handoff doc gemaakt" | kind=Commit | source=git | neighbors=[1514d2b Changes, 7842118 Prijs wijzing 499, main, ca832db Add .env to .gitignore., tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@8913689daf2814713c150db0381cf833259ce82e": "8913689 bug fixes" | kind=Commit | source=git | neighbors=[775e9f5 bug fixes, main, 6500c48 bug fixes, admin.functions.ts, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@8ccc23819b7b4d0f51c031773c446e71ed901768": "8ccc238 Work in progress" | kind=Commit | source=git | neighbors=[37c0d11 Dock tokens toegevoegd & emojis…, main, 930fc24 Changes, routeTree.gen.ts, tmp-main-merge, tmp-revert-main]
-- "commit:repo:github.com/MilanDijksterhuis/aimi-digital-craft@930fc24f8e21c168e5d97193bd8d6542c392bd48": "930fc24 Changes" | kind=Commit | source=git | neighbors=[8ccc238 Work in progress, main, 5e76ecd Changes, __root.tsx, tmp-main-merge, tmp-revert-main]
 
 ## Instructions
 

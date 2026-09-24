@@ -17,6 +17,17 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_pagination_pagination": "Pagination()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L7 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationcontent": "PaginationContent" | kind=code-symbol | source=src/components/ui/pagination.tsx:L17 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationellipsis": "PaginationEllipsis()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L78 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationitem": "PaginationItem" | kind=code-symbol | source=src/components/ui/pagination.tsx:L24 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationlink": "PaginationLink()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L34 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationlinkprops": "PaginationLinkProps" | kind=code-symbol | source=src/components/ui/pagination.tsx:L29 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationnext": "PaginationNext()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L65 | neighbors=[pagination.tsx]
+- "ui_pagination_paginationprevious": "PaginationPrevious()" | kind=code-symbol | source=src/components/ui/pagination.tsx:L49 | neighbors=[pagination.tsx]
+- "ui_popover_popovercontent": "PopoverContent" | kind=code-symbol | source=src/components/ui/popover.tsx:L12 | neighbors=[popover.tsx]
+- "ui_progress_progress": "Progress" | kind=code-symbol | source=src/components/ui/progress.tsx:L8 | neighbors=[progress.tsx]
+- "ui_radio_group_radiogroup": "RadioGroup" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L7 | neighbors=[radio-group.tsx]
 - "ui_radio_group_radiogroupitem": "RadioGroupItem" | kind=code-symbol | source=src/components/ui/radio-group.tsx:L15 | neighbors=[radio-group.tsx]
 - "ui_resizable_resizablehandle": "ResizableHandle()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L15 | neighbors=[resizable.tsx]
 - "ui_resizable_resizablepanelgroup": "ResizablePanelGroup()" | kind=code-symbol | source=src/components/ui/resizable.tsx:L6 | neighbors=[resizable.tsx]
@@ -46,17 +57,6 @@ one-sentence description — no prose, no markdown fences.
 - "ui_sidebar_sidebarinput": "SidebarInput" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L331 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebarinset": "SidebarInset" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L314 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebarmenu": "SidebarMenu" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L479 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenuaction": "SidebarMenuAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L584 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenubadge": "SidebarMenuBadge" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L615 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenubutton": "SidebarMenuButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L525 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenubuttonvariants": "sidebarMenuButtonVariants" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L503 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenuitem": "SidebarMenuItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L491 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenuskeleton": "SidebarMenuSkeleton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L635 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenusub": "SidebarMenuSub" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L668 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenusubbutton": "SidebarMenuSubButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L689 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarmenusubitem": "SidebarMenuSubItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L684 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarprovider": "SidebarProvider" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L49 | neighbors=[sidebar.tsx]
-- "ui_sidebar_sidebarrail": "SidebarRail" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L286 | neighbors=[sidebar.tsx]
 
 ## Instructions
 

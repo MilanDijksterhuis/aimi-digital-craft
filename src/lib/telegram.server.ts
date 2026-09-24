@@ -8,7 +8,7 @@
 //  - Het bot-token (TELEGRAM_BOT_TOKEN) blijft uitsluitend server-side. Deze
 //    module wordt nooit vanuit client-code geïmporteerd; alle toegang loopt via
 //    server functions / server routes.
-//  - Alle tabellen zijn service_role-only (zie supabase-telegram-migration.sql).
+//  - Alle tabellen zijn service_role-only (zie supabase/legacy-migrations/supabase-telegram-migration.sql).
 //  - Koppelcodes, MFA-codes en pending-logins zijn eenmalig en kortlevend.
 //
 // Belangrijke Telegram-beperking: de Bot API kan geen bericht sturen naar een

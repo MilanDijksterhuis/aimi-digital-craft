@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { AnswerBlock } from "@/components/AnswerBlock";
 import { Services } from "@/components/Services";
+import { BranchLinks } from "@/components/BranchLinks";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { CookieBanner } from "@/components/CookieBanner";
 
@@ -70,6 +71,7 @@ function Index() {
         <Hero />
         <AnswerBlock />
         <Services />
+        <BranchLinks />
         <ProcessTimeline />
         <Pricing />
         <FAQ />

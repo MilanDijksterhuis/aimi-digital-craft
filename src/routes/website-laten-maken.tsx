@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageData } from "@/components/ServicePage";
+import { BranchLinks } from "@/components/BranchLinks";
 import { serviceJsonLd, breadcrumbJsonLd, offeringsJsonLd, SITE_URL, OG_IMAGE_URL } from "@/lib/seo";
 import { RedDiagonalBackground } from "../components/rodeachtergrond";
 
@@ -109,7 +110,9 @@ export const Route = createFileRoute("/website-laten-maken")({
   component: () => (
     <>
       <RedDiagonalBackground />
-      <ServicePage data={data} path="/website-laten-maken" />
+      <ServicePage data={data} path="/website-laten-maken">
+        <BranchLinks heading="Voor jouw branche" />
+      </ServicePage>
     </>
   ),
 });

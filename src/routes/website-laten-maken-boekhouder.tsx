@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-boekhouder`;
+const PATH = "/website-laten-maken-boekhouder";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "administratiekantoor",
+  path: PATH,
+  summary: [
+    "Een website voor je boekhoud- of administratiekantoor laat je serieus overkomen en splitst je aanbod per type ondernemer: zzp, mkb of iemand die wil overstappen.",
+    "AIMI bouwt de site op maat, met een veilige manier om documenten aan te leveren waar dat nodig is, en host hem zelf vanuit Veendam.",
+  ],
   h1: "Een website die je boekhoudkantoor serieus laat overkomen",
   kicker: "Webdesign voor boekhouders",
   intro:
@@ -48,7 +54,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken makelaar", href: "/website-laten-maken-makelaar" },
     { label: "Onze werkwijze", href: "/werkwijze" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "pitfalls", "pricing", "faq"],
@@ -57,7 +63,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-boekhouder")({
   head: () => ({
     meta: [
-      { title: "Website voor je administratiekantoor — vanaf € 499 | AIMI" },
+      { title: "Website boekhouder of administratiekantoor laten maken | AIMI" },
       { name: "description", content: "Website voor je boekhoud- of administratiekantoor: opgesplitst per type ondernemer, met heldere prijsindicaties en een uitgelegde overstap." },
       { property: "og:title", content: "Website laten maken voor je administratiekantoor | AIMI" },
       { property: "og:description", content: "Webdesign voor boekhouders: concreet in plaats van jargon, met duidelijke tarieven en een lage overstapdrempel." },
@@ -75,10 +81,10 @@ export const Route = createFileRoute("/website-laten-maken-boekhouder")({
         name: "Website laten maken voor je administratiekantoor",
         description: "Websites op maat voor boekhouders en administratiekantoren, opgesplitst per doelgroep en met heldere tarieven.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor boekhouders",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je administratiekantoor", "/website-laten-maken-boekhouder"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je administratiekantoor", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

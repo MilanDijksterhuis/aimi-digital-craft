@@ -3,10 +3,16 @@ import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { WELLNESS_EXAMPLES } from "@/components/ExampleSlideshow";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-nagelstudio`;
+const PATH = "/website-laten-maken-nagelstudio";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "nagelstudio",
+  path: PATH,
+  summary: [
+    "Een website voor je nagelstudio laat je werk zien met een portfolio van nailart en maakt online boeken en cadeaubonnen makkelijk.",
+    "AIMI bouwt de site op maat en houdt hem snel ondanks veel foto's, en host hem zelf vanuit Veendam.",
+  ],
   h1: "Een website die je nagelstudio laat zien",
   kicker: "Webdesign voor nagelstudio's",
   intro:
@@ -34,7 +40,7 @@ const data: BranchPageData = {
   pricingHeading: "Wat kost een website voor een nagelstudio",
   pricingBody: [
     "Een eenvoudige website voor je nagelstudio met behandelmenu, prijslijst en openingstijden begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een nagelstudio hangt verder samen met de gewenste opzet: een compacte site met portfolio, prijslijst en contactgegevens vraagt minder werk dan een site met online boeken, cadeaubonnen en uitgebreide categorieën binnen het portfolio. Ook het aantal foto's dat verwerkt moet worden en of er al een boekingssysteem is, spelen mee in de scope.",
-    "Bekijk de knop 'Bekijk tarieven' hierboven voor onze actuele bedragen. In een kort kennismakingsgesprek kijken we samen welke onderdelen voor jouw nagelstudio nodig zijn, zodat je een offerte krijgt die aansluit op wat je website daadwerkelijk moet doen.",
+    "In een kort kennismakingsgesprek kijken we samen welke onderdelen voor jouw nagelstudio nodig zijn, zodat je een offerte krijgt die aansluit op wat je website daadwerkelijk moet doen.",
   ],
   faqs: [
     { q: "Kan mijn website veel foto's van nailart tonen zonder traag te worden?", a: "Ja, we optimaliseren alle afbeeldingen bij oplevering, zodat een uitgebreid portfolio toch snel blijft laden, ook op mobiel." },
@@ -49,7 +55,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je kapsalon", href: "/website-laten-maken-kapsalon" },
     { label: "Website voor je schoonheidssalon", href: "/website-laten-maken-schoonheidssalon" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website voor je pedicure", href: "/website-laten-maken-pedicure" },
     { label: "Website laten maken", href: "/website-laten-maken" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -58,7 +64,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-nagelstudio")({
   head: () => ({
     meta: [
-      { title: "Nagelstudio-website laten maken — booking | AIMI" },
+      { title: "Website nagelstudio laten maken — online boeken | AIMI" },
       {
         name: "description",
         content: "Snelle website voor je nagelstudio met een visueel portfolio, online boeken en prijzen per behandeling. Gebouwd en gehost door AIMI.",
@@ -85,7 +91,7 @@ export const Route = createFileRoute("/website-laten-maken-nagelstudio")({
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
-        ["Website laten maken voor je nagelstudio", "/website-laten-maken-nagelstudio"],
+        ["Website laten maken voor je nagelstudio", PATH],
       ]),
       faqJsonLd(data.faqs),
     ],

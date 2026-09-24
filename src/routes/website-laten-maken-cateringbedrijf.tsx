@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-cateringbedrijf`;
+const PATH = "/website-laten-maken-cateringbedrijf";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "cateringbedrijf",
+  path: PATH,
+  summary: [
+    "Een website voor je cateringbedrijf verkoopt geen product maar een belofte: laat je formules en richtprijzen zien en maak het makkelijk om een bruikbare offerteaanvraag te doen.",
+    "AIMI bouwt de site op maat met een aanvraagformulier dat meteen de juiste gegevens uitvraagt, en host hem zelf vanuit Veendam.",
+  ],
   h1: "Webdesign voor catering: van aanvraag tot offerte",
   kicker: "Webdesign voor catering",
   intro:
@@ -47,7 +53,7 @@ const data: BranchPageData = {
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken restaurant", href: "/website-laten-maken-restaurant" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Webshop laten maken", href: "/webshop-laten-maken" },
     { label: "Tarieven", href: "/tarieven" },
     { label: "Neem contact op", href: "/contact" },
   ],
@@ -57,7 +63,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-cateringbedrijf")({
   head: () => ({
     meta: [
-      { title: "Cateringbedrijf-website laten maken — vanaf € 499 | AIMI" },
+      { title: "Website cateringbedrijf laten maken — offertes | AIMI" },
       { name: "description", content: "Website voor je cateringbedrijf met een aanvraagformulier dat bruikbare offerteaanvragen oplevert, heldere formules en richtprijzen." },
       { property: "og:title", content: "Website laten maken voor je cateringbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor cateraars: duidelijke formules, richtprijzen en aanvragen met genoeg informatie voor een offerte." },
@@ -75,10 +81,10 @@ export const Route = createFileRoute("/website-laten-maken-cateringbedrijf")({
         name: "Website laten maken voor je cateringbedrijf",
         description: "Websites op maat voor cateringbedrijven, met heldere formules, richtprijzen en een bruikbaar aanvraagformulier.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor cateraars",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je cateringbedrijf", "/website-laten-maken-cateringbedrijf"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je cateringbedrijf", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

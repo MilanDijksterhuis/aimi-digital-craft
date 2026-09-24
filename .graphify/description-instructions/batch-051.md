@@ -17,6 +17,17 @@ No marketing language.
 Respond ONLY with a JSON object mapping each node id (as a string) to its
 one-sentence description — no prose, no markdown fences.
 
+- "ui_sidebar_sidebarmenuaction": "SidebarMenuAction" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L584 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubadge": "SidebarMenuBadge" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L615 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubutton": "SidebarMenuButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L525 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenubuttonvariants": "sidebarMenuButtonVariants" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L503 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuitem": "SidebarMenuItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L491 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenuskeleton": "SidebarMenuSkeleton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L635 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusub": "SidebarMenuSub" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L668 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubbutton": "SidebarMenuSubButton" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L689 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarmenusubitem": "SidebarMenuSubItem" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L684 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarprovider": "SidebarProvider" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L49 | neighbors=[sidebar.tsx]
+- "ui_sidebar_sidebarrail": "SidebarRail" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L286 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebarseparator": "SidebarSeparator" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L377 | neighbors=[sidebar.tsx]
 - "ui_sidebar_sidebartrigger": "SidebarTrigger" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L260 | neighbors=[sidebar.tsx]
 - "ui_sidebar_usesidebar": "useSidebar()" | kind=code-symbol | source=src/components/ui/sidebar.tsx:L40 | neighbors=[sidebar.tsx]

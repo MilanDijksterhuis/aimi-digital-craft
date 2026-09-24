@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-restaurant`;
+const PATH = "/website-laten-maken-restaurant";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "restaurant",
+  path: PATH,
+  summary: [
+    "Een website voor je restaurant beantwoordt de kleine vragen die gasten écht hebben: wat staat er op de kaart, kan ik reserveren, en zijn jullie vanavond open?",
+    "AIMI zet de menukaart als leesbare pagina neer in plaats van een pdf, houdt de site snel op mobiel en host hem zelf vanuit Veendam.",
+  ],
   h1: "Website laten maken voor je restaurant",
   kicker: "Webdesign voor horeca",
   intro:
@@ -48,7 +54,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken cateringbedrijf", href: "/website-laten-maken-cateringbedrijf" },
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken", href: "/website-laten-maken" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "pitfalls", "approach", "faq", "pricing"],
@@ -57,7 +63,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-restaurant")({
   head: () => ({
     meta: [
-      { title: "Restaurant-website laten maken — reserveringen | AIMI" },
+      { title: "Website restaurant laten maken — reserveren | AIMI" },
       { name: "description", content: "Website voor je restaurant met openingstijden, een leesbare menukaart en reserveren binnen een paar tikken. Snel op mobiel, zelf te beheren." },
       { property: "og:title", content: "Website laten maken voor je restaurant | AIMI" },
       { property: "og:description", content: "Webdesign voor horeca: openingstijden en kaart vooraan, snel op mobiel en zelf bij te werken." },
@@ -78,7 +84,7 @@ export const Route = createFileRoute("/website-laten-maken-restaurant")({
         serviceType: "Webdesign voor horeca",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je restaurant", "/website-laten-maken-restaurant"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je restaurant", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),

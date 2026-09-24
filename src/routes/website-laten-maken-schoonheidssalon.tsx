@@ -3,10 +3,16 @@ import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { WELLNESS_EXAMPLES } from "@/components/ExampleSlideshow";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-schoonheidssalon`;
+const PATH = "/website-laten-maken-schoonheidssalon";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "schoonheidssalon",
+  path: PATH,
+  summary: [
+    "Een website voor je schoonheidssalon toont je behandelmenu overzichtelijk met uitleg per behandeling, maakt de intake vooraf makkelijk en verkoopt cadeaubonnen.",
+    "AIMI bouwt de site op maat met een rustige, verzorgde uitstraling en host hem zelf vanuit Veendam.",
+  ],
   h1: "Webdesign voor je schoonheidssalon",
   kicker: "Webdesign voor schoonheidssalons",
   intro:
@@ -34,7 +40,7 @@ const data: BranchPageData = {
   pricingHeading: "Wat kost een website voor een schoonheidssalon",
   pricingBody: [
     "Een eenvoudige website voor je schoonheidssalon met behandelmenu, prijslijst en team begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een schoonheidssalon hangt af van de omvang van het behandelmenu, of er een intakeformulier en boekingssysteem gekoppeld moeten worden, en hoeveel pagina's er nodig zijn om alle behandelingen goed uit te leggen. Een salon met een uitgebreid aanbod vraagt meer content en structuur dan een salon met een compact menu.",
-    "Bekijk de knop 'Bekijk tarieven' hierboven voor onze actuele bedragen. Tijdens de kennismaking bepalen we samen welke onderdelen jouw schoonheidssalon nodig heeft, zodat de offerte precies aansluit op je behandelmenu en werkwijze.",
+    "Tijdens de kennismaking bepalen we samen welke onderdelen jouw schoonheidssalon nodig heeft, zodat de offerte precies aansluit op je behandelmenu en werkwijze.",
   ],
   faqs: [
     { q: "Kan ik een intakeformulier op mijn website laten zetten?", a: "Ja, we bouwen een online intakeformulier waarmee klanten vooraf gegevens kunnen invullen, zodat je voorbereid aan een eerste behandeling begint." },
@@ -49,7 +55,7 @@ const data: BranchPageData = {
     { label: "Alle branches", href: "/branches" },
     { label: "Website voor je kapsalon", href: "/website-laten-maken-kapsalon" },
     { label: "Website voor je pedicurepraktijk", href: "/website-laten-maken-pedicure" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website voor je nagelstudio", href: "/website-laten-maken-nagelstudio" },
     { label: "Neem contact op", href: "/contact" },
   ],
   sectionOrder: ["needs", "approach", "faq", "pitfalls", "pricing"],
@@ -58,7 +64,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
   head: () => ({
     meta: [
-      { title: "Schoonheidssalon-website laten maken | AIMI" },
+      { title: "Website schoonheidssalon laten maken | AIMI" },
       {
         name: "description",
         content: "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, vanaf € 499.",
@@ -85,7 +91,7 @@ export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
       breadcrumbJsonLd([
         ["Home", "/"],
         ["Branches", "/branches"],
-        ["Website laten maken voor je schoonheidssalon", "/website-laten-maken-schoonheidssalon"],
+        ["Website laten maken voor je schoonheidssalon", PATH],
       ]),
       faqJsonLd(data.faqs),
     ],

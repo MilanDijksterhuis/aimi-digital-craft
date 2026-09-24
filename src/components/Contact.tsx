@@ -8,13 +8,21 @@ import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/seo";
 
 type Mode = "choice" | "appointment" | "form";
 
-export function Contact() {
+export function Contact({ initialBranche }: { initialBranche?: string } = {}) {
   const submit = useServerFn(submitContactForm);
-  const [mode, setMode] = useState<Mode>("choice");
+  // Komt de bezoeker vanaf een branchepagina (/contact?branche=…), dan openen we
+  // direct het formulier met een vooringevuld bericht (SEO-audit 2026-09, P2-5).
+  const [mode, setMode] = useState<Mode>(initialBranche ? "form" : "choice");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: initialBranche
+      ? `Ik wil graag een website laten maken voor mijn ${initialBranche}.`
+      : "",
+  });
   // SEC-6 honeypot: onzichtbaar voor mensen, bots vullen het vaak in.
   const [companyWebsite, setCompanyWebsite] = useState("");
 

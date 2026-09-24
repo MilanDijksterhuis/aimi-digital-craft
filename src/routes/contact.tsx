@@ -7,7 +7,16 @@ import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, contactPageJsonLd } from "@/l
 
 const URL = `${SITE_URL}/contact`;
 
+/** SEO-audit 2026-09 (§29.6, P2-5): branchepagina's linken naar
+ * /contact?branche=<branche>. We lezen die parameter uit, zodat het
+ * contactformulier met een branche-context opent i.p.v. leeg. */
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>): { branche?: string } => {
+    const raw = typeof search.branche === "string" ? search.branche.trim() : "";
+    // Alleen simpele branchetermen toelaten; geen HTML/rare tekens in de prefill.
+    const branche = /^[a-zA-Zà-ÿ'\s-]{2,40}$/.test(raw) ? raw : undefined;
+    return branche ? { branche } : {};
+  },
   head: () => ({
     meta: [
       { title: "Contact | Vraag een offerte aan | AIMI" },
@@ -43,6 +52,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { branche } = Route.useSearch();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -73,7 +83,7 @@ function ContactPage() {
             </p>
           </div>
         </section>
-        <Contact />
+        <Contact initialBranche={branche} />
       </main>
       <Footer />
       <CookieBanner />

@@ -2,10 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BranchPage, type BranchPageData } from "@/components/BranchPage";
 import { SITE_URL, OG_IMAGE_URL, breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
-const URL = `${SITE_URL}/website-laten-maken-klusbedrijf`;
+const PATH = "/website-laten-maken-klusbedrijf";
+const URL = `${SITE_URL}${PATH}`;
 
 const data: BranchPageData = {
   branch: "klusbedrijf",
+  path: PATH,
+  summary: [
+    "Een website voor je klusbedrijf laat zien welke klussen je allround oppakt en maakt het makkelijk om met een paar foto's een offerte aan te vragen.",
+    "Ben je vooral in één vak gespecialiseerd, zoals loodgieterswerk of schilderwerk, dan is een aparte vakpagina soms sterker. AIMI bouwt de site op maat en host hem zelf vanuit Veendam.",
+  ],
   h1: "Website laten maken voor je klusbedrijf",
   kicker: "Webdesign voor klusbedrijven",
   intro:
@@ -42,14 +48,14 @@ const data: BranchPageData = {
     { q: "Hoeveel kost een website voor mijn klusbedrijf?", a: "Dat is afhankelijk van het aantal pagina's en of je een uitgebreid offerteformulier met foto-upload wilt. Bekijk de tarievenpagina voor een indicatie of vraag direct een offerte aan." },
     { q: "Wat als ik na livegang teksten wil aanpassen?", a: "Via het klantenportaal kun je aanvragen indienen voor tekstuele of visuele aanpassingen, zonder dat je zelf hoeft te programmeren." },
     { q: "Werken jullie landelijk of in een bepaalde regio?", a: "We werken voor klusbedrijven in Noord-Nederland, maar richten de website in op het werkgebied dat voor jouw bedrijf klopt." },
-    { q: "Wordt mijn klusbedrijf gevonden op zoektermen als 'klusbedrijf website laten maken'?", a: "Een snelle, technisch schone site is de basis waarop Google kan vertrouwen. Wij zorgen dat die basis klopt; verdere groei in vindbaarheid hangt ook af van je content en tijd." },
+    { q: "Ik doe vooral één vak. Is een klusbedrijf-site dan wel de juiste?", a: "Als je breed inzetbaar bent, past een klusbedrijf-site goed. Zit je zwaartepunt op één vak, bijvoorbeeld loodgieterswerk of schilderwerk, dan trekt een pagina die specifiek op dat vak is gericht vaak gerichtere aanvragen. We hebben daar aparte branchepagina's voor; bij de kennismaking kijken we wat in jouw geval het sterkst werkt." },
     { q: "Hoe lang duurt het bouwen van een website voor mijn klusbedrijf?", a: "Een standaard website met dienstenoverzicht en offerteformulier staat gemiddeld binnen 2 tot 4 weken live, afhankelijk van hoe snel we foto's en teksten ontvangen." },
   ],
   related: [
     { label: "Alle branches", href: "/branches" },
     { label: "Website laten maken hovenier", href: "/website-laten-maken-hovenier" },
     { label: "Website laten maken loodgieter", href: "/website-laten-maken-loodgieter" },
-    { label: "Website laten maken Groningen", href: "/website-laten-maken-groningen" },
+    { label: "Website laten maken schilder", href: "/website-laten-maken-schilder" },
     { label: "Webdesign", href: "/webdesign" },
   ],
   sectionOrder: ["pitfalls", "needs", "approach", "faq", "pricing"],
@@ -58,7 +64,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
   head: () => ({
     meta: [
-      { title: "Klusbedrijf-website laten maken — vanaf € 499 | AIMI" },
+      { title: "Website klusbedrijf laten maken — vanaf € 499 | AIMI" },
       { name: "description", content: "Mobiel-first website voor je klusbedrijf: overzicht van specialismen, offerteaanvraag met foto-upload en techniek die ook op de bouwplaats snel laadt." },
       { property: "og:title", content: "Website laten maken voor je klusbedrijf | AIMI" },
       { property: "og:description", content: "Webdesign voor klusbedrijven, gebouwd voor bezoekers die zoeken vanaf hun telefoon." },
@@ -76,10 +82,10 @@ export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
         name: "Website laten maken voor je klusbedrijf",
         description: "Mobiel-first websites voor klusbedrijven, met offerteformulier, foto-upload en eigen hosting.",
         url: URL,
-        serviceType: "Webdesign",
+        serviceType: "Webdesign voor klusbedrijven",
         areaServed: null,
       }),
-      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je klusbedrijf", "/website-laten-maken-klusbedrijf"]]),
+      breadcrumbJsonLd([["Home", "/"], ["Branches", "/branches"], ["Website laten maken voor je klusbedrijf", PATH]]),
       faqJsonLd(data.faqs),
     ],
   }),
