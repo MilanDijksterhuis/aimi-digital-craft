@@ -15,12 +15,12 @@ const STATIC_SECTIONS = `# AIMI
 ## Pages
 
 - [Home](/): Overzicht van AIMI's diensten, werkwijze, tarieven en contact.
-- [Website laten maken](/website-laten-maken): Professioneel webdesign op maat, vanaf € 499.
+- [Website laten maken](/website-laten-maken): Professioneel webdesign op maat, prijs op aanvraag.
 - [Webshop laten maken](/webshop-laten-maken): Verkoopklare webshops op maat met veilige betaalmethodes.
 - [Website laten vernieuwen](/website-laten-vernieuwen): Bestaande site opknappen of opnieuw bouwen, met behoud van URL's en posities.
 - [Onderhoud & hosting](/onderhoud-hosting): Snelle Nederlandse hosting, onderhoud en monitoring vanaf € 30 p/m.
 - [SEO](/seo): Technische SEO, Core Web Vitals, zoekintentie en lokale vindbaarheid. Geen beloftes over posities.
-- [Tarieven](/tarieven): Wat kost een website laten maken — vaste prijzen vanaf € 499 eenmalig en € 30 per maand.
+- [Tarieven](/tarieven): Wat kost een website laten maken — vaste prijs op aanvraag en vanaf € 30 per maand voor hosting.
 - [Meer diensten](/meer-diensten): Losse diensten, waaronder performance-optimalisatie.
 - [WordPress of maatwerk?](/wordpress-of-maatwerk): Eerlijke vergelijking op kosten, snelheid, beheer, beveiliging en SEO.
 - [Werkwijze](/werkwijze): Hoe AIMI werkt — van kennismaking tot livegang, met vaste prijzen.
@@ -73,7 +73,7 @@ const STATIC_SECTIONS = `# AIMI
 
 ## Diensten
 
-- Website laten maken (vanaf € 499 eenmalig)
+- Website laten maken (prijs op aanvraag)
 - Webshop laten maken (op maat)
 - Hosting, onderhoud en beveiliging (vanaf € 30 per maand)
 - Performance-optimalisatie

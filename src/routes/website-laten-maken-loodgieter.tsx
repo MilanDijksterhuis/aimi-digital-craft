@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een loodgietersbedrijf",
   pricingBody: [
-    "Een eenvoudige website voor je loodgietersbedrijf met diensten, spoedcontact en werkgebied begint bij € 499 eenmalig (Starter). Met uitgebreide dienstenpagina's per specialisme zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een loodgietersbedrijf hangt verder af van de omvang: een compacte site met spoedmelding, telefoonnummer en dienstenoverzicht vraagt minder werk dan een uitgebreide site met aparte pagina's per dienst. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
+    "Een eenvoudige website voor je loodgietersbedrijf met diensten, spoedcontact en werkgebied valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met uitgebreide dienstenpagina's per specialisme zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De prijs van een website voor een loodgietersbedrijf hangt verder af van de omvang: een compacte site met spoedmelding, telefoonnummer en dienstenoverzicht vraagt minder werk dan een uitgebreide site met aparte pagina's per dienst. Via het offerteformulier geef je aan wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste loodgietersbedrijven is een compacte, snelle site met nadruk op spoedcontact voldoende; wie meerdere diensten apart wil uitlichten, kiest vaak voor een uitgebreider pakket. Dat bespreken we altijd vooraf, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [

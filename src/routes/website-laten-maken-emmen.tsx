@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "In Emmen bouwt AIMI websites op maat voor € 499 tot € 749 eenmalig, met € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam en werkt voor zowel de industrie als de toeristische ondernemers rond Emmen.",
+    "In Emmen bouwt AIMI websites op maat voor een vaste prijs op aanvraag, met vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam en werkt voor zowel de industrie als de toeristische ondernemers rond Emmen.",
   kicker: "Webdesign Emmen",
   intro:
     "AIMI bouwt professionele, snelle websites voor ondernemers in en rond Emmen, de grootste stad van Drenthe. Van industrie en logistiek tot toerisme en lokale dienstverlening: een website die past bij jouw bedrijf en klaar is voor groei.",
@@ -108,7 +108,7 @@ export const Route = createFileRoute("/website-laten-maken-emmen")({
       {
         name: "description",
         content:
-          "Voor bedrijven in Emmen: AIMI ontwikkelt snelle websites met eigen hosting, gericht op industrie, toerisme en lokaal MKB. Vaste prijs vanaf € 499.",
+          "Voor bedrijven in Emmen: AIMI ontwikkelt snelle websites met eigen hosting, gericht op industrie, toerisme en lokaal MKB. Vaste prijs op aanvraag.",
       },
       { name: "geo.region", content: "NL-DR" },
       { name: "geo.placename", content: "Emmen" },

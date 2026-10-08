@@ -21,7 +21,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "Bij AIMI laat je in Meppel een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle sites bouwt voor de logistiek en het MKB in Meppel en omgeving.",
+    "Bij AIMI laat je in Meppel een website maken voor een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle sites bouwt voor de logistiek en het MKB in Meppel en omgeving.",
   kicker: "Webdesign in Meppel",
   intro:
     "Meppel geldt van oudsher als poort naar Drenthe: een spoorknooppunt met sterke logistieke en grafische bedrijvigheid. AIMI ontwerpt, bouwt en host websites voor ondernemers in Meppel die net zo snel en betrouwbaar moeten werken als het knooppunt waar ze middenin zitten.",

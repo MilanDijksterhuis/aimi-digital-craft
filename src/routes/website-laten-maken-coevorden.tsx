@@ -13,7 +13,7 @@ const CITY = "Coevorden";
 const URL = `${SITE_URL}/website-laten-maken-coevorden`;
 const TITLE = "Website laten maken in Coevorden — ook voor Duitsland | AIMI";
 const DESCRIPTION =
-  "Professioneel webdesign in Coevorden, ook geschikt voor de Duitse markt. Snel, technisch solide en zelf gehost door AIMI, vanaf € 499. Vraag een offerte aan.";
+  "Professioneel webdesign in Coevorden, ook geschikt voor de Duitse markt. Snel, technisch solide en zelf gehost door AIMI, vaste prijs op aanvraag. Vraag een offerte aan.";
 
 const data: LocationPageData = {
   city: CITY,
@@ -21,7 +21,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "Bij AIMI laat je in Coevorden een website maken vanaf € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in Coevorden, ook voor wie zakendoet over de Duitse grens.",
+    "Bij AIMI laat je in Coevorden een website maken voor een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in Coevorden, ook voor wie zakendoet over de Duitse grens.",
   kicker: "Webdesign in Coevorden",
   intro:
     "Coevorden ligt direct tegen de Duitse grens en is van oudsher een logistiek en industrieel knooppunt. AIMI bouwt en host websites voor ondernemers in Coevorden die zowel de Nederlandse als de Duitse afzetmarkt willen bedienen, met een heldere structuur en techniek die ook onder wisselende belasting stabiel blijft.",

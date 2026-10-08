@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een bloemenwinkel",
   pricingBody: [
-    "Een eenvoudige website voor je bloemenwinkel met assortiment, bezorggebied en openingstijden begint bij € 499 eenmalig (Starter). Met een online besteltool met bezorgopties zit je eerder in het Pro-traject vanaf € 749. Wil je alleen gevonden worden met je openingstijden, assortiment en bezorginformatie, dan is een compacte site voldoende en zit je in de buurt van ons Starter- of Pro-pakket. Dat is voor bloemisten die vooral van de winkel en telefonische bestellingen leven een prima startpunt.",
+    "Een eenvoudige website voor je bloemenwinkel met assortiment, bezorggebied en openingstijden valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online besteltool met bezorgopties zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Wil je alleen gevonden worden met je openingstijden, assortiment en bezorginformatie, dan is een compacte site voldoende en zit je in de buurt van ons Starter- of Pro-pakket. Dat is voor bloemisten die vooral van de winkel en telefonische bestellingen leven een prima startpunt.",
     "Wil je daadwerkelijk online laten bestellen en afrekenen, met bezorgdatum, kaartje en beschikbaarheid per dag, dan is het een webshoptraject. Dat is maatwerk, omdat betalingen, bezorglogica en voorraad meespelen. We bekijken samen wat je nodig hebt en geven daarna een vaste prijs.",
   ],
   faqs: [

@@ -89,9 +89,9 @@ export function Hero() {
         >
           <strong style={{ color: "#fff", fontWeight: 600 }}>AIMI Development</strong> is een
           webdesignbureau in Veendam (Groningen) dat websites en webshops bouwt voor ondernemers in
-          Noord-Nederland, vanaf € 499 eenmalig plus € 30 per maand voor hosting en onderhoud. Wij
-          ontwerpen, bouwen en hosten zelf, met focus op lage kosten, hoge kwaliteit en snelle
-          oplevering.
+          Noord-Nederland, met een vaste prijs op aanvraag plus vanaf € 30 per maand voor hosting
+          en onderhoud. Wij ontwerpen, bouwen en hosten zelf, met focus op lage kosten, hoge
+          kwaliteit en snelle oplevering.
         </p>
 
         <div

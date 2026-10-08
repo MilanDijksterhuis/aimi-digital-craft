@@ -12,9 +12,9 @@ import {
 const CITY = "Hoogeveen";
 const PATH = "/website-laten-maken-hoogeveen";
 const URL = `${SITE_URL}${PATH}`;
-const TITLE = "Webdesigner in Hoogeveen — vanaf € 499 | AIMI";
+const TITLE = "Webdesigner in Hoogeveen | AIMI";
 const DESCRIPTION =
-  "Zoek je een webdesigner in Hoogeveen? AIMI bouwt en host snelle websites voor ondernemers in Zuid-Drenthe. Persoonlijk contact, vanaf € 499.";
+  "Zoek je een webdesigner in Hoogeveen? AIMI bouwt en host snelle websites voor ondernemers in Zuid-Drenthe. Persoonlijk contact, vaste prijs op aanvraag.";
 
 const data: LocationPageData = {
   city: CITY,
@@ -22,7 +22,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "Een website laten maken in Hoogeveen kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat het hele traject verzorgt, van ontwerp tot Nederlandse hosting, voor ondernemers in Hoogeveen.",
+    "Een website laten maken in Hoogeveen heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat het hele traject verzorgt, van ontwerp tot Nederlandse hosting, voor ondernemers in Hoogeveen.",
   kicker: "Webdesign in Hoogeveen",
   intro:
     "Hoogeveen is een van de grotere kernen van Drenthe en fungeert als verzorgingscentrum voor een flink gebied eromheen. AIMI ontwerpt, bouwt en host websites voor ondernemers die het hier van die regiofunctie moeten hebben: goed vindbaar voor mensen uit de wijde omgeving, en snel genoeg om ze niet kwijt te raken voordat de pagina geladen is.",

@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een autobedrijf",
   pricingBody: [
-    "Een eenvoudige website voor je autobedrijf met voorraadoverzicht, contactgegevens en openingstijden begint bij € 499 eenmalig (Starter). Met een doorzoekbaar voertuigaanbod inclusief filters zit je eerder in het Pro-traject vanaf € 749. Een autowebsite valt bijna altijd buiten de standaardpakketten, omdat het voorraadgedeelte maatwerk is: het aantal auto's, de filters en een eventuele koppeling met je bestaande systeem bepalen het werk. Een site met een handmatig beheerde voorraad is aanzienlijk eenvoudiger dan een site die automatisch synchroniseert met een occasionplatform.",
+    "Een eenvoudige website voor je autobedrijf met voorraadoverzicht, contactgegevens en openingstijden valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een doorzoekbaar voertuigaanbod inclusief filters zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Een autowebsite valt bijna altijd buiten de standaardpakketten, omdat het voorraadgedeelte maatwerk is: het aantal auto's, de filters en een eventuele koppeling met je bestaande systeem bepalen het werk. Een site met een handmatig beheerde voorraad is aanzienlijk eenvoudiger dan een site die automatisch synchroniseert met een occasionplatform.",
     "We bespreken dat vooraf en geven daarna een vaste prijs, zodat je niet halverwege voor verrassingen komt te staan. Op onze tarievenpagina zie je waar onze prijzen beginnen; voor een autobedrijf maken we op basis van je voorraad en wensen een concrete offerte.",
   ],
   faqs: [

@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een klusbedrijf",
   pricingBody: [
-    "Een eenvoudige website voor je klusbedrijf met diensten, werkgebied en contact begint bij € 499 eenmalig (Starter). Met een online planningsmodule voor afspraken zit je eerder in het Pro-traject vanaf € 749. Wat een website voor een klusbedrijf verder kost, hangt af van het aantal pagina's en de functionaliteit die je nodig hebt: een compacte site met dienstenoverzicht en offerteformulier is minder werk dan een uitgebreide site met aparte pagina's per specialisme. Via het offerteformulier geef je aan wat je ongeveer nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang.",
+    "Een eenvoudige website voor je klusbedrijf met diensten, werkgebied en contact valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online planningsmodule voor afspraken zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Wat een website voor een klusbedrijf verder kost, hangt af van het aantal pagina's en de functionaliteit die je nodig hebt: een compacte site met dienstenoverzicht en offerteformulier is minder werk dan een uitgebreide site met aparte pagina's per specialisme. Via het offerteformulier geef je aan wat je ongeveer nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang.",
     "Onze tarieven staan als startpunt op de pricing-pagina. Voor de meeste klusbedrijven volstaat een site met een handvol pagina's, een duidelijk overzicht van specialismen en een offerteformulier met foto-upload; wie meerdere aparte diensten breed wil uitlichten, kiest vaak voor een uitgebreider pakket. We stemmen dat altijd vooraf met je af, zodat je precies weet waar je aan toe bent.",
   ],
   faqs: [
@@ -103,7 +103,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-klusbedrijf")({
   head: () => ({
     meta: [
-      { title: "Website klusbedrijf laten maken — vanaf € 499 | AIMI" },
+      { title: "Website klusbedrijf laten maken | AIMI" },
       {
         name: "description",
         content:

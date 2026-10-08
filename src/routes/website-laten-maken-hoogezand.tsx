@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Groningen",
 
   definitie:
-    "Vanuit het nabijgelegen Veendam bouwt AIMI websites voor ondernemers in Hoogezand: € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. De korte lijnen maken AIMI een logische keuze voor productiebedrijven, installateurs en zzp'ers in Hoogezand.",
+    "Vanuit het nabijgelegen Veendam bouwt AIMI websites voor ondernemers in Hoogezand: een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. De korte lijnen maken AIMI een logische keuze voor productiebedrijven, installateurs en zzp'ers in Hoogezand.",
   kicker: "Webdesign in Hoogezand",
   intro:
     "Hoogezand, onderdeel van de gemeente Midden-Groningen, kent van oudsher een sterke maakindustrie en veel kleine zelfstandigen. AIMI bouwt vanuit de buurgemeente Veendam professionele websites voor ondernemers in Hoogezand die technisch in orde willen zijn zonder overbodige poespas.",

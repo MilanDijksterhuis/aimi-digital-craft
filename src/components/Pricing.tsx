@@ -4,13 +4,13 @@ import { Check, ArrowRight } from "lucide-react";
 const tiers = [
   {
     name: "Starter",
-    price: "€ 499",
+    price: "Op aanvraag",
     desc: "Een professionele één-pagina site. Voor ZZP'ers en kleine bedrijven.",
     features: ["1-pagina site", "Mobile-first design", "Domein (1 jaar)", "Basic SEO"],
   },
   {
     name: "Pro",
-    price: "€ 749",
+    price: "Op aanvraag",
     desc: "Meerdere pagina's, eigen design en CMS. Voor bedrijven die meer controle willen.",
     features: [
       "Tot 6 pagina's",

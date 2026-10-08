@@ -19,7 +19,7 @@ const data: LocationPageData = {
   h1: "Een zakelijke website voor ondernemers in Drachten",
   region: REGION,
   definitie:
-    "Een website laten maken in Drachten kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle, heldere sites bouwt voor technische bedrijven en dienstverleners in Drachten en omgeving.",
+    "Een website laten maken in Drachten heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle, heldere sites bouwt voor technische bedrijven en dienstverleners in Drachten en omgeving.",
   kicker: "Webdesign in Drachten",
   intro:
     "Drachten, hoofdplaats van de gemeente Smallingerland, staat bekend om zijn technische maakindustrie en innovatieve bedrijfsleven. AIMI bouwt websites voor die technische en industriële ondernemers, met dezelfde nauwkeurigheid en betrouwbaarheid die je van hun eigen producten verwacht.",

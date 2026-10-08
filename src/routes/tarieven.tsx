@@ -24,7 +24,6 @@ const FONT = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 type Tier = {
   name: string;
   price: string;
-  amount?: number;
   desc: string;
   forWho: string;
   features: string[];
@@ -34,8 +33,7 @@ type Tier = {
 const tiers: Tier[] = [
   {
     name: "Starter",
-    price: "€ 499",
-    amount: 499,
+    price: "Prijs op aanvraag",
     desc: "Een professionele één-pagina site, eenmalig.",
     forWho: "Voor ZZP'ers en starters die vooral gevonden en gebeld willen worden.",
     features: [
@@ -49,8 +47,7 @@ const tiers: Tier[] = [
   },
   {
     name: "Pro",
-    price: "€ 749",
-    amount: 749,
+    price: "Prijs op aanvraag",
     desc: "Meerdere pagina's, eigen ontwerp en CMS, eenmalig.",
     forWho: "Voor bedrijven met meerdere diensten of vestigingen die zelf tekst willen aanpassen.",
     features: [
@@ -81,7 +78,7 @@ const tiers: Tier[] = [
 const recurring = [
   {
     name: "Hosting & onderhoud",
-    price: "€ 30 / maand",
+    price: "Vanaf € 30 / maand",
     desc: "Nederlandse hosting op onze eigen VPS, SSL, dagelijkse back-ups, updates en 24/7 monitoring. Geen setup-kosten als we een bestaande site overnemen.",
     href: "/onderhoud-hosting",
     linkLabel: "Onderhoud & hosting",
@@ -114,13 +111,13 @@ const notIncluded = [
 const comparison = [
   {
     aspect: "Startprijs",
-    aimi: "Vanaf € 499 eenmalig, vaste prijs vooraf",
+    aimi: "Vaste prijs op aanvraag, vooraf duidelijk na een kort gesprek",
     bouwpakket: 'Vaak "gratis" te starten, maar pas online met een betaald abonnement',
-    freelancer: "Wisselend, vaak € 40–90 per uur zonder vast eindbedrag vooraf",
+    freelancer: "Wisselend, vaak per uur zonder vast eindbedrag vooraf",
   },
   {
     aspect: "Doorlopende kosten",
-    aimi: "€ 30 per maand, alles inbegrepen (hosting, SSL, back-ups, updates)",
+    aimi: "Vanaf € 30 per maand, alles inbegrepen (hosting, SSL, back-ups, updates)",
     bouwpakket: "€ 15–40 per maand licentiekosten, prijs stijgt vaak na 1–2 jaar",
     freelancer: "Losse hostingkosten, apart te regelen en te onderhouden",
   },
@@ -147,19 +144,19 @@ const comparison = [
 const faqs = [
   {
     q: "Wat kost een website laten maken?",
-    a: "Bij AIMI begint een professionele één-pagina website bij € 499 eenmalig. Een meerpagina-site met eigen ontwerp en CMS kost € 749. Webshops en maatwerkprojecten krijgen een vaste prijs na een kennismakingsgesprek. Daarnaast betaal je € 30 per maand voor hosting en onderhoud.",
+    a: "Bij AIMI krijg je een vaste prijs op aanvraag, afgestemd op de omvang van je site: een professionele één-pagina website (Starter), een meerpagina-site met eigen ontwerp en CMS (Pro), of een webshop en maatwerkproject (Custom). Na een kort gesprek weet je precies wat je betaalt. Daarnaast betaal je vanaf € 30 per maand voor hosting en onderhoud.",
   },
   {
     q: "Zijn dit vaste prijzen of een indicatie?",
-    a: "Dit zijn vaste prijzen. Je weet vooraf wat je betaalt en we werken niet met uurtje-factuurtje. Alleen bij maatwerk bepalen we de prijs na het gesprek, maar ook dan ligt het bedrag daarna vast.",
+    a: "Dit zijn vaste prijzen. Je weet na een kort gesprek vooraf wat je betaalt en we werken niet met uurtje-factuurtje. We bepalen de prijs altijd op basis van jouw situatie, maar het bedrag ligt daarna vast.",
   },
   {
     q: "Zitten er verborgen kosten bij?",
-    a: "Nee. De eenmalige prijs dekt het ontwerp en de bouw. De maandelijkse € 30 dekt hosting, SSL, back-ups, updates en monitoring. Je domeinnaam zit het eerste jaar bij de prijs in.",
+    a: "Nee. De eenmalige prijs dekt het ontwerp en de bouw. De maandelijkse prijs vanaf € 30 dekt hosting, SSL, back-ups, updates en monitoring. Je domeinnaam zit het eerste jaar bij de prijs in.",
   },
   {
     q: "Wat kost hosting en onderhoud per maand?",
-    a: "€ 30 per maand. Daarvoor draait je site op onze eigen Nederlandse VPS, met SSL, dagelijkse back-ups, security-updates en 24/7 uptime-monitoring. Nemen we een bestaande site over, dan betaal je geen setup-kosten.",
+    a: "Vanaf € 30 per maand. Daarvoor draait je site op onze eigen Nederlandse VPS, met SSL, dagelijkse back-ups, security-updates en 24/7 uptime-monitoring. Nemen we een bestaande site over, dan betaal je geen setup-kosten.",
   },
   {
     q: "Moet ik alles vooraf betalen?",
@@ -178,17 +175,17 @@ const faqs = [
 export const Route = createFileRoute("/tarieven")({
   head: () => ({
     meta: [
-      { title: "Wat kost een website laten maken? Tarieven vanaf € 499" },
+      { title: "Wat kost een website laten maken? Tarieven en werkwijze" },
       {
         name: "description",
         content:
-          "Vaste prijzen voor een website laten maken: vanaf € 499 eenmalig en € 30 per maand voor hosting en onderhoud. Geen uurtje-factuurtje, geen verborgen kosten.",
+          "Een website laten maken heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. Geen uurtje-factuurtje, geen verborgen kosten.",
       },
       { property: "og:title", content: "Tarieven: wat kost een website laten maken? | AIMI" },
       {
         property: "og:description",
         content:
-          "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
+          "Website met een vaste prijs op aanvraag, hosting en onderhoud vanaf € 30 per maand. Vaste prijzen, vooraf duidelijk.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
@@ -198,7 +195,7 @@ export const Route = createFileRoute("/tarieven")({
       {
         name: "twitter:description",
         content:
-          "Website vanaf € 499 eenmalig, hosting en onderhoud € 30 per maand. Vaste prijzen, vooraf duidelijk.",
+          "Website met een vaste prijs op aanvraag, hosting en onderhoud vanaf € 30 per maand. Vaste prijzen, vooraf duidelijk.",
       },
     ],
     links: [{ rel: "canonical", href: URL }],
@@ -217,18 +214,6 @@ export const Route = createFileRoute("/tarieven")({
           url: URL,
           provider: { "@id": ORG_ID },
           itemListElement: [
-            ...tiers
-              .filter((t) => t.amount)
-              .map((t) => ({
-                "@type": "Offer",
-                name: `Website laten maken: ${t.name}`,
-                description: t.desc,
-                price: String(t.amount),
-                priceCurrency: "EUR",
-                priceValidUntil: PRICE_VALID_UNTIL,
-                url: URL,
-                availability: "https://schema.org/InStock",
-              })),
             {
               "@type": "Offer",
               name: "Hosting & onderhoud",
@@ -253,9 +238,9 @@ export const Route = createFileRoute("/tarieven")({
       faqJsonLd(faqs),
       webPageJsonLd({
         path: "/tarieven",
-        name: "Wat kost een website laten maken? Tarieven vanaf € 499",
+        name: "Wat kost een website laten maken? Tarieven en werkwijze",
         description:
-          "Vaste prijzen voor een website laten maken: vanaf € 499 eenmalig en € 30 per maand voor hosting en onderhoud.",
+          "Een website laten maken heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud.",
       }),
     ],
   }),
@@ -295,10 +280,10 @@ function TarievenPage() {
               Wat kost een website laten maken?
             </h1>
             <p className="mt-6 max-w-2xl text-[16px] leading-relaxed" style={{ color: "#a4a9b2" }}>
-              Een professionele website begint bij AIMI op{" "}
-              <strong style={{ color: "#ffffff" }}>€ 499 eenmalig</strong>, plus{" "}
-              <strong style={{ color: "#ffffff" }}>€ 30 per maand</strong> voor hosting en
-              onderhoud. Dat zijn vaste prijzen: je weet vooraf precies wat je betaalt, we werken
+              Een professionele website heeft bij AIMI een{" "}
+              <strong style={{ color: "#ffffff" }}>vaste prijs op aanvraag</strong>, plus{" "}
+              <strong style={{ color: "#ffffff" }}>vanaf € 30 per maand</strong> voor hosting en
+              onderhoud. Je weet na een kort gesprek vooraf precies wat je betaalt, we werken
               niet met uurtje-factuurtje en er komt achteraf niets bij.
             </p>
             {/* SEO-audit 2026-09-02 (sxo.md SXO-2): deze paragraaf diende alleen
@@ -307,9 +292,9 @@ function TarievenPage() {
                 marktbeeld, zodat de pagina ook die awareness-fase bedient. */}
             <p className="mt-4 max-w-2xl text-[14px] leading-relaxed" style={{ color: "#868b94" }}>
               Ter oriëntatie: in de Nederlandse markt kost een eenvoudige website via een bouwpakket
-              of freelancer doorgaans tussen de € 500 en € 1.500, een zakelijke site met meer
-              pagina's € 1.500–5.000 en een webshop al snel € 3.000 en meer. Een freelancer op
-              uurtarief rekent vaak € 40–90 per uur zonder vast eindbedrag vooraf.
+              of freelancer doorgaans enkele honderden tot een paar duizend euro, een zakelijke site
+              met meer pagina's loopt verder op en een webshop valt al snel in een hogere prijsklasse.
+              Een freelancer op uurtarief rekent vaak per uur zonder vast eindbedrag vooraf.
             </p>
           </div>
         </section>
@@ -402,7 +387,7 @@ function TarievenPage() {
                       textDecoration: "none",
                     }}
                   >
-                    {t.amount ? "Vraag een offerte aan" : "Plan een gesprek"}
+                    {t.name === "Custom" ? "Plan een gesprek" : "Vraag een offerte aan"}
                   </Link>
                 </div>
               ))}

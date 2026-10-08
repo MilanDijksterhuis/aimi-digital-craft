@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "Een website laten maken in Assen kost bij AIMI € 499 tot € 749 eenmalig, met € 30 per maand voor hosting en onderhoud. Als webdesignbureau uit het nabijgelegen Veendam bouwt AIMI sites op maat voor zakelijke dienstverleners in de provinciehoofdstad van Drenthe.",
+    "Een website laten maken in Assen heeft bij AIMI een vaste prijs op aanvraag, met vanaf € 30 per maand voor hosting en onderhoud. Als webdesignbureau uit het nabijgelegen Veendam bouwt AIMI sites op maat voor zakelijke dienstverleners in de provinciehoofdstad van Drenthe.",
   kicker: "Webdesign in Assen",
   intro:
     "Als provinciehoofdstad van Drenthe combineert Assen bestuurlijke en zakelijke dienstverlening met een stad die rond het TT-circuit ook flink wat evenementenbezoek trekt. AIMI bouwt professionele websites voor ondernemers in Assen die hun online uitstraling willen laten aansluiten op dat brede publiek.",
@@ -93,11 +93,11 @@ const data: LocationPageData = {
 export const Route = createFileRoute("/website-laten-maken-assen")({
   head: () => ({
     meta: [
-      { title: "Website laten maken in Assen — vanaf € 499 | AIMI" },
+      { title: "Website laten maken in Assen | AIMI" },
       {
         name: "description",
         content:
-          "AIMI ontwikkelt professionele websites voor zakelijke dienstverleners in Assen, met snelle techniek, eigen Nederlandse hosting en vaste prijzen vanaf € 499.",
+          "AIMI ontwikkelt professionele websites voor zakelijke dienstverleners in Assen, met snelle techniek, eigen Nederlandse hosting en een vaste prijs op aanvraag.",
       },
       { name: "geo.region", content: "NL-DR" },
       { name: "geo.placename", content: "Assen" },

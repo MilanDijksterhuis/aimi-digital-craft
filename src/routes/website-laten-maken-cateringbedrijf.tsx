@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een cateringbedrijf",
   pricingBody: [
-    "Een eenvoudige website voor je cateringbedrijf met menukaart, offerteaanvraag en referenties begint bij € 499 eenmalig (Starter). Met een online offerte- of bestelmodule zit je eerder in het Pro-traject vanaf € 749. Voor de meeste cateraars werkt een meerpagina-site goed: een homepage, een pagina per type catering, een pagina met praktische informatie en veelgestelde vragen, referenties en een uitgebreider aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je cateringbedrijf met menukaart, offerteaanvraag en referenties valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online offerte- of bestelmodule zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Voor de meeste cateraars werkt een meerpagina-site goed: een homepage, een pagina per type catering, een pagina met praktische informatie en veelgestelde vragen, referenties en een uitgebreider aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
     "Wil je dat klanten online een vaste formule kunnen afrekenen, bijvoorbeeld standaard lunchpakketten voor bedrijven, dan schuift het richting een webshop en wordt het maatwerk. Dat prijzen we apart en spreken we vooraf af, zodat de kosten geen verrassing zijn.",
   ],
   faqs: [

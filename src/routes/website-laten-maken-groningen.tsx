@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Groningen",
 
   definitie:
-    "Een website laten maken in Groningen kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers die in de drukke Groningse markt willen opvallen.",
+    "Een website laten maken in Groningen heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers die in de drukke Groningse markt willen opvallen.",
   kicker: "Webdesign in Groningen",
   intro:
     "Groningen is een stad vol starters en groeiende ondernemingen, van horeca in de Folkingestraat tot dienstverleners rond de Grote Markt. AIMI bouwt snelle, professionele websites voor ondernemers in Groningen die willen opvallen tussen de vele webdesignbureaus die de stad rijk is.",

@@ -28,7 +28,7 @@ const LOCAL_SERVICES: { label: string; href: string; desc: string }[] = [
   {
     label: "Website laten maken",
     href: "/website-laten-maken",
-    desc: "Een professionele site op maat, vanaf € 499 eenmalig.",
+    desc: "Een professionele site op maat. Prijs op aanvraag.",
   },
   {
     label: "Webshop laten maken",
@@ -262,7 +262,7 @@ export function LocationPageV2({ data }: { data: LocationPageData }) {
   // definitie oppikken bij "website laten maken in {stad}".
   const definitie =
     data.definitie ??
-    `Een website laten maken in ${city} kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in ${city} en omgeving.`;
+    `Een website laten maken in ${city} heeft bij AIMI een prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in ${city} en omgeving.`;
 
   return (
     <div style={{ background: BG, color: "#efeff1", minHeight: "100dvh", fontFamily: FONT }}>

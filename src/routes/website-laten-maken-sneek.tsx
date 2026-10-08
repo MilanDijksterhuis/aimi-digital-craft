@@ -19,7 +19,7 @@ const data: LocationPageData = {
   h1: "Webdesign in Sneek, van watersport tot dienstverlening",
   region: REGION,
   definitie:
-    "Bij AIMI laat je in Sneek een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites bouwt die ook tijdens de Sneekweek en het watersportseizoen snel en stabiel blijven.",
+    "Bij AIMI laat je in Sneek een website maken voor een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites bouwt die ook tijdens de Sneekweek en het watersportseizoen snel en stabiel blijven.",
   kicker: "Webdesign in Sneek",
   intro:
     "Sneek is onlosmakelijk verbonden met watersport en toerisme, met de jaarlijkse Sneekweek als bekendste voorbeeld. AIMI bouwt websites voor ondernemers in Sneek die met seizoensgebonden drukte te maken hebben, van horeca tot detailhandel, en die willen dat hun website daar goed op is voorbereid.",

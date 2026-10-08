@@ -18,7 +18,6 @@ import {
   LOGO_URL,
   OG_IMAGE_URL,
   ORG_ID,
-  PRICE_VALID_UNTIL,
   PHONE_E164,
   EMAIL,
   businessIdentityJsonLd,
@@ -199,7 +198,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "Lokale SEO",
           ],
           description:
-            "AIMI is een webdesignbureau uit Veendam in Noord-Nederland. We ontwerpen, bouwen en hosten snelle, professionele websites en webshops voor ondernemers, met vaste prijzen vanaf € 499.",
+            "AIMI is een webdesignbureau uit Veendam in Noord-Nederland. We ontwerpen, bouwen en hosten snelle, professionele websites en webshops voor ondernemers, met een vaste prijs op aanvraag.",
           areaServed: [
             { "@type": "AdministrativeArea", name: "Groningen" },
             { "@type": "AdministrativeArea", name: "Drenthe" },
@@ -224,20 +223,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               {
                 "@type": "Offer",
                 name: "Starter",
-                price: "499",
-                priceCurrency: "EUR",
                 availability: "https://schema.org/InStock",
                 url: `${SITE_URL}/tarieven`,
-                priceValidUntil: PRICE_VALID_UNTIL,
               },
               {
                 "@type": "Offer",
                 name: "Pro",
-                price: "749",
-                priceCurrency: "EUR",
                 availability: "https://schema.org/InStock",
                 url: `${SITE_URL}/tarieven`,
-                priceValidUntil: PRICE_VALID_UNTIL,
               },
             ],
           },

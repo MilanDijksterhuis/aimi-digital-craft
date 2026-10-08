@@ -54,7 +54,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een schoonheidssalon",
   pricingBody: [
-    "Een eenvoudige website voor je schoonheidssalon met behandelmenu, prijslijst en team begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een schoonheidssalon hangt af van de omvang van het behandelmenu, of er een intakeformulier en boekingssysteem gekoppeld moeten worden, en hoeveel pagina's er nodig zijn om alle behandelingen goed uit te leggen. Een salon met een uitgebreid aanbod vraagt meer content en structuur dan een salon met een compact menu.",
+    "Een eenvoudige website voor je schoonheidssalon met behandelmenu, prijslijst en team valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online boekingsmodule zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De prijs van een website voor een schoonheidssalon hangt af van de omvang van het behandelmenu, of er een intakeformulier en boekingssysteem gekoppeld moeten worden, en hoeveel pagina's er nodig zijn om alle behandelingen goed uit te leggen. Een salon met een uitgebreid aanbod vraagt meer content en structuur dan een salon met een compact menu.",
     "Tijdens de kennismaking bepalen we samen welke onderdelen jouw schoonheidssalon nodig heeft, zodat de offerte precies aansluit op je behandelmenu en werkwijze.",
   ],
   faqs: [
@@ -104,7 +104,7 @@ export const Route = createFileRoute("/website-laten-maken-schoonheidssalon")({
       {
         name: "description",
         content:
-          "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, vanaf € 499.",
+          "Rustige, verzorgde website voor je schoonheidssalon met behandelmenu, intakeformulier en cadeaubonnen. Gebouwd en gehost door AIMI, met een vaste prijs op aanvraag.",
       },
       { property: "og:title", content: "Website laten maken voor je schoonheidssalon | AIMI" },
       {

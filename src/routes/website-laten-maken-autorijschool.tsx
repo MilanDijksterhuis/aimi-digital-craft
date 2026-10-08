@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een rijschool",
   pricingBody: [
-    "Een eenvoudige website voor je rijschool met lespakketten, planning en tarieven begint bij € 499 eenmalig (Starter). Met een online lesplanning-module zit je eerder in het Pro-traject vanaf € 749. Voor de meeste rijscholen is een meerpagina-site voldoende: een pagina met pakketten en prijzen, een pagina over de rijschool en de instructeurs, een pagina met veelgestelde vragen over het traject, en een inschrijfformulier. Dat past doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je rijschool met lespakketten, planning en tarieven valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online lesplanning-module zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Voor de meeste rijscholen is een meerpagina-site voldoende: een pagina met pakketten en prijzen, een pagina over de rijschool en de instructeurs, een pagina met veelgestelde vragen over het traject, en een inschrijfformulier. Dat past doorgaans binnen ons Pro-pakket.",
     "Wil je daarnaast een gekoppelde lesagenda of een online betaalmogelijkheid voor pakketten, dan wordt het maatwerk en krijg je daar vooraf een aparte prijs voor. Op de tarievenpagina zie je waar we beginnen; wat jouw rijschool nodig heeft bespreken we in het kennismakingsgesprek.",
   ],
   faqs: [
@@ -103,7 +103,7 @@ export const Route = createFileRoute("/website-laten-maken-autorijschool")({
       {
         name: "description",
         content:
-          "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Vanaf € 499.",
+          "Website voor je rijschool met heldere pakketprijzen, ervaringen van leerlingen en een inschrijfformulier dat op elke telefoon werkt. Prijs op aanvraag.",
       },
       { property: "og:title", content: "Website laten maken voor je autorijschool | AIMI" },
       {

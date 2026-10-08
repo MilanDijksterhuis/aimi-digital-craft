@@ -16,14 +16,14 @@ const PATH = "/website-laten-maken-veendam";
 const URL = `${SITE_URL}${PATH}`;
 const TITLE = "Website laten maken in Veendam: lokaal webdesign | AIMI";
 const DESCRIPTION =
-  "Webdesigner in Veendam nodig? AIMI zit hier zelf gevestigd en bouwt snelle websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vanaf € 499.";
+  "Webdesigner in Veendam nodig? AIMI zit hier zelf gevestigd en bouwt snelle websites voor ondernemers in Oost-Groningen. Persoonlijk contact, vaste prijs op aanvraag.";
 
 const data: LocationPageData = {
   city: CITY,
   h1: "Website laten maken in Veendam",
   region: "Groningen",
   definitie:
-    "Een website laten maken in Veendam kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is als webdesignbureau in Veendam zelf gevestigd en bouwt sites op maat voor lokale ondernemers, met korte lijnen en persoonlijk contact.",
+    "Een website laten maken in Veendam heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is als webdesignbureau in Veendam zelf gevestigd en bouwt sites op maat voor lokale ondernemers, met korte lijnen en persoonlijk contact.",
   kicker: "Webdesign vanuit Veendam",
   intro:
     "AIMI is gevestigd in Veendam. Dat maakt deze pagina anders dan de rest: voor ondernemers hier zijn we geen bureau op afstand, maar een partij uit dezelfde plaats. We ontwerpen, bouwen en hosten websites en webshops voor Veendammer ondernemers, en een kop koffie om de plannen door te nemen is letterlijk om de hoek.",

@@ -63,7 +63,7 @@ export const faqItems: FaqItem[] = [
   {
     category: "Prijzen",
     q: "Wat kost een website laten maken?",
-    a: "Een professionele website bij AIMI start vanaf € 499. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs, geen uurtje-factuurtje.",
+    a: "Een professionele website bij AIMI heeft een vaste prijs op aanvraag. De uiteindelijke prijs hangt af van het aantal pagina's, de gewenste functionaliteiten en of je bijvoorbeeld een blog of boekingssysteem nodig hebt. Je krijgt altijd vooraf een vaste prijs, geen uurtje-factuurtje.",
   },
   {
     category: "Prijzen",

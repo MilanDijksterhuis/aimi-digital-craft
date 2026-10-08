@@ -19,7 +19,7 @@ const data: LocationPageData = {
   h1: "Website laten maken in Heerenveen",
   region: REGION,
   definitie:
-    "Bij AIMI laat je in Heerenveen een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle, professionele sites bouwt voor het brede MKB in Heerenveen en de rest van Friesland.",
+    "Bij AIMI laat je in Heerenveen een website maken voor een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat snelle, professionele sites bouwt voor het brede MKB in Heerenveen en de rest van Friesland.",
   kicker: "Webdesign in Heerenveen",
   intro:
     "Heerenveen is een plaats met een uitgesproken identiteit, sterk verbonden met sport en een actief lokaal bedrijfsleven. AIMI bouwt websites voor ondernemers in Heerenveen die net zo scherp voor de dag willen komen als de reputatie van hun eigen plaats, met snelheid, duidelijkheid en een technisch stevige basis.",
@@ -95,7 +95,7 @@ const data: LocationPageData = {
   sectionOrder: ["workflow", "context", "businessTypes", "faq"],
 };
 
-const TITLE = "Website laten maken in Heerenveen — vanaf € 499 | AIMI";
+const TITLE = "Website laten maken in Heerenveen | AIMI";
 const DESCRIPTION =
   "AIMI bouwt snelle, professionele websites voor ondernemers in Heerenveen, met eigen hosting, monitoring en persoonlijk contact. Vraag een offerte aan.";
 

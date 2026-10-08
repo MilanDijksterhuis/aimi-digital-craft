@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Groningen",
 
   definitie:
-    "Een website laten maken in Stadskanaal kost bij AIMI een vaste prijs van € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit het nabijgelegen Veendam dat sites op maat bouwt voor ondernemers in Stadskanaal.",
+    "Een website laten maken in Stadskanaal heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit het nabijgelegen Veendam dat sites op maat bouwt voor ondernemers in Stadskanaal.",
   kicker: "Webdesign Stadskanaal",
   intro:
     "Een webdesigner in Stadskanaal nodig die verder kijkt dan een mooi sjabloon? AIMI bouwt snelle, professionele websites voor ondernemers in Stadskanaal en de wijde omgeving, met eigen techniek, eigen hosting en korte lijnen tussen ontwerp en beheer.",

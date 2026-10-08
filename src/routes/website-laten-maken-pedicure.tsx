@@ -54,7 +54,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een pedicurepraktijk",
   pricingBody: [
-    "Een eenvoudige website voor je pedicurepraktijk met behandelmenu, prijslijst en afspraakmogelijkheid begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een pedicurepraktijk hangt onder meer af van of je alleen regulier pedicure aanbiedt of ook medisch pedicure met bijbehorende informatie over registratie en vergoeding, en van het aantal pagina's dat nodig is om dat helder uit te leggen. Een eenvoudige site met contactgegevens en afspraakmogelijkheid vraagt minder werk dan een site die ook uitgebreid ingaat op medische indicaties.",
+    "Een eenvoudige website voor je pedicurepraktijk met behandelmenu, prijslijst en afspraakmogelijkheid valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online boekingsmodule zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De prijs van een website voor een pedicurepraktijk hangt onder meer af van of je alleen regulier pedicure aanbiedt of ook medisch pedicure met bijbehorende informatie over registratie en vergoeding, en van het aantal pagina's dat nodig is om dat helder uit te leggen. Een eenvoudige site met contactgegevens en afspraakmogelijkheid vraagt minder werk dan een site die ook uitgebreid ingaat op medische indicaties.",
     "In een kennismakingsgesprek bepalen we samen welke onderdelen jouw praktijk nodig heeft, zodat de offerte aansluit op je daadwerkelijke aanbod.",
   ],
   faqs: [
@@ -100,7 +100,7 @@ const data: BranchPageData = {
 export const Route = createFileRoute("/website-laten-maken-pedicure")({
   head: () => ({
     meta: [
-      { title: "Website pedicure laten maken — vanaf € 499 | AIMI" },
+      { title: "Website pedicure laten maken | AIMI" },
       {
         name: "description",
         content:

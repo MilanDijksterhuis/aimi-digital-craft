@@ -59,8 +59,8 @@ const data: ServicePageData = {
     { title: "Bouwen & testen", desc: "We bouwen de site, vullen 'm met content en testen op alle apparaten." },
     { title: "Livegang & nazorg", desc: "We zetten de site live op onze snelle hosting en blijven bereikbaar." },
   ],
-  priceLabel: "vanaf € 499",
-  priceNote: "Eenmalig, met een vaste prijs vooraf. Hosting en onderhoud kunnen los worden afgenomen.",
+  priceLabel: "Prijs op aanvraag",
+  priceNote: "Een vaste prijs, afgestemd op jouw wensen. Hosting en onderhoud kunnen los worden afgenomen.",
   related: [
     { label: "Webshop laten maken", href: "/webshop-laten-maken" },
     { label: "Onderhoud & hosting", href: "/onderhoud-hosting" },
@@ -79,20 +79,20 @@ const data: ServicePageData = {
 export const Route = createFileRoute("/website-laten-maken")({
   head: () => ({
     meta: [
-      { title: "Website laten maken | Professioneel & vanaf € 499 | AIMI" },
+      { title: "Website laten maken | Professioneel webdesign | AIMI" },
       {
         name: "description",
         content:
-          "Website laten maken door AIMI? Professioneel webdesign op maat voor ondernemers en ZZP'ers. Snel en goed vindbaar. Vaste prijs vanaf € 499.",
+          "Website laten maken door AIMI? Professioneel webdesign op maat voor ondernemers en ZZP'ers. Snel en goed vindbaar. Vaste prijs op aanvraag.",
       },
       { property: "og:title", content: "Website laten maken | AIMI Webdesign" },
-      { property: "og:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
+      { property: "og:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Prijs op aanvraag." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Website laten maken | AIMI Webdesign" },
-      { name: "twitter:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Vanaf € 499." },
+      { name: "twitter:description", content: "Professioneel webdesign op maat voor ondernemers en ZZP'ers. Prijs op aanvraag." },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: URL }],

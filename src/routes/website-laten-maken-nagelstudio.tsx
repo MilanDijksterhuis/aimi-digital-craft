@@ -54,7 +54,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een nagelstudio",
   pricingBody: [
-    "Een eenvoudige website voor je nagelstudio met behandelmenu, prijslijst en openingstijden begint bij € 499 eenmalig (Starter). Met een online boekingsmodule zit je eerder in het Pro-traject vanaf € 749. De prijs van een website voor een nagelstudio hangt verder samen met de gewenste opzet: een compacte site met portfolio, prijslijst en contactgegevens vraagt minder werk dan een site met online boeken, cadeaubonnen en uitgebreide categorieën binnen het portfolio. Ook het aantal foto's dat verwerkt moet worden en of er al een boekingssysteem is, spelen mee in de scope.",
+    "Een eenvoudige website voor je nagelstudio met behandelmenu, prijslijst en openingstijden valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online boekingsmodule zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De prijs van een website voor een nagelstudio hangt verder samen met de gewenste opzet: een compacte site met portfolio, prijslijst en contactgegevens vraagt minder werk dan een site met online boeken, cadeaubonnen en uitgebreide categorieën binnen het portfolio. Ook het aantal foto's dat verwerkt moet worden en of er al een boekingssysteem is, spelen mee in de scope.",
     "In een kort kennismakingsgesprek kijken we samen welke onderdelen voor jouw nagelstudio nodig zijn, zodat je een offerte krijgt die aansluit op wat je website daadwerkelijk moet doen.",
   ],
   faqs: [

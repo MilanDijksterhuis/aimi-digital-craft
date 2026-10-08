@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een restaurant",
   pricingBody: [
-    "Een eenvoudige website voor je restaurant met menukaart, openingstijden en reserveren begint bij € 499 eenmalig (Starter). Met een online reserveringssysteem zit je eerder in het Pro-traject vanaf € 749. Veel restaurants zijn goed geholpen met een compacte site: openingstijden, de kaart, sfeerbeeld, route en reserveren. Dat past regelmatig binnen ons Starter- of Pro-pakket, afhankelijk van het aantal pagina's en of je de kaart zelf wilt kunnen beheren.",
+    "Een eenvoudige website voor je restaurant met menukaart, openingstijden en reserveren valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online reserveringssysteem zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Veel restaurants zijn goed geholpen met een compacte site: openingstijden, de kaart, sfeerbeeld, route en reserveren. Dat past regelmatig binnen ons Starter- of Pro-pakket, afhankelijk van het aantal pagina's en of je de kaart zelf wilt kunnen beheren.",
     "Heb je meerdere vestigingen, een aparte lunchkaart en dinerkaart, een zaal voor groepen of een cadeaubonnenverkoop, dan groeit het naar maatwerk. We bespreken dat vooraf en zetten er een vaste prijs op. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [

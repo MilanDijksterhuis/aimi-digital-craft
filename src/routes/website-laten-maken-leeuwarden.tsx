@@ -19,7 +19,7 @@ const data: LocationPageData = {
   h1: "Webdesign in Leeuwarden, hoofdstad van Friesland",
   region: REGION,
   definitie:
-    "Een website laten maken in Leeuwarden kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor culturele organisaties, horeca en MKB in de Friese hoofdstad.",
+    "Een website laten maken in Leeuwarden heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor culturele organisaties, horeca en MKB in de Friese hoofdstad.",
   kicker: "Webdesign in Leeuwarden",
   intro:
     "Als hoofdstad van Friesland heeft Leeuwarden een brede en diverse ondernemersbasis: van culturele instellingen en horeca tot zzp'ers, adviesbureaus en maakbedrijven. AIMI bouwt voor die ondernemers snelle, professionele websites, inclusief hosting en onderhoud, zodat je online net zo scherp voor de dag komt als je onderneming dat verdient.",

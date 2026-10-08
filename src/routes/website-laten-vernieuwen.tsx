@@ -70,7 +70,7 @@ const preserved = [
 const faqs = [
   {
     q: "Wat kost het om een website te laten vernieuwen?",
-    a: "Een vernieuwing valt qua prijs meestal in dezelfde range als een nieuwe site: vanaf € 499 voor een eenvoudige één-pagina site en € 749 voor een meerpagina-site met eigen ontwerp en CMS. Is je bestaande site technisch gezond en gaat het vooral om ontwerp en teksten, dan kan het minder werk zijn. Dat bepalen we na een blik op je huidige site.",
+    a: "Een vernieuwing valt qua prijs meestal in dezelfde orde van grootte als een nieuwe site: een vaste prijs op aanvraag, voor zowel een eenvoudige één-pagina site als een meerpagina-site met eigen ontwerp en CMS. Is je bestaande site technisch gezond en gaat het vooral om ontwerp en teksten, dan kan het minder werk zijn. Dat bepalen we na een blik op je huidige site.",
   },
   {
     q: "Verlies ik mijn positie in Google als ik mijn site vernieuw?",

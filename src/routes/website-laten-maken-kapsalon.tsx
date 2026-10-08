@@ -54,7 +54,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een kapsalon",
   pricingBody: [
-    "Een eenvoudige website voor je kapsalon met prijslijst, team en openingstijden begint bij € 499 eenmalig (Starter). Met een online afsprakenmodule zit je eerder in het Pro-traject vanaf € 749. De uiteindelijke prijs voor een website voor je kapsalon hangt af van de scope: een eenvoudige site met prijslijst, team en contactgegevens is minder omvangrijk dan een site met een gekoppeld boekingssysteem, meertalige content of een uitgebreide portfolio-pagina per stylist. Ook het aantal pagina's en of er al bruikbare foto's zijn, of dat er nog fotografie nodig is, speelt mee.",
+    "Een eenvoudige website voor je kapsalon met prijslijst, team en openingstijden valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online afsprakenmodule zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De uiteindelijke prijs voor een website voor je kapsalon hangt af van de scope: een eenvoudige site met prijslijst, team en contactgegevens is minder omvangrijk dan een site met een gekoppeld boekingssysteem, meertalige content of een uitgebreide portfolio-pagina per stylist. Ook het aantal pagina's en of er al bruikbare foto's zijn, of dat er nog fotografie nodig is, speelt mee.",
     "In een kennismakingsgesprek bepalen we samen welke onderdelen nodig zijn voor jouw salon, zodat de offerte aansluit op wat je echt gebruikt in plaats van op een standaardpakket.",
   ],
   faqs: [

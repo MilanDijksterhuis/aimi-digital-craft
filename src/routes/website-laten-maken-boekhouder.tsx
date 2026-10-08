@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een administratiekantoor",
   pricingBody: [
-    "Een eenvoudige website voor je boekhoudkantoor met dienstenoverzicht, tarieven en contact begint bij € 499 eenmalig (Starter). Met een koppeling naar een klantportaal zit je eerder in het Pro-traject vanaf € 749. Voor de meeste administratiekantoren volstaat een meerpagina-site: een homepage, een pagina per doelgroep, een pagina over het kantoor en de mensen, een pagina over overstappen en een contactpagina met aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
+    "Een eenvoudige website voor je boekhoudkantoor met dienstenoverzicht, tarieven en contact valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een koppeling naar een klantportaal zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. Voor de meeste administratiekantoren volstaat een meerpagina-site: een homepage, een pagina per doelgroep, een pagina over het kantoor en de mensen, een pagina over overstappen en een contactpagina met aanvraagformulier. Dat valt doorgaans binnen ons Pro-pakket.",
     "Wil je daarnaast een beveiligde omgeving waarin klanten stukken kunnen aanleveren, dan wordt het maatwerk. Dat is technisch goed te doen, maar vraagt extra aandacht voor beveiliging en bewaartermijnen, en dat prijzen we apart. Op de tarievenpagina zie je waar we beginnen.",
   ],
   faqs: [

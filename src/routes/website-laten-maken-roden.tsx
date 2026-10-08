@@ -11,9 +11,9 @@ import {
 
 const CITY = "Roden";
 const URL = `${SITE_URL}/website-laten-maken-roden`;
-const TITLE = "Website laten maken in Roden — vanaf € 499 | AIMI";
+const TITLE = "Website laten maken in Roden | AIMI";
 const DESCRIPTION =
-  "Webdesigner in Roden gezocht? AIMI bouwt snelle, professionele websites voor ZZP'ers en mkb in Noordenveld, met eigen hosting en vaste prijzen vanaf € 499.";
+  "Webdesigner in Roden gezocht? AIMI bouwt snelle, professionele websites voor ZZP'ers en mkb in Noordenveld, met eigen hosting en een vaste prijs op aanvraag.";
 
 const data: LocationPageData = {
   city: CITY,
@@ -21,7 +21,7 @@ const data: LocationPageData = {
   region: "Drenthe",
 
   definitie:
-    "Een website laten maken in Roden kost bij AIMI € 499 tot € 749 eenmalig, plus € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in Roden, op een steenworp van de stad Groningen.",
+    "Een website laten maken in Roden heeft bij AIMI een vaste prijs op aanvraag, plus vanaf € 30 per maand voor hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor ondernemers in Roden, op een steenworp van de stad Groningen.",
   kicker: "Webdesign in Roden",
   intro:
     "Op zoek naar een webdesigner in Roden? AIMI ontwerpt, bouwt en host snelle, professionele websites voor ondernemers in Roden en de rest van gemeente Noordenveld. Persoonlijk contact, korte lijnen en een website die daadwerkelijk nieuwe klanten oplevert via Google.",

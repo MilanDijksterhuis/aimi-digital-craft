@@ -53,7 +53,7 @@ const data: BranchPageData = {
   ],
   pricingHeading: "Wat kost een website voor een hoveniersbedrijf",
   pricingBody: [
-    "Een eenvoudige website voor je hoveniersbedrijf met dienstenoverzicht, projectfoto's en contactgegevens begint bij € 499 eenmalig (Starter). Met een online offerteaanvraag zit je eerder in het Pro-traject vanaf € 749. De prijs van een hovenierswebsite hangt verder af van de omvang: een eenvoudige site met een projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor aanleg, onderhoud en losse diensten. Via het offerteformulier op onze site vertel je kort wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
+    "Een eenvoudige website voor je hoveniersbedrijf met dienstenoverzicht, projectfoto's en contactgegevens valt doorgaans in ons Starter-pakket, met een vaste prijs op aanvraag. Met een online offerteaanvraag zit je eerder in het Pro-traject, ook met een vaste prijs op aanvraag die we na een kort gesprek vastleggen. De prijs van een hovenierswebsite hangt verder af van de omvang: een eenvoudige site met een projectgalerij en offerteformulier vraagt minder werk dan een uitgebreide site met aparte pagina's voor aanleg, onderhoud en losse diensten. Via het offerteformulier op onze site vertel je kort wat je nodig hebt, waarna we een reactie geven die aansluit op de daadwerkelijke omvang van het project.",
     "Onze tarieven staan overzichtelijk op de pricing-pagina als startpunt. Voor de meeste hoveniersbedrijven is een site met een aantal vaste pagina's, een projectgalerij en een offerteformulier voldoende; wie meerdere specialismen apart wil uitlichten of een uitgebreidere fotobibliotheek wil, kiest vaak voor een groter pakket. We bespreken dat altijd vooraf, zodat er geen verrassingen zijn.",
   ],
   faqs: [
@@ -103,7 +103,7 @@ export const Route = createFileRoute("/website-laten-maken-hovenier")({
       {
         name: "description",
         content:
-          "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, vanaf € 499.",
+          "Website voor je hoveniersbedrijf met projectfoto's, offerteaanvraag en duidelijk onderscheid tussen aanleg en onderhoud. Gebouwd door AIMI, met een vaste prijs op aanvraag.",
       },
       { property: "og:title", content: "Website laten maken voor je hoveniersbedrijf | AIMI" },
       {

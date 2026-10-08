@@ -18,7 +18,7 @@ const data: LocationPageData = {
   region: "Groningen",
 
   definitie:
-    "Bij AIMI laat je in Winschoten een website maken voor € 499 tot € 749 eenmalig, plus € 30 per maand voor eigen Nederlandse hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor winkels en dienstverleners in Winschoten en de Oldambt-regio.",
+    "Bij AIMI laat je in Winschoten een website maken voor een vaste prijs op aanvraag, plus vanaf € 30 per maand voor eigen Nederlandse hosting en onderhoud. AIMI is een webdesignbureau uit Veendam dat sites op maat bouwt voor winkels en dienstverleners in Winschoten en de Oldambt-regio.",
   kicker: "Webdesign Winschoten",
   intro:
     "Ondernemer in Winschoten en toe aan een professionele website? AIMI ontwerpt en bouwt snelle, overzichtelijke websites voor winkels en dienstverleners in de hoofdplaats van Oldambt, inclusief eigen hosting en persoonlijk beheer.",
